@@ -1,0 +1,125 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiOinrOutgoingInterstateInfo"
+           program-name="SWEOINRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiOinrOutgoingInterstateInfo"
+           transaction="SRBT"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <map from="CombinationCodeValue" to="CombinationCodeValue"/>
+      <map from="CombinationCode" to="CombinationCode"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_IREQ"
+       action="transfer"
+       to="SiIreqInterstateReqHistory"
+       send-command="LNK_OINR">
+      <map from="Case1" to="NextCase"/>
+      <map from="PreviousCase" to="DisplayOnly"/>
+      <map from="Ap" to="ApCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_IATT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIattInterstateReqAttach"
+       send-command="DISPLAY">
+      <map from="Case1" to="Next"/>
+      <map from="PreviousCase" to="DisplayOnly"/>
+      <map from="Ap" to="Ap"/>
+      <map from="ReferralFips" to="OtherState"/>
+   </on>
+   <on exit-state="CO0000_LIST_LEGL_ACT_BY_CSE_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACS"
+       to="LeLacsLstLglActnByCseCase"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="DlgflwSelected" to="SelectedFromLacs"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiItsmInterstateMenu"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+      <map from="PreviousCase" to="Case1"/>
+      <map from="Ap" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="InterstateRequest" to="InterstateRequest"/>
+   <map from="PromptCountry" to="PromptCountry"/>
+   <map from="PromptTribalAgency" to="PromptTribalAgency"/>
+   <map from="Agency" to="Agency"/>
+   <map from="PreviousInterstateRequest" to="PreviousInterstateRequest"/>
+   <map from="PreviousInterstateContactAddress"
+        to="PreviousInterstateContactAddress"/>
+   <map from="AddressMismatch" to="AddressMismatch"/>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="Case1" to="Case1"/>
+   <map from="Ar" to="Ar"/>
+   <map from="Ap" to="Ap"/>
+   <map from="ReferralFips" to="ReferralFips"/>
+   <map from="PromptState" to="PromptState"/>
+   <map from="PromptFunction" to="PromptFunctionCd"/>
+   <map from="PromptReason" to="PromptReason"/>
+   <map from="PromptAp" to="PromptAp"/>
+   <map from="CourtOrder.GexportCourtOrder" to="CourtOrder.GimportCourtOrder"/>
+   <map from="Children.GexportChild" to="Children.GimportChild"/>
+   <map from="Children.GexportSelectChild" to="Children.GimportSelectChild"/>
+   <map from="CourtOrder.GexportPromptCourtOrder"
+        to="CourtOrder.GimportPromptCourtOrder"/>
+   <map from="InterstateContact" to="InterstateContact"/>
+   <map from="PreviousReferral" to="PreviousReferral"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PreviousInterstateContact" to="PreviousInterstateContact"/>
+   <map from="PromptAttachment" to="PromptAttachment"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="PromptCloseReason" to="PromptCloseReason"/>
+   <map from="PreviousCommon" to="PreviousCommon"/>
+   <map from="InterstateContactAddress.Province"
+        to="InterstateContactAddress.Province"/>
+   <map from="InterstateContactAddress.PostalCode"
+        to="InterstateContactAddress.PostalCode"/>
+   <map from="InterstateContactAddress.Country"
+        to="InterstateContactAddress.Country"/>
+   <map from="PreviousCase.Number" to="PreviousCase.Number"/>
+   <map from="ReferralInterstateRequestHistory.FunctionalTypeCode"
+        to="ReferralInterstateRequestHistory.FunctionalTypeCode"/>
+   <map from="ReferralInterstateRequestHistory.ActionCode"
+        to="ReferralInterstateRequestHistory.ActionCode"/>
+   <map from="ReferralInterstateRequestHistory.ActionReasonCode"
+        to="ReferralInterstateRequestHistory.ActionReasonCode"/>
+   <map from="InterstateContactAddress.Street1"
+        to="InterstateContactAddress.Street1"/>
+   <map from="InterstateContactAddress.Street2"
+        to="InterstateContactAddress.Street2"/>
+   <map from="InterstateContactAddress.City" to="InterstateContactAddress.City"/>
+   <map from="ReferralInterstateRequestHistory.Note"
+        to="ReferralInterstateRequestHistory.Note"/>
+   <map from="ReferralInterstateRequestHistory.AttachmentIndicator"
+        to="ReferralInterstateRequestHistory.AttachmentIndicator"/>
+   <map from="InterstateContactAddress.State"
+        to="InterstateContactAddress.State"/>
+   <map from="InterstateContactAddress.ZipCode"
+        to="InterstateContactAddress.ZipCode"/>
+   <map from="InterstateContactAddress.Zip4" to="InterstateContactAddress.Zip4"/>
+   <map from="InterstateContactAddress.StartDate"
+        to="InterstateContactAddress.StartDate"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER = @cspNumber1) and
+    (T2.TYPE = 'AP')
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T1.NUMB = T4.CAS_NUMBER) and
+    (T4.CSP_NUMBER = @cspNumber2) and
+    (T4.TYPE = 'AR')
+order by
+  T1.STATUS desc
+</value>
+   </data>
+   <data name="ReadCaseCaseUnit">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.CSP_NO_AR,
+  T2.CSP_NO_AP
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.NUMB = T2.CAS_NO) and
+    (T2.CSP_NO_AP = @cspNoAp) and
+    (T2.CSP_NO_AR = @cspNoAr)
+</value>
+   </data>
+</root>

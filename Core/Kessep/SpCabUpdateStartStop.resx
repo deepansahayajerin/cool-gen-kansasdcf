@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadActivityStartStop">
+      <value>
+select top(1)
+  ACTION_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  ACT_NO,
+  ACD_ID,
+  EVE_NO,
+  EVD_ID
+from
+  CKT_ACT_START_STOP
+where
+  (ACTION_CODE = @actionCode) and
+  (EVD_ID = @evdId) and
+  (EVE_NO = @eveNo) and
+  (ACD_ID = @acdId) and
+  (ACT_NO = @actNo)
+</value>
+   </data>
+   <data name="UpdateActivityStartStop">
+      <value>
+update CKT_ACT_START_STOP
+set
+  EFFECTIVE_DATE = @effectiveDate,
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (ACTION_CODE = @actionCode) and
+  (ACT_NO = @actNo) and
+  (ACD_ID = @acdId) and
+  (EVE_NO = @eveNo) and
+  (EVD_ID = @evdId)
+</value>
+   </data>
+</root>

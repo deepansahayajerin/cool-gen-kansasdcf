@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAbsentParentCsePerson1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadAbsentParentCsePerson2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadAbsentParentCsePerson3">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadAbsentParentCsePerson4">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadApplicantRecipientCsePerson1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadApplicantRecipientCsePerson2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  [STATE] = @state
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  STATE_ABBREVIATION = @stateAbbreviation
+</value>
+   </data>
+   <data name="ReadInterstateCase1">
+      <value>
+select
+  OTHER_FIPS_STATE,
+  TRANS_SERIAL_NBR,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  KS_CASE_ID
+from
+  CKT_INTERST_CASE
+where
+  (KS_CASE_ID = cast(@number as char(10))) and
+  (FUNCTIONAL_TYPE_CO &lt;&gt; 'LO1') and
+  (OTHER_FIPS_STATE = @otherFipsState)
+</value>
+   </data>
+   <data name="ReadInterstateCase2">
+      <value>
+select
+  OTHER_FIPS_STATE,
+  TRANS_SERIAL_NBR,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  KS_CASE_ID
+from
+  CKT_INTERST_CASE
+where
+  (KS_CASE_ID = cast(@number as char(10))) and
+  (FUNCTIONAL_TYPE_CO = 'LO1')
+</value>
+   </data>
+   <data name="ReadInterstateCase3">
+      <value>
+select
+  OTHER_FIPS_STATE,
+  TRANS_SERIAL_NBR,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  KS_CASE_ID
+from
+  CKT_INTERST_CASE
+where
+  (KS_CASE_ID = cast(@number as char(10))) and
+  (FUNCTIONAL_TYPE_CO &lt;&gt; 'LO1')
+</value>
+   </data>
+   <data name="ReadInterstateRequest1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (@croId = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (OTHR_STATE_FIPS_CD = @othrStateFipsCd)
+</value>
+   </data>
+   <data name="ReadInterstateRequest2">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (@croId = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadInterstateRequestAttachment">
+      <value>
+select
+  INT_H_GENERATED_ID,
+  SYS_GEN_SEQ_NBR,
+  SENT_DATE,
+  REQUEST_DATE,
+  RECEIVED_DATE,
+  DATA_TYPE_CODE,
+  NOTE
+from
+  CKT_INT_RQST_ATTCH
+where
+  INT_H_GENERATED_ID = @intHGeneratedId
+order by
+  REQUEST_DATE desc,
+  RECEIVED_DATE desc,
+  SENT_DATE desc
+</value>
+   </data>
+</root>

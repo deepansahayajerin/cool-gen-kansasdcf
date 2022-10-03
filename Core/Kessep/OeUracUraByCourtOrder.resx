@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OBG_RLN T4
+  on
+    (T1.NUMB = T4.CSP_F_NUMBER) and
+    (@otySecondId = T4.OTY_SECOND_ID) and
+    (@obgGeneratedId = T4.OBG_GENERATED_ID) and
+    (@cspNumber = T4.CSP_NUMBER) and
+    (@cpaType = T4.CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OBG_RLN T4
+  on
+    (T1.NUMB = T4.CSP_NUMBER) and
+    (@otyFirstId = T4.OTY_FIRST_ID) and
+    (@obgFGeneratedId = T4.OBG_F_GENERATED_ID) and
+    (@cspFNumber = T4.CSP_F_NUMBER) and
+    (@cpaFType = T4.CPA_F_TYPE)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.[ROLE] in ('C', 'P'))
+  on
+    (T3.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T3.STANDARD_NO = @standardNo) and
+    (T3.CLASSIFICATION = 'J')
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION = 'J')
+</value>
+   </data>
+   <data name="ReadObligationCsePerson">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  LGA_ID,
+  PRIM_SEC_CD
+from
+  CKT_OBLIGATION
+where
+  @lgaId = LGA_ID
+</value>
+   </data>
+</root>

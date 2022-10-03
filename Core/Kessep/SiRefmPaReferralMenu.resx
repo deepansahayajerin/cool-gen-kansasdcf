@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeAddress1">
+      <value>
+select top(1)
+  OFF_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  ZIP,
+  ZIP4
+from
+  CKT_OFFICE_ADDRESS
+where
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (TYPE = 'M')
+</value>
+   </data>
+   <data name="ReadOfficeAddress2">
+      <value>
+select top(1)
+  OFF_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  ZIP,
+  ZIP4
+from
+  CKT_OFFICE_ADDRESS
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (TYPE = 'M')
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider1">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  WORK_PHONE_NUMBER,
+  DISCONTINUE_DATE,
+  WORK_PHONE_EXT,
+  WORK_PHONE_AREA_CD,
+  LOC_CONT_FOR_IRS
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider2">
+      <value>
+select
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  WORK_PHONE_NUMBER,
+  DISCONTINUE_DATE,
+  WORK_PHONE_EXT,
+  WORK_PHONE_AREA_CD,
+  LOC_CONT_FOR_IRS
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+   <data name="ReadServiceProviderAddress1">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  ZIP,
+  ZIP4
+from
+  CKT_SRVCE_PRVR_ADR
+where
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (TYPE = 'M')
+</value>
+   </data>
+   <data name="ReadServiceProviderAddress2">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  ZIP,
+  ZIP4
+from
+  CKT_SRVCE_PRVR_ADR
+where
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (TYPE = 'M')
+</value>
+   </data>
+</root>

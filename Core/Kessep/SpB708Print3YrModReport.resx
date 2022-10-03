@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignmentOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T2.OFFICE_ID,
+  T2.OFF_OFFICE,
+  T3.SERVICE_PRVDER_ID,
+  T3.LAST_NAME,
+  T3.FIRST_NAME
+from
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFICE T2
+  join
+  CKT_ASSIGN_CASE T1
+  on
+    (T1.CAS_NO = @casNo) and
+    (T2.OFFICE_ID = T1.OFF_ID)
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_ID
+order by
+  T1.EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (TYPE = 'AR')
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'AP')
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  DENORM_NUMERIC_12,
+  DENORM_TEXT_12,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  CREATED_TIMESTAMP,
+  REFERENCE_DATE
+from
+  CKT_INFRASTRUCTURE
+where
+  (CREATED_TIMESTAMP &gt;= @createdTimestamp) and
+  (REASON_CODE = 'PRMODLTR')
+order by
+  CASE_NUMBER,
+  CSE_PERSON_NUM
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = cast(@denormNumeric12 as decimal(12))
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T2.CODE
+from
+  CKT_PROGRAM T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (T2.CODE = 'AF') and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate)
+order by
+  T1.EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

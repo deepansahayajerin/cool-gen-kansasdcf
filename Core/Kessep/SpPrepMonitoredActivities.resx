@@ -1,0 +1,1062 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadActivityDistributionRule">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT,
+  CASE_UNIT_FUNCTION,
+  REASON_CODE,
+  RESP_CODE,
+  CASE_ROLE_CODE,
+  CSE_PERSON_ACCT_CD,
+  CSENET_ROLE_CODE,
+  LA_PERSON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  ACT_CONTROL_NO,
+  ACD_ID
+from
+  CKT_ACT_DIST_RULE
+where
+  (@actControlNo = ACT_CONTROL_NO) and
+  (@acdId = ACD_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadActivityStartStopActivityDetailActivity">
+      <value>
+select
+  T1.ACTION_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.ACT_NO,
+  T1.ACD_ID,
+  T1.EVE_NO,
+  T1.EVD_ID,
+  T2.FED_NO_COMPLI_DAYS,
+  T2.FED_NR_N_CMPL_DAYS,
+  T2.OTH_NO_COMPLI_DAYS,
+  T2.OTH_NR_N_COMPL_DAY,
+  T2.REG_SOURCE_ID,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T3.NAME,
+  T3.TYPE_CODE
+from
+  CKT_ACTIVITY T3
+  join
+  CKT_ACTIVITY_DETAL T2
+  join
+  CKT_ACT_START_STOP T1
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T1.EVD_ID = @evdId) and
+    (T1.EVE_NO = @eveNo) and
+    (T2.SYSTEM_GENERATED_I = T1.ACD_ID) and
+    (T2.ACT_NO = T1.ACT_NO) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    T3.CONTROL_NUMBER = T2.ACT_NO
+order by
+  T1.ACTION_CODE
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID,
+  ADMIN_APPEAL_NO,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OAA_TAKEN_DATE,
+  OTY_ID
+from
+  CKT_ADMIN_APPEAL
+where
+  (ADMIN_APPEAL_ID = @adminAppealId) and
+  (OTY_ID is not null) and
+  (OAA_TAKEN_DATE is not null) and
+  (AAT_TYPE is not null) and
+  (OBG_GENERATED_ID is not null) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = cast(@csePersonAcctCode as char(2)))
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  (NUMB = @numb) and
+  (STATUS = 'C')
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.LEGAL_ACTION_ID = @legalActionId) and
+    (T1.LEGAL_ACTION_ID = T3.LGA_R_IDENTIFIER) and
+    (T3.LAD_R_NUMBER is not null) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T3.[ROLE] = cast(@laPersonCode as char(2))) and
+    (T3.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T3.END_DT &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (COURT_CASE_NO = @courtCaseNo) and
+  (@trbId = TRB_ID)
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (LEGAL_ACTION_ID = @legalActionId) and
+  (TRB_ID is not null)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity1">
+      <value>
+select distinct
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.CLOSURE_DATE,
+  T1.INF_SYS_GEN_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T1.ACTIVITY_CTRL_NUM = @activityCtrlNum) and
+    (T1.CLOSURE_DATE = @closureDate) and
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (T2.CASE_UNIT_NUM = @caseUnitNum) and
+    (T2.CSE_PERSON_NUM = @csePersonNum) and
+    (T2.DENORM_NUMERIC_12 between cast(@denormNumeric12 as decimal(12)) and cast(@denormNumeric12 as decimal(12)))
+</value>
+   </data>
+   <data name="ReadMonitoredActivity2">
+      <value>
+select distinct
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.CLOSURE_DATE,
+  T1.INF_SYS_GEN_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (T2.DENORM_NUMERIC_12 between cast(@denormNumeric12 as decimal(12)) and cast(@denormNumeric12 as decimal(12))) and
+    (T2.BUSINESS_OBJECT_CD = 'LRF') and
+    (T1.ACTIVITY_CTRL_NUM between cast(@controlNumber as integer) and cast(@controlNumber as integer)) and
+    (T1.CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity3">
+      <value>
+select distinct
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.CLOSURE_DATE,
+  T1.INF_SYS_GEN_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T1.ACTIVITY_CTRL_NUM = @activityCtrlNum) and
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T1.CLOSURE_DATE = @closureDate)
+  join
+  CKT_INFRASTRUCTURE T4 with(readuncommitted)
+  on
+    (T2.OBG_ID = T4.OBG_ID) and
+    (T2.CSP_NO = T4.CSP_NO) and
+    (T2.CPA_TYPE = T4.CPA_TYPE) and
+    (T2.OTY_ID = T4.OTY_ID) and
+    (T4.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity4">
+      <value>
+select distinct
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.CLOSURE_DATE,
+  T1.INF_SYS_GEN_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T1.ACTIVITY_CTRL_NUM = @activityCtrlNum) and
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T1.CLOSURE_DATE = @closureDate)
+  join
+  CKT_INFRASTRUCTURE T4 with(readuncommitted)
+  on
+    (T2.OAA_DATE = T4.OAA_DATE) and
+    (T2.CPA_OAA_TYPE = T4.CPA_OAA_TYPE) and
+    (T2.CSP_OAA_NO = T4.CSP_OAA_NO) and
+    (T2.OBG_OAA_ID = T4.OBG_OAA_ID) and
+    (T2.AAT_TYPE = T4.AAT_TYPE) and
+    (T2.OTY_OAA_ID = T4.OTY_OAA_ID) and
+    (T4.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity5">
+      <value>
+select distinct
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.CLOSURE_DATE,
+  T1.INF_SYS_GEN_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.DENORM_NUMERIC_12 = @denormNumeric12) and
+    (T2.DENORM_DATE = @denormDate) and
+    (T2.BUSINESS_OBJECT_CD = 'INR') and
+    (T1.ACTIVITY_CTRL_NUM = @activityCtrlNum) and
+    (T1.CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity6">
+      <value>
+select distinct
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.CLOSURE_DATE,
+  T1.INF_SYS_GEN_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T1.ACTIVITY_CTRL_NUM = @activityCtrlNum) and
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.DENORM_NUMERIC_12 = @denormNumeric12) and
+    (T2.BUSINESS_OBJECT_CD = 'ADA') and
+    (T1.CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity7">
+      <value>
+select distinct
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.CLOSURE_DATE,
+  T1.INF_SYS_GEN_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.DENORM_NUMERIC_12 = @denormNumeric12) and
+    (T1.ACTIVITY_CTRL_NUM between cast(@controlNumber as integer) and cast(@controlNumber as integer)) and
+    (T1.CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadMonitoredActivityInfrastructure">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.CLOSURE_DATE,
+  T1.INF_SYS_GEN_ID,
+  T2.BUSINESS_OBJECT_CD,
+  T2.DENORM_NUMERIC_12,
+  T2.DENORM_DATE,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.CASE_UNIT_NUM,
+  T2.OTY_OAA_ID,
+  T2.AAT_TYPE,
+  T2.OBG_OAA_ID,
+  T2.CSP_OAA_NO,
+  T2.CPA_OAA_TYPE,
+  T2.OAA_DATE,
+  T2.OTY_ID,
+  T2.CPA_TYPE,
+  T2.CSP_NO,
+  T2.OBG_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (T1.ACTIVITY_CTRL_NUM between cast(@controlNumber as integer) and cast(@controlNumber as integer)) and
+    (T1.CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID
+from
+  CKT_OBLIGATION T1
+  join
+  CKT_INFRASTRUCTURE T2
+  on
+    (T1.OB_ID = T2.OBG_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NO) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.DTY_GENERATED_ID = T2.OTY_ID) and
+    (T2.SYSTEM_GENERATED_I = @systemGeneratedI) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.CPA_TYPE = cast(@csePersonAcctCode as char(2)))
+</value>
+   </data>
+   <data name="ReadObligationAdministrativeAction">
+      <value>
+select top(1)
+  T1.OTY_TYPE,
+  T1.AAT_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.TAKEN_DT
+from
+  CKT_OBLIG_ADMIN_AC T1
+  join
+  CKT_INFRASTRUCTURE T2
+  on
+    (T1.TAKEN_DT = T2.OAA_DATE) and
+    (T1.CPA_TYPE = T2.CPA_OAA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_OAA_NO) and
+    (T1.OBG_GENERATED_ID = T2.OBG_OAA_ID) and
+    (T1.AAT_TYPE = T2.AAT_TYPE) and
+    (T1.OTY_TYPE = T2.OTY_OAA_ID) and
+    (T2.SYSTEM_GENERATED_I = @systemGeneratedI) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.CPA_TYPE = cast(@csePersonAcctCode as char(2)))
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider1">
+      <value>
+select distinct top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    (T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID) and
+    (T3.USER_ID = @userId) and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate)
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_PRN_OUTPT_DEST T4
+  on
+    T2.OFFICE_ID = T4.OFF_GENERATED
+  join
+  CKT_OUTGOING_DOC T5
+  on
+    (T4.PRINTER_ID = T5.POD_PRINTER_ID) and
+    (T5.INF_ID = @infId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider10">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_OBG_AA T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    )
+  join
+  CKT_INFRASTRUCTURE T6
+  on
+    (T4.OAA_DATE = T6.OAA_DATE) and
+    (T4.CPA_TYPE = T6.CPA_OAA_TYPE) and
+    (T4.CSP_NO = T6.CSP_OAA_NO) and
+    (T4.OBG_ID = T6.OBG_OAA_ID) and
+    (T4.AAT_TYPE = T6.AAT_TYPE) and
+    (T4.OTY_ID = T6.OTY_OAA_ID) and
+    (T6.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider11">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_OBG_AA T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    )
+  join
+  CKT_ADMIN_APPEAL T6
+  on
+    (T4.OTY_ID = T6.OTY_ID) and
+    (T4.OAA_DATE = T6.OAA_TAKEN_DATE) and
+    (T4.AAT_TYPE = T6.AAT_TYPE) and
+    (T4.CPA_TYPE = T6.CPA_TYPE) and
+    (T4.CSP_NO = T6.CSP_NUMBER) and
+    (T4.OBG_ID = T6.OBG_GENERATED_ID) and
+    (T6.ADMIN_APPEAL_ID = @adminAppealId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider12">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OBLIGATION T5
+  join
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_OBG T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    )
+  on
+    (T5.OB_ID = T4.OBG_ID) and
+    (T5.CSP_NUMBER = T4.CSP_NO) and
+    (T5.CPA_TYPE = T4.CPA_TYPE) and
+    (T5.DTY_GENERATED_ID = T4.OTY_ID) and
+    (T5.LGA_ID = @lgaId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider13">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_OBG T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    )
+  join
+  CKT_INFRASTRUCTURE T6
+  on
+    (T4.OBG_ID = T6.OBG_ID) and
+    (T4.CSP_NO = T6.CSP_NO) and
+    (T4.CPA_TYPE = T6.CPA_TYPE) and
+    (T4.OTY_ID = T6.OTY_ID) and
+    (T6.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider14">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_LA_SERV_PROV T4
+  on
+    (T1.ROLE_CODE = T4.OSP_ROLE_CODE) and
+    (T1.EFFECTIVE_DATE = T4.OSP_EFFECTIVE_DATE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_GENERATED_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_GENERATED_ID) and
+    (T4.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T4.END_DT &gt;= @effectiveDt) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    ) and
+    (T4.LGA_IDENTIFIER = @lgaIdentifier)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider15">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_AAP T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    ) and
+    (T4.AAP_ID = @aapId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider16">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    ) and
+    (T4.CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider2">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_LA_SERV_PROV T4
+  on
+    (T1.ROLE_CODE = T4.OSP_ROLE_CODE) and
+    (T1.EFFECTIVE_DATE = T4.OSP_EFFECTIVE_DATE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_GENERATED_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_GENERATED_ID) and
+    (T4.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T4.END_DT &gt;= @effectiveDt) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    )
+  join
+  CKT_OBLIGATION T6
+  on
+    T4.LGA_IDENTIFIER = T6.LGA_ID
+  join
+  CKT_INFRASTRUCTURE T8
+  on
+    (T6.DTY_GENERATED_ID = T8.OTY_OAA_ID) and
+    (T6.OB_ID = T8.OBG_OAA_ID) and
+    (T6.CSP_NUMBER = T8.CSP_OAA_NO) and
+    (T6.CPA_TYPE = T8.CPA_OAA_TYPE) and
+    (T8.OAA_DATE is not null) and
+    (T8.AAT_TYPE is not null) and
+    (T8.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider3">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_CASE_UNT T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.[FUNCTION] = @function) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    ) and
+    (T4.CSU_NO = @csuNo) and
+    (T4.CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider4">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_LA_SERV_PROV T4
+  on
+    (T1.ROLE_CODE = T4.OSP_ROLE_CODE) and
+    (T1.EFFECTIVE_DATE = T4.OSP_EFFECTIVE_DATE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_GENERATED_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_GENERATED_ID) and
+    (T4.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T4.END_DT &gt;= @effectiveDt) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    )
+  join
+  CKT_OBLIGATION T6
+  on
+    T4.LGA_IDENTIFIER = T6.LGA_ID
+  join
+  CKT_INFRASTRUCTURE T7
+  on
+    (T6.OB_ID = T7.OBG_ID) and
+    (T6.CSP_NUMBER = T7.CSP_NO) and
+    (T6.CPA_TYPE = T7.CPA_TYPE) and
+    (T6.DTY_GENERATED_ID = T7.OTY_ID) and
+    (T7.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider5">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_ADMIN_APPEAL T5
+  join
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_AAP T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    )
+  on
+    T5.ADMIN_APPEAL_ID = T4.AAP_ID
+  join
+  CKT_INFRASTRUCTURE T7
+  on
+    (T5.OAA_TAKEN_DATE = T7.OAA_DATE) and
+    (T5.CPA_TYPE = T7.CPA_OAA_TYPE) and
+    (T5.CSP_NUMBER = T7.CSP_OAA_NO) and
+    (T5.OBG_GENERATED_ID = T7.OBG_OAA_ID) and
+    (T5.AAT_TYPE = T7.AAT_TYPE) and
+    (T5.OTY_ID = T7.OTY_OAA_ID) and
+    (T7.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider6">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_OBG T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    )
+  join
+  CKT_INFRASTRUCTURE T7
+  on
+    (T4.OTY_ID = T7.OTY_OAA_ID) and
+    (T4.OBG_ID = T7.OBG_OAA_ID) and
+    (T4.CSP_NO = T7.CSP_OAA_NO) and
+    (T4.CPA_TYPE = T7.CPA_OAA_TYPE) and
+    (T7.OAA_DATE is not null) and
+    (T7.AAT_TYPE is not null) and
+    (T7.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider7">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_INT_CASE T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@reasonCode as char(3)) = ' ') or
+      (T4.REASON_CODE = @reasonCode)
+    ) and
+    (T4.ICS_NO = @icsNo) and
+    (T4.ICS_DATE = @icsDate)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider8">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_LEG_REF T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T4.LGR_ID = @lgrId) and
+    (T4.CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider9">
+      <value>
+select distinct
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_LEGAL_REFERRAL T5
+  join
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+  join
+  CKT_ASSGN_LEG_REF T4
+  on
+    (T1.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T1.ROLE_CODE = T4.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    (T5.IDENTIFIER = T4.LGR_ID) and
+    (T5.CAS_NUMBER = T4.CAS_NO) and
+    (T5.STATUS &lt;&gt; 'C') and
+    (T5.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+</root>

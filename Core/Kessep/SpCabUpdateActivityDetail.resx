@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadActivityDetail">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT,
+  CASE_UNIT_FUNCTION,
+  FED_NO_COMPLI_DAYS,
+  FED_NR_N_CMPL_DAYS,
+  OTH_NO_COMPLI_DAYS,
+  OTH_NR_N_COMPL_DAY,
+  REG_SOURCE_ID,
+  REG_SRC_DESC,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  ACT_NO
+from
+  CKT_ACTIVITY_DETAL
+where
+  (ACT_NO = @actNo) and
+  (SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="UpdateActivityDetail">
+      <value>
+update CKT_ACTIVITY_DETAL
+set
+  BUSINESS_OBJECT = @businessObject,
+  CASE_UNIT_FUNCTION = @caseUnitFunction,
+  FED_NO_COMPLI_DAYS = @fedNoCompliDays,
+  FED_NR_N_CMPL_DAYS = @fedNrNCmplDays,
+  OTH_NO_COMPLI_DAYS = @othNoCompliDays,
+  OTH_NR_N_COMPL_DAY = @othNrNComplDay,
+  REG_SOURCE_ID = @regSourceId,
+  REG_SRC_DESC = @regSrcDesc,
+  EFFECTIVE_DATE = @effectiveDate,
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (SYSTEM_GENERATED_I = @systemGeneratedI) and
+  (ACT_NO = @actNo)
+</value>
+   </data>
+</root>

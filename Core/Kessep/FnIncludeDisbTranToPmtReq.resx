@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  AMOUNT,
+  PRQ_GENERATED_ID,
+  DESIGNATED_PAYEE
+from
+  CKT_DISB_TRAN
+where
+  (CSP_NUMBER = @cspNumber) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmission">
+      <value>
+select top(1)
+  TRANSMITTAL_AMOUNT,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  PRQ_GENERATED_ID,
+  COLLECTION_AMOUNT
+from
+  CKT_ELEC_FUND_TRAN
+where
+  @prqGeneratedId = PRQ_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  ACH_FORMAT_CODE,
+  TYPE,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="UpdateElectronicFundTransmission">
+      <value>
+update CKT_ELEC_FUND_TRAN
+set
+  TRANSMITTAL_AMOUNT = @transmittalAmount,
+  COLLECTION_AMOUNT = @collectionAmount
+where
+  (TRANSMISSION_TYPE = @transmissionType) and
+  (TRANSMISSION_ID = @transmissionId)
+</value>
+   </data>
+   <data name="UpdatePaymentRequest#1">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  AMOUNT = @amount
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="UpdatePaymentRequest#2">
+      <value>
+update CKT_DISB_TRAN
+set
+  PRQ_GENERATED_ID = @prqGeneratedId
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCollectionType">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.OBLGOR_FIRST_NM,
+  T1.OBLGOR_LAST_NM,
+  T1.OBLGOR_MID_NM,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T1.CRV_IDENTIFIER = @crvIdentifier) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T1.CRT_IDENTIFIER = @crtIdentifier) and
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  (CR_SRCE_TYPE_ID = @crSrceTypeId) and
+  (cast(@crtypeId as smallint) = cast(@crtIdentifier as smallint))
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CATEGORY_IND
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="ReadCollectionCsePersonDebtObligation">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.DISB_PROC_NEED_IND,
+  T1.PGM_APPLD_TO,
+  T1.CT_ORD_APPLIED_TO,
+  T4.CSP_NUMBER,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE,
+  T4.LGA_ID
+from
+  CKT_OBLIGATION T4 with(readuncommitted)
+  join
+  CKT_OB_TRN T3 with(readuncommitted)
+  on
+    (T4.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T4.OB_ID = T3.OBG_GENERATED_ID) and
+    (T4.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T4.CPA_TYPE = T3.CPA_TYPE)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (
+      (T1.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) or
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.COLL_ADJ_DT between cast(@date1 as date) and cast(@date2 as date))
+      )
+    ) and
+    (T1.CONCURRENT_IND = 'N') and
+    (T3.OTY_TYPE = T1.OTY_ID) and
+    (T3.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T3.OB_TRN_ID = T1.OTR_ID) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.OBG_GENERATED_ID = T1.OBG_ID)
+order by
+  T4.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.TRB_ID
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_OBLIGATION T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T2.DTY_GENERATED_ID = @dtyGeneratedId) and
+    (T2.OB_ID = @obId) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadTribunalFips">
+      <value>
+select top(1)
+  T1.TRIBUNAL_NM,
+  T1.FIP_LOCATION,
+  T1.JUDICIAL_DISTRICT,
+  T1.IDENTIFIER,
+  T1.FIP_COUNTY,
+  T1.FIP_STATE,
+  T2.COUNTY_DESC
+from
+  CKT_FIPS T2
+  join
+  CKT_TRIBUNAL T1
+  on
+    (T1.IDENTIFIER = @identifier) and
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE)
+</value>
+   </data>
+</root>

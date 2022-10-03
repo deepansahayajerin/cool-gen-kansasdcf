@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadStmtCouponSuppStatusHist">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  COLL_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  OTY_ID,
+  CPA_TYPE_OBLIG,
+  CSP_NUMBER_OBLIG,
+  OBG_ID,
+  DOC_TYPE_TO_SUPP
+from
+  CKT_STMT_SUP_ST_HS
+where
+  (CPA_TYPE_OBLIG is not null) and
+  (CSP_NUMBER_OBLIG = @cspNumberOblig) and
+  (OBG_ID = @obgId) and
+  (OTY_ID = @otyId) and
+  (TYPE = 'O')
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

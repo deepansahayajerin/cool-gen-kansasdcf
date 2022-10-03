@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeActCertification1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  ORIGINAL_AMT,
+  CURRENT_AMT,
+  CURRENT_AMT_DT,
+  DECERTIFIED_DT,
+  RECOVERY_AMT,
+  CHILD_SUPP_REL_AMT,
+  ADC_AMT,
+  NON_ADC_AMT,
+  INJURED_SPOUSE_DT,
+  DATE_SENT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (TYPE = 'FDSO') and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  TAKEN_DT desc
+</value>
+   </data>
+   <data name="ReadAdministrativeActCertification2">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  ORIGINAL_AMT,
+  CURRENT_AMT,
+  CURRENT_AMT_DT,
+  DECERTIFIED_DT,
+  RECOVERY_AMT,
+  CHILD_SUPP_REL_AMT,
+  ADC_AMT,
+  NON_ADC_AMT,
+  INJURED_SPOUSE_DT,
+  DATE_SENT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (TYPE = 'SDSO') and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  TAKEN_DT desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  STANDARD_NO = @standardNo
+</value>
+   </data>
+   <data name="ReadObligation1">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T1.CREATED_TMST,
+  T1.ORD_TYP_CD
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_OBLIGATION T1
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T2.STANDARD_NO = @standardNo) and
+    (T1.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligation2">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  LGA_ID,
+  CREATED_TMST,
+  ORD_TYP_CD
+from
+  CKT_OBLIGATION
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadObligation3">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T1.CREATED_TMST,
+  T1.ORD_TYP_CD
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_OBLIGATION T1
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T2.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadObligor">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  AOD_NAD_ARR_BAL,
+  AOD_NAD_INT_BAL,
+  AOD_ADC_ARR_BAL,
+  AOD_ADC_INT_BAL,
+  AOD_REC_BAL,
+  AOD_TOT_FEE_BAL,
+  AOD_T_FEE_INT_BAL,
+  AOD_T_BAL_CURR_ARR,
+  LTD_CS_COLL_CURR,
+  LTD_SP_COLL_CURR,
+  LTD_MS_COLL_CURR,
+  LTD_NAD_ARR_COLL,
+  LTD_NAD_INT_COLL,
+  LTD_ADC_ARR_COLL,
+  LTD_ADC_INT_COLL,
+  AOD_TOT_REC_COLL,
+  AOD_TOT_FEE_COLL,
+  AOD_T_FEE_INT_COLL,
+  LAST_COL_AMT,
+  AOD_NF_ARR_BAL,
+  AOD_NF_INT_BAL,
+  AOD_FC_ARR_BAL,
+  AOD_FC_INT_BAL,
+  TD_NF_ARR_COLL,
+  TD_NF_INT_COLL,
+  TD_FC_ARR_COLL,
+  TD_FC_INT_COLL
+from
+  CKT_CSE_PERSON_ACC
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadObligorCsePerson1">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.AOD_NAD_ARR_BAL,
+  T1.AOD_NAD_INT_BAL,
+  T1.AOD_ADC_ARR_BAL,
+  T1.AOD_ADC_INT_BAL,
+  T1.AOD_REC_BAL,
+  T1.AOD_TOT_FEE_BAL,
+  T1.AOD_T_FEE_INT_BAL,
+  T1.AOD_T_BAL_CURR_ARR,
+  T1.LTD_CS_COLL_CURR,
+  T1.LTD_SP_COLL_CURR,
+  T1.LTD_MS_COLL_CURR,
+  T1.LTD_NAD_ARR_COLL,
+  T1.LTD_NAD_INT_COLL,
+  T1.LTD_ADC_ARR_COLL,
+  T1.LTD_ADC_INT_COLL,
+  T1.AOD_TOT_REC_COLL,
+  T1.AOD_TOT_FEE_COLL,
+  T1.AOD_T_FEE_INT_COLL,
+  T1.LAST_COL_AMT,
+  T1.AOD_NF_ARR_BAL,
+  T1.AOD_NF_INT_BAL,
+  T1.AOD_FC_ARR_BAL,
+  T1.AOD_FC_INT_BAL,
+  T1.TD_NF_ARR_COLL,
+  T1.TD_NF_INT_COLL,
+  T1.TD_FC_ARR_COLL,
+  T1.TD_FC_INT_COLL,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CSE_PERSON_ACC T1
+  join
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_OBLIGATION T3
+  on
+    (T4.STANDARD_NO = @standardNo) and
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID)
+  on
+    (T1.TYPE = T3.CPA_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER)
+  on
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.NUMB = @numb)
+</value>
+   </data>
+   <data name="ReadObligorCsePerson2">
+      <value>
+select distinct
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.AOD_NAD_ARR_BAL,
+  T1.AOD_NAD_INT_BAL,
+  T1.AOD_ADC_ARR_BAL,
+  T1.AOD_ADC_INT_BAL,
+  T1.AOD_REC_BAL,
+  T1.AOD_TOT_FEE_BAL,
+  T1.AOD_T_FEE_INT_BAL,
+  T1.AOD_T_BAL_CURR_ARR,
+  T1.LTD_CS_COLL_CURR,
+  T1.LTD_SP_COLL_CURR,
+  T1.LTD_MS_COLL_CURR,
+  T1.LTD_NAD_ARR_COLL,
+  T1.LTD_NAD_INT_COLL,
+  T1.LTD_ADC_ARR_COLL,
+  T1.LTD_ADC_INT_COLL,
+  T1.AOD_TOT_REC_COLL,
+  T1.AOD_TOT_FEE_COLL,
+  T1.AOD_T_FEE_INT_COLL,
+  T1.LAST_COL_AMT,
+  T1.AOD_NF_ARR_BAL,
+  T1.AOD_NF_INT_BAL,
+  T1.AOD_FC_ARR_BAL,
+  T1.AOD_FC_INT_BAL,
+  T1.TD_NF_ARR_COLL,
+  T1.TD_NF_INT_COLL,
+  T1.TD_FC_ARR_COLL,
+  T1.TD_FC_INT_COLL,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CSE_PERSON_ACC T1
+  join
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_OBLIGATION T3
+  on
+    (T4.STANDARD_NO = @standardNo) and
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID)
+  on
+    (T1.TYPE = T3.CPA_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER)
+  on
+    T2.NUMB = T1.CSP_NUMBER
+</value>
+   </data>
+</root>

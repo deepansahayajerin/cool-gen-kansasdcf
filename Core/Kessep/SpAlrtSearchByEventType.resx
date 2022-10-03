@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInfrastructureOfficeServiceProviderAlert1">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.PROCESS_STATUS,
+  T1.EVENT_ID,
+  T1.EVENT_TYPE,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.BUSINESS_OBJECT_CD,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TEXT_12,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CASE_UNIT_NUM,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.TYPE_CODE,
+  T2.MESSAGE,
+  T2.DESCRIPTION,
+  T2.DISTRIBUTION_DATE,
+  T2.OPTIMIZATION_IND,
+  T2.OPTIMIZED_FLAG,
+  T2.USER_ID,
+  T2.CREATED_TIMESTAMP,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE
+from
+  CKT_INFRASTRUCTURE T1 with(readuncommitted)
+  join
+  CKT_OSP_ALERT T2 with(readuncommitted)
+  on
+    (T1.EVENT_TYPE = @eventType) and
+    (T1.PROCESS_STATUS &lt;&gt; 'O') and
+    (T1.SYSTEM_GENERATED_I = T2.INF_ID) and
+    (T2.DISTRIBUTION_DATE &gt;= @distributionDate1) and
+    (
+      (cast(@typeCode as char(3)) = 'ALL') or
+      (
+        (cast(@typeCode as char(3)) &lt;&gt; 'ALL') and
+        (T2.TYPE_CODE = @typeCode)
+      )
+    ) and
+    (
+      (T1.CASE_NUMBER &gt; @caseNumber) or
+      (
+        (T1.CASE_NUMBER = @caseNumber) and
+        (T2.DISTRIBUTION_DATE &gt; @distributionDate2)
+      ) or
+      (
+        (T1.CASE_NUMBER = @caseNumber) and
+        (T2.DISTRIBUTION_DATE = @distributionDate2) and
+        (T2.CREATED_TIMESTAMP &gt;= @createdTimestamp)
+      )
+    )
+order by
+  T1.CASE_NUMBER,
+  T2.DISTRIBUTION_DATE,
+  T2.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadInfrastructureOfficeServiceProviderAlert2">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.PROCESS_STATUS,
+  T1.EVENT_ID,
+  T1.EVENT_TYPE,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.BUSINESS_OBJECT_CD,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TEXT_12,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CASE_UNIT_NUM,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.TYPE_CODE,
+  T2.MESSAGE,
+  T2.DESCRIPTION,
+  T2.DISTRIBUTION_DATE,
+  T2.OPTIMIZATION_IND,
+  T2.OPTIMIZED_FLAG,
+  T2.USER_ID,
+  T2.CREATED_TIMESTAMP,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE
+from
+  CKT_INFRASTRUCTURE T1 with(readuncommitted)
+  join
+  CKT_OSP_ALERT T2 with(readuncommitted)
+  on
+    (T1.EVENT_TYPE = @eventType) and
+    (T1.PROCESS_STATUS &lt;&gt; 'O') and
+    (T1.SYSTEM_GENERATED_I = T2.INF_ID) and
+    (T2.DISTRIBUTION_DATE &gt;= @distributionDate1) and
+    (
+      (cast(@typeCode as char(3)) = 'ALL') or
+      (
+        (cast(@typeCode as char(3)) &lt;&gt; 'ALL') and
+        (T2.TYPE_CODE = @typeCode)
+      )
+    ) and
+    (
+      (T1.CSE_PERSON_NUM &gt; @csePersonNum) or
+      (
+        (T1.CSE_PERSON_NUM = @csePersonNum) and
+        (T2.DISTRIBUTION_DATE &gt; @distributionDate2)
+      ) or
+      (
+        (T1.CSE_PERSON_NUM = @csePersonNum) and
+        (T2.DISTRIBUTION_DATE = @distributionDate2) and
+        (T2.CREATED_TIMESTAMP &gt;= @createdTimestamp)
+      )
+    )
+order by
+  T1.CSE_PERSON_NUM,
+  T2.DISTRIBUTION_DATE,
+  T2.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadInfrastructureOfficeServiceProviderAlert3">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.PROCESS_STATUS,
+  T1.EVENT_ID,
+  T1.EVENT_TYPE,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.BUSINESS_OBJECT_CD,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TEXT_12,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CASE_UNIT_NUM,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.TYPE_CODE,
+  T2.MESSAGE,
+  T2.DESCRIPTION,
+  T2.DISTRIBUTION_DATE,
+  T2.OPTIMIZATION_IND,
+  T2.OPTIMIZED_FLAG,
+  T2.USER_ID,
+  T2.CREATED_TIMESTAMP,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE
+from
+  CKT_INFRASTRUCTURE T1 with(readuncommitted)
+  join
+  CKT_OSP_ALERT T2 with(readuncommitted)
+  on
+    (T1.EVENT_TYPE = @eventType) and
+    (T1.PROCESS_STATUS &lt;&gt; 'O') and
+    (T1.SYSTEM_GENERATED_I = T2.INF_ID) and
+    (T2.DISTRIBUTION_DATE &gt;= @distributionDate1) and
+    (
+      (cast(@typeCode as char(3)) = 'ALL') or
+      (
+        (cast(@typeCode as char(3)) &lt;&gt; 'ALL') and
+        (T2.TYPE_CODE = @typeCode)
+      )
+    ) and
+    (
+      (T2.DISTRIBUTION_DATE &gt; @distributionDate2) or
+      (
+        (T2.DISTRIBUTION_DATE = @distributionDate2) and
+        (T2.CREATED_TIMESTAMP &gt;= @createdTimestamp)
+      )
+    )
+order by
+  T2.DISTRIBUTION_DATE,
+  T2.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadInfrastructureOfficeServiceProviderAlert4">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.PROCESS_STATUS,
+  T1.EVENT_ID,
+  T1.EVENT_TYPE,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.BUSINESS_OBJECT_CD,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TEXT_12,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CASE_UNIT_NUM,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.TYPE_CODE,
+  T2.MESSAGE,
+  T2.DESCRIPTION,
+  T2.DISTRIBUTION_DATE,
+  T2.OPTIMIZATION_IND,
+  T2.OPTIMIZED_FLAG,
+  T2.USER_ID,
+  T2.CREATED_TIMESTAMP,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE
+from
+  CKT_INFRASTRUCTURE T1 with(readuncommitted)
+  join
+  CKT_OSP_ALERT T2 with(readuncommitted)
+  on
+    (T1.EVENT_TYPE = @eventType) and
+    (T1.PROCESS_STATUS &lt;&gt; 'O') and
+    (T1.SYSTEM_GENERATED_I = T2.INF_ID) and
+    (T2.DISTRIBUTION_DATE &gt;= @distributionDate1) and
+    (
+      (cast(@typeCode as char(3)) = 'ALL') or
+      (
+        (cast(@typeCode as char(3)) &lt;&gt; 'ALL') and
+        (T2.TYPE_CODE = @typeCode)
+      )
+    ) and
+    (
+      (T2.MESSAGE &gt; @message) or
+      (
+        (T2.MESSAGE = @message) and
+        (T2.DISTRIBUTION_DATE &gt; @distributionDate2)
+      ) or
+      (
+        (T2.MESSAGE = @message) and
+        (T2.DISTRIBUTION_DATE = @distributionDate2) and
+        (T2.CREATED_TIMESTAMP &gt;= @createdTimestamp)
+      )
+    )
+order by
+  T2.MESSAGE,
+  T2.DISTRIBUTION_DATE,
+  T2.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadInfrastructureOfficeServiceProviderAlert5">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.PROCESS_STATUS,
+  T1.EVENT_ID,
+  T1.EVENT_TYPE,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.BUSINESS_OBJECT_CD,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TEXT_12,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CASE_UNIT_NUM,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.TYPE_CODE,
+  T2.MESSAGE,
+  T2.DESCRIPTION,
+  T2.DISTRIBUTION_DATE,
+  T2.OPTIMIZATION_IND,
+  T2.OPTIMIZED_FLAG,
+  T2.USER_ID,
+  T2.CREATED_TIMESTAMP,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE
+from
+  CKT_INFRASTRUCTURE T1 with(readuncommitted)
+  join
+  CKT_OSP_ALERT T2 with(readuncommitted)
+  on
+    (T1.EVENT_TYPE = @eventType) and
+    (T1.PROCESS_STATUS &lt;&gt; 'O') and
+    (T1.SYSTEM_GENERATED_I = T2.INF_ID) and
+    (T2.DISTRIBUTION_DATE &gt;= @distributionDate1) and
+    (
+      (cast(@typeCode as char(3)) = 'ALL') or
+      (
+        (cast(@typeCode as char(3)) &lt;&gt; 'ALL') and
+        (T2.TYPE_CODE = @typeCode)
+      )
+    ) and
+    (
+      (T2.DISTRIBUTION_DATE &lt; @distributionDate2) or
+      (
+        (T2.DISTRIBUTION_DATE = @distributionDate2) and
+        (T2.CREATED_TIMESTAMP &lt;= @createdTimestamp)
+      )
+    )
+order by
+  T2.DISTRIBUTION_DATE desc,
+  T2.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_FIPS T3
+  join
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.LEGAL_ACTION_ID = cast(@denormNumeric12 as decimal(12))) and
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T2.IDENTIFIER = T1.TRB_ID)
+  on
+    (T3.LOCATION = T2.FIP_LOCATION) and
+    (T3.COUNTY = T2.FIP_COUNTY) and
+    (T3.[STATE] = T2.FIP_STATE) and
+    (T3.STATE_ABBREVIATION = @stateAbbreviation) and
+    (T3.COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_FIPS_TRIB_ADDR T3
+  on
+    (T1.LEGAL_ACTION_ID = cast(@denormNumeric12 as decimal(12))) and
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T1.TRB_ID = T3.TRB_ID) and
+    (T3.COUNTRY = @country)
+</value>
+   </data>
+   <data name="ReadOfficeOfficeServiceProviderServiceProvider">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.OFF_OFFICE,
+  T2.SPD_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T3.USER_ID
+from
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFICE T1
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T2.EFFECTIVE_DATE = @effectiveDate) and
+    (T2.ROLE_CODE = @roleCode) and
+    (T2.OFF_GENERATED_ID = @offGeneratedId) and
+    (T2.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T1.OFFICE_ID = T2.OFF_GENERATED_ID)
+  on
+    T3.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID
+</value>
+   </data>
+</root>

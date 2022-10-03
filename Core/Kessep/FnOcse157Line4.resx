@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCsePersonCase">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  EMANCIPATION_DT
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (TYPE = 'CH') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate) and
+  (CSP_NUMBER &gt; @cspNumber) and
+  (CSP_NUMBER between cast(@suppPersonNumber1 as char(10)) and cast(@suppPersonNumber2 as char(10)))
+order by
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadOcse157Data">
+      <value>
+select top(1)
+  max(RUN_NUMBER)
+from
+  CKT_OCSE157_DATA with(readuncommitted)
+where
+  (FISCAL_YEAR = @fiscalYear) and
+  (LINE_NUMBER = '01 ')
+</value>
+   </data>
+   <data name="ReadOcse157Verification">
+      <value>
+select top(1)
+  min(CASE_NUMBER)
+from
+  CKT_OCSE157_VERIFI with(readuncommitted)
+where
+  (COLUMN0 &lt;&gt; ' ') and
+  (FISCAL_YEAR = @fiscalYear) and
+  (RUN_NUMBER = @runNumber) and
+  (LINE_NUMBER = '01 ') and
+  (CASE_NUMBER = @caseNumber)
+</value>
+   </data>
+</root>

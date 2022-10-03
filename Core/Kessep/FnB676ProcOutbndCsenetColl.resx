@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select distinct
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COLLECTION_DATE,
+  T1.COLLAMT_APPL_IND,
+  T1.CLT_IDENTIFIER
+from
+  CKT_CR_DETAIL T1
+  join
+  CKT_OBLIGATION T3
+  join
+  CKT_COLLECTION T5
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T3.DTY_GENERATED_ID = T5.OTY_ID) and
+    (T3.OB_ID = T5.OBG_ID) and
+    (T3.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T3.CPA_TYPE = T5.CPA_TYPE) and
+    (
+      (
+        (T5.ADJ_IND = @adjInd) and
+        (T5.CSENET_OB_ADJ_P_DT = @csenetObAdjPDt)
+      ) or
+      (T5.CSENET_OB_P_DT = @csenetObAdjPDt)
+    ) and
+    (@lgaId = T3.LGA_ID)
+  on
+    (T1.CRD_ID = T5.CRD_ID) and
+    (T1.CRV_IDENTIFIER = T5.CRV_ID) and
+    (T1.CST_IDENTIFIER = T5.CST_ID) and
+    (T1.CRT_IDENTIFIER = T5.CRT_TYPE) and
+    (T1.COLLECTION_DATE &gt; @collectionDate) and
+    (T1.COLLAMT_APPL_IND = @collamtApplInd)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select
+  COLL_ID,
+  COLL_DT,
+  ADJ_IND,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OB_TRN_AMT,
+  PGM_APPLD_TO,
+  CSENET_OB_REQ_IND,
+  CSENET_OB_P_DT,
+  CSENET_OB_ADJ_P_DT
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (
+    (
+      (ADJ_IND = @adjInd) and
+      (CSENET_OB_ADJ_P_DT = @csenetObAdjPDt)
+    ) or
+    (CSENET_OB_ADJ_P_DT = @csenetObAdjPDt)
+  )
+order by
+  COLL_DT
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (LOCATION = 0) and
+  (COUNTY = 0)
+</value>
+   </data>
+   <data name="ReadInterstateRequestCaseCsePersonLegalAction">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.OTHER_STATE_CAS_ID,
+  T1.OTHR_STATE_FIPS_CD,
+  T1.CREATED_TIMESTAMP,
+  T1.OTH_ST_CASE_STATUS,
+  T1.CASE_TYPE,
+  T1.KS_CASE_IND,
+  T1.CAS_I_NUMBER,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_ID,
+  T2.KS_FIPS_CODE,
+  T2.INTERSTATE_CASE_ID,
+  T4.LEGAL_ACTION_ID,
+  T4.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T4 with(readuncommitted)
+  join
+  CKT_CASE T2 with(readuncommitted)
+  join
+  CKT_INTERSTAT_RQST T1 with(readuncommitted)
+  on
+    (T2.NUMB = T1.CAS_I_NUMBER) and
+    (T1.KS_CASE_IND = @ksCaseInd) and
+    (T1.OTH_ST_CASE_STATUS = @othStCaseStatus) and
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (T1.CRO_TYPE = 'AP')
+  join
+  CKT_LEG_ACT_CAS_RL T7 with(readuncommitted)
+  on
+    (T1.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T7.CRO_TYPE = 'AP') and
+    (T2.NUMB = T7.CAS_NUMBER) and
+    (T1.CRO_ID = T7.CRO_IDENTIFIER) and
+    (T1.CRO_TYPE = T7.CRO_TYPE) and
+    (T1.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T1.CAS_NUMBER = T7.CAS_NUMBER)
+  on
+    T4.LEGAL_ACTION_ID = T7.LGA_ID
+order by
+  T1.CSP_NUMBER,
+  T1.OTHR_STATE_FIPS_CD,
+  T1.CAS_I_NUMBER,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory">
+      <value>
+select
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  TRANSACTION_DIRECT,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  ACTION_REASON_CODE
+from
+  CKT_INT_RQST_HIST with(readuncommitted)
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (TRANSACTION_DIRECT = 'O') and
+  (
+    (FUNCTIONAL_TYPE_CO in ('ENF', 'EST', 'PAT')) or
+    (ACTION_REASON_CODE = 'OICNV')
+  )
+order by
+  TRANSACTION_DATE desc
+</value>
+   </data>
+   <data name="UpdateCollection">
+      <value>
+update CKT_COLLECTION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  CSENET_OB_REQ_IND = @csenetObReqInd,
+  CSENET_OB_P_DT = @csenetObPDt,
+  CSENET_OB_ADJ_P_DT = @csenetObAdjPDt
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.PAT_LOCK_IND
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.PAT_LOCK_IND = 'Y') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.ACCOUNT_TYPE = 'S') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (T2.LAD_R_NUMBER = @ladRNumber) and
+    (T2.LGA_R_IDENTIFIER = @lgaRIdentifier)
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (COUNTY_ABBR = @countyAbbr) and
+  (STATE_ABBREVIATION = @stateAbbreviation)
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  STATE_ABBREVIATION = @stateAbbreviation
+</value>
+   </data>
+   <data name="ReadFips3">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadFipsTribunal">
+      <value>
+select top(1)
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION,
+  T1.COUNTY_DESC,
+  T1.STATE_ABBREVIATION,
+  T1.COUNTY_ABBR,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.JUDICIAL_DISTRICT,
+  T2.IDENTIFIER
+from
+  CKT_FIPS T1
+  join
+  CKT_TRIBUNAL T2
+  on
+    (T1.LOCATION = T2.FIP_LOCATION) and
+    (T1.COUNTY = T2.FIP_COUNTY) and
+    (T1.[STATE] = T2.FIP_STATE) and
+    (T2.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.PAYMENT_LOCATION,
+  T1.STANDARD_NO,
+  T1.TRB_ID
+from
+  CKT_FIPS T3
+  join
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T2.IDENTIFIER = T1.TRB_ID)
+  on
+    (T3.LOCATION = T2.FIP_LOCATION) and
+    (T3.COUNTY = T2.FIP_COUNTY) and
+    (T3.[STATE] = T2.FIP_STATE) and
+    (T3.STATE_ABBREVIATION = @stateAbbreviation) and
+    (T3.COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  COURT_CASE_NO,
+  PAYMENT_LOCATION,
+  STANDARD_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (TRB_ID = @trbId) and
+  (COURT_CASE_NO = @courtCaseNo)
+</value>
+   </data>
+   <data name="ReadLegalAction3">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  COURT_CASE_NO,
+  PAYMENT_LOCATION,
+  STANDARD_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionDetail1">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  BOND_AMT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  [LIMIT],
+  DETAIL_TYPE,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND,
+  DESCRIPTION,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (DAY_OF_MONTH_1 = @dayOfMonth1) and
+  (DAY_OF_MONTH_2 = @dayOfMonth2) and
+  (DAY_OF_WEEK = @dayOfWeek) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (@otyId = OTY_ID) and
+  (EFFECTIVE_DT = @effectiveDt) and
+  (FRQ_PRD_CD = @frqPrdCd) and
+  (ARREARS_AMOUNT = @arrearsAmount) and
+  (CURRENT_AMOUNT = @currentAmount) and
+  (JUDGEMENT_AMOUNT = @judgementAmount) and
+  (LA_DETAIL_NO &lt;&gt; @laDetailNo)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail2">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  BOND_AMT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  [LIMIT],
+  DETAIL_TYPE,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND,
+  DESCRIPTION,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (DAY_OF_MONTH_1 = @dayOfMonth1) and
+  (DAY_OF_MONTH_2 = @dayOfMonth2) and
+  (DAY_OF_WEEK = @dayOfWeek) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (@otyId = OTY_ID) and
+  (EFFECTIVE_DT = @effectiveDt) and
+  (FRQ_PRD_CD = @frqPrdCd) and
+  (ARREARS_AMOUNT = @arrearsAmount) and
+  (CURRENT_AMOUNT = @currentAmount) and
+  (JUDGEMENT_AMOUNT = @judgementAmount)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail3">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  BOND_AMT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  [LIMIT],
+  DETAIL_TYPE,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND,
+  DESCRIPTION,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (LA_DETAIL_NO = @laDetailNo)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail4">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  BOND_AMT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  [LIMIT],
+  DETAIL_TYPE,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND,
+  DESCRIPTION,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@otyId = OTY_ID)
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.PAYMENT_LOCATION,
+  T1.STANDARD_NO,
+  T1.TRB_ID,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T2.IDENTIFIER = T1.TRB_ID) and
+    (T2.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionTribunalFips">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.PAYMENT_LOCATION,
+  T1.STANDARD_NO,
+  T1.TRB_ID,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE,
+  T3.COUNTY_DESC,
+  T3.STATE_ABBREVIATION,
+  T3.COUNTY_ABBR
+from
+  CKT_FIPS T3
+  join
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T2.IDENTIFIER = T1.TRB_ID)
+  on
+    (T3.LOCATION = T2.FIP_LOCATION) and
+    (T3.COUNTY = T2.FIP_COUNTY) and
+    (T3.[STATE] = T2.FIP_STATE) and
+    (T3.STATE_ABBREVIATION = @stateAbbreviation) and
+    (T3.COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select distinct
+  T1.OTY_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.OBG_CSP_NUMBER,
+  T1.OBG_CPA_TYPE,
+  T1.START_DT,
+  T1.END_DT
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_LEGAL_ACT_DTL T2
+  on
+    (T2.LGA_IDENTIFIER = @lgaIdentifier) and
+    (T2.LA_DETAIL_NO = @laDetailNo) and
+    (T3.DEBT_TYP_ID = T2.OTY_ID) and
+    (T3.DEBT_TYP_CD = @debtTypCd)
+  join
+  CKT_OBLIGATION T4
+  on
+    (T3.DEBT_TYP_ID = T4.DTY_GENERATED_ID) and
+    (T2.LA_DETAIL_NO = T4.LAD_NUMBER) and
+    (T2.LGA_IDENTIFIER = T4.LGA_IDENTIFIER)
+  join
+  CKT_OB_PYMNT_SCH T1
+  on
+    (T4.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T4.OB_ID = T1.OBG_GENERATED_ID) and
+    (T4.CSP_NUMBER = T1.OBG_CSP_NUMBER) and
+    (T4.CPA_TYPE = T1.OBG_CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadObligationType1">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_CD = @debtTypCd
+</value>
+   </data>
+   <data name="ReadObligationType2">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadObligationType3">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  (DEBT_TYP_CD = @debtTypCd) and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (DISCONTINUE_DT &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadObligationType4">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  (DEBT_TYP_CD = @debtTypCd) and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (DISCONTINUE_DT &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadObligationType5">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadObligationType6">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  JUDICIAL_DISTRICT,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

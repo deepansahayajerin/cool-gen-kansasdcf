@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@lgaIdentifier = T2.LGA_IDENTIFIER)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePersonLegalAction">
+      <value>
+select
+  T5.CSP_NUMBER,
+  T2.LEGAL_ACTION_ID,
+  T2.FILED_DT,
+  T2.COURT_CASE_NO,
+  T2.CREATED_TSTAMP,
+  T2.TRB_ID
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_LEGAL_ACT_PERS T5
+  on
+    (T2.COURT_CASE_NO = @courtCaseNo) and
+    (T2.TRB_ID = @trbId) and
+    (T2.LEGAL_ACTION_ID = T5.LGA_R_IDENTIFIER) and
+    (T5.LAD_R_NUMBER is not null) and
+    (T5.CSP_NUMBER is not null)
+order by
+  T5.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  FILED_DT,
+  COURT_CASE_NO,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (COURT_CASE_NO = @courtCaseNo) and
+  (TRB_ID = @trbId)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson1">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  END_REASON,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_REASON &lt;&gt; ' ')
+</value>
+   </data>
+   <data name="ReadLegalActionPerson2">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  END_REASON,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER
+from
+  CKT_LEGAL_ACT_PERS
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  DATE_RETAINED,
+  DATE_DISMISSED,
+  LAST_NAME,
+  FIRST_NAME
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+</root>

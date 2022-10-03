@@ -1,0 +1,69 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnNperMtnNonCaseClient"
+           program-name="SWENPERP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnNperMtnNonCaseClient"
+           transaction="SR7U"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_NADS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnNadsNonCaseForeignAddr"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NADR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnNadrMtnNonCaseAddr"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.FirstName" to="CsePersonsWorkSet.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial"
+           to="CsePersonsWorkSet.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="CsePersonsWorkSet.LastName"/>
+   </on>
+   <map from="NonCaseMessage" to="NonCaseMessage"/>
+   <map from="BeforeFlowCsePersonsWorkSet" to="BeforeFlowCsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Protect" to="Protect"/>
+   <map from="PrevCsePersonsWorkSet" to="PrevCsePersonsWorkSet"/>
+   <map from="BeforeFlowSsnWorkArea" to="BeforeFlowSsnWorkArea"/>
+   <map from="BeenToName" to="BeenToName"/>
+   <map from="PrevCommon" to="PrevCommon"/>
+   <map from="PrevCsePerson" to="PrevCsePerson"/>
+   <map from="Converted" to="Converted"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="CsePerson.Number" to="CsePerson.Number"/>
+   <map from="CsePersonsWorkSet.FirstName" to="CsePersonsWorkSet.FirstName"/>
+   <map from="CsePersonsWorkSet.MiddleInitial"
+        to="CsePersonsWorkSet.MiddleInitial"/>
+   <map from="CsePersonsWorkSet.LastName" to="CsePersonsWorkSet.LastName"/>
+   <map from="CsePersonsWorkSet.Sex" to="CsePersonsWorkSet.Sex"/>
+   <map from="CsePersonsWorkSet.Dob" to="CsePersonsWorkSet.Dob"/>
+   <map from="Client.HomePhoneAreaCode" to="Client.HomePhoneAreaCode"/>
+   <map from="Client.WorkPhoneAreaCode" to="Client.WorkPhoneAreaCode"/>
+   <map from="Client.WorkPhone" to="Client.WorkPhone"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="Client.HomePhone" to="Client.HomePhone"/>
+   <map from="Dob.Text10" to="Dob.Text10"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+   <map from="Hidden.LastTran" to="Hidden.LastTran"/>
+</procedure>

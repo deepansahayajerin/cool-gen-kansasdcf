@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateAccrualSuspension">
+      <value>
+insert into CKT_ACCR_SUSP
+(
+  FRQ_SUSP_ID,
+  SUSPEND_DT,
+  RESUME_DT,
+  RED_PCT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTR_TYPE,
+  OTY_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  REDUCTION_AMOUNT,
+  FRQ_SUSP_RSN_TXT
+)
+values
+(
+  @frqSuspId,
+  @suspendDt,
+  @resumeDt,
+  @redPct,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @otrType,
+  @otyId,
+  @obgId,
+  @cspNumber,
+  @cpaType,
+  @otrId,
+  @reductionAmount,
+  @frqSuspRsnTxt
+)
+</value>
+   </data>
+   <data name="ReadAccrualInstructions">
+      <value>
+select top(1)
+  OTR_TYPE,
+  OTY_ID,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  AS_OF_DT,
+  DISCONTINUE_DT,
+  LAST_ACCRUAL_DT
+from
+  CKT_ACCRUAL_INSTR
+where
+  (@otrType = OTR_TYPE) and
+  (@otyId = OTY_ID) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgGeneratedId = OBG_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadAccrualSuspension">
+      <value>
+select top(1)
+  FRQ_SUSP_ID,
+  SUSPEND_DT,
+  RESUME_DT,
+  OTR_TYPE,
+  OTY_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID
+from
+  CKT_ACCR_SUSP
+where
+  (@otrType = OTR_TYPE) and
+  (@otyId = OTY_ID) and
+  (@otrId = OTR_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgId = OBG_ID) and
+  (@suspendDt &gt;= SUSPEND_DT) and
+  (@resumeDt &lt; RESUME_DT)
+</value>
+   </data>
+   <data name="ReadObligationTransaction">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN
+where
+  (OB_TRN_ID = @obTrnId) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

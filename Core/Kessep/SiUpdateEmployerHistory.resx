@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadEmployerHistory">
+      <value>
+select top(1)
+  NOTE,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  EMP_ID
+from
+  CKT_EMPLOYER_HIST
+where
+  (EMP_ID = @empId) and
+  (CREATED_TMST = @createdTmst)
+</value>
+   </data>
+   <data name="UpdateEmployerHistory">
+      <value>
+update CKT_EMPLOYER_HIST
+set
+  NOTE = @note,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TMST = @createdTmst) and
+  (EMP_ID = @empId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadVendor">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME,
+  NUMB,
+  PHONE_NUMBER,
+  FAX,
+  CONTACT_PERSON,
+  SERVICE_TYPE_CODE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FAX_EXT,
+  PHONE_EXT,
+  FAX_AREA,
+  PHONE_AREA
+from
+  CKT_VENDOR
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadVendorAddress">
+      <value>
+select top(1)
+  VEN_IDENTIFIER,
+  EFFECTIVE_DATE,
+  EXPIRY_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE5,
+  ZIP_CODE4,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_VENDOR_ADDR
+where
+  @venIdentifier = VEN_IDENTIFIER
+order by
+  EXPIRY_DATE desc
+</value>
+   </data>
+   <data name="ReadVendorVendorAddress">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.NAME,
+  T1.NUMB,
+  T1.PHONE_NUMBER,
+  T1.FAX,
+  T1.CONTACT_PERSON,
+  T1.SERVICE_TYPE_CODE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.FAX_EXT,
+  T1.PHONE_EXT,
+  T1.FAX_AREA,
+  T1.PHONE_AREA,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRY_DATE,
+  T2.STREET_1,
+  T2.STREET_2,
+  T2.CITY,
+  T2.[STATE],
+  T2.ZIP_CODE5,
+  T2.ZIP_CODE4,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST
+from
+  CKT_VENDOR T1
+  join
+  CKT_VENDOR_ADDR T2
+  on
+    (T1.NAME &gt;= @name) and
+    (T1.IDENTIFIER = T2.VEN_IDENTIFIER) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.EXPIRY_DATE &gt;= @effectiveDate)
+order by
+  T1.NAME
+</value>
+   </data>
+</root>

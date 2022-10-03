@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAbsentParent">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  LOCAL_FIPS_STATE,
+  LOCAL_FIPS_COUNTY,
+  LOCAL_FIPS_LOCATIO,
+  OTHER_FIPS_STATE,
+  OTHER_FIPS_COUNTY,
+  OTHER_FIPS_LOCATIO,
+  TRANS_SERIAL_NBR,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  KS_CASE_ID,
+  INTERSTATE_CASE_ID,
+  ACTION_REASON_CODE,
+  ACTION_RESOLUTION,
+  ATTACHMENTS_IND,
+  CASE_DATA_IND,
+  AP_IDENTIFICATION,
+  AP_LOCATE_DATA_IND,
+  PARTICIPANT_DATA_I,
+  ORDER_DATA_IND,
+  COLLECTION_DATA_IN,
+  INFORMATION_IND,
+  SENT_DATE,
+  SENT_TIME,
+  DUE_DATE,
+  OVERDUE_IND,
+  DATE_RECEIVED,
+  TIME_RECEIVED,
+  ATTACHMNTS_DUE_DTE,
+  INTERSTATE_FORMS_P,
+  CASE_TYPE,
+  CASE_STATUS,
+  PAYMENT_MAILING_AD,
+  PAYMENT_ADDRESS_LI,
+  PAYMENT_CITY,
+  PAYMENT_STATE,
+  PAYMENT_ZIP_CODE_5,
+  PAYMENT_ZIP_CODE_4,
+  ZDEL_CP_ADDR_LINE1,
+  ZDEL_CP_ADDR_LINE2,
+  ZDEL_CP_CITY,
+  ZDEL_CP_STATE,
+  ZDEL_CP_ZIP_CODE_5,
+  ZDEL_CP_ZIP_CODE_4,
+  CONTACT_NAME_LAST,
+  CONTACT_NAME_FIRST,
+  CONTACT_NAME_MIDDL,
+  CONTACT_NAME_SUFFI,
+  CONTACT_ADDR_LINE1,
+  CONTACT_ADDR_LINE2,
+  CONTACT_CITY,
+  CONTACT_STATE,
+  CONTACT_ZIP_CODE_5,
+  CONTACT_ZIP_CODE_4,
+  CONTACT_PHONE_NUM,
+  ASSN_DEACT_DT,
+  ASSN_DEACT_IND,
+  LAST_DEFER_DT,
+  MEMO,
+  CONTACT_PHONE_EXT,
+  CONTACT_FAX_NUMBER,
+  CON_FAX_AREA_CODE,
+  CON_INTERNET_ADDR,
+  INIT_DOCKET_NUM,
+  SEND_PAYM_BANK_ACC,
+  SEND_PAYM_RT_CODE,
+  NONDISCLOSURE_FIND,
+  RESP_DOCKET_NUM,
+  STATE_WITH_CEJ,
+  PAYM_FIPS_COUNTY,
+  PAYMENT_FIPS_STATE,
+  PAYM_FIPS_LOCATION,
+  CONTACT_AREA_CODE
+from
+  CKT_INTERST_CASE
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="ReadInterstateMiscellaneous">
+      <value>
+select top(1)
+  INFO_TEXT_1,
+  INFO_TEXT_2,
+  INFO_TEXT_3,
+  CCA_TRANS_SER_NUM,
+  CCA_TRANSACTION_DT,
+  INFO_TEXT_LINE_4,
+  INFO_TEXT_LINE_5
+from
+  CKT_INTERST_MISC
+where
+  (@ccaTransactionDt = CCA_TRANSACTION_DT) and
+  (@ccaTransSerNum = CCA_TRANS_SER_NUM)
+</value>
+   </data>
+</root>

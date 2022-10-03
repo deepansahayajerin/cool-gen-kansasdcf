@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDeleteReason">
+      <value>
+select top(1)
+  CRDELETE_RSN_ID,
+  CODE
+from
+  CKT_CRDELETE_RSN
+where
+  CRDELETE_RSN_ID = @crdeleteRsnId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatusHistoryCashReceiptStatus">
+      <value>
+select top(1)
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DISCONTINUE_DATE,
+  REASON_TEXT,
+  CDR_IDENTIFIER
+from
+  CKT_CR_STATUS_HIST
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (DISCONTINUE_DATE &gt; @discontinueDate)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

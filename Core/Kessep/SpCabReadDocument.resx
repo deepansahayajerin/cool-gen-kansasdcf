@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDocument">
+      <value>
+select top(1)
+  NAME,
+  TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  DESCRIPTION,
+  BUSINESS_OBJECT,
+  RQURED_RSPNSE_DAYS,
+  EVE_NO,
+  EVD_ID,
+  DETAILED_DESC,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  PRINT_PREVIEW_SW,
+  VERSION_NBR
+from
+  CKT_DOCUMENT
+where
+  (NAME = @name) and
+  (EXPIRATION_DATE = @expirationDate)
+order by
+  EXPIRATION_DATE desc
+</value>
+   </data>
+   <data name="ReadEventEventDetail">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME
+from
+  CKT_EVENT_DETAIL
+where
+  (SYSTEM_GENERATED_I = @systemGeneratedI) and
+  (EVE_NO = @eveNo)
+</value>
+   </data>
+</root>

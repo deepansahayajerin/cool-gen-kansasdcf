@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS with(readuncommitted)
+where
+  ([STATE] = @state) and
+  (COUNTY = 0) and
+  (LOCATION = 0)
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS with(readuncommitted)
+where
+  (STATE_ABBREVIATION = @stateAbbreviation) and
+  (COUNTY = 0) and
+  (LOCATION = 0)
+</value>
+   </data>
+   <data name="ReadInterstateContact">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  START_DATE,
+  CONTACT_PHONE_NUM,
+  END_DATE,
+  NAME_LAST,
+  NAME_FIRST,
+  NAME_MIDDLE,
+  AREA_CODE,
+  CONTACT_PHONE_EXT,
+  CONTACT_FAX_NUMBER,
+  CONT_FAX_AREA_CODE,
+  CONT_INTERNET_ADDR
+from
+  CKT_INT_CONTACT with(readuncommitted)
+where
+  INT_GENERATED_ID = @intGeneratedId
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadInterstateContactAddress">
+      <value>
+select top(1)
+  ICO_CONT_START_DT,
+  INT_GENERATED_ID,
+  START_DATE,
+  STREET1,
+  STREET2,
+  CITY,
+  END_DATE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE
+from
+  CKT_INT_CNTCT_ADDR
+where
+  (@icoContStartDt = ICO_CONT_START_DT) and
+  (@intGeneratedId = INT_GENERATED_ID)
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST
+where
+  (CRO_ID is not null) and
+  (CAS_NUMBER is not null) and
+  (
+    (
+      (cast(@state as smallint) &lt;&gt; 0) and
+      (OTHR_STATE_FIPS_CD = @state)
+    ) or
+    (
+      (cast(@country as char(2)) &lt;&gt; ' ') and
+      (COUNTRY = @country)
+    ) or
+    (
+      (cast(@tribalAgency as char(4)) &lt;&gt; ' ') and
+      (TRIBAL_AGENCY = @tribalAgency)
+    )
+  ) and
+  (KS_CASE_IND &lt;&gt; ' ') and
+  (CAS_I_NUMBER = @casINumber) and
+  (CRO_TYPE = 'AP') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequestCsePerson1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST
+where
+  (CRO_ID is not null) and
+  (CSP_NUMBER is not null) and
+  (CAS_NUMBER is not null) and
+  (KS_CASE_IND &gt; ' ') and
+  (OTH_ST_CASE_STATUS &gt; ' ') and
+  (CAS_I_NUMBER = @casINumber) and
+  (CRO_TYPE = 'AP') and
+  (KS_CASE_IND &lt;&gt; 'Y')
+</value>
+   </data>
+   <data name="ReadInterstateRequestCsePerson2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST
+where
+  (CRO_ID is not null) and
+  (CSP_NUMBER is not null) and
+  (CAS_NUMBER is not null) and
+  (OTH_ST_CASE_STATUS &gt; ' ') and
+  (CAS_I_NUMBER = @casINumber) and
+  (CRO_TYPE = 'AP') and
+  (KS_CASE_IND = 'Y')
+</value>
+   </data>
+   <data name="ReadInterstateRequestCsePerson3">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (CRO_ID is not null) and
+  (CSP_NUMBER is not null) and
+  (CAS_NUMBER is not null) and
+  (OTH_ST_CASE_STATUS &gt; ' ') and
+  (
+    (
+      (cast(@state as smallint) &gt; 0) and
+      (OTHR_STATE_FIPS_CD = @state)
+    ) or
+    (
+      (cast(@country as char(2)) &lt;&gt; ' ') and
+      (COUNTRY = @country)
+    ) or
+    (
+      (cast(@tribalAgency as char(4)) &lt;&gt; ' ') and
+      (TRIBAL_AGENCY = @tribalAgency)
+    ) or
+    (
+      (cast(@state as smallint) = 0) and
+      (cast(@country as char(2)) = ' ') and
+      (cast(@tribalAgency as char(4)) = ' ')
+    )
+  ) and
+  (CAS_I_NUMBER = @casINumber) and
+  (CRO_TYPE = 'AP') and
+  (KS_CASE_IND = 'Y')
+order by
+  OTH_ST_CASE_STATUS desc,
+  KS_CASE_IND
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  FILED_DT,
+  END_DT
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+</root>

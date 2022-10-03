@@ -1,0 +1,383 @@
+﻿<!--Name: FN_LEFT_LIST_ELEC_FUND_TRAN, ID: 372412713, model: 746-->
+<div coolContent coolName="FN_LEFT_LIST_ELEC_FUND_TRAN" coolType="SCREEN"
+  (coolInit)="scrollSize = 150; pageSize = 11">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 18.75%; top: 0; width: 65%; height: 4%;"
+     coolCol="16" coolRow="1" coolLength="52">CSE - List Electronic Fund Transmission Files - LEFT</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 12%; width: 21.25%; height: 4%;" coolCol="3"
+     coolRow="4" coolLength="17">Transmission Type</div>
+   <input type="text" coolType="field" name="field_4_22"
+     [(ngModel)]="in.search.transmissionType"
+     [coolVideo]="out.search.screenField?.transmissionType" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['O','I']"
+     style="left: 26.25%; top: 12%; width: 1.25%; height: 4%;" coolCol="22"
+     coolRow="4" coolLength="1">
+   
+   <div coolType="literal"
+     style="left: 30%; top: 12%; width: 27.5%; height: 4%;" coolCol="25"
+     coolRow="4" coolLength="22">(I)nbound / (O)utbound</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 16%; width: 28.75%; height: 4%;" coolCol="3"
+     coolRow="5" coolLength="23">File Creation Date From</div>
+   <input type="text" coolType="field" name="field_5_28"
+     [(ngModel)]="in.search.fileCreationDate"
+     [coolVideo]="out.search.screenField?.fileCreationDate" coolAutotab
+     coolFocus coolColor="green" coolHighlight="underscore" coolDate="MMddyyyy"
+     [attr.maxlength]="8"
+     style="left: 33.75%; top: 16%; width: 10%; height: 4%;" coolCol="28"
+     coolRow="5" coolLength="8">
+   
+   <div coolType="literal"
+     style="left: 46.25%; top: 16%; width: 2.5%; height: 4%;" coolCol="38"
+     coolRow="5" coolLength="2">To</div>
+   <input type="text" coolType="field" name="field_5_42"
+     [(ngModel)]="in.searchEnding.fileCreationDate"
+     [coolVideo]="out.searchEnding.screenField?.fileCreationDate" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolDate="MMddyyyy"
+     [attr.maxlength]="8"
+     style="left: 51.25%; top: 16%; width: 10%; height: 4%;" coolCol="42"
+     coolRow="5" coolLength="8">
+   
+   <div coolType="literal"
+     style="left: 11.25%; top: 24%; width: 16.25%; height: 4%;" coolCol="10"
+     coolRow="7" coolLength="13">File Creation</div>
+   
+   <div coolType="literal"
+     style="left: 33.75%; top: 24%; width: 18.75%; height: 4%;" coolCol="28"
+     coolRow="7" coolLength="15">Total Number of</div>
+   
+   <div coolType="literal"
+     style="left: 56.25%; top: 24%; width: 18.75%; height: 4%;" coolCol="46"
+     coolRow="7" coolLength="15">Total Amount of</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 28%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="8" coolLength="3">Sel</div>
+   
+   <div coolType="literal"
+     style="left: 11.25%; top: 28%; width: 16.25%; height: 4%;" coolCol="10"
+     coolRow="8" coolLength="13">Date     Time</div>
+   
+   <div coolType="literal"
+     style="left: 33.75%; top: 28%; width: 18.75%; height: 4%;" coolCol="28"
+     coolRow="8" coolLength="15">Records in File</div>
+   
+   <div coolType="literal"
+     style="left: 56.25%; top: 28%; width: 18.75%; height: 4%;" coolCol="46"
+     coolRow="8" coolLength="15">Records in File</div>
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.group, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 32%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 32%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="9" coolLength="5" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 32%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="9" coolLength="11" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 32%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="9" coolLength="14" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_10_3"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 36%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 36%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="10" coolLength="5" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 36%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="10" coolLength="11" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 36%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="10" coolLength="14" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_11_3"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 40%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 40%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="11" coolLength="5" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 40%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="11" coolLength="11" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 40%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="11" coolLength="14" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_12_3"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 44%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 44%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="12" coolLength="5" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 44%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="12" coolLength="11" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 44%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="12" coolLength="14" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 48%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 48%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="13" coolLength="5" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 48%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="13" coolLength="11" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 48%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="13" coolLength="14" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_14_3"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 52%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 52%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="14" coolLength="5" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 52%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="14" coolLength="11" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 52%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="14" coolLength="14" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_15_3"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 56%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 56%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="15" coolLength="5" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 56%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="15" coolLength="11" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 56%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="15" coolLength="14" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_16_3"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 60%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 60%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="16" coolLength="5" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 60%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="16" coolLength="11" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 60%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="16" coolLength="14" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 8 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 64%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 64%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="17" coolLength="5" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 64%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="17" coolLength="11" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 64%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="17" coolLength="14" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_18_3"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 9 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 68%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 68%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="18" coolLength="5" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 68%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="18" coolLength="11" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 68%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="18" coolLength="14" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_19_3"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 10 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 72%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.eftTransmissionFileInfo.fileCreationDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 22.5%; top: 72%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="19" coolLength="5" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.eftTransmissionFileInfo.fileCreationTime|coolTime:'HH:mm':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 72%; width: 13.75%; height: 4%;" coolCol="30"
+     coolRow="19" coolLength="11" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.eftTransmissionFileInfo.recordCount|coolNumber:'###,###,##0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 57.5%; top: 72%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="19" coolLength="14" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.eftTransmissionFileInfo.totalAmount|coolNumber:'###,###,##0.00;#':1}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="71" coolRow="20" coolLength="9"
+     style="left: 87.5%; top: 76%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 88%; width: 90%; height: 4%;" coolCol="2"
+     coolRow="23" coolLength="72">PF KEYS:   1 Help  2 Display  3 Exit  7 Prev  8 Next  9 Return  11 Clear</div>
+   
+   <div coolType="literal"
+     style="left: 13.75%; top: 92%; width: 23.75%; height: 4%;" coolCol="12"
+     coolRow="24" coolLength="19">12 Signoff  15 LTRN</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="LTRN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=LTRN</a>
+   </div>

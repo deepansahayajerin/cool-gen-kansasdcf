@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignment">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (CAS_NO = @casNo)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  MAIN_PHONE_NUMBER,
+  MAIN_FAX_NUMBER,
+  NAME,
+  DISCONTINUE_DATE,
+  MAIN_PHONE_AREA_CD,
+  FAX_AREA_CD,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = 329
+</value>
+   </data>
+   <data name="ReadOfficeAddress">
+      <value>
+select top(1)
+  OFF_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  ZIP,
+  ZIP4
+from
+  CKT_OFFICE_ADDRESS
+where
+  @offGeneratedId = OFF_GENERATED_ID
+order by
+  TYPE
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderServiceProviderOffice">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.WORK_PHONE_NUMBER,
+  T1.WORK_FAX_NUMBER,
+  T1.WORK_FAX_AREA_CD,
+  T1.WORK_PHONE_EXT,
+  T1.WORK_PHONE_AREA_CD,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL,
+  T2.EMAIL_ADDRESS,
+  T3.MAIN_PHONE_NUMBER,
+  T3.MAIN_FAX_NUMBER,
+  T3.NAME,
+  T3.DISCONTINUE_DATE,
+  T3.MAIN_PHONE_AREA_CD,
+  T3.FAX_AREA_CD,
+  T3.OFF_OFFICE
+from
+  CKT_OFFICE T3
+  join
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    (T1.EFFECTIVE_DATE = @effectiveDate) and
+    (T1.ROLE_CODE = @roleCode) and
+    (T1.OFF_GENERATED_ID = @offGeneratedId) and
+    (T1.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID)
+  on
+    (T3.OFFICE_ID = T1.OFF_GENERATED_ID) and
+    (T3.DISCONTINUE_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+   <data name="ReadServiceProviderAddress">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  ZIP,
+  ZIP4
+from
+  CKT_SRVCE_PRVR_ADR
+where
+  @spdGeneratedId = SPD_GENERATED_ID
+order by
+  TYPE
+</value>
+   </data>
+</root>

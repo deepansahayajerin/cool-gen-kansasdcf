@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadElectronicFundTransmission">
+      <value>
+select top(1)
+  RECEIVING_DFI_IDEN,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  PRQ_GENERATED_ID,
+  EFFECTIVE_ENTRY_DT,
+  CHECK_DIGIT,
+  RECV_DFI_ACCT_NUM
+from
+  CKT_ELEC_FUND_TRAN
+where
+  (TRANSMISSION_TYPE = 'O') and
+  (TRANSMISSION_ID = @transmissionId)
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  AMOUNT,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  TYPE,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="ReadPaymentStatus">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID,
+  CODE
+from
+  CKT_PAYMENT_STATUS
+where
+  PAYMENT_STATUS_ID = @paymentStatusId
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistory">
+      <value>
+select
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  CREATED_BY
+from
+  CKT_PMNT_STAT_HIST
+where
+  @prqGeneratedId = PRQ_GENERATED_ID
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

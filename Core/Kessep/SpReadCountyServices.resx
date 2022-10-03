@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCountyServiceCseOrganization1">
+      <value>
+select
+  T1.SYSTEM_GENERATD_ID,
+  T1.TYPE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_GENERATED_ID,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.[FUNCTION],
+  T1.PRG_GENERATED_ID,
+  T2.NAME
+from
+  CKT_CSE_ORGANIZATN T2
+  join
+  CKT_COUNTY_SERVICE T1
+  on
+    (T2.TYPE_CODE = T1.COG_TYPE_CODE) and
+    (T2.ORGANZTN_ID = T1.COG_CODE) and
+    (@offGeneratedId = T1.OFF_GENERATED_ID) and
+    (T1.[FUNCTION] &gt; ' ') and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate)
+order by
+  T2.NAME,
+  T1.[FUNCTION]
+</value>
+   </data>
+   <data name="ReadCountyServiceCseOrganization2">
+      <value>
+select
+  T1.SYSTEM_GENERATD_ID,
+  T1.TYPE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_GENERATED_ID,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.[FUNCTION],
+  T1.PRG_GENERATED_ID,
+  T2.NAME
+from
+  CKT_CSE_ORGANIZATN T2
+  join
+  CKT_COUNTY_SERVICE T1
+  on
+    (T2.TYPE_CODE = T1.COG_TYPE_CODE) and
+    (T2.ORGANZTN_ID = T1.COG_CODE) and
+    (@offGeneratedId = T1.OFF_GENERATED_ID) and
+    (T1.[FUNCTION] &gt; ' ') and
+    (T1.DISCONTINUE_DATE &lt;= @discontinueDate)
+order by
+  T2.NAME,
+  T1.[FUNCTION]
+</value>
+   </data>
+   <data name="ReadCountyServiceCseOrganizationProgram1">
+      <value>
+select
+  T1.SYSTEM_GENERATD_ID,
+  T1.TYPE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_GENERATED_ID,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.[FUNCTION],
+  T1.PRG_GENERATED_ID,
+  T2.NAME,
+  T3.CODE,
+  T3.DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM T3
+  join
+  CKT_CSE_ORGANIZATN T2
+  join
+  CKT_COUNTY_SERVICE T1
+  on
+    (T2.TYPE_CODE = T1.COG_TYPE_CODE) and
+    (T2.ORGANZTN_ID = T1.COG_CODE) and
+    (@offGeneratedId = T1.OFF_GENERATED_ID) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate)
+  on
+    T3.PROGRAM_ID = T1.PRG_GENERATED_ID
+order by
+  T1.COG_CODE,
+  T3.CODE
+</value>
+   </data>
+   <data name="ReadCountyServiceCseOrganizationProgram2">
+      <value>
+select
+  T1.SYSTEM_GENERATD_ID,
+  T1.TYPE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_GENERATED_ID,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.[FUNCTION],
+  T1.PRG_GENERATED_ID,
+  T2.NAME,
+  T3.CODE,
+  T3.DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM T3
+  join
+  CKT_CSE_ORGANIZATN T2
+  join
+  CKT_COUNTY_SERVICE T1
+  on
+    (T2.TYPE_CODE = T1.COG_TYPE_CODE) and
+    (T2.ORGANZTN_ID = T1.COG_CODE) and
+    (@offGeneratedId = T1.OFF_GENERATED_ID) and
+    (T1.DISCONTINUE_DATE &lt;= @discontinueDate)
+  on
+    T3.PROGRAM_ID = T1.PRG_GENERATED_ID
+order by
+  T1.COG_CODE,
+  T3.CODE
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+</root>

@@ -1,0 +1,116 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiNcopNcpNonCooperation"
+           program-name="SWENCOPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiNcopNcpNonCooperation"
+           transaction="SSAE"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <return-map from="Selected" to="SelectedAp"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PEPR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiPeprPersonProgramMaint"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <return-map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Ap" to="CsePersonsWorkSet"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+   </on>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="SuccessfullyDisplayed" to="SuccessfullyDisplayed"/>
+   <map from="Next" to="Next"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="Ar" to="Ar"/>
+   <map from="HidNoItemsFndNc" to="HidNoItemsFndNc"/>
+   <map from="NcPlus" to="NcPlus"/>
+   <map from="NcMinus" to="NcMinus"/>
+   <map from="Nc1" to="Nc1"/>
+   <map from="MaxPagesNc" to="MaxPagesNc"/>
+   <map from="ApPrompt" to="ApPrompt"/>
+   <map from="HiddenRedisplay" to="HiddenRedisplay"/>
+   <map from="NoItemsNc" to="NoItemsNc"/>
+   <map from="CurrItmNoNc" to="CurrItmNoNc"/>
+   <map from="HiddenGrpNc.HiddenGrpNcAp" to="HiddenGrpNc.HiddenGrpNcDetAp"/>
+   <map from="SelectedAp" to="SelectedAp"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="Standard" to="Standard"/>
+   <map from="NewSelect" to="NewSelect"/>
+   <map from="NewAp" to="NewAp"/>
+   <map from="New1" to="New1"/>
+   <map from="NewLetter1CdPrmt" to="NewLetter1CdPrmt"/>
+   <map from="NewPhone1CdPrmt" to="NewPhone1CdPrmt"/>
+   <map from="NewPersonPrompt" to="NewPersonPrompt"/>
+   <map from="NewLetter2CdPrmt" to="NewLetter2CdPrmt"/>
+   <map from="NewPhone2CdPrmt" to="NewPhone2CdPrmt"/>
+   <map from="Nc.NcpNonCooperation" to="Nc.NcpNonCooperation"/>
+   <map from="Nc.Select" to="Nc.NcSelect"/>
+   <map from="Nc.NcAp" to="Nc.Ap"/>
+   <map from="Nc.EffDate" to="Nc.EffDate"/>
+   <map from="Nc.EndDate" to="Nc.EndDate"/>
+   <map from="Nc.EndReasonPrompt" to="Nc.EndReasonPrompt"/>
+   <map from="Nc.Phone2Prompt" to="Nc.Phone2Prompt"/>
+   <map from="Nc.Phone1Prompt" to="Nc.Phone1Prompt"/>
+   <map from="Nc.Ltr2Prompt" to="Nc.Ltr2Prompt"/>
+   <map from="Nc.Ltr1Promt" to="Nc.Ltr1Prompt"/>
+   <map from="Nc.NcRsnPrompt" to="Nc.ReasonPrompt"/>
+   <map from="Nc.NcCodePrmpt" to="Nc.NcCodePrompt"/>
+   <map from="Pagenum.Pagenum1" to="Pagenum.Pagenum1"/>
+   <map from="HiddenGrpNc.HiddenEffDate" to="HiddenGrpNc.HiddenEffDate"/>
+   <map from="HiddenGrpNc.HiddenEndDate" to="HiddenGrpNc.HiddenEndDate"/>
+   <map from="HiddenGrpNc.Hidden" to="HiddenGrpNc.Hidden"/>
+   <map from="Case1.Number" to="Case1.Number"/>
+   <map from="HiddenNextTranInfo.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+   <map from="HiddenNextTranInfo.LegalActionIdentifier"
+        to="HiddenNextTranInfo.LegalActionIdentifier"/>
+   <map from="HiddenNextTranInfo.CourtCaseNumber"
+        to="HiddenNextTranInfo.CourtCaseNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumber"
+        to="HiddenNextTranInfo.CsePersonNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberAp"
+        to="HiddenNextTranInfo.CsePersonNumberAp"/>
+   <map from="Ap.Number" to="Ap.Number"/>
+   <map from="Ap.FormattedName" to="Ap.FormattedName"/>
+   <map from="HiddenNextTranInfo.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+   <map from="Prev.Number" to="Prev.Number"/>
+   <map from="HiddenNextTranInfo.LastTran" to="HiddenNextTranInfo.LastTran"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligee"
+        to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligor"
+        to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+   <map from="HiddenNextTranInfo.CourtOrderNumber"
+        to="HiddenNextTranInfo.CourtOrderNumber"/>
+   <map from="HiddenNextTranInfo.ObligationId"
+        to="HiddenNextTranInfo.ObligationId"/>
+   <map from="HiddenNextTranInfo.StandardCrtOrdNumber"
+        to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+   <map from="HiddenNextTranInfo.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+   <map from="HiddenNextTranInfo.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+   <map from="HiddenNextTranInfo.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+   <map from="HiddenNextTranInfo.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+   <map from="HiddenNextTranInfo.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+</procedure>

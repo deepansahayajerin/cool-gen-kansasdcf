@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_CASE
+where
+  (NUMB = @numb1) and
+  (NUMB = @numb2)
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCase3">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCase4">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCase5">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CREATED_TIMESTAMP
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.NUMB = T2.CAS_NUMBER)
+order by
+  T1.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadCasePersonPrivateAttorney1">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CREATED_TIMESTAMP,
+  T2.CSP_NUMBER,
+  T2.IDENTIFIER,
+  T2.DATE_RETAINED,
+  T2.DATE_DISMISSED,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL,
+  T2.FIRM_NAME,
+  T2.PHONE,
+  T2.FAX_NUMBER,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.FAX_AREA,
+  T2.FAX_EXT,
+  T2.PHONE_AREA,
+  T2.PHONE_EXT,
+  T2.COURT_CASE_NUMBER,
+  T2.FIPS_STATE_ABBREV,
+  T2.FIPS_COUNTY_ABBREV,
+  T2.TRIB_COUNTRY,
+  T2.EMAIL_ADDRESS,
+  T2.BAR_NUMBER,
+  T2.CONSENT_IND,
+  T2.NOTE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T1.NUMB = T3.CAS_NUMBER)
+  join
+  CKT_PRSN_PRIV_ATTR T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.IDENTIFIER &gt; @identifier)
+order by
+  T2.IDENTIFIER,
+  T2.DATE_DISMISSED
+</value>
+   </data>
+   <data name="ReadCasePersonPrivateAttorney2">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CREATED_TIMESTAMP,
+  T2.CSP_NUMBER,
+  T2.IDENTIFIER,
+  T2.DATE_RETAINED,
+  T2.DATE_DISMISSED,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL,
+  T2.FIRM_NAME,
+  T2.PHONE,
+  T2.FAX_NUMBER,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.FAX_AREA,
+  T2.FAX_EXT,
+  T2.PHONE_AREA,
+  T2.PHONE_EXT,
+  T2.COURT_CASE_NUMBER,
+  T2.FIPS_STATE_ABBREV,
+  T2.FIPS_COUNTY_ABBREV,
+  T2.TRIB_COUNTRY,
+  T2.EMAIL_ADDRESS,
+  T2.BAR_NUMBER,
+  T2.CONSENT_IND,
+  T2.NOTE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T1.NUMB = T3.CAS_NUMBER)
+  join
+  CKT_PRSN_PRIV_ATTR T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.IDENTIFIER &lt; @identifier)
+order by
+  T2.DATE_DISMISSED desc
+</value>
+   </data>
+   <data name="ReadCasePersonPrivateAttorney3">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CREATED_TIMESTAMP,
+  T2.CSP_NUMBER,
+  T2.IDENTIFIER,
+  T2.DATE_RETAINED,
+  T2.DATE_DISMISSED,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL,
+  T2.FIRM_NAME,
+  T2.PHONE,
+  T2.FAX_NUMBER,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.FAX_AREA,
+  T2.FAX_EXT,
+  T2.PHONE_AREA,
+  T2.PHONE_EXT,
+  T2.COURT_CASE_NUMBER,
+  T2.FIPS_STATE_ABBREV,
+  T2.FIPS_COUNTY_ABBREV,
+  T2.TRIB_COUNTRY,
+  T2.EMAIL_ADDRESS,
+  T2.BAR_NUMBER,
+  T2.CONSENT_IND,
+  T2.NOTE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T1.NUMB = T3.CAS_NUMBER)
+  join
+  CKT_PRSN_PRIV_ATTR T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER)
+order by
+  T2.DATE_DISMISSED desc,
+  T2.IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionPersonTribunalFips">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.DISMISSED_IND,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T2.LA_PERSON_ID,
+  T2.CSP_NUMBER,
+  T2.EFFECTIVE_DT,
+  T2.[ROLE],
+  T2.END_DT,
+  T2.ACCOUNT_TYPE,
+  T3.FIP_LOCATION,
+  T3.FIP_COUNTY,
+  T3.FIP_STATE,
+  T4.STATE_ABBREVIATION,
+  T4.COUNTY_ABBR
+from
+  CKT_FIPS T4
+  join
+  CKT_TRIBUNAL T3
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER)
+  join
+  CKT_LEG_ACT_CAS_RL T5
+  on
+    (T1.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (@casNumber = T5.CAS_NUMBER)
+  on
+    T3.IDENTIFIER = T1.TRB_ID
+  on
+    (T4.LOCATION = T3.FIP_LOCATION) and
+    (T4.COUNTY = T3.FIP_COUNTY) and
+    (T4.[STATE] = T3.FIP_STATE)
+order by
+  T1.COURT_CASE_NO,
+  T4.COUNTY_ABBR,
+  T4.STATE_ABBREVIATION
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionPersonTribunalFipsTribAddress">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.DISMISSED_IND,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T2.LA_PERSON_ID,
+  T2.CSP_NUMBER,
+  T2.EFFECTIVE_DT,
+  T2.[ROLE],
+  T2.END_DT,
+  T2.ACCOUNT_TYPE,
+  T3.FIP_LOCATION,
+  T3.FIP_COUNTY,
+  T3.FIP_STATE,
+  T4.IDENTIFIER,
+  T4.COUNTRY
+from
+  CKT_TRIBUNAL T3
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER)
+  join
+  CKT_LEG_ACT_CAS_RL T5
+  on
+    (T1.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (@casNumber = T5.CAS_NUMBER)
+  on
+    T3.IDENTIFIER = T1.TRB_ID
+  join
+  CKT_FIPS_TRIB_ADDR T4
+  on
+    T3.IDENTIFIER = T4.TRB_ID
+order by
+  T1.COURT_CASE_NO,
+  T4.COUNTRY
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.DISMISSED_IND,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T2.FIP_LOCATION,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (@cspNumber = T3.CSP_NUMBER)
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (T1.LEGAL_ACTION_ID = T4.LGA_ID) and
+    (@casNumber = T4.CAS_NUMBER)
+  on
+    T2.IDENTIFIER = T1.TRB_ID
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (IDENTIFIER &gt; @identifier)
+order by
+  IDENTIFIER
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (IDENTIFIER &lt; @identifier)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney3">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  CAS_NUMBER,
+  DATE_RETAINED,
+  DATE_DISMISSED,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  FIRM_NAME,
+  PHONE,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FAX_AREA,
+  FAX_EXT,
+  PHONE_AREA,
+  PHONE_EXT,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY,
+  EMAIL_ADDRESS,
+  BAR_NUMBER,
+  CONSENT_IND,
+  NOTE
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney4">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  CAS_NUMBER,
+  DATE_RETAINED,
+  DATE_DISMISSED,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  FIRM_NAME,
+  PHONE,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FAX_AREA,
+  FAX_EXT,
+  PHONE_AREA,
+  PHONE_EXT,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY,
+  EMAIL_ADDRESS,
+  BAR_NUMBER,
+  CONSENT_IND,
+  NOTE
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+order by
+  DATE_DISMISSED desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney5">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  CAS_NUMBER,
+  DATE_RETAINED,
+  DATE_DISMISSED,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  FIRM_NAME,
+  PHONE,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FAX_AREA,
+  FAX_EXT,
+  PHONE_AREA,
+  PHONE_EXT,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY,
+  EMAIL_ADDRESS,
+  BAR_NUMBER,
+  CONSENT_IND,
+  NOTE
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  @cspNumber = CSP_NUMBER
+order by
+  DATE_DISMISSED desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPrivateAttorneyAddress">
+      <value>
+select top(1)
+  PPA_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_PRIV_ATTR_ADDR
+where
+  (@ppaIdentifier = PPA_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

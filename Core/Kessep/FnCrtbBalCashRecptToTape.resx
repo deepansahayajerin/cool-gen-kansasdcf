@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  RECEIPT_DATE,
+  CHECK_NUMBER,
+  BAL_TMST,
+  CREATED_BY,
+  CREATED_TIMESTAMP
+from
+  CKT_CASH_RECEIPT
+where
+  (CREATED_BY = @createdBy) and
+  (RECEIPT_AMOUNT &gt; 0)
+order by
+  CASH_RECEIPT_ID
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID
+from
+  CKT_CR_EVENT
+where
+  (CREVENT_ID = @creventId) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus">
+      <value>
+select top(1)
+  CR_STATUS_ID,
+  CODE
+from
+  CKT_CR_STATUS
+where
+  CR_STATUS_ID = @crStatusId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatusHistory">
+      <value>
+select top(1)
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  DISCONTINUE_DATE
+from
+  CKT_CR_STATUS_HIST
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CODE,
+  CATEGORY_IND
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="ReadServiceProviderProfileServiceProviderProfile1">
+      <value>
+select top(1)
+  T1.CREATED_TIMESTAMP,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.PRO_NAME,
+  T1.SPD_GEN_ID,
+  T2.USER_ID
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_SERV_PROV_PRO T1
+  on
+    (T2.USER_ID = @userId) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GEN_ID) and
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @discontinueDate) and
+    (T1.PRO_NAME = 'RECCHIEF')
+</value>
+   </data>
+   <data name="ReadServiceProviderProfileServiceProviderProfile2">
+      <value>
+select top(1)
+  T1.CREATED_TIMESTAMP,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.PRO_NAME,
+  T1.SPD_GEN_ID,
+  T2.USER_ID
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_SERV_PROV_PRO T1
+  on
+    (T2.USER_ID = @userId) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GEN_ID) and
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt; @discontinueDate) and
+    (T1.PRO_NAME = 'RECCHIEF')
+</value>
+   </data>
+</root>

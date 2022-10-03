@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadTribunalLegalAction">
+      <value>
+select top(1)
+  T1.JUDICIAL_DISTRICT,
+  T1.IDENTIFIER,
+  T2.LEGAL_ACTION_ID,
+  T2.STANDARD_NO
+from
+  CKT_TRIBUNAL T1
+  join
+  CKT_LEGAL_ACTION T2
+  on
+    T1.IDENTIFIER = T2.TRB_ID
+  join
+  CKT_OBLIGATION T3
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T3.OB_ID = @obId) and
+    (T3.DTY_GENERATED_ID = @dtyGeneratedId) and
+    (T3.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

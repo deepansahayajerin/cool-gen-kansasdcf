@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDisbursementTransactionCsePerson">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PROCESS_DATE,
+  CREATED_TIMESTAMP,
+  DISBURSEMENT_DATE,
+  CASH_NON_CASH_IND,
+  COLLECTION_DATE,
+  REFERENCE_NUMBER
+from
+  CKT_DISB_TRAN with(readuncommitted)
+where
+  (CREATED_TIMESTAMP &lt;= @createdTimestamp) and
+  (
+    (PROCESS_DATE &gt; @processDate1) or
+    (PROCESS_DATE = @processDate2)
+  ) and
+  (TYPE = 'C') and
+  (CASH_NON_CASH_IND = 'C')
+order by
+  CSP_NUMBER,
+  REFERENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadOcse34">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  CSE_DSB_DBT_AMT,
+  DISB_DEBIT_LDA,
+  DISB_DEBIT_GT_2,
+  DISB_DEBIT_GT_30,
+  DISB_DEBIT_GT_180,
+  DISB_DEBIT_GT_365,
+  DISB_DEBIT_GT_1095,
+  DISB_DEBIT_GT_1825
+from
+  CKT_OCSE34
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="UpdateOcse34">
+      <value>
+update CKT_OCSE34
+set
+  CSE_DSB_DBT_AMT = @cseDsbDbtAmt,
+  DISB_DEBIT_LDA = @disbDebitLda,
+  DISB_DEBIT_GT_2 = @disbDebitGt2,
+  DISB_DEBIT_GT_30 = @disbDebitGt30,
+  DISB_DEBIT_GT_180 = @disbDebitGt180,
+  DISB_DEBIT_GT_365 = @disbDebitGt365,
+  DISB_DEBIT_GT_1095 = @disbDebitGt1095,
+  DISB_DEBIT_GT_1825 = @disbDebitGt1825
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

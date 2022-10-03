@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.END_DATE = @endDate)
+</value>
+   </data>
+   <data name="ReadEmployerEmployerAddress1">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.EIN,
+  T1.KANSAS_ID,
+  T1.NAME,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.PHONE_NO,
+  T1.AREA_CODE,
+  T2.LOCATION_TYPE,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.CREATED_BY,
+  T2.STREET1,
+  T2.STREET2,
+  T2.CITY,
+  T2.IDENTIFIER,
+  T2.[STATE],
+  T2.ZIP_CODE,
+  T2.ZIP4,
+  T2.ZIP3,
+  T2.COUNTY,
+  T2.NOTE
+from
+  CKT_EMPLOYER T1
+  join
+  CKT_EMPLOYER_ADDR T2
+  on
+    (T1.EIN = @ein) and
+    (T1.IDENTIFIER = T2.EMP_ID) and
+    (T2.ZIP_CODE = @zipCode)
+</value>
+   </data>
+   <data name="ReadEmployerEmployerAddress2">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.EIN,
+  T1.KANSAS_ID,
+  T1.NAME,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.PHONE_NO,
+  T1.AREA_CODE,
+  T2.LOCATION_TYPE,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.CREATED_BY,
+  T2.STREET1,
+  T2.STREET2,
+  T2.CITY,
+  T2.IDENTIFIER,
+  T2.[STATE],
+  T2.ZIP_CODE,
+  T2.ZIP4,
+  T2.ZIP3,
+  T2.COUNTY,
+  T2.NOTE
+from
+  CKT_EMPLOYER T1
+  join
+  CKT_EMPLOYER_ADDR T2
+  on
+    (T1.EIN = @ein) and
+    (T1.IDENTIFIER = T2.EMP_ID) and
+    (
+      (T2.STREET1 like '%FRICK%') or
+      (T2.STREET1 like '%BOX 283%') or
+      (T2.STREET1 like '%BOX 749%') or
+      (T2.STREET1 like '%BOX 782%') or
+      (T2.STREET1 like '%ADP%') or
+      (T2.STREET1 like '%COLUMBIA EDP%') or
+      (T2.STREET1 like '%COMPENSATION%') or
+      (T2.STREET1 like '%U%C%CONSULTANTS%') or
+      (T2.STREET1 like '%DUNN%') or
+      (T2.STREET1 like '%EMPLOYER%') or
+      (T2.STREET1 like '%GATES%') or
+      (T2.STREET1 like '%GIBBENS%') or
+      (T2.STREET1 like '%HARRINGTON%') or
+      (T2.STREET1 like '%PENSER%') or
+      (T2.STREET1 like '%SHEAKLEY%') or
+      (T2.STREET1 like '%UNEMPLOY%') or
+      (T2.STREET1 like '%UNITY%') or
+      (T2.STREET1 like '%UTMC%') or
+      (T2.STREET2 like '%FRICK%') or
+      (T2.STREET2 like '%BOX 283%') or
+      (T2.STREET2 like '%BOX 749%') or
+      (T2.STREET2 like '%BOX 782%') or
+      (T2.STREET2 like '%ADP%') or
+      (T2.STREET2 like '%COLUMBIA EDP%') or
+      (T2.STREET2 like '%COMPENSATION%') or
+      (T2.STREET2 like '%U%C%CONSULTANTS%') or
+      (T2.STREET2 like '%DUNN%') or
+      (T2.STREET2 like '%EMPLOYER%') or
+      (T2.STREET2 like '%GATES%') or
+      (T2.STREET2 like '%GIBBENS%') or
+      (T2.STREET2 like '%HARRINGTON%') or
+      (T2.STREET2 like '%PENSER%') or
+      (T2.STREET2 like '%SHEAKLEY%') or
+      (T2.STREET2 like '%UNEMPLOY%') or
+      (T2.STREET2 like '%UNITY%') or
+      (T2.STREET2 like '%UTMC%')
+    )
+</value>
+   </data>
+   <data name="ReadIncomeSourceCsePerson1">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.LAST_QTR_INCOME,
+  T1.LAST_QTR_YR,
+  T1.SECOND_QTR_INCOME,
+  T1.SECOND_QTR_YR,
+  T1.THIRD_QTR_INCOME,
+  T1.THIRD_QTR_YR,
+  T1.FOURTH_QTR_INCOME,
+  T1.FOURTH_QTR_YR,
+  T1.RETURN_CD,
+  T1.CSP_I_NUMBER,
+  T1.EMP_ID
+from
+  CKT_INCOME_SOURCE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (@empId = T1.EMP_ID) and
+    (T1.RETURN_CD = 'E') and
+    (T1.CSP_I_NUMBER = T3.CSP_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.END_DATE = @endDate)
+</value>
+   </data>
+   <data name="ReadIncomeSourceCsePerson2">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.LAST_QTR_INCOME,
+  T1.LAST_QTR_YR,
+  T1.SECOND_QTR_INCOME,
+  T1.SECOND_QTR_YR,
+  T1.THIRD_QTR_INCOME,
+  T1.THIRD_QTR_YR,
+  T1.FOURTH_QTR_INCOME,
+  T1.FOURTH_QTR_YR,
+  T1.RETURN_CD,
+  T1.CSP_I_NUMBER,
+  T1.EMP_ID
+from
+  CKT_INCOME_SOURCE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (@empId = T1.EMP_ID) and
+    (T1.RETURN_CD = ' ') and
+    (T1.CSP_I_NUMBER = T3.CSP_NUMBER) and
+    (T3.END_DATE = @endDate) and
+    (T3.TYPE = 'AP')
+</value>
+   </data>
+</root>

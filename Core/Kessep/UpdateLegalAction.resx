@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCsePerson">
+      <value>
+update CKT_OBLIGATION
+set
+  CSP_P_NUMBER = @cspPNumber
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="AssociateLegalAction">
+      <value>
+update CKT_LEGAL_ACTION
+set
+  CSP_NUMBER = @cspNumber
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="DisassociateCsePerson#1">
+      <value>
+update CKT_OBLIGATION
+set
+  CSP_P_NUMBER = null
+where
+  (CPA_TYPE = @cpaType1) and
+  (CSP_NUMBER = @cspNumber1) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="DisassociateCsePerson#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_OBLIGATION T1
+where
+  (T1.CPA_TYPE = @cpaType2) and
+  (T1.CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="DisassociateCsePerson#3">
+      <value>
+delete from CKT_CSE_PERSON_ACC
+where
+  (TYPE = @cpaType2) and
+  (CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="DisassociateLegalAction">
+      <value>
+update CKT_LEGAL_ACTION
+set
+  CSP_NUMBER = null
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.CSE_OPEN_DATE,
+  T1.CREATED_TIMESTAMP
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.NUMB = T2.CAS_NO) and
+    (@cspNoChild = T2.CSP_NO_CHILD) and
+    (cast(T1.CREATED_TIMESTAMP as date) &gt; cast(@filedDate as date))
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  LAST_MOD_REVIEW_DT,
+  ATTORNEY_APPROVAL,
+  APPROVAL_SENT_DT,
+  PETITIONER_APPRVAL,
+  APPROVAL_RECD_DT,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  TYPE,
+  FILED_DT,
+  FOREIGN_ORD_REG_DT,
+  URESA_SENT_DT,
+  URESA_ACKNOWLDG_DT,
+  UIFSA_SENT_DT,
+  UIFSA_ACKNOWLDG_DT,
+  INITIATING_STATE,
+  INITIATING_COUNTY,
+  RESPONDING_STATE,
+  RESPONDING_COUNTY,
+  ORDER_AUTHORITY,
+  COURT_CASE_NO,
+  REFILE_DT,
+  END_DT,
+  PAYMENT_LOCATION,
+  DISMISSED_IND,
+  STANDARD_NO,
+  LONG_ARM_STAT_IND,
+  DISMISSAL_CD,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  ESTABLISHMENT_CD,
+  FOREIGN_FIPS_ST,
+  FOREIGN_FIPS_COUNT,
+  FOREIGN_FIPS_LO,
+  FOREIGN_ORDER_NO,
+  NON_CSE_PETITIONER,
+  DT_NCP_REQ_IWO_BGN,
+  DT_CP_REQ_IWO_BGN,
+  CT_ORD_ALT_BA_IND,
+  CSP_NUMBER,
+  INITIATING_COUNTRY,
+  RESPONDING_COUNTRY,
+  FILED_DT_ENTRED_ON
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionAssigment">
+      <value>
+select
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  END_DT,
+  REASON_CODE,
+  OVERRIDE_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_LA_SERV_PROV
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (END_DT &gt;= @endDt)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail1">
+      <value>
+select
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  NON_FIN_OBLG_TYPE,
+  DETAIL_TYPE
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (DETAIL_TYPE = 'N') and
+  (NON_FIN_OBLG_TYPE = 'EP') and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail2">
+      <value>
+select
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  NON_FIN_OBLG_TYPE,
+  DETAIL_TYPE
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (DETAIL_TYPE = 'N') and
+  (NON_FIN_OBLG_TYPE = 'ZCS') and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonCsePerson1">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DT,
+  T1.END_DT,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T2.TYPE,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.OUT_OF_WEDLOCK,
+  T2.CSE_TO_EST_PATR,
+  T2.PAT_ESTAB_IND,
+  T2.DATE_PATERN_ESTAB
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@ladRNumber = T1.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T1.LGA_R_IDENTIFIER) and
+    (T1.ACCOUNT_TYPE = 'R') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T2.NUMB = T1.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonCsePerson2">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DT,
+  T1.END_DT,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T2.TYPE,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.OUT_OF_WEDLOCK,
+  T2.CSE_TO_EST_PATR,
+  T2.PAT_ESTAB_IND,
+  T2.DATE_PATERN_ESTAB
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@ladRNumber = T1.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T1.LGA_R_IDENTIFIER) and
+    (T1.ACCOUNT_TYPE = 'S') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T2.NUMB = T1.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  LGA_ID,
+  CSP_P_NUMBER
+from
+  CKT_OBLIGATION
+where
+  @lgaId = LGA_ID
+</value>
+   </data>
+   <data name="UpdateCsePerson">
+      <value>
+update CKT_CSE_PERSON
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  CSE_TO_EST_PATR = @cseToEstPatr,
+  PAT_ESTAB_IND = @patEstabInd,
+  DATE_PATERN_ESTAB = @datePaternEstab
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateLegalAction">
+      <value>
+update CKT_LEGAL_ACTION
+set
+  LAST_MOD_REVIEW_DT = @lastModReviewDt,
+  ATTORNEY_APPROVAL = @attorneyApproval,
+  APPROVAL_SENT_DT = @approvalSentDt,
+  PETITIONER_APPRVAL = @petitionerApprval,
+  APPROVAL_RECD_DT = @approvalRecdDt,
+  CLASSIFICATION = @classification,
+  ACTION_TAKEN = @actionTaken,
+  TYPE = @type,
+  FILED_DT = @filedDt,
+  FOREIGN_ORD_REG_DT = @foreignOrdRegDt,
+  URESA_SENT_DT = @uresaSentDt,
+  URESA_ACKNOWLDG_DT = @uresaAcknowldgDt,
+  UIFSA_SENT_DT = @uifsaSentDt,
+  UIFSA_ACKNOWLDG_DT = @uifsaAcknowldgDt,
+  INITIATING_STATE = @initiatingState,
+  INITIATING_COUNTY = @initiatingCounty,
+  RESPONDING_STATE = @respondingState,
+  RESPONDING_COUNTY = @respondingCounty,
+  ORDER_AUTHORITY = @orderAuthority,
+  COURT_CASE_NO = @courtCaseNo,
+  REFILE_DT = @refileDt,
+  END_DT = @endDt,
+  PAYMENT_LOCATION = @paymentLocation,
+  DISMISSED_IND = @dismissedInd,
+  STANDARD_NO = @standardNo,
+  LONG_ARM_STAT_IND = @longArmStatInd,
+  DISMISSAL_CD = @dismissalCd,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  ESTABLISHMENT_CD = @establishmentCd,
+  FOREIGN_FIPS_ST = @foreignFipsSt,
+  FOREIGN_FIPS_COUNT = @foreignFipsCount,
+  FOREIGN_FIPS_LO = @foreignFipsLo,
+  FOREIGN_ORDER_NO = @foreignOrderNo,
+  NON_CSE_PETITIONER = @nonCsePetitioner,
+  DT_NCP_REQ_IWO_BGN = @dtNcpReqIwoBgn,
+  DT_CP_REQ_IWO_BGN = @dtCpReqIwoBgn,
+  CT_ORD_ALT_BA_IND = @ctOrdAltBaInd,
+  INITIATING_COUNTRY = @initiatingCountry,
+  RESPONDING_COUNTRY = @respondingCountry,
+  FILED_DT_ENTRED_ON = @filedDtEntredOn
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="UpdateLegalActionAssigment">
+      <value>
+update CKT_LA_SERV_PROV
+set
+  END_DT = @endDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

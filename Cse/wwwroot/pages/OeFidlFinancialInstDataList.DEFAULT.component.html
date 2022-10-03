@@ -1,0 +1,480 @@
+﻿<!--Name: OE_FIDL_FINANCIAL_INST_DATA_LIST, ID: 374392817, model: 746-->
+<div coolContent coolName="OE_FIDL_FINANCIAL_INST_DATA_LIST" coolType="SCREEN"
+  (coolInit)="scrollSize = 50; pageSize = 13">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 4%; width: 10%; height: 4%;" coolCol="2"
+     coolRow="2" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 22.5%; top: 4%; width: 55%; height: 4%;"
+     coolCol="19" coolRow="2" coolLength="44">CSE - FINANCIAL INSTITUTION DATA LIST - FIDL</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 86.25%; top: 4%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="2" coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 8%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="3" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_3_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 8%; width: 5%; height: 4%;" coolCol="7" coolRow="3"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 86.25%; top: 8%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="3" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 16%; width: 10%; height: 4%;"
+     coolCol="2" coolRow="5" coolLength="8">Person #</div>
+   <input type="text" coolType="field" name="field_5_11"
+     [(ngModel)]="in.financialInstitutionDataMatch.csePersonNumber"
+     [coolVideo]="out.financialInstitutionDataMatch.screenField?.csePersonNumber"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="10"
+     style="left: 12.5%; top: 16%; width: 12.5%; height: 4%;" coolCol="11"
+     coolRow="5" coolLength="10">
+   <input type="text" coolType="field" name="field_5_22"
+     [(ngModel)]="in.promptName.promptField"
+     [coolVideo]="out.promptName.screenField?.promptField" coolAutotab
+     coolColor="green" placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 26.25%; top: 16%; width: 1.25%; height: 4%;" coolCol="22"
+     coolRow="5" coolLength="1">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 30%; top: 16%; width: 41.25%; height: 4%;" coolCol="25"
+     coolRow="5" coolLength="33">{{in.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 24%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="7" coolLength="3">Sel</div>
+   
+   <div coolType="prompt" style="left: 6.25%; top: 24%; width: 5%; height: 4%;"
+     coolCol="6" coolRow="7" coolLength="4">Type</div>
+   
+   <div coolType="prompt"
+     style="left: 16.25%; top: 24%; width: 32.5%; height: 4%;" coolCol="14"
+     coolRow="7" coolLength="26">Financial Institution Name</div>
+   
+   <div coolType="prompt"
+     style="left: 68.75%; top: 24%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="7" coolLength="7">Balance</div>
+   
+   <div coolType="prompt" style="left: 83.75%; top: 24%; width: 5%; height: 4%;"
+     coolCol="68" coolRow="7" coolLength="4">Date</div>
+   
+   <div coolType="prompt"
+     style="left: 92.5%; top: 24%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="7" coolLength="6">Source</div>
+   <input type="text" coolType="field" name="field_8_3"
+     [(ngModel)]="ref(in.group, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 28%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 28%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="8" coolLength="2" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 28%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="8" coolLength="39" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 28%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="8" coolLength="15" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 28%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="8" coolLength="6" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 28%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="8" coolLength="6" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 32%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="9" coolLength="2" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 32%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="9" coolLength="39" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 32%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="9" coolLength="15" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 32%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="9" coolLength="6" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 32%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="9" coolLength="6" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_10_3"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 36%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="10" coolLength="2" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 36%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="10" coolLength="39" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 36%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="10" coolLength="15" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 36%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="10" coolLength="6" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 36%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="10" coolLength="6" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_11_3"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 40%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="11" coolLength="2" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 40%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="11" coolLength="39" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 40%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="11" coolLength="15" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 40%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="11" coolLength="6" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 40%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="11" coolLength="6" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_12_3"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 44%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="12" coolLength="2" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 44%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="12" coolLength="39" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 44%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="12" coolLength="15" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 44%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="12" coolLength="6" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 44%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="12" coolLength="6" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 48%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="13" coolLength="2" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 48%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="13" coolLength="39" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 48%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="13" coolLength="15" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 48%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="13" coolLength="6" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 48%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="13" coolLength="6" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_14_3"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 52%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="14" coolLength="2" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 52%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="14" coolLength="39" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 52%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="14" coolLength="15" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 52%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="14" coolLength="6" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 52%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="14" coolLength="6" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_15_3"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 56%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="15" coolLength="2" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 56%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="15" coolLength="39" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 56%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="15" coolLength="15" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 56%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="15" coolLength="6" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 56%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="15" coolLength="6" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_16_3"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 8 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 60%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="16" coolLength="2" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 60%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="16" coolLength="39" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 60%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="16" coolLength="15" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 60%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="16" coolLength="6" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 60%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="16" coolLength="6" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 9 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 64%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="17" coolLength="2" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 64%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="17" coolLength="39" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 64%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="17" coolLength="15" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 64%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="17" coolLength="6" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 64%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="17" coolLength="6" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_18_3"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 10 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 68%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="18" coolLength="2" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 68%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="18" coolLength="39" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 68%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="18" coolLength="15" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 68%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="18" coolLength="6" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 68%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="18" coolLength="6" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_19_3"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 11 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 72%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="19" coolLength="2" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 72%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="19" coolLength="39" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 72%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="19" coolLength="15" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 72%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="19" coolLength="6" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 72%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="19" coolLength="6" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.matchSource.text6}}</div>
+   <input type="text" coolType="field" name="field_20_3"
+     [(ngModel)]="ref(in.group, pageOffset + 12, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 12]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 76%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 12 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 7.5%; top: 76%; width: 2.5%; height: 4%;" coolCol="7"
+     coolRow="20" coolLength="2" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.accountType.text3}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 11.25%; top: 76%; width: 48.75%; height: 4%;" coolCol="10"
+     coolRow="20" coolLength="39" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.financialInstitutionDataMatch.institutionName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 62.5%; top: 76%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="20" coolLength="15" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.financialInstitutionDataMatch.accountBalance|coolNumber:'###,###,##0.00
+      ;###,###,##0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 76%; width: 7.5%; height: 4%;" coolCol="67"
+     coolRow="20" coolLength="6" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.runDate.text6}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 76%; width: 7.5%; height: 4%;" coolCol="75"
+     coolRow="20" coolLength="6" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.matchSource.text6}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="3" coolRow="22" coolLength="78"
+     style="left: 2.5%; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal"
+     style="left: 2.5%; top: 88%; width: 96.25%; height: 4%;" coolCol="3"
+     coolRow="23" coolLength="77">PF KEY: 1 Help  2 Display  3 Exit  4 List  7 Prev  8 Next  9 Return  11 Clear</div>
+   
+   <div coolType="literal" style="left: 2.5%; top: 92%; width: 45%; height: 4%;"
+     coolCol="3" coolRow="24" coolLength="36">        12 Signoff  17 RESL  18 FIDM</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="ADD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=ADD</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="RESL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F5">F17=RESL</a>
+   <a coolType="action" coolCommand="FIDM" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F6">F18=FIDM</a>
+   </div>

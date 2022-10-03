@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadEmployerEmployerAddress">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.EIN,
+  T1.KANSAS_ID,
+  T1.NAME,
+  T1.CREATED_TSTAMP,
+  T1.PHONE_NO,
+  T1.AREA_CODE,
+  T1.EIWO_END_DATE,
+  T1.EIWO_START_DATE,
+  T1.FAX_AREA_CODE,
+  T1.FAX_PHONE_NO,
+  T1.EMAIL_ADDRESS,
+  T1.EFFECTIVE_DATE,
+  T1.END_DATE,
+  T2.LOCATION_TYPE,
+  T2.STREET1,
+  T2.STREET2,
+  T2.CITY,
+  T2.IDENTIFIER,
+  T2.[STATE],
+  T2.ZIP_CODE,
+  T2.ZIP4,
+  T2.NOTE
+from
+  CKT_EMPLOYER T1
+  join
+  CKT_EMPLOYER_ADDR T2
+  on
+    (T1.IDENTIFIER = T2.EMP_ID) and
+    (T1.NAME like cast(@name1 as char(33))) and
+    (T1.EIN like cast(@ein as char(9))) and
+    (T2.CITY like cast(@city as char(15))) and
+    (T2.ZIP_CODE like cast(@zipCode1 as char(5))) and
+    (
+      (
+        (cast(@state1 as char(2)) &gt; ' ') and
+        (T2.[STATE] = @state1)
+      ) or
+      (T2.[STATE] like cast(@state2 as char(2)))
+    ) and
+    (
+      (T1.NAME &gt; @name2) or
+      (
+        (T1.NAME = @name2) and
+        (T1.IDENTIFIER &gt; @identifier1)
+      ) or
+      (
+        (T1.NAME = @name2) and
+        (T1.IDENTIFIER = @identifier1) and
+        (T2.ZIP_CODE &gt; @zipCode2)
+      ) or
+      (
+        (T1.NAME = @name2) and
+        (T1.IDENTIFIER = @identifier1) and
+        (T2.ZIP_CODE = @zipCode2) and
+        (T2.IDENTIFIER &gt;= @identifier2)
+      )
+    )
+order by
+  T1.NAME,
+  T1.IDENTIFIER,
+  T2.ZIP_CODE,
+  T2.IDENTIFIER
+</value>
+   </data>
+   <data name="ReadEmployerRelation">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  EMP_HQ_ID,
+  EMP_LOC_ID,
+  TYPE
+from
+  CKT_EMPL_RLN
+where
+  (
+    (@empHqId = EMP_HQ_ID) and
+    (EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (END_DATE &gt;= @effectiveDate)
+  ) or
+  (
+    (@empHqId = EMP_LOC_ID) and
+    (EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (END_DATE &gt;= @effectiveDate)
+  )
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_I_NUMBER,
+  EMP_ID,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (@empId = EMP_ID) and
+  (END_DT &gt;= @endDt) and
+  (START_DT &lt;= @endDt)
+</value>
+   </data>
+</root>

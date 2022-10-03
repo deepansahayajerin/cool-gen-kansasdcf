@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDocumentField">
+      <value>
+insert into CKT_DOCUMENT_FIELD
+(
+  ORDER_POSITION,
+  REQUIRED_SWITCH,
+  SCREEN_PROMPT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE
+)
+values
+(
+  @orderPosition,
+  @requiredSwitch,
+  @screenPrompt,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @fldName,
+  @docName,
+  @docEffectiveDte
+)
+</value>
+   </data>
+   <data name="DeleteDocumentField">
+      <value>
+delete from CKT_DOCUMENT_FIELD
+where
+  (FLD_NAME = @fldName) and
+  (DOC_NAME = @docName) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte)
+</value>
+   </data>
+   <data name="ReadDocument">
+      <value>
+select top(1)
+  NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_DOCUMENT
+where
+  (NAME = @name) and
+  (EXPIRATION_DATE = @expirationDate)
+</value>
+   </data>
+   <data name="ReadDocumentField">
+      <value>
+select top(1)
+  ORDER_POSITION,
+  REQUIRED_SWITCH,
+  SCREEN_PROMPT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE
+from
+  CKT_DOCUMENT_FIELD
+where
+  (@docEffectiveDte = DOC_EFFECTIVE_DTE) and
+  (@docName = DOC_NAME) and
+  (@fldName = FLD_NAME)
+</value>
+   </data>
+   <data name="ReadField1">
+      <value>
+select top(1)
+  NAME
+from
+  CKT_FIELD
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="ReadField2">
+      <value>
+select top(1)
+  NAME
+from
+  CKT_FIELD
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="ReadFieldValue">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (@docEffectiveDte = DOC_EFFECTIVE_DTE) and
+  (@docName = DOC_NAME) and
+  (@fldName = FLD_NAME)
+</value>
+   </data>
+   <data name="UpdateDocumentField">
+      <value>
+update CKT_DOCUMENT_FIELD
+set
+  ORDER_POSITION = @orderPosition,
+  REQUIRED_SWITCH = @requiredSwitch,
+  SCREEN_PROMPT = @screenPrompt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (FLD_NAME = @fldName) and
+  (DOC_NAME = @docName) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte)
+</value>
+   </data>
+</root>

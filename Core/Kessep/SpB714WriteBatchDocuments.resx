@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadOutgoingDocumentDocumentInfrastructure">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.FIELD_VAL_ARCH_IND,
+  T1.INF_ID,
+  T2.VERSION_NBR
+from
+  CKT_DOCUMENT T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.EFFECTIVE_DATE = T1.DOC_EFFECTIVE_DTE) and
+    (T2.NAME = T1.DOC_NAME) and
+    (T1.PRNT_SUCESSFUL_IND = @prntSucessfulInd) and
+    (T1.LAST_UPDATED_BY = @lastUpdatedBy) and
+    (T1.LAST_UPDATD_TSTAMP &gt; @lastUpdatdTstamp1) and
+    (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp2)
+order by
+  T1.DOC_NAME,
+  T2.VERSION_NBR
+</value>
+   </data>
+</root>

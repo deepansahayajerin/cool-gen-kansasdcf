@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadField">
+      <value>
+select distinct
+  T1.NAME,
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME
+from
+  CKT_FIELD T1
+  join
+  CKT_DOCUMENT_FIELD T2
+  on
+    (T1.NAME = T2.FLD_NAME) and
+    (T2.DOC_NAME = @docName) and
+    (T2.DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+    (T1.DEPENDANCY = @dependancy)
+order by
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME,
+  T1.NAME
+</value>
+   </data>
+</root>

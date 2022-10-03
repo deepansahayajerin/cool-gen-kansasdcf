@@ -1,0 +1,36 @@
+Feature: Issue26-PermittedValueException
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "1" in a field next to the 'select an option'
+    And presses "Enter"
+    Then "CSE - Service Initiation Menu" window appears
+    Then take snapshot "page1"
+    When user enters "4" in "option"
+    And presses "Enter"
+    Then "CSE - Person Management Menu" window appears
+    Then snapshot "page2"
+    When user enters "11" in "option"
+    And presses "Enter"
+    Then "CSE - Case Details" window appears
+    When user enters "566485" in "Case #"
+    When user presses "F2"
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    When user enters "S" in first field under text "Sel"
+    And user enters "S" in first field under text "Cause"
+    When user presses "F4"
+    Then "CSE - Code Values List" window appears
+    When user enters "S" in first field under text "Sel"
+    And user presses "F9"
+    Then "CSE - Case Details" window appears
+    #And first field under text "Good" has value "GC"
+    When enters "Today" in first field under text "Date"
+    And user presses "F5"
+    Then message "An AP is required for good cause on a case with AP(s)." is displayed
+    When enters "3804975" in first field under text "Person #"
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed

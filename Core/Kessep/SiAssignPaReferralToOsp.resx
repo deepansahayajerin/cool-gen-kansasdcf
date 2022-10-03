@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePaReferralAssignment">
+      <value>
+insert into CKT_ASSGN_PA_REF
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  PAF_NO,
+  PAF_TYPE,
+  PAF_TSTAMP
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @pafNo,
+  @pafType,
+  @pafTstamp
+)
+</value>
+   </data>
+   <data name="ReadCountyServiceOffice1">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATD_ID,
+  T1.TYPE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_GENERATED_ID,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.PRG_GENERATED_ID,
+  T2.TYPE_CODE,
+  T2.OFF_OFFICE
+from
+  CKT_OFFICE T2
+  join
+  CKT_COUNTY_SERVICE T1
+  on
+    (@prgGeneratedId = T1.PRG_GENERATED_ID) and
+    (@cogTypeCode = T1.COG_TYPE_CODE) and
+    (@cogCode = T1.COG_CODE) and
+    (T1.TYPE = 'P') and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T2.OFFICE_ID = T1.OFF_GENERATED_ID) and
+    (T2.TYPE_CODE = 'F')
+</value>
+   </data>
+   <data name="ReadCountyServiceOffice2">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATD_ID,
+  T1.TYPE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_GENERATED_ID,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.PRG_GENERATED_ID,
+  T2.TYPE_CODE,
+  T2.OFF_OFFICE
+from
+  CKT_OFFICE T2
+  join
+  CKT_COUNTY_SERVICE T1
+  on
+    (@prgGeneratedId = T1.PRG_GENERATED_ID) and
+    (@cogTypeCode = T1.COG_TYPE_CODE) and
+    (@cogCode = T1.COG_CODE) and
+    (T1.TYPE = 'P') and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T2.OFFICE_ID = T1.OFF_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadCountyServiceOffice3">
+      <value>
+select
+  T1.SYSTEM_GENERATD_ID,
+  T1.TYPE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_GENERATED_ID,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.PRG_GENERATED_ID,
+  T2.TYPE_CODE,
+  T2.OFF_OFFICE
+from
+  CKT_OFFICE T2
+  join
+  CKT_COUNTY_SERVICE T1
+  on
+    (@cogTypeCode = T1.COG_TYPE_CODE) and
+    (@cogCode = T1.COG_CODE) and
+    (@prgGeneratedId = T1.PRG_GENERATED_ID) and
+    (T1.TYPE = 'P') and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T2.OFFICE_ID = T1.OFF_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE
+from
+  CKT_CSE_ORGANIZATN
+where
+  (TYPE_CODE = 'C') and
+  (ORGANZTN_ID = @organztnId)
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  TYPE_CODE,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeCaseloadAssignment">
+      <value>
+select
+  OFCE_CSLD_ASSGN_ID,
+  ENDING_ALPHA,
+  BEGINING_ALPHA,
+  EFFECTIVE_DATE,
+  PRIORITY,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OFF_GENERATED_ID,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  END_FIRST_INITIAL,
+  BGN_FIRST_INTIAL,
+  ASSIGNMENT_IND,
+  [FUNCTION],
+  ASSIGNMENT_TYPE,
+  OFF_D_GENERATED_ID,
+  SPD_GENERATED_ID
+from
+  CKT_OFCE_CSLD_ASGT
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate) and
+  (BEGINING_ALPHA &lt;= cast(@lastName as char(17))) and
+  (ENDING_ALPHA &gt; cast(@lastName as char(17))) and
+  (ASSIGNMENT_TYPE = 'RE')
+order by
+  PRIORITY
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (@offGeneratedId1 = OFF_GENERATED_ID) and
+  (ROLE_CODE = @roleCode) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (OFF_GENERATED_ID = @offGeneratedId2) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="ReadPaReferral">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  CREATED_TSTAMP
+from
+  CKT_PA_REFERRAL
+where
+  (CREATED_TSTAMP = @createdTstamp) and
+  (NUMB = @numb) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="ReadPaReferralParticipant1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CREATED_TSTAMP,
+  ABSENCE_CODE,
+  RELATIONSHIP,
+  SEX,
+  DOB,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  SSN,
+  PERSON_NUM,
+  INSUR_IND,
+  PAT_EST_IND,
+  BENE_IND,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PRE_NUMBER,
+  GOOD_CAUSE_STATUS,
+  PAF_TYPE,
+  PAF_TSTAMP,
+  [ROLE]
+from
+  CKT_PA_REFER_PART
+where
+  (@pafTstamp = PAF_TSTAMP) and
+  (@preNumber = PRE_NUMBER) and
+  (@pafType = PAF_TYPE) and
+  ([ROLE] = 'AP')
+</value>
+   </data>
+   <data name="ReadPaReferralParticipant2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CREATED_TSTAMP,
+  ABSENCE_CODE,
+  RELATIONSHIP,
+  SEX,
+  DOB,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  SSN,
+  PERSON_NUM,
+  INSUR_IND,
+  PAT_EST_IND,
+  BENE_IND,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PRE_NUMBER,
+  GOOD_CAUSE_STATUS,
+  PAF_TYPE,
+  PAF_TSTAMP,
+  [ROLE]
+from
+  CKT_PA_REFER_PART
+where
+  (@pafTstamp = PAF_TSTAMP) and
+  (@preNumber = PRE_NUMBER) and
+  (@pafType = PAF_TYPE) and
+  ([ROLE] = 'AR')
+</value>
+   </data>
+   <data name="ReadPaReferralParticipant3">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CREATED_TSTAMP,
+  ABSENCE_CODE,
+  RELATIONSHIP,
+  SEX,
+  DOB,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  SSN,
+  PERSON_NUM,
+  INSUR_IND,
+  PAT_EST_IND,
+  BENE_IND,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PRE_NUMBER,
+  GOOD_CAUSE_STATUS,
+  PAF_TYPE,
+  PAF_TSTAMP,
+  [ROLE]
+from
+  CKT_PA_REFER_PART
+where
+  (@pafTstamp = PAF_TSTAMP) and
+  (@preNumber = PRE_NUMBER) and
+  (@pafType = PAF_TYPE) and
+  ([ROLE] = 'CH')
+</value>
+   </data>
+   <data name="ReadProgram">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+where
+  CODE = cast(@pgmCode as char(2))
+</value>
+   </data>
+</root>

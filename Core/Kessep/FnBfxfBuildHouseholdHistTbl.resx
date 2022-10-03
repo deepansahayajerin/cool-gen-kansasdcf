@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_IM_HH_MBR_MSUM T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@imhAeCaseNo = T2.IMH_AE_CASE_NO)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_LEGAL_ACTION T3 with(readuncommitted)
+  join
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.ACCOUNT_TYPE = 'S')
+  on
+    (T3.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T3.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadCsePersonObligation">
+      <value>
+select distinct
+  T1.NUMB,
+  T4.CPA_TYPE,
+  T4.CSP_NUMBER,
+  T4.OBG_GENERATED_ID,
+  T4.OTY_TYPE
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_OB_TRN T4 with(readuncommitted)
+  on
+    (T1.NUMB = T4.CSP_SUP_NUMBER) and
+    (T4.CPA_SUP_TYPE is not null) and
+    (T4.CSP_NUMBER = @cspNumber)
+order by
+  T4.OBG_GENERATED_ID,
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadImHousehold">
+      <value>
+select distinct
+  T1.AE_CASE_NO
+from
+  CKT_IM_HOUSEHOLD T1 with(readuncommitted)
+  join
+  CKT_IM_HH_MBR_MSUM T2 with(readuncommitted)
+  on
+    (T1.AE_CASE_NO = T2.IMH_AE_CASE_NO) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadImHouseholdImHouseholdMbrMnthlySum">
+      <value>
+select
+  IMH_AE_CASE_NO,
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM with(readuncommitted)
+where
+  (CSP_NUMBER = @cspNumber) and
+  (YEAR0 &lt;= @year0) and
+  (
+    (YEAR0 &lt; @year0) or
+    (
+      (YEAR0 = @year0) and
+      (MONTH0 &lt;= @month0)
+    )
+  )
+order by
+  YEAR0,
+  MONTH0,
+  IMH_AE_CASE_NO
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum1">
+      <value>
+select top(1)
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM with(readuncommitted)
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum2">
+      <value>
+select top(1)
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM with(readuncommitted)
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum3">
+      <value>
+select top(1)
+  sum(URA_AMOUNT)
+from
+  CKT_IM_HH_MBR_MSUM with(readuncommitted)
+where
+  (YEAR0 &lt;= @year0) and
+  (
+    (YEAR0 &lt; @year0) or
+    (
+      (YEAR0 = @year0) and
+      (MONTH0 &lt;= @month0)
+    )
+  ) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum4">
+      <value>
+select top(1)
+  sum(URA_MEDICAL_AMOUNT)
+from
+  CKT_IM_HH_MBR_MSUM with(readuncommitted)
+where
+  (YEAR0 &lt;= @year0) and
+  (
+    (YEAR0 &lt; @year0) or
+    (
+      (YEAR0 = @year0) and
+      (MONTH0 &lt;= @month0)
+    )
+  ) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  STANDARD_NO = @standardNo
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.ACCOUNT_TYPE = 'S')
+</value>
+   </data>
+</root>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollectionAdjustmentReason">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID
+from
+  CKT_COLL_ADJ_RSN
+where
+  OB_TRN_RLN_RSN_ID = @obTrnRlnRsnId
+</value>
+   </data>
+   <data name="ReadCollectionDebtDebtDetail">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.DISB_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.DISB_ADJ_PROC_DATE,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.COLL_ADJ_PROC_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.DISB_PROC_NEED_IND,
+  T1.DIST_MTD,
+  T1.PGM_APPLD_TO,
+  T1.APPL_TO_ORD_TYP_CD,
+  T1.CRT_NOTICE_REQ_IND,
+  T1.CRT_NOTICE_PROC_DT,
+  T1.AE_NOTIFIED_DT,
+  T1.OCSE34_RPT_PERIOD,
+  T1.BAL_BEF_COLL,
+  T1.CUM_INT_CHRGD,
+  T1.CUM_INT_COLL_AFT,
+  T1.INT_BAL_AFT_COLL,
+  T1.DISB_TO_AR_IND,
+  T1.MNL_DIST_RSN_TXT,
+  T1.COL_ADJ_RSN_TXT,
+  T1.CT_ORD_APPLIED_TO,
+  T1.APPLIED_TO_FUT_IND,
+  T1.CSENET_OB_REQ_IND,
+  T1.CSENET_OB_P_DT,
+  T1.CSENET_OB_ADJ_P_DT,
+  T1.CRT_NTC_ADJ_PRC_DT,
+  T1.PGM_ST_APPLD_TO,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE,
+  T3.DUE_DT
+from
+  CKT_OB_TRN T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID) and
+    (@cpaSupType = T2.CPA_SUP_TYPE) and
+    (@cspSupNumber = T2.CSP_SUP_NUMBER) and
+    (T1.ADJ_IND = 'N') and
+    (T1.CREATED_TMST &lt; @createdTmst) and
+    (T1.DISB_DT &gt; @disbDt)
+  join
+  CKT_DEBT_DTL T3
+  on
+    (T2.OTY_TYPE = T3.OTY_TYPE) and
+    (T2.OBG_GENERATED_ID = T3.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = T3.OTR_TYPE) and
+    (T2.OB_TRN_ID = T3.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T3.CPA_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (
+      (T1.COLL_DT &gt;= @collDt) or
+      (T3.DUE_DT &gt;= @collDt)
+    )
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'S')
+</value>
+   </data>
+</root>

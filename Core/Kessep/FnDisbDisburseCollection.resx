@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection">
+      <value>
+select
+  COLL_ID,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (ADJ_IND = 'Y')
+</value>
+   </data>
+   <data name="ReadCollectionCsePersonCashReceiptCashReceiptDetail">
+      <value>
+select
+  T1.COLL_ID,
+  T1.DISB_DT,
+  T1.ADJ_IND,
+  T1.DISB_ADJ_PROC_DATE,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.DISB_PROC_NEED_IND,
+  T3.CRV_IDENTIFIER,
+  T3.CST_IDENTIFIER,
+  T3.CRT_IDENTIFIER,
+  T3.CASH_RECEIPT_ID,
+  T4.COLLAMT_APPL_IND,
+  T5.CATEGORY_IND
+from
+  CKT_CR_TYPE T5
+  join
+  CKT_CASH_RECEIPT T3
+  join
+  CKT_CR_DETAIL T4
+  join
+  CKT_COLLECTION T1
+  on
+    (T1.CSP_NUMBER &gt;= @cspNumber1) and
+    (T1.CSP_NUMBER &lt; @cspNumber2) and
+    (T1.DISB_PROC_NEED_IND = 'Y') and
+    (
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.DISB_ADJ_PROC_DATE = @disbAdjProcDate)
+      ) or
+      (T1.DISB_DT = @disbAdjProcDate)
+    ) and
+    (T4.CRD_ID = T1.CRD_ID) and
+    (T4.CRV_IDENTIFIER = T1.CRV_ID) and
+    (T4.CST_IDENTIFIER = T1.CST_ID) and
+    (T4.CRT_IDENTIFIER = T1.CRT_TYPE)
+  on
+    (T3.CRT_IDENTIFIER = T4.CRT_IDENTIFIER) and
+    (T3.CST_IDENTIFIER = T4.CST_IDENTIFIER) and
+    (T3.CRV_IDENTIFIER = T4.CRV_IDENTIFIER)
+  on
+    T5.CRTYPE_ID = T3.CRT_IDENTIFIER
+order by
+  T1.CSP_NUMBER,
+  T3.CASH_RECEIPT_ID,
+  T1.CRD_ID,
+  T1.COLL_ID
+</value>
+   </data>
+   <data name="ReadCollectionDebtObligationCashReceiptDetailCashReceipt1">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.DISB_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.DISB_ADJ_PROC_DATE,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.COLL_ADJ_PROC_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.DISB_PROC_NEED_IND,
+  T1.PGM_APPLD_TO,
+  T1.APPL_TO_ORD_TYP_CD,
+  T1.APPLIED_TO_FUT_IND,
+  T1.PGM_ST_APPLD_TO,
+  T1.AR_NUMBER,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE,
+  T4.COLLAMT_APPL_IND,
+  T5.CASH_RECEIPT_ID,
+  T6.DUE_DT
+from
+  CKT_CASH_RECEIPT T5
+  join
+  CKT_CR_DETAIL T4
+  join
+  CKT_OB_TRN T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T1.COLL_ID = @collId) and
+    (T1.DISB_PROC_NEED_IND = 'Y') and
+    (
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.DISB_ADJ_PROC_DATE = @disbAdjProcDate)
+      ) or
+      (T1.DISB_DT = @disbAdjProcDate)
+    ) and
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T2.CPA_SUP_TYPE is not null) and
+    (T2.CSP_SUP_NUMBER is not null)
+  join
+  CKT_DEBT_DTL T6
+  on
+    (T2.OTY_TYPE = T6.OTY_TYPE) and
+    (T2.OBG_GENERATED_ID = T6.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = T6.OTR_TYPE) and
+    (T2.OB_TRN_ID = T6.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T6.CPA_TYPE) and
+    (T2.CSP_NUMBER = T6.CSP_NUMBER)
+  on
+    (T4.CRD_ID = T1.CRD_ID) and
+    (T4.CRV_IDENTIFIER = T1.CRV_ID) and
+    (T4.CST_IDENTIFIER = T1.CST_ID) and
+    (T4.CRT_IDENTIFIER = T1.CRT_TYPE)
+  on
+    (T5.CRT_IDENTIFIER = T4.CRT_IDENTIFIER) and
+    (T5.CST_IDENTIFIER = T4.CST_IDENTIFIER) and
+    (T5.CRV_IDENTIFIER = T4.CRV_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCollectionDebtObligationCashReceiptDetailCashReceipt2">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.DISB_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.DISB_ADJ_PROC_DATE,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.COLL_ADJ_PROC_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.DISB_PROC_NEED_IND,
+  T1.PGM_APPLD_TO,
+  T1.APPL_TO_ORD_TYP_CD,
+  T1.APPLIED_TO_FUT_IND,
+  T1.PGM_ST_APPLD_TO,
+  T1.AR_NUMBER,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE,
+  T4.COLLAMT_APPL_IND,
+  T5.CASH_RECEIPT_ID,
+  T6.DUE_DT,
+  T7.CATEGORY_IND
+from
+  CKT_CR_TYPE T7
+  join
+  CKT_CASH_RECEIPT T5
+  on
+    T7.CRTYPE_ID = T5.CRT_IDENTIFIER
+  join
+  CKT_CR_DETAIL T4
+  join
+  CKT_OB_TRN T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID) and
+    (@cpaType = T2.CPA_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@cpaSupType = T2.CPA_SUP_TYPE) and
+    (@cspSupNumber = T2.CSP_SUP_NUMBER) and
+    (T1.DISB_PROC_NEED_IND = 'Y') and
+    (
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.DISB_ADJ_PROC_DATE = @disbAdjProcDate)
+      ) or
+      (T1.DISB_DT = @disbAdjProcDate)
+    )
+  join
+  CKT_DEBT_DTL T6
+  on
+    (T2.OTY_TYPE = T6.OTY_TYPE) and
+    (T2.OBG_GENERATED_ID = T6.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = T6.OTR_TYPE) and
+    (T2.OB_TRN_ID = T6.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T6.CPA_TYPE) and
+    (T2.CSP_NUMBER = T6.CSP_NUMBER)
+  on
+    (T4.CRD_ID = T1.CRD_ID) and
+    (T4.CRV_IDENTIFIER = T1.CRV_ID) and
+    (T4.CST_IDENTIFIER = T1.CST_ID) and
+    (T4.CRT_IDENTIFIER = T1.CRT_TYPE)
+  on
+    (T5.CRT_IDENTIFIER = T4.CRT_IDENTIFIER) and
+    (T5.CST_IDENTIFIER = T4.CST_IDENTIFIER) and
+    (T5.CRV_IDENTIFIER = T4.CRV_IDENTIFIER)
+order by
+  T5.CASH_RECEIPT_ID,
+  T1.CRD_ID,
+  T1.COLL_ID
+</value>
+   </data>
+   <data name="ReadCsePersonAccountCsePersonAccountCsePerson">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T6.CSP_SUP_NUMBER,
+  T6.CPA_SUP_TYPE
+from
+  CKT_CSE_PERSON_ACC T1
+  join
+  CKT_OB_TRN T6
+  on
+    (T1.TYPE = T6.CPA_TYPE) and
+    (T1.CSP_NUMBER = T6.CSP_NUMBER) and
+    (T6.CPA_SUP_TYPE is not null) and
+    (T6.CSP_SUP_NUMBER is not null)
+  join
+  CKT_COLLECTION T7
+  on
+    (T6.OTY_TYPE = T7.OTY_ID) and
+    (T6.OB_TRN_TYP = T7.OTR_TYPE) and
+    (T6.OB_TRN_ID = T7.OTR_ID) and
+    (T6.CPA_TYPE = T7.CPA_TYPE) and
+    (T6.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T6.OBG_GENERATED_ID = T7.OBG_ID) and
+    (T7.COLL_ID = @collId)
+</value>
+   </data>
+</root>

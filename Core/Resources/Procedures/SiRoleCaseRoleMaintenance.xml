@@ -1,0 +1,86 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiRoleCaseRoleMaintenance"
+           program-name="SWEROLEP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiRoleCaseRoleMaintenance"
+           transaction="SR2H"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_COMN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiComnCaseCompositionByName"
+       send-command="DISPLAY">
+      <map from="Selected.Number" to="Search.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="NewCsePersonsWorkSet.Number" to="SearchCsePersonsWorkSet.Number"/>
+      <map from="NewCsePersonsWorkSet.Sex" to="SearchCsePersonsWorkSet.Sex"/>
+      <map from="NewCsePersonsWorkSet.Dob" to="SearchCsePersonsWorkSet.Dob"/>
+      <map from="NewCsePersonsWorkSet.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+      <map from="NewCsePersonsWorkSet.FirstName"
+           to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="NewCsePersonsWorkSet.MiddleInitial"
+           to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <map from="NewCsePersonsWorkSet.LastName"
+           to="SearchCsePersonsWorkSet.LastName"/>
+      <return-map from="Selected" to="NewCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ORG_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETORGZ"
+       to="SiOrgzOrganizationMaintenance"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected.Number" to="NewCsePersonsWorkSet.Number"/>
+      <return-map from="HiddenSelected.FormattedName"
+                  to="NewCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CPAT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMCPAT"
+       to="SiCpatChildPaternityMaint"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <map from="ChildSuccessfullyAdded" to="FromRole"/>
+   </on>
+   <map from="SelectAction2" to="SelectAction2"/>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="HiddenReturnRequired" to="HiddenReturnRequired"/>
+   <map from="Export1.DetailCsePersonsWorkSet"
+        to="Import1.DetailCsePersonsWorkSet"/>
+   <map from="Next" to="Next"/>
+   <map from="Case1" to="Case1"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="HiddenPageKeys.HiddenPageKeyCsePerson"
+        to="HiddenPageKeys.HiddenPageKeyCsePerson"/>
+   <map from="NewCaseRole" to="NewCaseRole"/>
+   <map from="NewCsePersonsWorkSet" to="NewCsePersonsWorkSet"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailCsePerson" to="Import1.DetailCsePerson"/>
+   <map from="Export1.DetailCaseRole" to="Import1.DetailCaseRole"/>
+   <map from="HiddenPageKeys.HiddenPageKeyCaseRole"
+        to="HiddenPageKeys.HiddenPageKeyCaseRole"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="BeenToName" to="BeenToName"/>
+   <map from="SelectAction" to="SelectAction"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="NewSsnWorkArea" to="NewSsnWorkArea"/>
+   <map from="ReturnFromCpat" to="ReturnFromCpat"/>
+   <map from="ChildSuccessfullyAdded" to="ChildSuccessfullyAdded"/>
+   <map from="FromCads" to="FromCads"/>
+</procedure>

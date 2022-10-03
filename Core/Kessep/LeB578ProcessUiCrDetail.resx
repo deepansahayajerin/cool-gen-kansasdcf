@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail1">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail2">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER)
+order by
+  CRD_ID desc
+</value>
+   </data>
+   <data name="ReadCashReceiptEventCashReceipt">
+      <value>
+select top(1)
+  T1.CST_IDENTIFIER,
+  T1.CREVENT_ID,
+  T1.SOURCE_CREATION_DT,
+  T1.TOT_NON_CSHTRN_CNT,
+  T1.ANTIC_CHECK_AMT,
+  T1.TOTAL_CASH_AMT,
+  T1.TOT_CASH_TRAN_CNT,
+  T1.TOT_NON_CASH_AMT,
+  T2.CRT_IDENTIFIER,
+  T2.RECEIPT_AMOUNT,
+  T2.CASH_RECEIPT_ID,
+  T2.TOTAL_CASH_TRANSAC,
+  T2.TOT_NONCSH_TRN_AMT,
+  T2.TOT_CASH_TRAN_CNT,
+  T2.TOT_NOCSH_TRAN_CNT,
+  T2.CASH_BAL_AMT,
+  T2.CASH_BAL_RSN,
+  T2.CASH_DUE
+from
+  CKT_CR_EVENT T1
+  join
+  CKT_CASH_RECEIPT T2
+  on
+    (T1.CREVENT_ID = @creventId) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T1.CREVENT_ID = T2.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T2.CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="UpdateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  TOTAL_CASH_TRANSAC = @totalCashTransac,
+  TOT_CASH_TRAN_CNT = @totCashTranCnt,
+  CASH_BAL_AMT = @cashBalAmt,
+  CASH_BAL_RSN = @cashBalRsn,
+  CASH_DUE = @cashDue
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="UpdateCashReceiptEvent">
+      <value>
+update CKT_CR_EVENT
+set
+  ANTIC_CHECK_AMT = @anticCheckAmt,
+  TOTAL_CASH_AMT = @totalCashAmt,
+  TOT_CASH_TRAN_CNT = @totCashTranCnt
+where
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CREVENT_ID = @creventId)
+</value>
+   </data>
+</root>

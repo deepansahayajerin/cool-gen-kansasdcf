@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCashReceiptDetailStatHistory">
+      <value>
+insert into CKT_CRDTL_STATHIST
+(
+  CRD_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CDS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  REASON_CODE_ID,
+  CREATED_BY,
+  DISCONTINUE_DATE,
+  REASON_TEXT
+)
+values
+(
+  @crdIdentifier,
+  @crvIdentifier,
+  @cstIdentifier,
+  @crtIdentifier,
+  @cdsIdentifier,
+  @createdTimestamp,
+  @reasonCodeId,
+  @createdBy,
+  @discontinueDate,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="CreateCashReceiptStatusHistory">
+      <value>
+insert into CKT_CR_STATUS_HIST
+(
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DISCONTINUE_DATE,
+  REASON_TEXT,
+  CDR_IDENTIFIER
+)
+values
+(
+  @crtIdentifier,
+  @cstIdentifier,
+  @crvIdentifier,
+  @crsIdentifier,
+  @createdTimestamp,
+  @createdBy,
+  @discontinueDate,
+  @reasonText,
+  null
+)
+</value>
+   </data>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  COLLAMT_APPL_IND
+from
+  CKT_CR_DETAIL
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatHistoryCashReceiptDetailStatus">
+      <value>
+select top(1)
+  CRD_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CDS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  REASON_CODE_ID,
+  CREATED_BY,
+  DISCONTINUE_DATE
+from
+  CKT_CRDTL_STATHIST
+where
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatus">
+      <value>
+select top(1)
+  CRDETAIL_STAT_ID,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_CR_DETAIL_STAT
+where
+  (CRDETAIL_STAT_ID = @crdetailStatId) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus">
+      <value>
+select top(1)
+  CR_STATUS_ID
+from
+  CKT_CR_STATUS
+where
+  CR_STATUS_ID = @crStatusId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatusHistoryCashReceiptStatus">
+      <value>
+select top(1)
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DISCONTINUE_DATE
+from
+  CKT_CR_STATUS_HIST
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetailStatHistory">
+      <value>
+update CKT_CRDTL_STATHIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (CRD_IDENTIFIER = @crdIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CDS_IDENTIFIER = @cdsIdentifier) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+</root>

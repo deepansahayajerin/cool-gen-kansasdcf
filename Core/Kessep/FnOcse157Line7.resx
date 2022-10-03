@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCsePersonCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.EMANCIPATION_DT,
+  T2.TYPE,
+  T2.OUT_OF_WEDLOCK,
+  T2.PAT_ESTAB_IND,
+  T3.INTERSTATE_CASE_ID
+from
+  CKT_CASE T3 with(readuncommitted)
+  join
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T2.PAT_ESTAB_IND = 'Y') and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'CH') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @endDate) and
+    (T2.NUMB &gt; @numb) and
+    (T2.NUMB between cast(@suppPersonNumber1 as char(10)) and cast(@suppPersonNumber2 as char(10)))
+  on
+    T3.NUMB = T1.CAS_NUMBER
+order by
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadGoodCause">
+      <value>
+select top(1)
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER
+from
+  CKT_GOOD_CAUSE with(readuncommitted)
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (@croType = CRO_TYPE) and
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (CODE = 'CO') and
+  (CREATED_TIMESTAMP &gt; @createdTimestamp1) and
+  (CREATED_TIMESTAMP &lt; @createdTimestamp2)
+</value>
+   </data>
+   <data name="ReadGoodCauseCaseRole">
+      <value>
+select
+  T1.CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_IDENTIFIER,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  join
+  CKT_GOOD_CAUSE T1 with(readuncommitted)
+  on
+    (T1.CODE = 'GC') and
+    (T2.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.TYPE = T1.CRO_TYPE) and
+    (T2.CASE_ROLE_ID = T1.CRO_IDENTIFIER) and
+    (T2.TYPE = 'AR') and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T2.START_DATE &lt;= @effectiveDate) and
+    (T2.END_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadOcse157Data">
+      <value>
+select top(1)
+  max(RUN_NUMBER)
+from
+  CKT_OCSE157_DATA with(readuncommitted)
+where
+  (FISCAL_YEAR = @fiscalYear) and
+  (LINE_NUMBER = '04 ')
+</value>
+   </data>
+   <data name="ReadOcse157Verification">
+      <value>
+select top(1)
+  min(SUPP_PERSON_NUMBER)
+from
+  CKT_OCSE157_VERIFI with(readuncommitted)
+where
+  (COLUMN0 &lt;&gt; ' ') and
+  (FISCAL_YEAR = @fiscalYear) and
+  (RUN_NUMBER = @runNumber) and
+  (LINE_NUMBER = '04 ') and
+  (SUPP_PERSON_NUMBER = @suppPersonNumber)
+</value>
+   </data>
+</root>

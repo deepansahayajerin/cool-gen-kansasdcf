@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadStmtCpnSuppStatObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  COLL_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  OTY_ID,
+  CPA_TYPE_OBLIG,
+  CSP_NUMBER_OBLIG,
+  OBG_ID,
+  DOC_TYPE_TO_SUPP
+from
+  CKT_STMT_SUP_ST_HS
+where
+  (@obgId = OBG_ID) and
+  (@cspNumberOblig = CSP_NUMBER_OBLIG) and
+  (@cpaTypeOblig = CPA_TYPE_OBLIG) and
+  (@otyId = OTY_ID) and
+  (@effectiveDate &gt;= EFFECTIVE_DATE) and
+  (@effectiveDate &lt; DISCONTINUE_DATE)
+</value>
+   </data>
+</root>

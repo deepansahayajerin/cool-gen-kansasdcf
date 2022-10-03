@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPersonProgramCsePersonProgram1">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T3.CODE
+from
+  CKT_PROGRAM T3 with(readuncommitted)
+  join
+  CKT_PERSON_PROGRAM T1 with(readuncommitted)
+  on
+    (T3.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (
+      T3.CODE in ('AF', 'AFI', 'FC',
+        'FCI')
+    ) and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @discontinueDate)
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (@casNumber = T4.CAS_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.START_DATE &lt;= @discontinueDate) and
+    (T4.END_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+   <data name="ReadPersonProgramCsePersonProgram2">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T3.CODE
+from
+  CKT_PROGRAM T3 with(readuncommitted)
+  join
+  CKT_PERSON_PROGRAM T1 with(readuncommitted)
+  on
+    (T3.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (
+      T3.CODE in ('MA', 'MAI', 'CI',
+        'MP', 'MS', 'SI')
+    ) and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @discontinueDate)
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (@casNumber = T4.CAS_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.START_DATE &lt;= @discontinueDate) and
+    (T4.END_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+   <data name="ReadPersonProgramCsePersonProgram3">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T3.CODE
+from
+  CKT_PROGRAM T3 with(readuncommitted)
+  join
+  CKT_PERSON_PROGRAM T1 with(readuncommitted)
+  on
+    (T3.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (
+      T3.CODE in ('AF', 'AFI', 'FC',
+        'FCI')
+    )
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T1.DISCONTINUE_DATE &gt;= T4.START_DATE) and
+    (T1.EFFECTIVE_DATE &lt;= T4.END_DATE) and
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (@casNumber = T4.CAS_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.START_DATE &lt;= @startDate)
+</value>
+   </data>
+</root>

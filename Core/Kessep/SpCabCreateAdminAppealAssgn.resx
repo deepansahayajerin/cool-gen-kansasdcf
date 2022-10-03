@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateAdministrativeAppealAssignment">
+      <value>
+insert into CKT_ASSGN_AAP
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  AAP_ID
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @aapId
+)
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID
+from
+  CKT_ADMIN_APPEAL
+where
+  ADMIN_APPEAL_ID = @adminAppealId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode)
+</value>
+   </data>
+</root>

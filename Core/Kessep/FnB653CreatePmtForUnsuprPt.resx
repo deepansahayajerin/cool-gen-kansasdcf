@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadControlTable1">
+      <value>
+select top(1)
+  CNTL_TBL_ID,
+  LAST_USED_NUMBER
+from
+  CKT_CONTROL_TABLE
+where
+  CNTL_TBL_ID = 'OUTBOUND EFT NUMBER'
+</value>
+   </data>
+   <data name="ReadControlTable2">
+      <value>
+select top(1)
+  CNTL_TBL_ID,
+  LAST_USED_NUMBER
+from
+  CKT_CONTROL_TABLE
+where
+  CNTL_TBL_ID = 'OUTBOUND EFT TRACE NUMBER'
+</value>
+   </data>
+   <data name="ReadCsePersonCsePersonAccountDisbursementTransaction">
+      <value>
+select
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PROCESS_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST,
+  DISBURSEMENT_DATE,
+  CASH_NON_CASH_IND,
+  RECAPTURED_IND,
+  COLLECTION_DATE,
+  DBT_GENERATED_ID,
+  INTERSTATE_IND
+from
+  CKT_DISB_TRAN
+where
+  (PROCESS_DATE = @processDate) and
+  (TYPE = @type) and
+  (DBT_GENERATED_ID = @dbtGeneratedId)
+order by
+  CSP_NUMBER,
+  DISBURSEMENT_DATE
+</value>
+   </data>
+   <data name="ReadDisbursementStatusHistoryDisbursementStatus">
+      <value>
+select top(1)
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+from
+  CKT_DISB_STAT_HIST
+where
+  (@dtrGeneratedId = DTR_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+order by
+  EFFECTIVE_DATE desc,
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadDisbursementType">
+      <value>
+select top(1)
+  DISB_TYPE_ID,
+  CODE
+from
+  CKT_DISB_TYPE
+where
+  DISB_TYPE_ID = @disbTypeId
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  TYPE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="UpdateControlTable1">
+      <value>
+update CKT_CONTROL_TABLE
+set
+  LAST_USED_NUMBER = @lastUsedNumber
+where
+  CNTL_TBL_ID = @cntlTblId
+</value>
+   </data>
+   <data name="UpdateControlTable2">
+      <value>
+update CKT_CONTROL_TABLE
+set
+  LAST_USED_NUMBER = @lastUsedNumber
+where
+  CNTL_TBL_ID = @cntlTblId
+</value>
+   </data>
+</root>

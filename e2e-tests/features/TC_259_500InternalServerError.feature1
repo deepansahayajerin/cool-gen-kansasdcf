@@ -1,0 +1,31 @@
+Feature: InternalServerError
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "OPAY" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - List Obligations by AP/Payor - OPAY" window appears
+
+    When user enters "<AP_PAYOR>" in "AP/Payor"
+    And user presses "F2"
+    And user enters "S" in first field under text "Sel"
+    And user presses "Shift+F6"
+    Then "CSE - LIST COLLECTIONS BY AP/PAYOR - PAYR" window appears
+
+    When user enters "<LIST_COLLECTIONS_FROM>" in "List Collections From/To"
+    And user presses "F2"
+    When user enters "S" in first field under text "Sel"
+    And user presses "Shift+F4"
+    Then "CSE - COLL" window appears
+
+
+
+    Examples:
+      | AP_PAYOR | LIST_COLLECTIONS_FROM |
+      | 161      | 012022                |
+
+

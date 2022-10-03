@@ -1,0 +1,59 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCrdpLstDeposits"
+           program-name="SWECRDPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCrdpLstDeposits"
+           transaction="SR25"
+           display-first="false"
+           primary-window="FN_CRDP_LST_DEPOSITS"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_DEPOSIT_ITEMS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrdiLstDepositItems"
+       send-command="DISPLAY">
+      <map from="Fund" to="Fund"/>
+      <map from="SelectFundTransaction.SystemGeneratedIdentifier"
+           to="SelectedFundTransaction.SystemGeneratedIdentifier"/>
+      <map from="SelectFundTransaction.DepositNumber"
+           to="SelectedFundTransaction.DepositNumber"/>
+      <map from="SelectFundTransaction.Amount" to="SelectedFundTransaction.Amount"/>
+      <map from="SelectFundTransaction.BusinessDate"
+           to="SelectedFundTransaction.BusinessDate"/>
+      <map from="SelectFundTransactionStatus.SystemGeneratedIdentifier"
+           to="SelectedFundTransactionStatus.SystemGeneratedIdentifier"/>
+      <map from="SelectFundTransactionStatus.Code"
+           to="SelectedFundTransactionStatus.Code"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_FUND_TRANS_STATS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnLftsListFundTransStatus"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="HiddenSelected"/>
+   </on>
+   <map from="Desired" to="Desired"/>
+   <map from="From" to="From"/>
+   <map from="To" to="To"/>
+   <map from="New1.NewExportGroupMemberCommon"
+        to="New1.NewImportGroupMemberCommon"/>
+   <map from="New1.NewExportGroupNoOfItems" to="New1.NewImportGroupNoOfItems"/>
+   <map from="New1.NewExportGroupMemberFundTransaction"
+        to="New1.NewImportGroupMemberFundTransaction"/>
+   <map from="New1.NewExportGroupMemberFundTransactionStatus"
+        to="New1.NewImportGroupMemberFundTransactionStatus"/>
+   <map from="New1.NewExportGroupMemberFundTransactionStatusHistory"
+        to="New1.NewImportGroupMemberFundTransactionStatusHistory"/>
+   <map from="New1.NewExportGroupMemberHidden"
+        to="New1.NewImportGroupMemberHidden"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="FirstTimeProcessed" to="FirstTimeProcessed"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

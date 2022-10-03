@@ -1,0 +1,48 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpDfldDocumentFieldListMntn"
+           program-name="SWEDFLDP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpDfldDocumentFieldListMntn"
+           transaction="SRPC"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpDmnuDocumentMaintMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_DOCM ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <return-map from="ReturnDoc" to="FromPromptDocument"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_FDLM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpFdlmFieldListAndMaintain"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="FromPromptField"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="FilterDocument" to="FilterDocument"/>
+   <map from="FilterStandard" to="FilterStandard"/>
+   <map from="FilterDocumentField" to="FilterDocumentField"/>
+   <map from="FilterPreviousDocumentField" to="FilterPreviousDocumentField"/>
+   <map from="Scrolling" to="Scrolling"/>
+   <map from="HiddenPageKeys.GexportHiddenDocumentField"
+        to="HiddenPageKeys.GimportHiddenDocumentField"/>
+   <map from="HiddenPageKeys.GexportHiddenField"
+        to="HiddenPageKeys.GimportHiddenField"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Export1.Gcommon" to="Import1.Gcommon"/>
+   <map from="Export1.GdocumentField" to="Import1.GdocumentField"/>
+   <map from="Export1.GexportPreviousDocumentField"
+        to="Import1.GimportPreviousDocumentField"/>
+   <map from="Export1.GexportFieldPrompt" to="Import1.GimportFieldPrompt"/>
+   <map from="FilterPreviousDocument.Name" to="FilterPreviousDocument.Name"/>
+   <map from="Export1.Gfield.Name" to="Import1.Gfield.Name"/>
+   <map from="Export1.GexportPreviousField.Name"
+        to="Import1.GimportPreviousField.Name"/>
+</procedure>

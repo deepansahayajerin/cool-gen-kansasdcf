@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (TYPE = 'AP') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COLLECTION_DATE
+from
+  CKT_CR_DETAIL T1 with(readuncommitted)
+  join
+  CKT_COLLECTION T2 with(readuncommitted)
+  on
+    (T1.COLLECTION_DATE &gt;= @collectionDate) and
+    (T1.CRD_ID = T2.CRD_ID) and
+    (T1.CRV_IDENTIFIER = T2.CRV_ID) and
+    (T1.CST_IDENTIFIER = T2.CST_ID) and
+    (T1.CRT_IDENTIFIER = T2.CRT_TYPE) and
+    (T2.COLL_DT &gt;= @collectionDate) and
+    (T2.CPA_TYPE = 'R') and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT,
+  RETIRED_DT
+from
+  CKT_DEBT_DTL with(readuncommitted)
+where
+  (RETIRED_DT = @retiredDt) and
+  (DUE_DT &lt;= @dueDt) and
+  (CPA_TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  END_DATE,
+  START_DATE
+from
+  CKT_INCARCERATION with(readuncommitted)
+where
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (T1.NUMB = T4.CAS_NUMBER) and
+    (T4.CSP_NUMBER = @cspNumber) and
+    (T4.LGA_ID = @lgaId)
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (STATE_ABBREVIATION = @stateAbbreviation) and
+  (COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  STATE_ABBREVIATION = @stateAbbreviation
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T2.IDENTIFIER = T1.TRB_ID) and
+    (T2.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionTribunalFips1">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE,
+  T3.COUNTY_DESC,
+  T3.STATE_ABBREVIATION,
+  T3.COUNTY_ABBR
+from
+  CKT_FIPS T3
+  join
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T2.IDENTIFIER = T1.TRB_ID)
+  on
+    (T3.LOCATION = T2.FIP_LOCATION) and
+    (T3.COUNTY = T2.FIP_COUNTY) and
+    (T3.[STATE] = T2.FIP_STATE) and
+    (T3.STATE_ABBREVIATION = @stateAbbreviation) and
+    (T3.COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadLegalActionTribunalFips2">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE,
+  T3.COUNTY_DESC,
+  T3.STATE_ABBREVIATION,
+  T3.COUNTY_ABBR
+from
+  CKT_FIPS T3
+  join
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.LEGAL_ACTION_ID = @legalActionId) and
+    (T2.IDENTIFIER = T1.TRB_ID)
+  on
+    (T3.LOCATION = T2.FIP_LOCATION) and
+    (T3.COUNTY = T2.FIP_COUNTY) and
+    (T3.[STATE] = T2.FIP_STATE)
+</value>
+   </data>
+</root>

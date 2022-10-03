@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE,
+  NAME
+from
+  CKT_CSE_ORGANIZATN
+where
+  (TYPE_CODE = @typeCode) and
+  (ORGANZTN_ID = @organztnId)
+</value>
+   </data>
+   <data name="ReadCseOrganizationRelationshipCseOrganization">
+      <value>
+select
+  T1.COG_PARENT_CODE,
+  T1.COG_PARENT_TYPE,
+  T1.COG_CHILD_CODE,
+  T1.COG_CHILD_TYPE,
+  T1.REASON_CODE,
+  T2.NAME
+from
+  CKT_CSE_ORGANIZATN T2
+  join
+  CKT_CSE_ORG_RELATN T1
+  on
+    (T1.REASON_CODE = @reasonCode) and
+    (@cogChildType = T1.COG_CHILD_TYPE) and
+    (@cogChildCode = T1.COG_CHILD_CODE) and
+    (T2.TYPE_CODE = T1.COG_PARENT_TYPE) and
+    (T2.ORGANZTN_ID = T1.COG_PARENT_CODE) and
+    (T2.ORGANZTN_ID &gt;= @organztnId)
+order by
+  T1.COG_PARENT_CODE
+</value>
+   </data>
+</root>

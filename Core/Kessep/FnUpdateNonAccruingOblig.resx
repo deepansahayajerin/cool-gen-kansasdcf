@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  min(COLL_DT)
+from
+  CKT_COLLECTION
+where
+  (ADJ_IND = 'N') and
+  (CONCURRENT_IND = 'N') and
+  (@otyId = OTY_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrId = OTR_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgId = OBG_ID)
+</value>
+   </data>
+   <data name="ReadDebtDetailObligationTransaction">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.CVRD_PRD_START_DT,
+  T1.CVD_PRD_END_DT,
+  T1.PRECNVRSN_PGM_CD,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T2.OB_TRN_AMT,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE
+from
+  CKT_OB_TRN T2
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T2.OTY_TYPE = T1.OTY_TYPE) and
+    (T2.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OB_TRN_ID = @obTrnId) and
+    (@otyType = T2.OTY_TYPE) and
+    (@obgGeneratedId = T2.OBG_GENERATED_ID) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@cpaType = T2.CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  OTHER_STATE_ABBR,
+  OB_DSC,
+  HISTORY_IND,
+  PRIM_SEC_CD,
+  AOD_BAL_CURR_ARR,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST,
+  ORD_TYP_CD
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadSupported">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RECOMP_BAL_FROM_DT,
+  TRIGGER_TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateDebtDetail1">
+      <value>
+update CKT_DEBT_DTL
+set
+  CVRD_PRD_START_DT = @cvrdPrdStartDt,
+  CVD_PRD_END_DT = @cvdPrdEndDt,
+  PRECNVRSN_PGM_CD = @precnvrsnPgmCd,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (OTR_TYPE = @otrType)
+</value>
+   </data>
+   <data name="UpdateDebtDetail2">
+      <value>
+update CKT_DEBT_DTL
+set
+  PRECNVRSN_PGM_CD = @precnvrsnPgmCd,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (OTR_TYPE = @otrType)
+</value>
+   </data>
+   <data name="UpdateObligation1">
+      <value>
+update CKT_OBLIGATION
+set
+  OB_DSC = @obDsc,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="UpdateObligation2">
+      <value>
+update CKT_OBLIGATION
+set
+  OTHER_STATE_ABBR = @otherStateAbbr,
+  OB_DSC = @obDsc,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst,
+  ORD_TYP_CD = @ordTypCd
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="UpdateSupported">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt,
+  TRIGGER_TYPE = @triggerType
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

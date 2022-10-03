@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeletePaReferralAssignment">
+      <value>
+delete from CKT_ASSGN_PA_REF
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (PAF_NO = @pafNo) and
+  (PAF_TYPE = @pafType) and
+  (PAF_TSTAMP = @pafTstamp)
+</value>
+   </data>
+   <data name="ReadPaReferralAssignment">
+      <value>
+select distinct
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.PAF_NO,
+  T1.PAF_TYPE,
+  T1.PAF_TSTAMP
+from
+  CKT_PA_REFERRAL T2
+  join
+  CKT_ASSGN_PA_REF T1
+  on
+    (T1.DISCONTINUE_DATE &lt; @discontinueDate) and
+    (T2.CREATED_TSTAMP = T1.PAF_TSTAMP) and
+    (T2.TYPE = T1.PAF_TYPE) and
+    (T2.NUMB = T1.PAF_NO) and
+    (T2.ASSIGN_DEACT_IND in ('D', 'A')) and
+    (T2.ASSIGN_DEACT_DATE &lt; @assignDeactDate1) and
+    (T2.ASSIGN_DEACT_DATE &gt; @assignDeactDate2)
+</value>
+   </data>
+</root>

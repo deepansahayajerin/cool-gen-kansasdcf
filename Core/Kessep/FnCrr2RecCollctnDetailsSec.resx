@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailAddress">
+      <value>
+select top(1)
+  T1.CRDETAIL_ADDRESS_I,
+  T1.STREET_1,
+  T1.STREET_2,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRD_IDENTIFIER
+from
+  CKT_CASH_RECEIPT T3
+  join
+  CKT_CRDETAIL_ADDRS T1
+  on
+    (T1.CRD_IDENTIFIER = @crdIdentifier) and
+    (T3.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T3.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T3.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T3.CASH_RECEIPT_ID = @cashReceiptId)
+</value>
+   </data>
+   <data name="ReadReceiptRefund">
+      <value>
+select distinct top(1)
+  T1.CREATED_TIMESTAMP,
+  T1.CRV_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.DATE_TRANSMITTED,
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER
+from
+  CKT_CASH_RECEIPT T3
+  join
+  CKT_RECEIPT_REFUND T1
+  on
+    (T1.CRD_IDENTIFIER = @crdIdentifier) and
+    (T3.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T3.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T3.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T3.CASH_RECEIPT_ID = @cashReceiptId) and
+    (T1.DATE_TRANSMITTED &gt; @dateTransmitted)
+</value>
+   </data>
+   <data name="ReadServiceProviderProfileServiceProviderProfile">
+      <value>
+select top(1)
+  T1.CREATED_TIMESTAMP,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.PRO_NAME,
+  T1.SPD_GEN_ID,
+  T2.USER_ID,
+  T4.CREATED_TIMESTAMP,
+  T4.ACTIVE_IND,
+  T4.FK_PRO_NAME,
+  T4.FK_TRN_TRANCODE,
+  T4.FK_TRN_SCREENID,
+  T4.FK_CMD_VALUE
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_SERV_PROV_PRO T1
+  on
+    (T2.USER_ID = @userId) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GEN_ID) and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @discontinueDate) and
+    (
+      T1.PRO_NAME in ('RECCHIEF', 'RECCOA', 'RECCOB',
+        'KPC', 'RECREC')
+    )
+  join
+  CKT_PROF_AUTH T4
+  on
+    (T1.PRO_NAME = T4.FK_PRO_NAME) and
+    (T4.ACTIVE_IND = 'Y')
+</value>
+   </data>
+</root>

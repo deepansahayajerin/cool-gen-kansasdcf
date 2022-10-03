@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate)
+  join
+  CKT_ASSIGN_CASE T4 with(readuncommitted)
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (T4.EFFECTIVE_DATE &lt;= @startDate) and
+    (T4.DISCONTINUE_DATE &gt; @startDate) and
+    (@offId = T4.OFF_ID)
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  END_DATE,
+  [STATE],
+  ZIP_CODE,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'M') and
+  (END_DATE &gt; @endDate)
+order by
+  END_DATE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  END_DATE,
+  [STATE],
+  ZIP_CODE,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'R') and
+  (END_DATE &gt; @endDate)
+order by
+  END_DATE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+</root>

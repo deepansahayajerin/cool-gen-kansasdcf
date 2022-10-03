@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection1">
+      <value>
+select top(1)
+  max(COLL_DT)
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (ADJ_IND = 'N') and
+  (DIST_MTD = 'A')
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select top(1)
+  min(COLL_DT)
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (ADJ_IND = 'N') and
+  (DIST_MTD = 'A')
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  PRIM_SEC_CD,
+  ORD_TYP_CD
+from
+  CKT_OBLIGATION
+where
+  (CPA_TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+</root>

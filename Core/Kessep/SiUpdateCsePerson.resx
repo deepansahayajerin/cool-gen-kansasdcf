@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCsePerson">
+      <value>
+update CKT_FIPS
+set
+  CSP_NUMBER = @cspNumber
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="DisassociateCsePerson">
+      <value>
+update CKT_FIPS
+set
+  CSP_NUMBER = null
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  OCCUPATION,
+  AE_CASE_NUMBER,
+  DATE_OF_DEATH,
+  ILLEGAL_ALIEN_IND,
+  CURRENT_SPOUSE_MI,
+  CURR_SPOUSE_1ST_NM,
+  BIRTH_PLACE_STATE,
+  EMERGENCY_PHONE,
+  NAME_MIDDLE,
+  NAME_MAIDEN,
+  HOME_PHONE,
+  OTHER_NUMBER,
+  BIRTH_PLACE_CITY,
+  CURR_MARITAL_STS,
+  CUR_SPOUSE_LAST_NM,
+  RACE,
+  HAIR_COLOR,
+  EYE_COLOR,
+  TAX_ID,
+  ORGANIZATION_NAME,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  KSCARES_NUMBER,
+  OTHER_AREA_CODE,
+  EMERGENCY_AREA_CD,
+  HOME_PHONE_AREA_CD,
+  WORK_PHONE_AREA_CD,
+  WORK_PHONE,
+  WORK_PHONE_EXT,
+  OTHER_PHONE_TYPE,
+  UNEMPLOYMENT_IND,
+  TAX_ID_SUFFIX,
+  OTHER_ID_INFO,
+  BIRTHPLACE_COUNTRY,
+  TEXT_MESSAGE_IND,
+  TRIBAL_CODE,
+  THREAT_ON_STAFF,
+  CUST_SERVICE_CD
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  CSP_NUMBER
+from
+  CKT_FIPS
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  CSP_NUMBER
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="UpdateCsePerson1">
+      <value>
+update CKT_CSE_PERSON
+set
+  TYPE = @type,
+  OCCUPATION = @occupation,
+  AE_CASE_NUMBER = @aeCaseNumber,
+  DATE_OF_DEATH = @dateOfDeath,
+  ILLEGAL_ALIEN_IND = @illegalAlienInd,
+  CURRENT_SPOUSE_MI = @currentSpouseMi,
+  CURR_SPOUSE_1ST_NM = @currSpouse1StNm,
+  BIRTH_PLACE_STATE = @birthPlaceState,
+  EMERGENCY_PHONE = @emergencyPhone,
+  NAME_MIDDLE = @nameMiddle,
+  NAME_MAIDEN = @nameMaiden,
+  HOME_PHONE = @homePhone,
+  OTHER_NUMBER = @otherNumber,
+  BIRTH_PLACE_CITY = @birthPlaceCity,
+  CURR_MARITAL_STS = @currMaritalSts,
+  CUR_SPOUSE_LAST_NM = @curSpouseLastNm,
+  RACE = @race,
+  HAIR_COLOR = @hairColor,
+  EYE_COLOR = @eyeColor,
+  TAX_ID = @taxId,
+  ORGANIZATION_NAME = @organizationName,
+  WEIGHT = @weight,
+  HEIGHT_FT = @heightFt,
+  HEIGHT_IN = @heightIn,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  KSCARES_NUMBER = @kscaresNumber,
+  OTHER_AREA_CODE = @otherAreaCode,
+  EMERGENCY_AREA_CD = @emergencyAreaCd,
+  HOME_PHONE_AREA_CD = @homePhoneAreaCd,
+  WORK_PHONE_AREA_CD = @workPhoneAreaCd,
+  WORK_PHONE = @workPhone,
+  WORK_PHONE_EXT = @workPhoneExt,
+  OTHER_PHONE_TYPE = @otherPhoneType,
+  UNEMPLOYMENT_IND = @unemploymentInd,
+  OTHER_ID_INFO = @otherIdInfo,
+  BIRTHPLACE_COUNTRY = @birthplaceCountry,
+  TEXT_MESSAGE_IND = @textMessageInd,
+  TRIBAL_CODE = @tribalCode,
+  THREAT_ON_STAFF = @threatOnStaff,
+  CUST_SERVICE_CD = @custServiceCd
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCsePerson2">
+      <value>
+update CKT_CSE_PERSON
+set
+  TAX_ID = @taxId,
+  ORGANIZATION_NAME = @organizationName,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  TAX_ID_SUFFIX = @taxIdSuffix
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

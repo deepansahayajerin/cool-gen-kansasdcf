@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE in ('CH', 'AR')) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T2.CODE
+from
+  CKT_PROGRAM T2 with(readuncommitted)
+  join
+  CKT_PERSON_PROGRAM T1 with(readuncommitted)
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (
+      T2.CODE in ('AF', 'AFI', 'FC',
+        'FCI')
+    ) and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @discontinueDate)
+</value>
+   </data>
+</root>

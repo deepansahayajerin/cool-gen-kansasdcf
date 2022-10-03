@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadImHousehold">
+      <value>
+select top(1)
+  AE_CASE_NO
+from
+  CKT_IM_HOUSEHOLD
+where
+  AE_CASE_NO = @aeCaseNo
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlyAdjImHouseholdMbrMnthlySum">
+      <value>
+select
+  T1.TYPE,
+  T1.ADJUSTMENT_AMT,
+  T1.CREATED_TMST,
+  T1.IMH_AE_CASE_NO,
+  T1.CSP_NUMBER,
+  T1.IMS_MONTH,
+  T1.IMS_YEAR,
+  T2.RELATIONSHIP,
+  T2.GRANT_AMT,
+  T2.GRANT_MED_AMT,
+  T2.URA_AMOUNT,
+  T2.URA_MEDICAL_AMOUNT
+from
+  CKT_IM_HH_MBR_MSUM T2
+  join
+  CKT_IM_HH_MBR_MADJ T1
+  on
+    (T2.YEAR0 = T1.IMS_YEAR) and
+    (T2.MONTH0 = T1.IMS_MONTH) and
+    (T2.IMH_AE_CASE_NO = T1.IMH_AE_CASE_NO) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (@imhAeCaseNo = T2.IMH_AE_CASE_NO)
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum1">
+      <value>
+select top(1)
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@imhAeCaseNo = IMH_AE_CASE_NO)
+order by
+  YEAR0 desc,
+  MONTH0 desc
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum2">
+      <value>
+select
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@imhAeCaseNo = IMH_AE_CASE_NO)
+order by
+  YEAR0,
+  MONTH0
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySumCsePerson">
+      <value>
+select
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  @imhAeCaseNo = IMH_AE_CASE_NO
+</value>
+   </data>
+   <data name="ReadUraCollectionApplicationImHouseholdMbrMnthlySum">
+      <value>
+select
+  T1.COLL_AMT_APPLD,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTY_IDENTIFIER,
+  T1.OBG_IDENTIFIER,
+  T1.OTR_IDENTIFIER,
+  T1.OTR_TYPE,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.COL_IDENTIFIER,
+  T1.IMH_AE_CASE_NO,
+  T1.CSP_NUMBER0,
+  T1.IMS_MONTH,
+  T1.IMS_YEAR,
+  T1.CREATED_TSTAMP,
+  T1.TYPE,
+  T2.RELATIONSHIP,
+  T2.GRANT_AMT,
+  T2.GRANT_MED_AMT,
+  T2.URA_AMOUNT,
+  T2.URA_MEDICAL_AMOUNT
+from
+  CKT_IM_HH_MBR_MSUM T2
+  join
+  CKT_URA_COLL_APPL T1
+  on
+    (T2.CSP_NUMBER = T1.CSP_NUMBER0) and
+    (T2.YEAR0 = T1.IMS_YEAR) and
+    (T2.MONTH0 = T1.IMS_MONTH) and
+    (T2.IMH_AE_CASE_NO = T1.IMH_AE_CASE_NO) and
+    (@imhAeCaseNo = T2.IMH_AE_CASE_NO)
+</value>
+   </data>
+</root>

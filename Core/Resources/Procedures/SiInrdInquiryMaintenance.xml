@@ -1,0 +1,171 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiInrdInquiryMaintenance"
+           program-name="SWEINRDP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiInrdInquiryMaintenance"
+           transaction="SR1S"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_NAME_LIST"
+       action="transfer"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="FromInrd" to="FromInrdCommon"/>
+      <map from="Phonetic" to="Phonetic"/>
+      <map from="Namelist.LastName" to="SearchCsePersonsWorkSet.LastName"/>
+      <map from="Namelist.FirstName" to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="Namelist.MiddleInitial"
+           to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <map from="Namelist.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+      <map from="InformationRequest" to="FromInrdInformationRequest"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiInrmInformationRequestMenu"
+       send-command-type="none">
+      <map from="Menu.Number" to="InformationRequest.Number"/>
+      <map from="Menu.ApplicantLastName" to="InformationRequest.ApplicantLastName"/>
+      <map from="Menu.ApplicantFirstName"
+           to="InformationRequest.ApplicantFirstName"/>
+      <map from="Menu.ApplicantMiddleInitial"
+           to="InformationRequest.ApplicantMiddleInitial"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CODE_TABLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <map from="StatePrompt" to="StatePrompt"/>
+   <map from="TypePrompt" to="TypePrompt"/>
+   <map from="DeniedIncompleteInformationRequest"
+        to="DeniedIncompleteInformationRequest"/>
+   <map from="LocateInd" to="LocateInd"/>
+   <map from="WithMedicalInd" to="WithMedicalInd"/>
+   <map from="DeniedIncompleteCommon" to="DeniedIncompleteCommon"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="WorkerId" to="WorkerId"/>
+   <map from="LimitedInd" to="LimitedInd"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ReopenTypr" to="ReopenType"/>
+   <map from="Ar" to="Ar"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="InformationRequest.Number" to="InformationRequest.Number"/>
+   <map from="InformationRequest.ApplicantCity"
+        to="InformationRequest.ApplicantCity"/>
+   <map from="InformationRequest.DateReceivedByCseComplete"
+        to="InformationRequest.DateReceivedByCseComplete"/>
+   <map from="InformationRequest.NonparentQuestionnaireSent"
+        to="InformationRequest.NonparentQuestionnaireSent"/>
+   <map from="InformationRequest.ParentQuestionnaireSent"
+        to="InformationRequest.ParentQuestionnaireSent"/>
+   <map from="InformationRequest.PaternityQuestionnaireSent"
+        to="InformationRequest.PaternityQuestionnaireSent"/>
+   <map from="InformationRequest.ApplicationSentIndicator"
+        to="InformationRequest.ApplicationSentIndicator"/>
+   <map from="InformationRequest.DateApplicationSent"
+        to="InformationRequest.DateApplicationSent"/>
+   <map from="InformationRequest.DateApplicationRequested"
+        to="InformationRequest.DateApplicationRequested"/>
+   <map from="InformationRequest.CallerLastName"
+        to="InformationRequest.CallerLastName"/>
+   <map from="InformationRequest.CallerFirstName"
+        to="InformationRequest.CallerFirstName"/>
+   <map from="InformationRequest.CallerMiddleInitial"
+        to="InformationRequest.CallerMiddleInitial"/>
+   <map from="InformationRequest.ApplicantLastName"
+        to="InformationRequest.ApplicantLastName"/>
+   <map from="InformationRequest.ApplicantFirstName"
+        to="InformationRequest.ApplicantFirstName"/>
+   <map from="InformationRequest.ApplicantMiddleInitial"
+        to="InformationRequest.ApplicantMiddleInitial"/>
+   <map from="InformationRequest.ApplicantStreet1"
+        to="InformationRequest.ApplicantStreet1"/>
+   <map from="InformationRequest.ApplicantStreet2"
+        to="InformationRequest.ApplicantStreet2"/>
+   <map from="InformationRequest.ApplicantState"
+        to="InformationRequest.ApplicantState"/>
+   <map from="InformationRequest.ApplicantZip5"
+        to="InformationRequest.ApplicantZip5"/>
+   <map from="InformationRequest.ApplicantZip4"
+        to="InformationRequest.ApplicantZip4"/>
+   <map from="InformationRequest.Type1" to="InformationRequest.Type1"/>
+   <map from="InformationRequest.Note" to="InformationRequest.Note"/>
+   <map from="HiddenInformationRequest.ApplicantState"
+        to="HiddenInformationRequest.ApplicantState"/>
+   <map from="HiddenInformationRequest.ApplicationSentIndicator"
+        to="HiddenInformationRequest.ApplicationSentIndicator"/>
+   <map from="HiddenInformationRequest.DateReceivedByCseComplete"
+        to="HiddenInformationRequest.DateReceivedByCseComplete"/>
+   <map from="HiddenInformationRequest.DateReceivedByCseIncomplete"
+        to="HiddenInformationRequest.DateReceivedByCseIncomplete"/>
+   <map from="HiddenInformationRequest.DateApplicationRequested"
+        to="HiddenInformationRequest.DateApplicationRequested"/>
+   <map from="HiddenInformationRequest.DateApplicationSent"
+        to="HiddenInformationRequest.DateApplicationSent"/>
+   <map from="HiddenInformationRequest.Note" to="HiddenInformationRequest.Note"/>
+   <map from="InformationRequest.DateReceivedByCseIncomplete"
+        to="InformationRequest.DateReceivedByCseIncomplete"/>
+   <map from="InformationRequest.ReasonIncomplete"
+        to="InformationRequest.ReasonIncomplete"/>
+   <map from="InformationRequest.ApplicantPhone"
+        to="InformationRequest.ApplicantPhone"/>
+   <map from="InformationRequest.ApplicantAreaCode"
+        to="InformationRequest.ApplicantAreaCode"/>
+   <map from="HiddenInformationRequest.ApplicantPhone"
+        to="HiddenInformationRequest.ApplicantPhone"/>
+   <map from="HiddenInformationRequest.ApplicantAreaCode"
+        to="HiddenInformationRequest.ApplicantAreaCode"/>
+   <map from="HiddenInformationRequest.Type1"
+        to="HiddenInformationRequest.Type1"/>
+   <map from="HiddenInformationRequest.ServiceCode"
+        to="HiddenInformationRequest.ServiceCode"/>
+   <map from="CsePersonsWorkSet.FormattedName" to="Namelist.FormattedName"/>
+   <map from="CsePersonsWorkSet.Number" to="Namelist.Number"/>
+   <map from="HiddenInformationRequest.Number"
+        to="HiddenInformationRequest.Number"/>
+   <map from="HiddenInformationRequest.CreatedBy"
+        to="HiddenInformationRequest.CreatedBy"/>
+   <map from="InformationRequest.CreatedBy" to="InformationRequest.CreatedBy"/>
+   <map from="InformationRequest.ServiceCode"
+        to="InformationRequest.ServiceCode"/>
+   <map from="Namelist.LastName" to="Namelist.LastName"/>
+   <map from="Namelist.FirstName" to="Namelist.FirstName"/>
+   <map from="Namelist.MiddleInitial" to="Namelist.MiddleInitial"/>
+   <map from="Namelist.Ssn" to="Namelist.Ssn"/>
+   <map from="InformationRequest.QuestionnaireTypeIndicator"
+        to="InformationRequest.QuestionnaireTypeIndicator"/>
+   <map from="InformationRequest.ApplicantZip3"
+        to="InformationRequest.ApplicantZip3"/>
+   <map from="HiddenInformationRequest.ApplicantLastName"
+        to="HiddenInformationRequest.ApplicantLastName"/>
+   <map from="HiddenInformationRequest.ApplicantFirstName"
+        to="HiddenInformationRequest.ApplicantFirstName"/>
+   <map from="HiddenInformationRequest.ApplicantMiddleInitial"
+        to="HiddenInformationRequest.ApplicantMiddleInitial"/>
+   <map from="HiddenInformationRequest.ApplicantStreet1"
+        to="HiddenInformationRequest.ApplicantStreet1"/>
+   <map from="HiddenInformationRequest.ApplicantStreet2"
+        to="HiddenInformationRequest.ApplicantStreet2"/>
+   <map from="HiddenInformationRequest.ApplicantCity"
+        to="HiddenInformationRequest.ApplicantCity"/>
+   <map from="HiddenInformationRequest.ApplicantZip5"
+        to="HiddenInformationRequest.ApplicantZip5"/>
+   <map from="HiddenInformationRequest.ApplicantZip4"
+        to="HiddenInformationRequest.ApplicantZip4"/>
+   <map from="HiddenInformationRequest.ApplicantZip3"
+        to="HiddenInformationRequest.ApplicantZip3"/>
+   <map from="InformationRequest.ReasonDenied"
+        to="InformationRequest.ReasonDenied"/>
+   <map from="InformationRequest.DateDenied" to="InformationRequest.DateDenied"/>
+   <map from="InformationRequest.ApplicationProcessedInd"
+        to="InformationRequest.ApplicationProcessedInd"/>
+   <map from="InformationRequest.ReopenReasonType"
+        to="InformationRequest.ReopenReasonType"/>
+   <map from="InformationRequest.MiscellaneousReason"
+        to="InformationRequest.MiscellaneousReason"/>
+   <map from="ReopenFromComn.Text1" to="ReopenFromComn.Text1"/>
+</procedure>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDisbursementStatusHistory">
+      <value>
+insert into CKT_DISB_STAT_HIST
+(
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT,
+  SUPPRESSION_REASON
+)
+values
+(
+  @dbsGeneratedId,
+  @dtrGeneratedId,
+  @cspNumber,
+  @cpaType,
+  @disbStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText,
+  @suppressionReason
+)
+</value>
+   </data>
+   <data name="ReadDisbursementStatusHistory">
+      <value>
+select top(1)
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+from
+  CKT_DISB_STAT_HIST
+where
+  (@dtrGeneratedId = DTR_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+order by
+  DISB_STAT_HIST_ID desc
+</value>
+   </data>
+   <data name="ReadDisbursementStatusHistoryDisbursementTransaction">
+      <value>
+select top(1)
+  T1.DBS_GENERATED_ID,
+  T1.DTR_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.DISB_STAT_HIST_ID,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.REASON_TEXT,
+  T2.TYPE
+from
+  CKT_DISB_TRAN T2
+  join
+  CKT_DISB_STAT_HIST T1
+  on
+    (T2.DISB_TRAN_ID = T1.DTR_GENERATED_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.REASON_TEXT &lt;&gt; 'PROCESSED') and
+    (T2.DISB_TRAN_ID = @disbTranId) and
+    (T1.DISB_STAT_HIST_ID = @disbStatHistId)
+</value>
+   </data>
+   <data name="UpdateDisbursementStatusHistory">
+      <value>
+update CKT_DISB_STAT_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  REASON_TEXT = @reasonText
+where
+  (DBS_GENERATED_ID = @dbsGeneratedId) and
+  (DTR_GENERATED_ID = @dtrGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (DISB_STAT_HIST_ID = @disbStatHistId)
+</value>
+   </data>
+</root>

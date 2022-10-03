@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateCaseAssignmentInterstateCaseCase">
+      <value>
+select
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.ICS_DATE,
+  T1.ICS_NO,
+  T2.KS_CASE_ID,
+  T2.INTERSTATE_CASE_ID,
+  T2.ACTION_REASON_CODE,
+  T3.STATUS
+from
+  CKT_INTERST_CASE T2
+  join
+  CKT_ASSGN_INT_CASE T1
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T2.TRANS_SERIAL_NBR = T1.ICS_NO) and
+    (T2.TRANSACTION_DATE = T1.ICS_DATE)
+  join
+  CKT_CASE T3
+  on
+    (T2.KS_CASE_ID = T3.NUMB) and
+    (T3.STATUS = 'C') and
+    (T3.NUMB &gt;= @numb)
+order by
+  T2.KS_CASE_ID
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.OFF_OFFICE,
+  T2.SERVICE_PRVDER_ID,
+  T2.USER_ID,
+  T2.LAST_NAME,
+  T2.FIRST_NAME
+from
+  CKT_OFFICE T1,
+  CKT_SERVICE_PRVDER T2
+where
+  (T1.OFFICE_ID = @officeId) and
+  (T2.SERVICE_PRVDER_ID = @servicePrvderId)
+</value>
+   </data>
+   <data name="UpdateInterstateCaseAssignment">
+      <value>
+update CKT_ASSGN_INT_CASE
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (ICS_DATE = @icsDate) and
+  (ICS_NO = @icsNo)
+</value>
+   </data>
+</root>

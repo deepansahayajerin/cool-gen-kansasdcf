@@ -1,0 +1,35 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDhstLstDisbStatHistory"
+           program-name="SWEDHSTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDhstLstDisbStatHistory"
+           transaction="SR50"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_LST_PAYEE_ACCT"
+       action="transfer"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="Pacc" to="StartingDate"/>
+      <map from="PayeeCsePerson" to="CsePerson"/>
+   </on>
+   <map from="Export1.DisbursementStatus" to="Import1.DisbursementStatus"/>
+   <map from="PayeeWorkArea" to="PayeeWorkArea"/>
+   <map from="PayeeCsePerson" to="PayeeCsePerson"/>
+   <map from="Export1.DateWorkArea" to="Import1.DateWorkArea"/>
+   <map from="Export1.DisbursementStatusHistory"
+        to="Import1.DisbursementStatusHistory"/>
+   <map from="DisbursementType" to="DisbursementType"/>
+   <map from="DisbursementTransaction" to="DisbursementTransaction"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Starting" to="Starting"/>
+   <map from="DesigPayeeCsePerson" to="DesigPayeeCsePerson"/>
+   <map from="DesigPayeeWorkArea" to="DesigPayeeWorkArea"/>
+   <map from="PayeeCsePersonAccount" to="PayeeCsePersonAccount"/>
+   <map from="Pacc" to="Pacc"/>
+</procedure>

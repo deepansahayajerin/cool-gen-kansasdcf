@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  COLLECTION_AMOUNT
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCashReceiptCashReceiptEvent">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COLLECTION_AMOUNT,
+  T2.CASH_RECEIPT_ID
+from
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  join
+  CKT_RECEIPT_REFUND T6
+  on
+    (T1.CRD_ID = T6.CRD_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T6.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T6.CST_IDENTIFIER) and
+    (T1.CRT_IDENTIFIER = T6.CRT_IDENTIFIER) and
+    (T6.CREATED_TIMESTAMP = @createdTimestamp)
+  on
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  CLASSIFICATION,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  RCT_R_TSTAMP,
+  PRQ_R_GENERATED_ID,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST
+where
+  (@rctRTstamp = RCT_R_TSTAMP) and
+  (TYPE = 'WAR')
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistoryPaymentStatus">
+      <value>
+select top(1)
+  T1.PST_GENERATED_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.PYMNT_STAT_HIST_ID,
+  T1.DISCONTINUE_DATE,
+  T2.CODE
+from
+  CKT_PAYMENT_STATUS T2
+  join
+  CKT_PMNT_STAT_HIST T1
+  on
+    (@prqGeneratedId = T1.PRQ_GENERATED_ID) and
+    (T2.PAYMENT_STATUS_ID = T1.PST_GENERATED_ID)
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadReceiptRefund1">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  OFFSET_CLOSED,
+  REASON_TEXT,
+  CLT_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (CSP_NUMBER = @cspNumber) and
+  (REQUEST_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+  (REASON_CODE = 'ADVANCE')
+order by
+  REQUEST_DATE desc
+</value>
+   </data>
+   <data name="ReadReceiptRefund2">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  OFFSET_CLOSED,
+  REASON_TEXT,
+  CLT_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (CSP_NUMBER = @cspNumber) and
+  (REASON_CODE = 'ADVANCE')
+order by
+  REQUEST_DATE desc
+</value>
+   </data>
+   <data name="ReadReceiptRefundCsePerson">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  OFFSET_CLOSED,
+  REASON_TEXT,
+  CLT_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (CSP_NUMBER is not null) and
+  (REQUEST_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+  (REASON_CODE = 'ADVANCE')
+order by
+  REQUEST_DATE desc,
+  CSP_NUMBER
+</value>
+   </data>
+</root>

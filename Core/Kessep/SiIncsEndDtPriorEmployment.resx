@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadIncomeSource">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  RETURN_CD,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CSP_I_NUMBER,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (IDENTIFIER &lt;&gt; @identifier) and
+  (TYPE = 'E') and
+  (RETURN_CD = 'E') and
+  (END_DT = @endDt)
+</value>
+   </data>
+   <data name="UpdateIncomeSource">
+      <value>
+update CKT_INCOME_SOURCE
+set
+  RETURN_CD = @returnCd,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  END_DT = @endDt
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+</root>

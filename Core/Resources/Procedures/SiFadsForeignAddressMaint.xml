@@ -1,0 +1,153 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiFadsForeignAddressMaint"
+           program-name="SWEFADSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiFadsForeignAddressMaint"
+           transaction="SR2O"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="HiddenCsePerson" to="StartCsePerson"/>
+      <map from="Case1" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Next" to="Case1"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <return-map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+      <return-map from="Selected" to="ApCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_ROLE_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiRoleCaseRoleMaintenance"
+       send-command="DISPLAY">
+      <map from="Case1.Number" to="Case1.Number"/>
+      <return-map from="Selected.Number" to="ArFromCaseRole.Number"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="HiddenPageKeys.HiddenPageKey" to="HiddenPageKeys.HiddenPageKey"/>
+   <map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ApCommon" to="ApCommon"/>
+   <map from="ArCommon" to="ArCommon"/>
+   <map from="Next" to="Next"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="ScrollMinus" to="ScrollMinus"/>
+   <map from="ScrollPlus" to="ScrollPlus"/>
+   <map from="Start" to="Search"/>
+   <map from="Last" to="Last"/>
+   <map from="Export1.PromptEndCode" to="Import1.PromptEndCode"/>
+   <map from="Export1.PromptReturnCode" to="Import1.PromptReturnCode"/>
+   <map from="Export1.PromptCountry" to="Import1.PromptCountry"/>
+   <map from="Export1.PromptSourceCode" to="Import1.PromptSourceCode"/>
+   <map from="PromptCaseComp" to="PromptCaseComp"/>
+   <map from="HpromptLineNo" to="HpromptLineNo"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="ApActive" to="ApActive"/>
+   <map from="HiddenNext" to="HiddenNext"/>
+   <map from="PromptRoleCase" to="PromptRoleCase"/>
+   <map from="Hidden.HiddenUpd" to="Hidden.HiddenUpd"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="Export1.Hdet.LocationType" to="Import1.Hdet.LocationType"/>
+   <map from="Export1.Hdet.Source" to="Import1.Hdet.Source"/>
+   <map from="Export1.Hdet.Street1" to="Import1.Hdet.Street1"/>
+   <map from="Export1.Hdet.Street2" to="Import1.Hdet.Street2"/>
+   <map from="Export1.Hdet.City" to="Import1.Hdet.City"/>
+   <map from="Export1.Hdet.Street3" to="Import1.Hdet.Street3"/>
+   <map from="Export1.Hdet.Street4" to="Import1.Hdet.Street4"/>
+   <map from="Export1.Hdet.Province" to="Import1.Hdet.Province"/>
+   <map from="Export1.Hdet.PostalCode" to="Import1.Hdet.PostalCode"/>
+   <map from="Export1.Hdet.Country" to="Import1.Hdet.Country"/>
+   <map from="HiddenStandard.PageNumber" to="HiddenStandard.PageNumber"/>
+   <map from="ApCsePersonsWorkSet.Number" to="ApCsePersonsWorkSet.Number"/>
+   <map from="ApCsePersonsWorkSet.FormattedName"
+        to="ApCsePersonsWorkSet.FormattedName"/>
+   <map from="Export1.DetailCsePersonAddress.Street1"
+        to="Import1.DetailCsePersonAddress.Street1"/>
+   <map from="Export1.DetailCsePersonAddress.Street2"
+        to="Import1.DetailCsePersonAddress.Street2"/>
+   <map from="Export1.DetailCsePersonAddress.City"
+        to="Import1.DetailCsePersonAddress.City"/>
+   <map from="Export1.DetailCsePersonAddress.SendDate"
+        to="Import1.DetailCsePersonAddress.SendDate"/>
+   <map from="Export1.DetailCsePersonAddress.Type1"
+        to="Import1.DetailCsePersonAddress.Type1"/>
+   <map from="Export1.DetailCsePersonAddress.Source"
+        to="Import1.DetailCsePersonAddress.Source"/>
+   <map from="Export1.DetailCsePersonAddress.VerifiedDate"
+        to="Import1.DetailCsePersonAddress.VerifiedDate"/>
+   <map from="Export1.DetailCsePersonAddress.EndDate"
+        to="Import1.DetailCsePersonAddress.EndDate"/>
+   <map from="Export1.DetailCsePersonAddress.EndCode"
+        to="Import1.DetailCsePersonAddress.EndCode"/>
+   <map from="Export1.DetailCsePersonAddress.Street3"
+        to="Import1.DetailCsePersonAddress.Street3"/>
+   <map from="Export1.DetailCsePersonAddress.Street4"
+        to="Import1.DetailCsePersonAddress.Street4"/>
+   <map from="Export1.DetailCsePersonAddress.Province"
+        to="Import1.DetailCsePersonAddress.Province"/>
+   <map from="Export1.DetailCsePersonAddress.PostalCode"
+        to="Import1.DetailCsePersonAddress.PostalCode"/>
+   <map from="Export1.DetailCsePersonAddress.Country"
+        to="Import1.DetailCsePersonAddress.Country"/>
+   <map from="Export1.DetailCsePersonAddress.WorkerId"
+        to="Import1.DetailCsePersonAddress.WorkerId"/>
+   <map from="Export1.DetailCsePersonAddress.LocationType"
+        to="Import1.DetailCsePersonAddress.LocationType"/>
+   <map from="Export1.DetailCsePersonAddress.Identifier"
+        to="Import1.DetailCsePersonAddress.Identifier"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Export1.Hdet.VerifiedDate" to="Import1.Hdet.VerifiedDate"/>
+   <map from="Export1.Hdet.EndDate" to="Import1.Hdet.EndDate"/>
+   <map from="Export1.Hdet.EndCode" to="Import1.Hdet.EndCode"/>
+   <map from="HiddenNextTranInfo.LegalActionIdentifier"
+        to="HiddenNextTranInfo.LegalActionIdentifier"/>
+   <map from="HiddenNextTranInfo.CourtCaseNumber"
+        to="HiddenNextTranInfo.CourtCaseNumber"/>
+   <map from="HiddenNextTranInfo.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumber"
+        to="HiddenNextTranInfo.CsePersonNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberAp"
+        to="HiddenNextTranInfo.CsePersonNumberAp"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligee"
+        to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligor"
+        to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+   <map from="HiddenNextTranInfo.CourtOrderNumber"
+        to="HiddenNextTranInfo.CourtOrderNumber"/>
+   <map from="HiddenNextTranInfo.ObligationId"
+        to="HiddenNextTranInfo.ObligationId"/>
+   <map from="HiddenNextTranInfo.StandardCrtOrdNumber"
+        to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+   <map from="HiddenNextTranInfo.InfrastructureId"
+        to="HiddenNextTranInfo.InfrastructureId"/>
+   <map from="HiddenNextTranInfo.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+   <map from="HiddenNextTranInfo.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+   <map from="HiddenNextTranInfo.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+   <map from="HiddenNextTranInfo.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+   <map from="HiddenNextTranInfo.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+   <map from="HiddenNextTranInfo.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+   <map from="ArFromCaseRole.Number" to="ArFromCaseRole.Number"/>
+   <map from="Export1.DetailCsePersonAddress.LastUpdatedTimestamp"
+        to="Import1.DetailCsePersonAddress.LastUpdatedTimestamp"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

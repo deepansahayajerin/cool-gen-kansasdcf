@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDisplacedPerson">
+      <value>
+insert into CKT_DISPLACED_PERS
+(
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  DISPLACED_IND,
+  DISPLACED_INT_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+)
+values
+(
+  @cspNumber,
+  @effectiveDate,
+  @endDate,
+  @displacedInd,
+  @displacedIntInd,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedTmst,
+  @lastUpdatedBy
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDisplacedPerson1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  DISPLACED_IND,
+  DISPLACED_INT_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_DISPLACED_PERS
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (END_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadDisplacedPerson2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  DISPLACED_IND,
+  DISPLACED_INT_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_DISPLACED_PERS
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="ReadDisplacedPerson3">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  DISPLACED_IND,
+  DISPLACED_INT_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_DISPLACED_PERS
+where
+  (DISPLACED_INT_IND = 'Y') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (END_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadDisplacedPerson4">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  DISPLACED_IND,
+  DISPLACED_INT_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_DISPLACED_PERS
+where
+  DISPLACED_INT_IND = 'X'
+</value>
+   </data>
+   <data name="UpdateDisplacedPerson1">
+      <value>
+update CKT_DISPLACED_PERS
+set
+  DISPLACED_IND = @displacedInd,
+  DISPLACED_INT_IND = @displacedIntInd,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="UpdateDisplacedPerson2">
+      <value>
+update CKT_DISPLACED_PERS
+set
+  DISPLACED_INT_IND = @displacedIntInd
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="UpdateDisplacedPerson3">
+      <value>
+update CKT_DISPLACED_PERS
+set
+  END_DATE = @endDate,
+  DISPLACED_INT_IND = @displacedIntInd,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="UpdateDisplacedPerson4">
+      <value>
+update CKT_DISPLACED_PERS
+set
+  END_DATE = @endDate,
+  DISPLACED_IND = @displacedInd,
+  DISPLACED_INT_IND = @displacedIntInd,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+</root>

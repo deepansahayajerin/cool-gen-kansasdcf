@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateNcpNonCooperation">
+      <value>
+insert into CKT_NCP_NON_COOP
+(
+  NCP_STATUS_CD,
+  EFFECTIVE_DT,
+  REASON_CD,
+  LETTER_1_DT,
+  LETTER_1_CD,
+  LETTER_2_DT,
+  LETTER_2_CD,
+  PHONE_1_DT,
+  PHONE_1_CD,
+  PHONE_2_DT,
+  PHONE_2_CD,
+  END_DT,
+  END_STATUS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  NOTE
+)
+values
+(
+  @ncpStatusCd,
+  @effectiveDt,
+  @reasonCd,
+  @letter1Dt,
+  @letter1Cd,
+  @letter2Dt,
+  @letter2Cd,
+  @phone1Dt,
+  @phone1Cd,
+  @phone2Dt,
+  @phone2Cd,
+  @endDt,
+  @endStatusCd,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @casNumber,
+  @cspNumber,
+  @note
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE = 'AP') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.NUMB = @numb)
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoAp = CSP_NO_AP)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+</root>

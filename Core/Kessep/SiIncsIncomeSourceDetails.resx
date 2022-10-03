@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (TYPE in ('AP', 'AR'))
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (CSP_NO_AP = @cspNoAp) and
+  (CAS_NO = @casNo) and
+  (CLOSURE_DATE &gt;= @closureDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (CSP_NO_AP = @cspNoAp) and
+  (CAS_NO = @casNo) and
+  (CLOSURE_DATE &lt; @closureDate)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  UNEMPLOYMENT_IND,
+  FEDERAL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EIN
+from
+  CKT_EMPLOYER
+where
+  (IDENTIFIER = @identifier) and
+  (EIN = '070000000')
+</value>
+   </data>
+   <data name="ReadEmployerAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EMP_ID,
+  NOTE
+from
+  CKT_EMPLOYER_ADDR
+where
+  EMP_ID = @empId
+</value>
+   </data>
+   <data name="ReadIncomeSource1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_I_NUMBER,
+  CPR_RESOURCE_NO,
+  CSP_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  (CSP_NUMBER is not null) and
+  (CPR_RESOURCE_NO = @cprResourceNo) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="ReadIncomeSource2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  CSP_I_NUMBER,
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EMP_ID,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (TYPE = 'E') and
+  (END_DT &gt;= @endDt) and
+  (CSP_I_NUMBER = @cspINumber) and
+  (EMP_ID = @empId)
+</value>
+   </data>
+   <data name="ReadIncomeSource3">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  CSP_I_NUMBER,
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EMP_ID,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (TYPE = 'R') and
+  (END_DT &gt;= @endDt) and
+  (CSP_I_NUMBER = @cspINumber) and
+  (CSP_NUMBER is not null) and
+  (CPR_RESOURCE_NO = @cprResourceNo)
+</value>
+   </data>
+   <data name="ReadIncomeSource4">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  CSP_I_NUMBER,
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EMP_ID,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (TYPE = 'M') and
+  (END_DT &gt;= @endDt)
+</value>
+   </data>
+</root>

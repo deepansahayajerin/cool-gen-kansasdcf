@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.AS_OF_DT,
+  T1.DISCONTINUE_DT
+from
+  CKT_OB_TRN T2 with(readuncommitted)
+  join
+  CKT_ACCRUAL_INSTR T1 with(readuncommitted)
+  on
+    (T1.AS_OF_DT &lt;= @asOfDt1) and
+    (T1.DISCONTINUE_DT &gt;= @discontinueDt1) and
+    (T1.AS_OF_DT &lt;= @asOfDt2) and
+    (T1.DISCONTINUE_DT &gt;= @discontinueDt2) and
+    (T1.AS_OF_DT &lt;= @asOfDt3) and
+    (T1.DISCONTINUE_DT &gt;= @discontinueDt3) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T2.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T2.CSP_SUP_NUMBER) and
+    (T2.OTY_TYPE in (3, 19))
+</value>
+   </data>
+   <data name="ReadCollection1">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.CT_ORD_APPLIED_TO
+from
+  CKT_COLLECTION T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T7 with(readuncommitted)
+  on
+    (T1.CREATED_TMST &gt; @createdTmst1) and
+    (T1.CREATED_TMST &lt; @createdTmst2) and
+    (
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.COLL_ADJ_DT &gt; @collAdjDt)
+      ) or
+      (T1.ADJ_IND = 'N')
+    ) and
+    (T1.OTY_ID in (3, 19)) and
+    (T1.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T7.TYPE in ('AP', 'AR')) and
+    (@casNumber = T7.CAS_NUMBER) and
+    (T1.CRT_TYPE &lt;&gt; 2) and
+    (T1.CRT_TYPE &lt;&gt; 7)
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.CT_ORD_APPLIED_TO
+from
+  CKT_OB_TRN T2 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (T1.CREATED_TMST &gt; @createdTmst1) and
+    (T1.CREATED_TMST &lt; @createdTmst2) and
+    (
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.COLL_ADJ_DT &gt; @collAdjDt)
+      ) or
+      (T1.ADJ_IND = 'N')
+    ) and
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T2.OTY_TYPE in (3, 19)) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T2.CSP_SUP_NUMBER) and
+    (T1.CRT_TYPE &lt;&gt; 2) and
+    (T1.CRT_TYPE &lt;&gt; 7)
+</value>
+   </data>
+   <data name="ReadCollectionCsePersonCsePerson">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.CT_ORD_APPLIED_TO,
+  T4.CSP_SUP_NUMBER
+from
+  CKT_OB_TRN T4 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (T1.CREATED_TMST &gt; @createdTmst1) and
+    (T1.CREATED_TMST &lt; @createdTmst2) and
+    (
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.COLL_ADJ_DT &gt; @collAdjDt)
+      ) or
+      (T1.ADJ_IND = 'N')
+    ) and
+    (T4.OTY_TYPE = T1.OTY_ID) and
+    (T4.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T4.OB_TRN_ID = T1.OTR_ID) and
+    (T4.CPA_TYPE = T1.CPA_TYPE) and
+    (T4.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T4.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T4.OTY_TYPE in (3, 19)) and
+    (T4.CPA_SUP_TYPE is not null) and
+    (T1.CRT_TYPE &lt;&gt; 2) and
+    (T1.CRT_TYPE &lt;&gt; 7)
+  join
+  CKT_CASE_ROLE T8 with(readuncommitted)
+  on
+    (T4.CSP_NUMBER = T8.CSP_NUMBER) and
+    (@casNumber = T8.CAS_NUMBER)
+  join
+  CKT_CASE_ROLE T10 with(readuncommitted)
+  on
+    (T4.CSP_SUP_NUMBER = T10.CSP_NUMBER) and
+    (@casNumber = T10.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T5 with(readuncommitted)
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T5.CSP_NUMBER) and
+    (T5.TYPE in ('AP', 'MO', 'FA')) and
+    (T5.START_DATE &lt;= @startDate) and
+    (T5.END_DATE &gt;= @endDate) and
+    (@casNumber = T5.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.ACCOUNT_TYPE = 'S') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (@ladRNumber = T2.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T2.LGA_R_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole">
+      <value>
+select
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (TYPE = 'CH') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePersonLegalActionDetailLegalActionPerson">
+      <value>
+select distinct
+  T4.CSP_NUMBER,
+  T2.LGA_IDENTIFIER,
+  T2.LA_DETAIL_NO,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.CREATED_TSTAMP,
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACTION T5 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T3 with(readuncommitted)
+  on
+    (T4.TYPE in ('AP', 'AR')) and
+    (@casNumber = T4.CAS_NUMBER) and
+    (T4.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.ACCOUNT_TYPE = 'R')
+  on
+    (T2.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T2.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (T2.DETAIL_TYPE = 'N') and
+    (T2.NON_FIN_OBLG_TYPE = 'HIC') and
+    (T2.CREATED_TSTAMP &lt;= @createdTstamp) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt)
+  on
+    (T5.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (
+      (T5.CLASSIFICATION between 'J' and 'J') or
+      (T5.CLASSIFICATION between 'O' and 'O')
+    ) and
+    (T5.FILED_DT &gt; @filedDt) and
+    (T5.FILED_DT &lt;= @effectiveDt) and
+    (T5.CREATED_TSTAMP &lt;= @createdTstamp)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.VERIFIED_DATE,
+  T1.POLICY_EXP_DATE,
+  T1.POLICY_EFF_DATE,
+  T1.CSP_NUMBER
+from
+  CKT_HINS_COVERAGE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.TYPE in ('AP', 'AR')) and
+    (@casNumber = T3.CAS_NUMBER) and
+    (T1.POLICY_EFF_DATE &lt;= @policyEffDate) and
+    (T1.POLICY_EXP_DATE &gt;= @policyExpDate)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoveragePersonalHealthInsurance">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.VERIFIED_DATE,
+  T1.POLICY_EXP_DATE,
+  T1.POLICY_EFF_DATE,
+  T1.CSP_NUMBER,
+  T2.CSP_NUMBER,
+  T2.COV_VERIFIED_DATE,
+  T2.COVER_BEGIN_DATE,
+  T2.COVER_END_DATE
+from
+  CKT_HINS_COVERAGE T1 with(readuncommitted)
+  join
+  CKT_PERSONAL_HINS T2 with(readuncommitted)
+  on
+    (T1.IDENTIFIER = T2.HCV_ID) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.COVER_BEGIN_DATE &lt;= @coverBeginDate) and
+    (T2.COVER_END_DATE &gt;= @coverEndDate) and
+    (T1.POLICY_EFF_DATE &lt;= @coverBeginDate) and
+    (T1.POLICY_EXP_DATE &gt;= @coverEndDate)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceViability1">
+      <value>
+select top(1)
+  CRO_TYPE,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  CRO_IDENTIFIER,
+  HINSV_ID,
+  HINS_VIABLE_IND,
+  CSP_NUM
+from
+  CKT_HINS_VIABILITY with(readuncommitted)
+where
+  @casNumber = CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadHealthInsuranceViability2">
+      <value>
+select top(1)
+  T1.CRO_TYPE,
+  T1.CSP_NUMBER,
+  T1.CAS_NUMBER,
+  T1.CRO_IDENTIFIER,
+  T1.HINSV_ID,
+  T1.HINS_VIABLE_IND,
+  T1.CSP_NUM
+from
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  join
+  CKT_HINS_VIABILITY T1 with(readuncommitted)
+  on
+    (T2.CASE_ROLE_ID = T1.CRO_IDENTIFIER) and
+    (T2.TYPE = T1.CRO_TYPE) and
+    (T2.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @endDate) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@cspNum = T1.CSP_NUM)
+order by
+  T1.HINSV_ID desc
+</value>
+   </data>
+   <data name="ReadHealthInsuranceViability3">
+      <value>
+select top(1)
+  CRO_TYPE,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  CRO_IDENTIFIER,
+  HINSV_ID,
+  HINS_VIABLE_IND,
+  CSP_NUM
+from
+  CKT_HINS_VIABILITY with(readuncommitted)
+where
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cspNum = CSP_NUM)
+order by
+  HINSV_ID desc
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRole">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+from
+  CKT_LA_PER_LA_CROL with(readuncommitted)
+where
+  (@lapId = LAP_ID) and
+  (LGA_ID = @lgaId) and
+  (CRO_TYPE in ('AP', 'AR')) and
+  (@casNum = CAS_NUM)
+</value>
+   </data>
+   <data name="ReadPersonProgram">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate1) and
+  (DISCONTINUE_DATE &gt;= @discontinueDate1) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate2) and
+  (DISCONTINUE_DATE &gt;= @discontinueDate2) and
+  (
+    PRG_GENERATED_ID in (6, 7, 8,
+      10, 11)
+  ) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

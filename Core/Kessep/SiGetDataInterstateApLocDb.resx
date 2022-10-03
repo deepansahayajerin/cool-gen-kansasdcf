@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  OCCUPATION,
+  CURRENT_SPOUSE_MI,
+  CURR_SPOUSE_1ST_NM,
+  HOME_PHONE,
+  CUR_SPOUSE_LAST_NM,
+  HOME_PHONE_AREA_CD,
+  WORK_PHONE_AREA_CD,
+  WORK_PHONE,
+  FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE,
+  CREATED_TIMESTAMP,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'M') and
+  (LOCATION_TYPE = 'D')
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE,
+  CREATED_TIMESTAMP,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'R') and
+  (LOCATION_TYPE = 'D')
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonLicense">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  ISSUING_STATE,
+  NUMB,
+  EXPIRATION_DT,
+  TYPE,
+  DESCRIPTION
+from
+  CKT_CSE_PERS_LCNS with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (EXPIRATION_DT &gt;= @expirationDt)
+</value>
+   </data>
+   <data name="ReadEmployerAddress">
+      <value>
+select top(1)
+  LOCATION_TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  IDENTIFIER,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  EMP_ID
+from
+  CKT_EMPLOYER_ADDR with(readuncommitted)
+where
+  (@empId = EMP_ID) and
+  (LOCATION_TYPE = 'D')
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompany">
+      <value>
+select top(1)
+  IDENTIFIER,
+  POLICY_CARRIER
+from
+  CKT_HEALTH_INS_CO with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage">
+      <value>
+select
+  IDENTIFIER,
+  POLICY_NUMBER,
+  POLICY_EXP_DATE,
+  CSP_NUMBER,
+  HIC_IDENTIFIER
+from
+  CKT_HINS_COVERAGE with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (POLICY_EXP_DATE &gt;= @policyExpDate)
+</value>
+   </data>
+   <data name="ReadIncomeSourceEmployer">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.TYPE,
+  T1.LAST_QTR_INCOME,
+  T1.LAST_QTR,
+  T1.LAST_QTR_YR,
+  T1.SECOND_QTR_INCOME,
+  T1.SECOND_QTR,
+  T1.SECOND_QTR_YR,
+  T1.THIRD_QTR_INCOME,
+  T1.THIRD_QTR,
+  T1.THIRD_QTR_YR,
+  T1.FOURTH_QTR_INCOME,
+  T1.FOURTH_QTR,
+  T1.FOURTH_QTR_YR,
+  T1.RETURN_DT,
+  T1.RETURN_CD,
+  T1.CREATED_TIMESTAMP,
+  T1.CSP_I_NUMBER,
+  T1.EMP_ID,
+  T1.START_DT,
+  T1.END_DT,
+  T2.EIN,
+  T2.NAME,
+  T2.PHONE_NO,
+  T2.AREA_CODE
+from
+  CKT_EMPLOYER T2 with(readuncommitted)
+  join
+  CKT_INCOME_SOURCE T1 with(readuncommitted)
+  on
+    (@cspINumber = T1.CSP_I_NUMBER) and
+    (T2.IDENTIFIER = T1.EMP_ID)
+order by
+  T1.END_DT desc,
+  T1.RETURN_DT desc
+</value>
+   </data>
+</root>

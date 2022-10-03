@@ -1,0 +1,545 @@
+﻿<!--Name: GB_LPCR_LST_PGM_CHKPT_RESTART, ID: 371743659, model: 746-->
+<div coolContent coolName="GB_LPCR_LST_PGM_CHKPT_RESTART" coolType="SCREEN"
+  (coolInit)="scrollSize = 100; pageSize = 14">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 18.75%; top: 0; width: 61.25%; height: 4%;" coolCol="16"
+     coolRow="1" coolLength="49">CSE - List Program Checkpoint Restart Info - LPCR</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 8%; width: 26.25%; height: 4%;" coolCol="3"
+     coolRow="3" coolLength="21">Starting Program Name</div>
+   <input type="text" coolType="field" name="field_3_26"
+     [(ngModel)]="in.search.programName"
+     [coolVideo]="out.search.screenField?.programName" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="8"
+     style="left: 31.25%; top: 8%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="3" coolLength="8">
+   
+   <div coolType="literal"
+     style="left: 53.75%; top: 12%; width: 6.25%; height: 4%;" coolCol="44"
+     coolRow="4" coolLength="5">Ckpnt</div>
+   
+   <div coolType="prompt"
+     style="left: 88.75%; top: 12%; width: 8.75%; height: 4%;" coolCol="72"
+     coolRow="4" coolLength="7">Restart</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 16%; width: 3.75%; height: 4%;" coolCol="3"
+     coolRow="5" coolLength="3">SEL</div>
+   
+   <div coolType="prompt"
+     style="left: 8.75%; top: 16%; width: 8.75%; height: 4%;" coolCol="8"
+     coolRow="5" coolLength="7">Program</div>
+   
+   <div coolType="prompt"
+     style="left: 21.25%; top: 16%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="5" coolLength="9">Read Freq</div>
+   
+   <div coolType="prompt"
+     style="left: 35%; top: 16%; width: 13.75%; height: 4%;" coolCol="29"
+     coolRow="5" coolLength="11">Update Freq</div>
+   
+   <div coolType="prompt"
+     style="left: 53.75%; top: 16%; width: 6.25%; height: 4%;" coolCol="44"
+     coolRow="5" coolLength="5">Count</div>
+   
+   <div coolType="prompt"
+     style="left: 65%; top: 16%; width: 18.75%; height: 4%;" coolCol="53"
+     coolRow="5" coolLength="15">Last Checkpoint</div>
+   
+   <div coolType="literal"
+     style="left: 91.25%; top: 16%; width: 3.75%; height: 4%;" coolCol="74"
+     coolRow="5" coolLength="3">Ind</div>
+   <input type="text" coolType="field" name="field_6_4"
+     [(ngModel)]="ref(in.import1, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab #field_6_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 20%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="6" coolLength="1" [hidden]="pageOffset >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 20%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="6" coolLength="8" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 20%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="6" coolLength="7" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 20%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="6" coolLength="7" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 20%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="6" coolLength="7" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 20%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="6" coolLength="19" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 20%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="6" coolLength="1" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_7_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab #field_7_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 24%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="7" coolLength="1" [hidden]="pageOffset + 1 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 24%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="7" coolLength="8" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 24%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="7" coolLength="7" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 24%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="7" coolLength="7" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 24%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="7" coolLength="7" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 24%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="7" coolLength="19" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 24%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="7" coolLength="1" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_8_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab #field_8_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 28%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 2 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 28%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 28%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="8" coolLength="7" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 28%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="8" coolLength="7" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 28%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="8" coolLength="7" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 28%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="8" coolLength="19" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 28%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_9_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab #field_9_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 32%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 3 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 32%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 32%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="9" coolLength="7" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 32%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="9" coolLength="7" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 32%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="9" coolLength="7" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 32%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="9" coolLength="19" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_10_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab #field_10_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 36%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 4 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 36%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 36%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="10" coolLength="7" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 36%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="10" coolLength="7" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 36%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="10" coolLength="7" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 36%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="10" coolLength="19" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_11_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab #field_11_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 40%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 5 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 40%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 40%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="11" coolLength="7" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 40%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="11" coolLength="7" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 40%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="11" coolLength="7" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 40%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="11" coolLength="19" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_12_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab #field_12_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 44%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 6 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 44%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 44%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="12" coolLength="7" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 44%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="12" coolLength="7" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 44%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="12" coolLength="7" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 44%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="12" coolLength="19" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_13_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab #field_13_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 48%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 7 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 48%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 48%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="13" coolLength="7" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 48%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="13" coolLength="7" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 48%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="13" coolLength="7" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 48%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="13" coolLength="19" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_14_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab #field_14_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 52%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 8 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 52%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 52%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="14" coolLength="7" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 52%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="14" coolLength="7" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 52%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="14" coolLength="7" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 52%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="14" coolLength="19" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_15_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab #field_15_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 56%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 9 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 56%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 56%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="15" coolLength="7" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 56%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="15" coolLength="7" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 56%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="15" coolLength="7" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 56%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="15" coolLength="19" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_16_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab #field_16_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 60%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 10 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 60%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 60%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="16" coolLength="7" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 60%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="16" coolLength="7" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 60%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="16" coolLength="7" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 60%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="16" coolLength="19" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_17_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 11, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 11]?.common.screenField?.selectChar"
+     coolAutotab #field_17_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 64%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 11 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 64%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 64%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="17" coolLength="7" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 64%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="17" coolLength="7" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 64%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="17" coolLength="7" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 64%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="17" coolLength="19" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_18_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 12, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 12]?.common.screenField?.selectChar"
+     coolAutotab #field_18_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 68%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 12 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 68%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 12 >= 100">{{in.import1?.[pageOffset + 12]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 68%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="18" coolLength="7" [hidden]="pageOffset + 12 >= 100">{{in.import1?.[pageOffset + 12]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 68%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="18" coolLength="7" [hidden]="pageOffset + 12 >= 100">{{in.import1?.[pageOffset + 12]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 68%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="18" coolLength="7" [hidden]="pageOffset + 12 >= 100">{{in.import1?.[pageOffset + 12]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 68%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="18" coolLength="19" [hidden]="pageOffset + 12 >= 100">{{in.import1?.[pageOffset + 12]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 12 >= 100">{{in.import1?.[pageOffset + 12]?.programCheckpointRestart.restartInd}}</div>
+   <input type="text" coolType="field" name="field_19_4"
+     [(ngModel)]="ref(in.import1, pageOffset + 13, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 13]?.common.screenField?.selectChar"
+     coolAutotab #field_19_4 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 3.75%; top: 72%; width: 1.25%; height: 4%;" coolCol="4"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 13 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 72%; width: 10%; height: 4%;" coolCol="8"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 13 >= 100">{{in.import1?.[pageOffset + 13]?.programCheckpointRestart.programName}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 22.5%; top: 72%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="19" coolLength="7" [hidden]="pageOffset + 13 >= 100">{{in.import1?.[pageOffset + 13]?.programCheckpointRestart.readFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 72%; width: 8.75%; height: 4%;" coolCol="31"
+     coolRow="19" coolLength="7" [hidden]="pageOffset + 13 >= 100">{{in.import1?.[pageOffset + 13]?.programCheckpointRestart.updateFrequencyCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 72%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="19" coolLength="7" [hidden]="pageOffset + 13 >= 100">{{in.import1?.[pageOffset + 13]?.programCheckpointRestart.checkpointCount|coolNumber:'######0;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 72%; width: 23.75%; height: 4%;" coolCol="51"
+     coolRow="19" coolLength="19" [hidden]="pageOffset + 13 >= 100">{{in.import1?.[pageOffset + 13]?.programCheckpointRestart.lastCheckpointTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="75"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 13 >= 100">{{in.import1?.[pageOffset + 13]?.programCheckpointRestart.restartInd}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 96.25%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="77">PFKEYS:   1 Help   2 Display   3 Exit   7 Prev   8 Next   9 Return   11 Clear</div>
+   
+   <div coolType="literal"
+     style="left: 12.5%; top: 92%; width: 23.75%; height: 4%;" coolCol="11"
+     coolRow="24" coolLength="19">12 Signoff  15 MPCR</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="MPCR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=MPCR</a>
+   </div>

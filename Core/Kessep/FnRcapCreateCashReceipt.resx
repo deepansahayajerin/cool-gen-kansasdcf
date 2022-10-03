@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailStatus">
+      <value>
+select top(1)
+  CRDETAIL_STAT_ID
+from
+  CKT_CR_DETAIL_STAT
+where
+  CRDETAIL_STAT_ID = @crdetailStatId
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  COURT_IND
+from
+  CKT_CRSRC_TYPE
+where
+  (CODE = 'MISC') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus">
+      <value>
+select top(1)
+  CR_STATUS_ID,
+  CODE
+from
+  CKT_CR_STATUS
+where
+  CR_STATUS_ID = @crStatusId
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CODE,
+  CATEGORY_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_CR_TYPE
+where
+  (CODE = 'RECAP') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE
+from
+  CKT_COLLTN_TYPE
+where
+  CODE = 'R'
+</value>
+   </data>
+</root>

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateHealthInsuranceViability">
+      <value>
+insert into CKT_HINS_VIABILITY
+(
+  CRO_TYPE,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  CRO_IDENTIFIER,
+  HINSV_ID,
+  HINS_VIABLE_IND,
+  HINS_VIND_WORKER,
+  HINS_VIND_UPD_DT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUM
+)
+values
+(
+  @croType,
+  @cspNumber,
+  @casNumber,
+  @croIdentifier,
+  @hinsvId,
+  @hinsViableInd,
+  @hinsVindWorker,
+  @hinsVindUpdDt,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @cspNum
+)
+</value>
+   </data>
+   <data name="CreateHinsViabNote">
+      <value>
+insert into CKT_HINS_VIAB_NOTE
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IDENTIFIER,
+  NOTE,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  HIV_ID
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @identifier,
+  @note,
+  @croId,
+  @croType,
+  @cspNumber,
+  @casNumber,
+  @hivId
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadChild">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadHealthInsuranceViability">
+      <value>
+select top(1)
+  CRO_TYPE,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  CRO_IDENTIFIER,
+  HINSV_ID
+from
+  CKT_HINS_VIABILITY
+where
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  HINSV_ID desc
+</value>
+   </data>
+</root>

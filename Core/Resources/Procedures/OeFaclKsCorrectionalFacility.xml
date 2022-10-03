@@ -1,0 +1,43 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeFaclKsCorrectionalFacility"
+           program-name="SWEFACLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeFaclKsCorrectionalFacility"
+           transaction="SR6U"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CODE_TABLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="H" to="StartCsePerson"/>
+   </on>
+   <map from="H" to="H"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Export1.SelChar" to="Import1.SelChar"/>
+   <map from="Filter" to="Filter"/>
+   <map from="Export1.Detail" to="Import1.Detail"/>
+   <map from="Export1.DetailStatePrompt" to="Import1.DetailStatePrompt"/>
+   <map from="FilterStatePrompt" to="FilterStatePrompt"/>
+   <map from="FilterHidden" to="FilterHidden"/>
+   <map from="Export1.DetailHidden" to="Import1.DetailHidden"/>
+   <map from="Export2Hidden.Export2HiddenDetail"
+        to="Import2Hidden.Import2HiddenDetail"/>
+   <map from="HiddenCodeValue" to="HiddenCodeValue"/>
+   <map from="HiddenCode" to="HiddenCode"/>
+   <map from="ScrollIndicator" to="ScrollIndicator"/>
+   <map from="HiddenInitialIndex" to="HiddenInitialIndex"/>
+   <map from="HiddenFinalIndex" to="HiddenFinalIndex"/>
+   <map from="HiddenGroupFull" to="HiddenGroupFull"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Exp.Deatail.Street2" to="Imp.Detail.Street2"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

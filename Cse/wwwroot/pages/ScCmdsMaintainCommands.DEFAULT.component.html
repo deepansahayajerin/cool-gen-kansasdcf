@@ -1,0 +1,406 @@
+﻿<!--Name: SC_CMDS_MAINTAIN_COMMANDS, ID: 371452757, model: 746-->
+<div coolContent coolName="SC_CMDS_MAINTAIN_COMMANDS" coolType="SCREEN"
+  (coolInit)="scrollSize = 300; pageSize = 15">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 2.5%; top: 0; width: 10%; height: 4%;" coolCol="3" coolRow="1"
+     coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 30%; top: 0; width: 40%; height: 4%;"
+     coolCol="25" coolRow="1" coolLength="32">CSE  -  KESSEP Security  -  CMDS</div>
+   
+   <div coolType="field" coolColor="green"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 4%; width: 5%; height: 4%;"
+     coolCol="3" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_8"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 8.75%; top: 4%; width: 5%; height: 4%;" coolCol="8"
+     coolRow="2" coolLength="4">
+   
+   <div coolType="literal"
+     style="left: 38.75%; top: 4%; width: 21.25%; height: 4%;" coolCol="32"
+     coolRow="2" coolLength="17">Maintain Commands</div>
+   
+   <div coolType="field" coolColor="green"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="literal"
+     style="left: 3.75%; top: 12%; width: 20%; height: 4%;" coolCol="4"
+     coolRow="4" coolLength="16">Starting Command</div>
+   <input type="text" coolType="field" name="field_4_22"
+     [(ngModel)]="in.starting.value"
+     [coolVideo]="out.starting.screenField?.value" coolAutotab coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="8"
+     style="left: 26.25%; top: 12%; width: 10%; height: 4%;" coolCol="22"
+     coolRow="4" coolLength="8">
+   
+   <div coolType="prompt" style="left: 15%; top: 16%; width: 3.75%; height: 4%;"
+     coolCol="13" coolRow="5" coolLength="3">SEL</div>
+   
+   <div coolType="prompt"
+     style="left: 22.5%; top: 16%; width: 6.25%; height: 4%;" coolCol="19"
+     coolRow="5" coolLength="5">Value</div>
+   
+   <div coolType="prompt"
+     style="left: 37.5%; top: 16%; width: 13.75%; height: 4%;" coolCol="31"
+     coolRow="5" coolLength="11">Description</div>
+   <input type="text" coolType="field" name="field_6_14"
+     [(ngModel)]="ref(in.group, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab #field_6_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 20%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="6" coolLength="1" [hidden]="pageOffset >= 300">
+   <input type="text" coolType="field" name="field_6_19"
+     [(ngModel)]="ref(in.group, pageOffset, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset]?.command.screenField?.value"
+     coolAutotab #field_6_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 20%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="6" coolLength="8" [hidden]="pageOffset >= 300">
+   <input type="text" coolType="field" name="field_6_31"
+     [(ngModel)]="ref(in.group, pageOffset, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset]?.command.screenField?.desc"
+     coolAutotab #field_6_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 20%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="6" coolLength="25" [hidden]="pageOffset >= 300">
+   <input type="text" coolType="field" name="field_7_14"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab #field_7_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 24%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="7" coolLength="1" [hidden]="pageOffset + 1 >= 300">
+   <input type="text" coolType="field" name="field_7_19"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.command.screenField?.value"
+     coolAutotab #field_7_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 24%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="7" coolLength="8" [hidden]="pageOffset + 1 >= 300">
+   <input type="text" coolType="field" name="field_7_31"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.command.screenField?.desc"
+     coolAutotab #field_7_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 24%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="7" coolLength="25" [hidden]="pageOffset + 1 >= 300">
+   <input type="text" coolType="field" name="field_8_14"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab #field_8_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 28%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 2 >= 300">
+   <input type="text" coolType="field" name="field_8_19"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.command.screenField?.value"
+     coolAutotab #field_8_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 28%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 2 >= 300">
+   <input type="text" coolType="field" name="field_8_31"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.command.screenField?.desc"
+     coolAutotab #field_8_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 28%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="8" coolLength="25" [hidden]="pageOffset + 2 >= 300">
+   <input type="text" coolType="field" name="field_9_14"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab #field_9_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 32%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 3 >= 300">
+   <input type="text" coolType="field" name="field_9_19"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.command.screenField?.value"
+     coolAutotab #field_9_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 32%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 3 >= 300">
+   <input type="text" coolType="field" name="field_9_31"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.command.screenField?.desc"
+     coolAutotab #field_9_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 32%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="9" coolLength="25" [hidden]="pageOffset + 3 >= 300">
+   <input type="text" coolType="field" name="field_10_14"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab #field_10_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 36%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 4 >= 300">
+   <input type="text" coolType="field" name="field_10_19"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.command.screenField?.value"
+     coolAutotab #field_10_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 36%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 4 >= 300">
+   <input type="text" coolType="field" name="field_10_31"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.command.screenField?.desc"
+     coolAutotab #field_10_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 36%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="10" coolLength="25" [hidden]="pageOffset + 4 >= 300">
+   <input type="text" coolType="field" name="field_11_14"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab #field_11_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 40%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 5 >= 300">
+   <input type="text" coolType="field" name="field_11_19"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.command.screenField?.value"
+     coolAutotab #field_11_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 40%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 5 >= 300">
+   <input type="text" coolType="field" name="field_11_31"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.command.screenField?.desc"
+     coolAutotab #field_11_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 40%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="11" coolLength="25" [hidden]="pageOffset + 5 >= 300">
+   <input type="text" coolType="field" name="field_12_14"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab #field_12_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 44%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 6 >= 300">
+   <input type="text" coolType="field" name="field_12_19"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.command.screenField?.value"
+     coolAutotab #field_12_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 44%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 6 >= 300">
+   <input type="text" coolType="field" name="field_12_31"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.command.screenField?.desc"
+     coolAutotab #field_12_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 44%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="12" coolLength="25" [hidden]="pageOffset + 6 >= 300">
+   <input type="text" coolType="field" name="field_13_14"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab #field_13_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 48%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 7 >= 300">
+   <input type="text" coolType="field" name="field_13_19"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.command.screenField?.value"
+     coolAutotab #field_13_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 48%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 7 >= 300">
+   <input type="text" coolType="field" name="field_13_31"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.command.screenField?.desc"
+     coolAutotab #field_13_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 48%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="13" coolLength="25" [hidden]="pageOffset + 7 >= 300">
+   <input type="text" coolType="field" name="field_14_14"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab #field_14_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 52%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 8 >= 300">
+   <input type="text" coolType="field" name="field_14_19"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.command.screenField?.value"
+     coolAutotab #field_14_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 52%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 8 >= 300">
+   <input type="text" coolType="field" name="field_14_31"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.command.screenField?.desc"
+     coolAutotab #field_14_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 52%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="14" coolLength="25" [hidden]="pageOffset + 8 >= 300">
+   <input type="text" coolType="field" name="field_15_14"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab #field_15_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 56%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 9 >= 300">
+   <input type="text" coolType="field" name="field_15_19"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.command.screenField?.value"
+     coolAutotab #field_15_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 56%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 9 >= 300">
+   <input type="text" coolType="field" name="field_15_31"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.command.screenField?.desc"
+     coolAutotab #field_15_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 56%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="15" coolLength="25" [hidden]="pageOffset + 9 >= 300">
+   <input type="text" coolType="field" name="field_16_14"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab #field_16_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 60%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 10 >= 300">
+   <input type="text" coolType="field" name="field_16_19"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.command.screenField?.value"
+     coolAutotab #field_16_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 60%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 10 >= 300">
+   <input type="text" coolType="field" name="field_16_31"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.command.screenField?.desc"
+     coolAutotab #field_16_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 60%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="16" coolLength="25" [hidden]="pageOffset + 10 >= 300">
+   <input type="text" coolType="field" name="field_17_14"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.common.screenField?.selectChar"
+     coolAutotab #field_17_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 64%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 11 >= 300">
+   <input type="text" coolType="field" name="field_17_19"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.command.screenField?.value"
+     coolAutotab #field_17_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 64%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 11 >= 300">
+   <input type="text" coolType="field" name="field_17_31"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.command.screenField?.desc"
+     coolAutotab #field_17_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 64%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="17" coolLength="25" [hidden]="pageOffset + 11 >= 300">
+   <input type="text" coolType="field" name="field_18_14"
+     [(ngModel)]="ref(in.group, pageOffset + 12, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 12]?.common.screenField?.selectChar"
+     coolAutotab #field_18_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 68%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 12 >= 300">
+   <input type="text" coolType="field" name="field_18_19"
+     [(ngModel)]="ref(in.group, pageOffset + 12, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 12]?.command.screenField?.value"
+     coolAutotab #field_18_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 68%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 12 >= 300">
+   <input type="text" coolType="field" name="field_18_31"
+     [(ngModel)]="ref(in.group, pageOffset + 12, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 12]?.command.screenField?.desc"
+     coolAutotab #field_18_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 68%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="18" coolLength="25" [hidden]="pageOffset + 12 >= 300">
+   <input type="text" coolType="field" name="field_19_14"
+     [(ngModel)]="ref(in.group, pageOffset + 13, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 13]?.common.screenField?.selectChar"
+     coolAutotab #field_19_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 72%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 13 >= 300">
+   <input type="text" coolType="field" name="field_19_19"
+     [(ngModel)]="ref(in.group, pageOffset + 13, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 13]?.command.screenField?.value"
+     coolAutotab #field_19_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 72%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 13 >= 300">
+   <input type="text" coolType="field" name="field_19_31"
+     [(ngModel)]="ref(in.group, pageOffset + 13, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 13]?.command.screenField?.desc"
+     coolAutotab #field_19_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 72%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="19" coolLength="25" [hidden]="pageOffset + 13 >= 300">
+   <input type="text" coolType="field" name="field_20_14"
+     [(ngModel)]="ref(in.group, pageOffset + 14, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 14]?.common.screenField?.selectChar"
+     coolAutotab #field_20_14 coolFocus coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 16.25%; top: 76%; width: 1.25%; height: 4%;" coolCol="14"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 14 >= 300">
+   <input type="text" coolType="field" name="field_20_19"
+     [(ngModel)]="ref(in.group, pageOffset + 14, 'command.value').value"
+     [coolVideo]="out.group?.[pageOffset + 14]?.command.screenField?.value"
+     coolAutotab #field_20_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 22.5%; top: 76%; width: 10%; height: 4%;" coolCol="19"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 14 >= 300">
+   <input type="text" coolType="field" name="field_20_31"
+     [(ngModel)]="ref(in.group, pageOffset + 14, 'command.desc').value"
+     [coolVideo]="out.group?.[pageOffset + 14]?.command.screenField?.desc"
+     coolAutotab #field_20_31 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="25"
+     style="left: 37.5%; top: 76%; width: 31.25%; height: 4%;" coolCol="31"
+     coolRow="20" coolLength="25" [hidden]="pageOffset + 14 >= 300">
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="67" coolRow="20" coolLength="9"
+     style="left: 82.5%; top: 76%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 87.5%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="70">PF Keys:  1 Help  2 Disp  3 Exit  5 Add  6 Upd  7 Prev  8 Next  10 Del</div>
+   
+   <div coolType="literal"
+     style="left: 11.25%; top: 92%; width: 25%; height: 4%;" coolCol="10"
+     coolRow="24" coolLength="20">11 Clear  12 Signoff</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="ADD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=ADD</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   </div>

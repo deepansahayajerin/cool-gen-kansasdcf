@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonEmailAddress">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  EMAIL_SOURCE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  EMAIL_ADDR
+from
+  CKT_CSP_EMAIL_ADDR
+where
+  (CREATED_TMST = @createdTmst) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateCsePersonEmailAddress">
+      <value>
+update CKT_CSP_EMAIL_ADDR
+set
+  EFFECTIVE_DATE = @effectiveDate,
+  END_DATE = @endDate,
+  EMAIL_SOURCE = @emailSource,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  EMAIL_ADDR = @emailAddr
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CREATED_TMST = @createdTmst)
+</value>
+   </data>
+</root>

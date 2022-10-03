@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  VERIFIED_DATE,
+  END_DATE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (VERIFIED_DATE &lt;= @verifiedDate) and
+  (END_DATE &gt;= @verifiedDate)
+</value>
+   </data>
+   <data name="ReadCsePersonCase1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T3.CAS_NUMBER
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.NUMB = @numb) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T3.TYPE = @type)
+</value>
+   </data>
+   <data name="ReadCsePersonCase2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T3.CAS_NUMBER
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T1.NUMB = @numb) and
+    (T3.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+</root>

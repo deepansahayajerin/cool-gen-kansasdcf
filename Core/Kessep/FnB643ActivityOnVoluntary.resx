@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCollectionType">
+      <value>
+select distinct
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COLLECTION_DATE,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  join
+  CKT_COLLECTION T3
+  on
+    (T1.CRD_ID = T3.CRD_ID) and
+    (T1.CRV_IDENTIFIER = T3.CRV_ID) and
+    (T1.CST_IDENTIFIER = T3.CST_ID) and
+    (T1.CRT_IDENTIFIER = T3.CRT_TYPE) and
+    (@otyId = T3.OTY_ID) and
+    (@obgId = T3.OBG_ID) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (@cpaType = T3.CPA_TYPE) and
+    (T3.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+  on
+    T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER
+order by
+  T1.COLLECTION_DATE
+</value>
+   </data>
+   <data name="ReadCollection1">
+      <value>
+select top(1)
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  DISB_DT,
+  ADJ_IND,
+  CONCURRENT_IND,
+  DISB_ADJ_PROC_DATE,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_DT,
+  COLL_ADJ_PROC_DATE,
+  CREATED_TMST,
+  OB_TRN_AMT,
+  DISB_PROC_NEED_IND,
+  DIST_MTD,
+  PGM_APPLD_TO,
+  APPL_TO_ORD_TYP_CD,
+  CRT_NOTICE_REQ_IND,
+  CRT_NOTICE_PROC_DT,
+  AE_NOTIFIED_DT,
+  BAL_BEF_COLL,
+  CUM_INT_CHRGD,
+  CUM_INT_COLL_AFT,
+  INT_BAL_AFT_COLL,
+  DISB_TO_AR_IND,
+  MNL_DIST_RSN_TXT,
+  COL_ADJ_RSN_TXT
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (ADJ_IND = 'Y') and
+  (COLL_ADJ_DT between cast(@date1 as date) and cast(@date2 as date))
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select top(1)
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  DISB_DT,
+  ADJ_IND,
+  CONCURRENT_IND,
+  DISB_ADJ_PROC_DATE,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_DT,
+  COLL_ADJ_PROC_DATE,
+  CREATED_TMST,
+  OB_TRN_AMT,
+  DISB_PROC_NEED_IND,
+  DIST_MTD,
+  PGM_APPLD_TO,
+  APPL_TO_ORD_TYP_CD,
+  CRT_NOTICE_REQ_IND,
+  CRT_NOTICE_PROC_DT,
+  AE_NOTIFIED_DT,
+  BAL_BEF_COLL,
+  CUM_INT_CHRGD,
+  CUM_INT_COLL_AFT,
+  INT_BAL_AFT_COLL,
+  DISB_TO_AR_IND,
+  MNL_DIST_RSN_TXT,
+  COL_ADJ_RSN_TXT
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+  (CONCURRENT_IND &lt;&gt; 'Y')
+order by
+  COLL_DT
+</value>
+   </data>
+   <data name="ReadDebtAdjustment">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CREATED_TMST,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+</value>
+   </data>
+</root>

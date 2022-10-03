@@ -1,0 +1,113 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeAaadAdminAppealAddress"
+           program-name="SWEAAADP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeAaadAdminAppealAddress"
+           transaction="SR8X"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none">
+      <map from="HiddenSecurity1" to="XxxImportHidden"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToDisplay" to="Code"/>
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <return-map from="DlgflwSelected" to="Dlgflw"/>
+   </on>
+   <on exit-state="ECO_LNK_2_ADMN_APPEAL_BY_CSE_PER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETAAPS"
+       to="LeAapsLstAdmApplsByCsePer"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+      <return-map from="Selected.Identifier" to="AdministrativeAppeal.Identifier"/>
+      <return-map from="Selected.Number" to="AdministrativeAppeal.Number"/>
+      <return-map from="Selected.Type1" to="AdministrativeAppeal.Type1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ADMIN_APPEAL_HEARING"
+       action="transfer"
+       to="LeAheaAdminAppealHearing"
+       send-command="DISPLAY">
+      <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_POSITION_STATEMENT"
+       action="transfer"
+       to="LePostPositionStatement"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ADMIN_APPEALS"
+       action="transfer"
+       to="LeAappAdministrativeAppealP1"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAppeal.Identifier"
+           to="AdministrativeAppeal.Identifier"/>
+      <map from="AdministrativeAppeal.Number" to="AdministrativeAppeal.Number"/>
+      <map from="AdministrativeAppeal.Type1" to="AdministrativeAppeal.Type1"/>
+      <map from="AdministrativeAppeal.AppellantLastName"
+           to="AdministrativeAppeal.AppellantLastName"/>
+      <map from="AdministrativeAppeal.AppellantFirstName"
+           to="AdministrativeAppeal.AppellantFirstName"/>
+      <map from="AdministrativeAppeal.AppellantMiddleInitial"
+           to="AdministrativeAppeal.AppellantMiddleInitial"/>
+      <map from="AdministrativeAppeal.AppellantSuffix"
+           to="AdministrativeAppeal.AppellantSuffix"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden.HiddenCommon" to="Hidden.HiddenCommon"/>
+   <map from="Hidden.HiddenAdminAppealAppellantAddress"
+        to="Hidden.HiddenAdminAppealAppellantAddress"/>
+   <map from="HiddenAdministrativeAppeal" to="HiddenAdministrativeAppeal"/>
+   <map from="HiddenAppellant" to="HiddenAppellant"/>
+   <map from="Display.Display1" to="Display.Display1"/>
+   <map from="Dlgflw" to="Dlgflw"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="Export1.DetailCountryPrmp" to="Import1.DetailCountryProm"/>
+   <map from="Export1.DetailStatePrompt" to="Import1.DetailStatePrompt"/>
+   <map from="Export1.DetailAddrTpPrmp" to="Import1.DetailAddrTpPrmp"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailAdminAppealAppellantAddress"
+        to="Import1.DetailAdminAppealAppellantAddress"/>
+   <map from="Export1.DetailCountyPrmpt" to="Import1.DetailCountyPromp"/>
+   <map from="ListAdmAppealsPrompt" to="ListAdmAppealsPrompt"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   <map from="HiddenSecurity.HiddenSecurityCommand"
+        to="HiddenSecurity.HiddenSecurityCommand"/>
+   <map from="HiddenSecurity.HiddenSecurityProfileAuthorization"
+        to="HiddenSecurity.HiddenSecurityProfileAuthorization"/>
+   <map from="AdministrativeAppeal.AppellantLastName"
+        to="AdministrativeAppeal.AppellantLastName"/>
+   <map from="AdministrativeAppeal.AppellantFirstName"
+        to="AdministrativeAppeal.AppellantFirstName"/>
+   <map from="AdministrativeAppeal.AppellantMiddleInitial"
+        to="AdministrativeAppeal.AppellantMiddleInitial"/>
+   <map from="AdministrativeAppeal.Identifier"
+        to="AdministrativeAppeal.Identifier"/>
+   <map from="AdministrativeAppeal.Number" to="AdministrativeAppeal.Number"/>
+   <map from="AdministrativeAppeal.Type1" to="AdministrativeAppeal.Type1"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+</procedure>

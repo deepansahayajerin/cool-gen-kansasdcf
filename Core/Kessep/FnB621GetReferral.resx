@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalReferralAssignment1">
+      <value>
+select top(1)
+  T1.REASON_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T1.LGR_ID
+from
+  CKT_LEGAL_REFERRAL T2 with(readuncommitted)
+  join
+  CKT_ASSGN_LEG_REF T1 with(readuncommitted)
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.IDENTIFIER = T1.LGR_ID) and
+    (T2.CAS_NUMBER = T1.CAS_NO) and
+    (T2.COURT_CASE_NO = @courtCaseNo) and
+    (T2.TRB_ID = @trbId) and
+    (T2.STATUS in ('S', 'O')) and
+    (T2.REFERRAL_REASON_1 = 'CV')
+</value>
+   </data>
+   <data name="ReadLegalReferralAssignment2">
+      <value>
+select top(1)
+  T1.REASON_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T1.LGR_ID
+from
+  CKT_LEGAL_REFERRAL T2 with(readuncommitted)
+  join
+  CKT_ASSGN_LEG_REF T1 with(readuncommitted)
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.IDENTIFIER = T1.LGR_ID) and
+    (T2.CAS_NUMBER = T1.CAS_NO) and
+    (T2.COURT_CASE_NO = @courtCaseNo) and
+    (T2.TRB_ID = @trbId) and
+    (T2.STATUS in ('S', 'O')) and
+    (
+      (T2.REFERRAL_REASON_1 = 'ENF') or
+      (T2.REFERRAL_REASON_2 = 'ENF') or
+      (T2.REFERRAL_REASON_3 = 'ENF') or
+      (T2.REFERRAL_REASON_4 = 'ENF') or
+      (T2.REFERRAL_REASON_5 = 'ENF')
+    )
+</value>
+   </data>
+   <data name="ReadLegalReferralAssignment3">
+      <value>
+select distinct top(1)
+  T1.REASON_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T1.LGR_ID
+from
+  CKT_LEGAL_ACTION T6 with(readuncommitted)
+  join
+  CKT_LEGAL_REFERRAL T2 with(readuncommitted)
+  join
+  CKT_ASSGN_LEG_REF T1 with(readuncommitted)
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.IDENTIFIER = T1.LGR_ID) and
+    (T2.CAS_NUMBER = T1.CAS_NO) and
+    (T2.STATUS in ('S', 'O')) and
+    (
+      (T2.REFERRAL_REASON_1 in ('CV', 'ENF')) or
+      (T2.REFERRAL_REASON_2 = 'ENF') or
+      (T2.REFERRAL_REASON_3 = 'ENF') or
+      (T2.REFERRAL_REASON_4 = 'ENF') or
+      (T2.REFERRAL_REASON_5 = 'ENF')
+    )
+  join
+  CKT_LEG_ACT_CAS_RL T5 with(readuncommitted)
+  on
+    T2.CAS_NUMBER = T5.CAS_NUMBER
+  on
+    (T6.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T6.STANDARD_NO = @standardNo) and
+    (T6.CLASSIFICATION = 'J')
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderServiceProviderOffice">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.USER_ID,
+  T3.OFF_OFFICE
+from
+  CKT_SERVICE_PRVDER T2 with(readuncommitted)
+  join
+  CKT_OFFICE T3 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T1 with(readuncommitted)
+  on
+    (T1.EFFECTIVE_DATE = @effectiveDate) and
+    (T1.ROLE_CODE = @roleCode) and
+    (T1.OFF_GENERATED_ID = @offGeneratedId) and
+    (T1.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T3.OFFICE_ID = T1.OFF_GENERATED_ID)
+  on
+    T2.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+</value>
+   </data>
+</root>

@@ -1,0 +1,26 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpAtlmActivityListMaint"
+           program-name="SWEATLMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpAtlmActivityListMaint"
+           transaction="SRP2"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_ADLM"
+       action="transfer"
+       to="SpAdlmActivityDetailListMnt"
+       send-command="DISPLAY">
+      <map from="ToTran" to="Activity2"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpInfmInfrastructureMgmtMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Starting" to="Starting"/>
+   <map from="Group.Activity" to="Group.Activity"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Hidden" to="Group.Hidden"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="HiddenExportManualList" to="HiddenImportManualList"/>
+</procedure>

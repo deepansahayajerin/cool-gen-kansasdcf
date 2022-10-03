@@ -1,0 +1,109 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnPsupMtnPrsnDisbSupprssn"
+           program-name="SWEPSUPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnPsupMtnPrsnDisbSupprssn"
+           transaction="SR43"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_SELECT_PERSON"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="FromFlowCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LAPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLAPS"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <return-map from="Selected" to="LegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_PAYEE_W_DISB_SUP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnLpspLstPyeesWthDisbSupp"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="SearchPayee"/>
+      <return-map from="SelectedLegalAction" to="LegalAction"/>
+      <return-map from="SelectedDisbSuppressionStatusHistory.SystemGeneratedIdentifier"
+                  to="DisbSuppressionStatusHistory.SystemGeneratedIdentifier"/>
+      <return-map from="SelectedDisbSuppressionStatusHistory.EffectiveDate"
+                  to="DisbSuppressionStatusHistory.EffectiveDate"/>
+      <return-map from="SelectedDisbSuppressionStatusHistory.DiscontinueDate"
+                  to="DisbSuppressionStatusHistory.DiscontinueDate"/>
+      <return-map from="SelectedDisbSuppressionStatusHistory.CreatedBy"
+                  to="DisbSuppressionStatusHistory.CreatedBy"/>
+      <return-map from="SelectedCsePerson" to="FromFlowCsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_MTN_DISB_SUPP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnLdspLstMtnDisbSuppr"
+       send-command="DISPLAY">
+      <map from="CsePerson" to="CsePerson"/>
+      <return-map from="CsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_MTN_COLL_DISB_SUPPR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCsupMtnCollDisbSupprssion"
+       send-command="DISPLAY">
+      <map from="CsePerson" to="CsePerson"/>
+      <return-map from="CsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_PAYEE_ACCT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="CsePerson" to="CsePerson"/>
+      <return-map from="CsePerson" to="CsePerson"/>
+   </on>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="CourtOrderPrompt" to="CourtOrderPrompt"/>
+   <map from="HiddenIdLegalAction" to="HiddenIdLegalAction"/>
+   <map from="SuppressAll" to="SuppressAll"/>
+   <map from="HiddenIdCsePerson" to="HiddenIdCsePerson"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="PersonPrompt" to="PersonPrompt"/>
+   <map from="HiddenIdDisbSuppressionStatusHistory.EffectiveDate"
+        to="HiddenIdDisbSuppressionStatusHistory.EffectiveDate"/>
+   <map from="DisbSuppressionStatusHistory.ReasonText"
+        to="DisbSuppressionStatusHistory.ReasonText"/>
+   <map from="CsePerson.Number" to="CsePerson.Number"/>
+   <map from="DisbSuppressionStatusHistory.DiscontinueDate"
+        to="DisbSuppressionStatusHistory.DiscontinueDate"/>
+   <map from="DisbSuppressionStatusHistory.EffectiveDate"
+        to="DisbSuppressionStatusHistory.EffectiveDate"/>
+   <map from="DisbSuppressionStatusHistory.LastUpdatedBy"
+        to="DisbSuppressionStatusHistory.LastUpdatedBy"/>
+   <map from="HiddenIdDisbSuppressionStatusHistory.SystemGeneratedIdentifier"
+        to="DisbSuppressionStatusHistory.SystemGeneratedIdentifier"/>
+   <map from="DisbSuppressionStatusHistory.SystemGeneratedIdentifier"
+        to="HiddenIdDisbSuppressionStatusHistory.SystemGeneratedIdentifier"/>
+   <map from="DisbSuppressionStatusHistory.Type1"
+        to="DisbSuppressionStatusHistory.Type1"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="DisbSuppressionStatusHistory.CreatedTimestamp"
+        to="DisbSuppressionStatusHistory.CreatedTimestamp"/>
+   <map from="DisbSuppressionStatusHistory.LastUpdatedTmst"
+        to="DisbSuppressionStatusHistory.LastUpdatedTmst"/>
+</procedure>

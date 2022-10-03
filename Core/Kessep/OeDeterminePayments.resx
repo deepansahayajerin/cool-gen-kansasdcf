@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.CLT_IDENTIFIER
+from
+  CKT_CR_DETAIL T1 with(readuncommitted)
+  join
+  CKT_CRDTL_STATHIST T2 with(readuncommitted)
+  on
+    (T1.COLLECTION_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+    (T1.OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+    (
+      (T1.COURT_ORDER_NUMBER between ' ' and ' ') or
+      (T1.COURT_ORDER_NUMBER = @courtOrderNumber)
+    ) and
+    (T1.CRD_ID = T2.CRD_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T2.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T1.CRT_IDENTIFIER = T2.CRT_IDENTIFIER) and
+    (T2.DISCONTINUE_DATE = @discontinueDate) and
+    (
+      T2.CDS_IDENTIFIER in (3, 4, 5,
+        7)
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select
+  COLL_ID,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  OB_TRN_AMT,
+  CT_ORD_APPLIED_TO
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (CT_ORD_APPLIED_TO = @ctOrdAppliedTo) and
+  (CONCURRENT_IND = 'N')
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select
+  COLLECTION_TYPE_ID
+from
+  CKT_COLLTN_TYPE with(readuncommitted)
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+</root>

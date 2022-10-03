@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select distinct
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.DISCONTINUE_DT,
+  T1.LAST_ACCRUAL_DT
+from
+  CKT_ACCRUAL_INSTR T1 with(readuncommitted),
+  CKT_CASE_ROLE T6 with(readuncommitted)
+where
+  (T1.DISCONTINUE_DT &gt;= @discontinueDt) and
+  (@cspNumber = T1.CSP_NUMBER) and
+  (@casNumber = T6.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T1.CSE_OPEN_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (@cspNumber = T2.CSP_NUMBER)
+order by
+  T1.CSE_OPEN_DATE desc
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailBalanceAdj1">
+      <value>
+select top(1)
+  CRD_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_S_IDENTIFIER,
+  CRV_S_IDENTIFIER,
+  CST_S_IDENTIFIER,
+  CRT_S_IDENTIFIER,
+  CRN_IDENTIFIER,
+  CREATED_TIMESTAMP
+from
+  CKT_CRDTL_BAL_ADJ with(readuncommitted)
+where
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailBalanceAdj2">
+      <value>
+select top(1)
+  CRD_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_S_IDENTIFIER,
+  CRV_S_IDENTIFIER,
+  CST_S_IDENTIFIER,
+  CRT_S_IDENTIFIER,
+  CRN_IDENTIFIER,
+  CREATED_TIMESTAMP
+from
+  CKT_CRDTL_BAL_ADJ with(readuncommitted)
+where
+  (@crdSIdentifier = CRD_S_IDENTIFIER) and
+  (@crvSIdentifier = CRV_S_IDENTIFIER) and
+  (@cstSIdentifier = CST_S_IDENTIFIER) and
+  (@crtSIdentifier = CRT_S_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select
+  CRTYPE_ID,
+  CATEGORY_IND
+from
+  CKT_CR_TYPE
+order by
+  CRTYPE_ID
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_DT
+from
+  CKT_COLLECTION with(readuncommitted)
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (ADJ_IND = 'Y')
+</value>
+   </data>
+   <data name="ReadCollectionCashReceiptDetailCashReceiptEvent1">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.APPL_TO_ORD_TYP_CD,
+  T1.CT_ORD_APPLIED_TO,
+  T1.PGM_ST_APPLD_TO,
+  T1.AR_NUMBER,
+  T2.CLT_IDENTIFIER,
+  T9.CSP_NUMBER,
+  T7.CSP_SUP_NUMBER,
+  T7.CPA_SUP_TYPE,
+  T9.ORD_TYP_CD,
+  T10.DEBT_TYP_CLASS,
+  T10.SUP_PRSN_REQ_IND
+from
+  CKT_CR_DETAIL T2 with(readuncommitted)
+  join
+  CKT_OB_TYPE T10 with(readuncommitted)
+  join
+  CKT_OBLIGATION T9 with(readuncommitted)
+  on
+    (T10.DEBT_TYP_ID = T9.DTY_GENERATED_ID) and
+    (T9.CSP_NUMBER = @cspNumber)
+  join
+  CKT_OB_TRN T7 with(readuncommitted)
+  on
+    (T9.DTY_GENERATED_ID = T7.OTY_TYPE) and
+    (T9.OB_ID = T7.OBG_GENERATED_ID) and
+    (T9.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T9.CPA_TYPE = T7.CPA_TYPE)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (T7.OTY_TYPE = T1.OTY_ID) and
+    (T7.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T7.OB_TRN_ID = T1.OTR_ID) and
+    (T7.CPA_TYPE = T1.CPA_TYPE) and
+    (T7.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T7.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T1.PGM_APPLD_TO in ('AF', 'NA')) and
+    (T1.APPL_TO_ORD_TYP_CD = 'K') and
+    (T1.APPLIED_TO_CD in ('A', 'C')) and
+    (T1.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+    (T1.ADJ_IND = 'N')
+  on
+    (T2.CRD_ID = T1.CRD_ID) and
+    (T2.CRV_IDENTIFIER = T1.CRV_ID) and
+    (T2.CST_IDENTIFIER = T1.CST_ID) and
+    (T2.CRT_IDENTIFIER = T1.CRT_TYPE)
+</value>
+   </data>
+   <data name="ReadCollectionCashReceiptDetailCashReceiptEvent2">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.APPL_TO_ORD_TYP_CD,
+  T1.CT_ORD_APPLIED_TO,
+  T1.PGM_ST_APPLD_TO,
+  T1.AR_NUMBER,
+  T2.CLT_IDENTIFIER,
+  T9.CSP_NUMBER,
+  T7.CSP_SUP_NUMBER,
+  T7.CPA_SUP_TYPE,
+  T9.ORD_TYP_CD,
+  T10.DEBT_TYP_CLASS,
+  T10.SUP_PRSN_REQ_IND
+from
+  CKT_CR_DETAIL T2 with(readuncommitted)
+  join
+  CKT_OB_TYPE T10 with(readuncommitted)
+  join
+  CKT_OBLIGATION T9 with(readuncommitted)
+  on
+    (T10.DEBT_TYP_ID = T9.DTY_GENERATED_ID) and
+    (T9.CSP_NUMBER = @cspNumber)
+  join
+  CKT_OB_TRN T7 with(readuncommitted)
+  on
+    (T9.DTY_GENERATED_ID = T7.OTY_TYPE) and
+    (T9.OB_ID = T7.OBG_GENERATED_ID) and
+    (T9.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T9.CPA_TYPE = T7.CPA_TYPE)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (T7.OTY_TYPE = T1.OTY_ID) and
+    (T7.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T7.OB_TRN_ID = T1.OTR_ID) and
+    (T7.CPA_TYPE = T1.CPA_TYPE) and
+    (T7.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T7.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T1.PGM_APPLD_TO in ('AF', 'NA')) and
+    (T1.APPL_TO_ORD_TYP_CD = 'K') and
+    (T1.APPLIED_TO_CD in ('A', 'C')) and
+    (T1.CREATED_TMST &gt;= @createdTmst1) and
+    (T1.CREATED_TMST &lt; @createdTmst2) and
+    (T1.ADJ_IND = 'N')
+  on
+    (T2.CRD_ID = T1.CRD_ID) and
+    (T2.CRV_IDENTIFIER = T1.CRV_ID) and
+    (T2.CST_IDENTIFIER = T1.CST_ID) and
+    (T2.CRT_IDENTIFIER = T1.CRT_TYPE)
+</value>
+   </data>
+   <data name="ReadCollectionType1">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID
+from
+  CKT_COLLTN_TYPE with(readuncommitted)
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadCollectionType2">
+      <value>
+select
+  COLLECTION_TYPE_ID,
+  CASH_NON_CASH_IND
+from
+  CKT_COLLTN_TYPE
+order by
+  COLLECTION_TYPE_ID
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (@casNumber = T2.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadDebt1">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OTY_TYPE = @otyType) and
+  (OB_TRN_ID = @obTrnId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OBG_GENERATED_ID = @obgGeneratedId)
+</value>
+   </data>
+   <data name="ReadDebt2">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (OTY_TYPE = @otyType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OB_TRN_ID = @obTrnId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDebtDetail1">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT,
+  BAL_DUE_AMT,
+  CVRD_PRD_START_DT,
+  CVD_PRD_END_DT,
+  PRECNVRSN_PGM_CD
+from
+  CKT_DEBT_DTL with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  DUE_DT desc
+</value>
+   </data>
+   <data name="ReadDebtDetail2">
+      <value>
+select distinct
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.BAL_DUE_AMT,
+  T1.CVRD_PRD_START_DT,
+  T1.CVD_PRD_END_DT,
+  T1.PRECNVRSN_PGM_CD
+from
+  CKT_DEBT_DTL T1 with(readuncommitted),
+  CKT_CASE_ROLE T6 with(readuncommitted)
+where
+  (T1.BAL_DUE_AMT &gt; 0) and
+  (@cspNumber = T1.CSP_NUMBER) and
+  (@casNumber = T6.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  ORD_TYP_CD
+from
+  CKT_OBLIGATION with(readuncommitted)
+where
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (OB_ID = @obId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CLASS,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE with(readuncommitted)
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

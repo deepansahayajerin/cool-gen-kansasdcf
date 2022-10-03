@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAbsentParent">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  (STATE_ABBREVIATION = @stateAbbreviation) and
+  (COUNTY = 000) and
+  (LOCATION = 00)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (@croId = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (OTHR_STATE_FIPS_CD = @othrStateFipsCd)
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistoryInterstateRequest1">
+      <value>
+select top(1)
+  T1.INT_GENERATED_ID,
+  T1.CREATED_TSTAMP,
+  T1.CREATED_BY,
+  T1.TRANSACTION_DIRECT,
+  T1.TRANSACTION_SERIAL,
+  T1.ACTION_CODE,
+  T1.FUNCTIONAL_TYPE_CO,
+  T1.TRANSACTION_DATE,
+  T1.ACTION_REASON_CODE,
+  T1.ACTION_RES_DTE,
+  T2.OTHER_STATE_CAS_ID,
+  T2.OTHR_STATE_FIPS_CD,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.OTH_ST_CASE_STATUS,
+  T2.CASE_TYPE,
+  T2.KS_CASE_IND,
+  T2.OTH_STATE_CLS_RES,
+  T2.OTH_STATE_CLS_DTE,
+  T2.CAS_I_NUMBER,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_ID
+from
+  CKT_INTERSTAT_RQST T2
+  join
+  CKT_INT_RQST_HIST T1
+  on
+    (T1.FUNCTIONAL_TYPE_CO = 'LO1') and
+    (T1.ACTION_CODE = 'P') and
+    (T1.TRANSACTION_DATE &gt; @transactionDate) and
+    (T2.OTHR_STATE_FIPS_CD = @othrStateFipsCd) and
+    (T2.IDENTIFIER = T1.INT_GENERATED_ID) and
+    (@croId = T2.CRO_ID) and
+    (@croType = T2.CRO_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER)
+order by
+  T1.TRANSACTION_DATE desc
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistoryInterstateRequest2">
+      <value>
+select top(1)
+  T1.INT_GENERATED_ID,
+  T1.CREATED_TSTAMP,
+  T1.CREATED_BY,
+  T1.TRANSACTION_DIRECT,
+  T1.TRANSACTION_SERIAL,
+  T1.ACTION_CODE,
+  T1.FUNCTIONAL_TYPE_CO,
+  T1.TRANSACTION_DATE,
+  T1.ACTION_REASON_CODE,
+  T1.ACTION_RES_DTE,
+  T2.OTHER_STATE_CAS_ID,
+  T2.OTHR_STATE_FIPS_CD,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.OTH_ST_CASE_STATUS,
+  T2.CASE_TYPE,
+  T2.KS_CASE_IND,
+  T2.OTH_STATE_CLS_RES,
+  T2.OTH_STATE_CLS_DTE,
+  T2.CAS_I_NUMBER,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_ID
+from
+  CKT_INTERSTAT_RQST T2
+  join
+  CKT_INT_RQST_HIST T1
+  on
+    (T1.FUNCTIONAL_TYPE_CO = 'LO1') and
+    (T1.ACTION_CODE = 'R') and
+    (T2.OTHR_STATE_FIPS_CD = @othrStateFipsCd) and
+    (T2.IDENTIFIER = T1.INT_GENERATED_ID) and
+    (@croId = T2.CRO_ID) and
+    (@croType = T2.CRO_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER)
+order by
+  T1.TRANSACTION_DATE desc
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistoryInterstateRequest3">
+      <value>
+select
+  T1.INT_GENERATED_ID,
+  T1.CREATED_TSTAMP,
+  T1.CREATED_BY,
+  T1.TRANSACTION_DIRECT,
+  T1.TRANSACTION_SERIAL,
+  T1.ACTION_CODE,
+  T1.FUNCTIONAL_TYPE_CO,
+  T1.TRANSACTION_DATE,
+  T1.ACTION_REASON_CODE,
+  T1.ACTION_RES_DTE,
+  T2.OTHER_STATE_CAS_ID,
+  T2.OTHR_STATE_FIPS_CD,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.OTH_ST_CASE_STATUS,
+  T2.CASE_TYPE,
+  T2.KS_CASE_IND,
+  T2.OTH_STATE_CLS_RES,
+  T2.OTH_STATE_CLS_DTE,
+  T2.CAS_I_NUMBER,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_ID
+from
+  CKT_INTERSTAT_RQST T2
+  join
+  CKT_INT_RQST_HIST T1
+  on
+    (T1.TRANSACTION_DATE = @transactionDate) and
+    (T1.FUNCTIONAL_TYPE_CO = 'LO1') and
+    (T1.ACTION_CODE = 'R') and
+    (T2.IDENTIFIER = T1.INT_GENERATED_ID) and
+    (@croId = T2.CRO_ID) and
+    (@croType = T2.CRO_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER)
+order by
+  T1.TRANSACTION_DATE desc
+</value>
+   </data>
+</root>

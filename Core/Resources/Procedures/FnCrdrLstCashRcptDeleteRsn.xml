@@ -1,0 +1,24 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCrdrLstCashRcptDeleteRsn"
+           program-name="SWECRDRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCrdrLstCashRcptDeleteRsn"
+           transaction="SR15"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_CASH_MNGMNT_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnCsamCashMgtAdminMenu"
+       send-command-type="none"/>
+   <map from="Export1.CashReceiptDeleteReason"
+        to="Import1.CashReceiptDeleteReason"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="History" to="History"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="FromAdminMenu" to="FromAdminMenu"/>
+</procedure>

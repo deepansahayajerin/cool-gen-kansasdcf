@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDisbSuppressionStatusHistory">
+      <value>
+insert into CKT_DISB_SUPPR_STS
+(
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  CLT_SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PERSON_DISB_FILLER,
+  COLLECTION_FILLER,
+  TYPE,
+  REASON_TEXT,
+  AUTOMATIC_FILLER,
+  EXCESS_URA_FILLER,
+  XURA_FILLER,
+  DUPLICATE_FILLER,
+  COURT_ORDER_SUPPR,
+  LGA_IDENTIFIER,
+  DECEASED_FILLER,
+  NO_ADDRESS_FILLER
+)
+values
+(
+  @cpaType,
+  @cspNumber,
+  @dssGeneratedId,
+  null,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @personDisbFiller,
+  @personDisbFiller,
+  @type,
+  @reasonText,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  null,
+  @personDisbFiller,
+  @personDisbFiller
+)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  TYPE,
+  REASON_TEXT
+from
+  CKT_DISB_SUPPR_STS
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'X') and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory2">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID
+from
+  CKT_DISB_SUPPR_STS
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  DSS_GENERATED_ID desc
+</value>
+   </data>
+   <data name="ReadDisbursementStatusHistoryDisbursementStatus">
+      <value>
+select top(1)
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SUPPRESSION_REASON
+from
+  CKT_DISB_STAT_HIST
+where
+  (@dtrGeneratedId = DTR_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+order by
+  DISCONTINUE_DATE desc,
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  OTY_ID,
+  OTR_TYPE_DISB,
+  OTR_ID,
+  CPA_TYPE_DISB,
+  CSP_NUMBER_DISB,
+  OBG_ID,
+  CRD_ID,
+  CRV_ID,
+  CST_ID,
+  CRT_ID,
+  COL_ID
+from
+  CKT_DISB_TRAN
+where
+  (@colId = COL_ID) and
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumberDisb = CSP_NUMBER_DISB) and
+  (@cpaTypeDisb = CPA_TYPE_DISB) and
+  (@otrId = OTR_ID) and
+  (@otrTypeDisb = OTR_TYPE_DISB) and
+  (@crtId = CRT_ID) and
+  (@cstId = CST_ID) and
+  (@crvId = CRV_ID) and
+  (@crdId = CRD_ID) and
+  (DISB_TRAN_ID &lt;&gt; @disbTranId)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction2">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.PROCESS_DATE,
+  T1.DBT_GENERATED_ID
+from
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_TRAN_RLN T2
+  on
+    (T1.DISB_TRAN_ID = T2.DTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (@dtrPGeneratedId = T2.DTR_P_GENERATED_ID) and
+    (@cpaPType = T2.CPA_P_TYPE) and
+    (@cspPNumber = T2.CSP_P_NUMBER) and
+    (T1.DBT_GENERATED_ID is not null) and
+    (T1.DBT_GENERATED_ID &lt;&gt; 73)
+</value>
+   </data>
+</root>

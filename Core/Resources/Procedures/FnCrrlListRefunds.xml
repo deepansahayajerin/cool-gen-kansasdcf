@@ -1,0 +1,126 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCrrlListRefunds"
+           program-name="SWECRRLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCrrlListRefunds"
+           transaction="SRIE"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="Pass"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_CASH_RECEIPT_DTL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrdlLstCashReceiptDetails"
+       send-command="DISPLAY">
+      <return-map from="CashReceipt" to="CashReceipt"/>
+      <return-map from="CashReceiptDetail" to="CashReceiptDetail"/>
+      <return-map from="CashReceiptType" to="HiddenCashReceiptType"/>
+      <return-map from="CashReceiptSourceType" to="HiddenCashReceiptSourceType"/>
+      <return-map from="CashReceiptEvent" to="HiddenCashReceiptEvent"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_CASH_SOURCES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCRSL"
+       to="FnCrslLstCashRcptSources"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="SelectedCashReceiptSourceType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_REFUND_COLLECTION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrruRefundUndstrbtdColl"
+       send-command="DISPLAY">
+      <map from="CollectionType" to="CollectionType"/>
+      <map from="CashReceiptDetail.SequentialIdentifier"
+           to="CashReceiptDetail.SequentialIdentifier"/>
+      <map from="CashReceiptDetail.ObligorSocialSecurityNumber"
+           to="CashReceiptDetail.ObligorSocialSecurityNumber"/>
+      <map from="CashReceiptDetail.CollectionAmount"
+           to="CashReceiptDetail.CollectionAmount"/>
+      <map from="CashReceiptDetail.CollectionDate"
+           to="CashReceiptDetail.CollectionDate"/>
+      <map from="CashReceipt" to="CashReceipt"/>
+      <map from="HiddenCashReceiptType.SystemGeneratedIdentifier"
+           to="CashReceiptType.SystemGeneratedIdentifier"/>
+      <map from="PassReceiptRefund.ReasonCode" to="ReceiptRefund.ReasonCode"/>
+      <map from="PassReceiptRefund.Taxid" to="ReceiptRefund.Taxid"/>
+      <map from="PassReceiptRefund.PayeeName" to="ReceiptRefund.PayeeName"/>
+      <map from="PassReceiptRefund.Amount" to="ReceiptRefund.Amount"/>
+      <map from="PassReceiptRefund.OffsetTaxYear" to="ReceiptRefund.OffsetTaxYear"/>
+      <map from="PassReceiptRefund.RequestDate" to="ReceiptRefund.RequestDate"/>
+      <map from="PassReceiptRefund.CreatedTimestamp"
+           to="ReceiptRefund.CreatedTimestamp"/>
+      <map from="HiddenCashReceiptEvent" to="CashReceiptEvent"/>
+      <map from="SelectedCashReceiptSourceType.Code"
+           to="CashReceiptSourceType.Code"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_RMSR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnRmsrRequestMiscRefunds"
+       send-command="DISPLAY">
+      <map from="PassCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="PassCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="PassReceiptRefund.ReasonCode" to="ReceiptRefund.ReasonCode"/>
+      <map from="PassReceiptRefund.Taxid" to="ReceiptRefund.Taxid"/>
+      <map from="PassReceiptRefund.PayeeName" to="ReceiptRefund.PayeeName"/>
+      <map from="PassReceiptRefund.Amount" to="ReceiptRefund.Amount"/>
+      <map from="PassReceiptRefund.OffsetTaxYear" to="ReceiptRefund.OffsetTaxYear"/>
+      <map from="PassReceiptRefund.RequestDate" to="ReceiptRefund.RequestDate"/>
+      <map from="PassReceiptRefund.CreatedTimestamp"
+           to="ReceiptRefund.CreatedTimestamp"/>
+   </on>
+   <map from="Export1.DetailPaymentRequest" to="Import1.DetailPaymentRequest"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Previous" to="Previous"/>
+   <map from="Export1.DetailReceiptRefund" to="Import1.DetailReceiptRefund"/>
+   <map from="StartKey" to="StartKey"/>
+   <map from="HiddenCashReceiptType" to="HiddenCashReceiptType"/>
+   <map from="HiddenCashReceiptSourceType" to="HiddenCashReceiptSourceType"/>
+   <map from="HiddenCashReceiptEvent" to="HiddenCashReceiptEvent"/>
+   <map from="DisplayAll" to="DisplayAll"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="SelectedCashReceiptSourceType" to="SelectedCashReceiptSourceType"/>
+   <map from="Source" to="Source"/>
+   <map from="To" to="To"/>
+   <map from="From" to="From"/>
+   <map from="Export1.Hidden" to="Import1.Hidden"/>
+   <map from="Export1.HiddenMiscUndis" to="Import1.HiddenMiscUndis"/>
+   <map from="HiddenFlowedFrom" to="HiddenFlowedFrom"/>
+   <map from="Selection" to="Selection"/>
+   <map from="PromptCsePerson" to="PromptCsePerson"/>
+   <map from="CollectionType" to="CollectionType"/>
+   <map from="CashReceipt" to="CashReceipt"/>
+   <map from="Export1.DetailPaymentStatus" to="Import1.DetailPaymentStatus"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailCrdCrComboNo" to="Import1.DetailCrdCrComboNo"/>
+   <map from="SelectedCsePerson" to="SelectedCsePerson"/>
+   <map from="DisplayMiscOnly" to="DisplayMiscOnly"/>
+   <map from="SortByCashReceipt" to="SortByCashReceipt"/>
+   <map from="SortByCashReceiptDetail" to="SortByCashReceiptDetail"/>
+   <map from="SortByPaymentRequest" to="SortByPaymentRequest"/>
+   <map from="CashReceiptDetail.SequentialIdentifier"
+        to="CashReceiptDetail.SequentialIdentifier"/>
+   <map from="CashReceiptDetail.CollectionAmount"
+        to="CashReceiptDetail.CollectionAmount"/>
+   <map from="CashReceiptDetail.CollectionDate"
+        to="CashReceiptDetail.CollectionDate"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

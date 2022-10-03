@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail1">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail2">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  INTERFACE_TRAN_ID
+from
+  CKT_CR_DETAIL
+where
+  (INTERFACE_TRAN_ID = @interfaceTranId) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+</root>

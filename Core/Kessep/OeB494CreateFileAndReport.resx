@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T3.CRO_TYPE = 'AP') and
+    (@lgaId = T3.LGA_ID)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T3.CRO_TYPE = 'CH') and
+    (@lgaId = T3.LGA_ID)
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR
+where
+  @cspNumber = CSP_NUMBER
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonCase">
+      <value>
+select top(1)
+  T1.NUMB,
+  T4.CAS_NUMBER
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (T1.NUMB = T4.CSP_NUMBER) and
+    (T4.CRO_TYPE = 'AR') and
+    (@lgaId = T4.LGA_ID)
+</value>
+   </data>
+   <data name="ReadEmployerAddress">
+      <value>
+select top(1)
+  LOCATION_TYPE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  STREET1,
+  STREET2,
+  CITY,
+  IDENTIFIER,
+  STREET3,
+  STREET4,
+  PROVINCE,
+  COUNTRY,
+  POSTAL_CODE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  EMP_ID,
+  COUNTY
+from
+  CKT_EMPLOYER_ADDR
+where
+  @empId = EMP_ID
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompanyHealthInsuranceCoverage1">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.CARRIER_CODE,
+  T1.POLICY_CARRIER,
+  T2.IDENTIFIER,
+  T2.GROUP_NUMBER,
+  T2.POLICY_NUMBER,
+  T2.POLICY_EXP_DATE,
+  T2.COVERAGE_CODE_1,
+  T2.COVERAGE_CODE_2,
+  T2.COVERAGE_CODE_3,
+  T2.COVERAGE_CODE_4,
+  T2.COVERAGE_CODE_5,
+  T2.COVERAGE_CODE_6,
+  T2.COVERAGE_CODE_7,
+  T2.POLICY_EFF_DATE,
+  T2.CSP_NUMBER
+from
+  CKT_HEALTH_INS_CO T1
+  join
+  CKT_HINS_COVERAGE T2
+  on
+    (T1.IDENTIFIER = T2.HIC_IDENTIFIER) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompanyHealthInsuranceCoverage2">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.CARRIER_CODE,
+  T1.POLICY_CARRIER,
+  T2.IDENTIFIER,
+  T2.GROUP_NUMBER,
+  T2.POLICY_NUMBER,
+  T2.POLICY_EXP_DATE,
+  T2.COVERAGE_CODE_1,
+  T2.COVERAGE_CODE_2,
+  T2.COVERAGE_CODE_3,
+  T2.COVERAGE_CODE_4,
+  T2.COVERAGE_CODE_5,
+  T2.COVERAGE_CODE_6,
+  T2.COVERAGE_CODE_7,
+  T2.POLICY_EFF_DATE,
+  T2.CSP_NUMBER
+from
+  CKT_HEALTH_INS_CO T1
+  join
+  CKT_HINS_COVERAGE T2
+  on
+    (T1.IDENTIFIER = T2.HIC_IDENTIFIER) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadIncomeSourceEmployer1">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.CSP_I_NUMBER,
+  T1.EMP_ID,
+  T2.NAME
+from
+  CKT_EMPLOYER T2
+  join
+  CKT_INCOME_SOURCE T1
+  on
+    (@cspINumber = T1.CSP_I_NUMBER) and
+    (T2.IDENTIFIER = T1.EMP_ID)
+</value>
+   </data>
+   <data name="ReadIncomeSourceEmployer2">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.CSP_I_NUMBER,
+  T1.EMP_ID,
+  T2.NAME
+from
+  CKT_EMPLOYER T2
+  join
+  CKT_INCOME_SOURCE T1
+  on
+    (@cspINumber = T1.CSP_I_NUMBER) and
+    (T2.IDENTIFIER = T1.EMP_ID)
+</value>
+   </data>
+   <data name="ReadOldNewXref">
+      <value>
+select top(1)
+  KESSEP_CASE_NBR,
+  CAECSES_CASE_NBR,
+  CLIENT_TYPE,
+  CLIENT_NBR
+from
+  CKT_OLD_NEW_XREF
+where
+  KESSEP_CASE_NBR = @kessepCaseNbr
+</value>
+   </data>
+   <data name="ReadPersonProgram">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.STATUS,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.CHANGED_IND,
+  T1.CHANGE_DATE,
+  T1.PRG_GENERATED_ID,
+  T1.MED_TYPE_DISC_DATE,
+  T1.MED_TYPE
+from
+  CKT_PROGRAM T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (
+      T2.CODE in ('MA', 'MAI', 'SI',
+        'CI', 'MP', 'MS',
+        'MK')
+    )
+</value>
+   </data>
+</root>

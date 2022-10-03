@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseTribunalFipsLegalAction">
+      <value>
+select top(1)
+  T6.CAS_NUMBER,
+  T2.FIP_LOCATION,
+  T2.IDENTIFIER,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE,
+  T3.STATE_DESC,
+  T3.COUNTY_DESC,
+  T3.LOCATION_DESC,
+  T3.STATE_ABBREVIATION,
+  T3.COUNTY_ABBR,
+  T4.LEGAL_ACTION_ID,
+  T4.COURT_CASE_NO,
+  T4.STANDARD_NO
+from
+  CKT_FIPS T3
+  join
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_LEG_ACT_CAS_RL T6
+  on
+    (T6.CAS_NUMBER = @casNumber) and
+    (T4.LEGAL_ACTION_ID = T6.LGA_ID) and
+    (T4.COURT_CASE_NO = @courtCaseNo)
+  on
+    T2.IDENTIFIER = T4.TRB_ID
+  on
+    (T3.LOCATION = T2.FIP_LOCATION) and
+    (T3.COUNTY = T2.FIP_COUNTY) and
+    (T3.[STATE] = T2.FIP_STATE)
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  T1.ORGANZTN_ID,
+  T1.TYPE_CODE,
+  T1.NAME
+from
+  CKT_CSE_ORGANIZATN T1
+  join
+  CKT_CSE_ORG_RELATN T2
+  on
+    (T1.TYPE_CODE = T2.COG_CHILD_TYPE) and
+    (T1.ORGANZTN_ID = T2.COG_CHILD_CODE) and
+    (T2.REASON_CODE = 'RC') and
+    (T2.COG_PARENT_TYPE = @cogParentType) and
+    (T2.COG_PARENT_CODE = @cogParentCode)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEG_REF_CROLE T3
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T3.CRO_TYPE = 'AP') and
+    (@lgrId = T3.LGR_ID) and
+    (@casNumber = T3.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalReferralAssignment1">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO,
+  LGR_ID
+from
+  CKT_ASSGN_LEG_REF
+where
+  (@lgrId = LGR_ID) and
+  (@casNo = CAS_NO) and
+  (REASON_CODE = 'RSP') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadLegalReferralAssignment2">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO,
+  LGR_ID
+from
+  CKT_ASSGN_LEG_REF
+where
+  (@lgrId = LGR_ID) and
+  (@casNo = CAS_NO) and
+  (REASON_CODE = 'RSP')
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadLegalReferralCase">
+      <value>
+select
+  CAS_NUMBER,
+  IDENTIFIER,
+  REF_BY_USER_ID,
+  STATUS_DATE,
+  STATUS,
+  REFERRAL_DATE,
+  CREATED_TIMESTAMP,
+  REFERRAL_REASON_1,
+  REFERRAL_REASON_2,
+  REFERRAL_REASON_3,
+  REFERRAL_REASON_4,
+  REFERRAL_REASON_5,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_REFERRAL
+where
+  (
+    REFERRAL_REASON_1 in ('MIC', 'MIN', 'MOC',
+      'MON', 'MOO')
+  ) or
+  (
+    REFERRAL_REASON_2 in ('MIC', 'MIN', 'MOC',
+      'MON', 'MOO')
+  ) or
+  (
+    REFERRAL_REASON_3 in ('MIC', 'MIN', 'MOC',
+      'MON', 'MOO')
+  ) or
+  (
+    REFERRAL_REASON_4 in ('MIC', 'MIN', 'MOC',
+      'MON', 'MOO')
+  ) or
+  (
+    REFERRAL_REASON_5 in ('MIC', 'MIN', 'MOC',
+      'MON', 'MOO')
+  )
+order by
+  CAS_NUMBER,
+  COURT_CASE_NO,
+  IDENTIFIER
+</value>
+   </data>
+   <data name="ReadOfficeOfficeServiceProviderServiceProvider">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.NAME,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.OFF_OFFICE,
+  T4.SPD_ID,
+  T4.OFF_ID,
+  T4.OSP_CODE,
+  T4.OSP_DATE,
+  T3.SERVICE_PRVDER_ID,
+  T3.LAST_NAME,
+  T3.FIRST_NAME,
+  T3.MIDDLE_INITIAL
+from
+  CKT_OFFICE T1
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T3.SERVICE_PRVDER_ID = T4.SPD_ID) and
+    (T4.REASON_CODE = 'RSP') and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (@casNo = T4.CAS_NO)
+  on
+    T1.OFFICE_ID = T4.OFF_ID
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  count(distinct T1.SERVICE_PRVDER_ID)
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFC_SRCPRV_RLT T3
+  on
+    (T1.SERVICE_PRVDER_ID = T3.SPD_R_GENERATED_ID) and
+    (@ospRoleCode = T3.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T3.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T3.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T3.SPD_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadServiceProvider3">
+      <value>
+select distinct
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFC_SRCPRV_RLT T3
+  on
+    (T1.SERVICE_PRVDER_ID = T3.SPD_R_GENERATED_ID) and
+    (@ospRoleCode = T3.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T3.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T3.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T3.SPD_GENERATED_ID)
+</value>
+   </data>
+</root>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalActionLegalActionPerson">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.STANDARD_NO,
+  T2.LA_PERSON_ID,
+  T2.CSP_NUMBER,
+  T2.EFFECTIVE_DT,
+  T2.END_DT
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @endDt) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T1.CLASSIFICATION = 'J')
+order by
+  T2.END_DT
+</value>
+   </data>
+</root>

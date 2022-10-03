@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  STATUS = 'O'
+order by
+  NUMB
+</value>
+   </data>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AP') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (CSP_NUMBER &lt;&gt; @cspNumber)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.MOTHERS_FIRST_NM,
+  T1.MOTHERS_MID_INIT,
+  T1.FATHERS_LAST_NAME,
+  T1.FATHERS_MID_INIT,
+  T1.FATHERS_FIRST_NAME,
+  T1.MOTHER_MAIDEN_LAST
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE = 'AP') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.TYPE = 'C')
+</value>
+   </data>
+   <data name="ReadCaseRole3">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  MOTHERS_FIRST_NM,
+  MOTHERS_MID_INIT,
+  FATHERS_LAST_NAME,
+  FATHERS_MID_INIT,
+  FATHERS_FIRST_NAME,
+  MOTHER_MAIDEN_LAST
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (END_DATE &gt;= @endDate) and
+  (START_DATE &lt;= @endDate) and
+  (TYPE in ('AP', 'AR', 'CH'))
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.MOTHERS_FIRST_NM,
+  T1.MOTHERS_MID_INIT,
+  T1.FATHERS_LAST_NAME,
+  T1.FATHERS_MID_INIT,
+  T1.FATHERS_FIRST_NAME,
+  T1.MOTHER_MAIDEN_LAST,
+  T2.TYPE,
+  T2.BIRTH_PLACE_STATE,
+  T2.BIRTH_PLACE_CITY,
+  T2.FAMILY_VIOL_IND,
+  T2.BIRTHPLACE_COUNTRY
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE in ('AR', 'AP')) and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.TYPE = 'C')
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  BIRTH_PLACE_STATE,
+  BIRTH_PLACE_CITY,
+  FAMILY_VIOL_IND,
+  BIRTHPLACE_COUNTRY
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb) and
+  (TYPE = 'C')
+</value>
+   </data>
+   <data name="ReadFplsLocateRequest">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  TRANSACTION_STATUS,
+  CASE_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  REQUEST_SENT_DATE,
+  SEND_REQUEST_TO
+from
+  CKT_FPLS_LOC_REQ
+where
+  (
+    (REQUEST_SENT_DATE &gt;= @requestSentDate1) or
+    (REQUEST_SENT_DATE = @requestSentDate2)
+  ) and
+  (TRANSACTION_STATUS = 'C') and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRole">
+      <value>
+select distinct top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_IDENTIFIER,
+  T1.LGA_ID,
+  T1.INIT_CR_IND
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_LEG_ACT_CAS_RL T1
+  on
+    (@croIdentifier = T1.CRO_IDENTIFIER) and
+    (@croType = T1.CRO_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (@casNumber = T1.CAS_NUMBER) and
+    (T2.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T2.CLASSIFICATION = 'J') and
+    (T2.FILED_DT &gt; @filedDt) and
+    (T2.END_DT &gt; @endDt)
+</value>
+   </data>
+   <data name="UpdateFplsLocateRequest">
+      <value>
+update CKT_FPLS_LOC_REQ
+set
+  TRANSACTION_STATUS = @transactionStatus,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  REQUEST_SENT_DATE = @requestSentDate,
+  SEND_REQUEST_TO = @sendRequestTo
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

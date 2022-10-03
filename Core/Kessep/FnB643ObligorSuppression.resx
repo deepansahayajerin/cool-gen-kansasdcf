@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAbsentParent">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  @cspNumber = CSP_NUMBER
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadBankruptcy">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  DISCHARGE_DATE
+from
+  CKT_BANKRUPTCY
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  OBLGOR_PRSN_NBR,
+  COLLAMT_APPL_IND
+from
+  CKT_CR_DETAIL
+where
+  (OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+  (COLLAMT_APPL_IND = ' ') and
+  (CRT_IDENTIFIER in (cast(@systemGeneratedIdentifier1 as smallint), cast(@systemGeneratedIdentifier2 as smallint)))
+</value>
+   </data>
+   <data name="ReadGoodCause">
+      <value>
+select top(1)
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_NUMBER1,
+  CSP_NUMBER1,
+  CRO_TYPE1,
+  CRO_IDENTIFIER1
+from
+  CKT_GOOD_CAUSE
+where
+  (@casNumber1 = CAS_NUMBER1) and
+  (@croIdentifier1 = CRO_IDENTIFIER1) and
+  (@croType1 = CRO_TYPE1) and
+  (@cspNumber1 = CSP_NUMBER1) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadStmtCpnSuppStatObligor">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  COLL_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  DOC_TYPE_TO_SUPP
+from
+  CKT_STMT_SUP_ST_HS
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@effectiveDate &gt;= EFFECTIVE_DATE) and
+  (@effectiveDate &lt; DISCONTINUE_DATE)
+</value>
+   </data>
+</root>

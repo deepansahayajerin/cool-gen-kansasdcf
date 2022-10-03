@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInterstateRequestHistory">
+      <value>
+insert into CKT_INT_RQST_HIST
+(
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  TRANSACTION_DIRECT,
+  TRANSACTION_SERIAL,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  ACTION_REASON_CODE,
+  ACTION_RES_DTE,
+  ATTACHMENT_INDICAT,
+  NOTE
+)
+values
+(
+  @intGeneratedId,
+  @createdTstamp,
+  @createdBy,
+  @transactionDirect,
+  @transactionSerial,
+  @actionCode,
+  @functionalTypeCo,
+  @transactionDate,
+  @actionReasonCode,
+  @actionResDte,
+  @attachmentIndicat,
+  @note
+)
+</value>
+   </data>
+   <data name="ReadAbsentParentCsePerson">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (@croId = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (
+    (
+      (cast(@otherStateFips as smallint) &gt; 0) and
+      (OTHR_STATE_FIPS_CD = @otherStateFips)
+    ) or
+    (
+      (cast(@country as char(2)) &lt;&gt; ' ') and
+      (COUNTRY = @country)
+    ) or
+    (
+      (cast(@tribalAgency as char(4)) &lt;&gt; ' ') and
+      (TRIBAL_AGENCY = @tribalAgency)
+    )
+  )
+</value>
+   </data>
+   <data name="ReadInterstateRequest2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

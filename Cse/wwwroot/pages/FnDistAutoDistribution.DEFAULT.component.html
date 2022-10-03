@@ -1,0 +1,678 @@
+﻿<!--Name: FN_DIST_AUTO_DISTRIBUTION, ID: 372287714, model: 746-->
+<div coolContent coolName="FN_DIST_AUTO_DISTRIBUTION" coolType="SCREEN"
+  (coolInit)="scrollSize = 100; pageSize = 8">
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 22.5%; top: 0; width: 53.75%; height: 4%;" coolCol="19"
+     coolRow="1" coolLength="43">CSE - On-Line Automatic Distribution - DIST</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 0; width: 10%; height: 4%;" coolCol="72"
+     coolRow="1" coolLength="8">{{global.currentDate|coolDate:'MM-dd-yy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 4%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':0}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 8%; width: 25%; height: 4%;"
+     coolCol="3" coolRow="3" coolLength="20">Cash Receipt Number:</div>
+   <input type="text" coolType="field" name="field_3_31"
+     [(ngModel)]="in.cashReceipt.sequentialNumber"
+     [coolVideo]="out.cashReceipt.screenField?.sequentialNumber" coolAutotab
+     coolFocus coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="########0;#" coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 37.5%; top: 8%; width: 11.25%; height: 4%;" coolCol="31"
+     coolRow="3" coolLength="9">
+   
+   <div coolType="literal"
+     style="left: 51.25%; top: 8%; width: 20%; height: 4%;" coolCol="42"
+     coolRow="3" coolLength="16">(Required Field)</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 12%; width: 33.75%; height: 4%;" coolCol="3"
+     coolRow="4" coolLength="27">Cash Receipt Detail Number:</div>
+   <input type="text" coolType="field" name="field_4_36"
+     [(ngModel)]="in.cashReceiptDetail.sequentialIdentifier"
+     [coolVideo]="out.cashReceiptDetail.screenField?.sequentialIdentifier"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0;#" coolBlankWhenZero [attr.maxlength]="4"
+     style="left: 43.75%; top: 12%; width: 5%; height: 4%;" coolCol="36"
+     coolRow="4" coolLength="4">
+   
+   <div coolType="literal"
+     style="left: 51.25%; top: 12%; width: 36.25%; height: 4%;" coolCol="42"
+     coolRow="4" coolLength="29">(Optional Field - Default: 1)</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 24%; width: 26.25%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="21">Amount to Distribute:</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 31.25%; top: 24%; width: 17.5%; height: 4%;" coolCol="26"
+     coolRow="7" coolLength="14">{{out.totalAmtAttempted.totalCurrency|coolNumber:'###,###,##0.00;#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 51.25%; top: 24%; width: 16.25%; height: 4%;" coolCol="42"
+     coolRow="7" coolLength="13">Event Raised:</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 24%; width: 1.25%; height: 4%;" coolCol="56"
+     coolRow="7" coolLength="1">{{in.eventRaisedInd.flag}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 28%; width: 21.25%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="17">Amount Suspended:</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 31.25%; top: 28%; width: 17.5%; height: 4%;" coolCol="26"
+     coolRow="8" coolLength="14">{{out.totalAmtSuspended.totalCurrency|coolNumber:'###,###,##0.00;#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 32%; width: 23.75%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="19">Amount Distributed:</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 31.25%; top: 32%; width: 17.5%; height: 4%;" coolCol="26"
+     coolRow="9" coolLength="14">{{out.totalAmtProcessed.totalCurrency|coolNumber:'###,###,##0.00;#':1}}</div>
+   
+   <div coolType="prompt" style="left: 5%; top: 40%; width: 6.25%; height: 4%;"
+     coolCol="5" coolRow="11" coolLength="5">OB-ID</div>
+   
+   <div coolType="prompt"
+     style="left: 12.5%; top: 40%; width: 8.75%; height: 4%;" coolCol="11"
+     coolRow="11" coolLength="7">OB-Type</div>
+   
+   <div coolType="prompt" style="left: 35%; top: 40%; width: 3.75%; height: 4%;"
+     coolCol="29" coolRow="11" coolLength="3">P/S</div>
+   
+   <div coolType="prompt" style="left: 40%; top: 40%; width: 3.75%; height: 4%;"
+     coolCol="33" coolRow="11" coolLength="3">K/I</div>
+   
+   <div coolType="prompt"
+     style="left: 46.25%; top: 40%; width: 11.25%; height: 4%;" coolCol="38"
+     coolRow="11" coolLength="9">Supp-Prsn</div>
+   
+   <div coolType="prompt"
+     style="left: 61.25%; top: 40%; width: 10%; height: 4%;" coolCol="50"
+     coolRow="11" coolLength="8">Coll-Amt</div>
+   
+   <div coolType="prompt"
+     style="left: 72.5%; top: 40%; width: 3.75%; height: 4%;" coolCol="59"
+     coolRow="11" coolLength="3">C/A</div>
+   
+   <div coolType="prompt"
+     style="left: 77.5%; top: 40%; width: 3.75%; height: 4%;" coolCol="63"
+     coolRow="11" coolLength="3">Pgm</div>
+   <input type="text" coolType="field" name="field_12_7"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligation.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligation.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 7.5%; top: 44%; width: 3.75%; height: 4%;" coolCol="7"
+     coolRow="12" coolLength="3" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_15"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligationType.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligationType.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 17.5%; top: 44%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="12" coolLength="3" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_19"
+     [(ngModel)]="ref(in.group, pageOffset, 'debt.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset]?.debt.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="########0;#"
+     coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 22.5%; top: 44%; width: 11.25%; height: 4%;" coolCol="19"
+     coolRow="12" coolLength="9" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_30"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligation.primarySecondaryCode').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligation.screenField?.primarySecondaryCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['J',' ','S','P']"
+     style="left: 36.25%; top: 44%; width: 1.25%; height: 4%;" coolCol="30"
+     coolRow="12" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_34"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligation.orderTypeCode').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligation.screenField?.orderTypeCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['K','I']"
+     style="left: 41.25%; top: 44%; width: 1.25%; height: 4%;" coolCol="34"
+     coolRow="12" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_37"
+     [(ngModel)]="ref(in.group, pageOffset, 'suppPrsn.number').value"
+     [coolVideo]="out.group?.[pageOffset]?.suppPrsn.screenField?.number"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 45%; top: 44%; width: 12.5%; height: 4%;" coolCol="37"
+     coolRow="12" coolLength="10" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_49"
+     [(ngModel)]="ref(in.group, pageOffset, 'collection.amount').value"
+     [coolVideo]="out.group?.[pageOffset]?.collection.screenField?.amount"
+     coolAutotab coolAlign="right" coolNumber="#####0.00 ;#####0.00-"
+     coolBlankWhenZero [attr.maxlength]="10"
+     style="left: 60%; top: 44%; width: 12.5%; height: 4%;" coolCol="49"
+     coolRow="12" coolLength="10" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_60"
+     [(ngModel)]="ref(in.group, pageOffset, 'collection.appliedToCode').value"
+     [coolVideo]="out.group?.[pageOffset]?.collection.screenField?.appliedToCode"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['C','I','A','G']"
+     style="left: 73.75%; top: 44%; width: 1.25%; height: 4%;" coolCol="60"
+     coolRow="12" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_63"
+     [(ngModel)]="ref(in.group, pageOffset, 'program.code').value"
+     [coolVideo]="out.group?.[pageOffset]?.program.screenField?.code"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="3"
+     style="left: 77.5%; top: 44%; width: 3.75%; height: 4%;" coolCol="63"
+     coolRow="12" coolLength="3" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_67"
+     [(ngModel)]="ref(in.group, pageOffset, 'dprProgram.programState').value"
+     [coolVideo]="out.group?.[pageOffset]?.dprProgram.screenField?.programState"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="2"
+     style="left: 82.5%; top: 44%; width: 2.5%; height: 4%;" coolCol="67"
+     coolRow="12" coolLength="2" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_7"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligation.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligation.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 7.5%; top: 48%; width: 3.75%; height: 4%;" coolCol="7"
+     coolRow="13" coolLength="3" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_15"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligationType.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligationType.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 17.5%; top: 48%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="13" coolLength="3" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_19"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'debt.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.debt.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="########0;#"
+     coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 22.5%; top: 48%; width: 11.25%; height: 4%;" coolCol="19"
+     coolRow="13" coolLength="9" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_30"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligation.primarySecondaryCode').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligation.screenField?.primarySecondaryCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['J',' ','S','P']"
+     style="left: 36.25%; top: 48%; width: 1.25%; height: 4%;" coolCol="30"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_34"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligation.orderTypeCode').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligation.screenField?.orderTypeCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['K','I']"
+     style="left: 41.25%; top: 48%; width: 1.25%; height: 4%;" coolCol="34"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_37"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'suppPrsn.number').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.suppPrsn.screenField?.number"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 45%; top: 48%; width: 12.5%; height: 4%;" coolCol="37"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_49"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'collection.amount').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.collection.screenField?.amount"
+     coolAutotab coolAlign="right" coolNumber="#####0.00 ;#####0.00-"
+     coolBlankWhenZero [attr.maxlength]="10"
+     style="left: 60%; top: 48%; width: 12.5%; height: 4%;" coolCol="49"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_60"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'collection.appliedToCode').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.collection.screenField?.appliedToCode"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['C','I','A','G']"
+     style="left: 73.75%; top: 48%; width: 1.25%; height: 4%;" coolCol="60"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_63"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'program.code').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.program.screenField?.code"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="3"
+     style="left: 77.5%; top: 48%; width: 3.75%; height: 4%;" coolCol="63"
+     coolRow="13" coolLength="3" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_67"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'dprProgram.programState').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.dprProgram.screenField?.programState"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="2"
+     style="left: 82.5%; top: 48%; width: 2.5%; height: 4%;" coolCol="67"
+     coolRow="13" coolLength="2" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_7"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligation.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligation.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 7.5%; top: 52%; width: 3.75%; height: 4%;" coolCol="7"
+     coolRow="14" coolLength="3" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_15"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligationType.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligationType.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 17.5%; top: 52%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="14" coolLength="3" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_19"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'debt.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.debt.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="########0;#"
+     coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 22.5%; top: 52%; width: 11.25%; height: 4%;" coolCol="19"
+     coolRow="14" coolLength="9" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_30"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligation.primarySecondaryCode').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligation.screenField?.primarySecondaryCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['J',' ','S','P']"
+     style="left: 36.25%; top: 52%; width: 1.25%; height: 4%;" coolCol="30"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_34"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligation.orderTypeCode').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligation.screenField?.orderTypeCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['K','I']"
+     style="left: 41.25%; top: 52%; width: 1.25%; height: 4%;" coolCol="34"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_37"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'suppPrsn.number').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.suppPrsn.screenField?.number"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 45%; top: 52%; width: 12.5%; height: 4%;" coolCol="37"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_49"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'collection.amount').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.collection.screenField?.amount"
+     coolAutotab coolAlign="right" coolNumber="#####0.00 ;#####0.00-"
+     coolBlankWhenZero [attr.maxlength]="10"
+     style="left: 60%; top: 52%; width: 12.5%; height: 4%;" coolCol="49"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_60"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'collection.appliedToCode').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.collection.screenField?.appliedToCode"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['C','I','A','G']"
+     style="left: 73.75%; top: 52%; width: 1.25%; height: 4%;" coolCol="60"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_63"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'program.code').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.program.screenField?.code"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="3"
+     style="left: 77.5%; top: 52%; width: 3.75%; height: 4%;" coolCol="63"
+     coolRow="14" coolLength="3" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_67"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'dprProgram.programState').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.dprProgram.screenField?.programState"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="2"
+     style="left: 82.5%; top: 52%; width: 2.5%; height: 4%;" coolCol="67"
+     coolRow="14" coolLength="2" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_7"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'obligation.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.obligation.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 7.5%; top: 56%; width: 3.75%; height: 4%;" coolCol="7"
+     coolRow="15" coolLength="3" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_15"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'obligationType.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.obligationType.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 17.5%; top: 56%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="15" coolLength="3" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_19"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'debt.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.debt.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="########0;#"
+     coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 22.5%; top: 56%; width: 11.25%; height: 4%;" coolCol="19"
+     coolRow="15" coolLength="9" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_30"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'obligation.primarySecondaryCode').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.obligation.screenField?.primarySecondaryCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['J',' ','S','P']"
+     style="left: 36.25%; top: 56%; width: 1.25%; height: 4%;" coolCol="30"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_34"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'obligation.orderTypeCode').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.obligation.screenField?.orderTypeCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['K','I']"
+     style="left: 41.25%; top: 56%; width: 1.25%; height: 4%;" coolCol="34"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_37"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'suppPrsn.number').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.suppPrsn.screenField?.number"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 45%; top: 56%; width: 12.5%; height: 4%;" coolCol="37"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_49"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'collection.amount').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.collection.screenField?.amount"
+     coolAutotab coolAlign="right" coolNumber="#####0.00 ;#####0.00-"
+     coolBlankWhenZero [attr.maxlength]="10"
+     style="left: 60%; top: 56%; width: 12.5%; height: 4%;" coolCol="49"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_60"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'collection.appliedToCode').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.collection.screenField?.appliedToCode"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['C','I','A','G']"
+     style="left: 73.75%; top: 56%; width: 1.25%; height: 4%;" coolCol="60"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_63"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'program.code').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.program.screenField?.code"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="3"
+     style="left: 77.5%; top: 56%; width: 3.75%; height: 4%;" coolCol="63"
+     coolRow="15" coolLength="3" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_67"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'dprProgram.programState').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.dprProgram.screenField?.programState"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="2"
+     style="left: 82.5%; top: 56%; width: 2.5%; height: 4%;" coolCol="67"
+     coolRow="15" coolLength="2" [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_7"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'obligation.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.obligation.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 7.5%; top: 60%; width: 3.75%; height: 4%;" coolCol="7"
+     coolRow="16" coolLength="3" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_15"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'obligationType.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.obligationType.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 17.5%; top: 60%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="16" coolLength="3" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_19"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'debt.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.debt.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="########0;#"
+     coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 22.5%; top: 60%; width: 11.25%; height: 4%;" coolCol="19"
+     coolRow="16" coolLength="9" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_30"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'obligation.primarySecondaryCode').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.obligation.screenField?.primarySecondaryCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['J',' ','S','P']"
+     style="left: 36.25%; top: 60%; width: 1.25%; height: 4%;" coolCol="30"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_34"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'obligation.orderTypeCode').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.obligation.screenField?.orderTypeCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['K','I']"
+     style="left: 41.25%; top: 60%; width: 1.25%; height: 4%;" coolCol="34"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_37"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'suppPrsn.number').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.suppPrsn.screenField?.number"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 45%; top: 60%; width: 12.5%; height: 4%;" coolCol="37"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_49"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'collection.amount').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.collection.screenField?.amount"
+     coolAutotab coolAlign="right" coolNumber="#####0.00 ;#####0.00-"
+     coolBlankWhenZero [attr.maxlength]="10"
+     style="left: 60%; top: 60%; width: 12.5%; height: 4%;" coolCol="49"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_60"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'collection.appliedToCode').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.collection.screenField?.appliedToCode"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['C','I','A','G']"
+     style="left: 73.75%; top: 60%; width: 1.25%; height: 4%;" coolCol="60"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_63"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'program.code').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.program.screenField?.code"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="3"
+     style="left: 77.5%; top: 60%; width: 3.75%; height: 4%;" coolCol="63"
+     coolRow="16" coolLength="3" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_67"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'dprProgram.programState').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.dprProgram.screenField?.programState"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="2"
+     style="left: 82.5%; top: 60%; width: 2.5%; height: 4%;" coolCol="67"
+     coolRow="16" coolLength="2" [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_7"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'obligation.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.obligation.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 7.5%; top: 64%; width: 3.75%; height: 4%;" coolCol="7"
+     coolRow="17" coolLength="3" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_15"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'obligationType.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.obligationType.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 17.5%; top: 64%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="17" coolLength="3" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_19"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'debt.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.debt.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="########0;#"
+     coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 22.5%; top: 64%; width: 11.25%; height: 4%;" coolCol="19"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_30"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'obligation.primarySecondaryCode').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.obligation.screenField?.primarySecondaryCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['J',' ','S','P']"
+     style="left: 36.25%; top: 64%; width: 1.25%; height: 4%;" coolCol="30"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_34"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'obligation.orderTypeCode').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.obligation.screenField?.orderTypeCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['K','I']"
+     style="left: 41.25%; top: 64%; width: 1.25%; height: 4%;" coolCol="34"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_37"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'suppPrsn.number').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.suppPrsn.screenField?.number"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 45%; top: 64%; width: 12.5%; height: 4%;" coolCol="37"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_49"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'collection.amount').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.collection.screenField?.amount"
+     coolAutotab coolAlign="right" coolNumber="#####0.00 ;#####0.00-"
+     coolBlankWhenZero [attr.maxlength]="10"
+     style="left: 60%; top: 64%; width: 12.5%; height: 4%;" coolCol="49"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_60"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'collection.appliedToCode').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.collection.screenField?.appliedToCode"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['C','I','A','G']"
+     style="left: 73.75%; top: 64%; width: 1.25%; height: 4%;" coolCol="60"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_63"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'program.code').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.program.screenField?.code"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="3"
+     style="left: 77.5%; top: 64%; width: 3.75%; height: 4%;" coolCol="63"
+     coolRow="17" coolLength="3" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_67"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'dprProgram.programState').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.dprProgram.screenField?.programState"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="2"
+     style="left: 82.5%; top: 64%; width: 2.5%; height: 4%;" coolCol="67"
+     coolRow="17" coolLength="2" [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_7"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'obligation.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.obligation.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 7.5%; top: 68%; width: 3.75%; height: 4%;" coolCol="7"
+     coolRow="18" coolLength="3" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_15"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'obligationType.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.obligationType.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 17.5%; top: 68%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="18" coolLength="3" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_19"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'debt.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.debt.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="########0;#"
+     coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 22.5%; top: 68%; width: 11.25%; height: 4%;" coolCol="19"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_30"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'obligation.primarySecondaryCode').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.obligation.screenField?.primarySecondaryCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['J',' ','S','P']"
+     style="left: 36.25%; top: 68%; width: 1.25%; height: 4%;" coolCol="30"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_34"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'obligation.orderTypeCode').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.obligation.screenField?.orderTypeCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['K','I']"
+     style="left: 41.25%; top: 68%; width: 1.25%; height: 4%;" coolCol="34"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_37"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'suppPrsn.number').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.suppPrsn.screenField?.number"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 45%; top: 68%; width: 12.5%; height: 4%;" coolCol="37"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_49"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'collection.amount').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.collection.screenField?.amount"
+     coolAutotab coolAlign="right" coolNumber="#####0.00 ;#####0.00-"
+     coolBlankWhenZero [attr.maxlength]="10"
+     style="left: 60%; top: 68%; width: 12.5%; height: 4%;" coolCol="49"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_60"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'collection.appliedToCode').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.collection.screenField?.appliedToCode"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['C','I','A','G']"
+     style="left: 73.75%; top: 68%; width: 1.25%; height: 4%;" coolCol="60"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_63"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'program.code').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.program.screenField?.code"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="3"
+     style="left: 77.5%; top: 68%; width: 3.75%; height: 4%;" coolCol="63"
+     coolRow="18" coolLength="3" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_67"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'dprProgram.programState').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.dprProgram.screenField?.programState"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="2"
+     style="left: 82.5%; top: 68%; width: 2.5%; height: 4%;" coolCol="67"
+     coolRow="18" coolLength="2" [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_7"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'obligation.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.obligation.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 7.5%; top: 72%; width: 3.75%; height: 4%;" coolCol="7"
+     coolRow="19" coolLength="3" [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_15"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'obligationType.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.obligationType.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="##0;#"
+     coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 17.5%; top: 72%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="19" coolLength="3" [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_19"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'debt.systemGeneratedIdentifier').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.debt.screenField?.systemGeneratedIdentifier"
+     coolAutotab coolAlign="right" coolColor="cyan" coolNumber="########0;#"
+     coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 22.5%; top: 72%; width: 11.25%; height: 4%;" coolCol="19"
+     coolRow="19" coolLength="9" [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_30"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'obligation.primarySecondaryCode').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.obligation.screenField?.primarySecondaryCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['J',' ','S','P']"
+     style="left: 36.25%; top: 72%; width: 1.25%; height: 4%;" coolCol="30"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_34"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'obligation.orderTypeCode').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.obligation.screenField?.orderTypeCode"
+     coolAutotab coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['K','I']"
+     style="left: 41.25%; top: 72%; width: 1.25%; height: 4%;" coolCol="34"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_37"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'suppPrsn.number').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.suppPrsn.screenField?.number"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 45%; top: 72%; width: 12.5%; height: 4%;" coolCol="37"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_49"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'collection.amount').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.collection.screenField?.amount"
+     coolAutotab coolAlign="right" coolNumber="#####0.00 ;#####0.00-"
+     coolBlankWhenZero [attr.maxlength]="10"
+     style="left: 60%; top: 72%; width: 12.5%; height: 4%;" coolCol="49"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_60"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'collection.appliedToCode').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.collection.screenField?.appliedToCode"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['C','I','A','G']"
+     style="left: 73.75%; top: 72%; width: 1.25%; height: 4%;" coolCol="60"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_63"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'program.code').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.program.screenField?.code"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="3"
+     style="left: 77.5%; top: 72%; width: 3.75%; height: 4%;" coolCol="63"
+     coolRow="19" coolLength="3" [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_67"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'dprProgram.programState').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.dprProgram.screenField?.programState"
+     coolAutotab coolColor="cyan" coolUpper [attr.maxlength]="2"
+     style="left: 82.5%; top: 72%; width: 2.5%; height: 4%;" coolCol="67"
+     coolRow="19" coolLength="2" [hidden]="pageOffset + 7 >= length(in.group)">
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="71" coolRow="20" coolLength="9"
+     style="left: 87.5%; top: 76%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 80%; width: 11.25%; height: 4%;" coolCol="2"
+     coolRow="21" coolLength="9">Susp Rsn:</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 13.75%; top: 80%; width: 12.5%; height: 4%;" coolCol="12"
+     coolRow="21" coolLength="10">{{out.suspendedReason.reasonCodeId}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 80%; width: 72.5%; height: 4%;" coolCol="23"
+     coolRow="21" coolLength="58">{{out.suspendedReason.reasonText}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="23" coolLength="79"
+     style="left: 0; top: 88%; width: 98.75%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 92%; width: 42.5%; height: 4%;"
+     coolCol="1" coolRow="24" coolLength="34">PF Key: 7 Prev  8 Next  15 Process</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="PROCESS" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=PROCESS</a>
+   </div>

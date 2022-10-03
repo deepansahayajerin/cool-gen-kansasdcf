@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePaymentRequest">
+      <value>
+insert into CKT_PMNT_REQUEST
+(
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  RECOVERY_FILLER,
+  RECAPTURE_FILLER,
+  ACH_FORMAT_CODE,
+  INTERFUND_VOUCHER,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  RCT_R_TSTAMP,
+  PTP_PROCESS_DATE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND,
+  RECOUPMENT_IND_KPC
+)
+values
+(
+  @paymentRequestId,
+  @processDate,
+  @amount,
+  @createdBy,
+  @createdTimestamp,
+  @dpCsePerNum,
+  @csePersonNumber,
+  @imprestFundCode,
+  @classification,
+  @recoveryFiller,
+  @recaptureFiller,
+  @achFormatCode,
+  @recaptureFiller,
+  @number,
+  @printDate,
+  @type,
+  @rctRTstamp,
+  null,
+  null,
+  @interstateInd,
+  @recaptureFiller
+)
+</value>
+   </data>
+   <data name="ReadCashReceipt1">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  TOTAL_CASH_TRANSAC,
+  TOT_NONCSH_TRN_AMT,
+  TOT_CASH_TRAN_CNT,
+  TOT_NOCSH_TRAN_CNT,
+  CASH_BAL_AMT,
+  CASH_BAL_RSN,
+  CASH_DUE
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceipt2">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail1">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COLLECTION_AMOUNT,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.REFUNDED_AMT,
+  T1.COLLAMT_APPL_IND
+from
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID = @cashReceiptId)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail2">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  COLLECTION_AMOUNT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REFUNDED_AMT,
+  COLLAMT_APPL_IND
+from
+  CKT_CR_DETAIL
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER)
+order by
+  CRD_ID desc
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail3">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail4">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  TOT_NON_CSHTRN_CNT,
+  ANTIC_CHECK_AMT,
+  TOTAL_CASH_AMT,
+  TOT_CASH_TRAN_CNT,
+  TOT_NON_CASH_AMT
+from
+  CKT_CR_EVENT
+where
+  CREVENT_ID = @creventId
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType1">
+      <value>
+select top(1)
+  T1.CR_SRCE_TYPE_ID
+from
+  CKT_CRSRC_TYPE T1
+  join
+  CKT_CR_EVENT T2
+  on
+    (T1.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER) and
+    (T2.CREVENT_ID = @creventId)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType2">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadReceiptRefund1">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  TAXID,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  OFFSET_CLOSED,
+  CLT_IDENTIFIER,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (TAXID = @taxid) and
+  (OFFSET_CLOSED &lt;&gt; 'Y') and
+  (@cltIdentifier = CLT_IDENTIFIER) and
+  (AMOUNT &gt; @amount)
+order by
+  AMOUNT,
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadReceiptRefund2">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  TAXID,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  OFFSET_CLOSED,
+  CLT_IDENTIFIER,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (TAXID = @taxid) and
+  (OFFSET_CLOSED &lt;&gt; 'Y') and
+  (@cltIdentifier = CLT_IDENTIFIER) and
+  (AMOUNT = @amount)
+order by
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadReceiptRefund3">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  TAXID,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  OFFSET_CLOSED,
+  CLT_IDENTIFIER,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (TAXID = @taxid) and
+  (OFFSET_CLOSED &lt;&gt; 'Y') and
+  (@cltIdentifier = CLT_IDENTIFIER) and
+  (AMOUNT &lt; @amount)
+order by
+  AMOUNT desc,
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="UpdateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  TOTAL_CASH_TRANSAC = @totalCashTransac,
+  TOT_CASH_TRAN_CNT = @totCashTranCnt,
+  CASH_BAL_AMT = @cashBalAmt,
+  CASH_BAL_RSN = @cashBalRsn,
+  CASH_DUE = @cashDue
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetail">
+      <value>
+update CKT_CR_DETAIL
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  REFUNDED_AMT = @refundedAmt,
+  COLLAMT_APPL_IND = @collamtApplInd
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+   <data name="UpdateCashReceiptEvent">
+      <value>
+update CKT_CR_EVENT
+set
+  ANTIC_CHECK_AMT = @anticCheckAmt,
+  TOTAL_CASH_AMT = @totalCashAmt,
+  TOT_CASH_TRAN_CNT = @totCashTranCnt
+where
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CREVENT_ID = @creventId)
+</value>
+   </data>
+   <data name="UpdateReceiptRefund">
+      <value>
+update CKT_RECEIPT_REFUND
+set
+  CRV_IDENTIFIER = @crvIdentifier,
+  CRD_IDENTIFIER = @crdIdentifier,
+  OFFSET_CLOSED = @offsetClosed,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  CRT_IDENTIFIER = @crtIdentifier,
+  CST_IDENTIFIER = @cstIdentifier
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

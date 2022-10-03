@@ -1,0 +1,59 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLcccLstCseCasesByCtCase"
+           program-name="SWELCCCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLcccLstCseCasesByCtCase"
+           transaction="SR9V"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="Foreign"/>
+      <return-map from="DlgflwSelectedTribunal" to="Tribunal"/>
+      <return-map from="DlgflwSelectedFips" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_SI_COMP_CASE_COMP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="SelectedCase" to="Case1"/>
+   </on>
+   <map from="DataExists" to="DataExists"/>
+   <map from="PreviousFipsTribAddress" to="PreviousFipsTribAddress"/>
+   <map from="PreviousFips" to="PreviousFips"/>
+   <map from="Standard" to="Standard"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="SelectedServiceProvider" to="SelectedServiceProvider"/>
+   <map from="SelectedCase" to="SelectedCase"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="PromptTribunal" to="PromptTribunal"/>
+   <map from="Foreign" to="Foreign"/>
+   <map from="Cases.Common" to="Cases.Common"/>
+   <map from="Cases.TextWorkArea" to="Cases.TextWorkArea"/>
+   <map from="PreviousLegalAction.CourtCaseNumber"
+        to="PreviousLegalAction.CourtCaseNumber"/>
+   <map from="SelectedOffice.SystemGeneratedId"
+        to="SelectedOffice.SystemGeneratedId"/>
+   <map from="Cases.Case1.Status" to="Cases.Case1.Status"/>
+   <map from="Cases.DetailServiceProvider.SystemGeneratedId"
+        to="Cases.DetailServiceProvider.SystemGeneratedId"/>
+   <map from="Cases.CsePersonsWorkSet.FormattedName"
+        to="Cases.CsePersonsWorkSet.FormattedName"/>
+   <map from="Cases.Case1.Number" to="Cases.Case1.Number"/>
+   <map from="Cases.DetailOffice.SystemGeneratedId"
+        to="Cases.DetailOffice.SystemGeneratedId"/>
+   <autoflow command="EXIT" exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"/>
+</procedure>

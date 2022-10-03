@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRole">
+      <value>
+select
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+from
+  CKT_LA_PER_LA_CROL
+where
+  @lapId = LAP_ID
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionPersonCsePerson">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.[ROLE],
+  T1.END_DT,
+  T1.END_REASON,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadLegalActionPersonLaPersonLaCaseRoleLegalActionCaseRole">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.[ROLE],
+  T1.END_DT,
+  T1.END_REASON,
+  T2.IDENTIFIER,
+  T2.CRO_ID,
+  T2.CRO_TYPE,
+  T2.CSP_NUM,
+  T2.CAS_NUM,
+  T2.LGA_ID,
+  T3.CREATED_BY,
+  T4.START_DATE,
+  T4.END_DATE,
+  T6.TYPE
+from
+  CKT_CSE_PERSON T6
+  join
+  CKT_CASE_ROLE T4
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  join
+  CKT_LEGAL_ACT_PERS T1
+  join
+  CKT_LA_PER_LA_CROL T2
+  on
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T1.LA_PERSON_ID = T2.LAP_ID)
+  on
+    (T3.LGA_ID = T2.LGA_ID) and
+    (T3.CAS_NUMBER = T2.CAS_NUM) and
+    (T3.CRO_IDENTIFIER = T2.CRO_ID) and
+    (T3.CSP_NUMBER = T2.CSP_NUM) and
+    (T3.CRO_TYPE = T2.CRO_TYPE) and
+    (@lgaIdentifier = T3.LGA_ID)
+  on
+    (T4.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T4.TYPE = T3.CRO_TYPE) and
+    (T4.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T4.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T4.TYPE in ('AP', 'AR', 'CH'))
+  on
+    (T6.NUMB = T1.CSP_NUMBER) and
+    (T6.NUMB = T4.CSP_NUMBER)
+order by
+  T2.CAS_NUM,
+  T2.CRO_TYPE,
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  JUDICIAL_DISTRICT,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

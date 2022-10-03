@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateLegalAction">
+      <value>
+update CKT_DISB_SUPPR_STS
+set
+  LGA_IDENTIFIER = @lgaIdentifier
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DSS_GENERATED_ID = @dssGeneratedId)
+</value>
+   </data>
+   <data name="CreateDisbSuppressionStatusHistory">
+      <value>
+insert into CKT_DISB_SUPPR_STS
+(
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  CLT_SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PERSON_DISB_FILLER,
+  COLLECTION_FILLER,
+  TYPE,
+  REASON_TEXT,
+  AUTOMATIC_FILLER,
+  EXCESS_URA_FILLER,
+  XURA_FILLER,
+  DUPLICATE_FILLER,
+  COURT_ORDER_SUPPR,
+  LGA_IDENTIFIER,
+  DECEASED_FILLER,
+  NO_ADDRESS_FILLER
+)
+values
+(
+  @cpaType,
+  @cspNumber,
+  @dssGeneratedId,
+  null,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @personDisbFiller,
+  @personDisbFiller,
+  @type,
+  @reasonText,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  null,
+  @personDisbFiller,
+  @personDisbFiller
+)
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  TYPE,
+  REASON_TEXT,
+  LGA_IDENTIFIER
+from
+  CKT_DISB_SUPPR_STS
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('P', 'O')) and
+  (
+    (
+      (DISCONTINUE_DATE &gt;= @discontinueDate) and
+      (EFFECTIVE_DATE &lt;= @effectiveDate)
+    ) or
+    (EFFECTIVE_DATE between cast(@discontinueDate as date) and cast(@effectiveDate as date))
+  )
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  STANDARD_NO = @standardNo
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+</root>

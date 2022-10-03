@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLifecycleState">
+      <value>
+select
+  IDENTIFIER,
+  DESCRIPTION
+from
+  CKT_LIFECYCL_STATE
+where
+  IDENTIFIER &gt;= @identifier
+order by
+  IDENTIFIER
+</value>
+   </data>
+   <data name="ReadLifecycleTransformation">
+      <value>
+select top(1)
+  T1.DESCRIPTION,
+  T1.LCS_ID_PRI,
+  T1.EVE_CTRL_NO_PRI,
+  T1.EVD_ID_PRI,
+  T1.LCS_LCT_ID_SEC
+from
+  CKT_LIFECYCLE_TRAN T1,
+  CKT_LIFECYCL_STATE T2
+where
+  (
+    (T2.IDENTIFIER = T1.LCS_LCT_ID_SEC) and
+    (T2.IDENTIFIER = @identifier)
+  ) or
+  (
+    (T2.IDENTIFIER = T1.LCS_ID_PRI) and
+    (T2.IDENTIFIER = @identifier)
+  )
+</value>
+   </data>
+</root>

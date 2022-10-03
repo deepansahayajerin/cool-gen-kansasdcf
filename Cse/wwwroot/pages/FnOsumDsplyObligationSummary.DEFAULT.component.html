@@ -1,0 +1,447 @@
+﻿<!--Name: FN_OSUM_DSPLY_OBLIGATION_SUMMARY, ID: 374431670, model: 746-->
+<div coolContent coolName="FN_OSUM_DSPLY_OBLIGATION_SUMMARY" coolType="SCREEN"
+  (coolInit)="scrollSize = 20; pageSize = 5">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 25%; top: 0; width: 48.75%; height: 4%;"
+     coolCol="21" coolRow="1" coolLength="39">CSE - DISPLAY OBLIGATION SUMMARY - OSUM</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 12%; width: 10%; height: 4%;"
+     coolCol="3" coolRow="4" coolLength="8" coolColor="white">AP/Payor</div>
+   <input type="text" coolType="field" name="field_4_12"
+     [(ngModel)]="in.csePersonsWorkSet.number"
+     [coolVideo]="out.csePersonsWorkSet.screenField?.number" coolAutotab
+     coolReadonly coolAlign="right" coolColor="cyan" coolUpper
+     [attr.maxlength]="10"
+     style="left: 13.75%; top: 12%; width: 12.5%; height: 4%;" coolCol="12"
+     coolRow="4" coolLength="10">
+   <input type="text" coolType="field" name="field_4_23"
+     [(ngModel)]="in.csePersonsWorkSet.formattedName"
+     [coolVideo]="out.csePersonsWorkSet.screenField?.formattedName" coolAutotab
+     coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="28"
+     style="left: 27.5%; top: 12%; width: 35%; height: 4%;" coolCol="23"
+     coolRow="4" coolLength="28">
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 12%; width: 16.25%; height: 4%;" coolCol="54"
+     coolRow="4" coolLength="13">Undist Amount</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 12%; width: 11.25%; height: 4%;" coolCol="68"
+     coolRow="4" coolLength="9">{{in.screenOwedAmountsDtl.undistributedAmt|coolNumber:'----0.00;-#':1}}</div>
+   <input type="text" coolType="field" name="field_4_78"
+     [(ngModel)]="in.amtPrompt.text1"
+     [coolVideo]="out.amtPrompt.screenField?.text1" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 96.25%; top: 12%; width: 1.25%; height: 4%;" coolCol="78"
+     coolRow="4" coolLength="1">
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 16%; width: 13.75%; height: 4%;" coolCol="3"
+     coolRow="5" coolLength="11" coolColor="white">Court Order</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 16%; width: 15%; height: 4%;" coolCol="15"
+     coolRow="5" coolLength="12">{{in.legalAction.standardNumber}}</div>
+   
+   <div coolType="prompt" style="left: 40%; top: 16%; width: 12.5%; height: 4%;"
+     coolCol="33" coolRow="5" coolLength="10">Oblig Type</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 53.75%; top: 16%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="5" coolLength="7">{{in.obligationType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 63.75%; top: 16%; width: 25%; height: 4%;" coolCol="52"
+     coolRow="5" coolLength="20">{{in.obligationType.name}}</div>
+   
+   <div coolType="prompt"
+     style="left: 91.25%; top: 16%; width: 2.5%; height: 4%;" coolCol="74"
+     coolRow="5" coolLength="2">ID</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 95%; top: 16%; width: 3.75%; height: 4%;" coolCol="77"
+     coolRow="5" coolLength="3">{{in.obligation.systemGeneratedIdentifier|coolNumber:'000;#':1}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 20%; width: 5%; height: 4%;"
+     coolCol="3" coolRow="6" coolLength="4">Freq</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 20%; width: 2.5%; height: 4%;" coolCol="15"
+     coolRow="6" coolLength="2">{{in.obligationPaymentSchedule.frequencyCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 20%; width: 16.25%; height: 4%;" coolCol="18"
+     coolRow="6" coolLength="13">{{in.frequencyWorkSet.frequencyDescription}}</div>
+   
+   <div coolType="prompt" style="left: 40%; top: 20%; width: 17.5%; height: 4%;"
+     coolCol="33" coolRow="6" coolLength="14">Interstate Ind</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 20%; width: 1.25%; height: 4%;" coolCol="48"
+     coolRow="6" coolLength="1">{{in.obligation.orderTypeCode}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 28%; width: 13.75%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="11">Freq Amount</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 20%; top: 28%; width: 11.25%; height: 4%;" coolCol="17"
+     coolRow="8" coolLength="9">{{in.obligationPaymentSchedule.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 71.25%; top: 28%; width: 15%; height: 4%;" coolCol="58"
+     coolRow="8" coolLength="12">Mthly Amount</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 28%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="8" coolLength="9">{{in.obligAmount.totalCurrency|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 32%; width: 15%; height: 4%;"
+     coolCol="3" coolRow="9" coolLength="12">Current Owed</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 20%; top: 32%; width: 11.25%; height: 4%;" coolCol="17"
+     coolRow="9" coolLength="9">{{in.screenOwedAmountsDtl.totalCurrOwed|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 65%; top: 32%; width: 21.25%; height: 4%;" coolCol="53"
+     coolRow="9" coolLength="17">Current Collected</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 32%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="9" coolLength="9">{{in.screenOwedAmountsDtl.totalCurrColl|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 36%; width: 15%; height: 4%;" coolCol="2"
+     coolRow="10" coolLength="12">ARREARS OWED</div>
+   
+   <div coolType="literal"
+     style="left: 25%; top: 36%; width: 16.25%; height: 4%;" coolCol="21"
+     coolRow="10" coolLength="13">INTEREST OWED</div>
+   
+   <div coolType="literal"
+     style="left: 48.75%; top: 36%; width: 21.25%; height: 4%;" coolCol="40"
+     coolRow="10" coolLength="17">ARREARS COLLECTED</div>
+   
+   <div coolType="literal"
+     style="left: 73.75%; top: 36%; width: 22.5%; height: 4%;" coolCol="60"
+     coolRow="10" coolLength="18">INTEREST COLLECTED</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 1.25%; top: 40%; width: 6.25%; height: 4%;" coolCol="2"
+     coolRow="11" coolLength="5" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.garrOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 8.75%; top: 40%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="11" coolLength="10" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.garrOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 25%; top: 40%; width: 6.25%; height: 4%;" coolCol="21"
+     coolRow="11" coolLength="5" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.gintOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 32.5%; top: 40%; width: 12.5%; height: 4%;" coolCol="27"
+     coolRow="11" coolLength="10" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.gintOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 48.75%; top: 40%; width: 6.25%; height: 4%;" coolCol="40"
+     coolRow="11" coolLength="5" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.garrCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 56.25%; top: 40%; width: 12.5%; height: 4%;" coolCol="46"
+     coolRow="11" coolLength="10" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.garrCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 73.75%; top: 40%; width: 6.25%; height: 4%;" coolCol="60"
+     coolRow="11" coolLength="5" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.gintCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 81.25%; top: 40%; width: 12.5%; height: 4%;" coolCol="66"
+     coolRow="11" coolLength="10" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.gintCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 1.25%; top: 44%; width: 6.25%; height: 4%;" coolCol="2"
+     coolRow="12" coolLength="5" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.garrOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 8.75%; top: 44%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.garrOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 25%; top: 44%; width: 6.25%; height: 4%;" coolCol="21"
+     coolRow="12" coolLength="5" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.gintOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 32.5%; top: 44%; width: 12.5%; height: 4%;" coolCol="27"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.gintOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 48.75%; top: 44%; width: 6.25%; height: 4%;" coolCol="40"
+     coolRow="12" coolLength="5" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.garrCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 56.25%; top: 44%; width: 12.5%; height: 4%;" coolCol="46"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.garrCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 73.75%; top: 44%; width: 6.25%; height: 4%;" coolCol="60"
+     coolRow="12" coolLength="5" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.gintCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 81.25%; top: 44%; width: 12.5%; height: 4%;" coolCol="66"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.gintCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 1.25%; top: 48%; width: 6.25%; height: 4%;" coolCol="2"
+     coolRow="13" coolLength="5" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.garrOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 8.75%; top: 48%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.garrOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 25%; top: 48%; width: 6.25%; height: 4%;" coolCol="21"
+     coolRow="13" coolLength="5" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.gintOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 32.5%; top: 48%; width: 12.5%; height: 4%;" coolCol="27"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.gintOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 48.75%; top: 48%; width: 6.25%; height: 4%;" coolCol="40"
+     coolRow="13" coolLength="5" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.garrCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 56.25%; top: 48%; width: 12.5%; height: 4%;" coolCol="46"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.garrCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 73.75%; top: 48%; width: 6.25%; height: 4%;" coolCol="60"
+     coolRow="13" coolLength="5" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.gintCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 81.25%; top: 48%; width: 12.5%; height: 4%;" coolCol="66"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.gintCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 1.25%; top: 52%; width: 6.25%; height: 4%;" coolCol="2"
+     coolRow="14" coolLength="5" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.garrOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 8.75%; top: 52%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.garrOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 25%; top: 52%; width: 6.25%; height: 4%;" coolCol="21"
+     coolRow="14" coolLength="5" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.gintOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 32.5%; top: 52%; width: 12.5%; height: 4%;" coolCol="27"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.gintOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 48.75%; top: 52%; width: 6.25%; height: 4%;" coolCol="40"
+     coolRow="14" coolLength="5" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.garrCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 56.25%; top: 52%; width: 12.5%; height: 4%;" coolCol="46"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.garrCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 73.75%; top: 52%; width: 6.25%; height: 4%;" coolCol="60"
+     coolRow="14" coolLength="5" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.gintCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 81.25%; top: 52%; width: 12.5%; height: 4%;" coolCol="66"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.gintCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 1.25%; top: 56%; width: 6.25%; height: 4%;" coolCol="2"
+     coolRow="15" coolLength="5" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.garrOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 8.75%; top: 56%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.garrOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 25%; top: 56%; width: 6.25%; height: 4%;" coolCol="21"
+     coolRow="15" coolLength="5" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.gintOweTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 32.5%; top: 56%; width: 12.5%; height: 4%;" coolCol="27"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.gintOweAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 48.75%; top: 56%; width: 6.25%; height: 4%;" coolCol="40"
+     coolRow="15" coolLength="5" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.garrCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 56.25%; top: 56%; width: 12.5%; height: 4%;" coolCol="46"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.garrCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 73.75%; top: 56%; width: 6.25%; height: 4%;" coolCol="60"
+     coolRow="15" coolLength="5" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.gintCollTitle.text5}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 81.25%; top: 56%; width: 12.5%; height: 4%;" coolCol="66"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.gintCollAmount.averageCurrency|coolNumber:'-----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 60%; width: 10%; height: 4%;"
+     coolCol="2" coolRow="16" coolLength="8">Fee Arrs</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 12.5%; top: 60%; width: 11.25%; height: 4%;" coolCol="11"
+     coolRow="16" coolLength="9">{{in.screenOwedAmountsDtl.feesArrearsOwed|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 25%; top: 60%; width: 8.75%; height: 4%;"
+     coolCol="21" coolRow="16" coolLength="7">Fee Int</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 35%; top: 60%; width: 11.25%; height: 4%;" coolCol="29"
+     coolRow="16" coolLength="9">{{in.screenOwedAmountsDtl.feesInterestOwed|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 50%; top: 60%; width: 10%; height: 4%;"
+     coolCol="41" coolRow="16" coolLength="8">Fee Arrs</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 60%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="16" coolLength="9">{{in.screenOwedAmountsDtl.feesArrearsColl|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 75%; top: 60%; width: 8.75%; height: 4%;"
+     coolCol="61" coolRow="16" coolLength="7">Fee Int</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 85%; top: 60%; width: 11.25%; height: 4%;" coolCol="69"
+     coolRow="16" coolLength="9">{{in.screenOwedAmountsDtl.feesInterestColl|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 64%; width: 10%; height: 4%;"
+     coolCol="2" coolRow="17" coolLength="8">Recovery</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 12.5%; top: 64%; width: 11.25%; height: 4%;" coolCol="11"
+     coolRow="17" coolLength="9">{{in.screenOwedAmountsDtl.recoveryArrearsOwed|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 50%; top: 64%; width: 10%; height: 4%;"
+     coolCol="41" coolRow="17" coolLength="8">Recovery</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 64%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="17" coolLength="9">{{in.screenOwedAmountsDtl.recoveryArrearsColl|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 68%; width: 6.25%; height: 4%;" coolCol="2"
+     coolRow="18" coolLength="5">TOTAL</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 12.5%; top: 68%; width: 11.25%; height: 4%;" coolCol="11"
+     coolRow="18" coolLength="9">{{in.screenOwedAmountsDtl.totalArrearsOwed|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 25%; top: 68%; width: 6.25%; height: 4%;"
+     coolCol="21" coolRow="18" coolLength="5">TOTAL</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 35%; top: 68%; width: 11.25%; height: 4%;" coolCol="29"
+     coolRow="18" coolLength="9">{{in.screenOwedAmountsDtl.totalInterestOwed|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 50%; top: 68%; width: 6.25%; height: 4%;"
+     coolCol="41" coolRow="18" coolLength="5">TOTAL</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 68%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="18" coolLength="9">{{in.screenOwedAmountsDtl.totalArrearsColl|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt" style="left: 75%; top: 68%; width: 6.25%; height: 4%;"
+     coolCol="61" coolRow="18" coolLength="5">TOTAL</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 85%; top: 68%; width: 11.25%; height: 4%;" coolCol="69"
+     coolRow="18" coolLength="9">{{in.screenOwedAmountsDtl.totalInterestColl|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 72%; width: 18.75%; height: 4%;" coolCol="54"
+     coolRow="19" coolLength="15">Future Payments</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     coolHighlight="underscore"
+     style="left: 87.5%; top: 72%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="19" coolLength="9">{{in.screenOwedAmountsDtl.futureColl|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 76%; width: 22.5%; height: 4%;" coolCol="2"
+     coolRow="20" coolLength="18">TOTAL OWED TO DATE</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 25%; top: 76%; width: 11.25%; height: 4%;" coolCol="21"
+     coolRow="20" coolLength="9">{{in.totalOwedToDate.totalCurrency|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 56.25%; top: 76%; width: 28.75%; height: 4%;" coolCol="46"
+     coolRow="20" coolLength="23">TOTAL COLLECTED TO DATE</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 76%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="20" coolLength="9">{{in.totalCollectedToDate.totalCurrency|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="yellow" coolUpper
+     style="left: 1.25%; top: 80%; width: 37.5%; height: 4%;" coolCol="2"
+     coolRow="21" coolLength="30">{{in.screenOwedAmountsDtl.errorInformationLine}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="65" coolRow="21" coolLength="9"
+     style="left: 80%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 86.25%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="69">PF KEY:  1 Help  3 Exit  4 List  7 Prev  8 Next  9 Return  12 Signoff</div>
+   
+   <div coolType="literal"
+     style="left: 10%; top: 92%; width: 8.75%; height: 4%;" coolCol="9"
+     coolRow="24" coolLength="7">15 LCDA</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="LCDA" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=LCDA</a>
+   </div>

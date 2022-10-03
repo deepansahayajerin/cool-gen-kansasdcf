@@ -1,0 +1,62 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeFips"
+           program-name="SWEFIPSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeFips"
+           transaction="SR8M"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_ORGZ"
+       action="transfer"
+       to="SiOrgzOrganizationMaintenance"
+       send-command="DISPLAY">
+      <map from="Fips" to="StartingSearchFips"/>
+      <map from="DlgflwRequiredCsePersonAddress.LocationType"
+           to="StartingSearchCity.LocationType"/>
+      <map from="DlgflwRequiredCsePersonAddress.City" to="StartingSearchCity.City"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_FIPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFIPL"
+       to="LeFiplListFips"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="Fips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="CoStbmSupportTablesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_TRIB"
+       action="transfer"
+       to="LeTribTribunal"
+       send-command="DISPLAY">
+      <map from="Fips" to="Fips"/>
+   </on>
+   <map from="Fips" to="Fips"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenFips" to="HiddenFips"/>
+   <map from="PromptFips" to="PromptFips"/>
+   <map from="Code" to="HiddenRetlink"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Detail.GexportLineSelect" to="Detail.GimportLineSelect"/>
+   <map from="Detail.GexportPromptCdvlCountry"
+        to="Detail.GimportPromptCdvlCountry"/>
+   <map from="Detail.GexportPromptCdvlAddrTyp"
+        to="Detail.GimportPromptCdvlAddrTp"/>
+   <map from="Detail.GexportPromptCdvlState"
+        to="Detail.GimportPromptCdvlStates"/>
+   <map from="Detail.GexportDetail" to="Detail.GimportDetail"/>
+   <map from="PromptState" to="PromptState"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

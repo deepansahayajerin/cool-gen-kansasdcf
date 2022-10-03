@@ -1,0 +1,130 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="Oe1099Details"
+           program-name="SWE1099P"
+           class="Gov.Kansas.DCF.Cse.Kessep.Oe1099Details"
+           transaction="SR6I"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="StartingCsePersonsWorkSet.FormattedName"
+           to="Selected.FormattedName"/>
+      <map from="StartingCsePersonsWorkSet.Number" to="Selected.Number"/>
+      <map from="StartingCsePersonsWorkSet.FirstName" to="Selected.FirstName"/>
+      <map from="StartingCsePersonsWorkSet.MiddleInitial"
+           to="Selected.MiddleInitial"/>
+      <map from="StartingCsePersonsWorkSet.LastName" to="Selected.LastName"/>
+      <map from="StartingCsePersonsWorkSet.Ssn" to="Selected.Ssn"/>
+      <map from="StartingCase" to="Next"/>
+      <return-map from="Selected" to="StartingCsePersonsWorkSet"/>
+      <return-map from="Next" to="StartingCase"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeAlomLocateInterfacesMenu"
+       send-command="XXFMMENU">
+      <map from="StartingCase" to="Start"/>
+      <map from="StartingCsePersonsWorkSet" to="PersonName"/>
+      <map from="StartingCsePerson" to="Starting"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_RESOURCE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeReslPersonResourceList"
+       send-command="DISPLAY">
+      <map from="StartingCase" to="StartingCase"/>
+      <map from="ListCsePersons" to="ListCsePersons"/>
+      <map from="StartingCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="StartingCsePerson.Number" to="StartingCsePerson.Number"/>
+      <return-map from="StartingCase" to="StartingCase"/>
+      <return-map from="ListCsePersons" to="Prompt"/>
+      <return-map from="CsePersonsWorkSet.Number" to="StartingCsePersonsWorkSet.Number"/>
+      <return-map from="CsePersonsWorkSet.FormattedName"
+                  to="StartingCsePersonsWorkSet.FormattedName"/>
+      <return-map from="StartingCsePerson" to="StartingCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="StartingCase" to="Case1"/>
+      <return-map from="Case1" to="StartingCase"/>
+      <return-map from="Selected.Number" to="StartingCsePersonsWorkSet.Number"/>
+      <return-map from="Selected.FormattedName"
+                  to="StartingCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_INCOME_SOURCE_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIncsIncomeSourceDetails"
+       send-command="DISPSRC">
+      <map from="StartingCase" to="Next"/>
+      <map from="StartingCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADDRESS_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiAddrAddressMaintenance"
+       send-command="DISPLAY">
+      <map from="StartingCase" to="Next"/>
+   </on>
+   <map from="StartingCsePerson" to="StartingCsePerson"/>
+   <map from="Data1099LocateResponse" to="Data1099LocateResponse"/>
+   <map from="SendIwo" to="SendIwo"/>
+   <map from="SendGarnishment" to="SendGarnishment"/>
+   <map from="ResultCode" to="ResultCode"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HiddenPrevdata1099LocateResponse"
+        to="HiddenPrevdata1099LocateResponse"/>
+   <map from="HiddenPrevdata1099LocateRequest"
+        to="HiddenPrevdata1099LocateRequest"/>
+   <map from="DocumentCode" to="DocumentCode"/>
+   <map from="AmountInd1" to="AmountInd1"/>
+   <map from="AmountInd2" to="AmountInd2"/>
+   <map from="AmountInd3" to="AmountInd3"/>
+   <map from="AmountInd4" to="AmountInd4"/>
+   <map from="AmountInd5" to="AmountInd5"/>
+   <map from="ListCsePersons" to="Prompt"/>
+   <map from="StartingCase" to="StartingCase"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="Hiddendata1099LocateRequest" to="Hiddendata1099LocateRequest"/>
+   <map from="StartingCsePersonsWorkSet" to="StartingCsePersonsWorkSet"/>
+   <map from="HiddenPrevCsePerson" to="HiddenPrevCsePerson"/>
+   <map from="AmountInd6" to="AmountInd6"/>
+   <map from="AmountInd7" to="AmountInd7"/>
+   <map from="AmountInd8" to="AmountInd8"/>
+   <map from="AmountInd9" to="AmountInd9"/>
+   <map from="AmountInd10" to="AmountInd10"/>
+   <map from="AmountInd11" to="AmountInd11"/>
+   <map from="AmountInd12" to="AmountInd12"/>
+   <map from="SendVerificationLetter" to="SendVerificationLetter"/>
+   <map from="SendPostmasterLetter" to="SendPostmasterLetter"/>
+   <map from="Delete1099Info" to="Delete1099Info"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="Data1099LocateRequest.Identifier"
+        to="Data1099LocateRequest.Identifier"/>
+   <map from="Data1099LocateRequest.NoMatchCode"
+        to="Data1099LocateRequest.NoMatchCode"/>
+   <map from="Data1099LocateRequest.LocalCode"
+        to="Data1099LocateRequest.LocalCode"/>
+   <map from="Data1099LocateRequest.AfdcCode"
+        to="Data1099LocateRequest.AfdcCode"/>
+   <map from="Data1099LocateRequest.CaseIdNo"
+        to="Data1099LocateRequest.CaseIdNo"/>
+   <map from="Data1099LocateRequest.CourtOrAdminOrdInd"
+        to="Data1099LocateRequest.CourtOrAdminOrdInd"/>
+   <map from="Data1099LocateRequest.RequestSentDate"
+        to="Data1099LocateRequest.RequestSentDate"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

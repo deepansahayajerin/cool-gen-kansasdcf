@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDashboardStagingPriority1">
+      <value>
+select top(1)
+  max(RUN_NUMBER)
+from
+  CKT_DB_STAGE_PRI_4 with(readuncommitted)
+where
+  REPORT_MONTH = @reportMonth
+</value>
+   </data>
+   <data name="ReadDashboardStagingPriority2">
+      <value>
+select
+  REPORT_MONTH,
+  RUN_NUMBER,
+  CASE_NUMBER,
+  AS_OF_DATE,
+  CURRENT_CS_IND,
+  OTHER_OBG_IND,
+  CS_DUE_AMT,
+  CS_COLLECTED_AMT,
+  PAYING_CASE_IND,
+  PATERNITY_EST_IND,
+  ADDRESS_VER_IND,
+  EMPLOYER_VER_IND,
+  WORKER_ID,
+  JUDICIAL_DISTRICT,
+  CONTRACTOR_NUM
+from
+  CKT_DB_STAGE_PRI_4 with(readuncommitted)
+where
+  (REPORT_MONTH = @reportMonth) and
+  (RUN_NUMBER = @runNumber) and
+  (
+    (CONTRACTOR_NUM &gt; @contractorNum) or
+    (
+      (CONTRACTOR_NUM = @contractorNum) and
+      (JUDICIAL_DISTRICT &gt; @judicialDistrict)
+    ) or
+    (
+      (CONTRACTOR_NUM = @contractorNum) and
+      (JUDICIAL_DISTRICT = @judicialDistrict) and
+      (WORKER_ID &gt; @workerId)
+    ) or
+    (
+      (CONTRACTOR_NUM = @contractorNum) and
+      (JUDICIAL_DISTRICT = @judicialDistrict) and
+      (WORKER_ID = @workerId) and
+      (CASE_NUMBER &gt; @caseNumber)
+    )
+  )
+order by
+  CONTRACTOR_NUM,
+  JUDICIAL_DISTRICT,
+  WORKER_ID,
+  CASE_NUMBER
+</value>
+   </data>
+</root>

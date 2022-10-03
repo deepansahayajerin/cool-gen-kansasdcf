@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDocument">
+      <value>
+select
+  NAME,
+  TYPE,
+  BUSINESS_OBJECT,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_DOCUMENT with(readuncommitted)
+where
+  NAME = @name
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadDocumentFieldField">
+      <value>
+select
+  T1.REQUIRED_SWITCH,
+  T1.FLD_NAME,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T2.DEPENDANCY
+from
+  CKT_FIELD T2 with(readuncommitted)
+  join
+  CKT_DOCUMENT_FIELD T1 with(readuncommitted)
+  on
+    (T2.NAME = T1.FLD_NAME) and
+    (@docEffectiveDte = T1.DOC_EFFECTIVE_DTE) and
+    (@docName = T1.DOC_NAME) and
+    (T2.DEPENDANCY = ' KEY')
+order by
+  T1.FLD_NAME
+</value>
+   </data>
+   <data name="ReadFieldValue">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE with(readuncommitted)
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (VALU = @valu) and
+  (FLD_NAME = @fldName)
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructure">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID
+from
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  join
+  CKT_FIELD_VALUE T3 with(readuncommitted)
+  on
+    (@docEffectiveDte = T1.DOC_EFFECTIVE_DTE) and
+    (@docName = T1.DOC_NAME) and
+    (T1.INF_ID = T3.INF_IDENTIFIER) and
+    (T3.VALU = @valu) and
+    (T3.FLD_NAME = @fldName) and
+    (@docEffectiveDte = T3.DOC_EFFECTIVE_DTE) and
+    (@docName = T3.DOC_NAME)
+order by
+  T1.LAST_UPDATD_TSTAMP desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseAssignmentOfficeServiceProvider1">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (@casNo = CAS_NO)
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseAssignmentOfficeServiceProvider2">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &lt;= @effectiveDate) and
+  (@casNo = CAS_NO)
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseUnitCsePersonCsePersonCsePerson">
+      <value>
+select
+  T1.CU_NUMBER,
+  T1.[STATE],
+  T1.START_DATE,
+  T1.CLOSURE_DATE,
+  T1.CLOSURE_REASON_COD,
+  T1.CAS_NO,
+  T1.CSP_NO_AR,
+  T1.CSP_NO_AP,
+  T1.CSP_NO_CHILD,
+  T2.TYPE,
+  T2.NAME_MIDDLE,
+  T2.NAME_MAIDEN,
+  T3.TYPE,
+  T3.NAME_MIDDLE,
+  T3.NAME_MAIDEN,
+  T3.ORGANIZATION_NAME,
+  T4.TYPE,
+  T4.NAME_MIDDLE,
+  T4.NAME_MAIDEN
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CSE_PERSON T3
+  join
+  CKT_CSE_PERSON T4
+  join
+  CKT_CASE_UNIT T1
+  on
+    (T1.CAS_NO = @casNo) and
+    (T4.NUMB = T1.CSP_NO_AP)
+  on
+    T3.NUMB = T1.CSP_NO_AR
+  on
+    T2.NUMB = T1.CSP_NO_CHILD
+order by
+  T1.CU_NUMBER
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+</root>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonObligorFederalDebtSetoff">
+      <value>
+select
+  CSP_NUMBER,
+  CPA_TYPE,
+  TYPE,
+  TAKEN_DT,
+  ADC_AMT,
+  NON_ADC_AMT,
+  SSN,
+  CASE_NUMBER,
+  LAST_NAME,
+  FIRST_NAME,
+  CASE_TYPE,
+  TANF_CODE,
+  TTYPE_DELETE_CERT
+from
+  CKT_ADMIN_ACT_CERT with(readuncommitted)
+order by
+  CSP_NUMBER,
+  TAKEN_DT desc
+</value>
+   </data>
+   <data name="ReadObligationObligationTypeDebtDetailCsePerson">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.PRIM_SEC_CD,
+  T1.ORD_TYP_CD,
+  T2.DEBT_TYP_CLASS,
+  T3.OBG_GENERATED_ID,
+  T3.CSP_NUMBER,
+  T3.CPA_TYPE,
+  T3.OTR_GENERATED_ID,
+  T3.OTY_TYPE,
+  T3.OTR_TYPE,
+  T3.DUE_DT,
+  T3.BAL_DUE_AMT,
+  T3.INT_BAL_DUE_AMT,
+  T3.RETIRED_DT,
+  T3.CVRD_PRD_START_DT,
+  T3.CVD_PRD_END_DT,
+  T3.PRECNVRSN_PGM_CD,
+  T5.CSP_SUP_NUMBER
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_OBLIGATION T1 with(readuncommitted)
+  on
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.DEBT_TYP_ID = T1.DTY_GENERATED_ID)
+  join
+  CKT_OB_TRN T5 with(readuncommitted)
+  on
+    (T1.DTY_GENERATED_ID = T5.OTY_TYPE) and
+    (T1.OB_ID = T5.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T1.CPA_TYPE = T5.CPA_TYPE) and
+    (T5.CPA_SUP_TYPE is not null) and
+    (T5.CSP_SUP_NUMBER is not null)
+  join
+  CKT_DEBT_DTL T3 with(readuncommitted)
+  on
+    (T5.OTY_TYPE = T3.OTY_TYPE) and
+    (T5.OBG_GENERATED_ID = T3.OBG_GENERATED_ID) and
+    (T5.OB_TRN_TYP = T3.OTR_TYPE) and
+    (T5.OB_TRN_ID = T3.OTR_GENERATED_ID) and
+    (T5.CPA_TYPE = T3.CPA_TYPE) and
+    (T5.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.RETIRED_DT = @retiredDt) and
+    (T3.DUE_DT &lt; @dueDt)
+</value>
+   </data>
+</root>

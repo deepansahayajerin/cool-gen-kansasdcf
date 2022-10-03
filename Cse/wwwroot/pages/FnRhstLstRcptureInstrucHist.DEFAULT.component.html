@@ -1,0 +1,499 @@
+﻿<!--Name: FN_RHST_LST_RCPTURE_INSTRUC_HIST, ID: 372128408, model: 746-->
+<div coolContent coolName="FN_RHST_LST_RCPTURE_INSTRUC_HIST" coolType="SCREEN"
+  (coolInit)="scrollSize = 25; pageSize = 3">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 21.25%; top: 0; width: 53.75%; height: 4%;" coolCol="18"
+     coolRow="1" coolLength="43">CSE - Lst/Mtn Recapture Instructions - RHST</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt" style="left: 5%; top: 8%; width: 8.75%; height: 4%;"
+     coolCol="5" coolRow="3" coolLength="7">Obligor</div>
+   <input type="text" coolType="field" name="field_3_13"
+     [(ngModel)]="in.csePerson.number"
+     [coolVideo]="out.csePerson.screenField?.number" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="10" style="left: 15%; top: 8%; width: 12.5%; height: 4%;"
+     coolCol="13" coolRow="3" coolLength="10">
+   <input type="text" coolType="field" name="field_3_24"
+     [(ngModel)]="in.promptCsePerson.selectChar"
+     [coolVideo]="out.promptCsePerson.screenField?.selectChar" coolAutotab
+     coolColor="green" placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 28.75%; top: 8%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="3" coolLength="1">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 8%; width: 41.25%; height: 4%;" coolCol="26"
+     coolRow="3" coolLength="33">{{in.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="literal"
+     style="left: 8.75%; top: 16%; width: 8.75%; height: 4%;" coolCol="8"
+     coolRow="5" coolLength="7">Monthly</div>
+   
+   <div coolType="literal"
+     style="left: 22.5%; top: 16%; width: 8.75%; height: 4%;" coolCol="19"
+     coolRow="5" coolLength="7">Percent</div>
+   
+   <div coolType="literal" style="left: 40%; top: 16%; width: 7.5%; height: 4%;"
+     coolCol="33" coolRow="5" coolLength="6">Amount</div>
+   
+   <div coolType="literal"
+     style="left: 58.75%; top: 16%; width: 3.75%; height: 4%;" coolCol="48"
+     coolRow="5" coolLength="3">Max</div>
+   <input type="text" coolType="field" name="field_6_5"
+     [(ngModel)]="ref(in.group, pageOffset, 'select.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 5%; top: 20%; width: 1.25%; height: 4%;"
+     coolCol="5" coolRow="6" coolLength="1"
+     [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 8.75%; top: 20%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="6" coolLength="10">NA Current</div>
+   <input type="text" coolType="field" name="field_6_23"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.nonAdcCurrentPercentage').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.nonAdcCurrentPercentage"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="##0;#" coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 27.5%; top: 20%; width: 3.75%; height: 4%;" coolCol="23"
+     coolRow="6" coolLength="3" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_6_32"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.nonAdcCurrentAmount').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.nonAdcCurrentAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 38.75%; top: 20%; width: 8.75%; height: 4%;" coolCol="32"
+     coolRow="6" coolLength="7" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_6_44"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.nonAdcCurrentMaxAmount').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.nonAdcCurrentMaxAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 53.75%; top: 20%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="6" coolLength="7" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 20%; width: 20%; height: 4%;" coolCol="54"
+     coolRow="6" coolLength="16">Last Accessed By</div>
+   
+   <div coolType="field" coolColor="cyan" coolHighlight="underscore" coolUpper
+     style="left: 87.5%; top: 20%; width: 10%; height: 4%;" coolCol="71"
+     coolRow="6" coolLength="8" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.obligorRule.lastUpdatedBy}}</div>
+   
+   <div coolType="prompt"
+     style="left: 8.75%; top: 24%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="7" coolLength="10">NA Arrears</div>
+   <input type="text" coolType="field" name="field_7_23"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.nonAdcArrearsPercentage').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.nonAdcArrearsPercentage"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="##0;#" coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 27.5%; top: 24%; width: 3.75%; height: 4%;" coolCol="23"
+     coolRow="7" coolLength="3" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_7_32"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.nonAdcArrearsAmount').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.nonAdcArrearsAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 38.75%; top: 24%; width: 8.75%; height: 4%;" coolCol="32"
+     coolRow="7" coolLength="7" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_7_44"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.nonAdcArrearsMaxAmount').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.nonAdcArrearsMaxAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 53.75%; top: 24%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="7" coolLength="7" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 24%; width: 20%; height: 4%;" coolCol="54"
+     coolRow="7" coolLength="16">Last Access Date</div>
+   
+   <div coolType="field" coolColor="cyan" coolHighlight="underscore"
+     style="left: 87.5%; top: 24%; width: 10%; height: 4%;" coolCol="71"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.obligorRule.lastUpdatedTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 8.75%; top: 28%; width: 10%; height: 4%;"
+     coolCol="8" coolRow="8" coolLength="8">Passthru</div>
+   <input type="text" coolType="field" name="field_8_23"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.passthruPercentage').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.passthruPercentage"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="##0;#" coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 27.5%; top: 28%; width: 3.75%; height: 4%;" coolCol="23"
+     coolRow="8" coolLength="3" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_8_32"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.passthruAmount').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.passthruAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 38.75%; top: 28%; width: 8.75%; height: 4%;" coolCol="32"
+     coolRow="8" coolLength="7" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_8_44"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.passthruMaxAmount').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.passthruMaxAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 53.75%; top: 28%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="8" coolLength="7" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 32%; width: 17.5%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="14">Effective Date</div>
+   <input type="text" coolType="field" name="field_9_18"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.effectiveDate').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 21.25%; top: 32%; width: 10%; height: 4%;" coolCol="18"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 33.75%; top: 32%; width: 20%; height: 4%;" coolCol="28"
+     coolRow="9" coolLength="16">Discontinue Date</div>
+   <input type="text" coolType="field" name="field_9_45"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.discontinueDate').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 55%; top: 32%; width: 10%; height: 4%;" coolCol="45"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 67.5%; top: 32%; width: 18.75%; height: 4%;" coolCol="55"
+     coolRow="9" coolLength="15">Negotiated Date</div>
+   <input type="text" coolType="field" name="field_9_71"
+     [(ngModel)]="ref(in.group, pageOffset, 'obligorRule.negotiatedDate').value"
+     [coolVideo]="out.group?.[pageOffset]?.obligorRule.screenField?.negotiatedDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 87.5%; top: 32%; width: 10%; height: 4%;" coolCol="71"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_11_5"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'select.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 5%; top: 40%; width: 1.25%; height: 4%;"
+     coolCol="5" coolRow="11" coolLength="1"
+     [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 8.75%; top: 40%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="11" coolLength="10">NA Current</div>
+   <input type="text" coolType="field" name="field_11_23"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.nonAdcCurrentPercentage').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.nonAdcCurrentPercentage"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="##0;#" coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 27.5%; top: 40%; width: 3.75%; height: 4%;" coolCol="23"
+     coolRow="11" coolLength="3" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_11_32"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.nonAdcCurrentAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.nonAdcCurrentAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 38.75%; top: 40%; width: 8.75%; height: 4%;" coolCol="32"
+     coolRow="11" coolLength="7" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_11_44"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.nonAdcCurrentMaxAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.nonAdcCurrentMaxAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 53.75%; top: 40%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="11" coolLength="7" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 40%; width: 20%; height: 4%;" coolCol="54"
+     coolRow="11" coolLength="16">Last Accessed By</div>
+   
+   <div coolType="field" coolColor="cyan" coolHighlight="underscore" coolUpper
+     style="left: 87.5%; top: 40%; width: 10%; height: 4%;" coolCol="71"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.obligorRule.lastUpdatedBy}}</div>
+   
+   <div coolType="prompt"
+     style="left: 8.75%; top: 44%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="12" coolLength="10">NA Arrears</div>
+   <input type="text" coolType="field" name="field_12_23"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.nonAdcArrearsPercentage').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.nonAdcArrearsPercentage"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="##0;#" coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 27.5%; top: 44%; width: 3.75%; height: 4%;" coolCol="23"
+     coolRow="12" coolLength="3" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_32"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.nonAdcArrearsAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.nonAdcArrearsAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 38.75%; top: 44%; width: 8.75%; height: 4%;" coolCol="32"
+     coolRow="12" coolLength="7" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_44"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.nonAdcArrearsMaxAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.nonAdcArrearsMaxAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 53.75%; top: 44%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="12" coolLength="7" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 44%; width: 20%; height: 4%;" coolCol="54"
+     coolRow="12" coolLength="16">Last Access Date</div>
+   
+   <div coolType="field" coolColor="cyan" coolHighlight="underscore"
+     style="left: 87.5%; top: 44%; width: 10%; height: 4%;" coolCol="71"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.obligorRule.lastUpdatedTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 8.75%; top: 48%; width: 10%; height: 4%;"
+     coolCol="8" coolRow="13" coolLength="8">Passthru</div>
+   <input type="text" coolType="field" name="field_13_23"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.passthruPercentage').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.passthruPercentage"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="##0;#" coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 27.5%; top: 48%; width: 3.75%; height: 4%;" coolCol="23"
+     coolRow="13" coolLength="3" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_32"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.passthruAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.passthruAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 38.75%; top: 48%; width: 8.75%; height: 4%;" coolCol="32"
+     coolRow="13" coolLength="7" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_44"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.passthruMaxAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.passthruMaxAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 53.75%; top: 48%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="13" coolLength="7" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 52%; width: 17.5%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="14">Effective Date</div>
+   <input type="text" coolType="field" name="field_14_18"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.effectiveDate').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 21.25%; top: 52%; width: 10%; height: 4%;" coolCol="18"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 33.75%; top: 52%; width: 20%; height: 4%;" coolCol="28"
+     coolRow="14" coolLength="16">Discontinue Date</div>
+   <input type="text" coolType="field" name="field_14_45"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.discontinueDate').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 55%; top: 52%; width: 10%; height: 4%;" coolCol="45"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 67.5%; top: 52%; width: 18.75%; height: 4%;" coolCol="55"
+     coolRow="14" coolLength="15">Negotiated Date</div>
+   <input type="text" coolType="field" name="field_14_71"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'obligorRule.negotiatedDate').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.obligorRule.screenField?.negotiatedDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 87.5%; top: 52%; width: 10%; height: 4%;" coolCol="71"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_5"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'select.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 5%; top: 60%; width: 1.25%; height: 4%;"
+     coolCol="5" coolRow="16" coolLength="1"
+     [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 8.75%; top: 60%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="16" coolLength="10">NA Current</div>
+   <input type="text" coolType="field" name="field_16_23"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.nonAdcCurrentPercentage').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.nonAdcCurrentPercentage"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="##0;#" coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 27.5%; top: 60%; width: 3.75%; height: 4%;" coolCol="23"
+     coolRow="16" coolLength="3" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_32"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.nonAdcCurrentAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.nonAdcCurrentAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 38.75%; top: 60%; width: 8.75%; height: 4%;" coolCol="32"
+     coolRow="16" coolLength="7" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_44"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.nonAdcCurrentMaxAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.nonAdcCurrentMaxAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 53.75%; top: 60%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="16" coolLength="7" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 60%; width: 20%; height: 4%;" coolCol="54"
+     coolRow="16" coolLength="16">Last Accessed By</div>
+   
+   <div coolType="field" coolColor="cyan" coolHighlight="underscore" coolUpper
+     style="left: 87.5%; top: 60%; width: 10%; height: 4%;" coolCol="71"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.obligorRule.lastUpdatedBy}}</div>
+   
+   <div coolType="prompt"
+     style="left: 8.75%; top: 64%; width: 12.5%; height: 4%;" coolCol="8"
+     coolRow="17" coolLength="10">NA Arrears</div>
+   <input type="text" coolType="field" name="field_17_23"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.nonAdcArrearsPercentage').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.nonAdcArrearsPercentage"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="##0;#" coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 27.5%; top: 64%; width: 3.75%; height: 4%;" coolCol="23"
+     coolRow="17" coolLength="3" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_32"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.nonAdcArrearsAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.nonAdcArrearsAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 38.75%; top: 64%; width: 8.75%; height: 4%;" coolCol="32"
+     coolRow="17" coolLength="7" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_44"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.nonAdcArrearsMaxAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.nonAdcArrearsMaxAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 53.75%; top: 64%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="17" coolLength="7" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 64%; width: 20%; height: 4%;" coolCol="54"
+     coolRow="17" coolLength="16">Last Access Date</div>
+   
+   <div coolType="field" coolColor="cyan" coolHighlight="underscore"
+     style="left: 87.5%; top: 64%; width: 10%; height: 4%;" coolCol="71"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.obligorRule.lastUpdatedTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 8.75%; top: 68%; width: 10%; height: 4%;"
+     coolCol="8" coolRow="18" coolLength="8">Passthru</div>
+   <input type="text" coolType="field" name="field_18_23"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.passthruPercentage').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.passthruPercentage"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="##0;#" coolBlankWhenZero [attr.maxlength]="3"
+     style="left: 27.5%; top: 68%; width: 3.75%; height: 4%;" coolCol="23"
+     coolRow="18" coolLength="3" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_32"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.passthruAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.passthruAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 38.75%; top: 68%; width: 8.75%; height: 4%;" coolCol="32"
+     coolRow="18" coolLength="7" [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_44"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.passthruMaxAmount').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.passthruMaxAmount"
+     coolAutotab coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="###0.00;#" coolBlankWhenZero [attr.maxlength]="7"
+     style="left: 53.75%; top: 68%; width: 8.75%; height: 4%;" coolCol="44"
+     coolRow="18" coolLength="7" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 72%; width: 17.5%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="14">Effective Date</div>
+   <input type="text" coolType="field" name="field_19_18"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.effectiveDate').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 21.25%; top: 72%; width: 10%; height: 4%;" coolCol="18"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 33.75%; top: 72%; width: 20%; height: 4%;" coolCol="28"
+     coolRow="19" coolLength="16">Discontinue Date</div>
+   <input type="text" coolType="field" name="field_19_45"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.discontinueDate').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 55%; top: 72%; width: 10%; height: 4%;" coolCol="45"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="prompt"
+     style="left: 67.5%; top: 72%; width: 18.75%; height: 4%;" coolCol="55"
+     coolRow="19" coolLength="15">Negotiated Date</div>
+   <input type="text" coolType="field" name="field_19_71"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'obligorRule.negotiatedDate').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.obligorRule.screenField?.negotiatedDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 87.5%; top: 72%; width: 10%; height: 4%;" coolCol="71"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 93.75%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="75">PF KEY:  1 Help  2 Display  3 Exit  4 List  5 Add  6 Update  7 Prev  8 Next</div>
+   
+   <div coolType="literal"
+     style="left: 11.25%; top: 92%; width: 73.75%; height: 4%;" coolCol="10"
+     coolRow="24" coolLength="59">9 Return  10 Delete  11 Clear  12 Signoff  15 RCAP  16 ROHL</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="ADD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=ADD</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="RCAP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=RCAP</a>
+   <a coolType="action" coolCommand="ROHL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=ROHL</a>
+   </div>

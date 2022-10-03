@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailAddress1">
+      <value>
+select top(1)
+  CRDETAIL_ADDRESS_I,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER
+from
+  CKT_CRDETAIL_ADDRS
+where
+  CRDETAIL_ADDRESS_I = @crdetailAddressI
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailAddress2">
+      <value>
+select top(1)
+  CRDETAIL_ADDRESS_I,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER
+from
+  CKT_CRDETAIL_ADDRS
+where
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCashReceiptCashReceiptEvent">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.ADJUSTMENT_IND,
+  T1.COURT_ORDER_NUMBER,
+  T1.OFFSET_TAXID,
+  T1.RECEIVED_AMOUNT,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.MULTI_PAYOR,
+  T1.JOINT_RETURN_NAME,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.REFUNDED_AMT,
+  T1.DISTRIBUTED_AMT,
+  T1.CLT_IDENTIFIER,
+  T2.CASH_RECEIPT_ID,
+  T4.CR_SRCE_TYPE_ID,
+  T4.CODE,
+  T5.CODE,
+  T5.CATEGORY_IND
+from
+  CKT_CRSRC_TYPE T4
+  join
+  CKT_CR_TYPE T5
+  join
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T1.CRV_IDENTIFIER = @crvIdentifier) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T1.CRT_IDENTIFIER = @crtIdentifier) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER)
+  on
+    T5.CRTYPE_ID = T2.CRT_IDENTIFIER
+  on
+    T4.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCashReceiptCashReceiptSourceType">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.ADJUSTMENT_IND,
+  T1.COURT_ORDER_NUMBER,
+  T1.OFFSET_TAXID,
+  T1.RECEIVED_AMOUNT,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.MULTI_PAYOR,
+  T1.JOINT_RETURN_NAME,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.REFUNDED_AMT,
+  T1.DISTRIBUTED_AMT,
+  T1.CLT_IDENTIFIER,
+  T2.CASH_RECEIPT_ID,
+  T3.CR_SRCE_TYPE_ID,
+  T3.CODE,
+  T4.CODE,
+  T4.CATEGORY_IND
+from
+  CKT_CR_TYPE T4
+  join
+  CKT_CRSRC_TYPE T3
+  join
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = @crvIdentifier) and
+    (T1.ADJUSTMENT_IND &lt;&gt; 'Y')
+  on
+    (T3.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER) and
+    (T3.CR_SRCE_TYPE_ID = @crSrceTypeId)
+  on
+    (T4.CRTYPE_ID = T2.CRT_IDENTIFIER) and
+    (T4.CRTYPE_ID = @crtypeId)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCashReceiptDetailBalanceAdj">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COLLECTION_AMOUNT,
+  T2.CRD_IDENTIFIER,
+  T2.CRV_IDENTIFIER,
+  T2.CST_IDENTIFIER,
+  T2.CRT_IDENTIFIER,
+  T2.CRN_IDENTIFIER,
+  T2.CREATED_TIMESTAMP
+from
+  CKT_CR_DETAIL T1
+  join
+  CKT_CRDTL_BAL_ADJ T2
+  on
+    (T1.CRD_ID = T2.CRD_S_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T2.CRV_S_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_S_IDENTIFIER) and
+    (T1.CRT_IDENTIFIER = T2.CRT_S_IDENTIFIER) and
+    (@crdIdentifier = T2.CRD_IDENTIFIER) and
+    (@crvIdentifier = T2.CRV_IDENTIFIER) and
+    (@cstIdentifier = T2.CST_IDENTIFIER) and
+    (@crtIdentifier = T2.CRT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatus">
+      <value>
+select top(1)
+  T1.CRDETAIL_STAT_ID,
+  T1.CODE
+from
+  CKT_CR_DETAIL_STAT T1
+  join
+  CKT_CRDTL_STATHIST T2
+  on
+    (T1.CRDETAIL_STAT_ID = T2.CDS_IDENTIFIER) and
+    (T2.DISCONTINUE_DATE = @discontinueDate) and
+    (@crdIdentifier = T2.CRD_IDENTIFIER) and
+    (@crvIdentifier = T2.CRV_IDENTIFIER) and
+    (@cstIdentifier = T2.CST_IDENTIFIER) and
+    (@crtIdentifier = T2.CRT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  RCT_R_TSTAMP,
+  PRQ_R_GENERATED_ID,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST
+where
+  @rctRTstamp = RCT_R_TSTAMP
+</value>
+   </data>
+   <data name="ReadPaymentStatusPaymentStatusHistory">
+      <value>
+select top(1)
+  T1.PAYMENT_STATUS_ID,
+  T1.CODE,
+  T2.PRQ_GENERATED_ID,
+  T2.PYMNT_STAT_HIST_ID,
+  T2.DISCONTINUE_DATE
+from
+  CKT_PAYMENT_STATUS T1
+  join
+  CKT_PMNT_STAT_HIST T2
+  on
+    (@prqGeneratedId = T2.PRQ_GENERATED_ID) and
+    (T1.PAYMENT_STATUS_ID = T2.PST_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadReceiptRefund1">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CDA_IDENTIFIER,
+  REASON_TEXT,
+  LAST_UPDATED_BY,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadReceiptRefund2">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CDA_IDENTIFIER,
+  REASON_TEXT,
+  LAST_UPDATED_BY,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadReceiptRefund3">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CDA_IDENTIFIER,
+  REASON_TEXT,
+  LAST_UPDATED_BY,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (REASON_CODE &lt;&gt; 'ADVANCE')
+order by
+  REQUEST_DATE
+</value>
+   </data>
+</root>

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsenetTransactionEnvelopInterstateCase">
+      <value>
+select
+  T1.CCA_TRANSACTION_DT,
+  T1.CCA_TRANS_SER_NUM,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TIMES,
+  T1.DIRECTION_IND,
+  T1.PROCESSING_STATUS,
+  T2.LOCAL_FIPS_STATE,
+  T2.LOCAL_FIPS_COUNTY,
+  T2.LOCAL_FIPS_LOCATIO,
+  T2.OTHER_FIPS_STATE,
+  T2.OTHER_FIPS_COUNTY,
+  T2.OTHER_FIPS_LOCATIO,
+  T2.ACTION_CODE,
+  T2.FUNCTIONAL_TYPE_CO,
+  T2.KS_CASE_ID,
+  T2.INTERSTATE_CASE_ID,
+  T2.ACTION_REASON_CODE,
+  T2.ACTION_RESOLUTION,
+  T2.ATTACHMENTS_IND,
+  T2.CASE_DATA_IND,
+  T2.AP_IDENTIFICATION,
+  T2.AP_LOCATE_DATA_IND,
+  T2.PARTICIPANT_DATA_I,
+  T2.ORDER_DATA_IND,
+  T2.COLLECTION_DATA_IN,
+  T2.INFORMATION_IND,
+  T2.SENT_DATE,
+  T2.SENT_TIME,
+  T2.DUE_DATE,
+  T2.OVERDUE_IND,
+  T2.DATE_RECEIVED,
+  T2.TIME_RECEIVED,
+  T2.ATTACHMNTS_DUE_DTE,
+  T2.INTERSTATE_FORMS_P,
+  T2.CASE_TYPE,
+  T2.CASE_STATUS,
+  T2.PAYMENT_MAILING_AD,
+  T2.PAYMENT_ADDRESS_LI,
+  T2.PAYMENT_CITY,
+  T2.PAYMENT_STATE,
+  T2.PAYMENT_ZIP_CODE_5,
+  T2.PAYMENT_ZIP_CODE_4,
+  T2.CONTACT_NAME_LAST,
+  T2.CONTACT_NAME_FIRST,
+  T2.CONTACT_NAME_MIDDL,
+  T2.CONTACT_NAME_SUFFI,
+  T2.CONTACT_ADDR_LINE1,
+  T2.CONTACT_ADDR_LINE2,
+  T2.CONTACT_CITY,
+  T2.CONTACT_STATE,
+  T2.CONTACT_ZIP_CODE_5,
+  T2.CONTACT_ZIP_CODE_4,
+  T2.CONTACT_PHONE_NUM,
+  T2.ASSN_DEACT_DT,
+  T2.ASSN_DEACT_IND,
+  T2.LAST_DEFER_DT,
+  T2.MEMO,
+  T2.CONTACT_PHONE_EXT,
+  T2.CONTACT_FAX_NUMBER,
+  T2.CON_FAX_AREA_CODE,
+  T2.CON_INTERNET_ADDR,
+  T2.INIT_DOCKET_NUM,
+  T2.SEND_PAYM_BANK_ACC,
+  T2.SEND_PAYM_RT_CODE,
+  T2.NONDISCLOSURE_FIND,
+  T2.RESP_DOCKET_NUM,
+  T2.STATE_WITH_CEJ,
+  T2.PAYM_FIPS_COUNTY,
+  T2.PAYMENT_FIPS_STATE,
+  T2.PAYM_FIPS_LOCATION,
+  T2.CONTACT_AREA_CODE
+from
+  CKT_INTERST_CASE T2
+  join
+  CKT_CSENET_TRN_ENV T1
+  on
+    (T2.TRANSACTION_DATE = T1.CCA_TRANSACTION_DT) and
+    (T2.TRANS_SERIAL_NBR = T1.CCA_TRANS_SER_NUM) and
+    (T1.DIRECTION_IND = 'I') and
+    (T1.PROCESSING_STATUS = 'C') and
+    (T2.ACTION_CODE = 'R') and
+    (T2.FUNCTIONAL_TYPE_CO = 'CSI')
+order by
+  T1.CCA_TRANSACTION_DT,
+  T1.CCA_TRANS_SER_NUM
+</value>
+   </data>
+   <data name="UpdateCsenetTransactionEnvelop1">
+      <value>
+update CKT_CSENET_TRN_ENV
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  PROCESSING_STATUS = @processingStatus
+where
+  (CCA_TRANSACTION_DT = @ccaTransactionDt) and
+  (CCA_TRANS_SER_NUM = @ccaTransSerNum)
+</value>
+   </data>
+   <data name="UpdateCsenetTransactionEnvelop2">
+      <value>
+update CKT_CSENET_TRN_ENV
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  PROCESSING_STATUS = @processingStatus
+where
+  (CCA_TRANSACTION_DT = @ccaTransactionDt) and
+  (CCA_TRANS_SER_NUM = @ccaTransSerNum)
+</value>
+   </data>
+</root>

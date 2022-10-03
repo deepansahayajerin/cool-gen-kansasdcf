@@ -1,0 +1,107 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpLralLegalRefAsgnmntList"
+           program-name="SWELRALP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpLralLegalRefAsgnmntList"
+           transaction="SRJG"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="CO_LINK_TO_POPT"
+       action="link"
+       return-when="LE0000_CANT_NEXTTRAN_INTO ACO_NE0000_RETURN"
+       return-command-type="none"
+       display-first-on-return="true"
+       to="CoPoptPrintOptionSelection"
+       send-command="DISPLAY">
+      <map from="DlgflwJob" to="Job"/>
+      <map from="DlgflwJobRun.ParmInfo" to="JobRun.ParmInfo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Selected" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <map from="Office.SystemGeneratedId" to="Office.SystemGeneratedId"/>
+      <map from="Office.Name" to="Office.Name"/>
+      <return-map from="HiddenSelectionOffice" to="HiddenOffice"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="HiddenOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionServiceProvider" to="HiddenServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LEGAL_REQUEST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="OeLgrqLegalRequest"
+       send-command="DISPLAY">
+      <map from="Selected" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LACS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACS"
+       to="LeLacsLstLglActnByCseCase"
+       send-command="DISPLAY">
+      <map from="Selected" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CDVL1 ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenCodeValue"/>
+   </on>
+   <map from="HiddenStarting" to="HiddenStarting"/>
+   <map from="Starting" to="Starting"/>
+   <map from="MaxPages" to="MaxPages"/>
+   <map from="ShowOnlyArrsCases" to="ShowOnlyArrsCases"/>
+   <map from="HiddenSearchAp" to="HiddenSearchAp"/>
+   <map from="HiddenSearchApFi" to="HiddenSearchApFi"/>
+   <map from="HiddenSearchLegalReferral" to="HiddenSearchLegalReferral"/>
+   <map from="HiddenSearchCodeValue" to="HiddenSearchCodeValue"/>
+   <map from="AsgnCount" to="AsgnCount"/>
+   <map from="SearchApFi" to="SearchApFi"/>
+   <map from="SearchPromptSvpo" to="SearchPromptSvpo"/>
+   <map from="CurrentPage" to="CurrentPage"/>
+   <map from="Group.DetailCommon" to="Group.DetailCommon"/>
+   <map from="Group.DetailPrgm" to="Group.DetailPrgm"/>
+   <map from="Group.DetailCase" to="Group.DetailCase"/>
+   <map from="Group.ArDetail" to="Group.ArDetail"/>
+   <map from="PageKeys.PageKeyCase" to="PageKeys.PageKeyCase"/>
+   <map from="Scroll" to="Scroll"/>
+   <map from="SearchAp" to="SearchAp"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="Office" to="Office"/>
+   <map from="SearchCodeValue" to="SearchCodeValue"/>
+   <map from="SearchPromptCdvl" to="SearchPromptCdvl"/>
+   <map from="HiddenCalcDone" to="HiddenCalcDone"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PageKeys.PageKeyLegalReferral" to="PageKeys.PageKeyLegalReferral"/>
+   <map from="Group.DetailLegalReferral" to="Group.DetailLegalReferral"/>
+   <map from="SearchLegalReferral" to="SearchLegalReferral"/>
+   <map from="HiddenSearchLegalReferralAssignment"
+        to="HiddenSearchLegalReferralAssignment"/>
+   <map from="SearchLegalReferralAssignment" to="SearchLegalReferralAssignment"/>
+   <map from="Group.ApDetail.FormattedName" to="Group.ApDetail.FormattedName"/>
+   <map from="ServiceProvider.SystemGeneratedId"
+        to="ServiceProvider.SystemGeneratedId"/>
+   <map from="ServiceProvider.LastName" to="ServiceProvider.LastName"/>
+   <map from="Group.DetailLegalReferralAssignment.OverrideInd"
+        to="Group.DetailLegalReferralAssignment.OverrideInd"/>
+</procedure>

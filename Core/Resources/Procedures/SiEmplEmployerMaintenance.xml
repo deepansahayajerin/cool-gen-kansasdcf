@@ -1,0 +1,67 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiEmplEmployerMaintenance"
+           program-name="SWEEMPLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiEmplEmployerMaintenance"
+           transaction="SR2N"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_DEDE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="none"
+       to="SiDedeDeleteDuplicateEmployr"
+       send-command="FROMEMPL">
+      <map from="RtnEmployer" to="DuplicateEmployer"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CODE_TABLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="Next" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_EMPA"
+       action="transfer"
+       to="SiEmpaEmployerRelations"
+       send-command="DISPLAY">
+      <map from="ScreenSelector" to="ScreenSelect"/>
+      <map from="WsEmployer" to="WsEmployer"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_EMPH"
+       action="transfer"
+       to="SiEmphEmployerChangeHist"
+       send-command="DISPLAY">
+      <map from="WsEmployer" to="Employer1"/>
+   </on>
+   <map from="PageKeys.GpageKeyEmployer" to="PageKeys.GpageKeyEmployer"/>
+   <map from="Group.GdetailEmployer" to="Group.GdetailEmployer"/>
+   <map from="Group.GdetailEmployerAddress" to="Group.GdetailEmployerAddress"/>
+   <map from="SearchEmployer" to="SearchEmployer"/>
+   <map from="SearchEmployerAddress" to="SearchEmployerAddress"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Plus" to="Plus"/>
+   <map from="PageKeys.GpageKeyEmployerAddress"
+        to="PageKeys.GpageKeyEmployerAddress"/>
+   <map from="StatePrompt" to="StatePrompt"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Group.GdetailCommon" to="Group.GdetailCommon"/>
+   <map from="Group.GeiwoEnd" to="Group.GeiwoEnd"/>
+   <map from="Group.GdetailPrompt" to="Group.GdetailPrompt"/>
+   <map from="ActiveLable" to="ActiveLable"/>
+   <map from="Active" to="Active"/>
+   <map from="Group.GcreateDate" to="Group.GcreateDate"/>
+   <map from="PfKey" to="PfKey"/>
+   <map from="Group.Gend" to="Group.Gend"/>
+   <map from="ScreenSelector" to="ScreenSelector"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Standard.PageNumber" to="Standard.PageNumber"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

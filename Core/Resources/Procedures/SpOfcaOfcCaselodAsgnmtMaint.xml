@@ -1,0 +1,95 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpOfcaOfcCaselodAsgnmtMaint"
+           program-name="SWEOFCAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpOfcaOfcCaselodAsgnmtMaint"
+           transaction="SR3E"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_OFFICE_SERVICE_PROVDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <map from="Office" to="Office"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="HiddenSelectionOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionServiceProvider"
+                  to="HiddenSelectionServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PROGRAM_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPRGM"
+       to="SpPrgmProgramMaintenance"
+       send-command="DISPLAY">
+      <map from="FromOfca" to="HiddenFromOfca"/>
+      <return-map from="HiddenSelection" to="HiddenSelectionProgram"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenSelectionCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_OFFICE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOFCL"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="SelectedOffice"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LTRB"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLTRB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="ToLtrb.StateAbbreviation" to="SearchFips.StateAbbreviation"/>
+      <return-map from="DlgflwSelectedTribunal" to="FromLtrb"/>
+   </on>
+   <map from="OfficeCaseloadAssignment" to="OfficeCaseloadAssignment"/>
+   <map from="InactiveOffice" to="InactiveOffice"/>
+   <map from="Export1.HiddenOfficeCaseloadAssignment"
+        to="Import1.HiddenOfficeCaseloadAssignment"/>
+   <map from="Confirm" to="Confirm"/>
+   <map from="Office" to="Office"/>
+   <map from="OfficeAddress" to="OfficeAddress"/>
+   <map from="Export1.Program" to="Import1.Program"/>
+   <map from="Export1.ServiceProvider" to="Import1.ServiceProvider"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.OfficeCaseloadAssignment"
+        to="Import1.OfficeCaseloadAssignment"/>
+   <map from="ListOffice" to="ListOffice"/>
+   <map from="Export1.ListServiceProvider" to="Import1.ListServiceProvider"/>
+   <map from="Export1.ListProgram" to="Import1.ListProgram"/>
+   <map from="Export1.ListFunction" to="Import1.ListFunction"/>
+   <map from="Export1.ListTribunal" to="Import1.ListTribunal"/>
+   <map from="TypeSearch" to="TypeSearch"/>
+   <map from="ListAsgnType" to="ListAsgnType"/>
+   <map from="HiddenOffice" to="HiddenOffice"/>
+   <map from="OfficeType" to="OfficeType"/>
+   <map from="Export1.OfficeServiceProvider" to="Import1.OfficeServiceProvider"/>
+   <map from="Export1.HiddenProgram" to="Import1.HiddenProgram"/>
+   <map from="HiddenSelectionProgram" to="HiddenSelectionProgram"/>
+   <map from="HiddenSelectionServiceProvider"
+        to="HiddenSelectionServiceProvider"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Tribunal" to="Import1.Tribunal"/>
+   <map from="Export1.HiddenTribunal" to="Import1.HiddenTribunal"/>
+   <map from="Priority" to="Priority"/>
+   <map from="ServiceProvider.SystemGeneratedId"
+        to="ServiceProvider.SystemGeneratedId"/>
+   <map from="ServiceProvider.LastName" to="ServiceProvider.LastName"/>
+   <map from="Export1.HiddenServiceProvider.SystemGeneratedId"
+        to="Import1.HiddenServiceProvider.SystemGeneratedId"/>
+</procedure>

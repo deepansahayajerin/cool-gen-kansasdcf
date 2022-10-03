@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateEftTransmissionFileInfo">
+      <value>
+insert into CKT_EFT_TRAN_FINFO
+(
+  TRANSMISSION_TYPE,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME,
+  RECORD_COUNT,
+  TOTAL_AMOUNT
+)
+values
+(
+  @transmissionType,
+  @fileCreationDate,
+  @fileCreationTime,
+  @recordCount,
+  @totalAmount
+)
+</value>
+   </data>
+   <data name="CreateElectronicFundTransmission">
+      <value>
+insert into CKT_ELEC_FUND_TRAN
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PAY_DATE,
+  TRANSMITTAL_AMOUNT,
+  AP_SSN,
+  MEDICAL_SUPPORT_ID,
+  AP_NAME,
+  FIPS_CODE,
+  EMPLOYMENT_TERM_ID,
+  ZDEL_ADENDA_SQ_NUM,
+  SEQUENCE_NUMBER,
+  RECEIVING_DFI_IDEN,
+  DFI_ACCT_NUMBER,
+  TRANSACTION_CODE,
+  SETTLEMENT_DATE,
+  CASE_ID,
+  TRANS_STATUS_CODE,
+  COMPANY_NAME,
+  ORIG_DFI_IDENT,
+  RECV_ENTITY_NAME,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  TRANS_PROCESS_DATE,
+  PRQ_GENERATED_ID,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME,
+  COMPANY_IDENT_ICD,
+  COMPANY_IDENT_NUM,
+  COMPANY_DESC_DATE,
+  EFFECTIVE_ENTRY_DT,
+  RECV_COMPANY_NAME,
+  TRACE_NUMBER,
+  APPLICATION_IDENT,
+  COLLECTION_AMOUNT,
+  VENDOR_NUMBER,
+  CHECK_DIGIT,
+  RECV_DFI_ACCT_NUM,
+  COMPANY_ENTRY_DESC
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @payDate,
+  @transmittalAmount,
+  @apSsn,
+  @medicalSupportId,
+  @apName,
+  @fipsCode,
+  @employmentTermId,
+  @zdelAdendaSqNum,
+  @sequenceNumber,
+  @receivingDfiIden,
+  @dfiAcctNumber,
+  @transactionCode,
+  @settlementDate,
+  @caseId,
+  @transStatusCode,
+  @companyName,
+  @origDfiIdent,
+  @recvEntityName,
+  @transmissionType,
+  @transmissionId,
+  @transProcessDate,
+  null,
+  @fileCreationDate,
+  @fileCreationTime,
+  @companyIdentIcd,
+  @companyIdentNum,
+  @companyDescDate,
+  @effectiveEntryDt,
+  @recvCompanyName,
+  @traceNumber,
+  @applicationIdent,
+  @collectionAmount,
+  @vendorNumber,
+  @checkDigit,
+  @recvDfiAcctNum,
+  @companyEntryDesc
+)
+</value>
+   </data>
+   <data name="ReadControlTable">
+      <value>
+select top(1)
+  CNTL_TBL_ID,
+  LAST_USED_NUMBER
+from
+  CKT_CONTROL_TABLE
+where
+  CNTL_TBL_ID = 'INBOUND EFT NUMBER'
+</value>
+   </data>
+   <data name="ReadEftTransmissionFileInfo">
+      <value>
+select top(1)
+  TRANSMISSION_TYPE,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME,
+  RECORD_COUNT,
+  TOTAL_AMOUNT
+from
+  CKT_EFT_TRAN_FINFO
+where
+  (TRANSMISSION_TYPE = 'I') and
+  (RECORD_COUNT = @recordCount) and
+  (TOTAL_AMOUNT = cast(@totalCurrency as decimal(15, 2))) and
+  (FILE_CREATION_DATE &gt;= dateadd(day, - cast(@count as integer), cast(@date as date)))
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmission">
+      <value>
+select top(1)
+  SEQUENCE_NUMBER,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME
+from
+  CKT_ELEC_FUND_TRAN
+where
+  (TRANSMISSION_TYPE = 'I') and
+  (FILE_CREATION_DATE = @fileCreationDate) and
+  (FILE_CREATION_TIME = @fileCreationTime) and
+  (SEQUENCE_NUMBER = @sequenceNumber)
+</value>
+   </data>
+   <data name="ReadProgramProcessingInfo">
+      <value>
+select top(1)
+  NAME,
+  CREATED_TIMESTAMP,
+  PARAMETER_LIST
+from
+  CKT_PGM_PRCSS_INFO
+where
+  NAME = 'SWEFB672'
+</value>
+   </data>
+   <data name="UpdateControlTable">
+      <value>
+update CKT_CONTROL_TABLE
+set
+  LAST_USED_NUMBER = @lastUsedNumber
+where
+  CNTL_TBL_ID = @cntlTblId
+</value>
+   </data>
+</root>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadActivity">
+      <value>
+select top(1)
+  CONTROL_NUMBER,
+  NAME
+from
+  CKT_ACTIVITY
+where
+  CONTROL_NUMBER = @controlNumber
+</value>
+   </data>
+   <data name="ReadActivityDetail">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT,
+  CASE_UNIT_FUNCTION,
+  REG_SRC_DESC,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  ACT_NO
+from
+  CKT_ACTIVITY_DETAL
+where
+  (@actNo = ACT_NO) and
+  (SYSTEM_GENERATED_I = @systemGeneratedI) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (
+    (DISCONTINUE_DATE &gt;= @effectiveDate) or
+    (DISCONTINUE_DATE = @discontinueDate)
+  )
+</value>
+   </data>
+   <data name="ReadActivityDistributionRule">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT,
+  CASE_UNIT_FUNCTION,
+  REASON_CODE,
+  RESP_CODE,
+  CASE_ROLE_CODE,
+  CSE_PERSON_ACCT_CD,
+  CSENET_ROLE_CODE,
+  LA_CASE_ROLE_CODE,
+  LA_PERSON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  ACT_CONTROL_NO,
+  ACD_ID
+from
+  CKT_ACT_DIST_RULE
+where
+  (@actControlNo = ACT_CONTROL_NO) and
+  (@acdId = ACD_ID)
+order by
+  SYSTEM_GENERATED_I
+</value>
+   </data>
+</root>

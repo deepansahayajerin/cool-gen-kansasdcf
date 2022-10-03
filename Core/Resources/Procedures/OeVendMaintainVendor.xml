@@ -1,0 +1,44 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeVendMaintainVendor"
+           program-name="SWEVENDP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeVendMaintainVendor"
+           transaction="SR6J"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="RequiredCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_VENDOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RSVENL"
+       to="OeVenlListVendor"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="HiddenSelected"/>
+   </on>
+   <map from="Vendor" to="Vendor"/>
+   <map from="VendorAddress" to="VendorAddress"/>
+   <map from="HiddenVendor" to="HiddenVendor"/>
+   <map from="HiddenVendorAddress" to="HiddenVendorAddress"/>
+   <map from="VendorType" to="VendorType"/>
+   <map from="ListStateCodes" to="ListStateCodes"/>
+   <map from="ListVendorTypes" to="ListVendorTypes"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="RequiredCode" to="RequiredCode"/>
+   <map from="StartingCodeValue" to="StartingCodeValue"/>
+   <map from="ListVendors" to="ListVendors"/>
+   <map from="HiddenSelected" to="HiddenSelected"/>
+   <map from="DlgflwSelected" to="DlgflwSelected"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDebtDetail">
+      <value>
+select
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT,
+  BAL_DUE_AMT,
+  INT_BAL_DUE_AMT,
+  RETIRED_DT,
+  CREATED_TMST
+from
+  CKT_DEBT_DTL with(readuncommitted)
+where
+  (RETIRED_DT = @retiredDt) and
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadObligationObligationType">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T1.PRIM_SEC_CD,
+  T1.CREATED_TMST,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_LEGAL_ACTION T5 with(readuncommitted)
+  join
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_OBLIGATION T1 with(readuncommitted)
+  on
+    (T2.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (T2.DEBT_TYP_ID &lt;&gt; 9) and
+    (T2.DEBT_TYP_ID &lt;&gt; 4) and
+    (T2.DEBT_TYP_ID &lt;&gt; 5) and
+    (T2.DEBT_TYP_ID &lt;&gt; 6) and
+    (T2.DEBT_TYP_ID &lt;&gt; 7) and
+    (T2.DEBT_TYP_ID &lt;&gt; 8) and
+    (T2.DEBT_TYP_ID &lt;&gt; 15) and
+    (T1.CSP_NUMBER = @cspNumber)
+  on
+    (T5.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T5.STANDARD_NO = @standardNo)
+</value>
+   </data>
+</root>

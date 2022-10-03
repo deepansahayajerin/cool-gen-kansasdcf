@@ -1,0 +1,82 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCtsvMaintainCountyServices"
+           program-name="SWECTSVP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCtsvMaintainCountyServices"
+           transaction="SR3C"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_PROGRAM_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpPrgmProgramMaintenance"
+       send-command="DISPLAY">
+      <map from="Select1" to="Search"/>
+      <return-map from="HiddenSelection" to="Select1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_OFFICE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="HiddenSaved"/>
+      <return-map from="StartingOfficeAddress" to="Select.SelectOfficeAddress"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_ORGANIZATION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpCsorCseOrganizationMaint"
+       send-command="DISPLAY">
+      <map from="SelectCounty.Type1" to="Search.Type1"/>
+      <return-map from="ReturnSelect" to="SelectCounty"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Cdvl.Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="Cdvl.CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <map from="PromptOffice" to="PromptOffice"/>
+   <map from="List.ListSel" to="List.ListSel"/>
+   <map from="List.ListCnty" to="List.ListCnty"/>
+   <map from="List.ListPgm" to="List.ListPgm"/>
+   <map from="List.ListCountyService" to="List.ListCountyService"/>
+   <map from="Select.SelectOffice" to="Select.SelectOffice"/>
+   <map from="PrevCommand" to="PrevCommand"/>
+   <map from="Select.SelectOfficeAddress" to="Select.SelectOfficeAddress"/>
+   <map from="Cdvl.ReturnVal" to="Cdvl.ReturnVal"/>
+   <map from="Cdvl.Code" to="Cdvl.Code"/>
+   <map from="Select1" to="Select1"/>
+   <map from="Select.OldRec" to="Select.OldRec"/>
+   <map from="FilterSearch.SearchCnty" to="FilterSearch.SearchCnty"/>
+   <map from="FilterSearch.SearchPgm" to="FilterSearch.SearchPgm"/>
+   <map from="FilterSearch.PromptScnty" to="FilterSearch.PromptScnty"/>
+   <map from="FilterSearch.PromptSpgm" to="FilterSearch.PromptSpgm"/>
+   <map from="List.ListFunction" to="List.ListFunction"/>
+   <map from="FilterSearch.SearchFunc" to="FilterSearch.SearchFunc"/>
+   <map from="FilterSearch.PromptSfunction" to="FilterSearch.PromptSfunction"/>
+   <map from="DateWorkArea" to="DateWorkArea"/>
+   <map from="FilterSearch.SearchFuncOnly" to="FilterSearch.SearchFuncOnly"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenSelect" to="HiddenSelect"/>
+   <map from="List.ListCseOrganization.Code" to="List.ListCseOrganization.Code"/>
+   <map from="List.ListCseOrganization.Type1"
+        to="List.ListCseOrganization.Type1"/>
+   <map from="List.ListProgram.SystemGeneratedIdentifier"
+        to="List.ListProgram.SystemGeneratedIdentifier"/>
+   <map from="List.ListProgram.Code" to="List.ListProgram.Code"/>
+   <map from="Cdvl.CodeValue.Cdvalue" to="Cdvl.CodeValue.Cdvalue"/>
+   <map from="SelectCounty.Type1" to="SelectCounty.Type1"/>
+   <map from="SelectCounty.Name" to="SelectCounty.Name"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

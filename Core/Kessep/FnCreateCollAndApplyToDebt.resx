@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCollection">
+      <value>
+insert into CKT_COLLECTION
+(
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  DISB_DT,
+  ADJ_IND,
+  CONCURRENT_IND,
+  DISB_ADJ_PROC_DATE,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  PREV_COLL_ADJ_DT,
+  CAR_ID,
+  OTY_ID,
+  COLL_ADJ_DT,
+  COLL_ADJ_PROC_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OB_TRN_AMT,
+  DISB_PROC_NEED_IND,
+  DIST_MTD,
+  PGM_APPLD_TO,
+  APPL_TO_ORD_TYP_CD,
+  CRT_NOTICE_REQ_IND,
+  CRT_NOTICE_PROC_DT,
+  AE_NOTIFIED_DT,
+  OCSE34_RPT_PERIOD,
+  BAL_BEF_COLL,
+  CUM_INT_CHRGD,
+  CUM_INT_COLL_AFT,
+  INT_BAL_AFT_COLL,
+  DISB_TO_AR_IND,
+  MNL_DIST_RSN_TXT,
+  COL_ADJ_RSN_TXT,
+  CT_ORD_APPLIED_TO,
+  APPLIED_TO_FUT_IND,
+  CSENET_OB_REQ_IND,
+  CSENET_OB_P_DT,
+  CSENET_OB_ADJ_P_DT,
+  CRT_NTC_ADJ_PRC_DT,
+  PGM_ST_APPLD_TO,
+  AR_NUMBER,
+  UNADJUSTED_DT
+)
+values
+(
+  @collId,
+  @appliedToCd,
+  @collDt,
+  @disbDt,
+  @adjInd,
+  @concurrentInd,
+  @disbAdjProcDate,
+  @crtType,
+  @cstId,
+  @crvId,
+  @crdId,
+  @obgId,
+  @cspNumber,
+  @cpaType,
+  @otrId,
+  @otrType,
+  @prevCollAdjDt,
+  null,
+  @otyId,
+  @collAdjDt,
+  @collAdjProcDate,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @obTrnAmt,
+  @disbProcNeedInd,
+  @distMtd,
+  @pgmAppldTo,
+  @applToOrdTypCd,
+  @crtNoticeReqInd,
+  @crtNoticeProcDt,
+  @prevCollAdjDt,
+  @prevCollAdjDt,
+  @balBefColl,
+  @balBefColl,
+  @balBefColl,
+  @balBefColl,
+  @disbToArInd,
+  @mnlDistRsnTxt,
+  @colAdjRsnTxt,
+  @ctOrdAppliedTo,
+  @appliedToFutInd,
+  @csenetObReqInd,
+  @prevCollAdjDt,
+  @csenetObAdjPDt,
+  @crtNtcAdjPrcDt,
+  @pgmStAppldTo,
+  @arNumber,
+  @prevCollAdjDt
+)
+</value>
+   </data>
+   <data name="CreateDebtDetailStatusHistory">
+      <value>
+insert into CKT_DBT_DT_STS_HIS
+(
+  OB_TRN_STAT_HST_ID,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  OTR_TYPE,
+  OTR_ID,
+  CPA_TYPE,
+  CSP_NUMBER,
+  OBG_ID,
+  OB_TRN_ST_CD,
+  OTY_TYPE,
+  RSN_TXT
+)
+values
+(
+  @obTrnStatHstId,
+  @effectiveDt,
+  @discontinueDt,
+  @createdBy,
+  @createdTmst,
+  @otrType,
+  @otrId,
+  @cpaType,
+  @cspNumber,
+  @obgId,
+  @obTrnStCd,
+  @otyType,
+  @rsnTxt
+)
+</value>
+   </data>
+   <data name="DisassociateCollection">
+      <value>
+update CKT_COLLECTION
+set
+  CAR_ID = null
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  DISB_DT,
+  ADJ_IND,
+  CONCURRENT_IND,
+  DISB_ADJ_PROC_DATE,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  PREV_COLL_ADJ_DT,
+  CAR_ID,
+  OTY_ID,
+  COLL_ADJ_DT,
+  COLL_ADJ_PROC_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OB_TRN_AMT,
+  DISB_PROC_NEED_IND,
+  DIST_MTD,
+  PGM_APPLD_TO,
+  APPL_TO_ORD_TYP_CD,
+  CRT_NOTICE_REQ_IND,
+  CRT_NOTICE_PROC_DT,
+  DISB_TO_AR_IND,
+  MNL_DIST_RSN_TXT,
+  COL_ADJ_RSN_TXT,
+  CT_ORD_APPLIED_TO,
+  APPLIED_TO_FUT_IND,
+  CSENET_OB_REQ_IND,
+  CSENET_OB_ADJ_P_DT,
+  CRT_NTC_ADJ_PRC_DT,
+  PGM_ST_APPLD_TO,
+  UNADJUSTED_DT
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (@otyId = OTY_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrId = OTR_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgId = OBG_ID) and
+  (OB_TRN_AMT = @obTrnAmt) and
+  (APPLIED_TO_CD = @appliedToCd) and
+  (APPL_TO_ORD_TYP_CD = @applToOrdTypCd) and
+  (DISB_TO_AR_IND = @disbToArInd) and
+  (DIST_MTD = @distMtd) and
+  (PGM_APPLD_TO = @pgmAppldTo) and
+  (PGM_ST_APPLD_TO = @pgmStAppldTo) and
+  (COLL_DT = @collDt) and
+  (CT_ORD_APPLIED_TO = @ctOrdAppliedTo) and
+  (APPLIED_TO_FUT_IND = @appliedToFutInd) and
+  (CONCURRENT_IND = @concurrentInd) and
+  (CSENET_OB_REQ_IND = @csenetObReqInd) and
+  (CRT_NOTICE_REQ_IND = @crtNoticeReqInd) and
+  (DISB_PROC_NEED_IND = @disbProcNeedInd) and
+  (ADJ_IND = 'Y') and
+  (DISB_ADJ_PROC_DATE = @disbAdjProcDate) and
+  (CRT_NTC_ADJ_PRC_DT = @disbAdjProcDate) and
+  (CSENET_OB_ADJ_P_DT = @disbAdjProcDate)
+</value>
+   </data>
+   <data name="ReadCollectionAdjustmentReason">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID
+from
+  CKT_COLL_ADJ_RSN
+where
+  OB_TRN_RLN_RSN_ID = @obTrnRlnRsnId
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDebtDetailStatusHistory">
+      <value>
+select top(1)
+  OB_TRN_STAT_HST_ID,
+  DISCONTINUE_DT,
+  OTR_TYPE,
+  OTR_ID,
+  CPA_TYPE,
+  CSP_NUMBER,
+  OBG_ID,
+  OB_TRN_ST_CD,
+  OTY_TYPE
+from
+  CKT_DBT_DT_STS_HIS
+where
+  (@otyType = OTY_TYPE) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (@otrId = OTR_ID) and
+  (@otrType = OTR_TYPE) and
+  (DISCONTINUE_DT = @discontinueDt)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (OB_ID = @obId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="UpdateCollection">
+      <value>
+update CKT_COLLECTION
+set
+  ADJ_IND = @adjInd,
+  PREV_COLL_ADJ_DT = @prevCollAdjDt,
+  COLL_ADJ_DT = @collAdjDt,
+  COLL_ADJ_PROC_DATE = @collAdjProcDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  COL_ADJ_RSN_TXT = @colAdjRsnTxt,
+  UNADJUSTED_DT = @unadjustedDt
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+   <data name="UpdateDebt">
+      <value>
+update CKT_OB_TRN
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OB_TRN_ID = @obTrnId) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+   <data name="UpdateDebtDetail1">
+      <value>
+update CKT_DEBT_DTL
+set
+  BAL_DUE_AMT = @balDueAmt,
+  INT_BAL_DUE_AMT = @intBalDueAmt,
+  RETIRED_DT = @retiredDt,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (OTR_TYPE = @otrType)
+</value>
+   </data>
+   <data name="UpdateDebtDetail2">
+      <value>
+update CKT_DEBT_DTL
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (OTR_TYPE = @otrType)
+</value>
+   </data>
+   <data name="UpdateDebtDetailStatusHistory">
+      <value>
+update CKT_DBT_DT_STS_HIS
+set
+  DISCONTINUE_DT = @discontinueDt
+where
+  (OB_TRN_STAT_HST_ID = @obTrnStatHstId) and
+  (OTR_TYPE = @otrType) and
+  (OTR_ID = @otrId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OBG_ID = @obgId) and
+  (OB_TRN_ST_CD = @obTrnStCd) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+</root>

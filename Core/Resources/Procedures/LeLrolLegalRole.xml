@@ -1,0 +1,174 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLrolLegalRole"
+           program-name="SWELROLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLrolLegalRole"
+           transaction="SR9I"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="SelectedNonCase"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_DETAIL"
+       action="transfer"
+       to="LeLdetLegalDetail"
+       send-command="DISPLAY">
+      <map from="FipsTribAddress" to="FipsTribAddress"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="Fips" to="Fips"/>
+      <map from="LegalAction" to="HiddenLegalAction"/>
+      <map from="LegalAction" to="LegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS1"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLTRB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="FipsTribAddress"/>
+      <return-map from="DlgflwSelectedTribunal" to="Tribunal"/>
+      <return-map from="DlgflwSelectedFips" to="Fips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACN"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="Fips.StateAbbreviation" to="SearchFips.StateAbbreviation"/>
+      <map from="Fips.CountyDescription" to="SearchFips.CountyDescription"/>
+      <map from="Fips.CountyAbbreviation" to="SearchFips.CountyAbbreviation"/>
+      <map from="LegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="LegalAction.Classification" to="SearchLegalAction.Classification"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.StandardNumber" to="SearchLegalAction.StandardNumber"/>
+      <return-map from="DlgflwSelected.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="DlgflwSelected.Classification" to="LegalAction.Classification"/>
+      <return-map from="DlgflwSelected.ActionTaken" to="LegalAction.ActionTaken"/>
+      <return-map from="DlgflwSelected.FiledDate" to="LegalAction.FiledDate"/>
+      <return-map from="DlgflwSelected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="DlgflwSelected.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LAPS_LEG_ACT_BY_PERSN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLAPS"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <return-map from="Selected.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="Selected.Classification" to="LegalAction.Classification"/>
+      <return-map from="Selected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="Selected.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CPAT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCPAT"
+       to="SiCpatChildPaternityMaint"
+       send-command="DISPLAY">
+      <map from="LegalActionFlowToCpat" to="LegalActionFlow"/>
+      <map from="Cpat" to="Next"/>
+      <map from="FromLrol" to="FromLrol"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_ACTION"
+       action="transfer"
+       to="LeLactLegalAction"
+       send-command="DISPLAY">
+      <map from="FipsTribAddress" to="FipsTribAddress"/>
+      <map from="Fips.StateAbbreviation" to="Fips.StateAbbreviation"/>
+      <map from="Fips.CountyDescription" to="Fips.CountyDescription"/>
+      <map from="Fips.CountyAbbreviation" to="Fips.CountyAbbreviation"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+      <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.FiledDate" to="LegalAction.FiledDate"/>
+      <map from="LegalAction.PaymentLocation" to="LegalAction.PaymentLocation"/>
+      <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+      <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+      <map from="LegalAction.Identifier" to="HiddenLegalAction.Identifier"/>
+      <map from="LegalAction.Classification" to="HiddenLegalAction.Classification"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="HiddenLegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.FiledDate" to="HiddenLegalAction.FiledDate"/>
+      <map from="LegalAction.ActionTaken" to="HiddenLegalAction.ActionTaken"/>
+      <map from="HiddenSecurity" to="HiddenSecurity1"/>
+   </on>
+   <map from="Display" to="Display"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptClass" to="PromptClass"/>
+   <map from="HiddenLegalAction" to="HiddenLegalAction"/>
+   <map from="LegalActionPerson.Common" to="LegalActionPerson.Common"/>
+   <map from="LegalActionPerson.CaseRole" to="LegalActionPerson.CaseRole"/>
+   <map from="LegalActionPerson.LegalActionPerson1"
+        to="LegalActionPerson.LegalActionPerson1"/>
+   <map from="LegalActionPerson.CsePersonsWorkSet"
+        to="LegalActionPerson.CsePersonsWorkSet"/>
+   <map from="ListEndRsn.DetailListEndRsn" to="ListEndReason.DetailListEndRsn"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="PromptTribunal" to="PromptTribunal"/>
+   <map from="InputCseCases.DetailInput" to="CseCases2.DetailInput2"/>
+   <map from="LegalActionPerson.DetailDisplayed"
+        to="LegalActionPerson.DetailDisplayed"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="LactActionTaken" to="LactActionTaken"/>
+   <map from="Cpat" to="Cpat"/>
+   <map from="LegalActionFlow" to="LegalActionFlow"/>
+   <map from="PrevH" to="PrevH"/>
+   <map from="EiwoSelection" to="EiwoSelection"/>
+   <map from="PrevCpatCases.GexpCpat" to="PrevCpatCases.GimpCpat"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="HiddenNextTranInfo.LegalActionIdentifier"
+        to="HiddenNextTranInfo.LegalActionIdentifier"/>
+   <map from="HiddenNextTranInfo.CourtCaseNumber"
+        to="HiddenNextTranInfo.CourtCaseNumber"/>
+   <map from="HiddenNextTranInfo.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumber"
+        to="HiddenNextTranInfo.CsePersonNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberAp"
+        to="HiddenNextTranInfo.CsePersonNumberAp"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligee"
+        to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligor"
+        to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+   <map from="HiddenNextTranInfo.CourtOrderNumber"
+        to="HiddenNextTranInfo.CourtOrderNumber"/>
+   <map from="HiddenNextTranInfo.ObligationId"
+        to="HiddenNextTranInfo.ObligationId"/>
+   <map from="HiddenNextTranInfo.StandardCrtOrdNumber"
+        to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+   <map from="HiddenNextTranInfo.InfrastructureId"
+        to="HiddenNextTranInfo.InfrastructureId"/>
+   <map from="HiddenNextTranInfo.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+   <map from="HiddenNextTranInfo.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+   <map from="HiddenNextTranInfo.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+   <map from="HiddenNextTranInfo.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+   <map from="HiddenNextTranInfo.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+   <map from="HiddenNextTranInfo.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+   <map from="LegalAction.FiledDate" to="LegalAction.FiledDate"/>
+   <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+</procedure>

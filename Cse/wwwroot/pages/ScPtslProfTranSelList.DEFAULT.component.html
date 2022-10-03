@@ -1,0 +1,338 @@
+﻿<!--Name: SC_PTSL_PROF_TRAN_SEL_LIST, ID: 371720315, model: 746-->
+<div coolContent coolName="SC_PTSL_PROF_TRAN_SEL_LIST" coolType="SCREEN"
+  (coolInit)="scrollSize = 250; pageSize = 11">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 2.5%; top: 0; width: 10%; height: 4%;" coolCol="3" coolRow="1"
+     coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 40%; top: 0; width: 40%; height: 4%;"
+     coolCol="33" coolRow="1" coolLength="32">CSE  -  KESSEP Security  -  PTSL</div>
+   
+   <div coolType="field" coolColor="green"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 4%; width: 5%; height: 4%;"
+     coolCol="3" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_8"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 8.75%; top: 4%; width: 5%; height: 4%;" coolCol="8"
+     coolRow="2" coolLength="4">
+   
+   <div coolType="literal"
+     style="left: 32.5%; top: 4%; width: 32.5%; height: 4%;" coolCol="27"
+     coolRow="2" coolLength="26">Transaction Selection List</div>
+   
+   <div coolType="field" coolColor="green"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 12%; width: 8.75%; height: 4%;" coolCol="3"
+     coolRow="4" coolLength="7">Profile</div>
+   <input type="text" coolType="field" name="field_4_12"
+     [(ngModel)]="in.profile.name" [coolVideo]="out.profile.screenField?.name"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 13.75%; top: 12%; width: 12.5%; height: 4%;" coolCol="12"
+     coolRow="4" coolLength="10">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 12%; width: 31.25%; height: 4%;" coolCol="23"
+     coolRow="4" coolLength="25">{{in.profile.desc}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 16%; width: 20%; height: 4%;"
+     coolCol="3" coolRow="5" coolLength="16">Sort Order (A/D)</div>
+   <input type="text" coolType="field" name="field_5_21"
+     [(ngModel)]="in.sortOrder.oneChar"
+     [coolVideo]="out.sortOrder.screenField?.oneChar" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 25%; top: 16%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="5" coolLength="1">
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 20%; width: 28.75%; height: 4%;" coolCol="3"
+     coolRow="6" coolLength="23">Starting From Screen ID</div>
+   <input type="text" coolType="field" name="field_6_27"
+     [(ngModel)]="in.startingFrom.screenId"
+     [coolVideo]="out.startingFrom.screenField?.screenId" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 32.5%; top: 20%; width: 5%; height: 4%;" coolCol="27"
+     coolRow="6" coolLength="4">
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 24%; width: 27.5%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="22">Starting From Trancode</div>
+   <input type="text" coolType="field" name="field_7_27"
+     [(ngModel)]="in.startingFrom.trancode"
+     [coolVideo]="out.startingFrom.screenField?.trancode" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 32.5%; top: 24%; width: 5%; height: 4%;" coolCol="27"
+     coolRow="7" coolLength="4">
+   
+   <div coolType="prompt"
+     style="left: 7.5%; top: 32%; width: 3.75%; height: 4%;" coolCol="7"
+     coolRow="9" coolLength="3">Sel</div>
+   
+   <div coolType="prompt" style="left: 15%; top: 32%; width: 6.25%; height: 4%;"
+     coolCol="13" coolRow="9" coolLength="5">Sc ID</div>
+   
+   <div coolType="prompt" style="left: 25%; top: 32%; width: 6.25%; height: 4%;"
+     coolCol="21" coolRow="9" coolLength="5">Tr Cd</div>
+   
+   <div coolType="prompt"
+     style="left: 43.75%; top: 32%; width: 13.75%; height: 4%;" coolCol="36"
+     coolRow="9" coolLength="11">Description</div>
+   <input type="text" coolType="field" name="field_10_8"
+     [(ngModel)]="ref(in.group, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 36%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="10" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 36%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="10" coolLength="4" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 36%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="10" coolLength="4" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 36%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="10" coolLength="25" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_11_8"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 40%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 40%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="11" coolLength="4" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 40%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="11" coolLength="4" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 40%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="11" coolLength="25" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_12_8"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 44%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 44%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="12" coolLength="4" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 44%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="12" coolLength="4" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 44%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="12" coolLength="25" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_13_8"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 48%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 48%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="13" coolLength="4" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 48%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="13" coolLength="4" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 48%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="13" coolLength="25" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_14_8"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 52%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 52%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="14" coolLength="4" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 52%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="14" coolLength="4" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 52%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="14" coolLength="25" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_15_8"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 56%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 56%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="15" coolLength="4" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 56%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="15" coolLength="4" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 56%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="15" coolLength="25" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_16_8"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 60%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 60%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="16" coolLength="4" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 60%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="16" coolLength="4" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 60%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="16" coolLength="25" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_17_8"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 64%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 64%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="17" coolLength="4" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 64%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="17" coolLength="4" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 64%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="17" coolLength="25" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_18_8"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 68%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 8 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 68%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="18" coolLength="4" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 68%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="18" coolLength="4" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 68%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="18" coolLength="25" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_19_8"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 72%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 9 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 72%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="19" coolLength="4" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 72%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="19" coolLength="4" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 72%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="19" coolLength="25" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.transaction.desc}}</div>
+   <input type="text" coolType="field" name="field_20_8"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 8.75%; top: 76%; width: 1.25%; height: 4%;" coolCol="8"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 10 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 76%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="20" coolLength="4" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 76%; width: 5%; height: 4%;" coolCol="22"
+     coolRow="20" coolLength="4" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.transaction.trancode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 36.25%; top: 76%; width: 31.25%; height: 4%;" coolCol="30"
+     coolRow="20" coolLength="25" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.transaction.desc}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="68" coolRow="20" coolLength="9"
+     style="left: 83.75%; top: 76%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="literal" style="left: 7.5%; top: 80%; width: 50%; height: 4%;"
+     coolCol="7" coolRow="21" coolLength="40">'*' - Currently assigned to the profile.</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="23" coolLength="78"
+     style="left: 0; top: 88%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 92%; width: 93.75%; height: 4%;"
+     coolCol="1" coolRow="24" coolLength="75">PF Key: 1 Help  2 Disp  3 Exit  5 Add  7 Prev  8 Next  9 Return  11 Signoff</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="ADD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=ADD</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   </div>

@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateRecaptureInclusion">
+      <value>
+insert into CKT_RECAPTR_INCLSN
+(
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  RECAP_INCL_SYSID,
+  DISCONTINUE_DATE,
+  EFFECTIVE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @otyType,
+  @obgGeneratedId,
+  @cspNumber,
+  @cpaType,
+  @recapInclSysid,
+  @discontinueDate,
+  @effectiveDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (CPA_TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="ReadRecaptureInclusion1">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  RECAP_INCL_SYSID,
+  DISCONTINUE_DATE,
+  EFFECTIVE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_RECAPTR_INCLSN
+where
+  (RECAP_INCL_SYSID = @recapInclSysid) and
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadRecaptureInclusion2">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  RECAP_INCL_SYSID,
+  DISCONTINUE_DATE,
+  EFFECTIVE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_RECAPTR_INCLSN
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+order by
+  RECAP_INCL_SYSID desc
+</value>
+   </data>
+   <data name="UpdateRecaptureInclusion1">
+      <value>
+update CKT_RECAPTR_INCLSN
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (OTY_TYPE = @otyType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (RECAP_INCL_SYSID = @recapInclSysid)
+</value>
+   </data>
+   <data name="UpdateRecaptureInclusion2">
+      <value>
+update CKT_RECAPTR_INCLSN
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (OTY_TYPE = @otyType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (RECAP_INCL_SYSID = @recapInclSysid)
+</value>
+   </data>
+</root>

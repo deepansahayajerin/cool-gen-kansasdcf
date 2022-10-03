@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailStatus">
+      <value>
+select top(1)
+  CRDETAIL_STAT_ID
+from
+  CKT_CR_DETAIL_STAT
+where
+  CRDETAIL_STAT_ID = 6
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="ReadCollectionAdjustmentReason">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID
+from
+  CKT_COLL_ADJ_RSN
+where
+  OB_TRN_RLN_RSN_ID = 2
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OB_TRN T3
+  on
+    (T1.NUMB = T3.CSP_SUP_NUMBER) and
+    (T3.CPA_SUP_TYPE is not null) and
+    (T3.OTY_TYPE = @otyType) and
+    (T3.OB_TRN_TYP = @obTrnTyp) and
+    (T3.OB_TRN_ID = @obTrnId) and
+    (T3.CPA_TYPE = @cpaType) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T3.OBG_GENERATED_ID = @obgGeneratedId)
+</value>
+   </data>
+   <data name="ReadCsePersonCollection">
+      <value>
+select
+  CSP_NUMBER,
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_DT,
+  COLL_ADJ_PROC_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OB_TRN_AMT,
+  DIST_MTD,
+  PGM_APPLD_TO,
+  COL_ADJ_RSN_TXT
+from
+  CKT_COLLECTION with(readcommitted)
+where
+  (ADJ_IND = 'N') and
+  (PGM_APPLD_TO &gt; ' ')
+order by
+  CSP_NUMBER,
+  COLL_DT
+</value>
+   </data>
+   <data name="ReadDebtDetailDebt">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.BAL_DUE_AMT,
+  T1.INT_BAL_DUE_AMT,
+  T1.RETIRED_DT,
+  T1.CVRD_PRD_START_DT,
+  T1.CVD_PRD_END_DT,
+  T1.PRECNVRSN_PGM_CD,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T2.CREATED_BY,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.DEBT_TYP,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE
+from
+  CKT_OB_TRN T2
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T2.OTY_TYPE = T1.OTY_TYPE) and
+    (T2.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OTY_TYPE = @otyType) and
+    (T2.OB_TRN_TYP = @obTrnTyp) and
+    (T2.OB_TRN_ID = @obTrnId) and
+    (T2.CPA_TYPE = @cpaType) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.OBG_GENERATED_ID = @obgGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationTypeObligation">
+      <value>
+select top(1)
+  T1.DEBT_TYP_ID,
+  T1.DEBT_TYP_CLASS,
+  T1.SUP_PRSN_REQ_IND,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.OB_ID,
+  T2.ORD_TYP_CD
+from
+  CKT_OB_TYPE T1
+  join
+  CKT_OBLIGATION T2
+  on
+    (T1.DEBT_TYP_ID = T2.DTY_GENERATED_ID) and
+    (T2.DTY_GENERATED_ID = @dtyGeneratedId) and
+    (T2.OB_ID = @obId) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="ReadSupported">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RECOMP_BAL_FROM_DT
+from
+  CKT_CSE_PERSON_ACC
+where
+  (@cspNumber1 = CSP_NUMBER) and
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="UpdateSupported">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

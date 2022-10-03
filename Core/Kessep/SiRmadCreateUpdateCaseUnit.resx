@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  FULL_SRV_WO_MED_IN,
+  FULL_SERV_W_MED_IN,
+  LOCATE_IND,
+  NUMB,
+  EXPEDIDED_PAT_IND
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (CU_NUMBER = @cuNumber)
+</value>
+   </data>
+   <data name="ReadCaseUnitCsePersonCsePersonCsePerson">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (CSP_NO_AP is not null) and
+  (CSP_NO_CHILD is not null) and
+  (CSP_NO_AR is not null)
+order by
+  CU_NUMBER desc
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCaseUnit">
+      <value>
+update CKT_CASE_UNIT
+set
+  START_DATE = @startDate,
+  CLOSURE_DATE = @closureDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CU_NUMBER = @cuNumber) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+</root>

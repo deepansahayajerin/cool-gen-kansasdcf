@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateGeneticTestAccount">
+      <value>
+update CKT_GENETIC_TST_AC
+set
+  OSP_EFFECTIVE_DATE = @ospEffectiveDate,
+  OSP_ROLE_CODE = @ospRoleCode,
+  OFF_GENERATED_ID = @offGeneratedId,
+  SPD_GENERATED_ID = @spdGeneratedId
+where
+  ACCOUNT_NUMBER = @accountNumber
+</value>
+   </data>
+   <data name="CreateGeneticTestAccount">
+      <value>
+insert into CKT_GENETIC_TST_AC
+(
+  ACCOUNT_NUMBER,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID
+)
+values
+(
+  @accountNumber,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @ospEffectiveDate,
+  @ospRoleCode,
+  @offGeneratedId,
+  @spdGeneratedId
+)
+</value>
+   </data>
+   <data name="DisassociateGeneticTestAccount">
+      <value>
+delete from CKT_GENETIC_TST_AC
+where
+  ACCOUNT_NUMBER = @accountNumber
+</value>
+   </data>
+   <data name="ReadGeneticTest">
+      <value>
+select top(1)
+  TEST_NUMBER,
+  TEST_TYPE,
+  GTA_ACCOUNT_NUMBER
+from
+  CKT_GENETIC_TEST
+where
+  @gtaAccountNumber = GTA_ACCOUNT_NUMBER
+</value>
+   </data>
+   <data name="ReadGeneticTestAccount1">
+      <value>
+select top(1)
+  ACCOUNT_NUMBER,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID
+from
+  CKT_GENETIC_TST_AC
+where
+  (@ospRoleCode = OSP_ROLE_CODE) and
+  (@ospEffectiveDate = OSP_EFFECTIVE_DATE) and
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (ACCOUNT_NUMBER = @accountNumber)
+</value>
+   </data>
+   <data name="ReadGeneticTestAccount2">
+      <value>
+select top(1)
+  ACCOUNT_NUMBER,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID
+from
+  CKT_GENETIC_TST_AC
+where
+  ACCOUNT_NUMBER = @accountNumber
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider1">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  WORK_PHONE_NUMBER,
+  WORK_FAX_NUMBER,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDTD_DTSTAMP,
+  WORK_PHONE_EXT,
+  WORK_PHONE_AREA_CD
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider2">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (ROLE_CODE = @roleCode) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="TransferGeneticTestAccount">
+      <value>
+update CKT_GENETIC_TST_AC
+set
+  OSP_EFFECTIVE_DATE = @ospEffectiveDate,
+  OSP_ROLE_CODE = @ospRoleCode,
+  OFF_GENERATED_ID = @offGeneratedId,
+  SPD_GENERATED_ID = @spdGeneratedId
+where
+  ACCOUNT_NUMBER = @accountNumber
+</value>
+   </data>
+</root>

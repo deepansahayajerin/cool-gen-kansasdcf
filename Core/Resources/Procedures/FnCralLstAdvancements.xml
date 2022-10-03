@@ -1,0 +1,100 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCralLstAdvancements"
+           program-name="SWECRALP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCralLstAdvancements"
+           transaction="SR7N"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CRRC_REC_COLL_DTL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnCrrcRecCollctnDetailsPri"
+       send-command="DISPLAY">
+      <map from="SelectedCashReceiptType" to="HiddenCashReceiptType"/>
+      <map from="SelectedCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="SelectedCashReceiptEvent" to="HiddenCashReceiptEvent"/>
+      <map from="SelectedCashReceipt.SequentialNumber"
+           to="CashReceipt.SequentialNumber"/>
+      <map from="SelectedCashReceiptDetail.SequentialIdentifier"
+           to="CashReceiptDetail.SequentialIdentifier"/>
+      <map from="SelectedCashReceiptDetail.CollectionAmount"
+           to="CashReceiptDetail.CollectionAmount"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_COLLECTION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCLCT"
+       to="FnClctLstCollectionTypes"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="FromFlow"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_COLL_BY_AP_PYR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnPayrLstCollsByApPyr"
+       send-command="DISPLAY">
+      <map from="SelectedCsePerson" to="CsePerson"/>
+      <map from="SelectedCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_OFFSET_ADVANCEMENT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnCraoOffsetAdvancement"
+       send-command="DETAIL">
+      <map from="SelectedCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="SelectedReceiptRefund.CreatedTimestamp"
+           to="ReceiptRefund.CreatedTimestamp"/>
+      <map from="SelectedCsePerson" to="CsePerson"/>
+   </on>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="Advancements.DetailReceiptRefund"
+        to="Advancements.DetailReceiptRefund"/>
+   <map from="SearchCsePersonNumber" to="SearchCsePersonNumber"/>
+   <map from="SelectedReceiptRefund" to="Selected"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Advancements.DetailPaymentRequest"
+        to="Advancements.DetailPaymentRequest"/>
+   <map from="InputTo" to="To"/>
+   <map from="InputFrom" to="From"/>
+   <map from="InputClosed" to="Closed"/>
+   <map from="OffsetType" to="OffsetType"/>
+   <map from="Advancements.DetailCollectionType"
+        to="Advancements.DetailCollectionType"/>
+   <map from="Advancements.DetailCashReceiptDetail"
+        to="Advancements.DetailCashReceiptDetail"/>
+   <map from="Advancements.DetailName" to="Advancements.DetailName"/>
+   <map from="Advancements.DetailOffset" to="Advancements.DetailOffset"/>
+   <map from="Advancements.DetailPaymentStatus"
+        to="Advancements.DetailPaymentStatus"/>
+   <map from="Advancements.DetailCsePersonsWorkSet"
+        to="Advancements.DetailCsePersonsWorkSet"/>
+   <map from="Advancements.DetailCsePerson" to="Advancements.DetailCsePerson"/>
+   <map from="Advancements.DetailCommon" to="Advancements.DetailCommon"/>
+   <map from="Advancements.DetailCashReceiptSourceType"
+        to="Advancements.DetailCashReceiptSourceType"/>
+   <map from="Input" to="CollectionType"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="CsePersonsWorkSet.FirstName" to="CsePersonsWorkSet.FirstName"/>
+   <map from="CsePersonsWorkSet.MiddleInitial"
+        to="CsePersonsWorkSet.MiddleInitial"/>
+   <map from="CsePersonsWorkSet.LastName" to="CsePersonsWorkSet.LastName"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

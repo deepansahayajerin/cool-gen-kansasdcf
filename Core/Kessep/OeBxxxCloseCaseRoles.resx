@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select
+  NUMB,
+  STATUS,
+  STATUS_DATE
+from
+  CKT_CASE
+where
+  STATUS = 'O'
+order by
+  NUMB
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'AR') and
+  (@casNumber = CAS_NUMBER)
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="UpdateCaseRole">
+      <value>
+update CKT_CASE_ROLE
+set
+  END_DATE = @endDate,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (CASE_ROLE_ID = @caseRoleId)
+</value>
+   </data>
+</root>

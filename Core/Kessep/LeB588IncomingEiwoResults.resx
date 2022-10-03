@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadIwoAction1">
+      <value>
+select
+  IDENTIFIER,
+  ACTION_TYPE,
+  STATUS_CD,
+  DOC_TRACKING_ID,
+  FILE_CONTROL_ID,
+  BATCH_CONTROL_ID,
+  ERROR_RECORD_TYPE,
+  ERROR_FIELD_1,
+  ERROR_FIELD_2,
+  MORE_ERRORS_IND,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER
+from
+  CKT_IWO_ACTION
+where
+  (BATCH_CONTROL_ID = @batchControlId) and
+  (STATUS_CD = 'N')
+</value>
+   </data>
+   <data name="ReadIwoAction2">
+      <value>
+select
+  IDENTIFIER,
+  ACTION_TYPE,
+  STATUS_CD,
+  DOC_TRACKING_ID,
+  FILE_CONTROL_ID,
+  BATCH_CONTROL_ID,
+  ERROR_RECORD_TYPE,
+  ERROR_FIELD_1,
+  ERROR_FIELD_2,
+  MORE_ERRORS_IND,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER
+from
+  CKT_IWO_ACTION
+where
+  BATCH_CONTROL_ID = @batchControlId
+</value>
+   </data>
+   <data name="ReadIwoAction3">
+      <value>
+select
+  IDENTIFIER,
+  ACTION_TYPE,
+  STATUS_CD,
+  DOC_TRACKING_ID,
+  FILE_CONTROL_ID,
+  BATCH_CONTROL_ID,
+  ERROR_RECORD_TYPE,
+  ERROR_FIELD_1,
+  ERROR_FIELD_2,
+  MORE_ERRORS_IND,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER
+from
+  CKT_IWO_ACTION
+where
+  DOC_TRACKING_ID = @docTrackingId
+</value>
+   </data>
+   <data name="ReadIwoTransactionLegalActionCsePerson">
+      <value>
+select top(1)
+  IDENTIFIER,
+  LGA_IDENTIFIER,
+  CSP_NUMBER
+from
+  CKT_IWO_TRANS
+where
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="UpdateIwoAction1">
+      <value>
+update CKT_IWO_ACTION
+set
+  ERROR_RECORD_TYPE = @errorRecordType,
+  ERROR_FIELD_1 = @errorField1
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IWT_IDENTIFIER = @iwtIdentifier)
+</value>
+   </data>
+   <data name="UpdateIwoAction2">
+      <value>
+update CKT_IWO_ACTION
+set
+  ERROR_RECORD_TYPE = @errorRecordType,
+  ERROR_FIELD_1 = @errorField1
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IWT_IDENTIFIER = @iwtIdentifier)
+</value>
+   </data>
+   <data name="UpdateIwoAction3">
+      <value>
+update CKT_IWO_ACTION
+set
+  ERROR_RECORD_TYPE = @errorRecordType,
+  ERROR_FIELD_1 = @errorField1,
+  ERROR_FIELD_2 = @errorField2,
+  MORE_ERRORS_IND = @moreErrorsInd
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IWT_IDENTIFIER = @iwtIdentifier)
+</value>
+   </data>
+</root>

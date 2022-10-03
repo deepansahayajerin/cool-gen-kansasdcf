@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteOfficeServiceProvRelationship">
+      <value>
+delete from CKT_OFC_SRCPRV_RLT
+where
+  (OSP_EFFECTIVE_DATE = @ospEffectiveDate) and
+  (OSP_ROLE_CODE = @ospRoleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (OSP_R_EFFECTIVE_DT = @ospREffectiveDt) and
+  (OSP_R_ROLE_CODE = @ospRRoleCode) and
+  (OFF_R_GENERATED_ID = @offRGeneratedId) and
+  (SPD_R_GENERATED_ID = @spdRGeneratedId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvRelationship">
+      <value>
+select top(1)
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID,
+  OSP_R_EFFECTIVE_DT,
+  OSP_R_ROLE_CODE,
+  OFF_R_GENERATED_ID,
+  SPD_R_GENERATED_ID,
+  REASON_CODE,
+  CREATED_BY,
+  CREATED_DTSTAMP
+from
+  CKT_OFC_SRCPRV_RLT
+where
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (OSP_ROLE_CODE = @ospRoleCode) and
+  (OSP_EFFECTIVE_DATE = @ospEffectiveDate) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_R_GENERATED_ID = @spdRGeneratedId) and
+  (OSP_R_ROLE_CODE = @ospRRoleCode) and
+  (OSP_R_EFFECTIVE_DT = @ospREffectiveDt) and
+  (OFF_GENERATED_ID = OFF_R_GENERATED_ID)
+</value>
+   </data>
+</root>

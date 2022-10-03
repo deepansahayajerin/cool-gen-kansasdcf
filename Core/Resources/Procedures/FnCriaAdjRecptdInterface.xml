@@ -1,0 +1,78 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCriaAdjRecptdInterface"
+           program-name="SWECRIAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCriaAdjRecptdInterface"
+           transaction="SR28"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LST_CR_BAL_RSN_CODE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnClbrLstCashRcptBalRsns"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="PassAreaCashReceiptRlnRsn"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_CR_BAL_ADJ"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrajLstCrBalanceAdjstmts"
+       send-command="CRIA">
+      <map from="Pass" to="PassArea"/>
+      <return-map from="PassAreaCashReceiptRlnRsn" to="PassAreaCashReceiptRlnRsn"/>
+      <return-map from="PassAreaCashReceiptBalanceAdjustment"
+                  to="PassAreaCashReceiptBalanceAdjustment"/>
+      <return-map from="PassAreaIncrease" to="PassAreaIncrease"/>
+      <return-map from="PassAreaDecrease" to="PassAreaDecrease"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_CASH_RECEIPT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrelLstCashReceipts"
+       send-command="DISPLAY">
+      <map from="PassArea" to="CashReceiptSourceType"/>
+      <return-map from="HiddenExportSelectedCashReceipt" to="PassAreaSelection"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_BALANCE_INTERFACE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrbiLstCrInterfaceBalance"
+       send-command="FROMCRIA">
+      <map from="PassArea" to="PassArea"/>
+      <return-map from="PassAreaFirstCashReceipt" to="PassAreaSelection"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <map from="IncreaseCashReceiptEvent" to="IncreaseCashReceiptEvent"/>
+   <map from="DecreaseCashReceiptEvent" to="DecreaseCashReceiptEvent"/>
+   <map from="IncreaseCashReceipt" to="IncreaseCashReceipt"/>
+   <map from="DecreaseCashReceipt" to="DecreaseCashReceipt"/>
+   <map from="Pass" to="PassAreaSelection"/>
+   <map from="IncreaseCrAdjAmt" to="IncreaseCrAdjAmt"/>
+   <map from="IncreaseNetReceiptAmt" to="IncreaseNetReceiptAmt"/>
+   <map from="DecreaseCrAdjAmt" to="DecreaseCrAdjAmt"/>
+   <map from="DecreaseNetReceiptAmt" to="DecreaseNetReceiptAmt"/>
+   <map from="CashReceiptRlnRsn" to="CashReceiptRlnRsn"/>
+   <map from="IncreaseCashReceiptSourceType" to="IncreaseCashReceiptSourceType"/>
+   <map from="DecreaseCashReceiptSourceType" to="DecreaseCashReceiptSourceType"/>
+   <map from="CashReceiptBalanceAdjustment" to="CashReceiptBalanceAdjustment"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="AdjustmentReasonPrompt" to="AdjustmentReasonPrompt"/>
+   <map from="DecreaseCrPrompt" to="DecreaseCrPrompt"/>
+   <map from="IncreaseCrPrompt" to="IncreaseCrPrompt"/>
+   <map from="HiddenCashReceiptRlnRsn" to="HiddenCashReceiptRlnRsn"/>
+   <map from="HiddenIncrease" to="HiddenIncrease"/>
+   <map from="HiddenDecrease" to="HiddenDecrease"/>
+   <map from="HiddenCashReceiptBalanceAdjustment"
+        to="HiddenCashReceiptBalanceAdjustment"/>
+   <map from="CallingPrad" to="CallingPrad"/>
+   <map from="DecraseHidden" to="DecreaseHidden"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

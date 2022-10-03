@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeActCertificationAdministrativeAction">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.TAKEN_DT,
+  T1.AAT_TYPE,
+  T1.ORIGINAL_AMT,
+  T1.CURRENT_AMT,
+  T1.CURRENT_AMT_DT,
+  T1.DECERTIFIED_DT,
+  T1.CREATED_BY,
+  T1.CSE_OFFICE_APP_DT,
+  T1.DATE_SENT,
+  T1.TANF_CODE,
+  T1.CHANGE_SSN_IND,
+  T2.INDICATR
+from
+  CKT_ADMIN_ACTION T2
+  join
+  CKT_ADMIN_ACT_CERT T1
+  on
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.TYPE = T1.AAT_TYPE) and
+    (T1.TAKEN_DT &lt;= @takenDt)
+order by
+  T1.TAKEN_DT desc,
+  T1.TYPE desc
+</value>
+   </data>
+   <data name="ReadAdministrativeAction">
+      <value>
+select top(1)
+  TYPE,
+  INDICATR
+from
+  CKT_ADMIN_ACTION
+where
+  TYPE = @type
+</value>
+   </data>
+   <data name="ReadAdministrativeActionObligationAdministrativeAction">
+      <value>
+select
+  T1.TYPE,
+  T1.INDICATR,
+  T2.OTY_TYPE,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.TAKEN_DT,
+  T2.RESPONSE_DT,
+  T2.RESPONSE
+from
+  CKT_ADMIN_ACTION T1
+  join
+  CKT_OBLIG_ADMIN_AC T2
+  on
+    (@cpaType = T2.CPA_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.TYPE = T2.AAT_TYPE) and
+    (T2.TAKEN_DT &lt;= @takenDt) and
+    (
+      (cast(@type as char(4)) = ' ') or
+      (T1.TYPE = @type)
+    )
+order by
+  T2.TAKEN_DT desc,
+  T1.TYPE
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadFederalDebtSetoff">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  AAT_TYPE,
+  ADC_AMT,
+  NON_ADC_AMT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@aatType = AAT_TYPE) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID
+from
+  CKT_OBLIGATION T1,
+  CKT_ADMIN_ACT_CERT T2
+where
+  (@cpaType = T1.CPA_TYPE) and
+  (@cspNumber = T1.CSP_NUMBER) and
+  (@cpaType = T2.CPA_TYPE) and
+  (@cspNumber = T2.CSP_NUMBER) and
+  (@aatType = T2.AAT_TYPE)
+order by
+  T1.OB_ID
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemption">
+      <value>
+select top(1)
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  END_DT
+from
+  CKT_OADM_ACT_EXMP
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (@aatType = AAT_TYPE) and
+  (END_DT &gt; @endDt) and
+  (EFFECTIVE_DT &lt; @endDt)
+order by
+  EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemptionAdministrativeAction">
+      <value>
+select top(1)
+  T1.OTY_TYPE,
+  T1.AAT_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.EFFECTIVE_DT,
+  T1.END_DT,
+  T2.INDICATR
+from
+  CKT_ADMIN_ACTION T2
+  join
+  CKT_OADM_ACT_EXMP T1
+  on
+    (T2.TYPE = T1.AAT_TYPE) and
+    (T2.INDICATR = @indicatr) and
+    (T2.TYPE &lt;&gt; @type1) and
+    (T2.TYPE &lt;&gt; @type2) and
+    (T2.TYPE &lt;&gt; @type3) and
+    (T2.TYPE &lt;&gt; @type4) and
+    (T1.END_DT &gt; @endDt) and
+    (T1.EFFECTIVE_DT &lt; @endDt) and
+    (@otyType = T1.OTY_TYPE) and
+    (@obgGeneratedId = T1.OBG_GENERATED_ID) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (@cpaType = T1.CPA_TYPE)
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_NM,
+  DEBT_TYP_CLASS,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

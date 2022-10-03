@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EIN,
+  NAME
+from
+  CKT_EMPLOYER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadEmployerAddress1">
+      <value>
+select top(1)
+  LOCATION_TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  IDENTIFIER,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  EMP_ID
+from
+  CKT_EMPLOYER_ADDR
+where
+  @empId = EMP_ID
+</value>
+   </data>
+   <data name="ReadEmployerAddress2">
+      <value>
+select top(1)
+  LOCATION_TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  IDENTIFIER,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  EMP_ID
+from
+  CKT_EMPLOYER_ADDR
+where
+  @empId = EMP_ID
+</value>
+   </data>
+   <data name="ReadEmployerRelationEmployer1">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.EFFECTIVE_DATE,
+  T1.END_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_TMST,
+  T1.EMP_HQ_ID,
+  T1.EMP_LOC_ID,
+  T1.NOTE,
+  T1.TYPE,
+  T2.EIN,
+  T2.NAME
+from
+  CKT_EMPLOYER T2
+  join
+  CKT_EMPL_RLN T1
+  on
+    (T2.IDENTIFIER = T1.EMP_LOC_ID) and
+    (@empHqId = T1.EMP_HQ_ID) and
+    (
+      (T1.END_DATE &lt; @endDate) or
+      (
+        (T1.END_DATE = @endDate) and
+        (T1.CREATED_TIMESTAMP &lt;= @createdTimestamp)
+      )
+    )
+order by
+  T1.END_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadEmployerRelationEmployer2">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.EFFECTIVE_DATE,
+  T1.END_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_TMST,
+  T1.EMP_HQ_ID,
+  T1.EMP_LOC_ID,
+  T1.NOTE,
+  T1.TYPE,
+  T2.EIN,
+  T2.NAME
+from
+  CKT_EMPLOYER T2
+  join
+  CKT_EMPL_RLN T1
+  on
+    (T2.IDENTIFIER = T1.EMP_HQ_ID) and
+    (@empLocId = T1.EMP_LOC_ID) and
+    (
+      (T1.END_DATE &lt; @endDate) or
+      (
+        (T1.END_DATE = @endDate) and
+        (T1.CREATED_TIMESTAMP &lt;= @createdTimestamp)
+      )
+    )
+order by
+  T1.END_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

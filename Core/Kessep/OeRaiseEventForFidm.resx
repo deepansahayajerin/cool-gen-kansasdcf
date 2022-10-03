@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseUnit">
+      <value>
+select
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.CSP_NO_AP
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NO) and
+    (T2.CSP_NO_AP = @cspNoAp)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadFinancialInstitutionDataMatch">
+      <value>
+select
+  CSE_NUMBER,
+  INSTITUTION_TIN,
+  MATCH_PAY_ACCT_NUM,
+  MATCH_RUN_DATE,
+  ACCOUNT_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP
+from
+  CKT_FIN_DATA_MATCH
+where
+  (CREATED_TIMESTAMP between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+  (CREATED_BY = @createdBy)
+order by
+  CSE_NUMBER
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  count(distinct T1.SERVICE_PRVDER_ID)
+from
+  CKT_CASE T4
+  join
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_ASSIGN_CASE T3
+  on
+    (T1.SERVICE_PRVDER_ID = T3.SPD_ID) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    (T4.NUMB = T3.CAS_NO) and
+    (T4.STATUS = 'O')
+  join
+  CKT_CASE_ROLE T5
+  on
+    (T4.NUMB = T5.CAS_NUMBER) and
+    (T5.TYPE = 'AP') and
+    (T5.START_DATE &lt;= @effectiveDate) and
+    (T5.END_DATE &gt;= @effectiveDate) and
+    (T5.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

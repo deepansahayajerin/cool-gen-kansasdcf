@@ -1,0 +1,101 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCrdiLstDepositItems"
+           program-name="SWECRDIP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCrdiLstDepositItems"
+           transaction="SR27"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Pass" to="Code"/>
+      <return-map from="DlgflwSelected" to="ReturnedPft"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CRTB"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrtbBalCashRecptToTape"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_CASH_RECIEPT_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCRTL"
+       to="FnCrtlLstCashReceiptTypes"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="ReturnedCrt"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CASH_RECEIPT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="none"
+       to="FnCrecCashReceipting"
+       send-command="DISPLAY">
+      <map from="ForFlowCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="ForFlowCashReceiptSourceType.Code"
+           to="CashReceiptSourceType.Code"/>
+      <map from="ForFlowCashReceiptEvent.SystemGeneratedIdentifier"
+           to="CashReceiptEvent.SystemGeneratedIdentifier"/>
+      <map from="ForFlowCashReceiptEvent.ReceivedDate"
+           to="CashReceiptEvent.ReceivedDate"/>
+      <map from="ForFlowCashReceiptType.SystemGeneratedIdentifier"
+           to="CashReceiptType.SystemGeneratedIdentifier"/>
+      <map from="ForFlowCashReceiptType.Code" to="CashReceiptType.Code"/>
+      <map from="ForFlowCashReceipt.ReceiptAmount" to="CashReceipt.ReceiptAmount"/>
+      <map from="ForFlowCashReceipt.SequentialNumber"
+           to="CashReceipt.SequentialNumber"/>
+      <map from="ForFlowCashReceipt.ReceiptDate" to="CashReceipt.ReceiptDate"/>
+      <map from="ForFlowCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="HiddenCashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="ForFlowCashReceiptSourceType.Code"
+           to="HiddenCashReceiptSourceType.Code"/>
+      <map from="ForFlowCashReceiptType" to="HiddenCashReceiptType"/>
+   </on>
+   <map from="SelectedFundTransaction" to="SelectedFundTransaction"/>
+   <map from="SelectedFundTransactionStatus" to="SelectedFundTransactionStatus"/>
+   <map from="HiddenProgramCostAccount" to="HiddenProgramCostAccount"/>
+   <map from="Fund" to="Fund"/>
+   <map from="Zdel.ZdelExportGroupMemberCashReceiptEvent"
+        to="Zdel.ZdelImportGroupMemberCashReceiptEvent"/>
+   <map from="HiddenFundTransaction" to="HiddenFundTransaction"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="FilterStarting" to="FilterStarting"/>
+   <map from="DepositNoOfItems" to="DepositNoOfItems"/>
+   <map from="ClosedDate" to="ClosedDate"/>
+   <map from="SelectedClosed" to="SelectedClosed"/>
+   <map from="FilterPft" to="FilterPft"/>
+   <map from="PftPrompt" to="PftPrompt"/>
+   <map from="PftTotals" to="PftTotals"/>
+   <map from="Filter" to="Filter"/>
+   <map from="ReceiptTypePrompt" to="ReceiptTypePrompt"/>
+   <map from="Page.PageExportGroupMember" to="Page.PageImportGroupMember"/>
+   <map from="New1.NewExportGroupMemberSelect"
+        to="New1.NewImportGroupMemberSelect"/>
+   <map from="New1.NewExportGroupMemberCashReceipt"
+        to="New1.NewImportGroupMemberCashReceipt"/>
+   <map from="New1.NewExportGroupMemberCashReceiptSourceType"
+        to="New1.NewImportGroupMemberCashReceiptSourceType"/>
+   <map from="New1.NewExportGroupMemberCashReceiptType"
+        to="New1.NewImportGroupMemberCashReceiptType"/>
+   <map from="New1.NewExportGroupMemberCashReceiptEvent"
+        to="New1.NewImportGroupMemberCashReceiptEvent"/>
+   <map from="Pf7Pf8PriorIndicator" to="Pf7Pf8PriorIndicator"/>
+   <map from="Pf7Pf8MoreIndicator" to="Pf7Pf8MoreIndicator"/>
+   <map from="Zdel.ZdelExportGroupMemberCashReceiptSourceType.SystemGeneratedIdentifier"
+        to="Zdel.ZdelImportGroupMemberCashReceiptSourceType.SystemGeneratedIdentifier"/>
+   <map from="Zdel.ZdelExportGroupMemberCashReceiptType.SystemGeneratedIdentifier"
+        to="Zdel.ZdelImportGroupMemberCashReceiptType.SystemGeneratedIdentifier"/>
+   <map from="Zdel.ZdelExportGroupMemberCashReceipt.ReceiptDate"
+        to="Zdel.ZdelImportGroupMemberCashReceipt.ReceiptDate"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateObligationRln">
+      <value>
+insert into CKT_OBG_RLN
+(
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OBG_F_GENERATED_ID,
+  CSP_F_NUMBER,
+  CPA_F_TYPE,
+  ORR_GENERATED_ID,
+  CREATED_BY,
+  CREATED_TMST,
+  OTY_SECOND_ID,
+  OTY_FIRST_ID,
+  OB_RLN_DSC
+)
+values
+(
+  @obgGeneratedId,
+  @cspNumber,
+  @cpaType,
+  @obgFGeneratedId,
+  @cspFNumber,
+  @cpaFType,
+  @orrGeneratedId,
+  @createdBy,
+  @createdTmst,
+  @otySecondId,
+  @otyFirstId,
+  @obRlnDsc
+)
+</value>
+   </data>
+   <data name="ReadObligation1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  PRIM_SEC_CD,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligation2">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  PRIM_SEC_CD,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligationRlnRsn">
+      <value>
+select top(1)
+  OB_RLN_RSN_ID
+from
+  CKT_OBG_RLNRSN
+where
+  OB_RLN_RSN_ID = @obRlnRsnId
+</value>
+   </data>
+   <data name="UpdateObligation1">
+      <value>
+update CKT_OBLIGATION
+set
+  PRIM_SEC_CD = @primSecCd,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="UpdateObligation2">
+      <value>
+update CKT_OBLIGATION
+set
+  PRIM_SEC_CD = @primSecCd,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  ZDEL_START_DATE,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('M', 'R')) and
+  (VERIFIED_DATE &lt;= @verifiedDate) and
+  (END_DATE &gt;= @verifiedDate)
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  ZDEL_START_DATE,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_DATE &gt;= @endDate) and
+  (VERIFIED_DATE &lt;= @endDate)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.FIP_STATE,
+  T1.FIP_COUNTY,
+  T1.FIP_LOCATION
+from
+  CKT_FIPS T2
+  join
+  CKT_FIPS_TRIB_ADDR T1
+  on
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+</root>

@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePaymentStatusHistory">
+      <value>
+insert into CKT_PMNT_STAT_HIST
+(
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @pstGeneratedId,
+  @prqGeneratedId,
+  @pymntStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="ReadEftTransmissionFileInfo">
+      <value>
+select top(1)
+  TRANSMISSION_TYPE,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME,
+  RECORD_COUNT,
+  TOTAL_AMOUNT
+from
+  CKT_EFT_TRAN_FINFO
+where
+  (RECORD_COUNT = @recordCount) and
+  (TOTAL_AMOUNT = cast(@totalCurrency as decimal(15, 2))) and
+  (TRANSMISSION_TYPE = 'O')
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmission">
+      <value>
+select
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PAY_DATE,
+  TRANSMITTAL_AMOUNT,
+  AP_SSN,
+  MEDICAL_SUPPORT_ID,
+  AP_NAME,
+  FIPS_CODE,
+  EMPLOYMENT_TERM_ID,
+  SEQUENCE_NUMBER,
+  RECEIVING_DFI_IDEN,
+  DFI_ACCT_NUMBER,
+  TRANSACTION_CODE,
+  SETTLEMENT_DATE,
+  CASE_ID,
+  TRANS_STATUS_CODE,
+  COMPANY_NAME,
+  ORIG_DFI_IDENT,
+  RECV_ENTITY_NAME,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  TRANS_PROCESS_DATE,
+  PRQ_GENERATED_ID,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME,
+  COMPANY_IDENT_ICD,
+  COMPANY_IDENT_NUM,
+  COMPANY_DESC_DATE,
+  EFFECTIVE_ENTRY_DT,
+  RECV_COMPANY_NAME,
+  TRACE_NUMBER,
+  APPLICATION_IDENT,
+  COLLECTION_AMOUNT,
+  VENDOR_NUMBER,
+  CHECK_DIGIT,
+  RECV_DFI_ACCT_NUM,
+  COMPANY_ENTRY_DESC
+from
+  CKT_ELEC_FUND_TRAN
+where
+  (FILE_CREATION_DATE = @fileCreationDate) and
+  (FILE_CREATION_TIME = @fileCreationTime) and
+  (TRANSMISSION_TYPE = 'O')
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="ReadPaymentStatus">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID
+from
+  CKT_PAYMENT_STATUS
+where
+  PAYMENT_STATUS_ID = 14
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistory">
+      <value>
+select top(1)
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+from
+  CKT_PMNT_STAT_HIST
+where
+  (@prqGeneratedId = PRQ_GENERATED_ID) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="UpdateElectronicFundTransmission">
+      <value>
+update CKT_ELEC_FUND_TRAN
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  TRANS_STATUS_CODE = @transStatusCode,
+  TRANS_PROCESS_DATE = @transProcessDate,
+  EFFECTIVE_ENTRY_DT = @effectiveEntryDt
+where
+  (TRANSMISSION_TYPE = @transmissionType) and
+  (TRANSMISSION_ID = @transmissionId)
+</value>
+   </data>
+   <data name="UpdatePaymentStatusHistory">
+      <value>
+update CKT_PMNT_STAT_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (PST_GENERATED_ID = @pstGeneratedId) and
+  (PRQ_GENERATED_ID = @prqGeneratedId) and
+  (PYMNT_STAT_HIST_ID = @pymntStatHistId)
+</value>
+   </data>
+</root>

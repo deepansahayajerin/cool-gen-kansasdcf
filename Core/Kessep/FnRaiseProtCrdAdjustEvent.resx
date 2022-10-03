@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseUnit1">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.CSP_NO_AP
+from
+  CKT_LEGAL_ACTION T6
+  join
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NO) and
+    (T2.CSP_NO_AP = @cspNoAp)
+  join
+  CKT_LEG_ACT_CAS_RL T5
+  on
+    (T1.NUMB = T5.CAS_NUMBER) and
+    (T5.CRO_TYPE = 'AP')
+  on
+    (T6.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T6.STANDARD_NO = @standardNo)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseCaseUnit2">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.CSP_NO_AP
+from
+  CKT_LEGAL_ACTION T6
+  join
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NO) and
+    (T2.CSP_NO_AP is not null)
+  join
+  CKT_LEG_ACT_CAS_RL T5
+  on
+    (T1.NUMB = T5.CAS_NUMBER) and
+    (T5.CRO_TYPE = 'AP')
+  on
+    (T6.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T6.STANDARD_NO = @standardNo)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseCaseUnit3">
+      <value>
+select
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.CSP_NO_AP
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NO) and
+    (T2.CSP_NO_AP = @cspNoAp)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AR') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

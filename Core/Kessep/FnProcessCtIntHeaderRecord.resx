@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  SOURCE_CREATION_DT,
+  CREATED_BY
+from
+  CKT_CR_EVENT
+where
+  (SOURCE_CREATION_DT = @sourceCreationDt) and
+  (@cstIdentifier = CST_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_CRSRC_TYPE
+where
+  (CODE = @code) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus">
+      <value>
+select top(1)
+  T1.CR_STATUS_ID
+from
+  CKT_CR_STATUS T1
+  join
+  CKT_CR_STATUS_HIST T2
+  on
+    (T1.CR_STATUS_ID = T2.CRS_IDENTIFIER) and
+    (T2.DISCONTINUE_DATE = @discontinueDate) and
+    (@crvIdentifier = T2.CRV_IDENTIFIER) and
+    (@cstIdentifier = T2.CST_IDENTIFIER)
+</value>
+   </data>
+</root>

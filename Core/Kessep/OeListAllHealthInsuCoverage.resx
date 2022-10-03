@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonCase">
+      <value>
+select top(1)
+  T1.NUMB,
+  T3.CAS_NUMBER
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T3.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonPersonalHealthInsuranceHealthInsuranceCoverage">
+      <value>
+select distinct
+  T6.CSP_NUMBER,
+  T2.HCV_ID,
+  T2.CSP_NUMBER,
+  T2.COVER_BEGIN_DATE,
+  T2.COVER_END_DATE,
+  T3.GROUP_NUMBER,
+  T3.POLICY_NUMBER,
+  T3.POLICY_EXP_DATE,
+  T3.POLICY_EFF_DATE,
+  T3.CSP_NUMBER,
+  T3.HIC_IDENTIFIER,
+  T4.CARRIER_CODE,
+  T4.POLICY_CARRIER
+from
+  CKT_HEALTH_INS_CO T4
+  join
+  CKT_HINS_COVERAGE T3
+  join
+  CKT_CASE_ROLE T6
+  join
+  CKT_PERSONAL_HINS T2
+  on
+    (@casNumber = T6.CAS_NUMBER) and
+    (T6.CSP_NUMBER = T2.CSP_NUMBER)
+  on
+    T3.IDENTIFIER = T2.HCV_ID
+  on
+    T4.IDENTIFIER = T3.HIC_IDENTIFIER
+  join
+  CKT_CASE_ROLE T7
+  on
+    (T3.CSP_NUMBER = T7.CSP_NUMBER) and
+    (@casNumber = T7.CAS_NUMBER)
+order by
+  T2.COVER_END_DATE desc,
+  T2.COVER_BEGIN_DATE
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompanyHealthInsuranceCoverage1">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.CARRIER_CODE,
+  T1.POLICY_CARRIER,
+  T2.IDENTIFIER,
+  T2.GROUP_NUMBER,
+  T2.POLICY_NUMBER,
+  T2.POLICY_EXP_DATE,
+  T2.POLICY_EFF_DATE,
+  T2.CSP_NUMBER,
+  T3.CSP_NUMBER,
+  T3.COVER_BEGIN_DATE,
+  T3.COVER_END_DATE
+from
+  CKT_HEALTH_INS_CO T1
+  join
+  CKT_HINS_COVERAGE T2
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.IDENTIFIER = T2.HIC_IDENTIFIER)
+  join
+  CKT_PERSONAL_HINS T3
+  on
+    T2.IDENTIFIER = T3.HCV_ID
+  join
+  CKT_CASE_ROLE T5
+  on
+    (T3.CSP_NUMBER = T5.CSP_NUMBER) and
+    (@casNumber = T5.CAS_NUMBER)
+order by
+  T3.COVER_END_DATE desc,
+  T3.COVER_BEGIN_DATE
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompanyHealthInsuranceCoverage2">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.CARRIER_CODE,
+  T1.POLICY_CARRIER,
+  T2.IDENTIFIER,
+  T2.GROUP_NUMBER,
+  T2.POLICY_NUMBER,
+  T2.POLICY_EXP_DATE,
+  T2.POLICY_EFF_DATE,
+  T2.CSP_NUMBER,
+  T3.CSP_NUMBER,
+  T3.COVER_BEGIN_DATE,
+  T3.COVER_END_DATE,
+  T6.CAS_NUMBER
+from
+  CKT_HEALTH_INS_CO T1
+  join
+  CKT_HINS_COVERAGE T2
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.IDENTIFIER = T2.HIC_IDENTIFIER)
+  join
+  CKT_PERSONAL_HINS T3
+  on
+    T2.IDENTIFIER = T3.HCV_ID
+  join
+  CKT_CASE_ROLE T6
+  on
+    T3.CSP_NUMBER = T6.CSP_NUMBER
+  join
+  CKT_CASE_ROLE T7
+  on
+    (T6.CAS_NUMBER = T7.CAS_NUMBER) and
+    (@cspNumber = T7.CSP_NUMBER)
+order by
+  T3.COVER_END_DATE desc,
+  T3.COVER_BEGIN_DATE
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompanyHealthInsuranceCoverage3">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.CARRIER_CODE,
+  T1.POLICY_CARRIER,
+  T2.IDENTIFIER,
+  T2.GROUP_NUMBER,
+  T2.POLICY_NUMBER,
+  T2.POLICY_EXP_DATE,
+  T2.POLICY_EFF_DATE,
+  T2.CSP_NUMBER,
+  T3.CSP_NUMBER,
+  T3.COVER_BEGIN_DATE,
+  T3.COVER_END_DATE
+from
+  CKT_HEALTH_INS_CO T1
+  join
+  CKT_HINS_COVERAGE T2
+  join
+  CKT_PERSONAL_HINS T3
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T2.IDENTIFIER = T3.HCV_ID)
+  on
+    T1.IDENTIFIER = T2.HIC_IDENTIFIER
+  join
+  CKT_CASE_ROLE T5
+  on
+    (T2.CSP_NUMBER = T5.CSP_NUMBER) and
+    (@casNumber = T5.CAS_NUMBER)
+order by
+  T3.COVER_END_DATE desc,
+  T3.COVER_BEGIN_DATE
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompanyHealthInsuranceCoverage4">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.CARRIER_CODE,
+  T1.POLICY_CARRIER,
+  T2.IDENTIFIER,
+  T2.GROUP_NUMBER,
+  T2.POLICY_NUMBER,
+  T2.POLICY_EXP_DATE,
+  T2.POLICY_EFF_DATE,
+  T2.CSP_NUMBER,
+  T3.CSP_NUMBER,
+  T3.COVER_BEGIN_DATE,
+  T3.COVER_END_DATE,
+  T6.CAS_NUMBER
+from
+  CKT_HEALTH_INS_CO T1
+  join
+  CKT_HINS_COVERAGE T2
+  join
+  CKT_PERSONAL_HINS T3
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T2.IDENTIFIER = T3.HCV_ID)
+  on
+    T1.IDENTIFIER = T2.HIC_IDENTIFIER
+  join
+  CKT_CASE_ROLE T6
+  on
+    T2.CSP_NUMBER = T6.CSP_NUMBER
+  join
+  CKT_CASE_ROLE T7
+  on
+    (T6.CAS_NUMBER = T7.CAS_NUMBER) and
+    (@cspNumber = T7.CSP_NUMBER)
+order by
+  T3.COVER_END_DATE desc,
+  T3.COVER_BEGIN_DATE
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage1">
+      <value>
+select distinct top(1)
+  T1.IDENTIFIER,
+  T1.GROUP_NUMBER,
+  T1.POLICY_NUMBER,
+  T1.POLICY_EXP_DATE,
+  T1.POLICY_EFF_DATE,
+  T1.CSP_NUMBER,
+  T1.HIC_IDENTIFIER
+from
+  CKT_HINS_COVERAGE T1
+  join
+  CKT_PERSONAL_HINS T2
+  on
+    (T1.IDENTIFIER = T2.HCV_ID) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  GROUP_NUMBER,
+  POLICY_NUMBER,
+  POLICY_EXP_DATE,
+  POLICY_EFF_DATE,
+  CSP_NUMBER,
+  HIC_IDENTIFIER
+from
+  CKT_HINS_COVERAGE
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverageHealthInsuranceCompany">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.GROUP_NUMBER,
+  T1.POLICY_NUMBER,
+  T1.POLICY_EXP_DATE,
+  T1.POLICY_EFF_DATE,
+  T1.CSP_NUMBER,
+  T1.HIC_IDENTIFIER,
+  T2.CARRIER_CODE,
+  T2.POLICY_CARRIER
+from
+  CKT_HEALTH_INS_CO T2
+  join
+  CKT_HINS_COVERAGE T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.IDENTIFIER = T1.HIC_IDENTIFIER)
+order by
+  T1.IDENTIFIER desc
+</value>
+   </data>
+</root>

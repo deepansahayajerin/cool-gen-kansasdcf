@@ -1,0 +1,64 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeHiplInsurCovByPersonList"
+           program-name="SWEHIPLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeHiplInsurCovByPersonList"
+           transaction="SR5W"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="CsePersonsWorkSet.Number" to="SearchCsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+      <map from="CsePersonsWorkSet.FirstName"
+           to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial"
+           to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="SearchCsePersonsWorkSet.LastName"/>
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Case1" to="SelectedCase"/>
+      <return-map from="Selected.Number" to="SelectedCsePersonsWorkSet.Number"/>
+      <return-map from="Selected.FormattedName"
+                  to="SelectedCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeHinmHealthInsuranceMenu"
+       send-command-type="none">
+      <map from="Case1" to="StartCase"/>
+      <map from="CsePerson" to="StartCsePerson"/>
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+   </on>
+   <map from="Export1.DetHealthInsuranceCoverage"
+        to="Import1.DetHealthInsuranceCoverage"/>
+   <map from="Case1" to="Case1"/>
+   <map from="Export1.DetHealthInsuranceCompany"
+        to="Import1.DetHealthInsuranceCompany"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="Export1.SelectionPrompt" to="Import1.SelectionPrompt"/>
+   <map from="Export1.DetPolicyHolder" to="Import1.DetPolicyHolder"/>
+   <map from="Export1.PolicyHolderName" to="Import1.PolicyHolderName"/>
+   <map from="Export1.DetInsurancActive" to="Import1.DetInsurancActive"/>
+   <map from="Export1.DetCase" to="Import1.DetCase"/>
+   <map from="Export1.DetCovered" to="Import1.DetCovered"/>
+   <map from="Export1.CoveredPersonName" to="Import1.CoveredPersonName"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="CsePersonPrompt" to="CsePersonPrompt"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="SelectedCase" to="SelectedCase"/>
+   <map from="SelectedCsePerson" to="SelectedCsePerson"/>
+   <map from="SelectedCsePersonsWorkSet" to="SelectedCsePersonsWorkSet"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

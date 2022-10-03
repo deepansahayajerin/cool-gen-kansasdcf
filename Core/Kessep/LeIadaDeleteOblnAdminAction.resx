@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteObligationAdministrativeAction#1">
+      <value>
+select top(1)
+  1
+from
+  CKT_ADMIN_APPEAL
+where
+  (OTY_ID = @otyId) and
+  (AAT_TYPE = @aatType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OAA_TAKEN_DATE = @oaaTakenDate)
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_ASSGN_OBG_AA
+where
+  (OTY_ID = @otyId) and
+  (AAT_TYPE = @aatType) and
+  (OBG_ID = @obgGeneratedId) and
+  (CSP_NO = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OAA_DATE = @oaaTakenDate)
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#3">
+      <value>
+update CKT_APPOINTMENT T3
+set
+  T3.INF_ID = null
+where
+  exists
+  (
+    select top(1)
+      1
+    from
+      CKT_INFRASTRUCTURE T2
+    where
+      (T2.SYSTEM_GENERATED_I = T3.INF_ID) and
+      (T2.OTY_OAA_ID = @otyId) and
+      (T2.AAT_TYPE = @aatType) and
+      (T2.OBG_OAA_ID = @obgGeneratedId) and
+      (T2.CSP_OAA_NO = @cspNumber) and
+      (T2.CPA_OAA_TYPE = @cpaType) and
+      (T2.OAA_DATE = @oaaTakenDate)
+  )
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#4">
+      <value>
+delete from CKT_ASSGN_MNT_ACT
+from
+  CKT_ASSGN_MNT_ACT T4
+  join
+  CKT_INFRASTRUCTURE T2
+  join
+  CKT_MONITORED_ACT T3
+  on
+    (T2.SYSTEM_GENERATED_I = T3.INF_SYS_GEN_ID) and
+    (T2.OTY_OAA_ID = @otyId) and
+    (T2.AAT_TYPE = @aatType) and
+    (T2.OBG_OAA_ID = @obgGeneratedId) and
+    (T2.CSP_OAA_NO = @cspNumber) and
+    (T2.CPA_OAA_TYPE = @cpaType) and
+    (T2.OAA_DATE = @oaaTakenDate)
+  on
+    T3.SYSTEM_GENERATED_I = T4.MAC_ID
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#5">
+      <value>
+delete from CKT_MONITORED_ACT
+from
+  CKT_MONITORED_ACT T3
+  join
+  CKT_INFRASTRUCTURE T2
+  on
+    (T2.SYSTEM_GENERATED_I = T3.INF_SYS_GEN_ID) and
+    (T2.OTY_OAA_ID = @otyId) and
+    (T2.AAT_TYPE = @aatType) and
+    (T2.OBG_OAA_ID = @obgGeneratedId) and
+    (T2.CSP_OAA_NO = @cspNumber) and
+    (T2.CPA_OAA_TYPE = @cpaType) and
+    (T2.OAA_DATE = @oaaTakenDate)
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#6">
+      <value>
+delete from CKT_OSP_ALERT
+from
+  CKT_OSP_ALERT T3
+  join
+  CKT_INFRASTRUCTURE T2
+  on
+    (T2.SYSTEM_GENERATED_I = T3.INF_ID) and
+    (T2.OTY_OAA_ID = @otyId) and
+    (T2.AAT_TYPE = @aatType) and
+    (T2.OBG_OAA_ID = @obgGeneratedId) and
+    (T2.CSP_OAA_NO = @cspNumber) and
+    (T2.CPA_OAA_TYPE = @cpaType) and
+    (T2.OAA_DATE = @oaaTakenDate)
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#7">
+      <value>
+delete from CKT_FIELD_VALUE
+from
+  CKT_FIELD_VALUE T4
+  join
+  CKT_INFRASTRUCTURE T2
+  on
+    (T2.SYSTEM_GENERATED_I = T4.INF_IDENTIFIER) and
+    (T2.OTY_OAA_ID = @otyId) and
+    (T2.AAT_TYPE = @aatType) and
+    (T2.OBG_OAA_ID = @obgGeneratedId) and
+    (T2.CSP_OAA_NO = @cspNumber) and
+    (T2.CPA_OAA_TYPE = @cpaType) and
+    (T2.OAA_DATE = @oaaTakenDate)
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#8">
+      <value>
+delete from CKT_MONITORED_DOC
+from
+  CKT_MONITORED_DOC T4
+  join
+  CKT_INFRASTRUCTURE T2
+  on
+    (T2.SYSTEM_GENERATED_I = T4.INF_ID) and
+    (T2.OTY_OAA_ID = @otyId) and
+    (T2.AAT_TYPE = @aatType) and
+    (T2.OBG_OAA_ID = @obgGeneratedId) and
+    (T2.CSP_OAA_NO = @cspNumber) and
+    (T2.CPA_OAA_TYPE = @cpaType) and
+    (T2.OAA_DATE = @oaaTakenDate)
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#9">
+      <value>
+delete from CKT_OUTGOING_DOC
+from
+  CKT_OUTGOING_DOC T3
+  join
+  CKT_INFRASTRUCTURE T2
+  on
+    (T2.SYSTEM_GENERATED_I = T3.INF_ID) and
+    (T2.OTY_OAA_ID = @otyId) and
+    (T2.AAT_TYPE = @aatType) and
+    (T2.OBG_OAA_ID = @obgGeneratedId) and
+    (T2.CSP_OAA_NO = @cspNumber) and
+    (T2.CPA_OAA_TYPE = @cpaType) and
+    (T2.OAA_DATE = @oaaTakenDate)
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#10">
+      <value>
+delete from ZDEL_REC_DOCUMENT
+from
+  ZDEL_REC_DOCUMENT T3
+  join
+  CKT_INFRASTRUCTURE T2
+  on
+    (T2.SYSTEM_GENERATED_I = T3.INF_ID) and
+    (T2.OTY_OAA_ID = @otyId) and
+    (T2.AAT_TYPE = @aatType) and
+    (T2.OBG_OAA_ID = @obgGeneratedId) and
+    (T2.CSP_OAA_NO = @cspNumber) and
+    (T2.CPA_OAA_TYPE = @cpaType) and
+    (T2.OAA_DATE = @oaaTakenDate)
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#11">
+      <value>
+delete from CKT_INFRASTRUCTURE
+where
+  (OTY_OAA_ID = @otyId) and
+  (AAT_TYPE = @aatType) and
+  (OBG_OAA_ID = @obgGeneratedId) and
+  (CSP_OAA_NO = @cspNumber) and
+  (CPA_OAA_TYPE = @cpaType) and
+  (OAA_DATE = @oaaTakenDate)
+</value>
+   </data>
+   <data name="DeleteObligationAdministrativeAction#12">
+      <value>
+delete from CKT_OBLIG_ADMIN_AC
+where
+  (OTY_TYPE = @otyId) and
+  (AAT_TYPE = @aatType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (TAKEN_DT = @oaaTakenDate)
+</value>
+   </data>
+   <data name="ReadAdministrativeAction">
+      <value>
+select top(1)
+  TYPE
+from
+  CKT_ADMIN_ACTION
+where
+  TYPE = @type
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OAA_TAKEN_DATE,
+  OTY_ID
+from
+  CKT_ADMIN_APPEAL
+where
+  (@otyId = OTY_ID) and
+  (@oaaTakenDate = OAA_TAKEN_DATE) and
+  (@aatType = AAT_TYPE) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgGeneratedId = OBG_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadObligationAdministrativeAction">
+      <value>
+select top(1)
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  TAKEN_DT,
+  RESPONSE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  RESPONSE
+from
+  CKT_OBLIG_ADMIN_AC
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (@aatType = AAT_TYPE) and
+  (TAKEN_DT = @takenDt)
+</value>
+   </data>
+   <data name="ReadObligationObligationType">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  LGA_ID
+from
+  CKT_OBLIGATION
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationTribunal">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T2.FIP_LOCATION,
+  T2.IDENTIFIER,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_OBLIGATION T1
+  on
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T3.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T3.COURT_CASE_NO = @courtCaseNo)
+  on
+    T2.IDENTIFIER = T3.TRB_ID
+</value>
+   </data>
+</root>

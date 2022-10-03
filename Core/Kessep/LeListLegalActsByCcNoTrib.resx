@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadLegalActionAppeal">
+      <value>
+select top(1)
+  LA_APPEAL_ID,
+  APL_ID,
+  LGA_ID
+from
+  CKT_LEG_ACT_APPEAL
+where
+  @lgaId = LGA_ID
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal1">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.FOREIGN_ORDER_NO,
+  T1.TRB_ID,
+  T1.SYSTEM_GEN_IND,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T2.IDENTIFIER = T1.TRB_ID)
+order by
+  T1.CREATED_TSTAMP desc,
+  T1.CLASSIFICATION
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal2">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.FOREIGN_ORDER_NO,
+  T1.TRB_ID,
+  T1.SYSTEM_GEN_IND,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.STANDARD_NO = @standardNo) and
+    (T2.IDENTIFIER = T1.TRB_ID)
+order by
+  T1.CREATED_TSTAMP desc,
+  T1.CLASSIFICATION
+</value>
+   </data>
+   <data name="ReadServiceProcess">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  SERVICE_DATE,
+  IDENTIFIER
+from
+  CKT_SERVICE_PROCSS
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (SERVICE_DATE &gt; @serviceDate)
+order by
+  SERVICE_DATE desc
+</value>
+   </data>
+</root>

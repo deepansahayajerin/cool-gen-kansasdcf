@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="Read1099LocateRequest">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  SSN,
+  LOCAL_CODE,
+  LAST_NAME,
+  AFDC_CODE,
+  CASE_ID_NO,
+  CT_OR_ADM_ORD_IND,
+  NO_MATCH_CODE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FIRST_NAME,
+  REQUEST_SENT_DATE,
+  MIDDLE_INITIAL
+from
+  CKT_1099_LOC_REQ
+where
+  (REQUEST_SENT_DATE &gt;= dateadd(day, - 5, cast(@processDate as date))) or
+  (REQUEST_SENT_DATE = @requestSentDate)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.NUMB = T2.CAS_NO) and
+    (@cspNoAp = T2.CSP_NO_AP)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="ReadProgramRun">
+      <value>
+select top(1)
+  PPI_CREATED_TSTAMP,
+  PPI_NAME,
+  START_TIMESTAMP
+from
+  CKT_PROGRAM_RUN
+where
+  (START_TIMESTAMP = @startTimestamp) and
+  (PPI_NAME = @ppiName) and
+  (PPI_CREATED_TSTAMP = @ppiCreatedTstamp)
+</value>
+   </data>
+   <data name="Update1099LocateRequest">
+      <value>
+update CKT_1099_LOC_REQ
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  REQUEST_SENT_DATE = @requestSentDate
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

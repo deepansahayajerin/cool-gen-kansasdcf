@@ -1,0 +1,77 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeMarlMarriageHistoryList"
+           program-name="SWEMARLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeMarlMarriageHistoryList"
+           transaction="SR6F"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MARH_MARRIAGE_HST"
+       action="transfer"
+       to="OeMarhMarriageHistory"
+       send-command="RSMHIST">
+      <map from="Case1" to="Case1"/>
+      <map from="CsePersonsWorkSet" to="PrimeCsePersonsWorkSet"/>
+      <map from="SelectedSpouseContact" to="HiddenSelectedContact"/>
+      <map from="SelectedSpouseCsePerson" to="HiddenSelectdSpouse"/>
+      <map from="Selected" to="HiddenSelectedMarriageHistory"/>
+      <map from="CsePerson" to="HiddenSelectedPrime"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="Case1" to="Current"/>
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+      <map from="CsePerson" to="StartCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CONTACT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OePcolPersonContactList"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="CsePerson" to="CsePerson"/>
+   </on>
+   <map from="Export1.DetailSpouseMarriageHistory"
+        to="Import1.DetailSpouseMarriageHistory"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="Export1.DetailSelectOpt" to="Import1.DetailSelectOpt"/>
+   <map from="Export1.DetailSpouseCsePerson" to="Import1.DetailSpouseCsePerson"/>
+   <map from="Export1.DetailContactInd" to="Import1.DetailContactInd"/>
+   <map from="Export1.DetailPrmOrSpous" to="Import1.DetailPrmOrSpous"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Export1.DetailSpouseCsePersonsWorkSet"
+        to="Import1.DetailSpouseCsePersonsWorkSet"/>
+   <map from="Export1.DetailSpouseContact" to="Import1.DetailSpouseContact"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ListCsePersons" to="ListCsePersons"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="SelectedSpouseContact" to="SelectedSpouseContact"/>
+   <map from="SelectedSpouseCsePerson" to="SelectedSpouseCsePerson"/>
+   <map from="Selected" to="SelectedMarriageHistory"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

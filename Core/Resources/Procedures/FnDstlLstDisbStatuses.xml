@@ -1,0 +1,24 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDstlLstDisbStatuses"
+           program-name="SWEDSTLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDstlLstDisbStatuses"
+           transaction="SR89"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command="XFERMENU"/>
+   <on exit-state="ECO_XFR_TO_MTN_DISB_STATUS"
+       action="transfer"
+       to="FnDstmMtnDisbStatus"
+       send-command="RETDSTL">
+      <map from="Flag" to="Flag"/>
+      <map from="FlowSelection" to="Selected"/>
+   </on>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailDisbursementStatus"
+        to="Import1.DetailDisbursementStatus"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="Standard" to="Standard"/>
+</procedure>

@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  TOT_DETAIL_ADJ_CNT,
+  CASH_BAL_AMT,
+  CASH_DUE
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptDetail">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CASH_RECEIPT_ID,
+  T1.TOT_DETAIL_ADJ_CNT,
+  T1.CASH_BAL_AMT,
+  T1.CASH_DUE,
+  T2.CRD_ID,
+  T2.INTERFACE_TRAN_ID,
+  T2.ADJUSTMENT_IND,
+  T2.COLLECTION_AMOUNT
+from
+  CKT_CASH_RECEIPT T1
+  join
+  CKT_CR_DETAIL T2
+  on
+    (T2.CRD_ID = @crdId) and
+    (T2.CRV_IDENTIFIER = @crvIdentifier) and
+    (T2.CST_IDENTIFIER = @cstIdentifier) and
+    (T2.CRT_IDENTIFIER = @crtIdentifier) and
+    (T1.CRT_IDENTIFIER = T2.CRT_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T2.CRV_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  INTERFACE_TRAN_ID,
+  ADJUSTMENT_IND,
+  COLLECTION_AMOUNT
+from
+  CKT_CR_DETAIL
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (ADJUSTMENT_IND = 'Y')
+order by
+  CRD_ID
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailBalanceAdjCashReceiptDetailRlnRsn">
+      <value>
+select top(1)
+  T1.CRD_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_S_IDENTIFIER,
+  T1.CRV_S_IDENTIFIER,
+  T1.CST_S_IDENTIFIER,
+  T1.CRT_S_IDENTIFIER,
+  T1.CRN_IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T2.CODE
+from
+  CKT_CRDTL_RLN_RSN T2
+  join
+  CKT_CRDTL_BAL_ADJ T1
+  on
+    (@crdSIdentifier = T1.CRD_S_IDENTIFIER) and
+    (@crvSIdentifier = T1.CRV_S_IDENTIFIER) and
+    (@cstSIdentifier = T1.CST_S_IDENTIFIER) and
+    (@crtSIdentifier = T1.CRT_S_IDENTIFIER) and
+    (T2.CRDTL_RLN_RSN_ID = T1.CRN_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  RECEIVED_DATE,
+  SOURCE_CREATION_DT
+from
+  CKT_CR_EVENT
+where
+  (CREVENT_ID = @creventId) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptEventCashReceiptSourceType">
+      <value>
+select top(1)
+  T1.CST_IDENTIFIER,
+  T1.CREVENT_ID,
+  T1.RECEIVED_DATE,
+  T1.SOURCE_CREATION_DT,
+  T2.INTERFACE_IND,
+  T2.CODE
+from
+  CKT_CRSRC_TYPE T2
+  join
+  CKT_CR_EVENT T1
+  on
+    (T1.CREVENT_ID = @creventId) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T2.CR_SRCE_TYPE_ID = T1.CST_IDENTIFIER)
+</value>
+   </data>
+</root>

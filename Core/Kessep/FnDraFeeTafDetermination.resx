@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (@cspNumber1 = T2.CSP_NUMBER)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AR') and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate) and
+    (@cspNumber2 = T3.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (TYPE = 'AR') and
+  (START_DATE &lt;= @startDate) and
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  START_DATE
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  PRIOR_TAF_IND
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.START_DATE &lt;= @startDate) and
+    (@casNumber = T2.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadPersonProgram1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (@cspNumber = CSP_NUMBER) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (PRG_GENERATED_ID &lt;&gt; 14) and
+  (PRG_GENERATED_ID &lt;&gt; 16) and
+  (PRG_GENERATED_ID &lt;&gt; 17) and
+  (PRG_GENERATED_ID &lt;&gt; 18)
+</value>
+   </data>
+   <data name="ReadPersonProgram2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (@cspNumber = CSP_NUMBER) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (
+    PRG_GENERATED_ID in (2, 14, 16,
+      17, 18)
+  )
+</value>
+   </data>
+   <data name="ReadPersonProgram3">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &lt;= @effectiveDate) and
+  (@cspNumber = CSP_NUMBER) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (PRG_GENERATED_ID in (2, 14))
+</value>
+   </data>
+   <data name="ReadPersonProgram4">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &lt;= @effectiveDate) and
+  (@cspNumber = CSP_NUMBER) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (PRG_GENERATED_ID in (16, 17, 18))
+</value>
+   </data>
+   <data name="ReadPersonProgram5">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (@cspNumber = CSP_NUMBER) and
+  (PRG_GENERATED_ID &lt;&gt; 14) and
+  (PRG_GENERATED_ID &lt;&gt; 16) and
+  (PRG_GENERATED_ID &lt;&gt; 17) and
+  (PRG_GENERATED_ID &lt;&gt; 18)
+</value>
+   </data>
+   <data name="ReadPersonProgram6">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (@cspNumber = CSP_NUMBER) and
+  (
+    PRG_GENERATED_ID in (2, 14, 16,
+      17, 18)
+  )
+</value>
+   </data>
+   <data name="ReadPersonProgram7">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &lt;= @effectiveDate) and
+  (@cspNumber = CSP_NUMBER) and
+  (PRG_GENERATED_ID in (2, 14))
+</value>
+   </data>
+   <data name="ReadPersonProgram8">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &lt;= @effectiveDate) and
+  (@cspNumber = CSP_NUMBER) and
+  (PRG_GENERATED_ID in (16, 17, 18))
+</value>
+   </data>
+</root>

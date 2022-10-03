@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select top(1)
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoChild = CSP_NO_CHILD) and
+  (@cspNoAp = CSP_NO_AP) and
+  (@cspNoAr = CSP_NO_AR) and
+  (CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select top(1)
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoChild = CSP_NO_CHILD) and
+  (@cspNoAp = CSP_NO_AP) and
+  (CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit3">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@cspNoChild = CSP_NO_CHILD) and
+  (@cspNoAp = CSP_NO_AP) and
+  (CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit4">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@cspNoChild = CSP_NO_CHILD) and
+  (@cspNoAp = CSP_NO_AP) and
+  (CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadCsePersonCsePerson">
+      <value>
+select top(1)
+  T1.NUMB,
+  T2.NUMB
+from
+  CKT_CSE_PERSON T1,
+  CKT_CSE_PERSON T2
+where
+  (T2.NUMB = @numb1) and
+  (T1.NUMB = @numb2)
+</value>
+   </data>
+   <data name="ReadCsePersonCsePersonCsePerson">
+      <value>
+select top(1)
+  T1.NUMB,
+  T2.NUMB,
+  T3.NUMB
+from
+  CKT_CSE_PERSON T1,
+  CKT_CSE_PERSON T2,
+  CKT_CSE_PERSON T3
+where
+  (T3.NUMB = @numb1) and
+  (T1.NUMB = @numb2) and
+  (T2.NUMB = @numb3)
+</value>
+   </data>
+   <data name="ReadInterstateRequest1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND = 'N') and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadInterstateRequest2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND = 'N') and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadLegalActionOfficeServiceProvider">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T2.SPD_GENERATED_ID,
+  T2.OFF_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR T2
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T1.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T1.ACTION_TAKEN in (cast(@actionTaken1 as char(30)), cast(@actionTaken2 as char(30))))
+  join
+  CKT_LA_SERV_PROV T6
+  on
+    T1.LEGAL_ACTION_ID = T6.LGA_IDENTIFIER
+  on
+    (T2.ROLE_CODE = T6.OSP_ROLE_CODE) and
+    (T2.EFFECTIVE_DATE = T6.OSP_EFFECTIVE_DATE) and
+    (T2.OFF_GENERATED_ID = T6.OFF_GENERATED_ID) and
+    (T2.SPD_GENERATED_ID = T6.SPD_GENERATED_ID) and
+    (T2.ROLE_CODE in (cast(@roleCode1 as char(2)), cast(@roleCode2 as char(2))))
+order by
+  T1.FILED_DT desc
+</value>
+   </data>
+</root>

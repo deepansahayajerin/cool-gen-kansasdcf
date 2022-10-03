@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = 'E') and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadImHouseholdImHouseholdMbrMnthlySum">
+      <value>
+select
+  T1.AE_CASE_NO,
+  T1.CASE_STATUS,
+  T1.STATUS_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TIMES,
+  T1.FIRST_BEN_DATE,
+  T2.YEAR0,
+  T2.MONTH0,
+  T2.CREATED_TMST,
+  T2.CSP_NUMBER
+from
+  CKT_IM_HOUSEHOLD T1
+  join
+  CKT_IM_HH_MBR_MSUM T2
+  on
+    (T1.AE_CASE_NO = T2.IMH_AE_CASE_NO) and
+    (T2.CSP_NUMBER = @cspNumber)
+order by
+  T2.CREATED_TMST desc
+</value>
+   </data>
+   <data name="ReadMonthlyObligeeSummary">
+      <value>
+select
+  YER,
+  MNTH,
+  DISBURSEMENTS_SUPP,
+  RECAPTURED_AMT,
+  PASSTHRU_AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  ADC_REIMBURSED_AMT,
+  CPA_S_TYPE,
+  CSP_S_NUMBER,
+  COLLECTION_AMT,
+  COLLCTN_DSB_TO_AR,
+  FEE_AMT,
+  TOT_EXCESS_URA_AMT,
+  NBR_OF_COLLECTIONS
+from
+  CKT_MNTHLY_OBE_SUM
+where
+  (
+    (
+      (YER = @yer1) and
+      (MNTH &lt;= @mnth1)
+    ) or
+    (YER &lt; @yer1)
+  ) and
+  (
+    (
+      (YER = @yer2) and
+      (MNTH &lt; @mnth2)
+    ) or
+    (YER &lt; @yer2)
+  ) and
+  (CPA_S_TYPE = 'E') and
+  (CSP_S_NUMBER = @cspSNumber)
+order by
+  YER desc,
+  MNTH desc
+</value>
+   </data>
+</root>

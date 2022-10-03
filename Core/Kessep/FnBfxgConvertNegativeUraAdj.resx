@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateImHouseholdMbrMnthlyAdj1">
+      <value>
+insert into CKT_IM_HH_MBR_MADJ
+(
+  TYPE,
+  ADJUSTMENT_AMT,
+  LEVEL_APPLIED_TO,
+  CREATED_BY,
+  CREATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER,
+  IMS_MONTH,
+  IMS_YEAR,
+  ADJUSTMENT_REASON
+)
+values
+(
+  @type,
+  @adjustmentAmt,
+  @levelAppliedTo,
+  @createdBy,
+  @createdTmst,
+  @imhAeCaseNo,
+  @cspNumber,
+  @imsMonth,
+  @imsYear,
+  @adjustmentReason
+)
+</value>
+   </data>
+   <data name="CreateImHouseholdMbrMnthlyAdj2">
+      <value>
+insert into CKT_IM_HH_MBR_MADJ
+(
+  TYPE,
+  ADJUSTMENT_AMT,
+  LEVEL_APPLIED_TO,
+  CREATED_BY,
+  CREATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER,
+  IMS_MONTH,
+  IMS_YEAR,
+  ADJUSTMENT_REASON
+)
+values
+(
+  @type,
+  @adjustmentAmt,
+  @levelAppliedTo,
+  @createdBy,
+  @createdTmst,
+  @imhAeCaseNo,
+  @cspNumber,
+  @imsMonth,
+  @imsYear,
+  @adjustmentReason
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_IM_HH_MBR_MSUM T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@imhAeCaseNo = T2.IMH_AE_CASE_NO) and
+    (
+      (T2.YEAR0 &lt; @year0) or
+      (
+        (T2.YEAR0 = @year0) and
+        (T2.MONTH0 &lt;= @month0)
+      )
+    )
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum1">
+      <value>
+select top(1)
+  sum(GRANT_AMT)
+from
+  CKT_IM_HH_MBR_MSUM with(readuncommitted)
+where
+  (@imhAeCaseNo = IMH_AE_CASE_NO) and
+  (YEAR0 &lt;= @year0) and
+  (
+    (
+      (MONTH0 &lt; @month0) and
+      (YEAR0 = @year0)
+    ) or
+    (YEAR0 &lt; @year0)
+  )
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum2">
+      <value>
+select top(1)
+  sum(GRANT_AMT)
+from
+  CKT_IM_HH_MBR_MSUM with(readuncommitted)
+where
+  (@imhAeCaseNo = IMH_AE_CASE_NO) and
+  (@cspNumber = CSP_NUMBER) and
+  (YEAR0 &lt;= @year0) and
+  (
+    (
+      (MONTH0 &lt; @month0) and
+      (YEAR0 = @year0)
+    ) or
+    (YEAR0 &lt; @year0)
+  )
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum3">
+      <value>
+select
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (@imhAeCaseNo = IMH_AE_CASE_NO) and
+  (CSP_NUMBER = @cspNumber) and
+  (
+    (YEAR0 &lt; @year0) or
+    (
+      (YEAR0 = @year0) and
+      (MONTH0 &lt; @month0)
+    )
+  )
+order by
+  YEAR0,
+  MONTH0
+</value>
+   </data>
+   <data name="ReadProgramCheckpointRestart">
+      <value>
+select top(1)
+  PROGRAM_NAME,
+  UPDATE_FREQUENCY_C,
+  READ_FREQUENCY_COU,
+  CHECKPOINT_COUNT,
+  LST_CHKPNT_TMST,
+  RESTART_IND,
+  RESTART_INFO
+from
+  CKT_PGM_CHKPNT_RST
+where
+  PROGRAM_NAME = 'SWEFBFXG'
+</value>
+   </data>
+   <data name="ReadUraAdjustmentImHouseholdMemberImHousehold">
+      <value>
+select
+  IDENTIFIER,
+  ADJ_YEAR,
+  ADJ_MONTH,
+  ADJ_ADC_GRANT,
+  ADJ_PASSTHRU,
+  ADJ_MED_ASSIST,
+  ADJ_FC_GRANT,
+  ADJ_HURA,
+  ADJ_REASON,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_NUMBER,
+  IMH_AE_CASE_NO,
+  IHM_START_DATE,
+  ADJ_MEDI_URA
+from
+  CKT_URA_ADJ with(readuncommitted)
+where
+  (ADJ_HURA &lt; 0) and
+  (IMH_AE_CASE_NO &gt;= @imhAeCaseNo)
+order by
+  IMH_AE_CASE_NO,
+  CSP_NUMBER,
+  IHM_START_DATE,
+  IDENTIFIER
+</value>
+   </data>
+   <data name="UpdateImHouseholdMbrMnthlySum">
+      <value>
+update CKT_IM_HH_MBR_MSUM
+set
+  URA_AMOUNT = @uraAmount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0) and
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateProgramCheckpointRestart1">
+      <value>
+update CKT_PGM_CHKPNT_RST
+set
+  LST_CHKPNT_TMST = @lstChkpntTmst,
+  RESTART_IND = @restartInd,
+  RESTART_INFO = @restartInfo
+where
+  PROGRAM_NAME = @programName
+</value>
+   </data>
+   <data name="UpdateProgramCheckpointRestart2">
+      <value>
+update CKT_PGM_CHKPNT_RST
+set
+  LST_CHKPNT_TMST = @lstChkpntTmst,
+  RESTART_IND = @restartInd,
+  RESTART_INFO = @restartInfo
+where
+  PROGRAM_NAME = @programName
+</value>
+   </data>
+</root>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  RECEIVED_DATE,
+  SOURCE_CREATION_DT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  TOT_NON_CSHTRN_CNT,
+  TOT_ADJUSTMENT_CNT,
+  TOT_CASH_FEE_AMT,
+  TOT_NONCSH_FEE_AMT,
+  ANTIC_CHECK_AMT,
+  TOTAL_CASH_AMT,
+  TOT_CASH_TRAN_CNT,
+  TOT_NON_CASH_AMT
+from
+  CKT_CR_EVENT
+where
+  (CREVENT_ID = @creventId) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="UpdateCashReceiptEvent">
+      <value>
+update CKT_CR_EVENT
+set
+  RECEIVED_DATE = @receivedDate,
+  SOURCE_CREATION_DT = @sourceCreationDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  TOT_NON_CSHTRN_CNT = @totNonCshtrnCnt,
+  TOT_ADJUSTMENT_CNT = @totAdjustmentCnt,
+  TOT_CASH_FEE_AMT = @totCashFeeAmt,
+  TOT_NONCSH_FEE_AMT = @totNoncshFeeAmt,
+  ANTIC_CHECK_AMT = @anticCheckAmt,
+  TOTAL_CASH_AMT = @totalCashAmt,
+  TOT_CASH_TRAN_CNT = @totCashTranCnt,
+  TOT_NON_CASH_AMT = @totNonCashAmt
+where
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CREVENT_ID = @creventId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,197 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeHiphInsuranceCovByHolder"
+           program-name="SWEHIPHP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeHiphInsuranceCovByHolder"
+           transaction="SR6A"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_HIPL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETHIPL"
+       to="OeHiplInsurCovByPersonList"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="Starting" to="Case1"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <return-map from="SelectedDetCase" to="Starting"/>
+      <return-map from="CsePersonsWorkSet" to="SelectedCsePersonsWorkSet"/>
+      <return-map from="SelectedDetHealthInsuranceCoverage.InsurancePolicyNumber"
+                  to="SelectedHealthInsuranceCoverage.InsurancePolicyNumber"/>
+      <return-map from="SelectedDetHealthInsuranceCoverage.InsuranceGroupNumber"
+                  to="SelectedHealthInsuranceCoverage.InsuranceGroupNumber"/>
+      <return-map from="SelectedDetHealthInsuranceCoverage.Identifier"
+                  to="SelectedHealthInsuranceCoverage.Identifier"/>
+      <return-map from="SelectionCount" to="SelectionCount"/>
+      <return-map from="CsePerson" to="SelectedCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_INCL_INC_SOURCE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETINCL"
+       to="SiInclIncomeSourceList"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Selected1.Identifier" to="SelectedIncomeSource.Identifier"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_HICP"
+       action="transfer"
+       to="OeHicpInsuranceCovByPerson"
+       send-command="RETHIPH">
+      <map from="CsePersonsWorkSet.Number" to="SelectedCsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.Ssn" to="SelectedCsePersonsWorkSet.Ssn"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="SelectedCsePersonsWorkSet.FormattedName"/>
+      <map from="Starting" to="SelectedCase"/>
+      <map from="CsePerson" to="SelectedCsePerson"/>
+      <map from="Contact" to="SelectedContact"/>
+      <map from="HealthInsuranceCoverage" to="SelectedHealthInsuranceCoverage"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeHinmHealthInsuranceMenu"
+       send-command-type="none">
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+      <map from="Starting" to="StartCase"/>
+      <map from="CsePerson" to="StartCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Starting" to="Case1"/>
+      <return-map from="Selected.Number" to="SelectedCsePersonsWorkSet.Number"/>
+      <return-map from="Selected.FormattedName"
+                  to="SelectedCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CONTACT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPCOL"
+       to="OePcolPersonContactList"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="Starting" to="Case1"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="Contact.ContactNumber" to="Starting.ContactNumber"/>
+      <map from="Contact.RelationshipToCsePerson"
+           to="Starting.RelationshipToCsePerson"/>
+      <map from="Contact.NameLast" to="Starting.NameLast"/>
+      <map from="Contact.NameFirst" to="Starting.NameFirst"/>
+      <map from="Contact.MiddleInitial" to="Starting.MiddleInitial"/>
+      <return-map from="CsePersonsWorkSet.FormattedName"
+                  to="CsePersonsWorkSet.FormattedName"/>
+      <return-map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <return-map from="CsePerson" to="CsePerson"/>
+      <return-map from="SelectedContact" to="SelectedContact"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUES ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_INSURANCE_CO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETHICL"
+       to="OeHiclHealthInsuCompanyList"
+       send-command="DISPLAY">
+      <map from="HealthInsuranceCompany" to="StartingHealthInsuranceCompany"/>
+      <map from="HealthInsuranceCompanyAddress"
+           to="StartingHealthInsuranceCompanyAddress"/>
+      <map from="PassToHicl" to="HiddenFromHiph"/>
+      <return-map from="SelectedHealthInsuranceCompany"
+                  to="SelectedHealthInsuranceCompany"/>
+      <return-map from="SelectedHealthInsuranceCompanyAddress"
+                  to="SelectedHealthInsuranceCompanyAddress"/>
+   </on>
+   <map from="HealthInsuranceCoverage" to="HealthInsuranceCoverage"/>
+   <map from="HcsePerson" to="HcsePerson"/>
+   <map from="HhealthInsuranceCoverage" to="HhealthInsuranceCoverage"/>
+   <map from="HhealthInsuranceCompany" to="HhealthInsuranceCompany"/>
+   <map from="Hcase" to="Hcase"/>
+   <map from="HealthInsuranceCompanyAddress" to="HealthInsuranceCompanyAddress"/>
+   <map from="WorkPromptInd" to="WorkPromptInd"/>
+   <map from="Hcontact" to="Hcontact"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="CsePersonPrompt" to="CsePersonPrompt"/>
+   <map from="SelectedContact" to="SelectedContact"/>
+   <map from="WorkContactExist" to="WorkContactExist"/>
+   <map from="SelectedCsePerson" to="SelectedCsePerson"/>
+   <map from="SelectedHealthInsuranceCoverage"
+        to="SelectedHealthInsuranceCoverage"/>
+   <map from="SelectedCsePersonsWorkSet" to="SelectedCsePersonsWorkSet"/>
+   <map from="SelectedHealthInsuranceCompany"
+        to="SelectedHealthInsuranceCompany"/>
+   <map from="Starting" to="Starting"/>
+   <map from="PromptCode1" to="PromptCode1"/>
+   <map from="PromptCode2" to="PromptCode2"/>
+   <map from="PromptCode3" to="PromptCode3"/>
+   <map from="PromptCode4" to="PromptCode4"/>
+   <map from="PromptCode5" to="PromptCode5"/>
+   <map from="PromptCode6" to="PromptCode6"/>
+   <map from="PromptCode7" to="PromptCode7"/>
+   <map from="EmpProvidingInsurance" to="EmpProvidingInsurance"/>
+   <map from="PromptEmployer" to="PromptEmployer"/>
+   <map from="Employer" to="Employer"/>
+   <map from="SelectedIncomeSource" to="SelectedIncomeSource"/>
+   <map from="PromptRelToChild" to="PromptRelToChild"/>
+   <map from="HealthInsuranceCompany.Identifier"
+        to="HealthInsuranceCompany.Identifier"/>
+   <map from="HealthInsuranceCompany.CarrierCode"
+        to="HealthInsuranceCompany.CarrierCode"/>
+   <map from="HealthInsuranceCompany.InsurancePolicyCarrier"
+        to="HealthInsuranceCompany.InsurancePolicyCarrier"/>
+   <map from="Contact.ContactNumber" to="Contact.ContactNumber"/>
+   <map from="Contact.RelationshipToCsePerson"
+        to="Contact.RelationshipToCsePerson"/>
+   <map from="Contact.NameLast" to="Contact.NameLast"/>
+   <map from="Contact.NameFirst" to="Contact.NameFirst"/>
+   <map from="Contact.MiddleInitial" to="Contact.MiddleInitial"/>
+   <map from="HealthInsuranceCompany.InsurerPhoneAreaCode"
+        to="HealthInsuranceCompany.InsurerPhoneAreaCode"/>
+   <map from="HealthInsuranceCompany.InsurerPhone"
+        to="HealthInsuranceCompany.InsurerPhone"/>
+   <map from="HealthInsuranceCompany.InsurerPhoneExt"
+        to="HealthInsuranceCompany.InsurerPhoneExt"/>
+   <map from="HealthInsuranceCompany.InsurerFaxAreaCode"
+        to="HealthInsuranceCompany.InsurerFaxAreaCode"/>
+   <map from="HealthInsuranceCompany.InsurerFax"
+        to="HealthInsuranceCompany.InsurerFax"/>
+   <map from="SelectedHealthInsuranceCompanyAddress.Street1"
+        to="SelectedHealthInsuranceCompanyAddress.Street1"/>
+   <map from="SelectedHealthInsuranceCompanyAddress.City"
+        to="SelectedHealthInsuranceCompanyAddress.City"/>
+   <map from="SelectedHealthInsuranceCompanyAddress.State"
+        to="SelectedHealthInsuranceCompanyAddress.State"/>
+   <map from="SelectedHealthInsuranceCompanyAddress.ZipCode5"
+        to="SelectedHealthInsuranceCompanyAddress.ZipCode5"/>
+   <map from="SelectedHealthInsuranceCompanyAddress.ZipCode4"
+        to="SelectedHealthInsuranceCompanyAddress.ZipCode4"/>
+   <map from="WorkPromptContact.SelectChar" to="WorkPromptContact.SelectChar"/>
+   <map from="WorkPromptCoverage.SelectChar" to="WorkPromptCoverage.SelectChar"/>
+   <map from="WorkPromptCarrier.SelectChar" to="WorkPromptCarrier.SelectChar"/>
+   <map from="HealthInsuranceCompany.EndDate"
+        to="HealthInsuranceCompany.EndDate"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

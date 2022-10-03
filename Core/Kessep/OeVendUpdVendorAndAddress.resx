@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadVendor">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME,
+  NUMB,
+  PHONE_NUMBER,
+  FAX,
+  CONTACT_PERSON,
+  SERVICE_TYPE_CODE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FAX_EXT,
+  PHONE_EXT,
+  FAX_AREA,
+  PHONE_AREA
+from
+  CKT_VENDOR
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadVendorAddress">
+      <value>
+select top(1)
+  VEN_IDENTIFIER,
+  EFFECTIVE_DATE,
+  EXPIRY_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE5,
+  ZIP_CODE4,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_VENDOR_ADDR
+where
+  (@venIdentifier = VEN_IDENTIFIER) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="UpdateVendor">
+      <value>
+update CKT_VENDOR
+set
+  NAME = @name,
+  NUMB = @numb,
+  PHONE_NUMBER = @phoneNumber,
+  FAX = @fax,
+  CONTACT_PERSON = @contactPerson,
+  SERVICE_TYPE_CODE = @serviceTypeCode,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  FAX_EXT = @faxExt,
+  PHONE_EXT = @phoneExt,
+  FAX_AREA = @faxArea,
+  PHONE_AREA = @phoneArea
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateVendorAddress">
+      <value>
+update CKT_VENDOR_ADDR
+set
+  EXPIRY_DATE = @expiryDate,
+  STREET_1 = @street1,
+  STREET_2 = @street2,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CODE5 = @zipCode5,
+  ZIP_CODE4 = @zipCode4,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (VEN_IDENTIFIER = @venIdentifier) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+</root>

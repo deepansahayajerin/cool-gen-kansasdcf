@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadRegisteredAgentRegisteredAgentAddress1">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.PHONE_NUMBER,
+  T1.AREA_CODE,
+  T1.NAME,
+  T2.IDENTIFIER,
+  T2.STREET1,
+  T2.STREET2,
+  T2.CITY,
+  T2.[STATE],
+  T2.ZIP_CODE5,
+  T2.ZIP_CODE4
+from
+  CKT_REG_AGENT T1
+  join
+  CKT_REG_AGENT_ADDR T2
+  on
+    (T1.NAME like cast(@name as char(33))) and
+    (T1.IDENTIFIER = T2.RAG_ID)
+order by
+  T1.NAME,
+  T2.CITY,
+  T1.IDENTIFIER
+</value>
+   </data>
+   <data name="ReadRegisteredAgentRegisteredAgentAddress2">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.PHONE_NUMBER,
+  T1.AREA_CODE,
+  T1.NAME,
+  T2.IDENTIFIER,
+  T2.STREET1,
+  T2.STREET2,
+  T2.CITY,
+  T2.[STATE],
+  T2.ZIP_CODE5,
+  T2.ZIP_CODE4
+from
+  CKT_REG_AGENT T1
+  join
+  CKT_REG_AGENT_ADDR T2
+  on
+    (T2.CITY = @city) and
+    (T1.NAME like cast(@name as char(33))) and
+    (T1.IDENTIFIER = T2.RAG_ID)
+order by
+  T1.NAME,
+  T1.IDENTIFIER
+</value>
+   </data>
+   <data name="ReadRegisteredAgentRegisteredAgentAddress3">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.PHONE_NUMBER,
+  T1.AREA_CODE,
+  T1.NAME,
+  T2.IDENTIFIER,
+  T2.STREET1,
+  T2.STREET2,
+  T2.CITY,
+  T2.[STATE],
+  T2.ZIP_CODE5,
+  T2.ZIP_CODE4
+from
+  CKT_REG_AGENT T1
+  join
+  CKT_REG_AGENT_ADDR T2
+  on
+    (T1.NAME like cast(@name as char(33))) and
+    (T2.CITY = @city) and
+    (T1.IDENTIFIER = T2.RAG_ID)
+order by
+  T1.NAME,
+  T1.IDENTIFIER
+</value>
+   </data>
+</root>

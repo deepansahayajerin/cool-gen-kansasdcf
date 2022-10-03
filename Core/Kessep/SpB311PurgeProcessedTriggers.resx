@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteTrigger">
+      <value>
+delete from CKT_TRIGGER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE_VALUE with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate) and
+  (COD_ID = @codId)
+</value>
+   </data>
+   <data name="ReadCodeValueCodeValueCombination1">
+      <value>
+select
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE,
+  T2.CVC_ID,
+  T2.COV_ID,
+  T2.COV_S_ID,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRATION_DATE
+from
+  CKT_CODE_VALUE T1 with(readuncommitted),
+  CKT_CODE_VAL_COMB T2 with(readuncommitted)
+where
+  (
+    (
+      (T1.COV_ID = T2.COV_ID) and
+      (@covSId = T2.COV_S_ID)
+    ) or
+    (
+      (T1.COV_ID = T2.COV_S_ID) and
+      (@covSId = T2.COV_ID)
+    )
+  ) and
+  (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (T1.EXPIRATION_DATE &gt;= @effectiveDate) and
+  (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (T2.EXPIRATION_DATE &gt;= @effectiveDate) and
+  (T1.COD_ID = @codId)
+</value>
+   </data>
+   <data name="ReadCodeValueCodeValueCombination2">
+      <value>
+select
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE,
+  T2.CVC_ID,
+  T2.COV_ID,
+  T2.COV_S_ID,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRATION_DATE
+from
+  CKT_CODE_VALUE T1 with(readuncommitted),
+  CKT_CODE_VAL_COMB T2 with(readuncommitted)
+where
+  (
+    (
+      (T1.COV_ID = T2.COV_ID) and
+      (@covSId = T2.COV_S_ID)
+    ) or
+    (
+      (T1.COV_ID = T2.COV_S_ID) and
+      (@covSId = T2.COV_ID)
+    )
+  ) and
+  (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (T1.EXPIRATION_DATE &gt;= @effectiveDate) and
+  (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (T2.EXPIRATION_DATE &gt;= @effectiveDate) and
+  (T1.COD_ID = @codId)
+</value>
+   </data>
+   <data name="ReadTrigger">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  STATUS,
+  CREATED_TIMESTAMP
+from
+  CKT_TRIGGER
+where
+  (TYPE = @type) and
+  (STATUS = @status) and
+  (CREATED_TIMESTAMP &lt; @createdTimestamp)
+</value>
+   </data>
+</root>

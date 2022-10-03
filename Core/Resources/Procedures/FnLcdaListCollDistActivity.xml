@@ -1,0 +1,359 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnLcdaListCollDistActivity"
+           program-name="SWELCDAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnLcdaListCollDistActivity"
+           transaction="SRDJ"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LAPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLAPS"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <map from="ObligorCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <return-map from="CsePersonsWorkSet" to="ObligorDlgflw"/>
+      <return-map from="Selected" to="DlgflwLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NAME"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="ObligorDlgflw"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTN_ACCRUING_OBLIG"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOaccMtnAccruingObligation"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="ObligorCsePerson"/>
+      <map from="ObligorCsePersonsWorkSet.Number"
+           to="ObligorCsePersonsWorkSet.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName"
+           to="ObligorCsePersonsWorkSet.FormattedName"/>
+      <map from="DlgflwObligation.SystemGeneratedIdentifier"
+           to="ObligorObligation.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligation.PrimarySecondaryCode"
+           to="ObligorObligation.PrimarySecondaryCode"/>
+      <map from="DlgflwObligationType" to="ObligationType"/>
+      <map from="DlgflwLegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="DlgflwLegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_DBT_ACT_BY_APPYR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnDebtLstDbtActvtyByApPyr"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson.Number" to="SearchCsePerson.Number"/>
+      <map from="ObligorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="DlgflwObligation" to="Obligation"/>
+      <map from="DlgflwObligationType" to="ObligationType"/>
+      <map from="DlgflwFrom" to="SearchFrom"/>
+      <map from="DlgflwTo" to="SearchTo"/>
+      <map from="DlgflwLegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="DlgflwLegalAction.StandardNumber"
+           to="SearchLegalAction.StandardNumber"/>
+      <map from="LstDbtWAmtOwedDlgflw" to="ListDebtsWithAmtOwed"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DlgflwCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTN_NON_ACCRUING_OBLG"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOnacMtnNonAccrngObligatn"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="ObligorCsePerson"/>
+      <map from="ObligorCsePersonsWorkSet" to="ObligorCsePersonsWorkSet"/>
+      <map from="DlgflwObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligation.PrimarySecondaryCode"
+           to="Obligation.PrimarySecondaryCode"/>
+      <map from="DlgflwObligationType" to="ObligationType"/>
+      <map from="DlgflwLegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="DlgflwLegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTN_RECOVERY_OBLIG"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOrecMtnRecoveryObligation"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="ObligorCsePerson"/>
+      <map from="ObligorCsePersonsWorkSet.Number"
+           to="ObligorCsePersonsWorkSet.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName"
+           to="ObligorCsePersonsWorkSet.FormattedName"/>
+      <map from="DlgflwObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligation.PrimarySecondaryCode"
+           to="Obligation.PrimarySecondaryCode"/>
+      <map from="DlgflwObligationType" to="ObligationType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OSUM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOsumDsplyObligationSummary"
+       send-command="DISPLAY">
+      <map from="ObligorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="DlgflwObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligationType.SystemGeneratedIdentifier"
+           to="ObligationType.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligationType.Code" to="ObligationType.Code"/>
+      <map from="DlgflwLegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PSUM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnPsumLstMnthlyPyeeSummry"
+       send-command="DISPLAY">
+      <map from="ObligeeDlgflwCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="DlgflwMonthlyObligeeSummary" to="Start"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LACN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="DlgflwLegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="DlgflwLegalAction.StandardNumber"
+           to="SearchLegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTN_VOLUNTARY_OBLIG"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOvolMtnVoluntaryObligation"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="CsePerson"/>
+      <map from="ObligorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="DlgflwObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligation.PrimarySecondaryCode"
+           to="Obligation.PrimarySecondaryCode"/>
+      <map from="DlgflwObligationType.SystemGeneratedIdentifier"
+           to="ObligationType.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligationType.Code" to="ObligationType.Code"/>
+      <map from="DlgflwObligationType.Classification"
+           to="ObligationType.Classification"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_COLL_BY_OBLIG"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOcolLstCollctnsByObligtn"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="SearchCsePerson"/>
+      <map from="ObligorCsePersonsWorkSet" to="SearchCsePersonsWorkSet"/>
+      <map from="LegalAction.StandardNumber" to="SearchLegalAction.StandardNumber"/>
+      <map from="CollectionFrom" to="SearchFrom"/>
+      <map from="CollectionTo" to="SearchTo"/>
+      <map from="DlgflwObligation.SystemGeneratedIdentifier"
+           to="SearchObligation.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligationType.SystemGeneratedIdentifier"
+           to="SearchObligationType.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligationType.Code" to="SearchObligationType.Code"/>
+      <map from="DlgflwDebt.SystemGeneratedIdentifier"
+           to="SearchObligationTransaction.SystemGeneratedIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COMN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiComnCaseCompositionByName"
+       send-command="DISPLAY">
+      <map from="ObligorCsePersonsWorkSet.Number" to="Search.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName" to="Search.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_POTNTL_RCVRY_OBLG"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOrelLstPotentialRecovOblg"
+       send-command="DISPLAY">
+      <map from="CollectionFrom" to="StartingDte"/>
+      <map from="ObligeeDlgflwCsePerson" to="SearchObligeeCsePerson"/>
+      <map from="ObligeeDlgflwCsePersonsWorkSet"
+           to="SearchObligeeCsePersonsWorkSet"/>
+      <map from="DlgflwFirstTimeInd" to="HiddenFirstTime"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_APSM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnApsmDsplyApPyrAcctSum"
+       send-command="DISPLAY">
+      <map from="ObligorCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="DlgflwLegalAction" to="LegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_COLLECTIONS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnCollLstCollActvyByApPyr"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="Obligor"/>
+      <map from="ObligorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CollectionFrom" to="SearchFrom"/>
+      <map from="CollectionTo" to="SearchTo"/>
+      <map from="DlgflwLegalAction" to="LegalAction"/>
+      <map from="DlgflwCashReceipt.SequentialNumber"
+           to="HiddenDlgflwCashReceipt.SequentialNumber"/>
+      <map from="DlgflwCashReceiptDetail.SequentialIdentifier"
+           to="HiddenDlgflwCashReceiptDetail.SequentialIdentifier"/>
+      <map from="DlgflwCashReceiptDetail.CourtOrderNumber"
+           to="HiddenDlgflwCashReceiptDetail.CourtOrderNumber"/>
+      <map from="DlgflwCashReceiptDetail.CollectionDate"
+           to="HiddenDlgflwCashReceiptDetail.CollectionDate"/>
+      <map from="DlgflwCashReceiptSourceType"
+           to="HiddenDlgflwCashReceiptSourceType"/>
+      <map from="DlgflwCashReceiptType" to="HiddenDlgflwCashReceiptType"/>
+      <map from="DlgflwCashReceiptEvent" to="HiddenDlgflwCashReceiptEvent"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_APACC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="DlgflwFrom" to="StartingDate"/>
+      <map from="DlgflwTo" to="EndingDate"/>
+      <map from="ObligeeDlgflwCsePerson" to="CsePerson"/>
+      <map from="ObligeeDlgflwCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_WARRANTS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnWarrLstWarrants"
+       send-command="DISPLAY">
+      <map from="DlgflwFrom" to="From"/>
+      <map from="DlgflwTo" to="To"/>
+      <map from="ObligeeDlgflwCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_OBLIG_BY_AP_PYR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnPayrLstCollsByApPyr"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="CsePerson"/>
+      <map from="ObligorCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CollectionFrom" to="SearchFrom"/>
+      <map from="CollectionTo" to="SearchTo"/>
+      <map from="DlgflwCashReceiptDetail" to="SelCourtOrderNo"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_OPAY_OBLG_BY_AP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="ObligorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_REIP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnReipRecIndividualPmntHist"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="CsePerson"/>
+      <map from="ObligorCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="DlgflwLegalAction" to="LegalAction"/>
+      <map from="DlgflwCashReceiptDetail" to="ListStarting"/>
+      <map from="DlgflwCashReceiptDetail" to="ListEnding"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OFEE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOfeeMtnFeeObligation"
+       send-command="DISPLAY">
+      <map from="ObligorCsePersonsWorkSet.Number" to="FlowFrom.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName"
+           to="FlowFrom.FormattedName"/>
+      <map from="ObligorCsePerson" to="ObligorCsePerson"/>
+      <map from="ObligorCsePersonsWorkSet.Number"
+           to="ObligorCsePersonsWorkSet.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName"
+           to="ObligorCsePersonsWorkSet.FormattedName"/>
+      <map from="DlgflwObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligation.PrimarySecondaryCode"
+           to="Obligation.PrimarySecondaryCode"/>
+      <map from="DlgflwDebt.SystemGeneratedIdentifier"
+           to="ObligationTransaction.SystemGeneratedIdentifier"/>
+      <map from="DlgflwLegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="DlgflwLegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+      <map from="DlgflwObligationType.SystemGeneratedIdentifier"
+           to="ObligationType.SystemGeneratedIdentifier"/>
+      <map from="DlgflwObligationType.Code" to="ObligationType.Code"/>
+      <map from="DlgflwObligationType.Classification"
+           to="ObligationType.Classification"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="ObligorCsePerson" to="ObligorCsePerson"/>
+   <map from="ObligorCsePersonsWorkSet" to="ObligorCsePersonsWorkSet"/>
+   <map from="PromptToName" to="PromptToName"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="PromptToLaps" to="PromptToLaps"/>
+   <map from="CollectionFrom" to="CollectionFrom"/>
+   <map from="CollectionTo" to="CollectionTo"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.CashReceipt" to="Group.CashReceipt"/>
+   <map from="Group.CashReceiptDetail" to="Group.CashReceiptDetail"/>
+   <map from="Group.Collection" to="Group.Collection"/>
+   <map from="Group.Process" to="Group.Process"/>
+   <map from="Group.PayeeRsn" to="Group.PayeeRsn"/>
+   <map from="Group.Obligation" to="Group.Obligation"/>
+   <map from="Group.ObligationType" to="Group.ObligationType"/>
+   <map from="Group.RcvryExists" to="Group.RcvryExists"/>
+   <map from="Group.CrdCrComboNo" to="Group.CrdCrComboNo"/>
+   <map from="Group.Pgm" to="Group.Pgm"/>
+   <map from="Group.Amt" to="Group.Amt"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="PgCntl.PgCntlCashReceipt" to="PgCntl.PgCntlCashReceipt"/>
+   <map from="PgPos" to="PgPos"/>
+   <map from="PgCntl.PgCntlCashReceiptDetail"
+        to="PgCntl.PgCntlCashReceiptDetail"/>
+   <map from="TraceIndHidden" to="TraceIndHidden"/>
+   <map from="ScrollInd" to="ScrollInd"/>
+   <map from="Group.DebtDetail" to="Group.DebtDetail"/>
+   <map from="FlowTo" to="FlowTo"/>
+   <map from="PromptToCdvl" to="PromptToCdvl"/>
+   <map from="Group.LineType" to="Group.LineType"/>
+   <map from="Group.LegalAction" to="Group.LegalAction"/>
+   <map from="Group.Debt" to="Group.Debt"/>
+   <map from="Group.DtlRecId" to="Group.DtlRecId"/>
+   <map from="PgCntl.PgCntlDtlRecId" to="PgCntl.PgCntlDtlRecId"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+</procedure>

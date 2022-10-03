@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInterstateRequest">
+      <value>
+insert into CKT_INTERSTAT_RQST
+(
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+)
+values
+(
+  @identifier,
+  @otherStateCasId,
+  @othrStateFipsCd,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @othStCaseStatus,
+  @caseType,
+  @ksCaseInd,
+  @othStateClsRes,
+  @othStateClsDte,
+  @casINumber,
+  @casNumber,
+  @cspNumber,
+  @croType,
+  @croId,
+  @country,
+  @tribalAgency
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AP') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequest1">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_INTERSTAT_RQST
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadInterstateRequest2">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (@croId = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (
+    (
+      (cast(@otherStateFips as smallint) &gt; 0) and
+      (OTHR_STATE_FIPS_CD = @otherStateFips)
+    ) or
+    (
+      (cast(@country as char(2)) &lt;&gt; ' ') and
+      (COUNTRY = @country)
+    ) or
+    (
+      (cast(@tribalAgency as char(4)) &lt;&gt; ' ') and
+      (TRIBAL_AGENCY = @tribalAgency)
+    )
+  )
+</value>
+   </data>
+</root>

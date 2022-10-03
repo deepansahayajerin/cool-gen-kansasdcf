@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInterstateSupportOrder">
+      <value>
+insert into CKT_INTERST_SUP_OR
+(
+  CCA_TRANSACTION_DT,
+  SYS_GENERATED_ID,
+  CCA_TRAN_SER_NUM,
+  FIPS_STATE,
+  FIPS_COUNTY,
+  FIPS_LOCATION,
+  NUMBER,
+  ORDER_FILING_DATE,
+  TYPE,
+  DEBT_TYPE,
+  PAYMENT_FREQ,
+  AMOUNT_ORDERED,
+  EFFECTIVE_DATE,
+  END_DATE,
+  CANCEL_DATE,
+  ARREARS_FREQ,
+  ARREARS_FRQ_AMT,
+  ARREARS_TOTAL_AMT,
+  ARRS_AFDC_FROM_DTE,
+  ARRS_AFDC_THRU_DTE,
+  ARREARS_AFDC_AMT,
+  ARR_NAFDC_FROM_DTE,
+  ARR_NAFDC_THRU_DTE,
+  ARR_NAFDC_AMT,
+  FOST_CARE_FROM_DTE,
+  FOST_CARE_THRU_DTE,
+  FOSTER_CARE_AMOUNT,
+  MEDICAL_FROM_DATE,
+  MEDICAL_THRU_DATE,
+  MEDICAL_AMOUNT,
+  MEDICAL_ORDERED_IN,
+  TRIBUNAL_CASE_NUM,
+  DATE_OF_LAST_PAY,
+  CNTRL_ORDER_FLAG,
+  NEW_ORDER_FLAG,
+  DOCKET_NUMBER,
+  LEGAL_ACTION_ID
+)
+values
+(
+  @ccaTransactionDt,
+  @sysGeneratedId,
+  @ccaTranSerNum,
+  @fipsState,
+  @fipsCounty,
+  @fipsLocation,
+  @number,
+  @orderFilingDate,
+  @type,
+  @debtType,
+  @paymentFreq,
+  @amountOrdered,
+  @effectiveDate,
+  @endDate,
+  @cancelDate,
+  @arrearsFreq,
+  @arrearsFrqAmt,
+  @arrearsTotalAmt,
+  @arrsAfdcFromDte,
+  @arrsAfdcThruDte,
+  @arrearsAfdcAmt,
+  @arrNafdcFromDte,
+  @arrNafdcThruDte,
+  @arrNafdcAmt,
+  @fostCareFromDte,
+  @fostCareThruDte,
+  @fosterCareAmount,
+  @medicalFromDate,
+  @medicalThruDate,
+  @medicalAmount,
+  @medicalOrderedIn,
+  @tribunalCaseNum,
+  @dateOfLastPay,
+  @cntrlOrderFlag,
+  @newOrderFlag,
+  @docketNumber,
+  @legalActionId
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = cast(@ksCaseId as char(15))
+</value>
+   </data>
+   <data name="ReadDebtCsePerson">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.NUMB,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_OB_TRN T1
+  on
+    (@otyType = T1.OTY_TYPE) and
+    (@obgGeneratedId = T1.OBG_GENERATED_ID) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (@cpaType = T1.CPA_TYPE) and
+    (T1.CPA_SUP_TYPE is not null) and
+    (T2.NUMB = T1.CSP_SUP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT,
+  BAL_DUE_AMT,
+  CVRD_PRD_START_DT,
+  CVD_PRD_END_DT,
+  PRECNVRSN_PGM_CD
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION
+from
+  CKT_FIPS T1
+  join
+  CKT_TRIBUNAL T2
+  on
+    (T1.LOCATION = T2.FIP_LOCATION) and
+    (T1.COUNTY = T2.FIP_COUNTY) and
+    (T1.[STATE] = T2.FIP_STATE) and
+    (T2.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  TRANS_SERIAL_NBR,
+  TRANSACTION_DATE,
+  CASE_TYPE
+from
+  CKT_INTERST_CASE
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="ReadInterstateSupportOrder">
+      <value>
+select top(1)
+  CCA_TRANSACTION_DT,
+  SYS_GENERATED_ID,
+  CCA_TRAN_SER_NUM,
+  FIPS_STATE,
+  FIPS_COUNTY,
+  FIPS_LOCATION,
+  NUMBER,
+  ORDER_FILING_DATE,
+  TYPE,
+  DEBT_TYPE,
+  PAYMENT_FREQ,
+  AMOUNT_ORDERED,
+  EFFECTIVE_DATE,
+  END_DATE,
+  CANCEL_DATE,
+  ARREARS_FREQ,
+  ARREARS_FRQ_AMT,
+  ARREARS_TOTAL_AMT,
+  ARRS_AFDC_FROM_DTE,
+  ARRS_AFDC_THRU_DTE,
+  ARREARS_AFDC_AMT,
+  ARR_NAFDC_FROM_DTE,
+  ARR_NAFDC_THRU_DTE,
+  ARR_NAFDC_AMT,
+  FOST_CARE_FROM_DTE,
+  FOST_CARE_THRU_DTE,
+  FOSTER_CARE_AMOUNT,
+  MEDICAL_FROM_DATE,
+  MEDICAL_THRU_DATE,
+  MEDICAL_AMOUNT,
+  MEDICAL_ORDERED_IN,
+  TRIBUNAL_CASE_NUM,
+  DATE_OF_LAST_PAY,
+  CNTRL_ORDER_FLAG,
+  NEW_ORDER_FLAG,
+  DOCKET_NUMBER
+from
+  CKT_INTERST_SUP_OR
+where
+  (@ccaTransactionDt = CCA_TRANSACTION_DT) and
+  (@ccaTranSerNum = CCA_TRAN_SER_NUM)
+order by
+  SYS_GENERATED_ID desc
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  FILED_DT,
+  ORDER_AUTHORITY,
+  COURT_CASE_NO,
+  END_DT,
+  DISMISSAL_CD,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  NON_FIN_OBLG_TYPE,
+  DETAIL_TYPE,
+  FRQ_PRD_CD
+from
+  CKT_LEGAL_ACT_DTL
+where
+  @lgaIdentifier = LGA_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadObligationObligationType">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.PRIM_SEC_CD,
+  T1.LAST_PYMNT_DT,
+  T1.ORD_TYP_CD,
+  T1.LGA_IDENTIFIER,
+  T1.LAD_NUMBER,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_OBLIGATION T1
+  on
+    (@ladNumber = T1.LAD_NUMBER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T2.DEBT_TYP_ID = T1.DTY_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  END_DT,
+  FRQ_PRD_CD
+from
+  CKT_OB_PYMNT_SCH
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@obgCspNumber = OBG_CSP_NUMBER) and
+  (@obgCpaType = OBG_CPA_TYPE) and
+  (START_DT &lt; @startDt) and
+  (END_DT &gt; @startDt)
+</value>
+   </data>
+   <data name="ReadPersonProgram1">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID
+from
+  CKT_PROGRAM T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (T2.DISTRBTN_PRGM_TYPE = 'NA')
+order by
+  T1.EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadPersonProgram2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (PRG_GENERATED_ID in (2, 14))
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadPersonProgram3">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (PRG_GENERATED_ID in (15, 16, 3))
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadPersonProgram4">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID
+from
+  CKT_PROGRAM T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (T2.DISTRBTN_PRGM_TYPE = 'NA')
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadPersonProgram5">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (PRG_GENERATED_ID in (2, 14))
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadPersonProgram6">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (PRG_GENERATED_ID in (15, 16, 3))
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (@cspNumber1 = T2.CSP_NUMBER)
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AR') and
+    (@cspNumber2 = T3.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (@cspNumber1 = T2.CSP_NUMBER)
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'CH') and
+    (@cspNumber2 = T3.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCase3">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (@cspNumber1 = T2.CSP_NUMBER)
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (@cspNumber2 = T3.CSP_NUMBER)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (
+    (
+      (TYPE = 'CH') and
+      (CSP_NUMBER = @cspNumber)
+    ) or
+    (TYPE = 'AR')
+  ) and
+  (CSP_NUMBER &lt;&gt; '000000017O') and
+  (CSP_NUMBER &lt;&gt; '000000181O') and
+  (CSP_NUMBER &lt;&gt; '000000182O') and
+  (CSP_NUMBER &lt;&gt; '000004029O')
+order by
+  TYPE desc,
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE in ('CH', 'AR')) and
+  (CSP_NUMBER &lt;&gt; '000000017O') and
+  (CSP_NUMBER &lt;&gt; '000000181O') and
+  (CSP_NUMBER &lt;&gt; '000000182O') and
+  (CSP_NUMBER &lt;&gt; '000004029O')
+order by
+  TYPE desc,
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID,
+  cast(@crvId as integer),
+  cast(@cstId as smallint),
+  cast(@crtType as smallint),
+  cast(@crdId as smallint)
+from
+  CKT_CASH_RECEIPT
+where
+  (CRT_IDENTIFIER = @crtType) and
+  (CST_IDENTIFIER = @cstId) and
+  (CRV_IDENTIFIER = @crvId)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  COLL_DT,
+  DISB_DT,
+  ADJ_IND,
+  DISB_ADJ_PROC_DATE,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  OB_TRN_AMT,
+  DISB_PROC_NEED_IND,
+  PGM_APPLD_TO,
+  PGM_ST_APPLD_TO
+from
+  CKT_COLLECTION
+where
+  COLL_ID = @collId
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonCsePersonAccountDebtObligationType">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CPA_TYPE,
+  OBG_GENERATED_ID,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN
+where
+  (OTY_TYPE = @otyType) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OB_TRN_ID = @obTrnId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OBG_GENERATED_ID = @obgGeneratedId)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

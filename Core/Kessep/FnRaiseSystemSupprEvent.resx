@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseRole">
+      <value>
+select distinct
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CR_DETAIL T9
+  join
+  CKT_DISB_TRAN T7
+  join
+  CKT_CASE_ROLE T2
+  join
+  CKT_DISB_TRAN T5
+  on
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T5.CPA_TYPE = 'E') and
+    (T5.TYPE = 'D') and
+    (T5.DISB_TRAN_ID = @disbTranId)
+  join
+  CKT_DISB_TRAN_RLN T6
+  on
+    (T5.DISB_TRAN_ID = T6.DTR_GENERATED_ID) and
+    (T5.CPA_TYPE = T6.CPA_TYPE) and
+    (T5.CSP_NUMBER = T6.CSP_NUMBER)
+  on
+    (T7.DISB_TRAN_ID = T6.DTR_P_GENERATED_ID) and
+    (T7.CPA_TYPE = T6.CPA_P_TYPE) and
+    (T7.CSP_NUMBER = T6.CSP_P_NUMBER) and
+    (T7.COL_ID is not null) and
+    (T7.OTY_ID is not null) and
+    (T7.OBG_ID is not null) and
+    (T7.CSP_NUMBER_DISB is not null) and
+    (T7.CPA_TYPE_DISB is not null) and
+    (T7.OTR_ID is not null) and
+    (T7.OTR_TYPE_DISB is not null)
+  on
+    (T9.CRD_ID = T7.CRD_ID) and
+    (T9.CRV_IDENTIFIER = T7.CRV_ID) and
+    (T9.CST_IDENTIFIER = T7.CST_ID) and
+    (T9.CRT_IDENTIFIER = T7.CRT_ID)
+  join
+  CKT_CASE_ROLE T10
+  on
+    (T9.OBLGOR_PRSN_NBR = T10.CSP_NUMBER) and
+    (T10.TYPE = 'AP') and
+    (T2.CAS_NUMBER = T10.CAS_NUMBER)
+order by
+  T2.END_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  @casNo = CAS_NO
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  DISBURSEMENT_DATE
+from
+  CKT_DISB_TRAN
+where
+  (CSP_NUMBER = @cspNumber) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+</root>

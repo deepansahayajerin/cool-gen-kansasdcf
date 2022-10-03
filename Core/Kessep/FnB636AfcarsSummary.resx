@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateAfcarsSummary">
+      <value>
+insert into CKT_AFCARS_SUMMARY
+(
+  CSP_NUMBER,
+  REPORT_MONTH,
+  COLLECTION_AMT,
+  CREATED_BY,
+  CREATED_TIMESTAMP
+)
+values
+(
+  @cspNumber,
+  @reportMonth,
+  @collectionAmt,
+  @createdBy,
+  @createdTimestamp
+)
+</value>
+   </data>
+   <data name="ReadCsePersonCollection">
+      <value>
+select
+  T4.CSP_SUP_NUMBER,
+  T2.COLL_ID,
+  T2.APPLIED_TO_CD,
+  T2.COLL_DT,
+  T2.ADJ_IND,
+  T2.CONCURRENT_IND,
+  T2.CRT_TYPE,
+  T2.CST_ID,
+  T2.CRV_ID,
+  T2.CRD_ID,
+  T2.OBG_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OTR_ID,
+  T2.OTR_TYPE,
+  T2.OTY_ID,
+  T2.CREATED_TMST,
+  T2.OB_TRN_AMT,
+  T2.APPL_TO_ORD_TYP_CD
+from
+  CKT_OB_TRN T4 with(readuncommitted)
+  join
+  CKT_COLLECTION T2 with(readuncommitted)
+  on
+    (T4.CPA_SUP_TYPE is not null) and
+    (T4.CSP_SUP_NUMBER is not null) and
+    (T4.OTY_TYPE = T2.OTY_ID) and
+    (T4.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T4.OB_TRN_ID = T2.OTR_ID) and
+    (T4.CPA_TYPE = T2.CPA_TYPE) and
+    (T4.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T4.OBG_GENERATED_ID = T2.OBG_ID) and
+    (T2.ADJ_IND = 'N') and
+    (T2.CONCURRENT_IND = 'N') and
+    (T2.APPL_TO_ORD_TYP_CD = 'K') and
+    (T2.APPLIED_TO_CD = 'C') and
+    (T2.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+    (T2.CRT_TYPE &lt;&gt; 2) and
+    (T2.CRT_TYPE &lt;&gt; 7) and
+    (T4.CSP_SUP_NUMBER &gt; @cspSupNumber)
+order by
+  T4.CSP_SUP_NUMBER
+</value>
+   </data>
+</root>

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadObligationObligationTransactionObligationType1">
+      <value>
+select distinct
+  T1.CREATED_BY,
+  count(*),
+  sum(T2.OB_TRN_AMT)
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_OBLIGATION T1
+  on
+    (T3.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (T3.DEBT_TYP_CLASS = 'R')
+  join
+  CKT_OB_TRN T2
+  on
+    (T1.DTY_GENERATED_ID = T2.OTY_TYPE) and
+    (T1.OB_ID = T2.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.CPA_TYPE)
+group by
+  T1.CREATED_BY
+</value>
+   </data>
+   <data name="ReadObligationObligationTransactionObligationType2">
+      <value>
+select distinct
+  T1.CREATED_BY,
+  count(*),
+  sum(T2.OB_TRN_AMT)
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_OBLIGATION T1
+  on
+    (T3.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (T3.DEBT_TYP_CLASS = 'R') and
+    (T1.PRQ_ID is not null) and
+    (T1.CREATED_BY = @createdBy)
+  join
+  CKT_OB_TRN T2
+  on
+    (T1.DTY_GENERATED_ID = T2.OTY_TYPE) and
+    (T1.OB_ID = T2.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.CPA_TYPE)
+group by
+  T1.CREATED_BY
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistoryPaymentStatusPaymentRequest">
+      <value>
+select distinct
+  T2.CODE,
+  T1.CREATED_BY,
+  count(*),
+  sum(T3.AMOUNT)
+from
+  CKT_PAYMENT_STATUS T2
+  join
+  CKT_PMNT_REQUEST T3
+  join
+  CKT_PMNT_STAT_HIST T1
+  on
+    (T3.PAYMENT_REQUEST_ID = T1.PRQ_GENERATED_ID) and
+    (T3.TYPE = 'RCV') and
+    (T1.DISCONTINUE_DATE = @discontinueDate)
+  on
+    T2.PAYMENT_STATUS_ID = T1.PST_GENERATED_ID
+group by
+  T2.CODE,
+  T1.CREATED_BY
+</value>
+   </data>
+</root>

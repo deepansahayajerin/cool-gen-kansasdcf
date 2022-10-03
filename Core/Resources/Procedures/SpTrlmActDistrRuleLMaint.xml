@@ -1,0 +1,47 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpTrlmActDistrRuleLMaint"
+           program-name="SWETRLMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpTrlmActDistrRuleLMaint"
+           transaction="SRP8"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToList" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromLinkCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpInfmInfrastructureMgmtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_ADLM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETADLM"
+       to="SpAdlmActivityDetailListMnt"
+       send-command="DISPLAY">
+      <map from="Activity" to="FromLinkActivity"/>
+      <return-map from="ToTranActivityDetail" to="FromLinkActivityDetail"/>
+      <return-map from="ToTranActivity" to="FromLinkActivity"/>
+   </on>
+   <map from="ActivityDetail1" to="ActivityDetail1"/>
+   <map from="Group.Protect" to="Group.Protect"/>
+   <map from="Activity" to="Activity"/>
+   <map from="ActivityDetail2" to="ActivityDetail2"/>
+   <map from="HiddenActivity" to="HiddenActivity"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Group.Hidden" to="Group.Hidden"/>
+   <map from="Group.ReasonCode" to="Group.ReasonCode"/>
+   <map from="Group.ActivityDistributionRule"
+        to="Group.ActivityDistributionRule"/>
+   <map from="Group.CuFunction" to="Group.CuFunction"/>
+   <map from="Group.BusObject" to="Group.BusObject"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.AssignCode" to="Group.AssignCode"/>
+</procedure>

@@ -1,0 +1,202 @@
+Feature: TC_071_MAN-FAMILY-VIOLENCE
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "NAME" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "Sc1_page1"
+    When user enters "<LAST>" in "Last"
+    And enters "<FIRST>" in "First"
+    And enters "<PERSON>" in the second field below "Case #"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "Sc1_page2"
+    When user enters "S" in the field below "Sel"
+    When user presses "Shift+F5"
+    Then "CSE - Case Compositions by Name - COMN" window appears
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then snapshot "Sc1_page3"
+    When user enters "P" in "Family Violence"
+    And user presses "F6"
+    Then snapshot "Sc1_page4"
+    Then message "ACO_NI0000: update successfull." is displayed
+    Then snapshot "Sc1_page5"
+
+    Examples:
+      | LAST       | FIRST | PERSON |
+      | REP-CARTER | LOGAN | 19     |
+
+
+  Scenario Outline: Scenario2
+    When user enters "NAME" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "Sc2_page1"
+    When user enters "<LAST>" in "Last"
+    And enters "<FIRST>" in "First"
+    And enters "<PERSON>" in the second field below "Case #"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "Sc2_page2"
+    When user enters "S" in the field below "Sel"
+    When user presses "Shift+F5"
+    Then "CSE - Case Compositions by Name - COMN" window appears
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then snapshot "Sc2_page3"
+    When user enters "D" in "Family Violence"
+    And user presses "F6"
+    Then snapshot "Sc2_page4"
+    Then message "ACO_NI0000: update successfull." is displayed
+    Then snapshot "Sc2_page5"
+
+    Examples:
+      | LAST      | FIRST  | PERSON |
+      | REP-JONAS | ALICIA | 56     |
+
+
+  Scenario Outline: Scenario3
+    When user enters "NAME" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "Sc3_page1"
+    When user enters "<CHILD_LAST>" in "Last"
+    And enters "<CHILD_FIRST>" in "First"
+    And enters "<CHILD_PERSON>" in the second field below "Case #"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "Sc3_page2"
+    When user enters "S" in the field below "Sel"
+    When user presses "Shift+F5"
+    Then "CSE - Case Compositions by Name - COMN" window appears
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then snapshot "Sc3_page3"
+    When user enters "C" in "Family Violence"
+    And user presses "F6"
+    Then snapshot "Sc3_page4"
+    Then message "This is an active CH on a Case with an AR who does not have the FV turned on." is displayed
+    Then snapshot "Sc3_page5"
+
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "Sc3_page6"
+    When user enters "<CP_LAST>" in "Last"
+    And enters "<CP_FIRST>" in "First"
+    And enters "<CP_PERSON>" in the second field below "Case #"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "Sc3_page7"
+    When user enters "S" in the field below "Sel"
+    When user presses "Shift+F5"
+    Then "CSE - Case Compositions by Name - COMN" window appears
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then snapshot "Sc3_page8"
+    When user enters "C" in "Family Violence"
+    And user presses "F6"
+    Then message "ACO_NI0000: update successfull." is displayed
+    Then snapshot "Sc3_page9"
+
+    When user enters "NAME" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "Sc3_page10"
+    When user enters "<CHILD_LAST>" in "Last"
+    And enters "<CHILD_FIRST>" in "First"
+    And enters "<CHILD_PERSON>" in the second field below "Case #"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "Sc3_page11"
+    When user enters "S" in the field below "Sel"
+    When user presses "Shift+F5"
+    Then "CSE - Case Compositions by Name - COMN" window appears
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then snapshot "Sc3_page12"
+    When user enters "C" in "Family Violence"
+    And user presses "F6"
+    Then message "ACO_NI0000: update successfull." is displayed
+    Then snapshot "Sc3_page13"
+
+
+    Examples:
+      | CHILD_LAST | CHILD_FIRST | CHILD_PERSON | CP_LAST   | CP_FIRST | CP_PERSON |
+      | REP-LUCAS  | LUCA        | 49           | REP-SMITH | ALI      | 48        |
+
+
+  Scenario Outline: Scenario4
+    When user enters "NAME" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "Sc4_page1"
+    When user enters "<CHILD_LAST>" in "Last"
+    And enters "<CHILD_FIRST>" in "First"
+    And enters "<CHILD_PERSON>" in the second field below "Case #"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "Sc4_page2"
+    When user enters "S" in the field below "Sel"
+    When user presses "Shift+F5"
+    Then "CSE - Case Compositions by Name - COMN" window appears
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then snapshot "Sc4_page3"
+    When user enters "C" in "Family Violence"
+    And user presses "F6"
+    Then snapshot "Sc4_page4"
+    Then message "ACO_NI0000: update successfull." is displayed
+    Then snapshot "Sc4_page6"
+
+    Examples:
+      | CHILD_LAST | CHILD_FIRST | CHILD_PERSON |
+      | REP-BIRD   | TAMMY       | 16           |
+
+
+  Scenario Outline: Scenario5
+    When user enters "NAME" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "Sc5_page1"
+    When user enters "<NCP_LAST>" in "Last"
+    And enters "<NCP_FIRST>" in "First"
+    And enters "<NCP_PERSON>" in the second field below "Case #"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "Sc5_page2"
+    When user enters "S" in the field below "Sel"
+    When user presses "Shift+F5"
+    Then "CSE - Case Compositions by Name - COMN" window appears
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then snapshot "Sc5_page2"
+    When user enters "P" in "Family Violence"
+    And user presses "F6"
+    Then snapshot "Sc5_page4"
+    Then message "ACO_NI0000: update successfull." is displayed
+    Then snapshot "Sc5_page5"
+
+    When user enters "NAME" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "Sc5_page1"
+    When user enters "<NCP_LAST>" in "Last"
+    And enters "<NCP_FIRST>" in "First"
+    And enters "<NCP_PERSON>" in the second field below "Case #"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "Sc5_page2"
+    When user enters "S" in the field below "Sel"
+    When user presses "Shift+F5"
+    Then "CSE - Case Compositions by Name - COMN" window appears
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then snapshot "Sc5_page2"
+    When user enters "P" in "Family Violence"
+    And user presses "F6"
+    Then message "ACO_NI0000: update successfull." is displayed
+    Then snapshot "Sc5_page4"
+
+
+    Examples:
+      | NCP_LAST   | NCP_FIRST | NCP_PERSON |
+      | REP-CARTER | SAM       | 44         |
+

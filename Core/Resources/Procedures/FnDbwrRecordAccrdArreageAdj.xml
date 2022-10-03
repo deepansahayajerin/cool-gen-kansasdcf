@@ -1,0 +1,88 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDbwrRecordAccrdArreageAdj"
+           program-name="SWEDBWRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDbwrRecordAccrdArreageAdj"
+           transaction="SR58"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_OBLIG_TRNS_RLN_RS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDBWR"
+       to="FnOtrlLstObligTransRlnRsn"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="ObligationTransactionRlnRsn"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COLP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnColpMtnCollectionProtect"
+       send-command="DISPLAY">
+      <map from="ApPayorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="ApPayorCsePerson" to="CsePerson"/>
+      <map from="Obligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="Obligation.PrimarySecondaryCode"
+           to="Obligation.PrimarySecondaryCode"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_DBT_ACT_BY_APPYR"
+       action="link"
+       return-when="ACO_NE0000_RETURN ECO_LNK_RETURN_FROM_LINK"
+       return-command="DISPLAY"
+       to="FnDebtLstDbtActvtyByApPyr"
+       send-command="DISPLAY">
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="Obligation" to="Obligation"/>
+      <map from="ApPayorCsePerson" to="SearchCsePerson"/>
+      <map from="ApPayorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="DebtAdjustmentFromDate" to="SearchFrom"/>
+      <map from="DebtAdjustmentToDate" to="SearchTo"/>
+   </on>
+   <map from="DebtAdjustmentFromDate" to="DebtAdjustmentFromDate"/>
+   <map from="ApPayorCsePerson" to="ApPayorCsePerson"/>
+   <map from="ApPayorCsePersonsWorkSet" to="ApPayorCsePersonsWorkSet"/>
+   <map from="Obligation" to="Obligation"/>
+   <map from="ObligationType" to="ObligationType"/>
+   <map from="ScreenOwedAmounts" to="ScreenOwedAmounts"/>
+   <map from="DebtAdjustmentToDate" to="DebtAdjustmentToDate"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="Group.DebtAdjustment" to="Group.DebtAdjustment"/>
+   <map from="Group.Hidden" to="Group.Hidden"/>
+   <map from="ObligationTransactionRlnRsn" to="ObligationTransactionRlnRsn"/>
+   <map from="ObligationPaymentSchedule" to="ObligationPaymentSchedule"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Group.AccrualInstructions" to="Group.AccrualInstructions"/>
+   <map from="LocalAdjust" to="LocalAdjust"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Debt" to="Group.Debt"/>
+   <map from="DebtAdjustmentInd" to="DebtAdjustmentInd"/>
+   <map from="CollProtectionExists" to="CollProtectionExists"/>
+   <map from="ConfirmWriteoff" to="ConfirmWriteoff"/>
+   <map from="DebtObligationTransaction.Amount"
+        to="DebtObligationTransaction.Amount"/>
+   <map from="DebtAdjustment.Amount" to="DebtAdjustment.Amount"/>
+   <map from="ObligationTransactionRln.Description"
+        to="ObligationTransactionRln.Description"/>
+   <map from="DebtAdjustment.SystemGeneratedIdentifier"
+        to="DebtObligationTransaction.SystemGeneratedIdentifier"/>
+   <map from="DebtAdjustment.Type1" to="DebtObligationTransaction.Type1"/>
+   <map from="DebtAdjustment.DebtAdjustmentType"
+        to="DebtAdjustment.DebtAdjustmentType"/>
+   <map from="DebtAdjustment.DebtAdjustmentDt"
+        to="DebtAdjustment.DebtAdjustmentDt"/>
+   <map from="DebtObligationTransaction.Type1" to="DebtAdjustment.Type1"/>
+   <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   <map from="DebtAccrualInstructions.LastAccrualDt"
+        to="DebtAccrualInstructions.LastAccrualDt"/>
+   <map from="DebtAdjustment.LastUpdatedBy" to="DebtAdjustment.LastUpdatedBy"/>
+   <map from="Group.Supported.Number" to="Group.Supported.Number"/>
+   <map from="Group.Supported.FormattedName" to="Group.Supported.FormattedName"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadClient1">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OB_TRN T4
+  on
+    (T1.NUMB = T4.CSP_NUMBER) and
+    (@cpaSupType = T4.CPA_SUP_TYPE) and
+    (@cspSupNumber = T4.CSP_SUP_NUMBER)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadClient2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OB_TRN T4
+  on
+    (T1.NUMB = T4.CSP_NUMBER) and
+    (@cpaSupType = T4.CPA_SUP_TYPE) and
+    (@cspSupNumber = T4.CSP_SUP_NUMBER)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadSupportedClient1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RECOMP_BAL_FROM_DT,
+  TRIGGER_TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (RECOMP_BAL_FROM_DT &gt; @recompBalFromDt)
+</value>
+   </data>
+   <data name="ReadSupportedClient2">
+      <value>
+select
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RECOMP_BAL_FROM_DT,
+  TRIGGER_TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  RECOMP_BAL_FROM_DT &gt; @recompBalFromDt
+order by
+  CSP_NUMBER
+</value>
+   </data>
+</root>

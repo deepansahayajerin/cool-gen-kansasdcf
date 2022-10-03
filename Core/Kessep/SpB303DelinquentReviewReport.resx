@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS,
+  T1.CSE_OPEN_DATE
+from
+  CKT_OFFC_SRVC_PRVR T3 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_ASSIGN_CASE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NO) and
+    (T1.STATUS = @status) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T1.NUMB &gt; @numb)
+  on
+    (T3.EFFECTIVE_DATE = T2.OSP_DATE) and
+    (T3.ROLE_CODE = T2.OSP_CODE) and
+    (T3.OFF_GENERATED_ID = T2.OFF_ID) and
+    (T3.SPD_GENERATED_ID = T2.SPD_ID) and
+    (@spdGeneratedId = T3.SPD_GENERATED_ID) and
+    (@offGeneratedId = T3.OFF_GENERATED_ID) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  max(REFERENCE_DATE)
+from
+  CKT_INFRASTRUCTURE
+where
+  (CASE_NUMBER = @caseNumber) and
+  (EVENT_ID = 5) and
+  (REASON_CODE = 'OSPRVWS')
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select
+  OFFICE_ID,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  OFF_OFFICE
+from
+  CKT_OFFICE with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (OFFICE_ID &gt;= @officeId)
+order by
+  OFFICE_ID
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select distinct
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T1 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T2 with(readuncommitted)
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (@offGeneratedId = T2.OFF_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T1.SERVICE_PRVDER_ID &gt;= @servicePrvderId)
+order by
+  T1.SERVICE_PRVDER_ID
+</value>
+   </data>
+   <data name="ReadServiceProviderOfficeServiceProvRelationship">
+      <value>
+select distinct top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL,
+  T2.OSP_EFFECTIVE_DATE,
+  T2.OSP_ROLE_CODE,
+  T2.OFF_GENERATED_ID,
+  T2.SPD_GENERATED_ID,
+  T2.OSP_R_EFFECTIVE_DT,
+  T2.OSP_R_ROLE_CODE,
+  T2.OFF_R_GENERATED_ID,
+  T2.SPD_R_GENERATED_ID,
+  T2.CREATED_BY,
+  T2.CREATED_DTSTAMP
+from
+  CKT_OFFC_SRVC_PRVR T4 with(readuncommitted)
+  join
+  CKT_SERVICE_PRVDER T1 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T3 with(readuncommitted)
+  on
+    (T1.SERVICE_PRVDER_ID = T3.SPD_GENERATED_ID) and
+    (@offGeneratedId = T3.OFF_GENERATED_ID) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate)
+  join
+  CKT_OFC_SRCPRV_RLT T2 with(readuncommitted)
+  on
+    (T3.ROLE_CODE = T2.OSP_R_ROLE_CODE) and
+    (T3.EFFECTIVE_DATE = T2.OSP_R_EFFECTIVE_DT) and
+    (T3.OFF_GENERATED_ID = T2.OFF_R_GENERATED_ID) and
+    (T3.SPD_GENERATED_ID = T2.SPD_R_GENERATED_ID)
+  on
+    (T4.ROLE_CODE = T2.OSP_ROLE_CODE) and
+    (T4.EFFECTIVE_DATE = T2.OSP_EFFECTIVE_DATE) and
+    (T4.OFF_GENERATED_ID = T2.OFF_GENERATED_ID) and
+    (T4.SPD_GENERATED_ID = T2.SPD_GENERATED_ID) and
+    (@spdGeneratedId = T4.SPD_GENERATED_ID) and
+    (@offGeneratedId = T4.OFF_GENERATED_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  T2.CREATED_DTSTAMP desc
+</value>
+   </data>
+</root>

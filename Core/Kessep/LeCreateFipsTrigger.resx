@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteTrigger">
+      <value>
+delete from CKT_TRIGGER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location) and
+  (STATE_ABBREVIATION = 'KS')
+</value>
+   </data>
+   <data name="ReadProgramCheckpointRestart">
+      <value>
+select top(1)
+  PROGRAM_NAME,
+  LST_CHKPNT_TMST
+from
+  CKT_PGM_CHKPNT_RST
+where
+  PROGRAM_NAME = 'SWELB590'
+</value>
+   </data>
+   <data name="ReadTrigger">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  ACTION0,
+  STATUS,
+  DENORM_NUMERIC_1,
+  DENORM_NUMERIC_2,
+  DENORM_NUMERIC_3,
+  DENORM_TEXT_1,
+  DENORM_TEXT_2,
+  DENORM_TEXT_3,
+  CREATED_TIMESTAMP
+from
+  CKT_TRIGGER
+where
+  (TYPE = @type) and
+  (DENORM_NUMERIC_1 = @denormNumeric1) and
+  (DENORM_NUMERIC_2 = @denormNumeric2) and
+  (DENORM_NUMERIC_3 = @denormNumeric3) and
+  (CREATED_TIMESTAMP &gt; @createdTimestamp)
+</value>
+   </data>
+</root>

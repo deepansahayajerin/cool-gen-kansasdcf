@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  CU_NUMBER,
+  [STATE],
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (CU_NUMBER = @cuNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'M') and
+  (VERIFIED_DATE &lt;= @verifiedDate1) and
+  (VERIFIED_DATE &gt; @verifiedDate2) and
+  (END_DATE &gt; @verifiedDate1) and
+  (LOCATION_TYPE = 'F')
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('M', 'R')) and
+  (VERIFIED_DATE &lt;= @verifiedDate1) and
+  (VERIFIED_DATE &gt; @verifiedDate2) and
+  (END_DATE &gt; @verifiedDate1) and
+  (LOCATION_TYPE = 'D')
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  END_DATE,
+  START_DATE
+from
+  CKT_INCARCERATION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate) and
+  (VERIFIED_DATE &lt;= @startDate) and
+  (VERIFIED_DATE &lt;&gt; @verifiedDate)
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  RETURN_CD,
+  CSP_I_NUMBER,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (START_DT &lt;= @startDt) and
+  (END_DT &gt; @startDt)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND = 'N')
+</value>
+   </data>
+   <data name="ReadMilitaryService">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  CSP_NUMBER,
+  START_DATE,
+  END_DATE
+from
+  CKT_MILITARY_SRV
+where
+  (@cspNumber = CSP_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+</root>

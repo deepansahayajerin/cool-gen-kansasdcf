@@ -1,0 +1,519 @@
+﻿<!--Name: LE_LACS_LST_LGL_ACTN_BY_CSE_CASE, ID: 371972210, model: 746-->
+<div coolContent coolName="LE_LACS_LST_LGL_ACTN_BY_CSE_CASE" coolType="SCREEN"
+  (coolInit)="scrollSize = 6; pageSize = 6">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 17.5%; top: 0; width: 62.5%; height: 4%;" coolCol="15"
+     coolRow="1" coolLength="50">CSE - List Legal Actions by CSE Case Number - LACS</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_8"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 8.75%; top: 4%; width: 5%; height: 4%;" coolCol="8"
+     coolRow="2" coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 8%; width: 18.75%; height: 4%;" coolCol="2"
+     coolRow="3" coolLength="15">CSE Case Number</div>
+   <input type="text" coolType="field" name="field_3_18"
+     [(ngModel)]="in.case1.number" [coolVideo]="out.case1.screenField?.number"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="10"
+     style="left: 21.25%; top: 8%; width: 12.5%; height: 4%;" coolCol="18"
+     coolRow="3" coolLength="10">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 12%; width: 42.5%; height: 4%;" coolCol="2"
+     coolRow="4" coolLength="34">Show Court Case Numbers Only (Y/N)</div>
+   <input type="text" coolType="field" name="field_4_39"
+     [(ngModel)]="in.courtCaseNumberOnly.text1"
+     [coolVideo]="out.courtCaseNumberOnly.screenField?.text1" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 47.5%; top: 12%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="4" coolLength="1">
+   
+   <div coolType="prompt"
+     style="left: 53.75%; top: 12%; width: 17.5%; height: 4%;" coolCol="44"
+     coolRow="4" coolLength="14">Classification</div>
+   <input type="text" coolType="field" name="field_4_63"
+     [(ngModel)]="in.filter.classification"
+     [coolVideo]="out.filter.screenField?.classification" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 77.5%; top: 12%; width: 1.25%; height: 4%;" coolCol="63"
+     coolRow="4" coolLength="1">
+   <input type="text" coolType="field" name="field_4_65"
+     [(ngModel)]="in.promptClassification.promptField"
+     [coolVideo]="out.promptClassification.screenField?.promptField" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1" style="left: 80%; top: 12%; width: 1.25%; height: 4%;"
+     coolCol="65" coolRow="4" coolLength="1">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 16%; width: 38.75%; height: 4%;" coolCol="2"
+     coolRow="5" coolLength="31" coolColor="white">List Legal Actions earlier than</div>
+   <input type="text" coolType="field" name="field_5_34"
+     [(ngModel)]="in.cutOff.date" [coolVideo]="out.cutOff.screenField?.date"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 41.25%; top: 16%; width: 10%; height: 4%;" coolCol="34"
+     coolRow="5" coolLength="8">
+   
+   <div coolType="prompt"
+     style="left: 53.75%; top: 16%; width: 22.5%; height: 4%;" coolCol="44"
+     coolRow="5" coolLength="18">Starting Ct Case #</div>
+   <input type="text" coolType="field" name="field_5_63"
+     [(ngModel)]="in.filter.courtCaseNumber"
+     [coolVideo]="out.filter.screenField?.courtCaseNumber" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="17"
+     style="left: 77.5%; top: 16%; width: 21.25%; height: 4%;" coolCol="63"
+     coolRow="5" coolLength="17">
+   
+   <div coolType="prompt" style="left: 1.25%; top: 20%; width: 45%; height: 4%;"
+     coolCol="2" coolRow="6" coolLength="36">List Actions prior to CSE Case (Y/N)</div>
+   <input type="text" coolType="field" name="field_6_39"
+     [(ngModel)]="in.listLactsPriorToCase.flag"
+     [coolVideo]="out.listLactsPriorToCase.screenField?.flag" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 47.5%; top: 20%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="6" coolLength="1">
+   
+   <div coolType="prompt" style="left: 0; top: 24%; width: 3.75%; height: 4%;"
+     coolCol="1" coolRow="7" coolLength="3">Sel</div>
+   
+   <div coolType="prompt" style="left: 5%; top: 24%; width: 21.25%; height: 4%;"
+     coolCol="5" coolRow="7" coolLength="17">Court Case Number</div>
+   
+   <div coolType="prompt"
+     style="left: 28.75%; top: 24%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="7" coolLength="1">C</div>
+   
+   <div coolType="prompt"
+     style="left: 31.25%; top: 24%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="7" coolLength="8">Filed Dt</div>
+   
+   <div coolType="prompt"
+     style="left: 42.5%; top: 24%; width: 16.25%; height: 4%;" coolCol="35"
+     coolRow="7" coolLength="13">Tribunal Name</div>
+   
+   <div coolType="prompt"
+     style="left: 81.25%; top: 24%; width: 12.5%; height: 4%;" coolCol="66"
+     coolRow="7" coolLength="10">Created Dt</div>
+   
+   <div coolType="prompt"
+     style="left: 96.25%; top: 24%; width: 3.75%; height: 4%;" coolCol="78"
+     coolRow="7" coolLength="3">App</div>
+   
+   <div coolType="prompt" style="left: 5%; top: 28%; width: 7.5%; height: 4%;"
+     coolCol="5" coolRow="8" coolLength="6">State,</div>
+   
+   <div coolType="prompt"
+     style="left: 13.75%; top: 28%; width: 7.5%; height: 4%;" coolCol="12"
+     coolRow="8" coolLength="6">County</div>
+   
+   <div coolType="prompt"
+     style="left: 32.5%; top: 28%; width: 8.75%; height: 4%;" coolCol="27"
+     coolRow="8" coolLength="7">Country</div>
+   
+   <div coolType="prompt" style="left: 42.5%; top: 28%; width: 15%; height: 4%;"
+     coolCol="35" coolRow="8" coolLength="12">Action Taken</div>
+   
+   <div coolType="prompt" style="left: 81.25%; top: 28%; width: 5%; height: 4%;"
+     coolCol="66" coolRow="8" coolLength="4">Auto</div>
+   <input type="text" coolType="field" name="field_9_2"
+     [(ngModel)]="ref(in.list, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.list?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 32%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= length(in.list)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 32%; width: 21.25%; height: 4%;" coolCol="5"
+     coolRow="9" coolLength="17" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.legalAction.courtCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 32%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.legalAction.classification}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 31.25%; top: 32%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.legalAction.filedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 32%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="9" coolLength="30" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.detailTribunal.name}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 81.25%; top: 32%; width: 10%; height: 4%;" coolCol="66"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.legalAction.createdTstamp|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 97.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="79"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.detailLaAppInd.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 36%; width: 2.5%; height: 4%;" coolCol="5"
+     coolRow="10" coolLength="2" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.detailFips.stateAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 36%; width: 2.5%; height: 4%;" coolCol="8"
+     coolRow="10" coolLength="2" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.detailFips.countyAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 36%; width: 25%; height: 4%;" coolCol="11"
+     coolRow="10" coolLength="20" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.detailFips.countyDescription}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 38.75%; top: 36%; width: 2.5%; height: 4%;" coolCol="32"
+     coolRow="10" coolLength="2" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.detailForeign.country}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 36%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="10" coolLength="30" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.detailActionTaken.description}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 36%; width: 1.25%; height: 4%;" coolCol="68"
+     coolRow="10" coolLength="1" [hidden]="pageOffset >= length(in.list)">{{in.list?.[pageOffset]?.legalAction.systemGenInd}}</div>
+   <input type="text" coolType="field" name="field_11_2"
+     [(ngModel)]="ref(in.list, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.list?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 40%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 1 >= length(in.list)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 40%; width: 21.25%; height: 4%;" coolCol="5"
+     coolRow="11" coolLength="17" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.legalAction.courtCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 40%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.legalAction.classification}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 31.25%; top: 40%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.legalAction.filedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 40%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="11" coolLength="30" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.detailTribunal.name}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 81.25%; top: 40%; width: 10%; height: 4%;" coolCol="66"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.legalAction.createdTstamp|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 97.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="79"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.detailLaAppInd.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 44%; width: 2.5%; height: 4%;" coolCol="5"
+     coolRow="12" coolLength="2" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.detailFips.stateAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 44%; width: 2.5%; height: 4%;" coolCol="8"
+     coolRow="12" coolLength="2" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.detailFips.countyAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 44%; width: 25%; height: 4%;" coolCol="11"
+     coolRow="12" coolLength="20" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.detailFips.countyDescription}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 38.75%; top: 44%; width: 2.5%; height: 4%;" coolCol="32"
+     coolRow="12" coolLength="2" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.detailForeign.country}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 44%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="12" coolLength="30" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.detailActionTaken.description}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 44%; width: 1.25%; height: 4%;" coolCol="68"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 1 >= length(in.list)">{{in.list?.[pageOffset + 1]?.legalAction.systemGenInd}}</div>
+   <input type="text" coolType="field" name="field_13_2"
+     [(ngModel)]="ref(in.list, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.list?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 48%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 2 >= length(in.list)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 48%; width: 21.25%; height: 4%;" coolCol="5"
+     coolRow="13" coolLength="17" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.legalAction.courtCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 48%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.legalAction.classification}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 31.25%; top: 48%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.legalAction.filedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 48%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="13" coolLength="30" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.detailTribunal.name}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 81.25%; top: 48%; width: 10%; height: 4%;" coolCol="66"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.legalAction.createdTstamp|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 97.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="79"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.detailLaAppInd.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 52%; width: 2.5%; height: 4%;" coolCol="5"
+     coolRow="14" coolLength="2" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.detailFips.stateAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 52%; width: 2.5%; height: 4%;" coolCol="8"
+     coolRow="14" coolLength="2" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.detailFips.countyAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 52%; width: 25%; height: 4%;" coolCol="11"
+     coolRow="14" coolLength="20" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.detailFips.countyDescription}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 38.75%; top: 52%; width: 2.5%; height: 4%;" coolCol="32"
+     coolRow="14" coolLength="2" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.detailForeign.country}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 52%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="14" coolLength="30" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.detailActionTaken.description}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 52%; width: 1.25%; height: 4%;" coolCol="68"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 2 >= length(in.list)">{{in.list?.[pageOffset + 2]?.legalAction.systemGenInd}}</div>
+   <input type="text" coolType="field" name="field_15_2"
+     [(ngModel)]="ref(in.list, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.list?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 56%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 3 >= length(in.list)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 56%; width: 21.25%; height: 4%;" coolCol="5"
+     coolRow="15" coolLength="17" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.legalAction.courtCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 56%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.legalAction.classification}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 31.25%; top: 56%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.legalAction.filedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 56%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="15" coolLength="30" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.detailTribunal.name}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 81.25%; top: 56%; width: 10%; height: 4%;" coolCol="66"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.legalAction.createdTstamp|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 97.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="79"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.detailLaAppInd.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 60%; width: 2.5%; height: 4%;" coolCol="5"
+     coolRow="16" coolLength="2" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.detailFips.stateAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 60%; width: 2.5%; height: 4%;" coolCol="8"
+     coolRow="16" coolLength="2" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.detailFips.countyAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 60%; width: 25%; height: 4%;" coolCol="11"
+     coolRow="16" coolLength="20" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.detailFips.countyDescription}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 38.75%; top: 60%; width: 2.5%; height: 4%;" coolCol="32"
+     coolRow="16" coolLength="2" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.detailForeign.country}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 60%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="16" coolLength="30" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.detailActionTaken.description}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 60%; width: 1.25%; height: 4%;" coolCol="68"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 3 >= length(in.list)">{{in.list?.[pageOffset + 3]?.legalAction.systemGenInd}}</div>
+   <input type="text" coolType="field" name="field_17_2"
+     [(ngModel)]="ref(in.list, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.list?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 64%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 4 >= length(in.list)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 64%; width: 21.25%; height: 4%;" coolCol="5"
+     coolRow="17" coolLength="17" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.legalAction.courtCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 64%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.legalAction.classification}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 31.25%; top: 64%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.legalAction.filedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 64%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="17" coolLength="30" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.detailTribunal.name}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 81.25%; top: 64%; width: 10%; height: 4%;" coolCol="66"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.legalAction.createdTstamp|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 97.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="79"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.detailLaAppInd.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 68%; width: 2.5%; height: 4%;" coolCol="5"
+     coolRow="18" coolLength="2" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.detailFips.stateAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 68%; width: 2.5%; height: 4%;" coolCol="8"
+     coolRow="18" coolLength="2" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.detailFips.countyAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 68%; width: 25%; height: 4%;" coolCol="11"
+     coolRow="18" coolLength="20" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.detailFips.countyDescription}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 38.75%; top: 68%; width: 2.5%; height: 4%;" coolCol="32"
+     coolRow="18" coolLength="2" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.detailForeign.country}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 68%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="18" coolLength="30" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.detailActionTaken.description}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 68%; width: 1.25%; height: 4%;" coolCol="68"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 4 >= length(in.list)">{{in.list?.[pageOffset + 4]?.legalAction.systemGenInd}}</div>
+   <input type="text" coolType="field" name="field_19_2"
+     [(ngModel)]="ref(in.list, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.list?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 72%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 5 >= length(in.list)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 72%; width: 21.25%; height: 4%;" coolCol="5"
+     coolRow="19" coolLength="17" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.legalAction.courtCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 72%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.legalAction.classification}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 31.25%; top: 72%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.legalAction.filedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 72%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="19" coolLength="30" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.detailTribunal.name}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 81.25%; top: 72%; width: 10%; height: 4%;" coolCol="66"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.legalAction.createdTstamp|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 97.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="79"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.detailLaAppInd.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 76%; width: 2.5%; height: 4%;" coolCol="5"
+     coolRow="20" coolLength="2" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.detailFips.stateAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 76%; width: 2.5%; height: 4%;" coolCol="8"
+     coolRow="20" coolLength="2" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.detailFips.countyAbbreviation}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 76%; width: 25%; height: 4%;" coolCol="11"
+     coolRow="20" coolLength="20" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.detailFips.countyDescription}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 38.75%; top: 76%; width: 2.5%; height: 4%;" coolCol="32"
+     coolRow="20" coolLength="2" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.detailForeign.country}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 42.5%; top: 76%; width: 37.5%; height: 4%;" coolCol="35"
+     coolRow="20" coolLength="30" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.detailActionTaken.description}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 76%; width: 1.25%; height: 4%;" coolCol="68"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 5 >= length(in.list)">{{in.list?.[pageOffset + 5]?.legalAction.systemGenInd}}</div>
+   
+   <div coolType="literal"
+     style="left: 86.25%; top: 80%; width: 7.5%; height: 4%;" coolCol="70"
+     coolRow="21" coolLength="6">More :</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 95%; top: 80%; width: 1.25%; height: 4%;" coolCol="77"
+     coolRow="21" coolLength="1">{{in.minus.text1}}</div>
+   
+   <div coolType="field" coolColor="white" coolUpper
+     style="left: 97.5%; top: 80%; width: 1.25%; height: 4%;" coolCol="79"
+     coolRow="21" coolLength="1">{{in.plus.text1}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 92.5%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="74">PF KEY: 1 Help  2 Disp  3 Exit  4 List  7 Prev  8 Next  9 Return  11 Clear</div>
+   
+   <div coolType="literal"
+     style="left: 8.75%; top: 92%; width: 46.25%; height: 4%;" coolCol="8"
+     coolRow="24" coolLength="37">12 Signoff  15 LACT  17 GLDV  19 IWGL</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT1" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT1</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="LACT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=LACT</a>
+   <a coolType="action" coolCommand="GLDV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F5">F17=GLDV</a>
+   <a coolType="action" coolCommand="IWGL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F7">F19=IWGL</a>
+   </div>

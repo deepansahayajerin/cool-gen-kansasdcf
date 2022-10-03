@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateLocateRequest">
+      <value>
+insert into CKT_LOC_REQUEST
+(
+  SSN_NUMBER,
+  DATE_OF_BIRTH,
+  CSE_PERSON_NUMBER,
+  REQUEST_DATE,
+  RESPONSE_DATE,
+  LICENSE_ISSUED_DT,
+  LICENSE_EXP_DATE,
+  LICENSE_SUSP_DATE,
+  LICENSE_NUMBER,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER,
+  LIC_SOURCE_NAME,
+  STREET_1,
+  ADDRESS_TYPE,
+  STREET_2,
+  STREET_3,
+  STREET_4,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  LIC_SUSPENSION_IND
+)
+values
+(
+  @ssnNumber,
+  @dateOfBirth,
+  @csePersonNumber,
+  @requestDate,
+  @responseDate,
+  @licenseIssuedDt,
+  @licenseExpDate,
+  @licenseSuspDate,
+  @licenseNumber,
+  @agencyNumber,
+  @sequenceNumber,
+  @licSourceName,
+  @street1,
+  @addressType,
+  @street2,
+  @street3,
+  @street4,
+  @city,
+  @state,
+  @zipCode5,
+  @zipCode4,
+  @zipCode3,
+  @province,
+  @postalCode,
+  @country,
+  @createdTimestamp,
+  @createdBy,
+  @lastUpdatedTmst,
+  @lastUpdatedBy,
+  @licSuspensionInd
+)
+</value>
+   </data>
+   <data name="ReadCodeCodeValue1">
+      <value>
+select top(1)
+  T1.COD_ID,
+  T1.CODE_NAME,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE,
+  T2.COV_ID,
+  T2.CDVALUE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRATION_DATE,
+  T2.DESCRIPTION
+from
+  CKT_CODE T1
+  join
+  CKT_CODE_VALUE T2
+  on
+    (T1.CODE_NAME = 'LICENSING AGENCY SOURCE(S)') and
+    (T1.COD_ID = T2.COD_ID) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.EXPIRATION_DATE &gt;= @effectiveDate) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.EXPIRATION_DATE &gt;= @effectiveDate) and
+    (substring(T2.CDVALUE, 1, 4) = cast(@cdvalue as char(10))) and
+    (substring(T2.CDVALUE, 5, 2) = cast(@text2 as char(2)))
+</value>
+   </data>
+   <data name="ReadCodeCodeValue2">
+      <value>
+select top(1)
+  T1.COD_ID,
+  T1.CODE_NAME,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE,
+  T2.COV_ID,
+  T2.CDVALUE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRATION_DATE,
+  T2.DESCRIPTION
+from
+  CKT_CODE T1
+  join
+  CKT_CODE_VALUE T2
+  on
+    (T1.COD_ID = T2.COD_ID) and
+    (T1.CODE_NAME = 'LICENSING AGENCY SOURCE(S)') and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.EXPIRATION_DATE &gt;= @effectiveDate) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.EXPIRATION_DATE &gt;= @effectiveDate) and
+    (substring(T2.CDVALUE, 1, 4) = cast(@cdvalue as char(10))) and
+    (substring(T2.CDVALUE, 5, 2) = cast(@text2 as char(2)))
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER
+from
+  CKT_CSE_PERS_ADDR
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadLocateRequest1">
+      <value>
+select top(1)
+  SSN_NUMBER,
+  DATE_OF_BIRTH,
+  CSE_PERSON_NUMBER,
+  REQUEST_DATE,
+  RESPONSE_DATE,
+  LICENSE_ISSUED_DT,
+  LICENSE_EXP_DATE,
+  LICENSE_SUSP_DATE,
+  LICENSE_NUMBER,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER,
+  LIC_SOURCE_NAME,
+  STREET_1,
+  ADDRESS_TYPE,
+  STREET_2,
+  STREET_3,
+  STREET_4,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  LIC_SUSPENSION_IND
+from
+  CKT_LOC_REQUEST
+where
+  (AGENCY_NUMBER = @agencyNumber) and
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (SEQUENCE_NUMBER &lt;&gt; @sequenceNumber)
+</value>
+   </data>
+   <data name="ReadLocateRequest2">
+      <value>
+select top(1)
+  SSN_NUMBER,
+  DATE_OF_BIRTH,
+  CSE_PERSON_NUMBER,
+  REQUEST_DATE,
+  RESPONSE_DATE,
+  LICENSE_ISSUED_DT,
+  LICENSE_EXP_DATE,
+  LICENSE_SUSP_DATE,
+  LICENSE_NUMBER,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER,
+  LIC_SOURCE_NAME,
+  STREET_1,
+  ADDRESS_TYPE,
+  STREET_2,
+  STREET_3,
+  STREET_4,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  LIC_SUSPENSION_IND
+from
+  CKT_LOC_REQUEST
+where
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (AGENCY_NUMBER = @agencyNumber) and
+  (SEQUENCE_NUMBER = @sequenceNumber)
+</value>
+   </data>
+   <data name="UpdateLocateRequest">
+      <value>
+update CKT_LOC_REQUEST
+set
+  SSN_NUMBER = @ssnNumber,
+  DATE_OF_BIRTH = @dateOfBirth,
+  REQUEST_DATE = @requestDate,
+  RESPONSE_DATE = @responseDate,
+  LICENSE_ISSUED_DT = @licenseIssuedDt,
+  LICENSE_EXP_DATE = @licenseExpDate,
+  LICENSE_SUSP_DATE = @licenseSuspDate,
+  LICENSE_NUMBER = @licenseNumber,
+  LIC_SOURCE_NAME = @licSourceName,
+  STREET_1 = @street1,
+  ADDRESS_TYPE = @addressType,
+  STREET_2 = @street2,
+  STREET_3 = @street3,
+  STREET_4 = @street4,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CODE_5 = @zipCode5,
+  ZIP_CODE_4 = @zipCode4,
+  ZIP_CODE_3 = @zipCode3,
+  PROVINCE = @province,
+  POSTAL_CODE = @postalCode,
+  COUNTRY = @country,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LIC_SUSPENSION_IND = @licSuspensionInd
+where
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (AGENCY_NUMBER = @agencyNumber) and
+  (SEQUENCE_NUMBER = @sequenceNumber)
+</value>
+   </data>
+</root>

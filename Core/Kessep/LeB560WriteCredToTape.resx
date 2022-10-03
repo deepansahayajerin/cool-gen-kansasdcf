@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonCreditReportingAction">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T2.IDENTIFIER,
+  T2.CSE_ACTION_CODE,
+  T2.CRA_TRANS_CODE,
+  T2.CRA_TRANS_DATE,
+  T2.DATE_SENT_TO_CRA,
+  T2.ORIGINAL_AMOUNT,
+  T2.CURRENT_AMOUNT,
+  T2.HIGHEST_AMOUNT,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.AAC_TYPE,
+  T2.AAC_TAKEN_DATE,
+  T2.AAC_TANF_CODE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CRED_RPT_ACT T2
+  on
+    (T1.TYPE = 'C') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CPA_TYPE = 'R') and
+    (T2.DATE_SENT_TO_CRA = @dateSentToCra)
+order by
+  T1.NUMB
+</value>
+   </data>
+</root>

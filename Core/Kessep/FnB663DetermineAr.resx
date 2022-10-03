@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.CSP_NUMBER = @cspNumber1) and
+    (
+      (
+        (T1.STATUS = 'O') and
+        (T1.STATUS_DATE &lt;= @statusDate)
+      ) or
+      (
+        (T1.STATUS = 'C') and
+        (T1.STATUS_DATE &gt; @statusDate)
+      )
+    )
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T1.NUMB = T4.CAS_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (@cspNumber2 = T4.CSP_NUMBER) and
+    (T4.START_DATE &lt;= @startDate) and
+    (T4.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseApplicantRecipient">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.CSP_NUMBER = @cspNumber1)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (@cspNumber2 = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseApplicantRecipientCsePerson">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.TYPE
+from
+  CKT_CSE_PERSON T3 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T1.NUMB = T4.CAS_NUMBER) and
+    (T4.TYPE = 'AP') and
+    (T4.CSP_NUMBER = @cspNumber)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  on
+    (T3.NUMB = T2.CSP_NUMBER) and
+    (T3.NUMB = @numb)
+</value>
+   </data>
+   <data name="ReadCaseChild1">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (@cspNumber1 = T2.CSP_NUMBER) and
+    (T2.START_DATE &gt; @startDate) and
+    (
+      (
+        (T1.STATUS = 'O') and
+        (T1.STATUS_DATE &lt;= @statusDate)
+      ) or
+      (
+        (T1.STATUS = 'C') and
+        (T1.STATUS_DATE &gt; @statusDate)
+      )
+    )
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.CSP_NUMBER = @cspNumber2)
+order by
+  T2.START_DATE
+</value>
+   </data>
+   <data name="ReadCaseChild2">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (@cspNumber1 = T2.CSP_NUMBER) and
+    (T2.END_DATE &lt;= @endDate) and
+    (
+      (
+        (T1.STATUS = 'O') and
+        (T1.STATUS_DATE &lt;= @statusDate)
+      ) or
+      (
+        (T1.STATUS = 'C') and
+        (T1.STATUS_DATE &gt; @statusDate)
+      )
+    )
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.CSP_NUMBER = @cspNumber2)
+order by
+  T2.END_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseCsePersonApplicantRecipientChild">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T2.NUMB,
+  T2.TYPE,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE,
+  T4.CSP_NUMBER,
+  T4.TYPE,
+  T4.CASE_ROLE_ID,
+  T4.START_DATE,
+  T4.END_DATE
+from
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T5 with(readuncommitted)
+  on
+    (T1.NUMB = T5.CAS_NUMBER) and
+    (T5.TYPE = 'AP') and
+    (T5.CSP_NUMBER = @cspNumber1)
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T1.NUMB = T4.CAS_NUMBER) and
+    (@cspNumber2 = T4.CSP_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.START_DATE &lt;= @startDate) and
+    (T4.END_DATE &gt;= @startDate)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AR') and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate)
+  on
+    T2.NUMB = T3.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonApplicantRecipient1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T2.TYPE = 'AR') and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T1.NUMB = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePersonApplicantRecipient2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T2.TYPE = 'AR') and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T1.NUMB = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePersonApplicantRecipient3">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T2.TYPE = 'AR') and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T1.NUMB = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT
+from
+  CKT_DEBT_DTL with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDisbCollection">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  OTY_ID,
+  OTR_TYPE_DISB,
+  OTR_ID,
+  CPA_TYPE_DISB,
+  CSP_NUMBER_DISB,
+  OBG_ID,
+  CRD_ID,
+  CRV_ID,
+  CST_ID,
+  CRT_ID,
+  COL_ID
+from
+  CKT_DISB_TRAN with(readuncommitted)
+where
+  (@colId = COL_ID) and
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumberDisb = CSP_NUMBER_DISB) and
+  (@cpaTypeDisb = CPA_TYPE_DISB) and
+  (@otrId = OTR_ID) and
+  (@otrTypeDisb = OTR_TYPE_DISB) and
+  (@crtId = CRT_ID) and
+  (@cstId = CST_ID) and
+  (@crvId = CRV_ID) and
+  (@crdId = CRD_ID)
+</value>
+   </data>
+   <data name="ReadDisbCollectionCsePerson">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.OTY_ID,
+  T1.OTR_TYPE_DISB,
+  T1.OTR_ID,
+  T1.CPA_TYPE_DISB,
+  T1.CSP_NUMBER_DISB,
+  T1.OBG_ID,
+  T1.CRD_ID,
+  T1.CRV_ID,
+  T1.CST_ID,
+  T1.CRT_ID,
+  T1.COL_ID,
+  T2.NUMB,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_DISB_TRAN T1 with(readuncommitted)
+  on
+    (@colId = T1.COL_ID) and
+    (@otyId = T1.OTY_ID) and
+    (@obgId = T1.OBG_ID) and
+    (@cspNumberDisb = T1.CSP_NUMBER_DISB) and
+    (@cpaTypeDisb = T1.CPA_TYPE_DISB) and
+    (@otrId = T1.OTR_ID) and
+    (@otrTypeDisb = T1.OTR_TYPE_DISB) and
+    (@crtId = T1.CRT_ID) and
+    (@cstId = T1.CST_ID) and
+    (@crvId = T1.CRV_ID) and
+    (@crdId = T1.CRD_ID) and
+    (T2.NUMB = T1.CSP_NUMBER)
+</value>
+   </data>
+</root>

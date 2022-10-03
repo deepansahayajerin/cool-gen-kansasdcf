@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePaParticipantAddress">
+      <value>
+insert into CKT_PA_PART_ADDR
+(
+  CREATED_TSTAMP,
+  TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  [STATE],
+  ZIP,
+  ZIP4,
+  ZIP3,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IDENTIFIER,
+  PRP_IDENTIFIER,
+  PAF_TYPE,
+  PRE_NUMBER,
+  PAF_TSTAMP
+)
+values
+(
+  @createdTstamp,
+  @type,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @zip,
+  @zip4,
+  @zip3,
+  @createdBy,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @identifier,
+  @prpIdentifier,
+  @pafType,
+  @preNumber,
+  @pafTstamp
+)
+</value>
+   </data>
+   <data name="ReadPaReferralParticipantPaReferral">
+      <value>
+select top(1)
+  IDENTIFIER,
+  PRE_NUMBER,
+  PAF_TYPE,
+  PAF_TSTAMP
+from
+  CKT_PA_REFER_PART
+where
+  (IDENTIFIER = @identifier) and
+  (PRE_NUMBER = @preNumber) and
+  (PAF_TYPE = @pafType) and
+  (PAF_TSTAMP = @pafTstamp)
+</value>
+   </data>
+</root>

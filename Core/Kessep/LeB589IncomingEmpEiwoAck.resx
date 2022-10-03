@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_IWO_ACTION T3
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T3.DOC_TRACKING_ID = @docTrackingId)
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T1.NUMB = T4.CSP_NUMBER) and
+    (T4.TYPE in ('AP', 'AR'))
+</value>
+   </data>
+   <data name="ReadCsePersonCase">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T3.CAS_NUMBER
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadEmployer1">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.EIN,
+  T1.NAME,
+  T1.PHONE_NO,
+  T1.AREA_CODE
+from
+  CKT_EMPLOYER T1
+  join
+  CKT_INCOME_SOURCE T2
+  on
+    (T1.EIN = @ein) and
+    (T1.IDENTIFIER = T2.EMP_ID)
+  join
+  CKT_IWO_TRANS T3
+  on
+    (T2.CSP_I_NUMBER = T3.CSP_I_NUMBER) and
+    (T2.IDENTIFIER = T3.ISR_IDENTIFIER)
+  join
+  CKT_IWO_ACTION T4
+  on
+    (T3.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T3.LGA_IDENTIFIER = T4.LGA_IDENTIFIER) and
+    (T3.IDENTIFIER = T4.IWT_IDENTIFIER) and
+    (T4.DOC_TRACKING_ID = @docTrackingId)
+</value>
+   </data>
+   <data name="ReadEmployer2">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.EIN,
+  T1.NAME,
+  T1.PHONE_NO,
+  T1.AREA_CODE
+from
+  CKT_EMPLOYER T1
+  join
+  CKT_INCOME_SOURCE T2
+  on
+    T1.IDENTIFIER = T2.EMP_ID
+  join
+  CKT_IWO_TRANS T3
+  on
+    (T2.CSP_I_NUMBER = T3.CSP_I_NUMBER) and
+    (T2.IDENTIFIER = T3.ISR_IDENTIFIER)
+  join
+  CKT_IWO_ACTION T4
+  on
+    (T3.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T3.LGA_IDENTIFIER = T4.LGA_IDENTIFIER) and
+    (T3.IDENTIFIER = T4.IWT_IDENTIFIER) and
+    (T4.DOC_TRACKING_ID = @docTrackingId)
+</value>
+   </data>
+   <data name="ReadFieldValue">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (INF_IDENTIFIER = @infIdentifier) and
+  (FLD_NAME = 'IDCSECASE')
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.TYPE,
+  T1.LAST_QTR_INCOME,
+  T1.LAST_QTR,
+  T1.LAST_QTR_YR,
+  T1.SECOND_QTR_INCOME,
+  T1.SECOND_QTR,
+  T1.SECOND_QTR_YR,
+  T1.THIRD_QTR_INCOME,
+  T1.THIRD_QTR,
+  T1.THIRD_QTR_YR,
+  T1.FOURTH_QTR_INCOME,
+  T1.FOURTH_QTR,
+  T1.FOURTH_QTR_YR,
+  T1.SENT_DT,
+  T1.RETURN_DT,
+  T1.RETURN_CD,
+  T1.NAME,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.CSP_I_NUMBER,
+  T1.EMP_ID,
+  T1.SEND_TO,
+  T1.WORKER_ID,
+  T1.START_DT,
+  T1.END_DT,
+  T1.NOTE
+from
+  CKT_INCOME_SOURCE T1
+  join
+  CKT_IWO_TRANS T2
+  on
+    (T1.CSP_I_NUMBER = T2.CSP_I_NUMBER) and
+    (T1.IDENTIFIER = T2.ISR_IDENTIFIER)
+  join
+  CKT_IWO_ACTION T3
+  on
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.LGA_IDENTIFIER = T3.LGA_IDENTIFIER) and
+    (T2.IDENTIFIER = T3.IWT_IDENTIFIER) and
+    (T3.DOC_TRACKING_ID = @docTrackingId)
+</value>
+   </data>
+   <data name="ReadIwoAction">
+      <value>
+select top(1)
+  IDENTIFIER,
+  ACTION_TYPE,
+  STATUS_CD,
+  DOC_TRACKING_ID,
+  FILE_CONTROL_ID,
+  BATCH_CONTROL_ID,
+  ERROR_RECORD_TYPE,
+  ERROR_FIELD_1,
+  ERROR_FIELD_2,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER,
+  INF_ID
+from
+  CKT_IWO_ACTION
+where
+  DOC_TRACKING_ID = @docTrackingId
+</value>
+   </data>
+   <data name="ReadIwoTransaction">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TRANSACTION_NUMBER,
+  CURRENT_STATUS,
+  STATUS_DATE,
+  LGA_IDENTIFIER,
+  CSP_NUMBER,
+  CSP_I_NUMBER,
+  ISR_IDENTIFIER
+from
+  CKT_IWO_TRANS
+where
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.TYPE,
+  T1.FILED_DT,
+  T1.INITIATING_STATE,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_IWO_ACTION T3
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T3.DOC_TRACKING_ID = @docTrackingId)
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select distinct top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.TYPE,
+  T1.FILED_DT,
+  T1.INITIATING_STATE,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.CLASSIFICATION &lt;&gt; 'N') and
+    (T1.CLASSIFICATION &lt;&gt; 'U') and
+    (T1.STANDARD_NO = @standardNo) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T4.TYPE = 'AP') and
+    (T4.START_DATE &lt;= @startDate) and
+    (T4.END_DATE &gt;= @startDate)
+  join
+  CKT_LA_PER_LA_CROL T6
+  on
+    (T2.LA_PERSON_ID = T6.LAP_ID) and
+    (T4.CAS_NUMBER = T6.CAS_NUM) and
+    (T2.CSP_NUMBER = T6.CSP_NUM)
+order by
+  T1.CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalAction3">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (@cspNumber = T2.CSP_NUMBER)
+order by
+  T1.STANDARD_NO desc
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSource">
+      <value>
+select
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  ISR_IDENTIFIER,
+  EFFECTIVE_DT,
+  WITHHOLDING_TYPE,
+  END_DT,
+  WAGE_OR_NON_WAGE,
+  ORDER_TYPE,
+  IDENTIFIER
+from
+  CKT_LEGAL_ACT_ISRC
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@isrIdentifier = ISR_IDENTIFIER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (END_DT = @endDt)
+</value>
+   </data>
+</root>

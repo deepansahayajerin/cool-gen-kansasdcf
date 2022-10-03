@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignment">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE with(readuncommitted)
+where
+  (@casNo = CAS_NO) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate)
+</value>
+   </data>
+   <data name="ReadCaseRoleCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.EMANCIPATION_DT,
+  T2.CSE_OPEN_DATE,
+  T2.PA_MEDICAL_SERVICE,
+  T2.INTERSTATE_CASE_ID
+from
+  CKT_CASE T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.END_DATE &gt;= @endDate) and
+    (T1.START_DATE &lt;= @endDate) and
+    (T1.TYPE in ('CH', 'AR'))
+</value>
+   </data>
+   <data name="ReadCollectionCsePerson1">
+      <value>
+select distinct
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.COL_ADJ_RSN_TXT
+from
+  CKT_OB_TRN T3 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (T3.OTY_TYPE = T1.OTY_ID) and
+    (T3.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T3.OB_TRN_ID = T1.OTR_ID) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T1.CRT_TYPE &lt;&gt; 2) and
+    (T1.CRT_TYPE &lt;&gt; 7) and
+    (
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.COLL_ADJ_DT &gt; @collAdjDt)
+      ) or
+      (T1.ADJ_IND = 'N')
+    ) and
+    (T1.CONCURRENT_IND = 'N') and
+    (T3.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T3.CSP_SUP_NUMBER) and
+    (T1.COLL_DT between cast(@date1 as date) and cast(@date2 as date)) and
+    (T1.CREATED_TMST &lt;= @createdTmst) and
+    (T1.APPLIED_TO_CD = 'C')
+</value>
+   </data>
+   <data name="ReadCollectionCsePerson2">
+      <value>
+select distinct
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.COL_ADJ_RSN_TXT
+from
+  CKT_OB_TRN T3 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (T3.OTY_TYPE = T1.OTY_ID) and
+    (T3.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T3.OB_TRN_ID = T1.OTR_ID) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T1.CRT_TYPE &lt;&gt; 2) and
+    (T1.CRT_TYPE &lt;&gt; 7) and
+    (
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.COLL_ADJ_DT &gt; @collAdjDt)
+      ) or
+      (T1.ADJ_IND = 'N')
+    ) and
+    (T1.CONCURRENT_IND = 'N') and
+    (T3.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T3.CSP_SUP_NUMBER) and
+    (T1.COLL_DT between cast(@date1 as date) and cast(@date2 as date)) and
+    (T1.CREATED_TMST &lt;= @createdTmst) and
+    (T1.APPLIED_TO_CD = 'C')
+</value>
+   </data>
+   <data name="ReadPersonProgramCsePerson1">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (PRG_GENERATED_ID in (2, 14)) and
+  (CSP_NUMBER &gt; @cspNumber) and
+  (CSP_NUMBER between cast(@suppPersonNumber1 as char(10)) and cast(@suppPersonNumber2 as char(10))) and
+  (DISCONTINUE_DATE between cast(@date1 as date) and cast(@date2 as date))
+order by
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadPersonProgramCsePerson2">
+      <value>
+select distinct
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T1.PRG_GENERATED_ID in (2, 14)) and
+    (T1.EFFECTIVE_DATE &lt;= T4.END_DATE) and
+    (T1.DISCONTINUE_DATE &gt;= T4.START_DATE) and
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T4.TYPE in ('CH', 'AR')) and
+    (@casNumber = T4.CAS_NUMBER) and
+    (T4.START_DATE &lt;= @effectiveDate) and
+    (T4.END_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+   <data name="ReadPersonProgramCsePersonCaseRole">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE,
+  T3.EMANCIPATION_DT
+from
+  CKT_PERSON_PROGRAM T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.CSP_NUMBER &lt; @cspNumber) and
+    (T1.PRG_GENERATED_ID in (2, 14)) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.TYPE in ('CH', 'AR')) and
+    (@casNumber = T3.CAS_NUMBER) and
+    (T3.START_DATE &lt;= @discontinueDate) and
+    (T3.END_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+</root>

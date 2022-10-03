@@ -1,0 +1,62 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCramMtnCashSrceAssignment"
+           program-name="SWECRAMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCramMtnCashSrceAssignment"
+           transaction="SR7H"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LST_CRUC_UNDSTRBTD_CL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCRUC"
+       to="FnCrucLstUndistrbtdCollectns"
+       send-command="DISPLAY">
+      <map from="Input" to="UserCashReceiptSourceType"/>
+      <map from="Search" to="UserServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASH_RECEIPT_SRC_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCRSL"
+       to="FnCrslLstCashRcptSources"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="CashReceiptSourceType"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <map from="Office.SystemGeneratedId" to="Office.SystemGeneratedId"/>
+      <return-map from="HiddenSelectionServiceProvider" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected1" to="Search"/>
+   </on>
+   <map from="Search" to="Search"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="Assgn.GcashReceiptSourceType" to="Assgn.CashReceiptSourceType"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Input" to="CashReceiptSourceType"/>
+   <map from="Assgn.GexportAction" to="Assgn.Action"/>
+   <map from="Assgn.GreceiptResearchAssignment"
+        to="Assgn.ReceiptResearchAssignment"/>
+   <map from="PromptSourceCode" to="PromptSourceCode"/>
+   <map from="HiddenCashReceiptSourceType" to="HiddenCashReceiptSourceType"/>
+   <map from="PromptServiceProvider" to="PromptServiceProvider"/>
+   <map from="Assgn.Detail.UserId" to="Assgn.Detail.UserId"/>
+   <map from="HiddenServiceProvider.UserId" to="HiddenServiceProvider.UserId"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

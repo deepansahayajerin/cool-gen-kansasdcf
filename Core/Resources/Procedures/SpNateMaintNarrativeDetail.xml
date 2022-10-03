@@ -1,0 +1,79 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpNateMaintNarrativeDetail"
+           program-name="SWENATEP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpNateMaintNarrativeDetail"
+           transaction="SR4A"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_EVLS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEVLS"
+       to="SpEvlsListEvents"
+       send-command="DISPLAY">
+      <map from="ToEvls" to="PassFilterEventType"/>
+      <return-map from="Selected" to="FromEvls"/>
+   </on>
+   <on exit-state="ECO_XFER_TO_CSLN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSLN"
+       to="SpCslnListNarrative"
+       send-command="RETNATE">
+      <map from="Processed.CaseNumber" to="HeaderInfrastructure.CaseNumber"/>
+      <map from="Filter.Date" to="HeaderStart.Date"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RHST"
+       to="SpHistHistory"
+       send-command="DISPLAY">
+      <map from="HeaderDateWorkArea" to="HeaderStartDate"/>
+      <map from="HeaderLegalAction" to="HeaderLegalAction"/>
+      <map from="HeaderInfrastructure" to="HeaderInfrastructure"/>
+      <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command="CLEAR"/>
+   <map from="Scroll" to="Scroll"/>
+   <map from="HeaderInfrastructure" to="HeaderInfrastructure"/>
+   <map from="HeaderDateWorkArea" to="HeaderDateWorkArea"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HeaderCsePersonsWorkSet" to="HeaderCsePersonsWorkSet"/>
+   <map from="HistLegalAction" to="HistLegalAction"/>
+   <map from="ErrOnAdabasUnavailable" to="ErrOnAdabasUnavailable"/>
+   <map from="AbendData" to="AbendData"/>
+   <map from="CallingProcedureNameAs" to="CallingProcedureNameAs"/>
+   <map from="HistCase" to="HistCase"/>
+   <map from="HistCsePerson" to="HistCsePerson"/>
+   <map from="Detail.DtlCommon" to="Detail.DtlCommon"/>
+   <map from="Detail.DtlNarrativeDetail" to="Detail.DtlNarrativeDetail"/>
+   <map from="HiddenKeys.HiddenKey" to="HiddenKeys.HiddenKey"/>
+   <map from="Processed" to="Processed"/>
+   <map from="Ar" to="Ar"/>
+   <map from="Ap" to="Ap"/>
+   <map from="ExternalEvent" to="ExternalEvent"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="FromEvls" to="FromEvls"/>
+   <map from="PrevHeaderNarrativeDetail" to="PrevHeaderNarrativeDetail"/>
+   <map from="PrevHeaderInfrastructure" to="PrevHeaderInfrastructure"/>
+   <map from="Page" to="Page"/>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="Filter" to="Filter"/>
+   <map from="PrevFilter" to="PrevFilter"/>
+   <map from="CpatFlow" to="CpatFlow"/>
+   <map from="HeaderServiceProvider.SystemGeneratedId"
+        to="HeaderServiceProvider.SystemGeneratedId"/>
+   <map from="HeaderServiceProvider.LastName"
+        to="HeaderServiceProvider.LastName"/>
+   <map from="HeaderServiceProvider.FirstName"
+        to="HeaderServiceProvider.FirstName"/>
+   <map from="HeaderServiceProvider.MiddleInitial"
+        to="HeaderServiceProvider.MiddleInitial"/>
+   <map from="HeaderLegalAction.CourtCaseNumber"
+        to="HeaderLegalAction.CourtCaseNumber"/>
+</procedure>

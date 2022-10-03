@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateAppeal">
+      <value>
+insert into CKT_APPEAL
+(
+  APPEAL_ID,
+  DOCKET_NO,
+  FILED_BY_FIRST,
+  FILED_BY_MI,
+  FILED_BY_LAST_NAME,
+  APPEAL_DT,
+  DOCKET_FILED_DT,
+  ATTORNEY_LAST_NM,
+  ATTORNEY_FIRST_NM,
+  ATTORNEY_MI,
+  ATTORNEY_SUFFIX,
+  APPELLANT_BRIEF_DT,
+  REPLY_BRIEF_DT,
+  ORAL_ARGUMENT_DT,
+  DECISION_DT,
+  FURTHER_APPEAL_IND,
+  EXT_REQ_GRANTED_DT,
+  DT_EXT_GRANTED,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  TRB_ID,
+  DECISION_RESULT
+)
+values
+(
+  @appealId,
+  @docketNo,
+  @filedByFirst,
+  @filedByMi,
+  @filedByLastName,
+  @appealDt,
+  @docketFiledDt,
+  @attorneyLastNm,
+  @attorneyFirstNm,
+  @attorneyMi,
+  @attorneySuffix,
+  @appellantBriefDt,
+  @replyBriefDt,
+  @oralArgumentDt,
+  @decisionDt,
+  @furtherAppealInd,
+  @extReqGrantedDt,
+  @dtExtGranted,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  @trbId,
+  @decisionResult
+)
+</value>
+   </data>
+   <data name="CreateLegalActionAppeal">
+      <value>
+insert into CKT_LEG_ACT_APPEAL
+(
+  LA_APPEAL_ID,
+  APL_ID,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TMST
+)
+values
+(
+  @laAppealId,
+  @aplId,
+  @lgaId,
+  @createdBy,
+  @createdTmst
+)
+</value>
+   </data>
+   <data name="ReadAppeal">
+      <value>
+select distinct top(1)
+  T1.APPEAL_ID,
+  T1.DOCKET_NO,
+  T1.FILED_BY_FIRST,
+  T1.FILED_BY_MI,
+  T1.FILED_BY_LAST_NAME,
+  T1.APPEAL_DT,
+  T1.DOCKET_FILED_DT,
+  T1.ATTORNEY_LAST_NM,
+  T1.ATTORNEY_FIRST_NM,
+  T1.ATTORNEY_MI,
+  T1.ATTORNEY_SUFFIX,
+  T1.APPELLANT_BRIEF_DT,
+  T1.REPLY_BRIEF_DT,
+  T1.ORAL_ARGUMENT_DT,
+  T1.DECISION_DT,
+  T1.FURTHER_APPEAL_IND,
+  T1.EXT_REQ_GRANTED_DT,
+  T1.DT_EXT_GRANTED,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.DECISION_RESULT
+from
+  CKT_APPEAL T1
+  join
+  CKT_LEG_ACT_APPEAL T2
+  on
+    (T1.APPEAL_ID = T2.APL_ID) and
+    (@lgaId = T2.LGA_ID) and
+    (T1.DOCKET_NO = @docketNo) and
+    (T1.APPEAL_DT = @appealDt) and
+    (T1.APPELLANT_BRIEF_DT = @appellantBriefDt) and
+    (T1.ATTORNEY_FIRST_NM = @attorneyFirstNm) and
+    (T1.ATTORNEY_LAST_NM = @attorneyLastNm) and
+    (T1.ATTORNEY_MI = @attorneyMi) and
+    (T1.ATTORNEY_SUFFIX = @attorneySuffix) and
+    (T1.DT_EXT_GRANTED = @dtExtGranted) and
+    (T1.DECISION_DT = @decisionDt) and
+    (T1.DECISION_RESULT = @decisionResult) and
+    (T1.DOCKET_NO = @docketNo) and
+    (T1.DOCKET_FILED_DT = @docketFiledDt) and
+    (T1.EXT_REQ_GRANTED_DT = @extReqGrantedDt) and
+    (T1.FILED_BY_FIRST = @filedByFirst) and
+    (T1.FILED_BY_LAST_NAME = @filedByLastName) and
+    (T1.FILED_BY_MI = @filedByMi) and
+    (T1.FURTHER_APPEAL_IND = @furtherAppealInd) and
+    (T1.ORAL_ARGUMENT_DT = @oralArgumentDt) and
+    (T1.REPLY_BRIEF_DT = @replyBriefDt)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  TRIBUNAL_NM,
+  JUDICIAL_DISTRICT,
+  IDENTIFIER
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

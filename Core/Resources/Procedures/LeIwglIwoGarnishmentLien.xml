@@ -1,0 +1,133 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeIwglIwoGarnishmentLien"
+           program-name="SWEIWGLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeIwglIwoGarnishmentLien"
+           transaction="SR9C"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACN"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="Fips.StateAbbreviation" to="SearchFips.StateAbbreviation"/>
+      <map from="Fips.CountyAbbreviation" to="SearchFips.CountyAbbreviation"/>
+      <map from="Fips.CountyDescription" to="SearchFips.CountyDescription"/>
+      <map from="LegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.Classification" to="SearchLegalAction.Classification"/>
+      <map from="LegalAction.ForeignOrderNumber"
+           to="SearchLegalAction.ForeignOrderNumber"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity"/>
+      <return-map from="DlgflwSelected" to="LegalAction"/>
+      <return-map from="HiddenSecurity" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Required" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS1"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedTribunal" to="DlgflwSelectedTribunal"/>
+      <return-map from="DlgflwSelectedFips" to="DlgflwSelectedFips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_INCL_INC_SOURCE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETINCL"
+       to="SiInclIncomeSourceList"
+       send-command="DISPLAY">
+      <map from="DlgflwLinkResl" to="FromMenu"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Selected1.Identifier" to="IncomeSource.Identifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_RESL_RESOURCE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETRESL"
+       to="OeReslPersonResourceList"
+       send-command="DISPLAY">
+      <map from="DlgflwLinkResl.Number" to="StartingCsePerson.Number"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Selected.ResourceNo" to="CsePersonResource.ResourceNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_LGL_ACT_BY_CP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLAPS"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Selected.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="Selected.Classification" to="LegalAction.Classification"/>
+      <return-map from="Selected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="PRINTRET"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="Document" to="FilterDocument"/>
+      <map from="Document" to="StartName"/>
+      <return-map from="ReturnDoc.Name" to="Document.Name"/>
+   </on>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="IwglType" to="IwglType"/>
+   <map from="LegalActionPersonResource" to="LegalActionPersonResource"/>
+   <map from="PromptLienType" to="PromptLienType"/>
+   <map from="HiddenLegalAction" to="HiddenLegalAction"/>
+   <map from="PromptLienResourceDesc" to="PromptLienResourceDesc"/>
+   <map from="HiddenIncomeSource" to="HiddenIncomeSource"/>
+   <map from="HiddenLien" to="HiddenLien"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HiddenPrevCsePersonsWorkSet" to="HiddenPrevCsePersonsWorkSet"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="HiddenPrevLegalActionPersonResource"
+        to="HiddenPrevLegalActionPersonResource"/>
+   <map from="HiddenPrevLegalActionIncomeSource"
+        to="HiddenPrevLegalActionIncomeSource"/>
+   <map from="LegalActionIncomeSource" to="LegalActionIncomeSource"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="PromptIwoType" to="PromptIwoType"/>
+   <map from="IncomeSource" to="IncomeSource"/>
+   <map from="PromptIncomeSource" to="PromptIncomeSource"/>
+   <map from="HiddenFips" to="HiddenFips"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   <map from="HiddenSecurity.HiddenSecurityCommand"
+        to="HiddenSecurity.HiddenSecurityCommand"/>
+   <map from="HiddenSecurity.HiddenSecurityProfileAuthorization"
+        to="HiddenSecurity.HiddenSecurityProfileAuthorization"/>
+   <map from="SsnWorkArea" to="SsnWorkArea"/>
+   <map from="Document" to="Document"/>
+   <map from="Fips" to="Fips"/>
+   <map from="PromptTribuType" to="PromptTribuType"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="Foreign" to="Foreign"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="CsePersonResource.ResourceDescription"
+        to="CsePersonResource.ResourceDescription"/>
+   <map from="CsePersonResource.ResourceNo" to="CsePersonResource.ResourceNo"/>
+   <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

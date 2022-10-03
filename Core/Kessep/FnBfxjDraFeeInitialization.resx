@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonCsePersonAccountObligationType">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  cast(@cspNumber as char(10)),
+  cast(@cpaType as char(1)),
+  cast(@dtyGeneratedId as smallint)
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  (TYPE = 'C') and
+  (NUMB = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionCsePerson">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.PROCESS_DATE,
+  T1.DBT_GENERATED_ID,
+  T1.REFERENCE_NUMBER,
+  T2.NUMB,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_DISB_TRAN T1 with(readuncommitted)
+  on
+    (T2.TYPE = 'C') and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.CPA_TYPE = 'E') and
+    (T1.TYPE = 'D') and
+    (T1.PROCESS_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+    (T1.DBT_GENERATED_ID is not null) and
+    (T1.DBT_GENERATED_ID &lt;&gt; 73) and
+    (
+      (T1.PROCESS_DATE &gt; @processDate) or
+      (
+        (T1.PROCESS_DATE = @processDate) and
+        (T2.NUMB &gt; @numb)
+      ) or
+      (
+        (T1.PROCESS_DATE = @processDate) and
+        (T2.NUMB = @numb) and
+        (T1.REFERENCE_NUMBER &gt; @referenceNumber)
+      )
+    )
+order by
+  T1.PROCESS_DATE,
+  T2.NUMB,
+  T1.REFERENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  CREATED_TMST
+from
+  CKT_OBLIGATION with(readuncommitted)
+where
+  (CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+  (DTY_GENERATED_ID between 4 and 9) and
+  (CREATED_TMST &gt; @createdTmst)
+order by
+  CREATED_TMST
+</value>
+   </data>
+</root>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonCaseRoleCase1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.FAMILY_VIOL_IND,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.CLOSURE_REASON,
+  T3.STATUS,
+  T3.STATUS_DATE,
+  T3.CSE_OPEN_DATE,
+  T3.OFFICE_IDENTIFIER,
+  T3.LAST_UPDATED_TMST,
+  T3.LAST_UPDATED_BY,
+  T3.CLOSURE_LETR_DATE,
+  T3.NOTE
+from
+  CKT_CASE T3
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.END_DATE &lt;= @endDate)
+  on
+    T3.NUMB = T2.CAS_NUMBER
+order by
+  T2.END_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRoleCase2">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.FAMILY_VIOL_IND,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.CLOSURE_REASON,
+  T3.STATUS,
+  T3.STATUS_DATE,
+  T3.CSE_OPEN_DATE,
+  T3.OFFICE_IDENTIFIER,
+  T3.LAST_UPDATED_TMST,
+  T3.LAST_UPDATED_BY,
+  T3.CLOSURE_LETR_DATE,
+  T3.NOTE
+from
+  CKT_CASE T3
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  on
+    T3.NUMB = T2.CAS_NUMBER
+</value>
+   </data>
+</root>

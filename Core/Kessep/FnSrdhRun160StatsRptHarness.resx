@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadStatsReport1">
+      <value>
+select
+  YEAR_MONTH,
+  FIRST_RUN_NUMBER,
+  LINE_NUMBER,
+  CREATED_TIMESTAMP,
+  SERVICE_PRVDR_ID,
+  OFFICE_ID,
+  CASE_WRK_ROLE,
+  CASE_EFF_DATE,
+  PARENT_ID,
+  CHIEF_ID,
+  COLUMN1,
+  COLUMN2,
+  COLUMN3,
+  COLUMN4,
+  COLUMN5,
+  COLUMN6,
+  COLUMN7,
+  COLUMN8,
+  COLUMN9,
+  COLUMN10,
+  COLUMN11,
+  COLUMN12,
+  COLUMN13,
+  COLUMN14,
+  COLUMN15
+from
+  CKT_STATS_REPORT with(readuncommitted)
+where
+  (YEAR_MONTH = @yearMonth) and
+  (SERVICE_PRVDR_ID = @servicePrvdrId) and
+  (FIRST_RUN_NUMBER = @firstRunNumber)
+order by
+  LINE_NUMBER
+</value>
+   </data>
+   <data name="ReadStatsReport2">
+      <value>
+select
+  LINE_NUMBER,
+  sum(COLUMN8),
+  sum(COLUMN9),
+  sum(COLUMN10),
+  sum(COLUMN11),
+  sum(COLUMN12),
+  sum(COLUMN13),
+  sum(COLUMN1),
+  sum(COLUMN2),
+  sum(COLUMN3),
+  sum(COLUMN4),
+  sum(COLUMN5),
+  sum(COLUMN6),
+  sum(COLUMN7)
+from
+  CKT_STATS_REPORT with(readuncommitted)
+where
+  (YEAR_MONTH = @yearMonth) and
+  (OFFICE_ID = @officeId) and
+  (PARENT_ID between cast(@parentId1 as integer) and cast(@parentId2 as integer)) and
+  (FIRST_RUN_NUMBER = @firstRunNumber)
+group by
+  LINE_NUMBER
+</value>
+   </data>
+   <data name="ReadStatsReport3">
+      <value>
+select
+  LINE_NUMBER,
+  sum(COLUMN8),
+  sum(COLUMN9),
+  sum(COLUMN10),
+  sum(COLUMN11),
+  sum(COLUMN12),
+  sum(COLUMN13),
+  sum(COLUMN1),
+  sum(COLUMN2),
+  sum(COLUMN3),
+  sum(COLUMN4),
+  sum(COLUMN5),
+  sum(COLUMN6),
+  sum(COLUMN7)
+from
+  CKT_STATS_REPORT with(readuncommitted)
+where
+  (YEAR_MONTH = @yearMonth) and
+  (PARENT_ID = @parentId) and
+  (FIRST_RUN_NUMBER = @firstRunNumber)
+group by
+  LINE_NUMBER
+</value>
+   </data>
+   <data name="ReadStatsReport4">
+      <value>
+select
+  LINE_NUMBER,
+  sum(COLUMN8),
+  sum(COLUMN9),
+  sum(COLUMN10),
+  sum(COLUMN11),
+  sum(COLUMN12),
+  sum(COLUMN13),
+  sum(COLUMN1),
+  sum(COLUMN2),
+  sum(COLUMN3),
+  sum(COLUMN4),
+  sum(COLUMN5),
+  sum(COLUMN6),
+  sum(COLUMN7)
+from
+  CKT_STATS_REPORT with(readuncommitted)
+where
+  (YEAR_MONTH = @yearMonth) and
+  (FIRST_RUN_NUMBER = @firstRunNumber)
+group by
+  LINE_NUMBER
+</value>
+   </data>
+</root>

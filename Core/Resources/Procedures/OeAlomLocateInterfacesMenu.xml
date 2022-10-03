@@ -1,0 +1,77 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeAlomLocateInterfacesMenu"
+           program-name="SWEALOMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeAlomLocateInterfacesMenu"
+           transaction="SROZ"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeOblmObligationEstbMenu"
+       send-command="XXFMMENU">
+      <map from="PersonName" to="PersonNameH"/>
+      <map from="Starting" to="CurrentHCsePerson"/>
+      <map from="Start" to="CurrentHCase"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_FPLS"
+       action="transfer"
+       to="OeFplsProcessFpls"
+       send-command="XXFMMENU">
+      <map from="Start" to="StartingCase"/>
+      <map from="Starting" to="StartingCsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_TEN9"
+       action="transfer"
+       to="Oe1099Details"
+       send-command="XXFMMENU">
+      <map from="Start" to="StartingCase"/>
+      <map from="PersonName.FormattedName"
+           to="StartingCsePersonsWorkSet.FormattedName"/>
+      <map from="Starting" to="StartingCsePerson"/>
+   </on>
+   <on exit-state="ECO_LINK_MENU_PROACTIVE_MATCH"
+       action="transfer"
+       to="OeFcrpProactiveMatchResponse"
+       send-command="XXFMMENU">
+      <map from="Starting" to="StartingCsePerson"/>
+      <map from="Start" to="StartingCase"/>
+   </on>
+   <on exit-state="OE_FLOW_TO_FIDL"
+       action="transfer"
+       to="OeFidlFinancialInstDataList"
+       send-command="DISPLAY">
+      <map from="Starting" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LOCA"
+       action="transfer"
+       to="OeLocaLocateInterfaceResp"
+       send-command="FROMMENU">
+      <map from="Starting.Number" to="CsePerson.Number"/>
+      <map from="Start" to="Starting"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LOCL"
+       action="transfer"
+       to="OeLoclLocateInterfaceList"
+       send-command="XXFMMENU">
+      <map from="Starting" to="CsePerson"/>
+   </on>
+   <on exit-state="OE_XFR_TO_FCRV"
+       action="transfer"
+       to="OeFcrvFcrCaseView"
+       send-command="DISPLAY">
+      <map from="Start" to="Pass"/>
+   </on>
+   <on exit-state="OE_XFR_TO_CALS"
+       action="transfer"
+       to="OeCalsFcrCaseList"
+       send-command="DISPLAY">
+      <map from="Start" to="Pass"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Current" to="Current"/>
+   <map from="Starting" to="Starting"/>
+   <map from="PersonName" to="PersonName"/>
+   <map from="Start" to="Start"/>
+   <map from="Hidden" to="Hidden"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

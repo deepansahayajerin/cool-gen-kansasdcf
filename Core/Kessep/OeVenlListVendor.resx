@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadVendorVendorAddress1">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.NAME,
+  T1.NUMB,
+  T1.SERVICE_TYPE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRY_DATE,
+  T2.CITY,
+  T2.[STATE]
+from
+  CKT_VENDOR T1
+  join
+  CKT_VENDOR_ADDR T2
+  on
+    (T1.IDENTIFIER = T2.VEN_IDENTIFIER) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.EXPIRY_DATE &gt;= @effectiveDate) and
+    (T2.CITY &gt;= @city) and
+    (T2.[STATE] = @state)
+order by
+  T2.CITY,
+  T1.NAME
+</value>
+   </data>
+   <data name="ReadVendorVendorAddress2">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.NAME,
+  T1.NUMB,
+  T1.SERVICE_TYPE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRY_DATE,
+  T2.CITY,
+  T2.[STATE]
+from
+  CKT_VENDOR T1
+  join
+  CKT_VENDOR_ADDR T2
+  on
+    (T1.IDENTIFIER = T2.VEN_IDENTIFIER) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.EXPIRY_DATE &gt;= @effectiveDate) and
+    (T2.CITY &gt;= @city)
+order by
+  T2.CITY,
+  T2.[STATE],
+  T1.NAME
+</value>
+   </data>
+   <data name="ReadVendorVendorAddress3">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.NAME,
+  T1.NUMB,
+  T1.SERVICE_TYPE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRY_DATE,
+  T2.CITY,
+  T2.[STATE]
+from
+  CKT_VENDOR T1
+  join
+  CKT_VENDOR_ADDR T2
+  on
+    (T1.NAME &gt;= @name) and
+    (T1.IDENTIFIER = T2.VEN_IDENTIFIER) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.EXPIRY_DATE &gt;= @effectiveDate)
+order by
+  T1.NAME,
+  T2.[STATE]
+</value>
+   </data>
+   <data name="ReadVendorVendorAddress4">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.NAME,
+  T1.NUMB,
+  T1.SERVICE_TYPE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRY_DATE,
+  T2.CITY,
+  T2.[STATE]
+from
+  CKT_VENDOR T1
+  join
+  CKT_VENDOR_ADDR T2
+  on
+    (T1.IDENTIFIER = T2.VEN_IDENTIFIER) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.EXPIRY_DATE &gt;= @effectiveDate) and
+    (T2.[STATE] = @state)
+order by
+  T2.[STATE],
+  T1.NAME
+</value>
+   </data>
+</root>

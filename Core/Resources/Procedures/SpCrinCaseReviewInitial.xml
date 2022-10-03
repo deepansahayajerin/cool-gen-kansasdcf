@@ -1,0 +1,122 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCrinCaseReviewInitial"
+           program-name="SWECRINP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCrinCaseReviewInitial"
+           transaction="SR4F"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_NATE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SpNateMaintNarrativeDetail"
+       send-command="DISPLAY">
+      <map from="ModOrPer" to="HeaderInfrastructure"/>
+      <map from="Ap1.FormattedName" to="HeaderCsePersonsWorkSet.FormattedName"/>
+      <map from="Ap1.Number" to="HeaderCsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected" to="Ap1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpCrmeCaseReviewMenu"
+       send-command-type="none">
+      <map from="Hidden" to="Hidden"/>
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_CASE_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCadsCaseDetails"
+       send-command="DISPLAY">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CR_LOCATE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SpCrloCaseReviewLocate"
+       send-command="DISPLAY">
+      <map from="ClosedCaseIndicator" to="CaseClosedIndicator"/>
+      <map from="Hidden" to="Hidden"/>
+      <map from="HiddenReviewType" to="HiddenPassedReviewType"/>
+      <map from="HiddenOrigAndPass" to="HiddenPassed1"/>
+      <map from="Case1" to="Case1"/>
+      <map from="PassReviewNote.GexportHiddenPassedFlag"
+           to="HiddenPassed.GimportHiddenPassed"/>
+      <map from="PassReviewNote.GexportHidden" to="HiddenPassed.GimportH"/>
+      <map from="Ap1" to="Ap1"/>
+      <map from="MultiAp" to="MultiAp"/>
+      <map from="ApSelected" to="ApSelected"/>
+      <map from="SelectedAp" to="SelectedAp"/>
+      <return-map from="HiddenPassedReviewType" to="HiddenReviewType"/>
+      <return-map from="HiddenPassed1.SystemGeneratedIdentifier"
+                  to="HiddenOrigAndPass.SystemGeneratedIdentifier"/>
+      <return-map from="HiddenPassed.GexportHiddenPassed"
+                  to="PassReviewNotes.GimportHiddenPassedFlag"/>
+      <return-map from="HiddenPassed.GexportH.Text"
+                  to="PassReviewNotes.GimportHidden.Text"/>
+      <return-map from="Ap1" to="Ap1"/>
+      <return-map from="MultiAp.Flag" to="MultiAp.Flag"/>
+      <return-map from="ApSelected" to="ApSelected"/>
+      <return-map from="SelectedApCsePersonsWorkSet" to="SelectedAp"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PEPR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiPeprPersonProgramMaint"
+       send-command="DISPLAY">
+      <map from="Case1" to="Next"/>
+   </on>
+   <map from="LastRvwResultedInMod" to="LastRvwResultedInMod"/>
+   <map from="Export2" to="Import2"/>
+   <map from="Ar" to="Ar"/>
+   <map from="Export2LastReview" to="Import2LastReview"/>
+   <map from="LastReview" to="LastReview"/>
+   <map from="ModOrPer" to="ModOrPer"/>
+   <map from="HiddenExportModified.HiddenPassedFlag"
+        to="HiddenImportModified.HiddenPassedFlag"/>
+   <map from="Flag" to="Flag"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="HiddenReviewType" to="HiddenReviewType"/>
+   <map from="HiddenOrigAndPass" to="HiddenOrigAndPass"/>
+   <map from="Case1" to="Case1"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CaseCoordinator" to="CaseCoordinator"/>
+   <map from="Case2" to="Case2"/>
+   <map from="Ap1" to="Ap1"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Pgm1" to="Pgm1"/>
+   <map from="Pgm2" to="Pgm2"/>
+   <map from="Pgm3" to="Pgm3"/>
+   <map from="Pgm4" to="Pgm4"/>
+   <map from="Pgm5" to="Pgm5"/>
+   <map from="Pgm6" to="Pgm6"/>
+   <map from="Pgm7" to="Pgm7"/>
+   <map from="Pgm8" to="Pgm8"/>
+   <map from="FunctionDesc" to="FunctionDesc"/>
+   <map from="MoreApsMsg" to="MoreApsMsg"/>
+   <map from="ClosedCaseIndicator" to="ClosedCaseIndicator"/>
+   <map from="PasForUpdt.GexportH" to="PasForUpdt.GimportH"/>
+   <map from="Program.Program1" to="Program.Program1"/>
+   <map from="CommandPassedFromEnfor" to="CommandPassedFromEnfor"/>
+   <map from="MultiAp" to="MultiAp"/>
+   <map from="PassReviewNote.GexportHiddenPassedFlag"
+        to="PassReviewNotes.GimportHiddenPassedFlag"/>
+   <map from="ApSelected" to="ApSelected"/>
+   <map from="SelectedAp" to="SelectedAp"/>
+   <map from="DisplayReviewNote.G" to="DisplayReviewNote.G"/>
+   <map from="HiddenExportModified.ModifiedNarrative"
+        to="HiddenImportModified.ModifiedNarrative"/>
+   <map from="PassReviewNote.GexportHidden" to="PassReviewNotes.GimportHidden"/>
+</procedure>

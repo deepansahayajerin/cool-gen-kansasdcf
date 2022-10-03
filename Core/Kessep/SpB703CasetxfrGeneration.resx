@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateRequest">
+      <value>
+select
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND = 'N') and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.OFF_OFFICE
+from
+  CKT_OFFICE T1
+  join
+  CKT_ASSIGN_CASE T3
+  on
+    (T1.OFFICE_ID = T3.OFF_ID) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (@casNo = T3.CAS_NO)
+</value>
+   </data>
+   <data name="ReadOfficeCsePersonCase">
+      <value>
+select distinct
+  T1.OFFICE_ID,
+  T1.OFF_OFFICE,
+  T2.NUMB,
+  T2.TYPE,
+  T2.DATE_OF_DEATH,
+  T3.NUMB,
+  T3.STATUS
+from
+  CKT_OFFICE T1
+  join
+  CKT_CASE T3
+  join
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T2.TYPE = 'C') and
+    (T2.NUMB = T4.CSP_NUMBER) and
+    (T4.TYPE = 'AR') and
+    (T4.START_DATE &lt;= @startDate) and
+    (T4.END_DATE &gt; @startDate)
+  on
+    (T3.NUMB = T4.CAS_NUMBER) and
+    (T3.STATUS = 'O')
+  join
+  CKT_ASSIGN_CASE T5
+  on
+    (T3.NUMB = T5.CAS_NO) and
+    (T5.EFFECTIVE_DATE &gt; @effectiveDate) and
+    (T5.EFFECTIVE_DATE &lt;= @startDate) and
+    (T5.DISCONTINUE_DATE &gt;= @startDate)
+  on
+    (T1.OFFICE_ID = T5.OFF_ID) and
+    (
+      (T1.OFFICE_ID &gt; @officeId) or
+      (
+        (T1.OFFICE_ID = @officeId) and
+        (T2.NUMB &gt; @numb)
+      )
+    )
+order by
+  T1.OFFICE_ID,
+  T2.NUMB
+</value>
+   </data>
+</root>

@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteLocateRequest">
+      <value>
+delete from CKT_LOC_REQUEST
+where
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (AGENCY_NUMBER = @agencyNumber) and
+  (SEQUENCE_NUMBER = @sequenceNumber)
+</value>
+   </data>
+   <data name="ReadCaseCaseRole">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (TYPE in ('AP', 'AR')) and
+  (END_DATE &gt;= @endDate) and
+  (START_DATE &lt;= @endDate) and
+  (CAS_NUMBER &gt; cast(@restartInfo as char(250)))
+order by
+  CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadCodeCodeValue">
+      <value>
+select top(1)
+  T1.COD_ID,
+  T1.CODE_NAME,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE,
+  T1.DISPLAY_TITLE,
+  T2.COV_ID,
+  T2.CDVALUE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRATION_DATE,
+  T2.DESCRIPTION
+from
+  CKT_CODE T1
+  join
+  CKT_CODE_VALUE T2
+  on
+    (T1.COD_ID = T2.COD_ID) and
+    (T1.CODE_NAME = 'LICENSING AGENCIES TIMEFRAMES') and
+    (substring(T2.CDVALUE, 7, 4) = cast(@text4 as char(4)))
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDebtDebtDetail">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CREATED_BY,
+  T1.DEBT_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.DUE_DT,
+  T2.BAL_DUE_AMT,
+  T2.INT_BAL_DUE_AMT,
+  T2.ADC_DT,
+  T2.RETIRED_DT,
+  T2.CVRD_PRD_START_DT,
+  T2.CVD_PRD_END_DT,
+  T2.PRECNVRSN_PGM_CD
+from
+  CKT_OB_TRN T1
+  join
+  CKT_DEBT_DTL T2
+  on
+    (T1.OTY_TYPE = T2.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T1.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (@otyType = T1.OTY_TYPE) and
+    (@obgGeneratedId = T1.OBG_GENERATED_ID) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (@cpaType = T1.CPA_TYPE) and
+    (T2.RETIRED_DT = @retiredDt)
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  END_DATE,
+  START_DATE
+from
+  CKT_INCARCERATION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadLocateRequest1">
+      <value>
+select top(1)
+  CSE_PERSON_NUMBER,
+  REQUEST_DATE,
+  RESPONSE_DATE,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER
+from
+  CKT_LOC_REQUEST
+where
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (AGENCY_NUMBER = @agencyNumber) and
+  (SEQUENCE_NUMBER = @sequenceNumber)
+</value>
+   </data>
+   <data name="ReadLocateRequest2">
+      <value>
+select distinct
+  CSE_PERSON_NUMBER,
+  REQUEST_DATE,
+  RESPONSE_DATE,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER
+from
+  CKT_LOC_REQUEST with(readcommitted)
+where
+  CSE_PERSON_NUMBER = @csePersonNumber
+order by
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  PRIM_SEC_CD,
+  ORD_TYP_CD
+from
+  CKT_OBLIGATION
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+</root>

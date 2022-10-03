@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateObligationAssignment">
+      <value>
+insert into CKT_ASSGN_OBG
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  OTY_ID,
+  CPA_TYPE,
+  CSP_NO,
+  OBG_ID
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @otyId,
+  @cpaType,
+  @cspNo,
+  @obgId
+)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode)
+</value>
+   </data>
+</root>

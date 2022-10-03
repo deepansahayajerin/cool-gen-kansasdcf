@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadTribunalFips">
+      <value>
+select top(1)
+  T1.JUDICIAL_DIVISION,
+  T1.TRIBUNAL_NM,
+  T1.FIP_LOCATION,
+  T1.JUDICIAL_DISTRICT,
+  T1.IDENTIFIER,
+  T1.FIP_COUNTY,
+  T1.FIP_STATE,
+  T2.COUNTY_DESC,
+  T2.STATE_ABBREVIATION,
+  T2.COUNTY_ABBR
+from
+  CKT_FIPS T2
+  join
+  CKT_TRIBUNAL T1
+  on
+    (T1.IDENTIFIER = @identifier) and
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE) and
+    (T2.STATE_ABBREVIATION = @stateAbbreviation) and
+    (T2.COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadTribunalFipsTribAddress">
+      <value>
+select top(1)
+  T1.JUDICIAL_DIVISION,
+  T1.TRIBUNAL_NM,
+  T1.FIP_LOCATION,
+  T1.JUDICIAL_DISTRICT,
+  T1.IDENTIFIER,
+  T1.FIP_COUNTY,
+  T1.FIP_STATE,
+  T2.IDENTIFIER,
+  T2.COUNTRY
+from
+  CKT_TRIBUNAL T1
+  join
+  CKT_FIPS_TRIB_ADDR T2
+  on
+    (T1.IDENTIFIER = @identifier1) and
+    (T1.IDENTIFIER = @identifier2) and
+    (T1.IDENTIFIER = T2.TRB_ID)
+</value>
+   </data>
+</root>

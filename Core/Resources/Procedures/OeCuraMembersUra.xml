@@ -1,0 +1,115 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeCuraMembersUra"
+           program-name="SWEURAMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeCuraMembersUra"
+           transaction="SR5P"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_NAME"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="SearchCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_TO_URAH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUrahHouseholdUra"
+       send-command="DISPLAY">
+      <map from="DialogFlowImHousehold" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_UCOL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUcolListUraCollections"
+       send-command="DISPLAY">
+      <map from="DialogFlowImHousehold" to="SearchImHousehold"/>
+      <map from="DialogFlowCsePersonsWorkSet.Number"
+           to="SearchMemberCsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UHMM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUhmmUraHouseholdMbrMaint"
+       send-command="DISPLAY">
+      <map from="DialogFlowImHousehold.AeCaseNo" to="ImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IMHH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeImhhListHhInfo"
+       send-command="DISPLAY">
+      <map from="DialogFlowCsePersonsWorkSet.Number"
+           to="SearchCriteria.SearchCsePersonsWorkSet.Number"/>
+      <map from="DialogFlowImHousehold.AeCaseNo"
+           to="SearchCriteria.SearchImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUraaUraAdjustment"
+       send-command="DISPLAY">
+      <map from="DialogFlowImHousehold" to="ImHousehold"/>
+      <map from="DialogFlowCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="DialogFlowDateWorkArea" to="ForAdjustments"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUracUraByCourtOrder"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_TO_URAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUralListUraAdj"
+       send-command="DISPLAY">
+      <map from="DialogFlowCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="DialogFlowImHousehold" to="ImHousehold"/>
+   </on>
+   <map from="NextTran" to="NextTran"/>
+   <map from="TotGrp" to="TotGrp"/>
+   <map from="TotGrpAfFcColl" to="TotGrpAfFcColl"/>
+   <map from="TotGrpMedicalColl" to="TotGrpMedicalColl"/>
+   <map from="TotGrpAfFc" to="TotGrpAfFc"/>
+   <map from="TotGrpMedical" to="TotGrpMedical"/>
+   <map from="TotGrpAfFcOwed" to="TotGrpAfFcOwed"/>
+   <map from="TotGrpMedicalOwed" to="TotGrpMedicalOwed"/>
+   <map from="Search" to="SearchCsePersonsWorkSet"/>
+   <map from="Detail.DtlCommon" to="Detail.DtlCommon"/>
+   <map from="Detail.DtlDateWorkAttributes" to="Detail.DtlDateWorkAttributes"/>
+   <map from="Detail.DtlGrpLabel1" to="Detail.DtlGrpLabel1"/>
+   <map from="Detail.DtlGrpLabel2" to="Detail.DtlGrpLabel2"/>
+   <map from="Detail.DtlImHouseholdMbrMnthlySum"
+        to="Detail.DtlImHouseholdMbrMnthlySum"/>
+   <map from="Detail.DtlGrpAfFcColl" to="Detail.DtlGrpAfFcColl"/>
+   <map from="Detail.DtlGrpMedicalColl" to="Detail.DtlGrpMedicalColl"/>
+   <map from="Detail.DtlGrpAfFc" to="Detail.DtlGrpAfFc"/>
+   <map from="Detail.DtlGrpMedical" to="Detail.DtlGrpMedical"/>
+   <map from="Detail.DtlImHousehold" to="Detail.DtlImHousehold"/>
+   <map from="Zzzzzzzzzzzzzzzzzzzzzzzzzz"
+        to="ZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzCsePersonsWorkSet"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="SearchFrom.TextMonthYear" to="SearchFrom.TextMonthYear"/>
+   <map from="SearchTo.TextMonthYear" to="SearchTo.TextMonthYear"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

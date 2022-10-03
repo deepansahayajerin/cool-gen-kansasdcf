@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCashReceipt">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.OBLGOR_SSN,
+  T1.OBLGOR_FIRST_NM,
+  T1.OBLGOR_LAST_NM,
+  T1.OBLGOR_MID_NM,
+  T2.RECEIPT_AMOUNT,
+  T2.CASH_RECEIPT_ID,
+  T2.RECEIPT_DATE,
+  T2.RECEIVED_DATE,
+  T2.NOTE
+from
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T1.CRV_IDENTIFIER = @crvIdentifier) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T1.CRT_IDENTIFIER = @crtIdentifier) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType1">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  (CR_SRCE_TYPE_ID = @crSrceTypeId) and
+  (CODE = @code)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType2">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  (CR_SRCE_TYPE_ID = @crSrceTypeId) and
+  (CODE = @code)
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  CLASSIFICATION,
+  NUMBER,
+  TYPE,
+  RCT_R_TSTAMP,
+  PRQ_R_GENERATED_ID,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST
+where
+  @rctRTstamp = RCT_R_TSTAMP
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistoryPaymentStatus">
+      <value>
+select top(1)
+  T1.PST_GENERATED_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.PYMNT_STAT_HIST_ID,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.CODE
+from
+  CKT_PAYMENT_STATUS T2
+  join
+  CKT_PMNT_STAT_HIST T1
+  on
+    (@prqGeneratedId = T1.PRQ_GENERATED_ID) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.PAYMENT_STATUS_ID = T1.PST_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadReceiptRefund">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (REQUEST_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+  (
+    (cast(@payeeName1 as char(60)) = ' ') or
+    (PAYEE_NAME like cast(@payeeName2 as char(60)))
+  ) and
+  (REASON_CODE &lt;&gt; 'ADVANCE')
+order by
+  REQUEST_DATE desc,
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadReceiptRefundCashReceiptDetailCashReceipt">
+      <value>
+select
+  T1.CREATED_TIMESTAMP,
+  T1.REASON_CODE,
+  T1.TAXID,
+  T1.PAYEE_NAME,
+  T1.AMOUNT,
+  T1.OFFSET_TAX_YEAR,
+  T1.REQUEST_DATE,
+  T1.CREATED_BY,
+  T1.CSP_NUMBER,
+  T1.CST_A_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T2.OBLGOR_SSN,
+  T2.OBLGOR_FIRST_NM,
+  T2.OBLGOR_LAST_NM,
+  T2.OBLGOR_MID_NM,
+  T3.RECEIPT_AMOUNT,
+  T3.CASH_RECEIPT_ID,
+  T3.RECEIPT_DATE,
+  T3.RECEIVED_DATE,
+  T3.NOTE
+from
+  CKT_CASH_RECEIPT T3
+  join
+  CKT_CR_DETAIL T2
+  join
+  CKT_RECEIPT_REFUND T1
+  on
+    (T1.REQUEST_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+    (
+      (cast(@payeeName1 as char(60)) = ' ') or
+      (T1.PAYEE_NAME like cast(@payeeName2 as char(60)))
+    ) and
+    (T1.REASON_CODE &lt;&gt; 'ADVANCE') and
+    (T2.CRD_ID = T1.CRD_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER)
+  on
+    (T3.CRT_IDENTIFIER = T2.CRT_IDENTIFIER) and
+    (T3.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T3.CRV_IDENTIFIER = T2.CRV_IDENTIFIER) and
+    (T3.CASH_RECEIPT_ID &gt;= @cashReceiptId)
+order by
+  T3.CASH_RECEIPT_ID,
+  T1.CRD_IDENTIFIER,
+  T1.REQUEST_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadReceiptRefundCsePerson">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (REQUEST_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+  (
+    (cast(@payeeName1 as char(60)) = ' ') or
+    (PAYEE_NAME like cast(@payeeName2 as char(60)))
+  ) and
+  (REASON_CODE &lt;&gt; 'ADVANCE') and
+  (CSP_NUMBER = @cspNumber)
+order by
+  REQUEST_DATE desc,
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadReceiptRefundCsePersonCashReceiptCashReceiptDetail">
+      <value>
+select
+  T1.CREATED_TIMESTAMP,
+  T1.REASON_CODE,
+  T1.TAXID,
+  T1.PAYEE_NAME,
+  T1.AMOUNT,
+  T1.OFFSET_TAX_YEAR,
+  T1.REQUEST_DATE,
+  T1.CREATED_BY,
+  T1.CSP_NUMBER,
+  T1.CST_A_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T3.CRV_IDENTIFIER,
+  T3.CST_IDENTIFIER,
+  T3.CRT_IDENTIFIER,
+  T3.RECEIPT_AMOUNT,
+  T3.CASH_RECEIPT_ID,
+  T3.RECEIPT_DATE,
+  T3.RECEIVED_DATE,
+  T3.NOTE,
+  T4.OBLGOR_SSN,
+  T4.OBLGOR_FIRST_NM,
+  T4.OBLGOR_LAST_NM,
+  T4.OBLGOR_MID_NM
+from
+  CKT_CASH_RECEIPT T3
+  join
+  CKT_CR_DETAIL T4
+  join
+  CKT_RECEIPT_REFUND T1
+  on
+    (T1.REQUEST_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+    (
+      (cast(@payeeName1 as char(60)) = ' ') or
+      (T1.PAYEE_NAME like cast(@payeeName2 as char(60)))
+    ) and
+    (T1.REASON_CODE &lt;&gt; 'ADVANCE') and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T4.CRD_ID = T1.CRD_IDENTIFIER) and
+    (T4.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T4.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T4.CRT_IDENTIFIER = T1.CRT_IDENTIFIER)
+  on
+    (T3.CRT_IDENTIFIER = T4.CRT_IDENTIFIER) and
+    (T3.CST_IDENTIFIER = T4.CST_IDENTIFIER) and
+    (T3.CRV_IDENTIFIER = T4.CRV_IDENTIFIER) and
+    (T3.CASH_RECEIPT_ID &gt;= @cashReceiptId)
+order by
+  T3.CASH_RECEIPT_ID,
+  T1.CRD_IDENTIFIER,
+  T1.REQUEST_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadReceiptRefundCsePersonPaymentRequest">
+      <value>
+select
+  T1.CREATED_TIMESTAMP,
+  T1.REASON_CODE,
+  T1.TAXID,
+  T1.PAYEE_NAME,
+  T1.AMOUNT,
+  T1.OFFSET_TAX_YEAR,
+  T1.REQUEST_DATE,
+  T1.CREATED_BY,
+  T1.CSP_NUMBER,
+  T1.CST_A_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T3.PAYMENT_REQUEST_ID,
+  T3.CLASSIFICATION,
+  T3.NUMBER,
+  T3.TYPE,
+  T3.PRQ_R_GENERATED_ID,
+  T3.RECOUPMENT_IND_KPC
+from
+  CKT_RECEIPT_REFUND T1
+  join
+  CKT_PMNT_REQUEST T3
+  on
+    (T1.REQUEST_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+    (
+      (cast(@payeeName1 as char(60)) = ' ') or
+      (T1.PAYEE_NAME like cast(@payeeName2 as char(60)))
+    ) and
+    (T1.REASON_CODE &lt;&gt; 'ADVANCE') and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T3.NUMBER &gt;= @number) and
+    (T1.CREATED_TIMESTAMP = T3.RCT_R_TSTAMP)
+order by
+  T3.NUMBER,
+  T1.REQUEST_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadReceiptRefundPaymentRequest">
+      <value>
+select
+  T1.CREATED_TIMESTAMP,
+  T1.REASON_CODE,
+  T1.TAXID,
+  T1.PAYEE_NAME,
+  T1.AMOUNT,
+  T1.OFFSET_TAX_YEAR,
+  T1.REQUEST_DATE,
+  T1.CREATED_BY,
+  T1.CSP_NUMBER,
+  T1.CST_A_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T2.PAYMENT_REQUEST_ID,
+  T2.CLASSIFICATION,
+  T2.NUMBER,
+  T2.TYPE,
+  T2.PRQ_R_GENERATED_ID,
+  T2.RECOUPMENT_IND_KPC
+from
+  CKT_RECEIPT_REFUND T1
+  join
+  CKT_PMNT_REQUEST T2
+  on
+    (T1.REQUEST_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+    (
+      (cast(@payeeName1 as char(60)) = ' ') or
+      (T1.PAYEE_NAME like cast(@payeeName2 as char(60)))
+    ) and
+    (T1.REASON_CODE &lt;&gt; 'ADVANCE') and
+    (T1.CREATED_TIMESTAMP = T2.RCT_R_TSTAMP) and
+    (T2.NUMBER &gt;= @number)
+order by
+  T2.NUMBER,
+  T1.REQUEST_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,80 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiIattInterstateReqAttach"
+           program-name="SWEIATTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiIattInterstateReqAttach"
+           transaction="SRBR"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_IREQ"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIreqInterstateReqHistory"
+       send-command="DISPLAY">
+      <map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+      <map from="Next" to="NextCase"/>
+      <map from="AutoFlow" to="AutoFlow"/>
+      <return-map from="SelectedFips.StateAbbreviation" to="OtherState.StateAbbreviation"/>
+      <return-map from="NextCase" to="Next"/>
+      <return-map from="InterstateRequest.KsCaseInd" to="InterstateRequest.KsCaseInd"/>
+      <return-map from="ApCsePersonsWorkSet" to="Ap"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="InterstateReqAttachment" to="Code"/>
+      <map from="HiddenReturnMultRecs" to="HiddenReturnMultRecs"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+      <return-map from="DlgflwMultSelectn.DetailMultSelectn"
+                  to="DlgflwMultSelectn.DetailMultSelect"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Next" to="Case1"/>
+      <return-map from="ArCsePersonsWorkSet" to="Ar"/>
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiItsmInterstateMenu"
+       send-command="XXFMMENU">
+      <map from="ApCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="DisplayOnly" to="Case1"/>
+      <map from="Next" to="Next"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="IattStatePrompt" to="IattStatePrompt"/>
+   <map from="HiddenPf15Pressed" to="HiddenPf15Pressed"/>
+   <map from="HiddenPf16Pressed" to="HiddenPf16Pressed"/>
+   <map from="HiddenCase" to="HiddenCase"/>
+   <map from="OtherState" to="OtherState"/>
+   <map from="Next" to="Next"/>
+   <map from="ApCsePersonsWorkSet" to="Ap"/>
+   <map from="Ar" to="Ar"/>
+   <map from="State" to="State"/>
+   <map from="Export1.Select" to="Import1.Select"/>
+   <map from="Export1.Details" to="Import1.Details"/>
+   <map from="PromptAttachment" to="PromptAttachment"/>
+   <map from="PromptPerson" to="PromptPerson"/>
+   <map from="OspOffice" to="OspOffice"/>
+   <map from="OspServiceProvider" to="OspServiceProvider"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="DisplayOnly.Number" to="DisplayOnly.Number"/>
+   <map from="InterstateRequest.OtherStateCaseId"
+        to="InterstateRequest.OtherStateCaseId"/>
+   <map from="InterstateRequest.CaseType" to="InterstateRequest.CaseType"/>
+   <map from="InterstateRequest.KsCaseInd" to="InterstateRequest.KsCaseInd"/>
+   <map from="InterstateRequest.IntHGeneratedId"
+        to="InterstateRequest.IntHGeneratedId"/>
+   <map from="InterstateRequest.OtherStateFips"
+        to="InterstateRequest.OtherStateFips"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

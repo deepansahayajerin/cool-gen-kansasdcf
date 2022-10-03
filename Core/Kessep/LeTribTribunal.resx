@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  (FIP_STATE = @fipState) and
+  (FIP_COUNTY = @fipCounty) and
+  (FIP_LOCATION = @fipLocation)
+</value>
+   </data>
+</root>

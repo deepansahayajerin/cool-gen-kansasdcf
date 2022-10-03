@@ -1,0 +1,261 @@
+﻿<!--Name: LE_CRIT_ADMIN_ACT_CRITERIA, ID: 372615485, model: 746-->
+<div coolContent coolName="LE_CRIT_ADMIN_ACT_CRITERIA" coolType="SCREEN"
+  (coolInit)="scrollSize = 30; pageSize = 3">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 21.25%; top: 0; width: 53.75%; height: 4%;" coolCol="18"
+     coolRow="1" coolLength="43">CSE - Administrative Action Criteria - CRIT</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_8"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 8.75%; top: 4%; width: 5%; height: 4%;" coolCol="8"
+     coolRow="2" coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 12%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="4" coolLength="4">Type</div>
+   <input type="text" coolType="field" name="field_4_8"
+     [(ngModel)]="in.administrativeAction.type1"
+     [coolVideo]="out.administrativeAction.screenField?.type1" coolAutotab
+     coolFocus coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="4" style="left: 8.75%; top: 12%; width: 5%; height: 4%;"
+     coolCol="8" coolRow="4" coolLength="4">
+   <input type="text" coolType="field" name="field_4_13"
+     [(ngModel)]="in.listAdminActions.promptField"
+     [coolVideo]="out.listAdminActions.screenField?.promptField" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1" style="left: 15%; top: 12%; width: 1.25%; height: 4%;"
+     coolCol="13" coolRow="4" coolLength="1">
+   
+   <div coolType="field" coolColor="green" coolUpper
+     style="left: 17.5%; top: 12%; width: 37.5%; height: 4%;" coolCol="15"
+     coolRow="4" coolLength="30">{{in.administrativeAction.description}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 16%; width: 23.75%; height: 4%;" coolCol="2"
+     coolRow="5" coolLength="19">Starting Identifier</div>
+   <input type="text" coolType="field" name="field_5_23"
+     [(ngModel)]="in.starting.identifier"
+     [coolVideo]="out.starting.screenField?.identifier" coolAutotab
+     coolAlign="right" coolColor="green" coolHighlight="underscore"
+     coolNumber="00;#" coolBlankWhenZero [attr.maxlength]="2"
+     style="left: 27.5%; top: 16%; width: 2.5%; height: 4%;" coolCol="23"
+     coolRow="5" coolLength="2">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 20%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="6" coolLength="3">Sel</div>
+   <input type="text" coolType="field" name="field_6_7"
+     [(ngModel)]="ref(in.import1, pageOffset, 'detailCommon.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_6_7 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 20%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="6" coolLength="1" [hidden]="pageOffset >= 30">
+   
+   <div coolType="prompt" style="left: 15%; top: 20%; width: 10%; height: 4%;"
+     coolCol="13" coolRow="6" coolLength="8">Criteria</div>
+   <input type="text" coolType="field" name="field_6_23"
+     [(ngModel)]="ref(in.import1, pageOffset, 'detailAdministrativeActionCriteria.identifier').value"
+     [coolVideo]="out.export1?.[pageOffset]?.detailAdministrativeActionCriteria.screenField?.identifier"
+     coolAutotab #field_6_23 coolReadonly coolAlign="right" coolColor="green"
+     coolNumber="00;#" coolBlankWhenZero [attr.maxlength]="2"
+     style="left: 27.5%; top: 20%; width: 2.5%; height: 4%;" coolCol="23"
+     coolRow="6" coolLength="2" [hidden]="pageOffset >= 30">
+   
+   <div coolType="prompt"
+     style="left: 36.25%; top: 20%; width: 17.5%; height: 4%;" coolCol="30"
+     coolRow="6" coolLength="14" coolColor="white">Effective Date</div>
+   <input type="text" coolType="field" name="field_6_46"
+     [(ngModel)]="ref(in.import1, pageOffset, 'detailAdministrativeActionCriteria.effectiveDate').value"
+     [coolVideo]="out.export1?.[pageOffset]?.detailAdministrativeActionCriteria.screenField?.effectiveDate"
+     coolAutotab #field_6_46 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 56.25%; top: 20%; width: 10%; height: 4%;" coolCol="46"
+     coolRow="6" coolLength="8" [hidden]="pageOffset >= 30">
+   
+   <div coolType="prompt" style="left: 72.5%; top: 20%; width: 10%; height: 4%;"
+     coolCol="59" coolRow="6" coolLength="8" coolColor="white">End Date</div>
+   <input type="text" coolType="field" name="field_6_69"
+     [(ngModel)]="ref(in.import1, pageOffset, 'detailAdministrativeActionCriteria.endDate').value"
+     [coolVideo]="out.export1?.[pageOffset]?.detailAdministrativeActionCriteria.screenField?.endDate"
+     coolAutotab #field_6_69 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 85%; top: 20%; width: 10%; height: 4%;" coolCol="69"
+     coolRow="6" coolLength="8" [hidden]="pageOffset >= 30">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 24%; width: 13.75%; height: 4%;" coolCol="2"
+     coolRow="7" coolLength="11">Description</div>
+   <textarea coolType="field" name="field_7_15"
+     [(ngModel)]="ref(in.import1, pageOffset, 'detailAdministrativeActionCriteria.description').value"
+     [coolVideo]="out.export1?.[pageOffset]?.detailAdministrativeActionCriteria.screenField?.description"
+     coolAutotab #field_7_15 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="240"
+     style="left: 17.5%; top: 24%; width: 82.5%; height: 12%;" coolCol="15"
+     coolRow="7" coolLength="66" coolHeight="3" [hidden]="pageOffset >= 30"></textarea>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 40%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="11" coolLength="3">Sel</div>
+   <input type="text" coolType="field" name="field_11_7"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'detailCommon.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_11_7 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 1 >= 30">
+   
+   <div coolType="prompt" style="left: 15%; top: 40%; width: 10%; height: 4%;"
+     coolCol="13" coolRow="11" coolLength="8">Criteria</div>
+   <input type="text" coolType="field" name="field_11_23"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'detailAdministrativeActionCriteria.identifier').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.detailAdministrativeActionCriteria.screenField?.identifier"
+     coolAutotab #field_11_23 coolReadonly coolAlign="right" coolColor="green"
+     coolNumber="00;#" coolBlankWhenZero [attr.maxlength]="2"
+     style="left: 27.5%; top: 40%; width: 2.5%; height: 4%;" coolCol="23"
+     coolRow="11" coolLength="2" [hidden]="pageOffset + 1 >= 30">
+   
+   <div coolType="prompt"
+     style="left: 36.25%; top: 40%; width: 17.5%; height: 4%;" coolCol="30"
+     coolRow="11" coolLength="14">Effective Date</div>
+   <input type="text" coolType="field" name="field_11_46"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'detailAdministrativeActionCriteria.effectiveDate').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.detailAdministrativeActionCriteria.screenField?.effectiveDate"
+     coolAutotab #field_11_46 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 56.25%; top: 40%; width: 10%; height: 4%;" coolCol="46"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 1 >= 30">
+   
+   <div coolType="prompt" style="left: 72.5%; top: 40%; width: 10%; height: 4%;"
+     coolCol="59" coolRow="11" coolLength="8">End Date</div>
+   <input type="text" coolType="field" name="field_11_69"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'detailAdministrativeActionCriteria.endDate').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.detailAdministrativeActionCriteria.screenField?.endDate"
+     coolAutotab #field_11_69 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 85%; top: 40%; width: 10%; height: 4%;" coolCol="69"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 1 >= 30">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 44%; width: 13.75%; height: 4%;" coolCol="2"
+     coolRow="12" coolLength="11">Description</div>
+   <textarea coolType="field" name="field_12_15"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'detailAdministrativeActionCriteria.description').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.detailAdministrativeActionCriteria.screenField?.description"
+     coolAutotab #field_12_15 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="240"
+     style="left: 17.5%; top: 44%; width: 82.5%; height: 12%;" coolCol="15"
+     coolRow="12" coolLength="66" coolHeight="3" [hidden]="pageOffset + 1 >= 30"></textarea>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 60%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="16" coolLength="3">Sel</div>
+   <input type="text" coolType="field" name="field_16_7"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'detailCommon.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_16_7 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 2 >= 30">
+   
+   <div coolType="prompt" style="left: 15%; top: 60%; width: 10%; height: 4%;"
+     coolCol="13" coolRow="16" coolLength="8">Criteria</div>
+   <input type="text" coolType="field" name="field_16_23"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'detailAdministrativeActionCriteria.identifier').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.detailAdministrativeActionCriteria.screenField?.identifier"
+     coolAutotab #field_16_23 coolReadonly coolAlign="right" coolColor="green"
+     coolNumber="00;#" coolBlankWhenZero [attr.maxlength]="2"
+     style="left: 27.5%; top: 60%; width: 2.5%; height: 4%;" coolCol="23"
+     coolRow="16" coolLength="2" [hidden]="pageOffset + 2 >= 30">
+   
+   <div coolType="prompt"
+     style="left: 36.25%; top: 60%; width: 17.5%; height: 4%;" coolCol="30"
+     coolRow="16" coolLength="14">Effective Date</div>
+   <input type="text" coolType="field" name="field_16_46"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'detailAdministrativeActionCriteria.effectiveDate').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.detailAdministrativeActionCriteria.screenField?.effectiveDate"
+     coolAutotab #field_16_46 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 56.25%; top: 60%; width: 10%; height: 4%;" coolCol="46"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 2 >= 30">
+   
+   <div coolType="prompt" style="left: 72.5%; top: 60%; width: 10%; height: 4%;"
+     coolCol="59" coolRow="16" coolLength="8">End Date</div>
+   <input type="text" coolType="field" name="field_16_69"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'detailAdministrativeActionCriteria.endDate').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.detailAdministrativeActionCriteria.screenField?.endDate"
+     coolAutotab #field_16_69 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 85%; top: 60%; width: 10%; height: 4%;" coolCol="69"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 2 >= 30">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 64%; width: 13.75%; height: 4%;" coolCol="2"
+     coolRow="17" coolLength="11">Description</div>
+   <textarea coolType="field" name="field_17_15"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'detailAdministrativeActionCriteria.description').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.detailAdministrativeActionCriteria.screenField?.description"
+     coolAutotab #field_17_15 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="240"
+     style="left: 17.5%; top: 64%; width: 82.5%; height: 12%;" coolCol="15"
+     coolRow="17" coolLength="66" coolHeight="3" [hidden]="pageOffset + 2 >= 30"></textarea>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 98.75%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="79">PF KEY:1 Help 2 Disp  3 Exit  4 List  5 Add  6 Update  7 Prev  8 Next  9 Return</div>
+   
+   <div coolType="literal" style="left: 7.5%; top: 92%; width: 50%; height: 4%;"
+     coolCol="7" coolRow="24" coolLength="40">10 Delete  11 Clear  12 SignOff  15 AACT</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="CREATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=CREATE</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="AACT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=AACT</a>
+   </div>

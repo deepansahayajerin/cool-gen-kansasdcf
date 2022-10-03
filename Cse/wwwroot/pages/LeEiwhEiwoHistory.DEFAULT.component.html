@@ -1,0 +1,353 @@
+﻿<!--Name: LE_EIWH_EIWO_HISTORY, ID: 1902506114, model: 746-->
+<div coolContent coolName="LE_EIWH_EIWO_HISTORY" coolType="SCREEN"
+  (coolInit)="scrollSize = 96; pageSize = 12">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 27.5%; top: 0; width: 46.25%; height: 4%;" coolCol="23"
+     coolRow="1" coolLength="37">CSE - EIWO TRANSACTION HISTORY - EIWH</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 12%; width: 10%; height: 4%;"
+     coolCol="2" coolRow="4" coolLength="8">Person #</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 13.75%; top: 12%; width: 12.5%; height: 4%;" coolCol="12"
+     coolRow="4" coolLength="10">{{in.csePersonsWorkSet.number}}</div>
+   
+   <div coolType="prompt"
+     style="left: 30%; top: 12%; width: 13.75%; height: 4%;" coolCol="25"
+     coolRow="4" coolLength="11">Standard No</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 45%; top: 12%; width: 25%; height: 4%;" coolCol="37"
+     coolRow="4" coolLength="20">{{in.legalAction.standardNumber}}</div>
+   
+   <div coolType="prompt" style="left: 72.5%; top: 12%; width: 15%; height: 4%;"
+     coolCol="59" coolRow="4" coolLength="12">Action Taken</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 88.75%; top: 12%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="4" coolLength="8">{{in.legalAction.actionTaken}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 16%; width: 16.25%; height: 4%;" coolCol="2"
+     coolRow="5" coolLength="13">Transaction #</div>
+   <input type="text" coolType="field" name="field_5_16"
+     [(ngModel)]="in.iwoTransaction.transactionNumber"
+     [coolVideo]="out.iwoTransaction.screenField?.transactionNumber" coolAutotab
+     coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="12"
+     style="left: 18.75%; top: 16%; width: 15%; height: 4%;" coolCol="16"
+     coolRow="5" coolLength="12">
+   
+   <div coolType="prompt"
+     style="left: 36.25%; top: 16%; width: 16.25%; height: 4%;" coolCol="30"
+     coolRow="5" coolLength="13">Income Source</div>
+   <input type="text" coolType="field" name="field_5_44"
+     [(ngModel)]="in.incomeSource.name"
+     [coolVideo]="out.incomeSource.screenField?.name" coolAutotab coolReadonly
+     coolColor="cyan" coolUpper [attr.maxlength]="36"
+     style="left: 53.75%; top: 16%; width: 45%; height: 4%;" coolCol="44"
+     coolRow="5" coolLength="36">
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 24%; width: 12.5%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="10">Tracking #</div>
+   
+   <div coolType="literal"
+     style="left: 20%; top: 24%; width: 22.5%; height: 4%;" coolCol="17"
+     coolRow="7" coolLength="18">e-IWO Event Detail</div>
+   
+   <div coolType="literal"
+     style="left: 78.75%; top: 24%; width: 7.5%; height: 4%;" coolCol="64"
+     coolRow="7" coolLength="6">Worker</div>
+   
+   <div coolType="literal"
+     style="left: 91.25%; top: 24%; width: 5%; height: 4%;" coolCol="74"
+     coolRow="7" coolLength="4">Date</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 28%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="12" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 28%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="8" coolLength="45" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 28%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="8" coolLength="8" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 28%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="8" coolLength="8" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 32%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="12" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 32%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="9" coolLength="45" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 32%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 32%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 36%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="10" coolLength="12"
+     [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 36%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="10" coolLength="45"
+     [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 36%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 36%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 40%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="12"
+     [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 40%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="11" coolLength="45"
+     [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 40%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 40%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 44%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="12" coolLength="12"
+     [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 44%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="12" coolLength="45"
+     [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 44%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 44%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 48%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="12"
+     [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 48%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="13" coolLength="45"
+     [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 48%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 48%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 52%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="12"
+     [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 52%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="14" coolLength="45"
+     [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 52%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 52%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 56%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="12"
+     [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 56%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="15" coolLength="45"
+     [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 56%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 56%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 60%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="16" coolLength="12"
+     [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 60%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="16" coolLength="45"
+     [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 60%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 60%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 64%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="12"
+     [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 64%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="17" coolLength="45"
+     [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 64%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 64%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 68%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="18" coolLength="12"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 68%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="18" coolLength="45"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 68%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="18" coolLength="8"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 68%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="18" coolLength="8"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 2.5%; top: 72%; width: 15%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="12"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.giwoAction.documentTrackingIdentifier}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 72%; width: 56.25%; height: 4%;" coolCol="17"
+     coolRow="19" coolLength="45"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.gworkArea.text50}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 77.5%; top: 72%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="19" coolLength="8"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.giwoActionHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 88.75%; top: 72%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="19" coolLength="8"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.giwoActionHistory.actionDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="20" coolLength="9"
+     style="left: 86.25%; top: 76%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 80%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="21" coolLength="4">Note</div>
+   <input type="text" coolType="field" name="field_21_7"
+     [(ngModel)]="in.iwoTransaction.note"
+     [coolVideo]="out.iwoTransaction.screenField?.note" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="73"
+     style="left: 7.5%; top: 80%; width: 91.25%; height: 4%;" coolCol="7"
+     coolRow="21" coolLength="73">
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 95%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="76">PF KEY:  1 Help   2 Display   3 Exit   6 Update   7 Prev   8 Next   9 Return</div>
+   
+   <div coolType="literal"
+     style="left: 6.25%; top: 92%; width: 67.5%; height: 4%;" coolCol="6"
+     coolRow="24" coolLength="54">   11 Clear 12 Signoff  15 Resubmit  16 Clear Severity</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="RESUBMIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=RESUBMIT</a>
+   <a coolType="action" coolCommand="CLEARSEV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=CLEARSEV</a>
+   </div>

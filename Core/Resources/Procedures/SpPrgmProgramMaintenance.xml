@@ -1,0 +1,58 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpPrgmProgramMaintenance"
+           program-name="SWEPRGMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpPrgmProgramMaintenance"
+           transaction="SR3I"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_PROGRAM_IND_HISTORY"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPFRH"
+       to="SpPfrhProgramIndHistory"
+       send-command="DISPLAY">
+      <map from="HiddenSelection" to="Program"/>
+   </on>
+   <map from="Search" to="Search"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.Program" to="Import1.Program"/>
+   <map from="Export1.ProgramIndicator" to="Import1.ProgramIndicator"/>
+   <map from="Export1.ListProgramType" to="Import1.ListProgramType"/>
+   <map from="Export1.ListCsRetentionCd" to="Import1.ListCsRetentionCd"/>
+   <map from="Export1.HiddenProgramIndicator"
+        to="Import1.HiddenProgramIndicator"/>
+   <map from="HiddenFromOfca" to="HiddenFromOfca"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   <map from="HiddenSecurity.HiddenSecurityCommand"
+        to="HiddenSecurity.HiddenSecurityCommand"/>
+   <map from="HiddenSecurity.HiddenSecurityProfileAuthorization"
+        to="HiddenSecurity.HiddenSecurityProfileAuthorization"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.HiddenProgram.SystemGeneratedIdentifier"
+        to="Import1.HiddenProgram.SystemGeneratedIdentifier"/>
+   <map from="Export1.HiddenProgram.Code" to="Import1.HiddenProgram.Code"/>
+   <map from="Export1.HiddenProgram.Title" to="Import1.HiddenProgram.Title"/>
+   <map from="Export1.HiddenProgram.DistributionProgramType"
+        to="Import1.HiddenProgram.DistributionProgramType"/>
+   <map from="Export1.HiddenProgram.DiscontinueDate"
+        to="Import1.HiddenProgram.DiscontinueDate"/>
+   <map from="Export1.HiddenProgram.EffectiveDate"
+        to="Import1.HiddenProgram.EffectiveDate"/>
+   <map from="Export1.HiddenProgram.InterstateIndicator"
+        to="Import1.HiddenProgram.InterstateIndicator"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

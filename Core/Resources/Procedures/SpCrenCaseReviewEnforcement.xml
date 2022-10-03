@@ -1,0 +1,222 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCrenCaseReviewEnforcement"
+           program-name="SWECRENP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCrenCaseReviewEnforcement"
+           transaction="SR4K"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_INCL_INC_SOURCE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiInclIncomeSourceList"
+       send-command="DISPLAY">
+      <map from="PassSelectedAp.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="PassSelectedAp.Number" to="CsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OCTO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnOctoLstObligByCourtOrder"
+       send-command="DISPLAY">
+      <map from="SelectOcto.StandardNumber" to="Search.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_DBT_ACT_BY_APPYR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnDebtLstDbtActvtyByApPyr"
+       send-command="DISPLAY">
+      <map from="SelectedApToDebt.Number" to="SearchCsePerson.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_OBLO_ADM_ACTS_BY_OBLIGOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="LeObloAdminActionsByObligor"
+       send-command="DISPLAY">
+      <map from="PassSelectedAp.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="PassSelectedAp.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WORKSHEET"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeWorkCsWorksheetPage1"
+       send-command="DISPLAY">
+      <map from="FromCren" to="FromCren"/>
+      <map from="PassSelectedAp.FormattedName" to="ParentBName.FormattedName"/>
+      <map from="PassSelectedAp.Number" to="ParentBName.Number"/>
+      <map from="PassSelectedAp.FormattedName" to="SelectedFromComp.FormattedName"/>
+      <map from="PassSelectedAp.Number" to="SelectedFromComp.Number"/>
+      <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SelectedLegalAction.CourtCaseNumber"/>
+      <map from="Ar.FormattedName" to="ParentAName.FormattedName"/>
+      <map from="Ar.Number" to="ParentAName.Number"/>
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LEGAL_REQUEST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeLgrqLegalRequest"
+       send-command="DISPLAY">
+      <map from="PassSelectedAp" to="ApCsePersonsWorkSet"/>
+      <map from="Ar" to="ArCsePersonsWorkSet"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden.LegalActionIdentifier"
+           to="HiddenNextTranInfo.LegalActionIdentifier"/>
+      <map from="Hidden.CourtCaseNumber" to="HiddenNextTranInfo.CourtCaseNumber"/>
+      <map from="Hidden.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+      <map from="Hidden.CsePersonNumber" to="HiddenNextTranInfo.CsePersonNumber"/>
+      <map from="Hidden.CsePersonNumberAp"
+           to="HiddenNextTranInfo.CsePersonNumberAp"/>
+      <map from="Hidden.CsePersonNumberObligee"
+           to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+      <map from="Hidden.CsePersonNumberObligor"
+           to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+      <map from="Hidden.CourtOrderNumber" to="HiddenNextTranInfo.CourtOrderNumber"/>
+      <map from="Hidden.ObligationId" to="HiddenNextTranInfo.ObligationId"/>
+      <map from="Hidden.StandardCrtOrdNumber"
+           to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+      <map from="Hidden.InfrastructureId" to="HiddenNextTranInfo.InfrastructureId"/>
+      <map from="Hidden.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+      <map from="Hidden.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+      <map from="Hidden.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+      <map from="Hidden.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+      <map from="Hidden.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+      <map from="Hidden.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       action="transfer"
+       to="SpCrmeCaseReviewMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CR_INITIAL"
+       action="transfer"
+       to="SpCrinCaseReviewInitial"
+       send-command="DISPLAY">
+      <map from="ModOrderInd" to="CrenModOrderInd"/>
+      <map from="Flag" to="Flag"/>
+      <map from="CaseClosedIndicator" to="ClosedCaseIndicator"/>
+      <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+      <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+      <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+      <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+      <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+      <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+      <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+      <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+      <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+      <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+      <map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+      <map from="Hidden.MiscText1" to="Hidden.MiscText1"/>
+      <map from="Hidden.MiscText2" to="Hidden.MiscText2"/>
+      <map from="Hidden.MiscNum1" to="Hidden.MiscNum1"/>
+      <map from="Hidden.MiscNum2" to="Hidden.MiscNum2"/>
+      <map from="Hidden.MiscNum1V2" to="Hidden.MiscNum1V2"/>
+      <map from="Hidden.MiscNum2V2" to="Hidden.MiscNum2V2"/>
+      <map from="HiddenPassedReviewType" to="HiddenReviewType"/>
+      <map from="HiddenPassInfra.SystemGeneratedIdentifier"
+           to="HiddenOrigAndPass.SystemGeneratedIdentifier"/>
+      <map from="HidnPassNarrative.GexportHiddenPassedFlag"
+           to="PassReviewNotes.GimportHiddenPassedFlag"/>
+      <map from="HidnPassNarrative.GexportH.Text"
+           to="PassReviewNotes.GimportHidden.Text"/>
+      <map from="CaseInReview" to="Case1"/>
+      <map from="Ap" to="Ap1"/>
+      <map from="CommandPassedToInitial" to="CommandPassedFromEnfor"/>
+      <map from="MultiAp.Flag" to="MultiAp.Flag"/>
+      <map from="ApSelected" to="ApSelected"/>
+      <map from="SelectedAp" to="SelectedAp"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_APSM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnApsmDsplyApPyrAcctSum"
+       send-command="DISPLAY">
+      <map from="Ap.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+      <map from="Ap.Number" to="CsePersonsWorkSet.Number"/>
+   </on>
+   <map from="ArDenialLtr" to="ArDenialLtr"/>
+   <map from="ApDenialLtr" to="ApDenialLtr"/>
+   <map from="ModificationRequest" to="ModificationRequest"/>
+   <map from="Client" to="Client"/>
+   <map from="MostRecent" to="MostRecent"/>
+   <map from="ArTotalMonthly" to="ArTotalMonthly"/>
+   <map from="ApTotalMonthly" to="ApTotalMonthly"/>
+   <map from="NoOfChildren" to="NoOfChildren"/>
+   <map from="GoodCause" to="GoodCause"/>
+   <map from="CourtCase.LegalAction" to="CourtCase.LegalAction"/>
+   <map from="LastIncomeIncrease" to="LastIncomeIncrease"/>
+   <map from="Bankruptcy" to="Bankruptcy"/>
+   <map from="ApKnownToOtherCases" to="ApKnownToOtherCases"/>
+   <map from="Case1" to="Case1"/>
+   <map from="HiddenFlowToWork" to="HiddenFlowToWork"/>
+   <map from="HiddenPassedReviewType" to="HiddenPassedReviewType"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenPassInfra" to="HiddenPass1"/>
+   <map from="HdnPasLegAct.GexportPassH" to="HdnPasLegAct.GimportPassH"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="LastReviewDate" to="LastReviewDate"/>
+   <map from="MoreApsMsg" to="MoreApsMsg"/>
+   <map from="CaseClosedIndicator" to="CaseClosedIndicator"/>
+   <map from="SelectedApToDebt" to="SelectedApObligor"/>
+   <map from="CountNoOfApOnCase" to="CountNoOfApOnCase"/>
+   <map from="CountAllCauReads" to="CountAllCauReads"/>
+   <map from="ModOrderInd" to="ModOrderInd"/>
+   <map from="MultiAp" to="MultiAp"/>
+   <map from="ApSelected" to="ApSelected"/>
+   <map from="SelectedAp" to="SelectedAp"/>
+   <map from="Ages.Age" to="Ages.Age"/>
+   <map from="CourtCase.MonthlyDue" to="CourtCase.MonthlyDue"/>
+   <map from="CourtCase.LastPayment" to="CourtCase.LastPayment"/>
+   <map from="CourtCase.IwoDate" to="CourtCase.IwoDate"/>
+   <map from="CourtCase.MwoDate" to="CourtCase.MwoDate"/>
+   <map from="CourtCase.TotalPayoff" to="CourtCase.TotalPayoff"/>
+   <map from="CourtCase.Common" to="CourtCase.Common"/>
+   <map from="SdsoAp" to="SdsoAp"/>
+   <map from="FdsoAp" to="FdsoAp"/>
+   <map from="CreditReportingAp" to="CreditReportingAp"/>
+   <map from="HiddenGroupCourtCase.HiddenCommon"
+        to="HiddenGroupCourtCase.HiddenCommon"/>
+   <map from="HiddenGroupCourtCase.HiddenGrpIwoDate"
+        to="HiddenGroupCourtCase.HiddenGrpIwoDate"/>
+   <map from="HiddenGroupCourtCase.HiddenGrpLastPayment"
+        to="HiddenGroupCourtCase.HiddenGrpLastPayment"/>
+   <map from="HiddenGroupCourtCase.HiddenLegalAction"
+        to="HiddenGroupCourtCase.HiddenLegalAction"/>
+   <map from="HiddenGroupCourtCase.HiddenGrpMonthlyDue"
+        to="HiddenGroupCourtCase.HiddenGrpMonthlyDue"/>
+   <map from="HiddenGroupCourtCase.HiddenGrpMwoDate"
+        to="HiddenGroupCourtCase.HiddenGrpMwoDate"/>
+   <map from="HiddenGroupCourtCase.HiddenGrpTotalPayoff"
+        to="HiddenGroupCourtCase.HiddenGrpTotalPayoff"/>
+   <map from="HiddenCrtCaseSubscript" to="HiddenCrtCaseSubscript"/>
+   <map from="ScrollMsg" to="ScrollMsg"/>
+   <map from="HidnPassNarrative.GexportH" to="HiddenPass.GimportH"/>
+   <map from="EnfReview" to="EnfReview"/>
+   <map from="Ar.FormattedName" to="Ar.FormattedName"/>
+   <map from="Ap.FormattedName" to="Ap.FormattedName"/>
+   <map from="Ap.Number" to="Ap.Number"/>
+   <map from="Ar.Number" to="Ar.Number"/>
+   <autoflow command="LGRQ" exit-state="ECO_LNK_TO_LEGAL_REQUEST"/>
+</procedure>

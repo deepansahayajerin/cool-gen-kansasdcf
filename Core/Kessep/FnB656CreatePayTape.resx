@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateWarrant">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  PTP_PROCESS_DATE = @ptpProcessDate
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="CreatePayTape#1">
+      <value>
+insert into CKT_PAY_TAPE
+(
+  PROCESS_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  IDENT_CODE,
+  VOUCHER_NUMBER
+)
+values
+(
+  @processDate,
+  @createdBy,
+  @createdTimestamp,
+  @identCode,
+  @voucherNumber
+)
+</value>
+   </data>
+   <data name="CreatePayTape#3">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  PTP_PROCESS_DATE = @ptpProcessDate
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="CreatePaymentStatusHistory">
+      <value>
+insert into CKT_PMNT_STAT_HIST
+(
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @pstGeneratedId,
+  @prqGeneratedId,
+  @pymntStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="CreateWarrantRemailAddress">
+      <value>
+insert into CKT_WRNT_RML_ADDR
+(
+  WARRANT_REMAIL_ID,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_4,
+  ZIP_CODE_5,
+  ZIP_CODE_3,
+  NAME,
+  REMAIL_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PRQ_ID
+)
+values
+(
+  @warrantRemailId,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @zipCode4,
+  @zipCode5,
+  @zipCode3,
+  @name,
+  @remailDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @prqId
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  PA_MEDICAL_SERVICE,
+  INTERSTATE_CASE_ID
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  MEDICAL_SUPP_IND
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE in ('AR', 'CH')) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailAddress">
+      <value>
+select top(1)
+  CRDETAIL_ADDRESS_I,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4
+from
+  CKT_CRDETAIL_ADDRS
+where
+  CRDETAIL_ADDRESS_I = @crdetailAddressI
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCollectionCollectionType">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.CREATED_TMST,
+  T1.PGM_APPLD_TO,
+  T1.CT_ORD_APPLIED_TO,
+  T2.COLLECTION_TYPE_ID,
+  T2.PRINT_NAME
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T3
+  on
+    T2.COLLECTION_TYPE_ID = T3.CLT_IDENTIFIER
+  join
+  CKT_COLLECTION T1
+  on
+    (T1.COLL_ID = @collId) and
+    (T1.OTY_ID = @otyId) and
+    (T1.OBG_ID = @obgId) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.CPA_TYPE = @cpaType) and
+    (T1.OTR_ID = @otrId) and
+    (T1.OTR_TYPE = @otrType) and
+    (T1.CRT_TYPE = @crtType) and
+    (T1.CST_ID = @cstId) and
+    (T1.CRV_ID = @crvId) and
+    (T1.CRD_ID = @crdId) and
+    (T3.CRD_ID = T1.CRD_ID) and
+    (T3.CRV_IDENTIFIER = T1.CRV_ID) and
+    (T3.CST_IDENTIFIER = T1.CST_ID) and
+    (T3.CRT_IDENTIFIER = T1.CRT_TYPE)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OB_TRN T3
+  on
+    (T1.NUMB = T3.CSP_SUP_NUMBER) and
+    (T3.CPA_SUP_TYPE = 'S') and
+    (T3.OTY_TYPE = @otyType) and
+    (T3.OB_TRN_TYP = @obTrnTyp) and
+    (T3.OB_TRN_ID = @obTrnId) and
+    (T3.CPA_TYPE = @cpaType) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T3.OBG_GENERATED_ID = @obgGeneratedId)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction1">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.PROCESS_DATE,
+  T1.COLLECTION_DATE,
+  T1.PASSTHRU_DATE,
+  T1.OTY_ID,
+  T1.OTR_TYPE_DISB,
+  T1.OTR_ID,
+  T1.CPA_TYPE_DISB,
+  T1.CSP_NUMBER_DISB,
+  T1.OBG_ID,
+  T1.CRD_ID,
+  T1.CRV_ID,
+  T1.CST_ID,
+  T1.CRT_ID,
+  T1.COL_ID,
+  T1.REFERENCE_NUMBER
+from
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_TRAN_RLN T2
+  on
+    (T1.DISB_TRAN_ID = T2.DTR_P_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_P_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_P_NUMBER) and
+    (@dtrGeneratedId = T2.DTR_GENERATED_ID) and
+    (@cpaType = T2.CPA_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction2">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  COLLECTION_DATE,
+  PRQ_GENERATED_ID,
+  INT_INTER_ID
+from
+  CKT_DISB_TRAN
+where
+  (@prqGeneratedId = PRQ_GENERATED_ID) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  COLLECTION_DATE
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionDisbursementType">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.PROCESS_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.DISBURSEMENT_DATE,
+  T1.DBT_GENERATED_ID,
+  T1.REFERENCE_NUMBER,
+  T2.CODE,
+  T2.NAME
+from
+  CKT_DISB_TYPE T2
+  join
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_TRAN_RLN T3
+  on
+    (T1.DISB_TRAN_ID = T3.DTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (@dtrPGeneratedId = T3.DTR_P_GENERATED_ID) and
+    (@cpaPType = T3.CPA_P_TYPE) and
+    (@cspPNumber = T3.CSP_P_NUMBER)
+  on
+    T2.DISB_TYPE_ID = T1.DBT_GENERATED_ID
+order by
+  T1.DISBURSEMENT_DATE,
+  T1.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadInterstatePaymentAddress">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  ADDRESS_START_DATE,
+  TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  ZIP_5,
+  ADDRESS_END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  PAYABLE_TO_NAME,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  FIPS_COUNTY,
+  FIPS_STATE,
+  FIPS_LOCATION
+from
+  CKT_INT_PYMNT_ADDR
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (TYPE = 'PY') and
+  (ADDRESS_START_DATE &lt;= @addressStartDate) and
+  (ADDRESS_END_DATE &gt;= @addressStartDate)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.OTHER_STATE_CAS_ID,
+  T1.OTHR_STATE_FIPS_CD,
+  T1.LAST_UPDATED_TMST,
+  T1.KS_CASE_IND,
+  T1.CAS_I_NUMBER,
+  T1.COUNTRY
+from
+  CKT_INTERSTAT_RQST T1
+  join
+  CKT_DISB_TRAN T2
+  on
+    (T1.IDENTIFIER = T2.INT_INTER_ID) and
+    (@prqGeneratedId = T2.PRQ_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadPaymentStatus">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID
+from
+  CKT_PAYMENT_STATUS
+where
+  PAYMENT_STATUS_ID = @paymentStatusId
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistory">
+      <value>
+select top(1)
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  DISCONTINUE_DATE
+from
+  CKT_PMNT_STAT_HIST
+where
+  (@prqGeneratedId = PRQ_GENERATED_ID) and
+  (PST_GENERATED_ID = @pstGeneratedId) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadProgram1">
+      <value>
+select top(1)
+  T1.PROGRAM_ID,
+  T1.CODE
+from
+  CKT_PROGRAM T1
+  join
+  CKT_PERSON_PROGRAM T2
+  on
+    (T1.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.CODE = 'AF') and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadProgram2">
+      <value>
+select top(1)
+  T1.PROGRAM_ID,
+  T1.CODE
+from
+  CKT_PROGRAM T1
+  join
+  CKT_PERSON_PROGRAM T2
+  on
+    (T1.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.CODE = 'FS') and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadReceiptRefund">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  PAYEE_NAME,
+  AMOUNT,
+  REQUEST_DATE,
+  CDA_IDENTIFIER,
+  REASON_TEXT
+from
+  CKT_RECEIPT_REFUND
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadWarrant">
+      <value>
+select
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  CLASSIFICATION,
+  TYPE,
+  RCT_R_TSTAMP,
+  PTP_PROCESS_DATE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND
+from
+  CKT_PMNT_REQUEST with(readcommitted)
+where
+  (PROCESS_DATE = @processDate) and
+  (PAYMENT_REQUEST_ID between cast(@systemGeneratedIdentifier1 as integer) and cast(@systemGeneratedIdentifier2 as integer))
+order by
+  CSE_PERSON_NUMBER
+</value>
+   </data>
+   <data name="UpdatePaymentStatusHistory">
+      <value>
+update CKT_PMNT_STAT_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (PST_GENERATED_ID = @pstGeneratedId) and
+  (PRQ_GENERATED_ID = @prqGeneratedId) and
+  (PYMNT_STAT_HIST_ID = @pymntStatHistId)
+</value>
+   </data>
+   <data name="UpdateWarrant">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  PROCESS_DATE = @processDate
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+</root>

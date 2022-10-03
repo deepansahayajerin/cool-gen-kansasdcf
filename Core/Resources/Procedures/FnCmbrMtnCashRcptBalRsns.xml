@@ -1,0 +1,30 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCmbrMtnCashRcptBalRsns"
+           program-name="SWECMBRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCmbrMtnCashRcptBalRsns"
+           transaction="SRIM"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LINK_TO_CLBR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCLBR"
+       to="FnClbrLstCashRcptBalRsns"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="Pass"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnCsamCashMgtAdminMenu"
+       send-command-type="none"/>
+   <on exit-state="ACO_NE0000_RETURN"
+       action="transfer"
+       to="FnCsamCashMgtAdminMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CashReceiptRlnRsn" to="CashReceiptRlnRsn"/>
+   <map from="HiddenCashReceiptRlnRsn" to="HiddenCashReceiptRlnRsn"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="TypeStatusAudit" to="TypeStatusAudit"/>
+</procedure>

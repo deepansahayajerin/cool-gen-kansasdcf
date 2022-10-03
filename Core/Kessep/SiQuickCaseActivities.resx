@@ -1,0 +1,888 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeActCertification1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  AAT_TYPE,
+  DECERTIFIED_DT,
+  DATE_STAYED,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (CSP_NUMBER = @cspNumber) and
+  (AAT_TYPE = 'FDSO')
+order by
+  TAKEN_DT desc
+</value>
+   </data>
+   <data name="ReadAdministrativeActCertification2">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  AAT_TYPE,
+  DECERTIFIED_DT,
+  DATE_STAYED,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (CSP_NUMBER = @cspNumber) and
+  (AAT_TYPE = 'SDSO')
+order by
+  TAKEN_DT desc
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  CLOSURE_REASON,
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseCaseRoleCsePerson">
+      <value>
+select
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CSE_OPEN_DATE,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.TYPE,
+  T3.DATE_OF_DEATH,
+  T3.PAT_ESTAB_IND,
+  T3.DATE_PATERN_ESTAB
+from
+  CKT_CASE T1
+  join
+  CKT_CSE_PERSON T3
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T3.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'CH')
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T1.NUMB = @numb)
+order by
+  T2.CSP_NUMBER desc
+</value>
+   </data>
+   <data name="ReadCreditReportingAction1">
+      <value>
+select distinct top(1)
+  T1.IDENTIFIER,
+  T1.CSE_ACTION_CODE,
+  T1.CRA_TRANS_DATE,
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.AAC_TYPE,
+  T1.AAC_TAKEN_DATE,
+  T1.AAC_TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT T2
+  join
+  CKT_CRED_RPT_ACT T1
+  on
+    (T2.TAKEN_DT = T1.AAC_TAKEN_DATE) and
+    (T2.TYPE = T1.AAC_TYPE) and
+    (T2.TANF_CODE = T1.AAC_TANF_CODE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.CSE_ACTION_CODE in ('UPD', 'ISS')) and
+    (T1.CRA_TRANS_DATE &gt; @craTransDate) and
+    (T1.CRA_TRANS_DATE &gt; T2.DATE_STAYED)
+order by
+  T1.CRA_TRANS_DATE desc
+</value>
+   </data>
+   <data name="ReadCreditReportingAction2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_DATE,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (CSP_NUMBER = @cspNumber) and
+  (
+    CSE_ACTION_CODE in ('CAN', 'DEL', 'XAD',
+      'XBR', 'XGC', 'REL')
+  )
+order by
+  CRA_TRANS_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH,
+  PAT_ESTAB_IND,
+  DATE_PATERN_ESTAB
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb) and
+  (DATE_OF_DEATH &gt; @dateOfDeath)
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  CREATED_TIMESTAMP,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_DATE &gt; @endDate)
+order by
+  TYPE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH,
+  T1.PAT_ESTAB_IND,
+  T1.DATE_PATERN_ESTAB,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (
+      (T2.TYPE = 'AR') or
+      (T1.NUMB = @numb)
+    )
+order by
+  T1.NUMB desc
+</value>
+   </data>
+   <data name="ReadCsePersonDetail1">
+      <value>
+select top(1)
+  PERSON_NUMBER,
+  FIRST_NAME,
+  LAST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_CSE_PERSON_DTL
+where
+  PERSON_NUMBER = @personNumber
+</value>
+   </data>
+   <data name="ReadCsePersonDetail2">
+      <value>
+select top(1)
+  PERSON_NUMBER,
+  FIRST_NAME,
+  LAST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_CSE_PERSON_DTL
+where
+  PERSON_NUMBER = @personNumber
+</value>
+   </data>
+   <data name="ReadFieldValue1">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (FLD_NAME = 'APEMPNM')
+</value>
+   </data>
+   <data name="ReadFieldValue2">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (FLD_NAME = 'APINCSNM')
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoveragePersonalHealthInsurance">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.PAID_BY_CSEP_IND,
+  T1.CSP_NUMBER,
+  T2.CSP_NUMBER,
+  T2.COV_VERIFIED_DATE,
+  T2.COVER_BEGIN_DATE,
+  T2.COVER_END_DATE,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE,
+  T4.CLOSURE_REASON,
+  T4.STATUS,
+  T4.STATUS_DATE,
+  T4.CSE_OPEN_DATE
+from
+  CKT_CASE T4
+  join
+  CKT_HINS_COVERAGE T1
+  join
+  CKT_PERSONAL_HINS T2
+  on
+    (T1.IDENTIFIER = T2.HCV_ID) and
+    (T1.PAID_BY_CSEP_IND &lt;&gt; 'N') and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T2.COVER_END_DATE &gt;= @coverEndDate) and
+    (T2.COVER_BEGIN_DATE &lt;= T2.COVER_END_DATE) and
+    (T2.COV_VERIFIED_DATE &lt;= T2.COVER_END_DATE)
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.TYPE = 'CH')
+  on
+    (T4.NUMB = T3.CAS_NUMBER) and
+    (T4.NUMB = @numb)
+order by
+  T2.COV_VERIFIED_DATE desc,
+  T2.COVER_BEGIN_DATE desc
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  PAROLE_ELIG_DATE,
+  END_DATE,
+  START_DATE,
+  TYPE,
+  INCARCERATED
+from
+  CKT_INCARCERATION
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE in ('J', 'P'))
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME,
+  CSP_I_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadInfrastructureEventDetail1">
+      <value>
+select distinct top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.EVENT_ID,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TIMESTAMP,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CREATED_TIMESTAMP,
+  T1.REFERENCE_DATE,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.EVE_NO
+from
+  CKT_INFRASTRUCTURE T1
+  join
+  CKT_OUTGOING_DOC T3
+  on
+    (T1.SYSTEM_GENERATED_I = T3.INF_ID) and
+    (T3.PRNT_SUCESSFUL_IND = 'Y') and
+    (T1.CASE_NUMBER = @caseNumber)
+  join
+  CKT_EVENT_DETAIL T2
+  on
+    (T1.EVENT_DETAIL_NAME = T2.DETAIL_NAME) and
+    (
+      (
+        (T1.EVENT_ID = 20) and
+        (T2.SYSTEM_GENERATED_I = 241) and
+        (T1.REASON_CODE = 'ORDIWO2A')
+      ) or
+      (
+        (T1.EVENT_ID = 20) and
+        (T2.SYSTEM_GENERATED_I = 227) and
+        (T1.REASON_CODE = 'ORDIWO2')
+      )
+    )
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadInfrastructureEventDetail2">
+      <value>
+select distinct top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.EVENT_ID,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TIMESTAMP,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CREATED_TIMESTAMP,
+  T1.REFERENCE_DATE,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.EVE_NO
+from
+  CKT_INFRASTRUCTURE T1
+  join
+  CKT_OUTGOING_DOC T3
+  on
+    (T1.SYSTEM_GENERATED_I = T3.INF_ID) and
+    (T3.PRNT_SUCESSFUL_IND = 'Y') and
+    (T1.CASE_NUMBER = @caseNumber)
+  join
+  CKT_EVENT_DETAIL T2
+  on
+    (T1.EVENT_DETAIL_NAME = T2.DETAIL_NAME) and
+    (
+      (
+        (T1.EVENT_ID = 20) and
+        (T2.SYSTEM_GENERATED_I = 268) and
+        (T1.REASON_CODE = 'MWONOHCA')
+      ) or
+      (
+        (T1.EVENT_ID = 20) and
+        (T2.SYSTEM_GENERATED_I = 244) and
+        (T1.REASON_CODE = 'MWONOTHC')
+      )
+    )
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadInfrastructureEventDetail3">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.EVENT_ID,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TIMESTAMP,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CREATED_TIMESTAMP,
+  T1.REFERENCE_DATE,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.EVE_NO
+from
+  CKT_INFRASTRUCTURE T1
+  join
+  CKT_EVENT_DETAIL T2
+  on
+    (T1.EVENT_DETAIL_NAME = T2.DETAIL_NAME) and
+    (T1.CASE_NUMBER = @caseNumber) and
+    (T1.EVENT_ID = 20) and
+    (T2.SYSTEM_GENERATED_I = 236) and
+    (T1.REASON_CODE = 'CONTORDN')
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadInfrastructureEventDetail4">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.EVENT_ID,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TIMESTAMP,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CREATED_TIMESTAMP,
+  T1.REFERENCE_DATE,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.EVE_NO
+from
+  CKT_INFRASTRUCTURE T1
+  join
+  CKT_EVENT_DETAIL T2
+  on
+    (T1.EVENT_DETAIL_NAME = T2.DETAIL_NAME) and
+    (T1.CASE_NUMBER = @caseNumber) and
+    (
+      (
+        (T1.EVENT_ID = 30) and
+        (T2.SYSTEM_GENERATED_I = 463) and
+        (T1.REASON_CODE = 'FMODSUPPO')
+      ) or
+      (
+        (T1.EVENT_ID = 30) and
+        (T2.SYSTEM_GENERATED_I = 512) and
+        (T1.REASON_CODE = 'FREGMODO')
+      ) or
+      (
+        (T1.EVENT_ID = 95) and
+        (T2.SYSTEM_GENERATED_I = 478) and
+        (T1.REASON_CODE = 'AMODBC')
+      ) or
+      (
+        (T1.EVENT_ID = 95) and
+        (T2.SYSTEM_GENERATED_I = 471) and
+        (T1.REASON_CODE = 'AJEFMOD')
+      ) or
+      (
+        (T1.EVENT_ID = 95) and
+        (T2.SYSTEM_GENERATED_I = 338) and
+        (T1.REASON_CODE = 'AREGMODO')
+      ) or
+      (
+        (T1.EVENT_ID = 95) and
+        (T2.SYSTEM_GENERATED_I = 492) and
+        (T1.REASON_CODE = 'AREGMODNJ')
+      ) or
+      (
+        (T1.EVENT_ID = 95) and
+        (T2.SYSTEM_GENERATED_I = 447) and
+        (T1.REASON_CODE = 'ACONMODJ')
+      )
+    )
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadInfrastructureEventDetail5">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.EVENT_ID,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TIMESTAMP,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CREATED_TIMESTAMP,
+  T1.REFERENCE_DATE,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.EVE_NO
+from
+  CKT_INFRASTRUCTURE T1
+  join
+  CKT_EVENT_DETAIL T2
+  on
+    (T1.EVENT_DETAIL_NAME = T2.DETAIL_NAME) and
+    (T1.CASE_NUMBER = @caseNumber) and
+    (
+      (
+        (T1.EVENT_ID = 8) and
+        (T2.SYSTEM_GENERATED_I = 48) and
+        (T1.REASON_CODE = 'MODFNRVWDT')
+      ) or
+      (
+        (
+          (T1.EVENT_ID = 120) and
+          (T2.SYSTEM_GENERATED_I = 1)
+        ) or
+        (T1.REASON_CODE = 'LEGAL36MOREVIEW')
+      )
+    )
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadInfrastructureEventDetailLegalActionLegalActionPersonResource">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.EVENT_ID,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TIMESTAMP,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CREATED_TIMESTAMP,
+  T1.REFERENCE_DATE,
+  T1.DETAIL,
+  T2.SYSTEM_GENERATED_I,
+  T2.EVE_NO,
+  T3.FILED_DT,
+  T4.CSP_NUMBER,
+  T4.CPR_RESOURCE_NO,
+  T4.LIEN_TYPE,
+  T4.IDENTIFIER,
+  T5.TYPE,
+  T5.RESOURCE_DESC,
+  T5.LOCATION
+from
+  CKT_CSE_PERSON_RES T5
+  join
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_LEGL_ACT_PRSRC T4
+  on
+    (T3.LEGAL_ACTION_ID = T4.LGA_IDENTIFIER) and
+    (T4.LIEN_TYPE = ' ') and
+    (T3.FILED_DT &gt; @filedDt)
+  on
+    (T5.RESOURCE_NO = T4.CPR_RESOURCE_NO) and
+    (T5.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T5.CSP_NUMBER = @cspNumber) and
+    (
+      T5.TYPE in ('BA', 'CB', 'CD',
+        'CH', 'CM', 'ER',
+        'MM', 'NA')
+    )
+  join
+  CKT_INFRASTRUCTURE T1
+  on
+    (T3.LEGAL_ACTION_ID = T1.DENORM_NUMERIC_12) and
+    (T1.CSE_PERSON_NUM = @cspNumber)
+  join
+  CKT_EVENT_DETAIL T2
+  on
+    (T1.EVENT_DETAIL_NAME = T2.DETAIL_NAME) and
+    (
+      (
+        (T1.EVENT_ID = 96) and
+        (T2.SYSTEM_GENERATED_I = 205) and
+        (T1.REASON_CODE = 'FGARNRQNW')
+      ) or
+      (
+        (T1.EVENT_ID = 96) and
+        (T2.SYSTEM_GENERATED_I = 201) and
+        (T1.REASON_CODE = 'FGARNAFFT')
+      ) or
+      (
+        (T1.EVENT_ID = 20) and
+        (T2.SYSTEM_GENERATED_I = 215) and
+        (T1.REASON_CODE = 'GARNO')
+      ) or
+      (
+        (T1.EVENT_ID = 20) and
+        (T2.SYSTEM_GENERATED_I = 216) and
+        (T1.REASON_CODE = 'GARNREQ')
+      )
+    )
+order by
+  T3.FILED_DT desc
+</value>
+   </data>
+   <data name="ReadInfrastructureLegalActionPersonLegalAction">
+      <value>
+select distinct top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.EVENT_ID,
+  T1.EVENT_DETAIL_NAME,
+  T1.REASON_CODE,
+  T1.DENORM_NUMERIC_12,
+  T1.DENORM_TIMESTAMP,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CREATED_TIMESTAMP,
+  T1.REFERENCE_DATE,
+  T1.DETAIL,
+  T2.LA_PERSON_ID,
+  T2.CSP_NUMBER,
+  T2.LGA_IDENTIFIER,
+  T2.EFFECTIVE_DT,
+  T2.[ROLE],
+  T2.END_DT,
+  T3.FILED_DT
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_INFRASTRUCTURE T1
+  on
+    (T1.CASE_NUMBER = @caseNumber) and
+    (T1.EVENT_ID = 33) and
+    (T1.REASON_CODE = 'FVOLPATPK') and
+    (T3.LEGAL_ACTION_ID = T1.DENORM_NUMERIC_12)
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T3.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.EFFECTIVE_DT &lt; @effectiveDt) and
+    (T2.END_DT &gt; @effectiveDt) and
+    (T2.[ROLE] = 'C') and
+    (@cspNumber = T2.CSP_NUMBER)
+  join
+  CKT_LA_PER_LA_CROL T4
+  on
+    (T2.LA_PERSON_ID = T4.LAP_ID) and
+    (@croId = T4.CRO_ID) and
+    (@croType = T4.CRO_TYPE) and
+    (@cspNum = T4.CSP_NUM) and
+    (@casNum = T4.CAS_NUM)
+order by
+  T1.REFERENCE_DATE desc
+</value>
+   </data>
+   <data name="ReadKsDriversLicense">
+      <value>
+select top(1)
+  CSP_NUM,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  (CSP_NUM = @cspNum) and
+  (RESTRICTED_DATE &lt;= @restrictedDate1) and
+  (RESTRICTED_DATE &lt;&gt; @restrictedDate2) and
+  (REINSTATED_DATE = @restrictedDate2)
+order by
+  RESTRICTED_DATE desc
+</value>
+   </data>
+   <data name="ReadLegalActionDetailCsePerson">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE,
+  T1.OTY_ID,
+  T2.NUMB,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_LEGAL_ACT_DTL T1
+  on
+    (T3.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T3.FILED_DT &gt; @filedDt)
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (T3.LEGAL_ACTION_ID = T4.LGA_ID) and
+    (T4.CAS_NUMBER = @casNumber) and
+    (T4.CRO_TYPE = 'AP')
+  join
+  CKT_LEG_ACT_CAS_RL T7
+  on
+    (T3.LEGAL_ACTION_ID = T7.LGA_ID) and
+    (T4.CAS_NUMBER = T7.CAS_NUMBER) and
+    (T7.CRO_TYPE = 'CH')
+  join
+  CKT_LEGAL_ACT_PERS T9
+  on
+    (T1.LA_DETAIL_NO = T9.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T9.LGA_R_IDENTIFIER) and
+    (T9.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T9.ACCOUNT_TYPE = 'R') and
+    (T9.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LEGAL_ACT_PERS T11
+  on
+    (T1.LA_DETAIL_NO = T11.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T11.LGA_R_IDENTIFIER) and
+    (T11.ACCOUNT_TYPE = 'S')
+  on
+    (T2.NUMB = T11.CSP_NUMBER) and
+    (T2.NUMB = T7.CSP_NUMBER)
+order by
+  T2.NUMB desc,
+  T1.EFFECTIVE_DT desc,
+  T1.END_DT desc
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemption1">
+      <value>
+select top(1)
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  END_DT
+from
+  CKT_OADM_ACT_EXMP
+where
+  (AAT_TYPE = 'SDSO') and
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt; @effectiveDt)
+order by
+  EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemption2">
+      <value>
+select top(1)
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  END_DT
+from
+  CKT_OADM_ACT_EXMP
+where
+  (AAT_TYPE in ('PAS', 'ALL')) and
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt; @effectiveDt)
+order by
+  EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemption3">
+      <value>
+select top(1)
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  END_DT
+from
+  CKT_OADM_ACT_EXMP
+where
+  (AAT_TYPE in ('ALBP', 'ALL', 'TAX')) and
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt; @effectiveDt)
+order by
+  EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadObligationAdministrativeAction">
+      <value>
+select distinct top(1)
+  T1.OTY_TYPE,
+  T1.AAT_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.TAKEN_DT
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_OBLIG_ADMIN_AC T1
+  on
+    (T3.DEBT_TYP_ID = T1.OTY_TYPE) and
+    (T3.DEBT_TYP_CD &lt;&gt; 'AJ') and
+    (T3.DEBT_TYP_CD &lt;&gt; 'IJ') and
+    (T3.DEBT_TYP_CD &lt;&gt; 'MJ') and
+    (T3.DEBT_TYP_CD &lt;&gt; 'SAJ') and
+    (T3.DEBT_TYP_CD &lt;&gt; '718B') and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.AAT_TYPE in ('OREL', 'LIEN'))
+order by
+  T1.TAKEN_DT desc
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD
+from
+  CKT_OB_TYPE
+where
+  (DEBT_TYP_ID = @debtTypId) and
+  (DEBT_TYP_CD = 'CS')
+</value>
+   </data>
+</root>

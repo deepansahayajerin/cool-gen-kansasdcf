@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateOutDocRtrnAddr">
+      <value>
+insert into CKT_OU_DOC_RT_ADR
+(
+  OSP_WK_PHONE_NUM,
+  OSP_WK_PH_AREA_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OSP_WK_PHONE_EXT,
+  OSP_CERT_NUM,
+  OSP_LOC_CONTACT_CD,
+  OSP_ROLE_CODE,
+  OSP_EFFECTIVE_DATE,
+  OFFICE_SYS_GEN_ID,
+  OFFICE_NAME,
+  OFFC_ADDR_STREET_1,
+  OFFC_ADDR_STREET_2,
+  OFFC_ADDR_CITY,
+  OFFC_ADDR_ST_PROV,
+  OFFC_ADR_POST_CD,
+  OFFC_ADDR_ZIP,
+  OFFC_ADDR_ZIP4,
+  OFFC_ADDR_COUNTRY,
+  SRV_PRV_SYS_GEN_ID,
+  SERV_PROV_USER_ID,
+  SRV_PROV_LAST_NAME,
+  SRV_PRV_FIRST_NAME,
+  SERV_PROV_MI,
+  SRV_PRV_ADR_ST_1,
+  SRV_PRV_ADR_ST_2,
+  SERV_PROV_ADR_CITY,
+  SRV_PRV_ADR_ST_PRV,
+  SRV_PRV_ADR_PST_CD,
+  SERV_PROV_ADDR_ZIP,
+  SRV_PROV_ADDR_ZIP4,
+  SRV_PRV_ADDR_CNTRY,
+  OFFC_ADDR_ZIP3,
+  SRV_PRV_ADR_ZIP3
+)
+values
+(
+  @ospWkPhoneNum,
+  @ospWkPhAreaCd,
+  @createdBy,
+  @createdTimestamp,
+  @ospWkPhoneExt,
+  @ospCertNum,
+  @ospWkPhAreaCd,
+  @ospRoleCode,
+  @ospEffectiveDate,
+  @officeSysGenId,
+  @officeName,
+  @offcAddrStreet1,
+  @offcAddrStreet1,
+  @offcAddrCity,
+  @offcAddrStProv,
+  @ospCertNum,
+  @ospWkPhoneExt,
+  @offcAddrZip4,
+  @ospCertNum,
+  @srvPrvSysGenId,
+  @servProvUserId,
+  @srvProvLastName,
+  @srvPrvFirstName,
+  @servProvMi,
+  @offcAddrStreet1,
+  @offcAddrStreet1,
+  @offcAddrCity,
+  @offcAddrStProv,
+  @ospCertNum,
+  @ospWkPhoneExt,
+  @offcAddrZip4,
+  @ospCertNum,
+  @offcAddrZip3,
+  @offcAddrZip3
+)
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  DISCONTINUE_DATE,
+  OFF_OFFICE
+from
+  CKT_OFFICE with(readuncommitted)
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeAddress">
+      <value>
+select top(1)
+  OFF_GENERATED_ID,
+  TYPE
+from
+  CKT_OFFICE_ADDRESS with(readuncommitted)
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (TYPE = 'M')
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR with(readuncommitted)
+where
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (ROLE_CODE = @roleCode) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="ReadOutDocRtrnAddr">
+      <value>
+select top(1)
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OSP_ROLE_CODE,
+  OSP_EFFECTIVE_DATE,
+  OFFICE_SYS_GEN_ID,
+  SRV_PRV_SYS_GEN_ID
+from
+  CKT_OU_DOC_RT_ADR
+where
+  CREATED_BY = @createdBy
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID
+from
+  CKT_SERVICE_PRVDER with(readuncommitted)
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="ReadServiceProviderAddress">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  TYPE
+from
+  CKT_SRVCE_PRVR_ADR with(readuncommitted)
+where
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (TYPE = 'M')
+</value>
+   </data>
+   <data name="UpdateOutDocRtrnAddr">
+      <value>
+update CKT_OU_DOC_RT_ADR
+set
+  OSP_ROLE_CODE = @ospRoleCode,
+  OSP_EFFECTIVE_DATE = @ospEffectiveDate,
+  OFFICE_SYS_GEN_ID = @officeSysGenId,
+  SRV_PRV_SYS_GEN_ID = @srvPrvSysGenId
+where
+  (CREATED_BY = @createdBy) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+</root>

@@ -1,0 +1,39 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDttlLstDisbTranTypes"
+           program-name="SWEDTTLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDttlLstDisbTranTypes"
+           transaction="SR86"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_MTN_DISB_TRAN_TYPE"
+       action="transfer"
+       to="FnDttmMtnDisbTranType"
+       send-command="DISPLAY">
+      <map from="Flag" to="Flag"/>
+      <map from="FlowSelection.SystemGeneratedIdentifier"
+           to="DisbursementTransactionType.SystemGeneratedIdentifier"/>
+      <map from="FlowSelection.Code" to="DisbursementTransactionType.Code"/>
+      <map from="FlowSelection.Name" to="DisbursementTransactionType.Name"/>
+      <map from="FlowSelection.EffectiveDate"
+           to="DisbursementTransactionType.EffectiveDate"/>
+      <map from="FlowSelection.DiscontinueDate"
+           to="DisbursementTransactionType.DiscontinueDate"/>
+      <map from="FlowSelection.CreatedBy"
+           to="DisbursementTransactionType.CreatedBy"/>
+      <map from="FlowSelection.CreatedTmst"
+           to="DisbursementTransactionType.CreatedTmst"/>
+      <map from="FlowSelection.LastUpdatedBy"
+           to="DisbursementTransactionType.LastUpdatedBy"/>
+      <map from="FlowSelection.LastUpdatedTmst"
+           to="DisbursementTransactionType.LastUpdatedTmst"/>
+   </on>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.DisbursementTransactionType"
+        to="Import1.DisbursementTransactionType"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="Standard" to="Standard"/>
+</procedure>

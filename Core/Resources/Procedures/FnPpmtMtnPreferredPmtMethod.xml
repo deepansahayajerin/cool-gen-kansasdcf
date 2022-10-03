@@ -1,0 +1,69 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnPpmtMtnPreferredPmtMethod"
+           program-name="SWEPPMTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnPpmtMtnPreferredPmtMethod"
+           transaction="SRI0"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PREFERRED_PMT_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPPLT"
+       to="FnPpltLstPreferredPmtMethod"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="SearchCsePersonsWorkSet"/>
+      <return-map from="Common" to="Flag"/>
+      <return-map from="SearchCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="ToTranPaymentMethodType" to="PaymentMethodType"/>
+      <return-map from="ToTranPersonPreferredPaymentMethod.SystemGeneratedIdentifier"
+                  to="PersonPreferredPaymentMethod.SystemGeneratedIdentifier"/>
+      <return-map from="ToTranPersonPreferredPaymentMethod.AbaRoutingNumber"
+                  to="PersonPreferredPaymentMethod.AbaRoutingNumber"/>
+      <return-map from="ToTranPersonPreferredPaymentMethod.DfiAccountNumber"
+                  to="PersonPreferredPaymentMethod.DfiAccountNumber"/>
+      <return-map from="ToTranPersonPreferredPaymentMethod.EffectiveDate"
+                  to="PersonPreferredPaymentMethod.EffectiveDate"/>
+      <return-map from="ToTranPersonPreferredPaymentMethod.DiscontinueDate"
+                  to="PersonPreferredPaymentMethod.DiscontinueDate"/>
+      <return-map from="ToTranPersonPreferredPaymentMethod.LastUpdateBy"
+                  to="PersonPreferredPaymentMethod.LastUpdateBy"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PaymentMethodType" to="PaymentMethodType"/>
+   <map from="HiddenId" to="HiddenId"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="HiddenPaymentMethodType" to="HiddenPaymentMethodType"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="Export9Digit" to="Import9Digit"/>
+   <map from="PersonPreferredPaymentMethod.SystemGeneratedIdentifier"
+        to="PersonPreferredPaymentMethod.SystemGeneratedIdentifier"/>
+   <map from="PersonPreferredPaymentMethod.AccountType"
+        to="PersonPreferredPaymentMethod.AccountType"/>
+   <map from="PersonPreferredPaymentMethod.AbaRoutingNumber"
+        to="PersonPreferredPaymentMethod.AbaRoutingNumber"/>
+   <map from="PersonPreferredPaymentMethod.DfiAccountNumber"
+        to="PersonPreferredPaymentMethod.DfiAccountNumber"/>
+   <map from="PersonPreferredPaymentMethod.EffectiveDate"
+        to="PersonPreferredPaymentMethod.EffectiveDate"/>
+   <map from="PersonPreferredPaymentMethod.DiscontinueDate"
+        to="PersonPreferredPaymentMethod.DiscontinueDate"/>
+   <map from="PersonPreferredPaymentMethod.Description"
+        to="PersonPreferredPaymentMethod.Description"/>
+   <map from="PersonPreferredPaymentMethod.LastUpdateBy"
+        to="PersonPreferredPaymentMethod.LastUpdateBy"/>
+   <map from="PersonPreferredPaymentMethod.LastUpdateTmst"
+        to="PersonPreferredPaymentMethod.LastUpdateTmst"/>
+</procedure>

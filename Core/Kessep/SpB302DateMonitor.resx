@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadBankruptcyCsePerson">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  FILING_DATE,
+  DISCHARGE_DATE,
+  CONFIRMATION_DATE,
+  LAST_UPDATED_TMST,
+  DISC_DATE_MOD_IND,
+  EXP_BKRP_DIS_DATE
+from
+  CKT_BANKRUPTCY
+where
+  EXP_BKRP_DIS_DATE = dateadd(day, cast(@dateMonitorDays as smallint), cast(@processDate as date))
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseCaseRoleCaseUnitCsePersonLegalActionCaseRole">
+      <value>
+select
+  T3.CAS_NO,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.EMANCIPATION_DT,
+  T2.LAST_UPDATED_TMST,
+  T3.CU_NUMBER,
+  T3.CLOSURE_DATE,
+  T3.CLOSURE_REASON_COD,
+  T3.CSP_NO_AR,
+  T3.CSP_NO_AP,
+  T3.CSP_NO_CHILD,
+  T5.LGA_ID,
+  T5.INIT_CR_IND
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_LEG_ACT_CAS_RL T5
+  on
+    (@lgaId = T5.LGA_ID) and
+    (T2.CASE_ROLE_ID = T5.CRO_IDENTIFIER) and
+    (T2.TYPE = T5.CRO_TYPE) and
+    (T2.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T5.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  join
+  CKT_CASE_UNIT T3
+  on
+    T2.CSP_NUMBER = T3.CSP_NO_AP
+order by
+  T3.CU_NUMBER
+</value>
+   </data>
+   <data name="ReadCaseCaseUnit">
+      <value>
+select
+  CAS_NO,
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  @cspNoAp = CSP_NO_AP
+</value>
+   </data>
+   <data name="ReadCaseCaseUnitCsePersonLegalActionCaseRole">
+      <value>
+select
+  T2.CAS_NO,
+  T2.CU_NUMBER,
+  T2.CLOSURE_DATE,
+  T2.CLOSURE_REASON_COD,
+  T2.CSP_NO_AR,
+  T2.CSP_NO_AP,
+  T2.CSP_NO_CHILD,
+  T5.CSP_NUMBER,
+  T4.CAS_NUMBER,
+  T4.CRO_TYPE,
+  T4.CRO_IDENTIFIER,
+  T4.LGA_ID,
+  T4.INIT_CR_IND,
+  T5.START_DATE,
+  T5.END_DATE,
+  T5.EMANCIPATION_DT,
+  T5.LAST_UPDATED_TMST
+from
+  CKT_CASE_ROLE T5
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (@lgaId = T4.LGA_ID) and
+    (T5.CASE_ROLE_ID = T4.CRO_IDENTIFIER) and
+    (T5.TYPE = T4.CRO_TYPE) and
+    (T5.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T5.CAS_NUMBER = T4.CAS_NUMBER) and
+    (T5.TYPE = 'AP') and
+    (T5.START_DATE &lt;= @startDate) and
+    (T5.END_DATE &gt;= @startDate)
+  join
+  CKT_CASE_UNIT T2
+  on
+    T5.CSP_NUMBER = T2.CSP_NO_AP
+order by
+  T2.CU_NUMBER
+</value>
+   </data>
+   <data name="ReadCaseRoleCaseUnitCaseCsePersonCaseRoleCsePerson1">
+      <value>
+select top(1)
+  cast(@casMNumber as char(10)),
+  cast(@cspMNumber as char(10)),
+  cast(@croMType as char(2)),
+  cast(@croMIdentifier as smallint),
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD,
+  cast(@casNumber as char(10)),
+  cast(@cspNumber as char(10)),
+  cast(@croType as char(2)),
+  cast(@croIdentifier as smallint)
+from
+  CKT_CASE_UNIT
+where
+  (@cspMNumber = CSP_NO_AP) and
+  (@cspNumber = CSP_NO_CHILD)
+</value>
+   </data>
+   <data name="ReadCaseRoleCaseUnitCaseCsePersonCaseRoleCsePerson2">
+      <value>
+select top(1)
+  cast(@casMNumber as char(10)),
+  cast(@cspMNumber as char(10)),
+  cast(@croMType as char(2)),
+  cast(@croMIdentifier as smallint),
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD,
+  cast(@casNumber as char(10)),
+  cast(@cspNumber as char(10)),
+  cast(@croType as char(2)),
+  cast(@croIdentifier as smallint),
+  cast(@casANumber as char(10)),
+  cast(@cspANumber as char(10)),
+  cast(@croAType as char(2)),
+  cast(@croAIdentifier as smallint)
+from
+  CKT_CASE_UNIT
+where
+  (@cspMNumber = CSP_NO_AR) and
+  (@cspNumber = CSP_NO_CHILD) and
+  (@cspANumber = CSP_NO_AP)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  EMANCIPATION_DT,
+  LAST_UPDATED_TMST
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'CH') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (EMANCIPATION_DT = dateadd(day, cast(@dateMonitorDays as smallint), cast(@startDate as date)))
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoChild = CSP_NO_CHILD) and
+  (CLOSURE_DATE &gt; @closureDate)
+</value>
+   </data>
+   <data name="ReadCaseUnitCaseCaseRoleCsePersonCaseRoleCsePerson">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD,
+  cast(@casNumber as char(10)),
+  cast(@cspNumber as char(10)),
+  cast(@croType as char(2)),
+  cast(@croIdentifier as smallint),
+  cast(@casANumber as char(10)),
+  cast(@cspANumber as char(10)),
+  cast(@croAType as char(2)),
+  cast(@croAIdentifier as smallint)
+from
+  CKT_CASE_UNIT
+where
+  (@cspNumber = CSP_NO_CHILD) and
+  (@cspANumber = CSP_NO_AP)
+</value>
+   </data>
+   <data name="ReadEventEventDetail1">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  INITIATING_ST_CD,
+  REASON_CODE,
+  DATE_MONITOR_DAYS
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = 18) and
+  (REASON_CODE = 'DMBKRPDSCH')
+</value>
+   </data>
+   <data name="ReadEventEventDetail2">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  INITIATING_ST_CD,
+  REASON_CODE,
+  DATE_MONITOR_DAYS
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = 18) and
+  (REASON_CODE = 'DMCONTSTGT')
+</value>
+   </data>
+   <data name="ReadEventEventDetail3">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  INITIATING_ST_CD,
+  REASON_CODE,
+  DATE_MONITOR_DAYS
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = 18) and
+  (REASON_CODE = 'DMEMANCIP')
+</value>
+   </data>
+   <data name="ReadEventEventDetail4">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  INITIATING_ST_CD,
+  REASON_CODE,
+  DATE_MONITOR_DAYS
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = 18) and
+  (REASON_CODE = 'DMEMANCIP45')
+</value>
+   </data>
+   <data name="ReadEventEventDetail5">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  INITIATING_ST_CD,
+  REASON_CODE,
+  DATE_MONITOR_DAYS
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = 18) and
+  (REASON_CODE = 'DMPAROLJAIL')
+</value>
+   </data>
+   <data name="ReadEventEventDetail6">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  INITIATING_ST_CD,
+  REASON_CODE,
+  DATE_MONITOR_DAYS
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = 18) and
+  (REASON_CODE = 'DMRLSEMIL')
+</value>
+   </data>
+   <data name="ReadEventEventDetail7">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  INITIATING_ST_CD,
+  REASON_CODE,
+  DATE_MONITOR_DAYS
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = 6) and
+  (REASON_CODE = 'DMHEARNGJ')
+</value>
+   </data>
+   <data name="ReadEventEventDetail8">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  INITIATING_ST_CD,
+  REASON_CODE,
+  DATE_MONITOR_DAYS
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = 6) and
+  (REASON_CODE = 'SRVREQSUB')
+</value>
+   </data>
+   <data name="ReadGeneticTest">
+      <value>
+select
+  TEST_NUMBER,
+  RESULT_RCVD_DATE,
+  CONTEST_RCVD_IND,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_M_NUMBER,
+  CSP_M_NUMBER,
+  CRO_M_TYPE,
+  CRO_M_IDENTIFIER,
+  CAS_A_NUMBER,
+  CSP_A_NUMBER,
+  CRO_A_TYPE,
+  CRO_A_IDENTIFIER
+from
+  CKT_GENETIC_TEST
+where
+  (CONTEST_RCVD_IND = ' ') and
+  (RESULT_RCVD_DATE = @resultRcvdDate)
+</value>
+   </data>
+   <data name="ReadHearingLegalAction">
+      <value>
+select
+  T1.HEARING_ID,
+  T1.LGA_IDENTIFIER,
+  T1.HEARING_DT,
+  T1.TYPE,
+  T1.LAST_UPD_TSTAMP,
+  T1.OUTCOME,
+  T2.COURT_CASE_NO
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_HEARING T1
+  on
+    (T1.HEARING_DT = dateadd(day, cast(@dateMonitorDays as smallint), cast(@processDate as date))) and
+    (T1.OUTCOME = ' ') and
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadIncarcerationCsePerson">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  PAROLE_ELIG_DATE,
+  END_DATE,
+  TYPE
+from
+  CKT_INCARCERATION
+where
+  PAROLE_ELIG_DATE = dateadd(day, cast(@dateMonitorDays as smallint), cast(@processDate as date))
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND = 'N')
+</value>
+   </data>
+   <data name="ReadMilitaryServiceCsePerson">
+      <value>
+select
+  EFFECTIVE_DATE,
+  CSP_NUMBER,
+  EXP_DISCH_DATE
+from
+  CKT_MILITARY_SRV
+where
+  EXP_DISCH_DATE = dateadd(day, cast(@dateMonitorDays as smallint), cast(@processDate as date))
+</value>
+   </data>
+   <data name="ReadServiceProcessLegalAction">
+      <value>
+select
+  T1.LGA_IDENTIFIER,
+  T1.SERVICE_REQUEST_DT,
+  T1.SERVICE_DATE,
+  T1.LAST_UPD_TSTAMP,
+  T1.IDENTIFIER,
+  T2.COURT_CASE_NO
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_SERVICE_PROCSS T1
+  on
+    (T1.SERVICE_REQUEST_DT = dateadd(day, - cast(@dateMonitorDays as smallint), cast(@processDate as date))) and
+    (T1.SERVICE_DATE = @serviceDate) and
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER)
+</value>
+   </data>
+</root>

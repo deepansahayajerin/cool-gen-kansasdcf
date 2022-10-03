@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (ADJ_IND = 'Y')
+</value>
+   </data>
+   <data name="ReadCollectionDebtObligationObligationTypeObligor">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.DISB_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.DISB_ADJ_PROC_DATE,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.COLL_ADJ_PROC_DATE,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.DISB_PROC_NEED_IND,
+  T1.PGM_APPLD_TO,
+  T1.APPL_TO_ORD_TYP_CD,
+  T1.APPLIED_TO_FUT_IND,
+  T1.PGM_ST_APPLD_TO,
+  T1.AR_NUMBER,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE,
+  T4.DEBT_TYP_ID,
+  T4.DEBT_TYP_CD,
+  T4.SUP_PRSN_REQ_IND,
+  T7.COLLECTION_AMOUNT,
+  T7.REFUNDED_AMT,
+  T7.DISTRIBUTED_AMT,
+  T7.COLLAMT_APPL_IND,
+  T8.CASH_RECEIPT_ID,
+  T11.CATEGORY_IND
+from
+  CKT_CR_TYPE T11
+  join
+  CKT_CASH_RECEIPT T8
+  join
+  CKT_CR_DETAIL T7
+  join
+  CKT_OB_TYPE T4
+  join
+  CKT_OB_TRN T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T1.DISB_PROC_NEED_IND = 'Y') and
+    (
+      (
+        (T1.ADJ_IND = 'Y') and
+        (T1.DISB_ADJ_PROC_DATE = @disbAdjProcDate)
+      ) or
+      (T1.DISB_DT = @disbAdjProcDate)
+    ) and
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID)
+  on
+    T4.DEBT_TYP_ID = T2.OTY_TYPE
+  on
+    (T7.CRD_ID = T1.CRD_ID) and
+    (T7.CRV_IDENTIFIER = T1.CRV_ID) and
+    (T7.CST_IDENTIFIER = T1.CST_ID) and
+    (T7.CRT_IDENTIFIER = T1.CRT_TYPE)
+  on
+    (T8.CRT_IDENTIFIER = T7.CRT_IDENTIFIER) and
+    (T8.CST_IDENTIFIER = T7.CST_IDENTIFIER) and
+    (T8.CRV_IDENTIFIER = T7.CRV_IDENTIFIER)
+  on
+    T11.CRTYPE_ID = T8.CRT_IDENTIFIER
+order by
+  T1.CSP_NUMBER,
+  T8.CASH_RECEIPT_ID,
+  T1.CRD_ID,
+  T1.COLL_ID
+</value>
+   </data>
+   <data name="UpdateCollection">
+      <value>
+update CKT_COLLECTION
+set
+  DISB_DT = @disbDt,
+  DISB_ADJ_PROC_DATE = @disbAdjProcDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+</root>

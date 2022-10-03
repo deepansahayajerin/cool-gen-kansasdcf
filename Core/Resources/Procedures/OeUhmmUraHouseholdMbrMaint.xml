@@ -1,0 +1,127 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeUhmmUraHouseholdMbrMaint"
+           program-name="SWEUHMMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeUhmmUraHouseholdMbrMaint"
+           transaction="SRMM"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="SearchCsePersonsWorkSet.FirstName"
+           to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="SearchCsePersonsWorkSet.MiddleInitial"
+           to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <map from="SearchCsePersonsWorkSet.LastName"
+           to="SearchCsePersonsWorkSet.LastName"/>
+      <map from="SearchCsePersonsWorkSet.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+      <map from="SearchCsePersonsWorkSet.Sex" to="SearchCsePersonsWorkSet.Sex"/>
+      <map from="SearchCsePersonsWorkSet.Dob" to="SearchCsePersonsWorkSet.Dob"/>
+      <map from="SearchCsePersonsWorkSet.Number"
+           to="SearchCsePersonsWorkSet.Number"/>
+      <return-map from="Selected" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UCOL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUcolListUraCollections"
+       send-command="DISPLAY">
+      <map from="SearchCsePersonsWorkSet" to="SearchMemberCsePersonsWorkSet"/>
+      <map from="ImHousehold" to="SearchImHousehold"/>
+      <map from="SearchToDateWorkArea" to="PassToDateWorkArea"/>
+      <map from="SearchFromDateWorkArea" to="PassFromDateWorkArea"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUraaUraAdjustment"
+       send-command="DISPLAY">
+      <map from="SearchCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="SearchCsePerson" to="CsePerson"/>
+      <map from="ImHousehold" to="ImHousehold"/>
+      <map from="SearchFromDateWorkArea" to="ForAdjustments"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PEPR"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiPeprPersonProgramMaint"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CURA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeCuraMembersUra"
+       send-command="DISPLAY">
+      <map from="SearchCsePersonsWorkSet" to="SearchCsePersonsWorkSet"/>
+      <map from="SearchCsePerson" to="SearchCsePerson"/>
+      <map from="SearchFromDateWorkAttributes" to="SearchFrom"/>
+      <map from="SearchToDateWorkAttributes" to="SearchTo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAC"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUracUraByCourtOrder"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_URAH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUrahHouseholdUra"
+       send-command="DISPLAY">
+      <map from="ImHousehold" to="Search"/>
+      <map from="SearchFromDateWorkAttributes" to="SearchFrom"/>
+      <map from="SearchToDateWorkAttributes" to="SearchTo"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_IMHH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeImhhListHhInfo"
+       send-command="DISPLAY">
+      <map from="SearchCsePersonsWorkSet"
+           to="SearchCriteria.SearchCsePersonsWorkSet"/>
+      <map from="ImHousehold" to="SearchCriteria.SearchImHousehold"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUralListUraAdj"
+       send-command="DISPLAY">
+      <map from="SearchCsePerson.Number" to="CsePerson1.Number"/>
+      <map from="SearchToDateWorkArea" to="ToYearNMonth"/>
+      <map from="SearchFromDateWorkArea" to="FromYearNMonth"/>
+      <map from="SearchCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="ImHousehold" to="ImHousehold"/>
+   </on>
+   <map from="HiddenConfirmCreate" to="HiddenConfirmCreate"/>
+   <map from="HiddenDeveloper" to="HiddenDeveloper"/>
+   <map from="ImHousehold" to="ImHousehold"/>
+   <map from="Previous" to="Previous"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Gcommon" to="Import1.Gcommon"/>
+   <map from="Export1.GexportPart" to="Import1.GimportPart"/>
+   <map from="Export1.GcsePerson" to="Import1.GcsePerson"/>
+   <map from="Export1.GexportScreenPrompt" to="Import1.GimportScreenPrompt"/>
+   <map from="Export1.GcsePersonsWorkSet" to="Import1.GcsePersonsWorkSet"/>
+   <map from="Export1.GexportBegin" to="Import1.GimportBegin"/>
+   <map from="Export1.GexportEnd" to="Import1.GimportEnd"/>
+   <map from="Export1.GimHouseholdMbrMnthlySum"
+        to="Import1.GimHouseholdMbrMnthlySum"/>
+   <map from="HiddenCommon" to="HiddenCommon"/>
+   <map from="HiddenConfirmAdd" to="HiddenConfirmAdd"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+</procedure>

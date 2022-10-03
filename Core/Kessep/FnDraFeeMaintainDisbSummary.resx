@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDisbursementSummary">
+      <value>
+insert into CKT_DISB_SUMMARY
+(
+  FISCAL_YEAR,
+  NON_TAF_AMOUNT,
+  THRESHOLD_DATE,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  CSP_NUMBER_OBLGEE,
+  CPA_TYPE_OBLGEE,
+  CSP_NUMBER_OBLGR,
+  CPA_TYPE_OBLGR
+)
+values
+(
+  @fiscalYear,
+  @nonTafAmount,
+  @thresholdDate,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  @cspNumberOblgee,
+  @cpaTypeOblgee,
+  @cspNumberOblgr,
+  @cpaTypeOblgr
+)
+</value>
+   </data>
+   <data name="ReadDisbursementSummary">
+      <value>
+select top(1)
+  FISCAL_YEAR,
+  NON_TAF_AMOUNT,
+  THRESHOLD_DATE,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  CSP_NUMBER_OBLGEE,
+  CPA_TYPE_OBLGEE,
+  CSP_NUMBER_OBLGR,
+  CPA_TYPE_OBLGR
+from
+  CKT_DISB_SUMMARY
+where
+  (FISCAL_YEAR = @fiscalYear) and
+  (CPA_TYPE_OBLGEE = 'E') and
+  (CSP_NUMBER_OBLGEE = @cspNumberOblgee) and
+  (CPA_TYPE_OBLGR = 'R') and
+  (CSP_NUMBER_OBLGR = @cspNumberOblgr)
+</value>
+   </data>
+   <data name="ReadObligee">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = 'E') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligor">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateDisbursementSummary">
+      <value>
+update CKT_DISB_SUMMARY
+set
+  NON_TAF_AMOUNT = @nonTafAmount,
+  THRESHOLD_DATE = @thresholdDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (FISCAL_YEAR = @fiscalYear) and
+  (CSP_NUMBER_OBLGEE = @cspNumberOblgee) and
+  (CPA_TYPE_OBLGEE = @cpaTypeOblgee) and
+  (CSP_NUMBER_OBLGR = @cspNumberOblgr) and
+  (CPA_TYPE_OBLGR = @cpaTypeOblgr)
+</value>
+   </data>
+</root>

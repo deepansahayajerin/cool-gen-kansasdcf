@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInterstateCaseAssignment">
+      <value>
+insert into CKT_ASSGN_INT_CASE
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  ICS_DATE,
+  ICS_NO
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @icsDate,
+  @icsNo
+)
+</value>
+   </data>
+   <data name="ReadCaseCaseAssignment">
+      <value>
+select
+  CAS_NO,
+  REASON_CODE,
+  OVERRIDE_IND,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE
+from
+  CKT_ASSIGN_CASE
+where
+  (CAS_NO &gt;= @casNo) and
+  (DISCONTINUE_DATE = @discontinueDate)
+order by
+  CAS_NO
+</value>
+   </data>
+   <data name="ReadInterstateCaseInterstateCaseAssignment">
+      <value>
+select
+  T1.TRANS_SERIAL_NBR,
+  T1.TRANSACTION_DATE,
+  T1.KS_CASE_ID,
+  T2.REASON_CODE,
+  T2.OVERRIDE_IND,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE
+from
+  CKT_INTERST_CASE T1
+  join
+  CKT_ASSGN_INT_CASE T2
+  on
+    (T1.KS_CASE_ID = @ksCaseId) and
+    (T1.TRANS_SERIAL_NBR = T2.ICS_NO) and
+    (T1.TRANSACTION_DATE = T2.ICS_DATE) and
+    (T2.DISCONTINUE_DATE = @discontinueDate)
+order by
+  T1.TRANS_SERIAL_NBR
+</value>
+   </data>
+   <data name="ReadOfficeOfficeServiceProviderServiceProvider">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.OFF_OFFICE,
+  T2.SPD_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T3.USER_ID
+from
+  CKT_OFFICE T1
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T2.EFFECTIVE_DATE = @effectiveDate) and
+    (T2.ROLE_CODE = @roleCode) and
+    (T2.OFF_GENERATED_ID = @offGeneratedId) and
+    (T2.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T2.DISCONTINUE_DATE = @discontinueDate) and
+    (T3.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID)
+  on
+    T1.OFFICE_ID = T2.OFF_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFICE T2
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    (T1.EFFECTIVE_DATE = @effectiveDate) and
+    (T1.ROLE_CODE = @roleCode) and
+    (T1.OFF_GENERATED_ID = @offGeneratedId) and
+    (T1.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T2.OFFICE_ID = T1.OFF_GENERATED_ID) and
+    (T1.DISCONTINUE_DATE = @discontinueDate)
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+</value>
+   </data>
+   <data name="UpdateInterstateCaseAssignment">
+      <value>
+update CKT_ASSGN_INT_CASE
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (ICS_DATE = @icsDate) and
+  (ICS_NO = @icsNo)
+</value>
+   </data>
+</root>

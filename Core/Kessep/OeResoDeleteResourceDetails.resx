@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteCsePersonResource#1">
+      <value>
+update CKT_CSE_PERSON_VEH
+set
+  CPR_C_RESOURCE_NO = null,
+  CSP_C_NUMBER = null
+where
+  (CSP_C_NUMBER = @cspCNumber) and
+  (CPR_C_RESOURCE_NO = @cprCResourceNo)
+</value>
+   </data>
+   <data name="DeleteCsePersonResource#2">
+      <value>
+delete from CKT_CSE_PERSON_RES
+where
+  (CSP_NUMBER = @cspCNumber) and
+  (RESOURCE_NO = @cprCResourceNo)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonResource">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  RESOURCE_NO
+from
+  CKT_CSE_PERSON_RES
+where
+  (RESOURCE_NO = @resourceNo) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

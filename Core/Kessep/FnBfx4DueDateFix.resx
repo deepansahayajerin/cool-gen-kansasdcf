@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadApplicantRecipientCsePerson">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (TYPE = 'AR') and
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate1) and
+  (START_DATE &lt;= @startDate2) and
+  (END_DATE &gt;= @endDate)
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadChildCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.STATUS
+from
+  CKT_CASE T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T1.TYPE = 'CH') and
+    (@cspNumber1 = T1.CSP_NUMBER) and
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (T1.START_DATE &lt;= @startDate) and
+    (T2.STATUS = 'O')
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T2.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (@cspNumber2 = T3.CSP_NUMBER)
+order by
+  T1.END_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select
+  T1.NUMB
+from
+  CKT_CASE T3 with(readuncommitted)
+  join
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  on
+    (T3.NUMB = T2.CAS_NUMBER) and
+    (T3.STATUS = 'O')
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T3.NUMB = T4.CAS_NUMBER) and
+    (T4.TYPE = 'AP') and
+    (@cspNumber1 = T4.CSP_NUMBER)
+  join
+  CKT_CASE_ROLE T5 with(readuncommitted)
+  on
+    (T3.NUMB = T5.CAS_NUMBER) and
+    (T5.TYPE = 'CH') and
+    (@cspNumber2 = T5.CSP_NUMBER) and
+    (T5.START_DATE &lt;= @startDate) and
+    (T5.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePersonObligationTypeDebtCsePersonObligation">
+      <value>
+select
+  CSP_NUMBER,
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DEBT_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (CPA_TYPE = 'R') and
+  (OB_TRN_TYP = 'DE') and
+  (CPA_SUP_TYPE is not null) and
+  (CSP_SUP_NUMBER is not null) and
+  (DEBT_TYP = 'D') and
+  (CREATED_BY = 'CONVERSN')
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT,
+  CREATED_BY,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="UpdateDebtDetail">
+      <value>
+update CKT_DEBT_DTL
+set
+  DUE_DT = @dueDt,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (OTR_TYPE = @otrType)
+</value>
+   </data>
+</root>

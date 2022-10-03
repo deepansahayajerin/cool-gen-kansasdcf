@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCashReceiptDetailAddress">
+      <value>
+insert into CKT_CRDETAIL_ADDRS
+(
+  CRDETAIL_ADDRESS_I,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER
+)
+values
+(
+  @crdetailAddressI,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @zipCode5,
+  @zipCode4,
+  @zipCode3,
+  @crtIdentifier,
+  @cstIdentifier,
+  @crvIdentifier,
+  @crdIdentifier
+)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+</root>

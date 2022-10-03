@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT with(readuncommitted)
+where
+  (@cspNoAp = CSP_NO_AP) and
+  (
+    (@cspNoAr = CSP_NO_AR) or
+    (@cspNoAr = CSP_NO_CHILD)
+  )
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT with(readuncommitted)
+where
+  @cspNoAp = CSP_NO_AP
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select
+  COLL_ID,
+  APPLIED_TO_CD,
+  ADJ_IND,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  CREATED_TMST,
+  OB_TRN_AMT,
+  PGM_APPLD_TO
+from
+  CKT_COLLECTION with(readuncommitted)
+where
+  (datepart(year, CREATED_TMST) = cast(@year as smallint)) and
+  (datepart(month, CREATED_TMST) = cast(@month as smallint)) and
+  (ADJ_IND = 'N') and
+  (CONCURRENT_IND = 'N')
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAccount1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  CREATED_TMST
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonAccount2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  CREATED_TMST
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (OB_ID = @obId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="ReadObligationTransaction">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN
+where
+  (OTY_TYPE = @otyType) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OB_TRN_ID = @obTrnId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OB_TRN_TYP = 'DE')
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadProgram">
+      <value>
+select top(1)
+  min(T1.PROGRAM_ID)
+from
+  CKT_PROGRAM T1
+  join
+  CKT_PERSON_PROGRAM T2
+  on
+    (
+      T1.CODE in ('CC', 'FS', 'MA',
+        'MAI', 'MP', 'MS',
+        'SI')
+    ) and
+    (T1.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE = @discontinueDate)
+  join
+  CKT_OB_TRN T5
+  on
+    (T2.CSP_NUMBER = T5.CSP_SUP_NUMBER) and
+    (T5.CPA_SUP_TYPE is not null) and
+    (T5.OTY_TYPE = @otyType) and
+    (T5.OB_TRN_TYP = @obTrnTyp) and
+    (T5.OB_TRN_ID = @obTrnId) and
+    (T5.CPA_TYPE = @cpaType) and
+    (T5.CSP_NUMBER = @cspNumber) and
+    (T5.OBG_GENERATED_ID = @obgGeneratedId)
+</value>
+   </data>
+</root>

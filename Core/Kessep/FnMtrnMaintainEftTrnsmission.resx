@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID,
+  CHECK_NUMBER
+from
+  CKT_CASH_RECEIPT
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CHECK_NUMBER = @checkNumber)
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmission1">
+      <value>
+select top(1)
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PAY_DATE,
+  TRANSMITTAL_AMOUNT,
+  AP_SSN,
+  MEDICAL_SUPPORT_ID,
+  AP_NAME,
+  FIPS_CODE,
+  EMPLOYMENT_TERM_ID,
+  SEQUENCE_NUMBER,
+  RECEIVING_DFI_IDEN,
+  DFI_ACCT_NUMBER,
+  TRANSACTION_CODE,
+  CASE_ID,
+  TRANS_STATUS_CODE,
+  COMPANY_NAME,
+  ORIG_DFI_IDENT,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  TRANS_PROCESS_DATE,
+  PRQ_GENERATED_ID,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME,
+  COMPANY_IDENT_ICD,
+  COMPANY_IDENT_NUM,
+  COMPANY_DESC_DATE,
+  EFFECTIVE_ENTRY_DT,
+  RECV_COMPANY_NAME,
+  TRACE_NUMBER,
+  APPLICATION_IDENT,
+  COLLECTION_AMOUNT,
+  VENDOR_NUMBER,
+  CHECK_DIGIT,
+  RECV_DFI_ACCT_NUM,
+  COMPANY_ENTRY_DESC
+from
+  CKT_ELEC_FUND_TRAN
+where
+  (TRANSMISSION_TYPE = 'I') and
+  (TRANS_STATUS_CODE = 'PENDED') and
+  (TRANSMISSION_ID &gt; @transmissionId)
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmission2">
+      <value>
+select top(1)
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PAY_DATE,
+  TRANSMITTAL_AMOUNT,
+  AP_SSN,
+  MEDICAL_SUPPORT_ID,
+  AP_NAME,
+  FIPS_CODE,
+  EMPLOYMENT_TERM_ID,
+  SEQUENCE_NUMBER,
+  RECEIVING_DFI_IDEN,
+  DFI_ACCT_NUMBER,
+  TRANSACTION_CODE,
+  CASE_ID,
+  TRANS_STATUS_CODE,
+  COMPANY_NAME,
+  ORIG_DFI_IDENT,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  TRANS_PROCESS_DATE,
+  PRQ_GENERATED_ID,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME,
+  COMPANY_IDENT_ICD,
+  COMPANY_IDENT_NUM,
+  COMPANY_DESC_DATE,
+  EFFECTIVE_ENTRY_DT,
+  RECV_COMPANY_NAME,
+  TRACE_NUMBER,
+  APPLICATION_IDENT,
+  COLLECTION_AMOUNT,
+  VENDOR_NUMBER,
+  CHECK_DIGIT,
+  RECV_DFI_ACCT_NUM,
+  COMPANY_ENTRY_DESC
+from
+  CKT_ELEC_FUND_TRAN
+where
+  (TRANSMISSION_TYPE = @transmissionType) and
+  (TRANSMISSION_ID = @transmissionId)
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmission3">
+      <value>
+select top(1)
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PAY_DATE,
+  TRANSMITTAL_AMOUNT,
+  AP_SSN,
+  MEDICAL_SUPPORT_ID,
+  AP_NAME,
+  FIPS_CODE,
+  EMPLOYMENT_TERM_ID,
+  SEQUENCE_NUMBER,
+  RECEIVING_DFI_IDEN,
+  DFI_ACCT_NUMBER,
+  TRANSACTION_CODE,
+  CASE_ID,
+  TRANS_STATUS_CODE,
+  COMPANY_NAME,
+  ORIG_DFI_IDENT,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  TRANS_PROCESS_DATE,
+  PRQ_GENERATED_ID,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME,
+  COMPANY_IDENT_ICD,
+  COMPANY_IDENT_NUM,
+  COMPANY_DESC_DATE,
+  EFFECTIVE_ENTRY_DT,
+  RECV_COMPANY_NAME,
+  TRACE_NUMBER,
+  APPLICATION_IDENT,
+  COLLECTION_AMOUNT,
+  VENDOR_NUMBER,
+  CHECK_DIGIT,
+  RECV_DFI_ACCT_NUM,
+  COMPANY_ENTRY_DESC
+from
+  CKT_ELEC_FUND_TRAN
+where
+  (TRANSMISSION_TYPE = @transmissionType) and
+  (TRANSMISSION_ID = @transmissionId)
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  ACH_FORMAT_CODE,
+  TYPE,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="UpdateElectronicFundTransmission">
+      <value>
+update CKT_ELEC_FUND_TRAN
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  PAY_DATE = @payDate,
+  TRANSMITTAL_AMOUNT = @transmittalAmount,
+  AP_SSN = @apSsn,
+  MEDICAL_SUPPORT_ID = @medicalSupportId,
+  AP_NAME = @apName,
+  FIPS_CODE = @fipsCode,
+  EMPLOYMENT_TERM_ID = @employmentTermId,
+  RECEIVING_DFI_IDEN = @receivingDfiIden,
+  DFI_ACCT_NUMBER = @dfiAcctNumber,
+  TRANSACTION_CODE = @transactionCode,
+  CASE_ID = @caseId,
+  TRANS_STATUS_CODE = @transStatusCode,
+  COMPANY_NAME = @companyName,
+  ORIG_DFI_IDENT = @origDfiIdent,
+  COMPANY_IDENT_ICD = @companyIdentIcd,
+  COMPANY_IDENT_NUM = @companyIdentNum,
+  COMPANY_DESC_DATE = @companyDescDate,
+  EFFECTIVE_ENTRY_DT = @effectiveEntryDt,
+  RECV_COMPANY_NAME = @recvCompanyName,
+  TRACE_NUMBER = @traceNumber,
+  APPLICATION_IDENT = @applicationIdent,
+  COLLECTION_AMOUNT = @collectionAmount,
+  VENDOR_NUMBER = @vendorNumber,
+  CHECK_DIGIT = @checkDigit,
+  COMPANY_ENTRY_DESC = @companyEntryDesc
+where
+  (TRANSMISSION_TYPE = @transmissionType) and
+  (TRANSMISSION_ID = @transmissionId)
+</value>
+   </data>
+</root>

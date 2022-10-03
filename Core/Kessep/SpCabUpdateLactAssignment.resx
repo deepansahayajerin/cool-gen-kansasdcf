@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalActionAssigment">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID,
+  EFFECTIVE_DT,
+  END_DT,
+  REASON_CODE,
+  OVERRIDE_IND,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_LA_SERV_PROV
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (OSP_EFFECTIVE_DATE = @ospEffectiveDate) and
+  (OSP_ROLE_CODE = @ospRoleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="UpdateLegalActionAssigment">
+      <value>
+update CKT_LA_SERV_PROV
+set
+  END_DT = @endDt,
+  REASON_CODE = @reasonCode,
+  OVERRIDE_IND = @overrideInd,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

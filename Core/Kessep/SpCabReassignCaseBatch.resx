@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCaseAssignment">
+      <value>
+insert into CKT_ASSIGN_CASE
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @casNo
+)
+</value>
+   </data>
+   <data name="UpdateCaseAssignment">
+      <value>
+update CKT_ASSIGN_CASE
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+</root>

@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadLegalActionAppeal">
+      <value>
+select top(1)
+  LA_APPEAL_ID,
+  APL_ID,
+  LGA_ID
+from
+  CKT_LEG_ACT_APPEAL
+where
+  @lgaId = LGA_ID
+</value>
+   </data>
+   <data name="ReadLegalActionPersonLegalAction">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.[ROLE],
+  T1.END_DT,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T2.CLASSIFICATION,
+  T2.ACTION_TAKEN,
+  T2.FILED_DT,
+  T2.COURT_CASE_NO,
+  T2.STANDARD_NO,
+  T2.CREATED_TSTAMP,
+  T2.TRB_ID,
+  T2.SYSTEM_GEN_IND
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER)
+order by
+  T2.CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalActionPersonLegalActionDetailLegalAction">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.[ROLE],
+  T1.END_DT,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T2.FRQ_PRD_CD,
+  T2.OTY_ID,
+  T3.CLASSIFICATION,
+  T3.ACTION_TAKEN,
+  T3.FILED_DT,
+  T3.COURT_CASE_NO,
+  T3.STANDARD_NO,
+  T3.CREATED_TSTAMP,
+  T3.TRB_ID,
+  T3.SYSTEM_GEN_IND
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_LEGAL_ACT_DTL T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.LA_DETAIL_NO = T1.LAD_R_NUMBER) and
+    (T2.LGA_IDENTIFIER = T1.LGA_R_IDENTIFIER)
+  on
+    T3.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER
+order by
+  T3.CREATED_TSTAMP desc,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T1.LA_PERSON_ID
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  JUDICIAL_DISTRICT,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

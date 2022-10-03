@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT_CD,
+  DENORM_NUMERIC_12,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  CASE_UNIT_NUM,
+  CREATED_BY,
+  DETAIL
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderAlert">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  TYPE_CODE,
+  MESSAGE,
+  DESCRIPTION,
+  DISTRIBUTION_DATE,
+  SITUATION_IDENTIFI,
+  USER_ID,
+  CREATED_BY,
+  INF_ID,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE
+from
+  CKT_OSP_ALERT
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderServiceProviderOffice">
+      <value>
+select top(1)
+  cast(@spdId as integer),
+  cast(@offId as smallint),
+  cast(@ospCode as char(2)),
+  cast(@ospDate as date),
+  T2.SERVICE_PRVDER_ID,
+  T2.USER_ID,
+  T3.OFFICE_ID,
+  T3.OFF_OFFICE
+from
+  CKT_SERVICE_PRVDER T2,
+  CKT_OFFICE T3
+where
+  (T2.SERVICE_PRVDER_ID = @spdId) and
+  (T3.OFFICE_ID = @offId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateAdministrativeActCertification">
+      <value>
+update CKT_ADMIN_APPEAL
+set
+  CPA_R_TYPE = @cpaRType,
+  CSP_R_NUMBER = @cspRNumber,
+  AAC_R_TYPE = @aacRType,
+  AAC_R_TAKEN_DATE = @aacRTakenDate,
+  AAC_TANF_CODE = @aacTanfCode
+where
+  ADMIN_APPEAL_ID = @adminAppealId
+</value>
+   </data>
+   <data name="AssociateObligationAdministrativeAction">
+      <value>
+update CKT_ADMIN_APPEAL
+set
+  AAT_TYPE = @aatType,
+  OBG_GENERATED_ID = @obgGeneratedId,
+  CSP_NUMBER = @cspNumber,
+  CPA_TYPE = @cpaType,
+  OAA_TAKEN_DATE = @oaaTakenDate,
+  OTY_ID = @otyId
+where
+  ADMIN_APPEAL_ID = @adminAppealId
+</value>
+   </data>
+   <data name="CreateAdministrativeAppeal">
+      <value>
+insert into CKT_ADMIN_APPEAL
+(
+  ADMIN_APPEAL_ID,
+  ADMIN_APPEAL_NO,
+  TYPE,
+  REQUEST_DT,
+  RECEIVED_DT,
+  RESPONDENT,
+  APPELLANT_LAST_NM,
+  APPELLANT_FIRST_NM,
+  APPELLANT_MI,
+  APPELLANT_SUFFIX,
+  APPELLANT_REL,
+  ADMIN_APPEAL_DT,
+  ADMIN_ORDER_DT,
+  WITHDRAW_DT,
+  REQ_FURTHER_REV_DT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  CSP_Q_NUMBER,
+  CPA_R_TYPE,
+  CSP_R_NUMBER,
+  AAC_R_TYPE,
+  AAC_R_TAKEN_DATE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OAA_TAKEN_DATE,
+  OTY_ID,
+  JUD_REVIEW_IND,
+  REASON,
+  OUTCOME,
+  REVIEW_OUTCOME,
+  WITHDRAW_REASON,
+  REQ_FURTHER_REVIEW,
+  ADMIN_REVIEW_STATE,
+  AAC_TANF_CODE
+)
+values
+(
+  @adminAppealId,
+  @adminAppealNo,
+  @type,
+  @requestDt,
+  @receivedDt,
+  @respondent,
+  @appellantLastNm,
+  @appellantFirstNm,
+  @appellantMi,
+  @appellantSuffix,
+  @appellantRel,
+  @adminAppealDt,
+  @adminOrderDt,
+  @withdrawDt,
+  @reqFurtherRevDt,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  @cspQNumber,
+  @cpaRType,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  @cpaType,
+  null,
+  null,
+  @judReviewInd,
+  @reason,
+  @outcome,
+  @reviewOutcome,
+  @withdrawReason,
+  @reqFurtherReview,
+  @adminReviewState,
+  null
+)
+</value>
+   </data>
+   <data name="ReadAdministrativeActCertification">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (CPA_TYPE = 'R') and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID,
+  ADMIN_APPEAL_NO,
+  TYPE,
+  REQUEST_DT,
+  RECEIVED_DT,
+  RESPONDENT,
+  APPELLANT_LAST_NM,
+  APPELLANT_FIRST_NM,
+  APPELLANT_MI,
+  APPELLANT_SUFFIX,
+  APPELLANT_REL,
+  ADMIN_APPEAL_DT,
+  ADMIN_ORDER_DT,
+  WITHDRAW_DT,
+  REQ_FURTHER_REV_DT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_Q_NUMBER,
+  CPA_R_TYPE,
+  CSP_R_NUMBER,
+  AAC_R_TYPE,
+  AAC_R_TAKEN_DATE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OAA_TAKEN_DATE,
+  OTY_ID,
+  JUD_REVIEW_IND,
+  REASON,
+  OUTCOME,
+  REVIEW_OUTCOME,
+  WITHDRAW_REASON,
+  REQ_FURTHER_REVIEW,
+  ADMIN_REVIEW_STATE,
+  AAC_TANF_CODE
+from
+  CKT_ADMIN_APPEAL
+where
+  (@cspQNumber = CSP_Q_NUMBER) and
+  (TYPE = @type) and
+  (REQUEST_DT = @requestDt)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadObligationAdministrativeAction">
+      <value>
+select top(1)
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  TAKEN_DT
+from
+  CKT_OBLIG_ADMIN_AC
+where
+  (TAKEN_DT = @takenDt) and
+  (AAT_TYPE = @aatType) and
+  (CPA_TYPE = 'R') and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

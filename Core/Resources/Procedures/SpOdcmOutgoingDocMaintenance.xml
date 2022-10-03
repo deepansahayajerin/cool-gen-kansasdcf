@@ -1,0 +1,77 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpOdcmOutgoingDocMaintenance"
+           program-name="SWEODCMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpOdcmOutgoingDocMaintenance"
+           transaction="SR4E"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_DDOC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpDdocDeadDocument"
+       send-command-type="current">
+      <map from="Selected" to="Infrastructure"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected1" to="FromPrompt"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <return-map from="ReturnDoc" to="ReturnDoc"/>
+   </on>
+   <map from="FilterServiceProvider" to="FilterServiceProvider"/>
+   <map from="FilterPreviousServiceProvider" to="FilterPreviousServiceProvider"/>
+   <map from="ServiceProviderName" to="ServiceProviderName"/>
+   <map from="FilterPreviousOutgoingDocument"
+        to="FilterPreviousOutgoingDocument"/>
+   <map from="FilterOutgoingDocument" to="FilterOutgoingDocument"/>
+   <map from="FilterAll" to="FilterAll"/>
+   <map from="FilterPreviousAll" to="FilterPreviousAll"/>
+   <map from="Scrolling" to="Scrolling"/>
+   <map from="Export1.Ginfrastructure" to="Import1.Ginfrastructure"/>
+   <map from="Export1.Gcommon" to="Import1.Gcommon"/>
+   <map from="Export1.Gdocument" to="Import1.Gdocument"/>
+   <map from="Export1.GoutgoingDocument" to="Import1.GoutgoingDocument"/>
+   <map from="HiddenPageKeys.GexportHidden" to="HiddenPageKeys.GimportHidden"/>
+   <map from="FilterDocument" to="FilterDocument"/>
+   <map from="FilterPreviousDocument" to="FilterPreviousDocument"/>
+   <map from="FilterPreviousCase" to="FilterPreviousCase"/>
+   <map from="FilterCase" to="FilterCase"/>
+   <map from="FilterPreviousCsePerson" to="FilterPreviousCsePerson"/>
+   <map from="FilterCsePerson" to="FilterCsePerson"/>
+   <map from="PromptDocm" to="PromtDocm"/>
+   <map from="PromptSvpl" to="PromptSvpl"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+   <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+   <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+   <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+   <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+   <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+   <map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+   <map from="Hidden.MiscText1" to="Hidden.MiscText1"/>
+   <map from="Hidden.MiscText2" to="Hidden.MiscText2"/>
+   <map from="Hidden.MiscNum1" to="Hidden.MiscNum1"/>
+   <map from="Hidden.MiscNum2" to="Hidden.MiscNum2"/>
+   <map from="Hidden.MiscNum1V2" to="Hidden.MiscNum1V2"/>
+   <map from="Hidden.MiscNum2V2" to="Hidden.MiscNum2V2"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInterstateRequestAttachment">
+      <value>
+insert into CKT_INT_RQST_ATTCH
+(
+  INT_H_GENERATED_ID,
+  SYS_GEN_SEQ_NBR,
+  SENT_DATE,
+  REQUEST_DATE,
+  RECEIVED_DATE,
+  LAST_UPDATED_TIMES,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  INCOMPLETE_IND,
+  DATA_TYPE_CODE,
+  NOTE
+)
+values
+(
+  @intHGeneratedId,
+  @sysGenSeqNbr,
+  @sentDate,
+  @requestDate,
+  @receivedDate,
+  @lastUpdatedTimes,
+  @lastUpdatedBy,
+  @createdTimestamp,
+  @createdBy,
+  @incompleteInd,
+  @dataTypeCode,
+  @note
+)
+</value>
+   </data>
+   <data name="ReadAbsentParent">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadInterstateRequestAttachment1">
+      <value>
+select top(1)
+  INT_H_GENERATED_ID,
+  SYS_GEN_SEQ_NBR,
+  SENT_DATE,
+  REQUEST_DATE,
+  RECEIVED_DATE,
+  LAST_UPDATED_TIMES,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DATA_TYPE_CODE,
+  NOTE
+from
+  CKT_INT_RQST_ATTCH
+where
+  @intHGeneratedId = INT_H_GENERATED_ID
+order by
+  SYS_GEN_SEQ_NBR desc
+</value>
+   </data>
+   <data name="ReadInterstateRequestAttachment2">
+      <value>
+select top(1)
+  INT_H_GENERATED_ID,
+  SYS_GEN_SEQ_NBR,
+  SENT_DATE,
+  REQUEST_DATE,
+  RECEIVED_DATE,
+  LAST_UPDATED_TIMES,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DATA_TYPE_CODE,
+  NOTE
+from
+  CKT_INT_RQST_ATTCH
+where
+  (@intHGeneratedId = INT_H_GENERATED_ID) and
+  (DATA_TYPE_CODE = @dataTypeCode) and
+  (
+    (
+      (SENT_DATE = @sentDate) and
+      (cast(@sentDate as date) &gt; cast(@date as date))
+    ) or
+    (
+      (REQUEST_DATE = @requestDate) and
+      (cast(@requestDate as date) &gt; cast(@date as date))
+    )
+  )
+</value>
+   </data>
+</root>

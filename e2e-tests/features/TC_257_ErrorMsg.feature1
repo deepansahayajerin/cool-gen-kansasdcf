@@ -1,0 +1,32 @@
+Feature: ErrorMsg
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "DEBT" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - LIST DEBT ACTIVITY BY AP/PAYOR - DEBT" window appears
+
+    When user enters "<AP_PAYOR>" in "AP/Payor"
+    And user presses "F2"
+
+    When user enters "S" in first field under text "Sel"
+    And user presses "Shift+F5"
+    Then "CSE - RECORD INDIVIDUAL DEBT ADJUSTMENTS - DBAJ" window appears
+    And enters "<ADJUSTMENT_AMOUNT>" in "Adjustment Amount"
+    And enters "<ADJUSTMENT_REASON>" in "Adjustment Reason"
+    And enters "<ADJUSTMENT_IND>" in "Inc/Dec Amnt (+/-)"
+    And enters "<DESCRIPTION>" in first field under text "Description"
+    And presses "F5"
+    Then message  "FN0000: Debt adjustment successful." is displayed
+
+
+
+    Examples:
+      | AP_PAYOR | ADJUSTMENT_AMOUNT | ADJUSTMENT_REASON | ADJUSTMENT_IND | DESCRIPTION |
+      | 132      | 30                | DA IOA            | +              | Testing     |
+
+

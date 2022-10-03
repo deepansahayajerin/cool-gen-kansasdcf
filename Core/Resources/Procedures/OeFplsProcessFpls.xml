@@ -1,0 +1,176 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeFplsProcessFpls"
+           program-name="SWEFPLSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeFplsProcessFpls"
+           transaction="SR5Q"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="StartingCsePersonsWorkSet.FormattedName"
+           to="Selected.FormattedName"/>
+      <map from="StartingCsePersonsWorkSet.Number" to="Selected.Number"/>
+      <map from="StartingCsePersonsWorkSet.Ssn" to="Selected.Ssn"/>
+      <map from="StartingCsePersonsWorkSet.FirstName" to="Selected.FirstName"/>
+      <map from="StartingCsePersonsWorkSet.MiddleInitial"
+           to="Selected.MiddleInitial"/>
+      <map from="StartingCsePersonsWorkSet.LastName" to="Selected.LastName"/>
+      <map from="StartingCase" to="Next"/>
+      <return-map from="Selected" to="StartingCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeAlomLocateInterfacesMenu"
+       send-command="XXFMMENU">
+      <map from="StartingCase" to="Start"/>
+      <map from="StartingCsePerson" to="Starting"/>
+      <map from="StartingCsePersonsWorkSet" to="PersonName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PROCESS_FPLS_PAGE2"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFPL2"
+       to="OeFpl2ProcessFpls"
+       send-command="DISPLAY">
+      <map from="StartingCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="FplsLocateResponse" to="FplsLocateResponse"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="StartingCase" to="Case1"/>
+      <return-map from="Case1" to="StartingCase"/>
+      <return-map from="Selected.Number" to="StartingCsePersonsWorkSet.Number"/>
+      <return-map from="Selected.FormattedName"
+                  to="StartingCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADDRESS_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiAddrAddressMaintenance"
+       send-command="FPLS">
+      <map from="Addr1.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="CsePersonAddress.Street1" to="EmptyAddr.Street1"/>
+      <map from="CsePersonAddress.Street2" to="EmptyAddr.Street2"/>
+      <map from="CsePersonAddress.City" to="EmptyAddr.City"/>
+      <map from="CsePersonAddress.LocationType" to="EmptyAddr.LocationType"/>
+      <map from="CsePersonAddress.State" to="EmptyAddr.State"/>
+      <map from="CsePersonAddress.ZipCode" to="EmptyAddr.ZipCode"/>
+      <map from="CsePersonAddress.Zip4" to="EmptyAddr.Zip4"/>
+      <map from="StartingCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_INCOME_SOURCE_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETINCS"
+       to="SiIncsIncomeSourceDetails"
+       send-command="DISPSRC">
+      <map from="StartingCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="AddressFormatFlag" to="AddressFormatFlag"/>
+   <map from="Page2Message" to="Page2Message"/>
+   <map from="StartingCsePerson" to="StartingCsePerson"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="FplsResp" to="FplsResp"/>
+   <map from="FplsAgency" to="FplsAgency"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="DodServiceDesc" to="DodServiceDesc"/>
+   <map from="DodPayGradeDesc" to="DodPayGradeDesc"/>
+   <map from="DodStatusDesc" to="DodStatusDesc"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="CsePersonPrompt" to="CsePersonPrompt"/>
+   <map from="ErrorCodeDesc" to="ErrorCodeDesc"/>
+   <map from="SesaRespondingState" to="SesaRespondingState"/>
+   <map from="UpdatedBy" to="UpdatedBy"/>
+   <map from="StartingCase" to="StartingCase"/>
+   <map from="FplsAddr.FplsAddrGroupDet" to="FplsAddr.FplsAddrGroupDet"/>
+   <map from="FplsLocateResponse.AddressFormatInd"
+        to="FplsLocateResponse.AddressFormatInd"/>
+   <map from="FplsLocateResponse.AddressIndType"
+        to="FplsLocateResponse.AddressIndType"/>
+   <map from="FplsLocateResponse.DodDateOfDeathOrSeparation"
+        to="FplsLocateResponse.DodDateOfDeathOrSeparation"/>
+   <map from="FplsLocateRequest.TransactionStatus"
+        to="FplsLocateRequest.TransactionStatus"/>
+   <map from="FplsLocateRequest.Identifier" to="FplsLocateRequest.Identifier"/>
+   <map from="StartingCsePersonsWorkSet.FormattedName"
+        to="StartingCsePersonsWorkSet.FormattedName"/>
+   <map from="FplsLocateRequest.TypeOfCase" to="FplsLocateRequest.TypeOfCase"/>
+   <map from="FplsLocateRequest.UsersField" to="FplsLocateRequest.UsersField"/>
+   <map from="FplsLocateResponse.Identifier" to="FplsLocateResponse.Identifier"/>
+   <map from="FplsLocateResponse.AgencyCode" to="FplsLocateResponse.AgencyCode"/>
+   <map from="FplsLocateResponse.DateReceived"
+        to="FplsLocateResponse.DateReceived"/>
+   <map from="FplsLocateResponse.DateOfAddress"
+        to="FplsLocateResponse.DateOfAddress"/>
+   <map from="FplsLocateResponse.IrsTaxYear" to="FplsLocateResponse.IrsTaxYear"/>
+   <map from="FplsLocateResponse.ApNameReturned"
+        to="FplsLocateResponse.ApNameReturned"/>
+   <map from="FplsLocateResponse.SesaRespondingState"
+        to="FplsLocateResponse.SesaRespondingState"/>
+   <map from="FplsLocateResponse.SesaWageClaimInd"
+        to="FplsLocateResponse.SesaWageClaimInd"/>
+   <map from="FplsLocateResponse.SesaWageAmount"
+        to="FplsLocateResponse.SesaWageAmount"/>
+   <map from="FplsLocateResponse.ResponseCode"
+        to="FplsLocateResponse.ResponseCode"/>
+   <map from="FplsLocateRequest.RequestSentDate"
+        to="FplsLocateRequest.RequestSentDate"/>
+   <map from="FplsLocateResponse.SsnReturned"
+        to="FplsLocateResponse.SsnReturned"/>
+   <map from="FplsLocateRequest.TransactionError"
+        to="FplsLocateRequest.TransactionError"/>
+   <map from="DateUpdated.Date" to="DateUpdated.Date"/>
+   <map from="StartingCsePersonsWorkSet.Ssn" to="StartingCsePersonsWorkSet.Ssn"/>
+   <map from="FplsLocateRequest.StationNumber"
+        to="FplsLocateRequest.StationNumber"/>
+   <map from="FplsLocateRequest.TransactionType"
+        to="FplsLocateRequest.TransactionType"/>
+   <map from="FplsLocateRequest.CaseId" to="FplsLocateRequest.CaseId"/>
+   <map from="FplsLocateRequest.ZdelCreatUserId"
+        to="FplsLocateRequest.ZdelCreatUserId"/>
+   <map from="FplsLocateResponse.ReturnedAddress"
+        to="FplsLocateResponse.ReturnedAddress"/>
+   <map from="FplsLocateResponse.NprcEmpdOrSepd"
+        to="FplsLocateResponse.NprcEmpdOrSepd"/>
+   <map from="FplsLocateResponse.SsaFederalOrMilitary"
+        to="FplsLocateResponse.SsaFederalOrMilitary"/>
+   <map from="FplsLocateResponse.SsaCorpDivision"
+        to="FplsLocateResponse.SsaCorpDivision"/>
+   <map from="FplsLocateResponse.MbrBenefitAmount"
+        to="FplsLocateResponse.MbrBenefitAmount"/>
+   <map from="FplsLocateResponse.MbrDateOfDeath"
+        to="FplsLocateResponse.MbrDateOfDeath"/>
+   <map from="FplsLocateResponse.VaBenefitCode"
+        to="FplsLocateResponse.VaBenefitCode"/>
+   <map from="FplsLocateResponse.VaDateOfDeath"
+        to="FplsLocateResponse.VaDateOfDeath"/>
+   <map from="FplsLocateResponse.VaAmtOfAwardEffectiveDate"
+        to="FplsLocateResponse.VaAmtOfAwardEffectiveDate"/>
+   <map from="FplsLocateResponse.VaAmountOfAward"
+        to="FplsLocateResponse.VaAmountOfAward"/>
+   <map from="FplsLocateResponse.VaSuspenseCode"
+        to="FplsLocateResponse.VaSuspenseCode"/>
+   <map from="FplsLocateResponse.VaIncarcerationCode"
+        to="FplsLocateResponse.VaIncarcerationCode"/>
+   <map from="FplsLocateResponse.VaRetirementPayCode"
+        to="FplsLocateResponse.VaRetirementPayCode"/>
+   <map from="StartingCsePersonsWorkSet.Number"
+        to="StartingCsePersonsWorkSet.Number"/>
+   <map from="FplsLocateResponse.DodAnnualSalary"
+        to="FplsLocateResponse.DodAnnualSalary"/>
+   <map from="FplsLocateResponse.DodDateOfBirth"
+        to="FplsLocateResponse.DodDateOfBirth"/>
+   <map from="FplsLocateResponse.SubmittingOffice"
+        to="FplsLocateResponse.SubmittingOffice"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

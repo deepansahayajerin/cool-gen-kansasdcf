@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteAppointment#1">
+      <value>
+update CKT_APPOINTMENT
+set
+  APP_TSTAMP = null
+where
+  APP_TSTAMP = @appTstamp
+</value>
+   </data>
+   <data name="DeleteAppointment#2">
+      <value>
+delete from CKT_APPOINTMENT
+where
+  CREATED_TIMESTAMP = @appTstamp
+</value>
+   </data>
+   <data name="ReadAppointment1">
+      <value>
+select top(1)
+  [RESULT],
+  CREATED_TIMESTAMP,
+  INF_ID,
+  APP_TSTAMP
+from
+  CKT_APPOINTMENT
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadAppointment2">
+      <value>
+select top(1)
+  [RESULT],
+  CREATED_TIMESTAMP,
+  APP_TSTAMP
+from
+  CKT_APPOINTMENT
+where
+  (@appTstamp = APP_TSTAMP) or
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+</root>

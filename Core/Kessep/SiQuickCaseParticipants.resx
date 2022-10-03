@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME,
+  T2.FAMILY_VIOL_IND,
+  T2.OUT_OF_WEDLOCK
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.CAS_NUMBER = @casNumber) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE in ('AP', 'AR', 'CH'))
+order by
+  T1.TYPE,
+  T1.CSP_NUMBER,
+  T1.START_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonDetail">
+      <value>
+select top(1)
+  PERSON_NUMBER,
+  FIRST_NAME,
+  LAST_NAME,
+  MIDDLE_INITIAL,
+  DATE_OF_BIRTH,
+  SSN
+from
+  CKT_CSE_PERSON_DTL
+where
+  PERSON_NUMBER = @personNumber
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (CAS_I_NUMBER = @casINumber) and
+  (OTHR_STATE_FIPS_CD = @othrStateFipsCd)
+</value>
+   </data>
+</root>

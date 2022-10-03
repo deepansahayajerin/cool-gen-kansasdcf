@@ -1,0 +1,222 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="QaQchdQuickChildData"
+           program-name="SWEQCHDP"
+           class="Gov.Kansas.DCF.Cse.Kessep.QaQchdQuickChildData"
+           transaction="SRQU"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_COMN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMN"
+       to="SiComnCaseCompositionByName"
+       send-command="DISPLAY">
+      <map from="ComnLink.Number" to="Search.Number"/>
+      <map from="ComnLink.Sex" to="Search.Sex"/>
+      <map from="ComnLink.Ssn" to="Search.Ssn"/>
+      <map from="ComnLink.FirstName" to="Search.FirstName"/>
+      <map from="ComnLink.MiddleInitial" to="Search.MiddleInitial"/>
+      <map from="ComnLink.FormattedName" to="Search.FormattedName"/>
+      <map from="ComnLink.LastName" to="Search.LastName"/>
+      <map from="Next" to="Next"/>
+      <return-map from="HiddenSelectedCase" to="Next"/>
+      <return-map from="HiddenSelectedCsePersonsWorkSet.Number" to="ComnLink.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="QaQarmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_ROLE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiRoleCaseRoleMaintenance"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <return-map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HICP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeHicpInsuranceCovByPerson"
+       send-command="DISPLAY">
+      <map from="SelectedChild" to="CsePerson"/>
+      <map from="Next" to="Case1"/>
+      <map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="ApCsePersonsWorkSet" to="Selected"/>
+      <map from="Next" to="Next"/>
+      <return-map from="Selected" to="FromComp"/>
+      <return-map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CHDS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiChdsChildDetails"
+       send-command="DISPLAY">
+      <map from="SelectCh.Number" to="ChCsePersonsWorkSet.Number"/>
+      <map from="ApCsePersonsWorkSet.Number" to="Ap.Number"/>
+      <map from="ApCsePersonsWorkSet.FirstName" to="Ap.FirstName"/>
+      <map from="ApCsePersonsWorkSet.MiddleInitial" to="Ap.MiddleInitial"/>
+      <map from="ApCsePersonsWorkSet.FormattedName" to="Ap.FormattedName"/>
+      <map from="Ar.Number" to="Ar.Number"/>
+      <map from="Ar.FormattedName" to="Ar.FormattedName"/>
+      <map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ZD_ECO_XFR_TO_PREV_SCRN ECO_XFR_TO_PREV"
+       action="transfer"
+       to="QaQardQuickArData"
+       send-command="DISPLAY">
+      <map from="HeaderLine" to="HeaderLine"/>
+      <map from="ArMultiCasesPrompt" to="ArOtherCasePrompt"/>
+      <map from="ApMultiCasesPrompt" to="ApOtherCasePrompt"/>
+      <map from="ArMultiCases" to="ArMultiCases"/>
+      <map from="AltSsnAlias" to="AltSsnAlias"/>
+      <map from="ApMultiCases" to="ApMultiCases"/>
+      <map from="Program" to="Program"/>
+      <map from="CaseFuncWorkSet" to="CaseFuncWorkSet"/>
+      <map from="ApCsePersonsWorkSet" to="Ap"/>
+      <map from="Ar" to="ArCsePersonsWorkSet"/>
+      <map from="Office" to="Office"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="CaseCloseRsn" to="ClsRsn"/>
+      <map from="Next" to="Next"/>
+      <map from="FromComp.Number" to="ApSelected.Number"/>
+      <map from="FromComp.FormattedName" to="ApSelected.FormattedName"/>
+      <map from="ProgCodeDescription" to="ProgCodeDescription"/>
+      <map from="MultipleAps" to="HiddenMultipleAps"/>
+      <map from="Case1.Number" to="Case1.Number"/>
+      <map from="Case1.ClosureReason" to="Case1.ClosureReason"/>
+      <map from="Case1.Status" to="Case1.Status"/>
+      <map from="Case1.CseOpenDate" to="Case1.CseOpenDate"/>
+      <map from="Case1.StatusDate" to="Case1.StatusDate"/>
+      <map from="Standard" to="Standard"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_NEXT_SCRN"
+       action="transfer"
+       to="QaQdbtQuickDebtDetail"
+       send-command="DISPLAY">
+      <map from="HeaderLine" to="HeaderLine"/>
+      <map from="ComnLink" to="ComnLink"/>
+      <map from="ApMultiCasesPrompt" to="ApMultiCasesPrompt"/>
+      <map from="MultipleAps" to="MultipleAps"/>
+      <map from="ApMultiCases" to="ApMultiCases"/>
+      <map from="ApClient" to="ApClient"/>
+      <map from="Next" to="Next"/>
+      <map from="FromComp" to="FromComp"/>
+      <map from="ApCaseRole" to="ArCaseRole"/>
+      <map from="ArMultiCasesPrompt" to="ArMultiCasesPrompt"/>
+      <map from="ArMultiCases" to="ArMultiCases"/>
+      <map from="ApCaseRole" to="ApCaseRole"/>
+      <map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+      <map from="Ar" to="ArCsePersonsWorkSet"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Office" to="Office"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CURA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeCuraMembersUra"
+       send-command="DISPLAY">
+      <map from="SelectedChild" to="SearchCsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ALT_SSN_AND_ALIAS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiAltsAlternateSsnAndAlias"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PEPR"
+       action="link"
+       return-when="ACO_NE0000_RETURN ECO_LNK_RETURN_FROM_LINK"
+       return-command="DISPLAY"
+       to="SiPeprPersonProgramMaint"
+       send-command="DISPLAY">
+      <map from="SelectCh" to="HiddenSelChild"/>
+      <map from="Next" to="Next"/>
+      <map from="ApCsePersonsWorkSet.Number" to="Ap.Number"/>
+      <map from="ApCsePersonsWorkSet.FirstName" to="Ap.FirstName"/>
+      <map from="ApCsePersonsWorkSet.MiddleInitial" to="Ap.MiddleInitial"/>
+      <map from="ApCsePersonsWorkSet.FormattedName" to="Ap.FormattedName"/>
+      <map from="Ar.Number" to="Ar.Number"/>
+      <map from="Ar.FormattedName" to="Ar.FormattedName"/>
+      <map from="SelectCh.Number" to="CsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_INSURANCE_COVERA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeHiplInsurCovByPersonList"
+       send-command="DISPLAY">
+      <map from="SelectedChild" to="CsePerson"/>
+      <map from="SelectCh.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="Case1" to="Case1"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ApPrompt" to="ApPrompt"/>
+   <map from="CaseFuncWorkSet" to="CaseFuncWorkSet"/>
+   <map from="MultipleAps" to="MultipleAps"/>
+   <map from="Next" to="Next"/>
+   <map from="Program" to="Program"/>
+   <map from="ProgCodeDescription" to="ProgCodeDescription"/>
+   <map from="CaseCloseRsn" to="CaseCloseRsn"/>
+   <map from="ApMultiCasesPrompt" to="ApMultiCasesPrompt"/>
+   <map from="AltSsnAlias" to="AltSsnAlias"/>
+   <map from="ArMultiCases" to="ArMultiCases"/>
+   <map from="ArMultiCasesPrompt" to="ArMultiCasesPrompt"/>
+   <map from="ApMultiCases" to="ApMultiCases"/>
+   <map from="Office" to="Office"/>
+   <map from="Child.Gcommon" to="Child.Gcommon"/>
+   <map from="Child.GexportCh" to="Child.GimportCh"/>
+   <map from="Child.Gprogram" to="Child.Gprogram"/>
+   <map from="Child.GexportStatus" to="Child.GimportStatus"/>
+   <map from="HiddenPage" to="HiddenPage"/>
+   <map from="PageKeys.GexportPageKeysCsePersonsWorkSet"
+        to="PageKeys.GimportPageKeysCsePersonsWorkSet"/>
+   <map from="PageKeys.GexportPageKeysWorkArea"
+        to="PageKeys.GimportPageKeysWorkArea"/>
+   <map from="Child.GexportAbsenceRsn" to="Child.GimportAbsenceRsn"/>
+   <map from="Child.GexportRelToAr" to="Child.GimportRelToAr"/>
+   <map from="Child.GexportChHealthInsuInd" to="Child.GimportChHealthInsuInd"/>
+   <map from="ApClient.Number" to="ApClient.Number"/>
+   <map from="ApClient.CurrentMaritalStatus" to="ApClient.CurrentMaritalStatus"/>
+   <map from="ApCsePersonsWorkSet.Number" to="ApCsePersonsWorkSet.Number"/>
+   <map from="ApCsePersonsWorkSet.FormattedName"
+        to="ApCsePersonsWorkSet.FormattedName"/>
+   <map from="ApCsePersonsWorkSet.Ssn" to="ApCsePersonsWorkSet.Ssn"/>
+   <map from="Ar.Number" to="ArCsePersonsWorkSet.Number"/>
+   <map from="Ar.FormattedName" to="ArCsePersonsWorkSet.FormattedName"/>
+   <map from="Ar.Ssn" to="ArCsePersonsWorkSet.Ssn"/>
+   <map from="Case1.ClosureReason" to="Case1.ClosureReason"/>
+   <map from="Case1.Number" to="Case1.Number"/>
+   <map from="Case1.Status" to="Case1.Status"/>
+   <map from="Case1.StatusDate" to="Case1.StatusDate"/>
+   <map from="Case1.CseOpenDate" to="Case1.CseOpenDate"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.LastTran" to="Hidden.LastTran"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="ServiceProvider.LastName" to="ServiceProvider.LastName"/>
+   <map from="Child.GcaseRole.HealthInsuranceIndicator"
+        to="Child.GcaseRole.HealthInsuranceIndicator"/>
+   <map from="Child.GcaseRole.AbsenceReasonCode"
+        to="Child.GcaseRole.AbsenceReasonCode"/>
+   <map from="Child.GcaseRole.ArWaivedInsurance"
+        to="Child.GcaseRole.ArWaivedInsurance"/>
+   <map from="Child.GcaseRole.DateOfEmancipation"
+        to="Child.GcaseRole.DateOfEmancipation"/>
+   <map from="Child.GcaseRole.RelToAr" to="Child.GcaseRole.RelToAr"/>
+</procedure>

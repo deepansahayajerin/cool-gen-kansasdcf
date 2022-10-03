@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  FTT_IDENTIFIER = @fttIdentifier,
+  PCA_CODE = @pcaCode,
+  PCA_EFFECTIVE_DATE = @pcaEffectiveDate,
+  FUN_IDENTIFIER = @funIdentifier,
+  FTR_IDENTIFIER = @ftrIdentifier
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="CreateCashReceiptAudit">
+      <value>
+insert into CKT_CSH_RCPT_AUDIT
+(
+  RECEIPT_AMOUNT,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  PRIOR_TRANSN_AMT,
+  PRIOR_ADJ_AMT,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER
+)
+values
+(
+  @receiptAmount,
+  @lastUpdatedTmst,
+  @lastUpdatedBy,
+  @priorTransnAmt,
+  @priorAdjAmt,
+  @crvIdentifier,
+  @cstIdentifier,
+  @crtIdentifier
+)
+</value>
+   </data>
+   <data name="DisassociateCashReceipt#1">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  FTT_IDENTIFIER = null,
+  PCA_CODE = null,
+  PCA_EFFECTIVE_DATE = null,
+  FUN_IDENTIFIER = null,
+  FTR_IDENTIFIER = null
+where
+  (CRV_IDENTIFIER = @crvIdentifier1) and
+  (CST_IDENTIFIER = @cstIdentifier1) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="DisassociateCashReceipt#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_CASH_RECEIPT T1
+where
+  (T1.CRV_IDENTIFIER = @crvIdentifier2) and
+  (T1.CST_IDENTIFIER = @cstIdentifier2)
+</value>
+   </data>
+   <data name="DisassociateCashReceipt#3">
+      <value>
+delete from CKT_CR_EVENT
+where
+  (CREVENT_ID = @crvIdentifier2) and
+  (CST_IDENTIFIER = @cstIdentifier2)
+</value>
+   </data>
+   <data name="ReadCashReceipt1">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID,
+  DEPOSIT_RLSE_DT,
+  BAL_TMST,
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FTR_IDENTIFIER
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceipt2">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  RECEIPT_DATE,
+  CHECK_TYPE,
+  CHECK_NUMBER,
+  CHECK_DATE,
+  RECEIVED_DATE,
+  DEPOSIT_RLSE_DT,
+  PAYOR_ORGANIZATION,
+  PAYOR_FIRST_NAME,
+  PAYOR_MIDDLE_NAME,
+  PAYOR_LAST_NAME,
+  BAL_TMST,
+  TOTAL_CASH_TRANSAC,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FTR_IDENTIFIER,
+  CASH_BAL_AMT,
+  CASH_BAL_RSN,
+  CASH_DUE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  NOTE
+from
+  CKT_CASH_RECEIPT
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn">
+      <value>
+select top(1)
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRT_I_IDENTIFIER,
+  T1.CST_I_IDENTIFIER,
+  T1.CRV_I_IDENTIFIER,
+  T1.CRR_IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T2.CR_RLN_RSN_ID,
+  T2.CODE
+from
+  CKT_CRBAL_ADJ T1,
+  CKT_CR_RLN_RSN T2
+where
+  (
+    (@crtIIdentifier = T1.CRT_I_IDENTIFIER) and
+    (@cstIIdentifier = T1.CST_I_IDENTIFIER) and
+    (@crvIIdentifier = T1.CRV_I_IDENTIFIER)
+  ) or
+  (
+    (@crtIIdentifier = T1.CRT_IDENTIFIER) and
+    (@cstIIdentifier = T1.CST_IDENTIFIER) and
+    (@crvIIdentifier = T1.CRV_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+  )
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus">
+      <value>
+select top(1)
+  CR_STATUS_ID,
+  CODE
+from
+  CKT_CR_STATUS
+where
+  CR_STATUS_ID = @crStatusId
+</value>
+   </data>
+   <data name="ReadFundTransaction">
+      <value>
+select top(1)
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FUND_TRANS_ID
+from
+  CKT_FUND_TRANS
+where
+  (FUND_TRANS_ID = @fundTransId) and
+  (FUN_IDENTIFIER = @funIdentifier) and
+  (FTT_IDENTIFIER = @fttIdentifier) and
+  (PCA_EFFECTIVE_DATE = @pcaEffectiveDate) and
+  (PCA_CODE = @pcaCode)
+</value>
+   </data>
+   <data name="UpdateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  RECEIPT_AMOUNT = @receiptAmount,
+  RECEIPT_DATE = @receiptDate,
+  CHECK_NUMBER = @checkNumber,
+  CHECK_DATE = @checkDate,
+  RECEIVED_DATE = @receivedDate,
+  DEPOSIT_RLSE_DT = @depositRlseDt,
+  PAYOR_ORGANIZATION = @payorOrganization,
+  PAYOR_FIRST_NAME = @payorFirstName,
+  PAYOR_MIDDLE_NAME = @payorMiddleName,
+  PAYOR_LAST_NAME = @payorLastName,
+  BAL_TMST = @balTmst,
+  CREATED_BY = @createdBy,
+  CASH_BAL_AMT = @cashBalAmt,
+  CASH_BAL_RSN = @cashBalRsn,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  NOTE = @note
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+</root>

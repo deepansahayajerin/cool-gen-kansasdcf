@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select top(1)
+  OTR_TYPE,
+  OTY_ID,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  DISCONTINUE_DT
+from
+  CKT_ACCRUAL_INSTR
+where
+  (DISCONTINUE_DT &gt;= @discontinueDt) and
+  (DISCONTINUE_DT &gt;= @discontinueDt) and
+  (@otyId = OTY_ID) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadCollection1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (ADJ_IND = 'Y') and
+  (LAST_UPDATED_TMST &gt;= @lastUpdatedTmst) and
+  (CRT_TYPE in (cast(@systemGeneratedIdentifier1 as smallint), cast(@systemGeneratedIdentifier2 as smallint)))
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CREATED_TMST &gt;= @createdTmst) and
+  (CRT_TYPE in (cast(@systemGeneratedIdentifier1 as smallint), cast(@systemGeneratedIdentifier2 as smallint)))
+</value>
+   </data>
+   <data name="ReadCollection3">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (ADJ_IND = 'Y') and
+  (LAST_UPDATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+</value>
+   </data>
+   <data name="ReadCollection4">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  sum(BAL_DUE_AMT + INT_BAL_DUE_AMT)
+from
+  CKT_DEBT_DTL
+where
+  (RETIRED_DT = @retiredDt) and
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadDebtDetailDebt">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_OB_TRN T2
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T2.OTY_TYPE = T1.OTY_TYPE) and
+    (T2.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (@otyType = T2.OTY_TYPE) and
+    (@obgGeneratedId = T2.OBG_GENERATED_ID) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@cpaType = T2.CPA_TYPE) and
+    (T2.CREATED_TMST &gt;= @createdTmst) and
+    (T1.DUE_DT &lt; @dueDt)
+</value>
+   </data>
+</root>

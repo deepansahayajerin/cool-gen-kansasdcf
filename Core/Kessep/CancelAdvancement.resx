@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeletePaymentRequest#1">
+      <value>
+update CKT_DISB_TRAN
+set
+  PRQ_GENERATED_ID = null
+where
+  PRQ_GENERATED_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_ELEC_FUND_TRAN
+where
+  PRQ_GENERATED_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#3">
+      <value>
+update CKT_OBLIGATION
+set
+  PRQ_ID = null
+where
+  PRQ_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#4">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  PRQ_R_GENERATED_ID = null
+where
+  PRQ_R_GENERATED_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#5">
+      <value>
+select top(1)
+  1
+from
+  CKT_POT_RECOVERY
+where
+  PRQ_IDENTIFIER = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#6">
+      <value>
+delete from CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentStatusHistory">
+      <value>
+delete from CKT_PMNT_STAT_HIST
+where
+  (PST_GENERATED_ID = @pstGeneratedId) and
+  (PRQ_GENERATED_ID = @prqGeneratedId) and
+  (PYMNT_STAT_HIST_ID = @pymntStatHistId)
+</value>
+   </data>
+   <data name="DeleteReceiptRefund#1">
+      <value>
+update CKT_DISB_TRAN T3
+set
+  T3.PRQ_GENERATED_ID = null
+where
+  exists
+  (
+    select top(1)
+      1
+    from
+      CKT_PMNT_REQUEST T2
+    where
+      (T2.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+      (T2.RCT_R_TSTAMP = @rctRTstamp)
+  )
+</value>
+   </data>
+   <data name="DeleteReceiptRefund#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_PMNT_REQUEST T2
+  join
+  CKT_ELEC_FUND_TRAN T3
+  on
+    (T2.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+    (T2.RCT_R_TSTAMP = @rctRTstamp)
+</value>
+   </data>
+   <data name="DeleteReceiptRefund#3">
+      <value>
+update CKT_OBLIGATION T3
+set
+  T3.PRQ_ID = null
+where
+  exists
+  (
+    select top(1)
+      1
+    from
+      CKT_PMNT_REQUEST T2
+    where
+      (T2.PAYMENT_REQUEST_ID = T3.PRQ_ID) and
+      (T2.RCT_R_TSTAMP = @rctRTstamp)
+  )
+</value>
+   </data>
+   <data name="DeleteReceiptRefund#4">
+      <value>
+update CKT_PMNT_REQUEST T3
+set
+  T3.PRQ_R_GENERATED_ID = null
+where
+  exists
+  (
+    select top(1)
+      1
+    from
+      CKT_PMNT_REQUEST T2
+    where
+      (T2.PAYMENT_REQUEST_ID = T3.PRQ_R_GENERATED_ID) and
+      (T2.RCT_R_TSTAMP = @rctRTstamp)
+  )
+</value>
+   </data>
+   <data name="DeleteReceiptRefund#5">
+      <value>
+select top(1)
+  1
+from
+  CKT_PMNT_REQUEST T2
+  join
+  CKT_POT_RECOVERY T3
+  on
+    (T2.PAYMENT_REQUEST_ID = T3.PRQ_IDENTIFIER) and
+    (T2.RCT_R_TSTAMP = @rctRTstamp)
+</value>
+   </data>
+   <data name="DeleteReceiptRefund#6">
+      <value>
+delete from CKT_PMNT_REQUEST
+where
+  RCT_R_TSTAMP = @rctRTstamp
+</value>
+   </data>
+   <data name="DeleteReceiptRefund#7">
+      <value>
+delete from CKT_RECEIPT_REFUND
+where
+  CREATED_TIMESTAMP = @rctRTstamp
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  RCT_R_TSTAMP,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  @rctRTstamp = RCT_R_TSTAMP
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistory">
+      <value>
+select top(1)
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_PMNT_STAT_HIST
+where
+  (@prqGeneratedId = PRQ_GENERATED_ID) and
+  (DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadReceiptRefund">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  REASON_TEXT,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

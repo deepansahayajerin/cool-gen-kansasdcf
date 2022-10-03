@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCaseRolePersonProgramProgram">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.ABSENCE_REASON_CD,
+  T1.REL_TO_AR,
+  T2.CSP_NUMBER,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_TIMESTAMP,
+  T2.PRG_GENERATED_ID,
+  T3.CODE,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE
+from
+  CKT_PROGRAM T3
+  join
+  CKT_CASE_ROLE T1
+  join
+  CKT_PERSON_PROGRAM T2
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE = 'CH') and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER)
+  on
+    T3.PROGRAM_ID = T2.PRG_GENERATED_ID
+order by
+  T3.CODE
+</value>
+   </data>
+</root>

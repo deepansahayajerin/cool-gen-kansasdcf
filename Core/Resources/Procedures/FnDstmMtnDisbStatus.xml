@@ -1,0 +1,37 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDstmMtnDisbStatus"
+           program-name="SWEDSTMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDstmMtnDisbStatus"
+           transaction="SR94"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_DISB_STATUSES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDSTL"
+       to="FnDstlLstDisbStatuses"
+       send-command="DISPLAY">
+      <return-map from="Flag" to="Flag"/>
+      <return-map from="FlowSelection" to="Selected"/>
+   </on>
+   <map from="TypeStatusAudit" to="TypeStatusAudit"/>
+   <map from="HiddenDisbursementStatus" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenDisplayOk" to="HiddenDisplayOk"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="DisbursementStatus.Code" to="DisbursementStatus.Code"/>
+   <map from="DisbursementStatus.Name" to="DisbursementStatus.Name"/>
+   <map from="DisbursementStatus.EffectiveDate"
+        to="DisbursementStatus.EffectiveDate"/>
+   <map from="DisbursementStatus.DiscontinueDate"
+        to="DisbursementStatus.DiscontinueDate"/>
+   <map from="DisbursementStatus.Description"
+        to="DisbursementStatus.Description"/>
+   <map from="DisbursementStatus.SystemGeneratedIdentifier"
+        to="DisbursementStatus.SystemGeneratedIdentifier"/>
+</procedure>

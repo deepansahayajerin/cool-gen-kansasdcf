@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDistributionPolicy">
+      <value>
+insert into CKT_DIST_PLCY
+(
+  DIST_PLCY_ID,
+  DIST_PLCY_NM,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  MAX_PRCD_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CLT_IDENTIFIER,
+  DIST_PLCY_DSC
+)
+values
+(
+  @distPlcyId,
+  @distPlcyNm,
+  @effectiveDt,
+  @discontinueDt,
+  @maxPrcdDt,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @cltIdentifier,
+  @distPlcyDsc
+)
+</value>
+   </data>
+   <data name="CreateDistributionPolicyRule">
+      <value>
+insert into CKT_DIST_PLCY_RL
+(
+  DBP_GENERATED_ID,
+  DIST_PLCY_RL_ID,
+  FIRST_LAST_IND,
+  DEBT_FUNC_TYP,
+  DEBT_STATE,
+  APPLY_TO,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DBP_NEXT_ID,
+  DPR_NEXT_ID,
+  DIST_TO_ORD_TYP_CD
+)
+values
+(
+  @dbpGeneratedId,
+  @distPlcyRlId,
+  @firstLastInd,
+  @debtFuncTyp,
+  @debtState,
+  @applyTo,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  null,
+  null,
+  @distToOrdTypCd
+)
+</value>
+   </data>
+   <data name="CreateDprObligType">
+      <value>
+insert into CKT_DPR_OBLIG_TYPE
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OTY_GENERATED_ID,
+  DBP_GENERATED_ID,
+  DPR_GENERATED_ID
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @otyGeneratedId,
+  @dbpGeneratedId,
+  @dprGeneratedId
+)
+</value>
+   </data>
+   <data name="CreateDprProgram">
+      <value>
+insert into CKT_DPR_PROGRAM
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DBP_GENERATED_ID,
+  DPR_GENERATED_ID,
+  PRG_GENERATED_ID,
+  PROGRAM_STATE,
+  ASSISTANCE_IND
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @dbpGeneratedId,
+  @dprGeneratedId,
+  @prgGeneratedId,
+  @programState,
+  @assistanceInd
+)
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_COLLTN_TYPE
+where
+  (CODE = @code) and
+  (EFFECTIVE_DATE &lt; @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadDistributionPolicy1">
+      <value>
+select top(1)
+  DIST_PLCY_ID,
+  DIST_PLCY_NM,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  MAX_PRCD_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CLT_IDENTIFIER,
+  DIST_PLCY_DSC
+from
+  CKT_DIST_PLCY
+order by
+  DIST_PLCY_ID desc
+</value>
+   </data>
+   <data name="ReadDistributionPolicy2">
+      <value>
+select distinct top(1)
+  T1.DIST_PLCY_ID,
+  T1.DIST_PLCY_NM,
+  T1.EFFECTIVE_DT,
+  T1.DISCONTINUE_DT,
+  T1.MAX_PRCD_DT,
+  T1.CREATED_BY,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.CLT_IDENTIFIER,
+  T1.DIST_PLCY_DSC
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_DIST_PLCY T1
+  on
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.CODE = @code)
+order by
+  T1.DISCONTINUE_DT desc
+</value>
+   </data>
+   <data name="ReadDprProgram">
+      <value>
+select top(1)
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DBP_GENERATED_ID,
+  DPR_GENERATED_ID,
+  PRG_GENERATED_ID,
+  PROGRAM_STATE,
+  ASSISTANCE_IND
+from
+  CKT_DPR_PROGRAM
+where
+  (@dprGeneratedId = DPR_GENERATED_ID) and
+  (@dbpGeneratedId = DBP_GENERATED_ID) and
+  (@prgGeneratedId = PRG_GENERATED_ID) and
+  (PROGRAM_STATE = @programState)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_CD = @debtTypCd
+</value>
+   </data>
+   <data name="ReadProgram">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_PROGRAM
+where
+  (CODE = @code) and
+  (EFFECTIVE_DATE &lt; @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="UpdateDistributionPolicy">
+      <value>
+update CKT_DIST_PLCY
+set
+  DISCONTINUE_DT = @discontinueDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  DIST_PLCY_ID = @distPlcyId
+</value>
+   </data>
+   <data name="UpdateDprProgram">
+      <value>
+update CKT_DPR_PROGRAM
+set
+  ASSISTANCE_IND = @assistanceInd
+where
+  (DBP_GENERATED_ID = @dbpGeneratedId) and
+  (DPR_GENERATED_ID = @dprGeneratedId) and
+  (PRG_GENERATED_ID = @prgGeneratedId) and
+  (PROGRAM_STATE = @programState)
+</value>
+   </data>
+</root>

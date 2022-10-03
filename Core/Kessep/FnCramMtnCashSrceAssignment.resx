@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptSourceType1">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  INTERFACE_IND,
+  CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  COURT_IND
+from
+  CKT_CRSRC_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType2">
+      <value>
+select
+  CR_SRCE_TYPE_ID,
+  INTERFACE_IND,
+  CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  COURT_IND
+from
+  CKT_CRSRC_TYPE
+where
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (EFFECTIVE_DATE &lt;= @discontinueDate) and
+  (
+    (cast(@code as char(10)) = ' ') or
+    (CODE &gt;= @code)
+  )
+order by
+  CODE
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType3">
+      <value>
+select
+  CR_SRCE_TYPE_ID,
+  INTERFACE_IND,
+  CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  COURT_IND
+from
+  CKT_CRSRC_TYPE
+where
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (EFFECTIVE_DATE &lt;= @discontinueDate) and
+  (
+    (CODE &gt;= @code) or
+    (CODE = ' ')
+  )
+order by
+  CODE
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceTypeReceiptResearchAssignment1">
+      <value>
+select
+  T1.CR_SRCE_TYPE_ID,
+  T1.INTERFACE_IND,
+  T1.CODE,
+  T1.NAME,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.COURT_IND,
+  T2.SPD_IDENTIFIER,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST
+from
+  CKT_CRSRC_TYPE T1
+  join
+  CKT_RECEIPT_ASSIGN T2
+  on
+    (@spdIdentifier = T2.SPD_IDENTIFIER) and
+    (T1.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER) and
+    (T2.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T2.EFFECTIVE_DATE &lt;= @discontinueDate)
+order by
+  T1.CODE
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceTypeReceiptResearchAssignment2">
+      <value>
+select
+  T1.CR_SRCE_TYPE_ID,
+  T1.INTERFACE_IND,
+  T1.CODE,
+  T1.NAME,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.COURT_IND,
+  T2.SPD_IDENTIFIER,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST
+from
+  CKT_CRSRC_TYPE T1
+  join
+  CKT_RECEIPT_ASSIGN T2
+  on
+    (@spdIdentifier = T2.SPD_IDENTIFIER) and
+    (T1.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER)
+order by
+  T1.CODE
+</value>
+   </data>
+   <data name="ReadReceiptResearchAssignment">
+      <value>
+select top(1)
+  T1.SPD_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST
+from
+  CKT_CRSRC_TYPE T2
+  join
+  CKT_RECEIPT_ASSIGN T1
+  on
+    (@spdIdentifier = T1.SPD_IDENTIFIER) and
+    (T2.CR_SRCE_TYPE_ID = T1.CST_IDENTIFIER) and
+    (T2.CODE = @code) and
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadReceiptResearchAssignmentServiceProvider">
+      <value>
+select top(1)
+  T1.SPD_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T2.USER_ID
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_RECEIPT_ASSIGN T1
+  on
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_IDENTIFIER) and
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @discontinueDate)
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+   <data name="ReadServiceProviderReceiptResearchAssignment1">
+      <value>
+select
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T2.CST_IDENTIFIER,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_RECEIPT_ASSIGN T2
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_IDENTIFIER) and
+    (@cstIdentifier = T2.CST_IDENTIFIER) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadServiceProviderReceiptResearchAssignment2">
+      <value>
+select
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T2.CST_IDENTIFIER,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_RECEIPT_ASSIGN T2
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_IDENTIFIER) and
+    (@cstIdentifier = T2.CST_IDENTIFIER) and
+    (T2.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T2.EFFECTIVE_DATE &lt;= @discontinueDate)
+order by
+  T1.USER_ID
+</value>
+   </data>
+   <data name="ReadServiceProviderReceiptResearchAssignment3">
+      <value>
+select
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T2.CST_IDENTIFIER,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_RECEIPT_ASSIGN T2
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_IDENTIFIER) and
+    (@cstIdentifier = T2.CST_IDENTIFIER)
+order by
+  T1.USER_ID
+</value>
+   </data>
+</root>

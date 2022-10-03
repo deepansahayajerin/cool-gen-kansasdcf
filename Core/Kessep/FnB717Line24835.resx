@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructionsObligationType">
+      <value>
+select distinct
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.AS_OF_DT,
+  T1.DISCONTINUE_DT,
+  T1.LAST_ACCRUAL_DT,
+  T2.DEBT_TYP_ID,
+  T2.DEBT_TYP_CD
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_OB_TRN T3 with(readuncommitted)
+  join
+  CKT_ACCRUAL_INSTR T1 with(readuncommitted)
+  on
+    (T3.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T3.OTY_TYPE = T1.OTY_ID) and
+    (T3.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T3.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T3.CSP_SUP_NUMBER) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T1.AS_OF_DT &lt;= @asOfDt) and
+    (T1.DISCONTINUE_DT &gt;= @discontinueDt)
+  on
+    (T2.DEBT_TYP_ID = T3.OTY_TYPE) and
+    (T2.DEBT_TYP_ID = 1)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  PA_MEDICAL_SERVICE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole">
+      <value>
+select distinct
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  EMANCIPATION_DT
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate) and
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'CH')
+order by
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePersonCsePerson">
+      <value>
+select distinct
+  T1.NUMB,
+  T4.CSP_NUMBER
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (@casNumber = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP')
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T4.START_DATE &lt;= @startDate) and
+    (T4.END_DATE &gt;= @endDate) and
+    (@casNumber = T4.CAS_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T3.START_DATE &lt;= T4.END_DATE) and
+    (T3.END_DATE &gt;= T4.START_DATE)
+order by
+  T4.CSP_NUMBER
+</value>
+   </data>
+</root>

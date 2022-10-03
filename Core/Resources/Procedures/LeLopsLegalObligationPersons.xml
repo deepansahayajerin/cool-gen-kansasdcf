@@ -1,0 +1,101 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLopsLegalObligationPersons"
+           program-name="SWELOPSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLopsLegalObligationPersons"
+           transaction="SR9E"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command="NMSRCH">
+      <return-map from="Selected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CPAT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiCpatChildPaternityMaint"
+       send-command="DISPLAY">
+      <map from="Selected" to="Next"/>
+      <map from="HiddenReturnRequired" to="FromLops"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ROLE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiRoleCaseRoleMaintenance"
+       send-command="DISPLAY">
+      <map from="Selected" to="Next"/>
+      <map from="HiddenReturnRequired" to="HiddenReturnRequired"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ZD_CO_LINK_LIST_CSE_CASES_BY_CC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCASE"
+       to="LeLcccLstCseCasesByCtCase"
+       send-command="DISPLAY">
+      <map from="Fips" to="Fips"/>
+      <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+      <map from="LegalAction" to="LegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="Filter" to="FilterDocument"/>
+      <map from="DocmProtectFilter" to="ProtectFilter"/>
+      <return-map from="ReturnDoc" to="Document"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="CseCases.Cse" to="CseCases.Cse"/>
+   <map from="ObligationPersons.LegalActionPerson"
+        to="ObligationPersons.LegalActionPerson"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="ObligationPersons.ListEndReason"
+        to="ObligationPersons.ListEndReason"/>
+   <map from="ObligationPersons.Common" to="ObligationPersons.Common"/>
+   <map from="ObligationPersons.Case1" to="ObligationPersons.Case1"/>
+   <map from="ObligationPersons.CaseRole" to="ObligationPersons.CaseRole"/>
+   <map from="ObligationPersons.CsePersonsWorkSet"
+        to="ObligationPersons.CsePersonsWorkSet"/>
+   <map from="ObligationType" to="ObligationType"/>
+   <map from="ActionTaken" to="ActionTaken"/>
+   <map from="CountTotalSupported" to="CountTotalSupported"/>
+   <map from="HiddenReturnRequired" to="HiddenReturnRequired"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="LegalActionDetail.Number" to="LegalActionDetail.Number"/>
+   <map from="LegalActionDetail.CurrentAmount"
+        to="LegalActionDetail.CurrentAmount"/>
+   <map from="LegalActionDetail.ArrearsAmount"
+        to="LegalActionDetail.ArrearsAmount"/>
+   <map from="LegalActionDetail.JudgementAmount"
+        to="LegalActionDetail.JudgementAmount"/>
+   <map from="LegalActionDetail.CreatedBy" to="LegalActionDetail.CreatedBy"/>
+   <map from="LegalActionDetail.LastUpdatedTstamp"
+        to="LegalActionDetail.LastUpdatedTstamp"/>
+</procedure>

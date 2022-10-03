@@ -1,0 +1,39 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="GbLpniLstPgmNameInfo"
+           program-name="SWELPNIP"
+           class="Gov.Kansas.DCF.Cse.Kessep.GbLpniLstPgmNameInfo"
+           transaction="SRPL"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <on exit-state="ACO_NE0000_RETURN ECO_LNK_TO_MPNI"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="GbMpniMtnPgmName"
+       send-command="DISPLAY">
+      <map from="Flow.PgmName" to="PgmNameTable.PgmName"/>
+      <map from="Flow.CreatedTimestamp" to="PgmNameTable.CreatedTimestamp"/>
+      <map from="Flow.PgmDescription" to="PgmNameTable.PgmDescription"/>
+      <map from="Flow.PgmActive" to="PgmNameTable.PgmActive"/>
+   </on>
+   <map from="Hidden" to="Hidden"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailCreated" to="Import1.DetailCreated"/>
+   <map from="Export1.DetailDescription" to="Import1.DetailDescription"/>
+   <map from="Search" to="Search"/>
+   <map from="Filter" to="Filter"/>
+   <map from="Export1.DetailPgmNameTable.PgmName"
+        to="Import1.DetailPgmNameTable.PgmName"/>
+   <map from="Export1.DetailPgmNameTable.PgmType"
+        to="Import1.DetailPgmNameTable.PgmType"/>
+   <map from="Export1.DetailPgmNameTable.PgmActive"
+        to="Import1.DetailPgmNameTable.PgmActive"/>
+   <map from="Export1.DetailPgmNameTable.CreatedBy"
+        to="Import1.DetailPgmNameTable.CreatedBy"/>
+</procedure>

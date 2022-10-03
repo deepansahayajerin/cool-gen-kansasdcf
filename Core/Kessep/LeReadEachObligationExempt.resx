@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeAction">
+      <value>
+select top(1)
+  TYPE,
+  DESCRIPTION
+from
+  CKT_ADMIN_ACTION
+where
+  TYPE = @type
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemptionAdministrativeAction">
+      <value>
+select
+  T1.OTY_TYPE,
+  T1.AAT_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.EFFECTIVE_DT,
+  T1.END_DT,
+  T1.LAST_NM,
+  T1.FIRST_NM,
+  T1.MIDDLE_INITIAL,
+  T1.REASON,
+  T1.DESCRIPTION,
+  T2.DESCRIPTION,
+  T3.OB_DSC,
+  T4.DEBT_TYP_CD,
+  T4.DEBT_TYP_NM
+from
+  CKT_OB_TYPE T4
+  join
+  CKT_ADMIN_ACTION T2
+  join
+  CKT_OBLIGATION T3
+  join
+  CKT_OADM_ACT_EXMP T1
+  on
+    (T3.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T3.OB_ID = T1.OBG_GENERATED_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CPA_TYPE = 'R') and
+    (T3.CSP_NUMBER = @cspNumber)
+  on
+    T2.TYPE = T1.AAT_TYPE
+  on
+    T4.DEBT_TYP_ID = T3.DTY_GENERATED_ID
+order by
+  T1.EFFECTIVE_DT desc,
+  T1.AAT_TYPE,
+  T4.DEBT_TYP_CD
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemptionObligationObligationType">
+      <value>
+select
+  T1.OTY_TYPE,
+  T1.AAT_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.EFFECTIVE_DT,
+  T1.END_DT,
+  T1.LAST_NM,
+  T1.FIRST_NM,
+  T1.MIDDLE_INITIAL,
+  T1.REASON,
+  T1.DESCRIPTION,
+  T2.OB_DSC,
+  T3.DEBT_TYP_CD,
+  T3.DEBT_TYP_NM
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_OBLIGATION T2
+  join
+  CKT_OADM_ACT_EXMP T1
+  on
+    (T2.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T2.OB_ID = T1.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (@aatType = T1.AAT_TYPE) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.CPA_TYPE = 'R')
+  on
+    T3.DEBT_TYP_ID = T2.DTY_GENERATED_ID
+order by
+  T1.EFFECTIVE_DT desc,
+  T3.DEBT_TYP_CD
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_NM
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_CD = @debtTypCd
+</value>
+   </data>
+</root>

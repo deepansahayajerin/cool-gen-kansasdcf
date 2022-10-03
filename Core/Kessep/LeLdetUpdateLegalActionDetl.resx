@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  BOND_AMT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  [LIMIT],
+  NON_FIN_OBLG_TYPE,
+  DETAIL_TYPE,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND,
+  DESCRIPTION,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (LA_DETAIL_NO = @laDetailNo)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@ladRNumber = LAD_R_NUMBER) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_CD = @debtTypCd
+</value>
+   </data>
+   <data name="UpdateLegalActionDetail1">
+      <value>
+update CKT_LEGAL_ACT_DTL
+set
+  END_DT = @endDt,
+  EFFECTIVE_DT = @effectiveDt,
+  BOND_AMT = @bondAmt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  ARREARS_AMOUNT = @arrearsAmount,
+  CURRENT_AMOUNT = @currentAmount,
+  JUDGEMENT_AMOUNT = @judgementAmount,
+  [LIMIT] = @limit,
+  NON_FIN_OBLG_TYPE = @nonFinOblgType,
+  DETAIL_TYPE = @detailType,
+  FRQ_PRD_CD = @frqPrdCd,
+  DAY_OF_WEEK = @dayOfWeek,
+  DAY_OF_MONTH_1 = @dayOfMonth1,
+  DAY_OF_MONTH_2 = @dayOfMonth2,
+  PERIOD_IND = @periodInd,
+  DESCRIPTION = @description,
+  OTY_ID = @otyId
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (LA_DETAIL_NO = @laDetailNo)
+</value>
+   </data>
+   <data name="UpdateLegalActionDetail2">
+      <value>
+update CKT_LEGAL_ACT_DTL
+set
+  END_DT = @endDt,
+  EFFECTIVE_DT = @effectiveDt,
+  BOND_AMT = @bondAmt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  NON_FIN_OBLG_TYPE = @nonFinOblgType,
+  DETAIL_TYPE = @detailType,
+  FRQ_PRD_CD = @frqPrdCd,
+  DAY_OF_WEEK = @dayOfWeek,
+  DAY_OF_MONTH_1 = @dayOfMonth1,
+  DAY_OF_MONTH_2 = @dayOfMonth2,
+  PERIOD_IND = @periodInd,
+  DESCRIPTION = @description
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (LA_DETAIL_NO = @laDetailNo)
+</value>
+   </data>
+</root>

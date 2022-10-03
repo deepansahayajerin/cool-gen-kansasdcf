@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  DETAIL
+from
+  CKT_INFRASTRUCTURE with(readuncommitted)
+where
+  (CASE_NUMBER = @caseNumber) and
+  (CSE_PERSON_NUM = @csePersonNum) and
+  (DETAIL = @detail) and
+  (REASON_CODE = @reasonCode)
+</value>
+   </data>
+</root>

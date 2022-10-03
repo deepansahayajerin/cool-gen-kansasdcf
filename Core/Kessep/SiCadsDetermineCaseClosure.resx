@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.END_DATE
+from
+  CKT_CASE T3
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.TYPE = 'AP') and
+    (T1.END_DATE = @endDate) and
+    (T3.NUMB = T1.CAS_NUMBER) and
+    (T3.STATUS = 'O') and
+    (T3.NUMB &lt;&gt; @numb)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in (cast(@type1 as char(2)), cast(@type2 as char(2))))
+</value>
+   </data>
+   <data name="ReadCaseRole3">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CASE T3 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.TYPE = @type) and
+    (T1.END_DATE &gt; @endDate) and
+    (T3.NUMB = T1.CAS_NUMBER) and
+    (T3.STATUS = @status) and
+    (T3.NUMB &lt;&gt; @numb)
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CASE T4 with(readuncommitted)
+  join
+  CKT_CASE_UNIT T1 with(readuncommitted)
+  on
+    (T1.CSP_NO_AR = @cspNoAr) and
+    (T1.CSP_NO_AP = @cspNoAp) and
+    (T1.CLOSURE_DATE &gt; @closureDate) and
+    (T4.NUMB = T1.CAS_NO) and
+    (T4.STATUS = @status) and
+    (T4.NUMB &lt;&gt; @numb)
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CASE T4 with(readuncommitted)
+  join
+  CKT_CASE_UNIT T1 with(readuncommitted)
+  on
+    (T1.CSP_NO_CHILD = @cspNoChild) and
+    (T1.CSP_NO_AP = @cspNoAp) and
+    (T4.NUMB = T1.CAS_NO) and
+    (T4.STATUS = @status) and
+    (T4.NUMB &lt;&gt; @numb)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  COURT_ORDER_NUMBER,
+  OBLGOR_PRSN_NBR
+from
+  CKT_CR_DETAIL with(readuncommitted)
+where
+  OBLGOR_PRSN_NBR = @oblgorPrsnNbr
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatHistory">
+      <value>
+select top(1)
+  CRD_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CDS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  DISCONTINUE_DATE
+from
+  CKT_CRDTL_STATHIST with(readuncommitted)
+where
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (CDS_IDENTIFIER in (cast(@systemGeneratedIdentifier1 as smallint), cast(@systemGeneratedIdentifier2 as smallint)))
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadDisbursementStatusHistory">
+      <value>
+select top(1)
+  T1.DBS_GENERATED_ID,
+  T1.DTR_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.DISB_STAT_HIST_ID,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.SUPPRESSION_REASON
+from
+  CKT_CR_DETAIL T8
+  join
+  CKT_DISB_TRAN T6
+  join
+  CKT_DISB_TRAN T2
+  join
+  CKT_DISB_STAT_HIST T1
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T2.DISB_TRAN_ID = T1.DTR_GENERATED_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.TYPE = 'D') and
+    (T2.CPA_TYPE = 'E') and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.DBS_GENERATED_ID = 3)
+  join
+  CKT_DISB_TRAN_RLN T5
+  on
+    (T2.DISB_TRAN_ID = T5.DTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T5.CPA_TYPE) and
+    (T2.CSP_NUMBER = T5.CSP_NUMBER)
+  on
+    (T6.DISB_TRAN_ID = T5.DTR_P_GENERATED_ID) and
+    (T6.CPA_TYPE = T5.CPA_P_TYPE) and
+    (T6.CSP_NUMBER = T5.CSP_P_NUMBER) and
+    (T6.COL_ID is not null) and
+    (T6.OTY_ID is not null) and
+    (T6.OBG_ID is not null) and
+    (T6.CSP_NUMBER_DISB is not null) and
+    (T6.CPA_TYPE_DISB is not null) and
+    (T6.OTR_ID is not null) and
+    (T6.OTR_TYPE_DISB is not null)
+  on
+    (T8.CRD_ID = T6.CRD_ID) and
+    (T8.CRV_IDENTIFIER = T6.CRV_ID) and
+    (T8.CST_IDENTIFIER = T6.CST_ID) and
+    (T8.CRT_IDENTIFIER = T6.CRT_ID)
+  join
+  CKT_CASE_ROLE T9
+  on
+    (T8.OBLGOR_PRSN_NBR = T9.CSP_NUMBER) and
+    (T9.TYPE = 'AP') and
+    (T9.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO
+from
+  CKT_CASE T4
+  join
+  CKT_CASE_ROLE T3
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T1.STANDARD_NO = @standardNo)
+  on
+    (T3.CASE_ROLE_ID = T2.CRO_IDENTIFIER) and
+    (T3.TYPE = T2.CRO_TYPE) and
+    (T3.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T3.CAS_NUMBER = T2.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.END_DATE = @endDate) and
+    (T3.CSP_NUMBER = @cspNumber)
+  on
+    (T4.NUMB = T3.CAS_NUMBER) and
+    (T4.NUMB &lt;&gt; @numb) and
+    (T4.STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO
+from
+  CKT_CASE_ROLE T3
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T1.STANDARD_NO = @standardNo)
+  on
+    (T3.CASE_ROLE_ID = T2.CRO_IDENTIFIER) and
+    (T3.TYPE = T2.CRO_TYPE) and
+    (T3.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T3.CAS_NUMBER = T2.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.END_DATE = @endDate) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T3.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligation1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligation2">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION with(readuncommitted)
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  OB_ID desc
+</value>
+   </data>
+   <data name="ReadObligationTransactionCsePerson">
+      <value>
+select
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  DEBT_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN
+where
+  (DEBT_TYP in ('A', 'D')) and
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CPA_SUP_TYPE is not null) and
+  (CSP_SUP_NUMBER is not null) and
+  (CSP_SUP_NUMBER &gt; @cspSupNumber)
+order by
+  CSP_SUP_NUMBER
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE with(readuncommitted)
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  T1.PAYMENT_REQUEST_ID,
+  T1.PROCESS_DATE,
+  T1.CSE_PERSON_NUMBER,
+  T1.TYPE,
+  T1.PRQ_R_GENERATED_ID
+from
+  CKT_CR_DETAIL T8
+  join
+  CKT_DISB_TRAN T6
+  join
+  CKT_PAYMENT_STATUS T3
+  join
+  CKT_PMNT_REQUEST T1
+  join
+  CKT_PMNT_STAT_HIST T2
+  on
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+    (T1.TYPE = 'WAR') and
+    (T1.PROCESS_DATE = @processDate) and
+    (T1.PAYMENT_REQUEST_ID = T2.PRQ_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE &gt; @discontinueDate)
+  on
+    (T3.PAYMENT_STATUS_ID = T2.PST_GENERATED_ID) and
+    (T3.CODE = 'REQ')
+  join
+  CKT_DISB_TRAN T4
+  on
+    (T1.PAYMENT_REQUEST_ID = T4.PRQ_GENERATED_ID) and
+    (T4.TYPE = 'D')
+  join
+  CKT_DISB_TRAN_RLN T5
+  on
+    (T4.DISB_TRAN_ID = T5.DTR_GENERATED_ID) and
+    (T4.CPA_TYPE = T5.CPA_TYPE) and
+    (T4.CSP_NUMBER = T5.CSP_NUMBER)
+  on
+    (T6.DISB_TRAN_ID = T5.DTR_P_GENERATED_ID) and
+    (T6.CPA_TYPE = T5.CPA_P_TYPE) and
+    (T6.CSP_NUMBER = T5.CSP_P_NUMBER) and
+    (T6.COL_ID is not null) and
+    (T6.OTY_ID is not null) and
+    (T6.OBG_ID is not null) and
+    (T6.CSP_NUMBER_DISB is not null) and
+    (T6.CPA_TYPE_DISB is not null) and
+    (T6.OTR_ID is not null) and
+    (T6.OTR_TYPE_DISB is not null)
+  on
+    (T8.CRD_ID = T6.CRD_ID) and
+    (T8.CRV_IDENTIFIER = T6.CRV_ID) and
+    (T8.CST_IDENTIFIER = T6.CST_ID) and
+    (T8.CRT_IDENTIFIER = T6.CRT_ID)
+  join
+  CKT_CASE_ROLE T9
+  on
+    (T8.OBLGOR_PRSN_NBR = T9.CSP_NUMBER) and
+    (T9.TYPE = 'AP') and
+    (T9.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateOffice1">
+      <value>
+update CKT_OFFICE
+set
+  COG_TYPE_CODE = @cogTypeCode,
+  COG_CODE = @cogCode
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="AssociateOffice2">
+      <value>
+update CKT_OFFICE
+set
+  OFF_OFFICE = @offOffice
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="AssociateOffice3">
+      <value>
+update CKT_FIPS
+set
+  OFF_IDENTIFIER = @offIdentifier
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="DisassociateOffice1">
+      <value>
+update CKT_OFFICE
+set
+  OFF_OFFICE = null
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="DisassociateOffice2">
+      <value>
+update CKT_FIPS
+set
+  OFF_IDENTIFIER = null
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE
+from
+  CKT_CSE_ORGANIZATN
+where
+  (ORGANZTN_ID = @organztnId) and
+  (TYPE_CODE = 'C')
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  OFF_IDENTIFIER
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (LOCATION = @location) and
+  (COUNTY = @county)
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  OFFICE_ID,
+  MAIN_PHONE_NUMBER,
+  MAIN_FAX_NUMBER,
+  TYPE_CODE,
+  NAME,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  COG_TYPE_CODE,
+  COG_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  MAIN_PHONE_AREA_CD,
+  FAX_AREA_CD,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select top(1)
+  OFFICE_ID,
+  MAIN_PHONE_NUMBER,
+  MAIN_FAX_NUMBER,
+  TYPE_CODE,
+  NAME,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  MAIN_PHONE_AREA_CD,
+  FAX_AREA_CD,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOffice3">
+      <value>
+select top(1)
+  OFFICE_ID,
+  MAIN_PHONE_NUMBER,
+  MAIN_FAX_NUMBER,
+  TYPE_CODE,
+  NAME,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  MAIN_PHONE_AREA_CD,
+  FAX_AREA_CD,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  @offOffice = OFF_OFFICE
+</value>
+   </data>
+   <data name="ReadOffice4">
+      <value>
+select top(1)
+  OFFICE_ID,
+  MAIN_PHONE_NUMBER,
+  MAIN_FAX_NUMBER,
+  TYPE_CODE,
+  NAME,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  MAIN_PHONE_AREA_CD,
+  FAX_AREA_CD,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="UpdateOffice">
+      <value>
+update CKT_OFFICE
+set
+  MAIN_PHONE_NUMBER = @mainPhoneNumber,
+  MAIN_FAX_NUMBER = @mainFaxNumber,
+  TYPE_CODE = @typeCode,
+  NAME = @name,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATD_TSTAMP = @lastUpdatdTstamp,
+  EFFECTIVE_DATE = @effectiveDate,
+  DISCONTINUE_DATE = @discontinueDate,
+  MAIN_PHONE_AREA_CD = @mainPhoneAreaCd,
+  FAX_AREA_CD = @faxAreaCd
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+</root>

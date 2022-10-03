@@ -1,0 +1,194 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCrecCashReceipting"
+           program-name="SWECRECP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCrecCashReceipting"
+           transaction="SR08"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_DEL_CASH_RECEIPT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrdeDeleteCashReceipt"
+       send-command="DISPLAY">
+      <map from="CashReceiptSourceType" to="CashReceiptSourceType"/>
+      <map from="CashReceiptEvent" to="CashReceiptEvent"/>
+      <map from="CashReceiptType" to="CashReceiptType"/>
+      <map from="CashReceipt" to="CashReceipt"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_VIEW_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrelLstCashReceipts"
+       send-command="DISPLAY">
+      <map from="CashReceiptSourceType" to="CashReceiptSourceType"/>
+      <map from="CashReceipt" to="CashReceipt"/>
+      <return-map from="HiddenExportSelectedCashReceiptSourceType.Code"
+                  to="CashReceiptSourceType.Code"/>
+      <return-map from="HiddenExportSelectedCashReceiptSourceType.SystemGeneratedIdentifier"
+                  to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <return-map from="HiddenExportSelectedCashReceiptEvent.SystemGeneratedIdentifier"
+                  to="CashReceiptEvent.SystemGeneratedIdentifier"/>
+      <return-map from="HiddenExportSelectedCashReceiptType.SystemGeneratedIdentifier"
+                  to="CashReceiptType.SystemGeneratedIdentifier"/>
+      <return-map from="HiddenExportSelectedCashReceiptType.Code"
+                  to="CashReceiptType.Code"/>
+      <return-map from="HiddenExportSelectedCashReceipt.ReceiptAmount"
+                  to="CashReceipt.ReceiptAmount"/>
+      <return-map from="HiddenExportSelectedCashReceipt.SequentialNumber"
+                  to="CashReceipt.SequentialNumber"/>
+      <return-map from="HiddenExportSelectedCashReceipt.ReceiptDate"
+                  to="CashReceipt.ReceiptDate"/>
+      <return-map from="HiddenExportSelectedCashReceipt.CheckNumber"
+                  to="CashReceipt.CheckNumber"/>
+      <return-map from="HiddenExportSelectedCashReceipt.CreatedBy"
+                  to="CashReceipt.CreatedBy"/>
+      <return-map from="HiddenExportSelectedCashReceipt.CheckType"
+                  to="CashReceipt.CheckType"/>
+      <return-map from="HiddenExportSelectedCashReceipt.CheckDate"
+                  to="CashReceipt.CheckDate"/>
+      <return-map from="HiddenExportSelectedCashReceipt.ReceivedDate"
+                  to="CashReceipt.ReceivedDate"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_BALANCE_RECEIPT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrtbBalCashRecptToTape"
+       send-command="DISPLAY">
+      <return-map from="FlowCashReceiptEvent.SystemGeneratedIdentifier"
+                  to="CashReceiptEvent.SystemGeneratedIdentifier"/>
+      <return-map from="FlowCashReceiptSourceType.SystemGeneratedIdentifier"
+                  to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <return-map from="FlowCashReceiptSourceType.Code" to="CashReceiptSourceType.Code"/>
+      <return-map from="FlowCashReceiptType" to="CashReceiptType"/>
+      <return-map from="FlowCashReceipt.SequentialNumber"
+                  to="CashReceipt.SequentialNumber"/>
+      <return-map from="FlowCashReceipt.ReceiptAmount" to="CashReceipt.ReceiptAmount"/>
+      <return-map from="FlowCashReceipt.CheckNumber" to="CashReceipt.CheckNumber"/>
+      <return-map from="FlowCashReceipt.ReceiptDate" to="CashReceipt.ReceiptDate"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_COLLECTION_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrrcRecCollctnDetailsPri"
+       send-command="DISPLAY">
+      <map from="CashReceiptSourceType" to="CashReceiptSourceType"/>
+      <map from="CashReceiptEvent" to="HiddenCashReceiptEvent"/>
+      <map from="CashReceiptType" to="HiddenCashReceiptType"/>
+      <map from="CashReceipt" to="CashReceipt"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_CASH_SOURCES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMCRSL"
+       to="FnCrslLstCashRcptSources"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection.SystemGeneratedIdentifier"
+                  to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <return-map from="HiddenSelection.Code" to="CashReceiptSourceType.Code"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_CASH_TYPES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMCRTL"
+       to="FnCrtlLstCashReceiptTypes"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="CashReceiptType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CODE_VALUES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="PassCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_MATCH_INTERFACE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="current"
+       to="FnCrmiMtchCshRcptToIntrfce"
+       send-command="CREC">
+      <map from="CashReceiptSourceType" to="ReceiptedCashReceiptSourceType"/>
+      <map from="CashReceiptEvent.SystemGeneratedIdentifier"
+           to="HiddenCashReceiptEvent.SystemGeneratedIdentifier"/>
+      <map from="CashReceiptEvent.ReceivedDate"
+           to="HiddenCashReceiptEvent.ReceivedDate"/>
+      <map from="CashReceiptEvent.SourceCreationDate"
+           to="HiddenCashReceiptEvent.SourceCreationDate"/>
+      <map from="CashReceiptType" to="HiddenCashReceiptType"/>
+      <map from="CashReceipt" to="ReceiptedCashReceipt"/>
+      <return-map from="FlowCashReceiptSourceType.SystemGeneratedIdentifier"
+                  to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <return-map from="FlowCashReceiptEvent" to="CashReceiptEvent"/>
+      <return-map from="FlowCashReceiptType.SystemGeneratedIdentifier"
+                  to="CashReceiptType.SystemGeneratedIdentifier"/>
+      <return-map from="ReceiptedCashReceipt.SequentialNumber"
+                  to="CashReceipt.SequentialNumber"/>
+      <return-map from="ReceiptedCashReceipt.ReceivedDate" to="CashReceipt.ReceivedDate"/>
+      <return-map from="ReceiptedCashReceipt.ReceiptDate" to="CashReceipt.ReceiptDate"/>
+      <return-map from="ReceiptedCashReceipt.ReceiptAmount"
+                  to="CashReceipt.ReceiptAmount"/>
+      <return-map from="ReceiptedCashReceipt.TotalCashTransactionAmount"
+                  to="CashReceipt.TotalCashTransactionAmount"/>
+      <return-map from="ReceiptedCashReceipt.CashDue" to="CashReceipt.CashDue"/>
+      <return-map from="ReceiptedCashReceipt.CashBalanceAmt"
+                  to="CashReceipt.CashBalanceAmt"/>
+      <return-map from="ReceiptedCashReceipt.CashBalanceReason"
+                  to="CashReceipt.CashBalanceReason"/>
+      <return-map from="ReceiptedCashReceipt.CheckType" to="CashReceipt.CheckType"/>
+      <return-map from="ReceiptedCashReceipt.CheckNumber" to="CashReceipt.CheckNumber"/>
+      <return-map from="ReceiptedCashReceipt.CheckDate" to="CashReceipt.CheckDate"/>
+      <return-map from="ReceiptedCashReceipt.PayorFirstName"
+                  to="CashReceipt.PayorFirstName"/>
+      <return-map from="ReceiptedCashReceipt.PayorMiddleName"
+                  to="CashReceipt.PayorMiddleName"/>
+      <return-map from="ReceiptedCashReceipt.PayorLastName"
+                  to="CashReceipt.PayorLastName"/>
+      <return-map from="ReceiptedCashReceipt.PayorOrganization"
+                  to="CashReceipt.PayorOrganization"/>
+      <return-map from="ReceiptedCashReceipt.Note" to="CashReceipt.Note"/>
+      <return-map from="ReceiptedCashReceipt.CreatedBy" to="CashReceipt.CreatedBy"/>
+      <return-map from="ReceiptedCashReceipt.CreatedTimestamp"
+                  to="CashReceipt.CreatedTimestamp"/>
+      <return-map from="FlowLastAction" to="LastAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTRN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnMtrnMaintainEftTrnsmission"
+       send-command="DISPLAY">
+      <map from="CashReceiptSourceType.Code" to="CashReceiptSourceType.Code"/>
+      <map from="PassElectronicFundTransmission.TransmissionType"
+           to="ElectronicFundTransmission.TransmissionType"/>
+      <map from="PassElectronicFundTransmission.TransmissionIdentifier"
+           to="ElectronicFundTransmission.TransmissionIdentifier"/>
+   </on>
+   <map from="CashReceiptType" to="CashReceiptType"/>
+   <map from="CashReceipt" to="CashReceipt"/>
+   <map from="CashReceiptEvent" to="CashReceiptEvent"/>
+   <map from="CashReceiptSourceType" to="CashReceiptSourceType"/>
+   <map from="HiddenCashReceiptSourceType" to="HiddenCashReceiptSourceType"/>
+   <map from="HiddenCashReceiptType" to="HiddenCashReceiptType"/>
+   <map from="Prompts.SourceTypePrompt" to="Prompts.SourceTypePrompt"/>
+   <map from="Prompts.CashRcptTypePrompt" to="Prompts.CashRcptTypePrompt"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CheckTypePrompt" to="CheckTypePrompt"/>
+   <map from="HiddenCashReceiptEvent" to="HiddenCashReceiptEvent"/>
+   <map from="CashReceiptStatus" to="CashReceiptStatus"/>
+   <map from="HiddenCashReceipt" to="HiddenCashReceipt"/>
+   <map from="HiddenNoOfCrDetails" to="HiddenNoOfCrDetails"/>
+   <map from="LastAction" to="LastAction"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

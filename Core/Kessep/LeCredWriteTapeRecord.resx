@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.STATUS = 'C') and
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER = @cspNumber)
+order by
+  T1.STATUS_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'AP')
+order by
+  START_DATE
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  VERIFIED_DATE,
+  CREATED_TIMESTAMP,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (VERIFIED_DATE &gt; @verifiedDate) and
+  (LOCATION_TYPE = 'D')
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  VERIFIED_DATE,
+  CREATED_TIMESTAMP,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (LOCATION_TYPE = 'D')
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress3">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  VERIFIED_DATE,
+  CREATED_TIMESTAMP,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  CSP_NUMBER = @cspNumber
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadDebtDetailObligationType">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.BAL_DUE_AMT,
+  T2.DEBT_TYP_ID,
+  T2.DEBT_TYP_CLASS,
+  T2.SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T1.BAL_DUE_AMT &gt; 0) and
+    (T1.OTR_TYPE = 'DE') and
+    (T1.CPA_TYPE = 'R') and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T2.DEBT_TYP_ID = T1.OTY_TYPE) and
+    (
+      T2.DEBT_TYP_ID in (1, 2, 3,
+        10, 12, 13,
+        14, 17, 18,
+        19)
+    )
+order by
+  T1.DUE_DT desc
+</value>
+   </data>
+</root>

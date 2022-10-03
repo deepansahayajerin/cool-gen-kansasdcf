@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadOfficeAssignmentPlan1">
+      <value>
+select
+  OFF_GENERATED_ID,
+  EFFECTIVE_DATE,
+  ASSIGNMENT_TYPE,
+  CNTY_ASSGNMNT_IND,
+  ALPHA_ASSGNMNT_IND,
+  FNCTN_ASSGNMNT_IND,
+  PRGRM_ASSGNMNT_IND,
+  DISCONTINUE_DATE,
+  CREATED_TSTAMP,
+  TRIBUNAL_IND
+from
+  CKT_OFCE_ASGMT_PLN
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (ASSIGNMENT_TYPE = @assignmentType)
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadOfficeAssignmentPlan2">
+      <value>
+select
+  OFF_GENERATED_ID,
+  EFFECTIVE_DATE,
+  ASSIGNMENT_TYPE,
+  CNTY_ASSGNMNT_IND,
+  ALPHA_ASSGNMNT_IND,
+  FNCTN_ASSGNMNT_IND,
+  PRGRM_ASSGNMNT_IND,
+  DISCONTINUE_DATE,
+  CREATED_TSTAMP,
+  TRIBUNAL_IND
+from
+  CKT_OFCE_ASGMT_PLN
+where
+  @offGeneratedId = OFF_GENERATED_ID
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadOfficeOfficeAddress">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.TYPE_CODE,
+  T1.NAME,
+  T1.OFF_OFFICE,
+  T2.TYPE,
+  T2.CITY
+from
+  CKT_OFFICE T1
+  join
+  CKT_OFFICE_ADDRESS T2
+  on
+    (T1.OFFICE_ID = @officeId) and
+    (T1.OFFICE_ID = T2.OFF_GENERATED_ID)
+</value>
+   </data>
+</root>

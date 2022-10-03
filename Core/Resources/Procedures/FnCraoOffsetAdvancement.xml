@@ -1,0 +1,90 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCraoOffsetAdvancement"
+           program-name="SWECRAOP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCraoOffsetAdvancement"
+           transaction="SR7I"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="PRMPTRET"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CRRC_REC_COLL_DTL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnCrrcRecCollctnDetailsPri"
+       send-command="DISPLAY">
+      <map from="ToCrrcCashReceiptType" to="HiddenCashReceiptType"/>
+      <map from="ToCrrcCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="ToCrrcCashReceiptEvent" to="HiddenCashReceiptEvent"/>
+      <map from="ToCrrcCashReceiptDetail.SequentialIdentifier"
+           to="CashReceiptDetail.SequentialIdentifier"/>
+      <map from="ToCrrcCashReceipt.SequentialNumber"
+           to="CashReceipt.SequentialNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_COLLECTION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCLCT"
+       to="FnClctLstCollectionTypes"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="FromFlow"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="StateCode" to="Code"/>
+      <map from="StartingState" to="Starting"/>
+      <return-map from="DlgflwSelected" to="StateCode"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_ADVANCEMENTS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="FnCralLstAdvancements"
+       send-command="DISPLAY">
+      <map from="CollectionType" to="CollectionType"/>
+      <map from="PassToCralClosed" to="Closed"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <return-map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="SelectedReceiptRefund.CreatedTimestamp"
+                  to="ReceiptRefund.CreatedTimestamp"/>
+      <return-map from="CsePerson" to="CsePerson"/>
+   </on>
+   <map from="ReceiptRefund" to="ReceiptRefund"/>
+   <map from="HiddenCollectionType" to="HiddenCollectionType"/>
+   <map from="PromptCollectionType" to="PromptCollectionType"/>
+   <map from="CollectionType" to="CollectionType"/>
+   <map from="Taxid" to="Taxid"/>
+   <map from="CashReceiptDetailAddress" to="CashReceiptDetailAddress"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="PromptCsePersonNumber" to="PromptCsePersonNumber"/>
+   <map from="PromptStateCode" to="PromptStateCode"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="HiddenCashReceiptSourceType" to="HiddenCashReceiptSourceType"/>
+   <map from="PaymentRequest" to="PaymentRequest"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CashReceiptDetail" to="CashReceiptDetail"/>
+   <map from="HiddenReceiptRefund" to="HiddenReceiptRefund"/>
+   <map from="PaymentStatus" to="PaymentStatus"/>
+   <map from="HdisplayPerformedInd" to="HdisplayPerformedInd"/>
+   <map from="CashReceiptSourceType.Code" to="CashReceiptSourceType.Code"/>
+   <map from="StartingState.Cdvalue" to="StateCode.Cdvalue"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

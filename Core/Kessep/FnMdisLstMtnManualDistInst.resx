@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  ORD_TYP_CD
+from
+  CKT_OBLIGATION
+where
+  (CPA_TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  END_DT,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND
+from
+  CKT_OB_PYMNT_SCH
+where
+  (OBG_CSP_NUMBER = @obgCspNumber) and
+  (OBG_CPA_TYPE = 'R') and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (END_DT &gt; @endDt)
+</value>
+   </data>
+</root>

@@ -1,0 +1,202 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeJailIncarceration"
+           program-name="SWEJAILP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeJailIncarceration"
+           transaction="SR6D"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="WorkNameCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SI_COMP_CASE_COMP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="Selected.Number" to="WorkNameCsePersonsWorkSet.Number"/>
+      <return-map from="Selected.FormattedName"
+                  to="WorkNameCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="WorkNameCsePersonsWorkSet" to="PersonName"/>
+      <map from="CsePerson" to="StartCsePerson"/>
+      <map from="Case1" to="StartCase"/>
+      <map from="Case1" to="Current"/>
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="State" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedState"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="Print" to="FilterDocument"/>
+      <map from="DocmProtectFilter" to="ProtectFilter"/>
+      <return-map from="ReturnDoc" to="Print"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CORRCTN_FACILITY_FACL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="current"
+       to="OeFaclKsCorrectionalFacility"
+       send-command="DISPPAGE">
+      <map from="CsePerson" to="H"/>
+      <return-map from="H" to="CsePerson"/>
+      <return-map from="SelectedIncarceration" to="SelectedPrisonIncarceration"/>
+      <return-map from="SelectedIncarcerationAddress"
+                  to="SelectedPrisonIncarcerationAddress"/>
+   </on>
+   <map from="HiddenParole" to="HiddenParole"/>
+   <map from="HiddenProbationCommon" to="HiddenProbationCommon"/>
+   <map from="HiddenJailCommon" to="HiddenJailCommon"/>
+   <map from="HiddenPrison" to="HiddenPrison"/>
+   <map from="HiddenJailIncarcerationAddress"
+        to="HiddenJailIncarcerationAddress"/>
+   <map from="HiddenProbationIncarcerationAddress"
+        to="HiddenProbationIncarcerationAddress"/>
+   <map from="H" to="H"/>
+   <map from="HiddenJailIncarceration" to="HiddenJailIncarceration"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="JailCommon" to="JailCommon"/>
+   <map from="Prison" to="Prison"/>
+   <map from="Parole" to="Parole"/>
+   <map from="ProbationCommon" to="ProbationCommon"/>
+   <map from="PromptFacility" to="PromptFacility"/>
+   <map from="PromptState2" to="PromptState2"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="WorkNameCsePersonsWorkSet" to="WorkNameCsePersonsWorkSet"/>
+   <map from="WorkNameOeWorkGroup" to="WorkNameOeWorkGroup"/>
+   <map from="Case1" to="Case1"/>
+   <map from="PersonPrompt" to="PersonPrompt"/>
+   <map from="LastReadHidden" to="LastReadHidden"/>
+   <map from="Facl" to="Facl"/>
+   <map from="HiddenSelectedPrison" to="HiddenSelectedPrison"/>
+   <map from="ClearPerfrmedBeforeAdd" to="ClearPerfrmedBeforeAdd"/>
+   <map from="Alrt" to="Alrt"/>
+   <map from="HiddenProbationIncarceration.Type1"
+        to="HiddenProbationIncarceration.Type1"/>
+   <map from="ProbationIncarceration.Type1" to="JailIncarceration.Type1"/>
+   <map from="JailIncarceration.Type1" to="ProbationIncarceration.Type1"/>
+   <map from="ProbationIncarceration.VerifiedDate"
+        to="ProbationIncarceration.VerifiedDate"/>
+   <map from="ProbationIncarceration.EndDate"
+        to="ProbationIncarceration.EndDate"/>
+   <map from="JailIncarceration.EndDate" to="JailIncarceration.EndDate"/>
+   <map from="JailIncarceration.VerifiedDate"
+        to="JailIncarceration.VerifiedDate"/>
+   <map from="JailIncarceration.InmateNumber"
+        to="JailIncarceration.InmateNumber"/>
+   <map from="JailIncarceration.ParoleEligibilityDate"
+        to="JailIncarceration.ParoleEligibilityDate"/>
+   <map from="JailIncarceration.WorkReleaseInd"
+        to="JailIncarceration.WorkReleaseInd"/>
+   <map from="JailIncarceration.ConditionsForRelease"
+        to="JailIncarceration.ConditionsForRelease"/>
+   <map from="JailIncarceration.StartDate" to="JailIncarceration.StartDate"/>
+   <map from="JailIncarceration.InstitutionName"
+        to="JailIncarceration.InstitutionName"/>
+   <map from="ProbationIncarceration.ParoleOfficerLastName"
+        to="ProbationIncarceration.ParoleOfficerLastName"/>
+   <map from="ProbationIncarceration.ParoleOfficerFirstName"
+        to="ProbationIncarceration.ParoleOfficerFirstName"/>
+   <map from="ProbationIncarceration.ParoleOfficerMiddleInitial"
+        to="ProbationIncarceration.ParoleOfficerMiddleInitial"/>
+   <map from="ProbationIncarceration.ConditionsForRelease"
+        to="ProbationIncarceration.ConditionsForRelease"/>
+   <map from="ProbationIncarceration.Identifier"
+        to="ProbationIncarceration.Identifier"/>
+   <map from="JailIncarceration.Identifier" to="JailIncarceration.Identifier"/>
+   <map from="HiddenProbationIncarceration.Identifier"
+        to="HiddenProbationIncarceration.Identifier"/>
+   <map from="ProbationIncarceration.ParoleOfficersTitle"
+        to="ProbationIncarceration.ParoleOfficersTitle"/>
+   <map from="JailIncarcerationAddress.Street1"
+        to="JailIncarcerationAddress.Street1"/>
+   <map from="JailIncarcerationAddress.Street2"
+        to="JailIncarcerationAddress.Street2"/>
+   <map from="JailIncarcerationAddress.City" to="JailIncarcerationAddress.City"/>
+   <map from="JailIncarcerationAddress.State"
+        to="JailIncarcerationAddress.State"/>
+   <map from="JailIncarcerationAddress.ZipCode5"
+        to="JailIncarcerationAddress.ZipCode5"/>
+   <map from="JailIncarcerationAddress.ZipCode4"
+        to="JailIncarcerationAddress.ZipCode4"/>
+   <map from="ProbationIncarcerationAddress.Street1"
+        to="ProbationIncarcerationAddress.Street1"/>
+   <map from="ProbationIncarcerationAddress.Street2"
+        to="ProbationIncarcerationAddress.Street2"/>
+   <map from="ProbationIncarcerationAddress.City"
+        to="ProbationIncarcerationAddress.City"/>
+   <map from="ProbationIncarcerationAddress.State"
+        to="ProbationIncarcerationAddress.State"/>
+   <map from="ProbationIncarcerationAddress.ZipCode5"
+        to="ProbationIncarcerationAddress.ZipCode5"/>
+   <map from="ProbationIncarcerationAddress.ZipCode4"
+        to="ProbationIncarcerationAddress.ZipCode4"/>
+   <map from="JailIncarceration.LastUpdatedBy"
+        to="JailIncarceration.LastUpdatedBy"/>
+   <map from="ProbationIncarceration.LastUpdatedBy"
+        to="ProbationIncarceration.LastUpdatedBy"/>
+   <map from="JailIncarceration.PhoneAreaCode"
+        to="JailIncarceration.PhoneAreaCode"/>
+   <map from="JailIncarceration.Phone" to="JailIncarceration.Phone"/>
+   <map from="JailIncarceration.PhoneExt" to="JailIncarceration.PhoneExt"/>
+   <map from="ProbationIncarceration.PhoneAreaCode"
+        to="ProbationIncarceration.PhoneAreaCode"/>
+   <map from="ProbationIncarceration.Phone" to="ProbationIncarceration.Phone"/>
+   <map from="ProbationIncarceration.PhoneExt"
+        to="ProbationIncarceration.PhoneExt"/>
+   <map from="Print.Name" to="Print.Name"/>
+   <map from="HiddenProbationIncarceration.PhoneAreaCode"
+        to="HiddenProbationIncarceration.PhoneAreaCode"/>
+   <map from="HiddenProbationIncarceration.PhoneExt"
+        to="HiddenProbationIncarceration.PhoneExt"/>
+   <map from="HiddenProbationIncarceration.VerifiedDate"
+        to="HiddenProbationIncarceration.VerifiedDate"/>
+   <map from="HiddenProbationIncarceration.ConditionsForRelease"
+        to="HiddenProbationIncarceration.ConditionsForRelease"/>
+   <map from="HiddenProbationIncarceration.ParoleOfficersTitle"
+        to="HiddenProbationIncarceration.ParoleOfficersTitle"/>
+   <map from="HiddenProbationIncarceration.Phone"
+        to="HiddenProbationIncarceration.Phone"/>
+   <map from="HiddenProbationIncarceration.EndDate"
+        to="HiddenProbationIncarceration.EndDate"/>
+   <map from="HiddenProbationIncarceration.StartDate"
+        to="ProbationIncarceration.StartDate"/>
+   <map from="HiddenProbationIncarceration.ParoleOfficerLastName"
+        to="HiddenProbationIncarceration.ParoleOfficerLastName"/>
+   <map from="HiddenProbationIncarceration.ParoleOfficerFirstName"
+        to="HiddenProbationIncarceration.ParoleOfficerFirstName"/>
+   <map from="HiddenProbationIncarceration.ParoleOfficerMiddleInitial"
+        to="HiddenProbationIncarceration.ParoleOfficerMiddleInitial"/>
+   <map from="HiddenProbationIncarceration.LastUpdatedBy"
+        to="HiddenProbationIncarceration.LastUpdatedBy"/>
+   <map from="JailIncarceration.Incarcerated"
+        to="JailIncarceration.Incarcerated"/>
+   <map from="ProbationIncarceration.Incarcerated"
+        to="ProbationIncarceration.Incarcerated"/>
+   <map from="HiddenProbationIncarceration.Incarcerated"
+        to="HiddenProbationIncarceration.Incarcerated"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateProgramCheckpointRestart">
+      <value>
+insert into CKT_PGM_CHKPNT_RST
+(
+  PROGRAM_NAME,
+  UPDATE_FREQUENCY_C,
+  READ_FREQUENCY_COU,
+  CHECKPOINT_COUNT,
+  LST_CHKPNT_TMST,
+  RESTART_IND,
+  RESTART_INFO
+)
+values
+(
+  @programName,
+  @updateFrequencyC,
+  @readFrequencyCou,
+  @checkpointCount,
+  @lstChkpntTmst,
+  @restartInd,
+  @restartInfo
+)
+</value>
+   </data>
+   <data name="DeleteProgramCheckpointRestart">
+      <value>
+delete from CKT_PGM_CHKPNT_RST
+where
+  PROGRAM_NAME = @programName
+</value>
+   </data>
+   <data name="ReadAccrualInstructions">
+      <value>
+select top(1)
+  OTR_TYPE,
+  OTY_ID,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  AS_OF_DT,
+  DISCONTINUE_DT,
+  LAST_ACCRUAL_DT
+from
+  CKT_ACCRUAL_INSTR
+where
+  (@otrType = OTR_TYPE) and
+  (@otyId = OTY_ID) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgGeneratedId = OBG_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadObligationCsePersonAccrualInstructionsObligationType">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.DORMANT_IND,
+  T3.OTR_TYPE,
+  T3.OTY_ID,
+  T3.OBG_GENERATED_ID,
+  T3.CSP_NUMBER,
+  T3.CPA_TYPE,
+  T3.OTR_GENERATED_ID,
+  T3.AS_OF_DT,
+  T3.DISCONTINUE_DT,
+  T3.LAST_ACCRUAL_DT,
+  T4.DEBT_TYP_CLASS,
+  T5.START_DT,
+  T5.FRQ_PRD_CD,
+  T5.DAY_OF_WEEK,
+  T5.DAY_OF_MONTH_1,
+  T5.DAY_OF_MONTH_2,
+  T5.PERIOD_IND,
+  T7.LAP_ID,
+  T7.OB_TRN_AMT,
+  T7.CSP_SUP_NUMBER,
+  T7.CPA_SUP_TYPE
+from
+  CKT_OB_TYPE T4
+  join
+  CKT_OBLIGATION T1
+  join
+  CKT_OB_TRN T7
+  on
+    (T1.CSP_NUMBER &gt;= @cspNumber) and
+    (T1.DTY_GENERATED_ID = T7.OTY_TYPE) and
+    (T1.OB_ID = T7.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T1.CPA_TYPE = T7.CPA_TYPE) and
+    (T1.DORMANT_IND &lt;&gt; 'H') and
+    (T1.DORMANT_IND &lt;&gt; '*') and
+    (
+      (
+        (cast(@number as char(10)) = ' ') and
+        (T1.CSP_NUMBER &gt;= @cspNumber)
+      ) or
+      (T1.CSP_NUMBER = @number)
+    ) and
+    (T7.LAP_ID is not null) and
+    (T7.CPA_SUP_TYPE is not null) and
+    (T7.CSP_SUP_NUMBER is not null)
+  join
+  CKT_ACCRUAL_INSTR T3
+  on
+    (T7.OB_TRN_TYP = T3.OTR_TYPE) and
+    (T7.OTY_TYPE = T3.OTY_ID) and
+    (T7.OB_TRN_ID = T3.OTR_GENERATED_ID) and
+    (T7.CPA_TYPE = T3.CPA_TYPE) and
+    (T7.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T7.OBG_GENERATED_ID = T3.OBG_GENERATED_ID) and
+    (T3.AS_OF_DT &lt;= @asOfDt) and
+    (T3.LAST_ACCRUAL_DT &lt; @asOfDt) and
+    (T3.DISCONTINUE_DT &gt; T3.LAST_ACCRUAL_DT)
+  on
+    T4.DEBT_TYP_ID = T1.DTY_GENERATED_ID
+  join
+  CKT_OB_PYMNT_SCH T5
+  on
+    (T1.DTY_GENERATED_ID = T5.OTY_TYPE) and
+    (T1.OB_ID = T5.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T5.OBG_CSP_NUMBER) and
+    (T1.CPA_TYPE = T5.OBG_CPA_TYPE)
+order by
+  T1.CSP_NUMBER,
+  T1.OB_ID
+</value>
+   </data>
+   <data name="ReadObligationTransactionRlnRsn">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID
+from
+  CKT_OB_TRN_RLN_RSN
+where
+  OB_TRN_RLN_RSN_ID = @obTrnRlnRsnId
+</value>
+   </data>
+   <data name="ReadProgramCheckpointRestart1">
+      <value>
+select top(1)
+  PROGRAM_NAME,
+  UPDATE_FREQUENCY_C,
+  READ_FREQUENCY_COU,
+  LST_CHKPNT_TMST
+from
+  CKT_PGM_CHKPNT_RST
+where
+  (PROGRAM_NAME = @programName) and
+  (UPDATE_FREQUENCY_C = cast(@count as integer)) and
+  (LST_CHKPNT_TMST = @lstChkpntTmst)
+</value>
+   </data>
+   <data name="ReadProgramCheckpointRestart2">
+      <value>
+select
+  PROGRAM_NAME,
+  UPDATE_FREQUENCY_C,
+  READ_FREQUENCY_COU,
+  LST_CHKPNT_TMST
+from
+  CKT_PGM_CHKPNT_RST
+where
+  (PROGRAM_NAME like cast(@programName as char(8))) and
+  (LST_CHKPNT_TMST = @lstChkpntTmst)
+</value>
+   </data>
+   <data name="UpdateProgramCheckpointRestart">
+      <value>
+update CKT_PGM_CHKPNT_RST
+set
+  READ_FREQUENCY_COU = @readFrequencyCou,
+  LST_CHKPNT_TMST = @lstChkpntTmst
+where
+  PROGRAM_NAME = @programName
+</value>
+   </data>
+</root>

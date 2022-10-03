@@ -1,0 +1,52 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpSpadSrvcPrvdrAlertDetails"
+           program-name="SWESPADP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpSpadSrvcPrvdrAlertDetails"
+           transaction="SRPP"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="SelectedOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionOffice" to="SelectedOffice"/>
+      <return-map from="HiddenSelectionServiceProvider" to="SelectedServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command="CLEAR"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Svpo" to="Svpo"/>
+   <map from="Office" to="Office"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="WorkArea" to="WorkArea"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Sender" to="Sender"/>
+   <map from="Fips" to="Fips"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="OfficeServiceProviderAlert.Message"
+        to="OfficeServiceProviderAlert.Message"/>
+   <map from="OfficeServiceProviderAlert.DistributionDate"
+        to="OfficeServiceProviderAlert.DistributionDate"/>
+   <map from="OfficeServiceProviderAlert.TypeCode"
+        to="OfficeServiceProviderAlert.TypeCode"/>
+   <map from="OfficeServiceProviderAlert.Description"
+        to="OfficeServiceProviderAlert.Description"/>
+   <map from="Infrastructure.CaseNumber" to="Infrastructure.CaseNumber"/>
+   <map from="Infrastructure.CaseUnitNumber" to="Infrastructure.CaseUnitNumber"/>
+   <map from="Infrastructure.CsePersonNumber"
+        to="Infrastructure.CsePersonNumber"/>
+   <map from="Infrastructure.SystemGeneratedIdentifier"
+        to="Infrastructure.SystemGeneratedIdentifier"/>
+   <map from="OfficeServiceProviderAlert.SystemGeneratedIdentifier"
+        to="OfficeServiceProviderAlert.SystemGeneratedIdentifier"/>
+   <map from="OfficeServiceProviderAlert.CreatedBy"
+        to="OfficeServiceProviderAlert.CreatedBy"/>
+</procedure>

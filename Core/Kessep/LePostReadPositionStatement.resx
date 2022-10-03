@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeActCertification">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (TANF_CODE = @tanfCode) and
+  (TAKEN_DT = @takenDt) and
+  (CPA_TYPE = @cpaType) and
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadAdministrativeAction1">
+      <value>
+select top(1)
+  TYPE,
+  DESCRIPTION
+from
+  CKT_ADMIN_ACTION
+where
+  TYPE = @type
+</value>
+   </data>
+   <data name="ReadAdministrativeAction2">
+      <value>
+select top(1)
+  TYPE,
+  DESCRIPTION
+from
+  CKT_ADMIN_ACTION
+where
+  TYPE = @type
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal1">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID,
+  ADMIN_APPEAL_NO,
+  TYPE,
+  CREATED_TSTAMP,
+  CSP_Q_NUMBER,
+  CPA_R_TYPE,
+  CSP_R_NUMBER,
+  AAC_R_TYPE,
+  AAC_R_TAKEN_DATE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OAA_TAKEN_DATE,
+  OTY_ID,
+  AAC_TANF_CODE
+from
+  CKT_ADMIN_APPEAL
+where
+  ADMIN_APPEAL_ID = @adminAppealId
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal2">
+      <value>
+select
+  ADMIN_APPEAL_ID,
+  ADMIN_APPEAL_NO,
+  TYPE,
+  CREATED_TSTAMP,
+  CSP_Q_NUMBER,
+  CPA_R_TYPE,
+  CSP_R_NUMBER,
+  AAC_R_TYPE,
+  AAC_R_TAKEN_DATE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OAA_TAKEN_DATE,
+  OTY_ID,
+  AAC_TANF_CODE
+from
+  CKT_ADMIN_APPEAL
+where
+  (
+    (cast(@number as char(15)) = ' ') or
+    (ADMIN_APPEAL_NO = @number)
+  ) and
+  (@cspQNumber = CSP_Q_NUMBER)
+order by
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  OCCUPATION,
+  AE_CASE_NUMBER,
+  DATE_OF_DEATH,
+  ILLEGAL_ALIEN_IND,
+  CURRENT_SPOUSE_MI,
+  CURR_SPOUSE_1ST_NM,
+  BIRTH_PLACE_STATE,
+  EMERGENCY_PHONE,
+  NAME_MIDDLE,
+  NAME_MAIDEN,
+  HOME_PHONE,
+  OTHER_NUMBER,
+  BIRTH_PLACE_CITY,
+  CURR_MARITAL_STS,
+  CUR_SPOUSE_LAST_NM,
+  RACE,
+  HAIR_COLOR,
+  EYE_COLOR,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN,
+  OTHER_ID_INFO
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  OCCUPATION,
+  AE_CASE_NUMBER,
+  DATE_OF_DEATH,
+  ILLEGAL_ALIEN_IND,
+  CURRENT_SPOUSE_MI,
+  CURR_SPOUSE_1ST_NM,
+  BIRTH_PLACE_STATE,
+  EMERGENCY_PHONE,
+  NAME_MIDDLE,
+  NAME_MAIDEN,
+  HOME_PHONE,
+  OTHER_NUMBER,
+  BIRTH_PLACE_CITY,
+  CURR_MARITAL_STS,
+  CUR_SPOUSE_LAST_NM,
+  RACE,
+  HAIR_COLOR,
+  EYE_COLOR,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN,
+  OTHER_ID_INFO
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPositionStatement">
+      <value>
+select
+  AAP_IDENTIFIER,
+  POSITION_STMT_NO,
+  EXPLANATION
+from
+  CKT_POSITION_STMT
+where
+  @aapIdentifier = AAP_IDENTIFIER
+order by
+  POSITION_STMT_NO
+</value>
+   </data>
+</root>

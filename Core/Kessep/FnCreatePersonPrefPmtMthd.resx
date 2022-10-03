@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePersonPreferredPaymentMethod">
+      <value>
+insert into CKT_PER_PRF_PMNT_M
+(
+  PMT_GENERATED_ID,
+  PERSN_PMNT_METH_ID,
+  ABA_ROUTING_NUMBER,
+  DFI_ACCOUNT_NO,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATE_BY,
+  LAST_UPDATE_TMST,
+  CSP_P_NUMBER,
+  DESCRIPTION,
+  ACCOUNT_TYPE
+)
+values
+(
+  @pmtGeneratedId,
+  @persnPmntMethId,
+  @abaRoutingNumber,
+  @dfiAccountNo,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdateBy,
+  @lastUpdateTmst,
+  @cspPNumber,
+  @description,
+  @accountType
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPaymentMethodType">
+      <value>
+select top(1)
+  PAYMNT_METH_TYP_ID,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_PMNT_METHD_TYP
+where
+  PAYMNT_METH_TYP_ID = @paymntMethTypId
+</value>
+   </data>
+   <data name="ReadPersonPreferredPaymentMethod">
+      <value>
+select top(1)
+  PMT_GENERATED_ID,
+  PERSN_PMNT_METH_ID,
+  ABA_ROUTING_NUMBER,
+  DFI_ACCOUNT_NO,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CSP_P_NUMBER,
+  DESCRIPTION,
+  ACCOUNT_TYPE
+from
+  CKT_PER_PRF_PMNT_M
+where
+  (
+    (
+      (EFFECTIVE_DATE &lt;= @effectiveDate1) and
+      (DISCONTINUE_DATE &gt;= @effectiveDate1)
+    ) or
+    (
+      (EFFECTIVE_DATE &lt;= @effectiveDate2) and
+      (DISCONTINUE_DATE &gt;= @effectiveDate2)
+    )
+  ) and
+  (@cspPNumber = CSP_P_NUMBER)
+</value>
+   </data>
+</root>

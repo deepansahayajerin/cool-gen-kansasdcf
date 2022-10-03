@@ -1,0 +1,524 @@
+﻿<!--Name: FN_PHST_LST_MAX_PASSTHRU_HISTORY, ID: 371809363, model: 746-->
+<div coolContent coolName="FN_PHST_LST_MAX_PASSTHRU_HISTORY" coolType="SCREEN"
+  (coolInit)="scrollSize = 100; pageSize = 17">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 23.75%; top: 0; width: 52.5%; height: 4%;" coolCol="20"
+     coolRow="1" coolLength="42">CSE - List Maximum Passthru History - PHST</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="literal" style="left: 10%; top: 8%; width: 6.25%; height: 4%;"
+     coolCol="9" coolRow="3" coolLength="5">Effec</div>
+   
+   <div coolType="literal" style="left: 21.25%; top: 8%; width: 5%; height: 4%;"
+     coolCol="18" coolRow="3" coolLength="4">Disc</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 12%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="4" coolLength="3">Sel</div>
+   
+   <div coolType="literal" style="left: 10%; top: 12%; width: 5%; height: 4%;"
+     coolCol="9" coolRow="4" coolLength="4">Date</div>
+   
+   <div coolType="literal"
+     style="left: 21.25%; top: 12%; width: 5%; height: 4%;" coolCol="18"
+     coolRow="4" coolLength="4">Date</div>
+   
+   <div coolType="literal" style="left: 30%; top: 12%; width: 7.5%; height: 4%;"
+     coolCol="25" coolRow="4" coolLength="6">Amount</div>
+   
+   <div coolType="literal"
+     style="left: 40%; top: 12%; width: 13.75%; height: 4%;" coolCol="33"
+     coolRow="4" coolLength="11">Description</div>
+   <input type="text" coolType="field" name="field_5_3"
+     [(ngModel)]="ref(in.import1, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 16%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="5" coolLength="1" [hidden]="pageOffset >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 16%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="5" coolLength="8" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 16%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="5" coolLength="8" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 16%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="5" coolLength="6" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 16%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="5" coolLength="45" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_6_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 20%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="6" coolLength="1" [hidden]="pageOffset + 1 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 20%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="6" coolLength="8" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 20%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="6" coolLength="8" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 20%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="6" coolLength="6" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 20%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="6" coolLength="45" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_7_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 24%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="1" [hidden]="pageOffset + 2 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 24%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="7" coolLength="8" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 24%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="7" coolLength="8" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 24%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="7" coolLength="6" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 24%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="7" coolLength="45" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_8_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 28%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 3 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 28%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 28%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 28%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="8" coolLength="6" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 28%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="8" coolLength="45" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 4 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 32%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 32%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 32%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="9" coolLength="6" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 32%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="9" coolLength="45" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_10_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 5 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 36%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 36%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 36%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="10" coolLength="6" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 36%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="10" coolLength="45"
+     [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_11_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 6 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 40%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 40%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 40%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="11" coolLength="6" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 40%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="11" coolLength="45"
+     [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_12_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 7 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 44%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 44%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 44%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="12" coolLength="6" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 44%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="12" coolLength="45"
+     [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 8 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 48%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 48%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 48%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="13" coolLength="6" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 48%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="13" coolLength="45"
+     [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_14_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 9 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 52%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 52%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 52%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="14" coolLength="6" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 52%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="14" coolLength="45"
+     [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_15_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="1"
+     [hidden]="pageOffset + 10 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 56%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="15" coolLength="8"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 56%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="15" coolLength="8"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 56%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="15" coolLength="6"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 56%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="15" coolLength="45"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_16_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 11, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 11]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="16" coolLength="1"
+     [hidden]="pageOffset + 11 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 60%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="16" coolLength="8"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 60%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="16" coolLength="8"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 60%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="16" coolLength="6"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 60%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="16" coolLength="45"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 12, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 12]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1"
+     [hidden]="pageOffset + 12 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 64%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="17" coolLength="8"
+     [hidden]="pageOffset + 12 >= length(in.import1)">{{in.import1?.[pageOffset + 12]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 64%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="17" coolLength="8"
+     [hidden]="pageOffset + 12 >= length(in.import1)">{{in.import1?.[pageOffset + 12]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 64%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="17" coolLength="6"
+     [hidden]="pageOffset + 12 >= length(in.import1)">{{in.import1?.[pageOffset + 12]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 64%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="17" coolLength="45"
+     [hidden]="pageOffset + 12 >= length(in.import1)">{{in.import1?.[pageOffset + 12]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_18_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 13, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 13]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="18" coolLength="1"
+     [hidden]="pageOffset + 13 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 68%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="18" coolLength="8"
+     [hidden]="pageOffset + 13 >= length(in.import1)">{{in.import1?.[pageOffset + 13]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 68%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="18" coolLength="8"
+     [hidden]="pageOffset + 13 >= length(in.import1)">{{in.import1?.[pageOffset + 13]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 68%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="18" coolLength="6"
+     [hidden]="pageOffset + 13 >= length(in.import1)">{{in.import1?.[pageOffset + 13]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 68%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="18" coolLength="45"
+     [hidden]="pageOffset + 13 >= length(in.import1)">{{in.import1?.[pageOffset + 13]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_19_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 14, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 14]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="1"
+     [hidden]="pageOffset + 14 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 72%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="19" coolLength="8"
+     [hidden]="pageOffset + 14 >= length(in.import1)">{{in.import1?.[pageOffset + 14]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 72%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="19" coolLength="8"
+     [hidden]="pageOffset + 14 >= length(in.import1)">{{in.import1?.[pageOffset + 14]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 72%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="19" coolLength="6"
+     [hidden]="pageOffset + 14 >= length(in.import1)">{{in.import1?.[pageOffset + 14]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 72%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="19" coolLength="45"
+     [hidden]="pageOffset + 14 >= length(in.import1)">{{in.import1?.[pageOffset + 14]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_20_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 15, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 15]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 76%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="20" coolLength="1"
+     [hidden]="pageOffset + 15 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 76%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="20" coolLength="8"
+     [hidden]="pageOffset + 15 >= length(in.import1)">{{in.import1?.[pageOffset + 15]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 76%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="20" coolLength="8"
+     [hidden]="pageOffset + 15 >= length(in.import1)">{{in.import1?.[pageOffset + 15]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 76%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="20" coolLength="6"
+     [hidden]="pageOffset + 15 >= length(in.import1)">{{in.import1?.[pageOffset + 15]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 76%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="20" coolLength="45"
+     [hidden]="pageOffset + 15 >= length(in.import1)">{{in.import1?.[pageOffset + 15]?.maximumPassthru.description}}</div>
+   <input type="text" coolType="field" name="field_21_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 16, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 16]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 80%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="21" coolLength="1"
+     [hidden]="pageOffset + 16 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 7.5%; top: 80%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="21" coolLength="8"
+     [hidden]="pageOffset + 16 >= length(in.import1)">{{in.import1?.[pageOffset + 16]?.maximumPassthru.effectiveDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 80%; width: 10%; height: 4%;" coolCol="16"
+     coolRow="21" coolLength="8"
+     [hidden]="pageOffset + 16 >= length(in.import1)">{{in.import1?.[pageOffset + 16]?.maximumPassthru.discontinueDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 30%; top: 80%; width: 7.5%; height: 4%;" coolCol="25"
+     coolRow="21" coolLength="6"
+     [hidden]="pageOffset + 16 >= length(in.import1)">{{in.import1?.[pageOffset + 16]?.maximumPassthru.amount|coolNumber:'###.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 40%; top: 80%; width: 56.25%; height: 4%;" coolCol="33"
+     coolRow="21" coolLength="45"
+     [hidden]="pageOffset + 16 >= length(in.import1)">{{in.import1?.[pageOffset + 16]?.maximumPassthru.description}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="69" coolRow="22" coolLength="9"
+     style="left: 85%; top: 84%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="23" coolLength="78"
+     style="left: 0; top: 88%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 92%; width: 100%; height: 4%;"
+     coolCol="1" coolRow="24" coolLength="80">PF KEY: 1 Help  2 Display  3 Exit  7 Next  8 Prev  9 Return  12 Signoff  15 MXPT</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="ADD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=ADD</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="MXPT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=MXPT</a>
+   </div>

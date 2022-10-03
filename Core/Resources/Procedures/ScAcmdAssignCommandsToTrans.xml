@@ -1,0 +1,30 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="ScAcmdAssignCommandsToTrans"
+           program-name="SWEACMDP"
+           class="Gov.Kansas.DCF.Cse.Security1.ScAcmdAssignCommandsToTrans"
+           transaction="SRGW">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="ScSecmSecurityMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_TRANSACTIONS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFMTRN"
+       to="ScTranMaintainTransaction"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="HiddenSelected"/>
+   </on>
+   <map from="Transaction" to="Transaction"/>
+   <map from="PromptTransaction" to="PromptTransaction"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Command" to="Group.Command"/>
+   <map from="Group.Active" to="Group.Active"/>
+   <map from="Group.HiddenPrevActive" to="Group.HiddenPrevActive"/>
+   <map from="Group.HiddenAction" to="Group.HiddenAction"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Starting" to="Starting"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

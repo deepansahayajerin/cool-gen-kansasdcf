@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonDebtDebtDetailObligationObligationType">
+      <value>
+select distinct
+  T2.CSP_SUP_NUMBER,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OB_TRN_ID,
+  T2.OB_TRN_TYP,
+  T2.CREATED_TMST,
+  T2.CPA_SUP_TYPE,
+  T2.OTY_TYPE,
+  T3.DUE_DT,
+  T3.BAL_DUE_AMT,
+  T3.CVRD_PRD_START_DT,
+  T3.CVD_PRD_END_DT,
+  T3.PRECNVRSN_PGM_CD,
+  T3.CREATED_TMST,
+  T4.ORD_TYP_CD,
+  T5.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T5 with(readuncommitted)
+  join
+  CKT_OBLIGATION T4 with(readuncommitted)
+  join
+  CKT_OB_TRN T2 with(readuncommitted)
+  join
+  CKT_DEBT_DTL T3 with(readuncommitted)
+  on
+    (T2.CPA_SUP_TYPE is not null) and
+    (T2.OTY_TYPE = T3.OTY_TYPE) and
+    (T2.OBG_GENERATED_ID = T3.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = T3.OTR_TYPE) and
+    (T2.OB_TRN_ID = T3.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T3.CPA_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.BAL_DUE_AMT &gt; 0) and
+    (T3.CREATED_TMST &lt;= @createdTmst)
+  join
+  CKT_CASE_ROLE T10 with(readuncommitted)
+  on
+    (T3.DUE_DT between T10.START_DATE and cast(@date as date)) and
+    (T3.DUE_DT &lt;= T10.END_DATE) and
+    (T2.CSP_SUP_NUMBER = T10.CSP_NUMBER) and
+    (@casNumber = T10.CAS_NUMBER) and
+    (T10.TYPE in ('CH', 'AR')) and
+    (T10.START_DATE &lt;= @date)
+  on
+    (T4.DTY_GENERATED_ID = T2.OTY_TYPE) and
+    (T4.OB_ID = T2.OBG_GENERATED_ID) and
+    (T4.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T4.CPA_TYPE = T2.CPA_TYPE)
+  join
+  CKT_CASE_ROLE T9 with(readuncommitted)
+  on
+    (T4.CSP_NUMBER = T9.CSP_NUMBER) and
+    (@casNumber = T9.CAS_NUMBER) and
+    (T9.TYPE = 'AP') and
+    (T9.START_DATE &lt;= @date)
+  on
+    T5.DEBT_TYP_ID = T4.DTY_GENERATED_ID
+</value>
+   </data>
+</root>

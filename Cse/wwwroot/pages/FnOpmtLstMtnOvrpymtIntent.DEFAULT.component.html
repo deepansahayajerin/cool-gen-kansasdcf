@@ -1,0 +1,531 @@
+﻿<!--Name: FN_OPMT_LST_MTN_OVRPYMT_INTENT, ID: 372045071, model: 746-->
+<div coolContent coolName="FN_OPMT_LST_MTN_OVRPYMT_INTENT" coolType="SCREEN"
+  (coolInit)="scrollSize = 200; pageSize = 11">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 21.25%; top: 0; width: 56.25%; height: 4%;" coolCol="18"
+     coolRow="1" coolLength="45">CSE - List/Maintain Overpayment Intent - OPMT</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 4%; width: 5%; height: 4%;"
+     coolCol="3" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_8"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 8.75%; top: 4%; width: 5%; height: 4%;" coolCol="8"
+     coolRow="2" coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt" style="left: 6.25%; top: 12%; width: 10%; height: 4%;"
+     coolCol="6" coolRow="4" coolLength="8">AP/Payor</div>
+   <input type="text" coolType="field" name="field_4_16"
+     [(ngModel)]="in.csePerson.number"
+     [coolVideo]="out.csePerson.screenField?.number" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="10"
+     style="left: 18.75%; top: 12%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="4" coolLength="10">
+   <input type="text" coolType="field" name="field_4_27"
+     [(ngModel)]="in.personPrompt.promptField"
+     [coolVideo]="out.personPrompt.screenField?.promptField" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 32.5%; top: 12%; width: 1.25%; height: 4%;" coolCol="27"
+     coolRow="4" coolLength="1">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 35%; top: 12%; width: 41.25%; height: 4%;" coolCol="29"
+     coolRow="4" coolLength="33">{{in.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="prompt" style="left: 6.25%; top: 20%; width: 15%; height: 4%;"
+     coolCol="6" coolRow="6" coolLength="12">Show History</div>
+   <input type="text" coolType="field" name="field_6_20"
+     [(ngModel)]="in.history.flag" [coolVideo]="out.history.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 23.75%; top: 20%; width: 1.25%; height: 4%;" coolCol="20"
+     coolRow="6" coolLength="1">
+   
+   <div coolType="literal"
+     style="left: 26.25%; top: 20%; width: 21.25%; height: 4%;" coolCol="22"
+     coolRow="6" coolLength="17">(Y - Yes, N - No)</div>
+   
+   <div coolType="literal"
+     style="left: 18.75%; top: 28%; width: 13.75%; height: 4%;" coolCol="16"
+     coolRow="8" coolLength="11">Overpayment</div>
+   
+   <div coolType="literal"
+     style="left: 35%; top: 28%; width: 11.25%; height: 4%;" coolCol="29"
+     coolRow="8" coolLength="9">Effective</div>
+   
+   <div coolType="prompt"
+     style="left: 48.75%; top: 28%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="8" coolLength="9">Worker ID</div>
+   
+   <div coolType="prompt"
+     style="left: 62.5%; top: 28%; width: 8.75%; height: 4%;" coolCol="51"
+     coolRow="8" coolLength="7">Created</div>
+   
+   <div coolType="prompt"
+     style="left: 12.5%; top: 32%; width: 3.75%; height: 4%;" coolCol="11"
+     coolRow="9" coolLength="3">Act</div>
+   
+   <div coolType="prompt"
+     style="left: 18.75%; top: 32%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="9" coolLength="6">Intent</div>
+   
+   <div coolType="prompt" style="left: 35%; top: 32%; width: 5%; height: 4%;"
+     coolCol="29" coolRow="9" coolLength="4">Date</div>
+   
+   <div coolType="literal" style="left: 65%; top: 32%; width: 5%; height: 4%;"
+     coolCol="53" coolRow="9" coolLength="4">Date</div>
+   
+   <div coolType="literal"
+     style="left: 78.75%; top: 32%; width: 16.25%; height: 4%;" coolCol="64"
+     coolRow="9" coolLength="13">Intent Values</div>
+   <input type="text" coolType="field" name="field_10_12"
+     [(ngModel)]="ref(in.import1, pageOffset, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset]?.common.screenField?.actionEntry"
+     coolAutotab #field_10_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 36%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="10" coolLength="1" [hidden]="pageOffset >= 200">
+   <input type="text" coolType="field" name="field_10_16"
+     [(ngModel)]="ref(in.import1, pageOffset, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_10_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 36%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="10" coolLength="1" [hidden]="pageOffset >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 36%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="10" coolLength="7" [hidden]="pageOffset >= 200">{{in.import1?.[pageOffset]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_10_29"
+     [(ngModel)]="ref(in.import1, pageOffset, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_10_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 36%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="10" coolLength="8" [hidden]="pageOffset >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 36%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="10" coolLength="8" [hidden]="pageOffset >= 200">{{in.import1?.[pageOffset]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 36%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="10" coolLength="8" [hidden]="pageOffset >= 200">{{in.import1?.[pageOffset]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="literal"
+     style="left: 78.75%; top: 36%; width: 12.5%; height: 4%;" coolCol="64"
+     coolRow="10" coolLength="10">R - Refund</div>
+   <input type="text" coolType="field" name="field_11_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.common.screenField?.actionEntry"
+     coolAutotab #field_11_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 40%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 1 >= 200">
+   <input type="text" coolType="field" name="field_11_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_11_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 40%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 1 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 40%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="11" coolLength="7" [hidden]="pageOffset + 1 >= 200">{{in.import1?.[pageOffset + 1]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_11_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_11_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 40%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 1 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 40%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 1 >= 200">{{in.import1?.[pageOffset + 1]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 40%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 1 >= 200">{{in.import1?.[pageOffset + 1]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="literal"
+     style="left: 78.75%; top: 40%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="11" coolLength="8">G - Gift</div>
+   <input type="text" coolType="field" name="field_12_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.common.screenField?.actionEntry"
+     coolAutotab #field_12_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 44%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 2 >= 200">
+   <input type="text" coolType="field" name="field_12_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_12_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 44%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 2 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 44%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="12" coolLength="7" [hidden]="pageOffset + 2 >= 200">{{in.import1?.[pageOffset + 2]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_12_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_12_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 44%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 2 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 44%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 2 >= 200">{{in.import1?.[pageOffset + 2]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 44%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 2 >= 200">{{in.import1?.[pageOffset + 2]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="literal"
+     style="left: 78.75%; top: 44%; width: 12.5%; height: 4%;" coolCol="64"
+     coolRow="12" coolLength="10">F - Future</div>
+   <input type="text" coolType="field" name="field_13_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 3]?.common.screenField?.actionEntry"
+     coolAutotab #field_13_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 48%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 3 >= 200">
+   <input type="text" coolType="field" name="field_13_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 3]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_13_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 48%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 3 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 48%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="13" coolLength="7" [hidden]="pageOffset + 3 >= 200">{{in.import1?.[pageOffset + 3]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_13_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 3]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_13_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 48%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 3 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 48%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 3 >= 200">{{in.import1?.[pageOffset + 3]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 48%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 3 >= 200">{{in.import1?.[pageOffset + 3]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="literal"
+     style="left: 78.75%; top: 48%; width: 17.5%; height: 4%;" coolCol="64"
+     coolRow="13" coolLength="14">(Display Only)</div>
+   <input type="text" coolType="field" name="field_14_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 4]?.common.screenField?.actionEntry"
+     coolAutotab #field_14_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 52%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 4 >= 200">
+   <input type="text" coolType="field" name="field_14_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 4]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_14_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 52%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 4 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 52%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="14" coolLength="7" [hidden]="pageOffset + 4 >= 200">{{in.import1?.[pageOffset + 4]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_14_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 4]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_14_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 52%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 4 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 52%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 4 >= 200">{{in.import1?.[pageOffset + 4]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 52%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 4 >= 200">{{in.import1?.[pageOffset + 4]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="literal"
+     style="left: 78.75%; top: 52%; width: 12.5%; height: 4%;" coolCol="64"
+     coolRow="14" coolLength="10">C - Cancel</div>
+   <input type="text" coolType="field" name="field_15_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 5]?.common.screenField?.actionEntry"
+     coolAutotab #field_15_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 56%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 5 >= 200">
+   <input type="text" coolType="field" name="field_15_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 5]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_15_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 56%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 5 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 56%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="15" coolLength="7" [hidden]="pageOffset + 5 >= 200">{{in.import1?.[pageOffset + 5]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_15_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 5]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_15_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 56%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 5 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 56%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 5 >= 200">{{in.import1?.[pageOffset + 5]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 56%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 5 >= 200">{{in.import1?.[pageOffset + 5]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="literal"
+     style="left: 78.75%; top: 56%; width: 18.75%; height: 4%;" coolCol="64"
+     coolRow="15" coolLength="15">N - Notice Sent</div>
+   <input type="text" coolType="field" name="field_16_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 6]?.common.screenField?.actionEntry"
+     coolAutotab #field_16_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 60%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 6 >= 200">
+   <input type="text" coolType="field" name="field_16_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 6]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_16_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 60%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 6 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 60%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="16" coolLength="7" [hidden]="pageOffset + 6 >= 200">{{in.import1?.[pageOffset + 6]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_16_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 6]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_16_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 60%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 6 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 60%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 6 >= 200">{{in.import1?.[pageOffset + 6]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 60%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 6 >= 200">{{in.import1?.[pageOffset + 6]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   <input type="text" coolType="field" name="field_17_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 7]?.common.screenField?.actionEntry"
+     coolAutotab #field_17_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 64%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 7 >= 200">
+   <input type="text" coolType="field" name="field_17_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 7]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_17_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 64%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 7 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 64%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="17" coolLength="7" [hidden]="pageOffset + 7 >= 200">{{in.import1?.[pageOffset + 7]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_17_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 7]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_17_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 64%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 7 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 64%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 7 >= 200">{{in.import1?.[pageOffset + 7]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 64%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 7 >= 200">{{in.import1?.[pageOffset + 7]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   <input type="text" coolType="field" name="field_18_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 8]?.common.screenField?.actionEntry"
+     coolAutotab #field_18_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 68%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 8 >= 200">
+   <input type="text" coolType="field" name="field_18_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 8]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_18_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 68%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 8 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 68%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="18" coolLength="7" [hidden]="pageOffset + 8 >= 200">{{in.import1?.[pageOffset + 8]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_18_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 8]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_18_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 68%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 8 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 68%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 8 >= 200">{{in.import1?.[pageOffset + 8]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 68%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 8 >= 200">{{in.import1?.[pageOffset + 8]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   <input type="text" coolType="field" name="field_19_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 9, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 9]?.common.screenField?.actionEntry"
+     coolAutotab #field_19_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 72%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 9 >= 200">
+   <input type="text" coolType="field" name="field_19_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 9, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 9]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_19_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 72%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 9 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 72%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="19" coolLength="7" [hidden]="pageOffset + 9 >= 200">{{in.import1?.[pageOffset + 9]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_19_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 9, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 9]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_19_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 72%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 9 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 72%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 9 >= 200">{{in.import1?.[pageOffset + 9]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 72%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 9 >= 200">{{in.import1?.[pageOffset + 9]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   <input type="text" coolType="field" name="field_20_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 10, 'common.actionEntry').value"
+     [coolVideo]="out.export1?.[pageOffset + 10]?.common.screenField?.actionEntry"
+     coolAutotab #field_20_12 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 13.75%; top: 76%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 10 >= 200">
+   <input type="text" coolType="field" name="field_20_16"
+     [(ngModel)]="ref(in.import1, pageOffset + 10, 'detOverpaymentHistory.overpaymentInd').value"
+     [coolVideo]="out.export1?.[pageOffset + 10]?.detOverpaymentHistory.screenField?.overpaymentInd"
+     coolAutotab #field_20_16 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['G','R','N','S','F','C']"
+     style="left: 18.75%; top: 76%; width: 1.25%; height: 4%;" coolCol="16"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 10 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 76%; width: 8.75%; height: 4%;" coolCol="18"
+     coolRow="20" coolLength="7" [hidden]="pageOffset + 10 >= 200">{{in.import1?.[pageOffset + 10]?.detTextWorkArea.text10}}</div>
+   <input type="text" coolType="field" name="field_20_29"
+     [(ngModel)]="ref(in.import1, pageOffset + 10, 'detOverpaymentHistory.effectiveDt').value"
+     [coolVideo]="out.export1?.[pageOffset + 10]?.detOverpaymentHistory.screenField?.effectiveDt"
+     coolAutotab #field_20_29 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 35%; top: 76%; width: 10%; height: 4%;" coolCol="29"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 10 >= 200">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 48.75%; top: 76%; width: 10%; height: 4%;" coolCol="40"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 10 >= 200">{{in.import1?.[pageOffset + 10]?.detOverpaymentHistory.createdBy}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 62.5%; top: 76%; width: 10%; height: 4%;" coolCol="51"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 10 >= 200">{{in.import1?.[pageOffset + 10]?.detOverpaymentHistory.createdTmst|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 80%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="64">PFKey:  1 Help  2 Disp  3 Exit  4 List  7 Prev  8 Next  11 Clear</div>
+   
+   <div coolType="literal"
+     style="left: 8.75%; top: 92%; width: 27.5%; height: 4%;" coolCol="8"
+     coolRow="24" coolLength="22">12 Signoff  15 Process</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="PROCESS" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=PROCESS</a>
+   </div>

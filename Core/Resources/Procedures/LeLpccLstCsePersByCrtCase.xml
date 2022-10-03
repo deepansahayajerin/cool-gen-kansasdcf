@@ -1,0 +1,65 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLpccLstCsePersByCrtCase"
+           program-name="SWELPCCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLpccLstCsePersByCrtCase"
+           transaction="SR8W"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="Foreign"/>
+      <return-map from="DlgflwSelectedTribunal" to="Tribunal"/>
+      <return-map from="DlgflwSelectedFips" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_PERS_PRIVATE_ATTORNEY"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="REDISP"
+       to="OeAttyPrivateAttorney"
+       send-command="DISPLAY">
+      <map from="SelectedCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="SelectedPersonPrivateAttorney.Identifier"
+           to="PersonPrivateAttorney.Identifier"/>
+      <map from="SelectedPersonPrivateAttorney.LastName"
+           to="PersonPrivateAttorney.LastName"/>
+      <map from="SelectedPersonPrivateAttorney.FirstName"
+           to="PersonPrivateAttorney.FirstName"/>
+      <map from="SelectedPersonPrivateAttorney.MiddleInitial"
+           to="PersonPrivateAttorney.MiddleInitial"/>
+   </on>
+   <map from="PreviousLegalAction" to="PreviousLegalAction"/>
+   <map from="DataExists" to="DataExists"/>
+   <map from="Export1.DetailCsePersonsWorkSet"
+        to="Import1.DetailCsePersonsWorkSet"/>
+   <map from="PreviousFips" to="PreviousFips"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="PromptTribunal" to="PromptTribunal"/>
+   <map from="ListOptionLrolLops" to="ListOptionLrolLops"/>
+   <map from="Foreign" to="Foreign"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="Export1.DetailPersonPrivateAttorney.Identifier"
+        to="Import1.DetailPersonPrivateAttorney.Identifier"/>
+   <map from="Export1.DetailPersonPrivateAttorney.LastName"
+        to="Import1.DetailPersonPrivateAttorney.LastName"/>
+   <map from="Export1.DetailPersonPrivateAttorney.FirstName"
+        to="Import1.DetailPersonPrivateAttorney.FirstName"/>
+   <map from="Export1.DetailPersonPrivateAttorney.MiddleInitial"
+        to="Import1.DetailPersonPrivateAttorney.MiddleInitial"/>
+   <autoflow command="EXIT" exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"/>
+</procedure>

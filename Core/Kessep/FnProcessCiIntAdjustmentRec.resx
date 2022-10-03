@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID
+from
+  CKT_CASH_RECEIPT
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail1">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  INTERFACE_TRAN_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  RECEIVED_AMOUNT,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  OBLGOR_PRSN_NBR,
+  OBLGOR_SSN,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  COLLAMT_APPL_IND
+from
+  CKT_CR_DETAIL
+where
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (INTERFACE_TRAN_ID = @interfaceTranId)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail2">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCashReceiptTypeCashReceiptEvent">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  INTERFACE_TRAN_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  RECEIVED_AMOUNT,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  OBLGOR_PRSN_NBR,
+  OBLGOR_SSN,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  COLLAMT_APPL_IND
+from
+  CKT_CR_DETAIL
+where
+  (INTERFACE_TRAN_ID = @interfaceTranId) and
+  (COURT_ORDER_NUMBER = @courtOrderNumber) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailRlnRsn">
+      <value>
+select top(1)
+  CRDTL_RLN_RSN_ID,
+  CODE,
+  DESCRIPTION
+from
+  CKT_CRDTL_RLN_RSN
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatHistoryCashReceiptDetailStatus">
+      <value>
+select top(1)
+  CRD_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CDS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  DISCONTINUE_DATE
+from
+  CKT_CRDTL_STATHIST
+where
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DIST_MTD,
+  CT_ORD_APPLIED_TO,
+  AR_NUMBER
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (DIST_MTD = @distMtd)
+</value>
+   </data>
+   <data name="ReadCollectionAdjustmentReason">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID,
+  OB_TRN_RLN_RSN_CD,
+  OB_TRN_RLN_RSN_NM
+from
+  CKT_COLL_ADJ_RSN
+where
+  OB_TRN_RLN_RSN_CD = 'COURTAD'
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetail1">
+      <value>
+update CKT_CR_DETAIL
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  COLLAMT_APPL_IND = @collamtApplInd
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetail2">
+      <value>
+update CKT_CR_DETAIL
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  REFUNDED_AMT = @refundedAmt,
+  COLLAMT_APPL_IND = @collamtApplInd
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+</root>

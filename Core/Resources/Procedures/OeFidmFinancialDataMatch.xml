@@ -1,0 +1,146 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeFidmFinancialDataMatch"
+           program-name="SWEFIDMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeFidmFinancialDataMatch"
+           transaction="SRDM"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_RESL_RESOURCE_LIST"
+       action="link"
+       return-when="ECO_LNK_RETURN_FROM_LINK ACO_NE0000_RETURN"
+       return-command="CMD08163"
+       to="OeReslPersonResourceList"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="PassCsePerson.Number" to="StartingCsePerson.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_RESOURCE_LIST1"
+       display-first="true"
+       action="link"
+       return-when="ECO_LNK_RETURN_FROM_LINK ACO_NE0000_RETURN"
+       return-command="CMD08163"
+       to="OeResoPersonResource"
+       send-command-type="none">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="PassToResoCsePersonResource" to="CsePersonResource"/>
+      <map from="Dummy" to="CsePersonVehicle"/>
+      <map from="PassToResoResourceLocationAddress" to="ResourceLocationAddress"/>
+      <map from="PassCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADDRESS_MAINTENANCE"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="CMD08163"
+       to="SiAddrAddressMaintenance"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+      <map from="CsePersonsWorkSet" to="HiddenAp"/>
+      <map from="PassCase" to="Case1"/>
+      <map from="PassCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeAlomLocateInterfacesMenu"
+       send-command="SPACES"/>
+   <map from="DisplayStatus1" to="DisplayStatus1"/>
+   <map from="DisplayStatus2" to="DisplayStatus2"/>
+   <map from="Standard" to="Standard"/>
+   <map from="FidmTrustFundType" to="FidmTrustFundType"/>
+   <map from="FidmAccountType" to="FidmAccountType"/>
+   <map from="ForeignCountry" to="ForeignCountry"/>
+   <map from="FidmResourceType" to="FidmResourceType"/>
+   <map from="FidmBalanceIndicator" to="FidmBalanceIndicator"/>
+   <map from="FidmAccountType2" to="FidmAccountType2"/>
+   <map from="FinancialInstitutionDataMatch.SecondInstitutionName"
+        to="FinancialInstitutionDataMatch.SecondInstitutionName"/>
+   <map from="FinancialInstitutionDataMatch.AccountStatusIndicator"
+        to="FinancialInstitutionDataMatch.AccountStatusIndicator"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+   <map from="ReceivedKey.CsePersonNumber" to="ReceivedKey.CsePersonNumber"/>
+   <map from="ReceivedKey.InstitutionTin" to="ReceivedKey.InstitutionTin"/>
+   <map from="ReceivedKey.MatchedPayeeAccountNumber"
+        to="ReceivedKey.MatchedPayeeAccountNumber"/>
+   <map from="ReceivedKey.MatchRunDate" to="ReceivedKey.MatchRunDate"/>
+   <map from="FinancialInstitutionDataMatch.CsePersonNumber"
+        to="FinancialInstitutionDataMatch.CsePersonNumber"/>
+   <map from="FinancialInstitutionDataMatch.InstitutionTin"
+        to="FinancialInstitutionDataMatch.InstitutionTin"/>
+   <map from="FinancialInstitutionDataMatch.MatchedPayeeStreetAddress"
+        to="FinancialInstitutionDataMatch.MatchedPayeeStreetAddress"/>
+   <map from="FinancialInstitutionDataMatch.MatchedPayeeCity"
+        to="FinancialInstitutionDataMatch.MatchedPayeeCity"/>
+   <map from="FinancialInstitutionDataMatch.MatchedPayeeState"
+        to="FinancialInstitutionDataMatch.MatchedPayeeState"/>
+   <map from="FinancialInstitutionDataMatch.MatchedPayeeZipCode"
+        to="FinancialInstitutionDataMatch.MatchedPayeeZipCode"/>
+   <map from="FinancialInstitutionDataMatch.MatchedPayeeZip4"
+        to="FinancialInstitutionDataMatch.MatchedPayeeZip4"/>
+   <map from="FinancialInstitutionDataMatch.MatchFlag"
+        to="FinancialInstitutionDataMatch.MatchFlag"/>
+   <map from="FinancialInstitutionDataMatch.AccountBalance"
+        to="FinancialInstitutionDataMatch.AccountBalance"/>
+   <map from="FinancialInstitutionDataMatch.AccountType"
+        to="FinancialInstitutionDataMatch.AccountType"/>
+   <map from="FinancialInstitutionDataMatch.AccountBalanceIndicator"
+        to="FinancialInstitutionDataMatch.AccountBalanceIndicator"/>
+   <map from="FinancialInstitutionDataMatch.DateOfBirth"
+        to="FinancialInstitutionDataMatch.DateOfBirth"/>
+   <map from="FinancialInstitutionDataMatch.AccountFullLegalTitle"
+        to="FinancialInstitutionDataMatch.AccountFullLegalTitle"/>
+   <map from="FinancialInstitutionDataMatch.PrimarySsn"
+        to="FinancialInstitutionDataMatch.PrimarySsn"/>
+   <map from="FinancialInstitutionDataMatch.SecondPayeeName"
+        to="FinancialInstitutionDataMatch.SecondPayeeName"/>
+   <map from="FinancialInstitutionDataMatch.SecondPayeeSsn"
+        to="FinancialInstitutionDataMatch.SecondPayeeSsn"/>
+   <map from="FinancialInstitutionDataMatch.InstitutionName"
+        to="FinancialInstitutionDataMatch.InstitutionName"/>
+   <map from="FinancialInstitutionDataMatch.InstitutionStreetAddress"
+        to="FinancialInstitutionDataMatch.InstitutionStreetAddress"/>
+   <map from="FinancialInstitutionDataMatch.InstitutionCity"
+        to="FinancialInstitutionDataMatch.InstitutionCity"/>
+   <map from="FinancialInstitutionDataMatch.InstitutionState"
+        to="FinancialInstitutionDataMatch.InstitutionState"/>
+   <map from="FinancialInstitutionDataMatch.InstitutionZipCode"
+        to="FinancialInstitutionDataMatch.InstitutionZipCode"/>
+   <map from="FinancialInstitutionDataMatch.InstitutionZip4"
+        to="FinancialInstitutionDataMatch.InstitutionZip4"/>
+   <map from="FinancialInstitutionDataMatch.MatchRunDate"
+        to="FinancialInstitutionDataMatch.MatchRunDate"/>
+   <map from="FinancialInstitutionDataMatch.MsfidmIndicator"
+        to="FinancialInstitutionDataMatch.MsfidmIndicator"/>
+   <map from="FinancialInstitutionDataMatch.MatchedPayeeZip3"
+        to="FinancialInstitutionDataMatch.MatchedPayeeZip3"/>
+   <map from="FinancialInstitutionDataMatch.TrustFundIndicator"
+        to="FinancialInstitutionDataMatch.TrustFundIndicator"/>
+   <map from="FinancialInstitutionDataMatch.MatchedPayeeName"
+        to="FinancialInstitutionDataMatch.MatchedPayeeName"/>
+   <map from="FinancialInstitutionDataMatch.MatchedPayeeAccountNumber"
+        to="FinancialInstitutionDataMatch.MatchedPayeeAccountNumber"/>
+   <map from="FinancialInstitutionDataMatch.InstitutionZip3"
+        to="FinancialInstitutionDataMatch.InstitutionZip3"/>
+   <map from="FinancialInstitutionDataMatch.PayeeForeignCountryIndicator"
+        to="FinancialInstitutionDataMatch.PayeeForeignCountryIndicator"/>
+   <map from="FinancialInstitutionDataMatch.MatchedPayeeSsn"
+        to="FinancialInstitutionDataMatch.MatchedPayeeSsn"/>
+   <map from="FinancialInstitutionDataMatch.PayeeIndicator"
+        to="FinancialInstitutionDataMatch.PayeeIndicator"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="PrimarySecondaryOwner1.SelectChar"
+        to="PrimarySecondaryOwner1.SelectChar"/>
+   <map from="PrimarySecondaryOwner2.SelectChar"
+        to="PrimarySecondaryOwner2.SelectChar"/>
+   <map from="CsePersonsWorkSet.FirstName" to="CsePersonsWorkSet.FirstName"/>
+   <map from="CsePersonsWorkSet.MiddleInitial"
+        to="CsePersonsWorkSet.MiddleInitial"/>
+   <map from="CsePersonsWorkSet.LastName" to="CsePersonsWorkSet.LastName"/>
+   <map from="ReceivedKey.AccountType" to="ReceivedKey.AccountType"/>
+   <map from="FinancialInstitutionDataMatch.Note"
+        to="FinancialInstitutionDataMatch.Note"/>
+</procedure>

@@ -1,0 +1,141 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeMblsFcrCaseMemberList"
+           program-name="SWEMBLSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeMblsFcrCaseMemberList"
+           transaction="SRSU"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_ALOM_MENU"
+       display-first="true"
+       action="transfer"
+       to="OeAlomLocateInterfacesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LINK_TO_CALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN ACO_NE0000_RETURN_NM"
+       return-command="RETLINK"
+       to="OeCalsFcrCaseList"
+       send-command="DISPLAY">
+      <map from="FilterCaseId" to="Starting"/>
+      <return-map from="PassFcrCaseId" to="PassFcrCaseId"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ALT_SSN_AND_ALIAS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiAltsAlternateSsnAndAlias"
+       send-command="DISPLAY">
+      <map from="PassCh" to="ChCsePersonsWorkSet"/>
+      <map from="PassAr.Number" to="ArCsePersonsWorkSet.Number"/>
+      <map from="PassAr.LastName" to="ArCsePersonsWorkSet.LastName"/>
+      <map from="PassAr.FirstName" to="ArCsePersonsWorkSet.FirstName"/>
+      <map from="PassAr.MiddleInitial" to="ArCsePersonsWorkSet.MiddleInitial"/>
+      <map from="PassAr.Ssn" to="ArCsePersonsWorkSet.Ssn"/>
+      <map from="PassAr.Dob" to="ArCsePersonsWorkSet.Dob"/>
+      <map from="PassAr.Sex" to="ArCsePersonsWorkSet.Sex"/>
+      <map from="PassAr.ReplicationIndicator"
+           to="ArCsePersonsWorkSet.ReplicationIndicator"/>
+      <map from="PassAp.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="PassAp.FormattedName" to="ApCsePersonsWorkSet.FormattedName"/>
+      <map from="PassAp.ReplicationIndicator"
+           to="ApCsePersonsWorkSet.ReplicationIndicator"/>
+      <map from="PassCaseNumber" to="Next"/>
+      <map from="PassCaseNumber" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_AR_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiArdsArDetails"
+       send-command="DISPLAY">
+      <map from="PassAr" to="ArCsePersonsWorkSet"/>
+      <map from="PassAp" to="ApCsePersonsWorkSet"/>
+      <map from="PassCaseNumber.Number" to="Case1.Number"/>
+      <map from="PassCaseNumber" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_AP_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiApdsApDetails"
+       send-command="DISPLAY">
+      <map from="PassAp.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="PassAp.ReplicationIndicator"
+           to="ApCsePersonsWorkSet.ReplicationIndicator"/>
+      <map from="PassCaseNumber" to="Next"/>
+      <map from="PassCaseNumber" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CHDS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiChdsChildDetails"
+       send-command="DISPLAY">
+      <map from="PassCh" to="ChCsePersonsWorkSet"/>
+      <map from="PassAr.Number" to="Ar.Number"/>
+      <map from="PassAr.ReplicationIndicator" to="Ar.ReplicationIndicator"/>
+      <map from="PassAp.Number" to="Ap.Number"/>
+      <map from="PassAp.FormattedName" to="Ap.FormattedName"/>
+      <map from="PassAp.ReplicationIndicator" to="Ap.ReplicationIndicator"/>
+      <map from="PassCaseNumber" to="Case1"/>
+      <map from="PassCaseNumber" to="Next"/>
+   </on>
+   <on exit-state="ECO_LINK_TO_MBDT"
+       action="link"
+       return-when="ACO_NE0000_RETURN_NM"
+       return-command="DISPLAY"
+       to="OeMbdtFcrCaseMemberDetail"
+       send-command="DISPLAY">
+      <map from="FilterCaseId" to="FcrCaseMaster"/>
+      <map from="PassMemberId.MemberId" to="FcrMember.MemberId"/>
+   </on>
+   <map from="FilterCaseId" to="FilterCaseId"/>
+   <map from="FcrMemberList.SelectChar" to="FcrMemberList.SelectChar"/>
+   <map from="HiddnFilterPrevCaseId" to="HiddnFilterPrevCaseId"/>
+   <map from="CasePrompt" to="CasePrompt"/>
+   <map from="FcrMemberList.FcrCaseMembers.MemberId"
+        to="FcrMemberList.FcrCaseMembers.MemberId"/>
+   <map from="FcrMemberList.FcrCaseMembers.ParticipantType"
+        to="FcrMemberList.FcrCaseMembers.ParticipantType"/>
+   <map from="FcrMemberList.FcrCaseMembers.ActionTypeCode"
+        to="FcrMemberList.FcrCaseMembers.ActionTypeCode"/>
+   <map from="FcrMemberList.FcrCaseMembers.DateOfBirth"
+        to="FcrMemberList.FcrCaseMembers.DateOfBirth"/>
+   <map from="FcrMemberList.FcrCaseMembers.Ssn"
+        to="FcrMemberList.FcrCaseMembers.Ssn"/>
+   <map from="FcrMemberList.FcrCaseMembers.SsnValidityCode"
+        to="FcrMemberList.FcrCaseMembers.SsnValidityCode"/>
+   <map from="FcrMemberList.FcrCaseMembers.PreviousSsn"
+        to="FcrMemberList.FcrCaseMembers.PreviousSsn"/>
+   <map from="FcrMemberList.FcrCaseMembers.LocateRequestType"
+        to="FcrMemberList.FcrCaseMembers.LocateRequestType"/>
+   <map from="FcrMemberList.FcrCaseMembers.BatchNumber"
+        to="FcrMemberList.FcrCaseMembers.BatchNumber"/>
+   <map from="FcrMemberList.FcrCaseMembers.AdditionalSsn1"
+        to="FcrMemberList.FcrCaseMembers.AdditionalSsn1"/>
+   <map from="FcrMemberList.FcrCaseMembers.AdditionalSsn1ValidityCode"
+        to="FcrMemberList.FcrCaseMembers.AdditionalSsn1ValidityCode"/>
+   <map from="FcrMemberList.FcrCaseMembers.AdditionalSsn2"
+        to="FcrMemberList.FcrCaseMembers.AdditionalSsn2"/>
+   <map from="FcrMemberList.FcrCaseMembers.AdditionalSsn2ValidityCode"
+        to="FcrMemberList.FcrCaseMembers.AdditionalSsn2ValidityCode"/>
+   <map from="FcrMemberList.FcrCaseMembers.MultipleSsn1"
+        to="FcrMemberList.FcrCaseMembers.MultipleSsn1"/>
+   <map from="FcrMemberList.FcrCaseMembers.MultipleSsn2"
+        to="FcrMemberList.FcrCaseMembers.MultipleSsn2"/>
+   <map from="FcrMemberList.FcrCaseMembers.MultipleSsn3"
+        to="FcrMemberList.FcrCaseMembers.MultipleSsn3"/>
+   <map from="FcrMemberList.FcrCaseMembers.AcknowledgementCode"
+        to="FcrMemberList.FcrCaseMembers.AcknowledgementCode"/>
+   <map from="FcrMemberList.FcrCaseMembers.ErrorCode1"
+        to="FcrMemberList.FcrCaseMembers.ErrorCode1"/>
+   <map from="FcrMemberList.FcrCaseMembers.ErrorCode2"
+        to="FcrMemberList.FcrCaseMembers.ErrorCode2"/>
+   <map from="FcrMemberList.FcrCaseMembers.ErrorCode3"
+        to="FcrMemberList.FcrCaseMembers.ErrorCode3"/>
+   <map from="FcrMemberList.FcrCaseMembers.ErrorCode4"
+        to="FcrMemberList.FcrCaseMembers.ErrorCode4"/>
+   <map from="FcrMemberList.FcrCaseMembers.ErrorCode5"
+        to="FcrMemberList.FcrCaseMembers.ErrorCode5"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+</procedure>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  EYE_COLOR,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadKdorVehicle1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_KDOR_VEHICLE
+where
+  @fkCktCsePersnumb = FK_CKT_CSE_PERSNUMB
+</value>
+   </data>
+   <data name="ReadKdorVehicle2">
+      <value>
+select
+  IDENTIFIER,
+  LAST_NAME,
+  FIRST_NAME,
+  SSN,
+  DATE_OF_BIRTH,
+  LICENSE_NUMBER,
+  VIN_NUMBER,
+  MAKE,
+  MODEL,
+  [YEAR],
+  PLATE_NUMBER,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAMP,
+  FK_CKT_CSE_PERSNUMB
+from
+  CKT_KDOR_VEHICLE
+where
+  @fkCktCsePersnumb = FK_CKT_CSE_PERSNUMB
+order by
+  IDENTIFIER
+</value>
+   </data>
+   <data name="ReadKdorVehicleOwner">
+      <value>
+select
+  IDENTIFIER,
+  ORGANIZATION_NAME,
+  FIRST_NAME,
+  MIDDLE_NAME,
+  LAST_NAME,
+  SUFFIX,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  VESTMENT_TYPE,
+  HOME_PHONE,
+  BUSINESS_PHONE,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAMP,
+  FK_CKT_KDOR_VEHFK_CKT_CSE_PERS,
+  FK_CKT_KDOR_VEHIDENTIFIER
+from
+  CKT_KDOR_VEHICLE_OWNER
+where
+  (@fkCktKdorVehfkCktCsePers = FK_CKT_KDOR_VEHFK_CKT_CSE_PERS) and
+  (@fkCktKdorVehidentifier = FK_CKT_KDOR_VEHIDENTIFIER)
+order by
+  IDENTIFIER
+</value>
+   </data>
+</root>

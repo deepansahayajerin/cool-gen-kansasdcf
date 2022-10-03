@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCodeValue">
+      <value>
+select distinct
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE
+from
+  CKT_CODE T2 with(readuncommitted)
+  join
+  CKT_CODE_VALUE T1 with(readuncommitted)
+  on
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'DMV SUFFIX')
+order by
+  T1.CDVALUE
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB &gt; @numb) and
+    (T1.TYPE = 'C') and
+    (T1.DATE_OF_DEATH &lt;= @dateOfDeath) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePersonLicense">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  ISSUING_STATE,
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERS_LCNS with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (ISSUING_STATE = 'KS') and
+  (TYPE = 'D')
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  END_DATE,
+  TYPE,
+  CREATED_TIMESTAMP,
+  INCARCERATED
+from
+  CKT_INCARCERATION with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('P', 'J')) and
+  (INCARCERATED = 'Y') and
+  (VERIFIED_DATE &gt; @verifiedDate)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadKsDriversLicense">
+      <value>
+select top(1)
+  CSP_NUM,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV with(readuncommitted)
+where
+  @cspNum = CSP_NUM
+order by
+  VALIDATION_DATE desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'AP') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRole3">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'AR') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoAp = CSP_NO_AP) and
+  (CLOSURE_DATE &gt;= @closureDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoAr = CSP_NO_AR) and
+  (CLOSURE_DATE &gt;= @closureDate)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND = 'N')
+</value>
+   </data>
+</root>

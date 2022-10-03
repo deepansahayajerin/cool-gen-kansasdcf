@@ -1,0 +1,442 @@
+
+.appTitle
+{
+  white-space: nowrap;
+}
+
+.appTitle .debug-info
+{
+  font-size: 80%;
+  color: gold;
+}
+
+.coolDialog
+{
+	position: relative;
+	height: 100%;
+    overflow: auto;
+}
+
+.coolPopup>content>ng-component
+{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  outline: none;
+}
+
+.coolPopup:not(.online)>content>ng-component
+{
+  background-color: #CECFCE !important;
+}
+
+.NOTSUPPORTED
+{
+  display: none;
+}
+
+textarea[coolType]
+{
+  resize: none;
+}
+
+
+.coolPopup.online textarea[coolType]
+{
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.coolPopup.online textarea[coolType]::-webkit-scrollbar 
+{
+  height: .5em;
+  width: .5em;
+}
+
+/* Handle */
+.coolPopup.online textarea[coolType]::-webkit-scrollbar-thumb 
+{
+  background: darkgray;
+  border-radius: .5em;
+}
+
+/* Handle on hover */
+.coolPopup.online textarea[coolType]::-webkit-scrollbar-thumb:hover 
+{
+  background: #8d93a5;
+  cursor: pointer;
+}
+
+[cooltype=pfkeys]
+{
+  display: none;
+}
+
+[coolcommands]
+{
+  flex-shrink: 0;
+}
+
+[coolcommands] a[coolType=action]
+{
+  padding: .25em .5em;
+}
+
+[coolcommands] [cooltype]
+{
+  position: static !important;
+}
+
+.coolPopup
+{
+  font-family: system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: normal;
+}
+
+[coolType=WINPRIME][coolColor],
+[coolType=DLGBOX][coolColor]
+{
+  color: inherit ! important;
+}
+
+[coolType=WINPRIME][coolBackground='000000'],
+[coolType=DLGBOX][coolBackground='000000'],
+[coolBackground='000000']:not([coolColor])
+{
+	background-color: inherit ! important;
+}
+
+[coolType=WINPRIME][coolFontSize],
+[coolType=DLGBOX][coolFontSize] {
+  font-size: inherit !important;
+}
+
+select[coolType],
+input[type=text][coolType],
+input[type=button][coolType],
+button[coolType]
+{
+  min-height: calc(1em + 3px);
+}
+
+input[type=text][coolType]
+{
+  padding: 1px 0 1px 1px;
+  min-width: calc(1em + 4px);
+}
+
+.coolPopup.online input[type=text][coolType]
+{
+  min-height: calc(1em + 1px);
+  min-width: calc(1em + 2px);
+}
+
+.coolPopup.online content>ng-component
+{
+  font-family: monospace !important;
+  background-color: black;
+  color:  #0f0;
+}
+
+.progress
+{
+  display: none;
+}
+
+.coolPopup.hostNotReady
+{
+  visibility: hidden;
+}
+
+.coolDialog.pending .progress
+{
+  overflow-x: hidden;
+  display: block;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.coolDialog.pending .progress-bar
+{
+  height: 3px;
+  position: relative;
+  animation: progress-indeterminate .75s linear infinite;
+  animation-delay: 1s;
+}
+
+@media print
+{
+  .coolPopup:not(.coolPrint),
+  .coolDialog .progress,
+  .coolDialog .watermark
+  {
+    display: none;
+  }
+
+  .coolPopup.coolPrint
+  {
+    position: fixed;
+    top: 0 !important;
+    left: 0 !important;
+  }
+}
+
+@keyframes progress-indeterminate
+{
+   from { left: -25%; width: 25%; background: crimson; }
+   to { left: 100%; width: 25%; background: crimson; }
+}
+
+.watermark
+{
+  position: fixed;
+  bottom: 2em;
+  right: 0;
+  border: solid 8px black;
+  opacity: 0.07;
+  z-index: 1000;
+  color: black;
+  font-size: 70px;
+  pointer-events: none;
+  transform: rotate(-45deg);
+  text-align: center;
+}
+
+.coolDialog[mode=Production i] .watermark
+{
+  display: none;
+}
+
+.watermark small
+{
+  font-size: 35%;
+  display: block;
+}
+
+.app-toolbars 
+{
+  position: fixed;
+  z-index: 1000;
+  left: 20px;
+  bottom: 20px;
+  font-size: 20px;
+}
+
+.app-toolbars a
+{
+  color: white;
+}
+
+@media print
+{
+  .windows-button, app-windows
+  {
+    display: none;
+  }
+}
+
+/*
+[coolFontFamily="Courier Bold Italic"]
+{
+	font-family: Courier !important;
+	font-weight: bold !important;
+	font-style: italic !important;
+}
+
+[coolFontFamily="Tahoma"]
+{
+  font-family: Tahoma;
+}
+
+[coolFontFamily="Helv"]
+{
+ font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+[coolFontFamily="Lucida Console"]
+{
+  font-family: 'Lucida Console', monospace;
+}
+
+[coolFontFamily="Comic Sans MS"]
+{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+[coolFontFamily="Arial Narrow"]
+{
+  font-family: "Arial Narrow", Arial, sans-serif;
+}
+
+[coolFontSize="7"]
+{
+  font-size: 7px;
+}
+
+[coolFontSize="8"]
+{
+  font-size: 8px;
+}
+
+[coolFontSize="9"]
+{
+  font-size: 9px;
+}
+
+[coolFontSize="10"]
+{
+  font-size: 10px;
+}
+
+[coolFontSize="11"]
+{
+  font-size: 11px;
+}
+
+[coolFontSize="14"]
+{
+  font-size: 14px;
+}
+
+[coolFontSize="18"]
+{
+  font-size: 18px;
+}
+
+[coolFontSize="22"]
+{
+  font-size: 22px;
+}
+
+[coolFontSize="24"]
+{
+  font-size: 24px;
+}
+
+[coolFontSize="26"]
+{
+  font-size: 26px;
+}
+
+[coolFontSize="36"]
+{
+  font-size: 36px;
+}
+
+[coolFontStyle~=italic i]
+{
+	font-style: italic;
+}
+
+[coolFontStyle~=bold i]
+{
+	font-weight: bold;
+}
+
+[coolFontStyle~=not i][coolFontStyle~=bold i]
+{
+	font-weight: normal;
+}
+
+[coolFontFamily="Courier Bold Italic" i]
+{
+	font-family: Courier;
+	font-weight: bold;
+}
+
+[coolHeader] [coolPrompt][coolFontSize="8"]
+{
+	display: block;
+  font-size: 10px ! important;
+}
+
+[coolFontFamily=Arial i]
+{
+  font-family: Arial ! important;
+}
+
+[coolType=PUSHBTN]
+{
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #D6D3CE !important;
+}
+
+[coolType=PUSHBTN]:not(coolFontSize)
+{
+  font-size: inherit;
+}
+
+
+[coolBackground=c0c0c0]
+{
+  background-color: #CECFCE !important;
+}
+
+input[type=date][coolType]
+{
+  font-size: 77%;
+}
+*/
+
+.coolPopup.online
+{
+  background-color: black;
+}
+
+.coolPopup.online content>ng-component
+{
+  font-family: monospace !important;
+  color:  #0f0;
+}
+
+.coolPopup.online :is(input, textarea)[coolType=field]:not([coolColor])
+{
+  color:  #0f0;
+}
+
+.coolPopup.online :is(input, textarea)[coolType=field]
+{
+  border-width: 0 0 1px 0;
+  border-color: darkseagreen;
+  font-family: monospace !important;
+  outline: none;
+}
+
+.coolPopup.online :is(input, textarea)[coolType=field]:read-only
+{
+  border: none;
+}
+
+.coolPopup.online :is(input, textarea)[coolType=field]:not(:read-only)
+{
+  background-color: #333;
+}
+
+.coolPopup.online :is(input, textarea)[coolType=field]:read-only
+{
+  background-color: inherit;
+}
+
+.coolPopup.online :is(input, textarea)[coolType=field]:focus:not([coolError])
+{
+  background-color: #555;
+  color: aquamarine !important;
+  outline: none;
+}
+
+.coolPopup.online a[coolType=action],
+.coolPopup.online a[coolType=action]:visited
+{
+  color: skyblue;
+}
+
+.coolPopup.online [coolError]:not([coolColor=red])
+{
+  color: white !important;
+}

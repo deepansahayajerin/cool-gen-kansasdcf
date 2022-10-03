@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateMonthlyObligeeSummary">
+      <value>
+insert into CKT_MNTHLY_OBE_SUM
+(
+  YER,
+  MNTH,
+  PT_RECAP_AMT,
+  DISBURSEMENTS_SUPP,
+  RECAPTURED_AMT,
+  NA_ARS_RECAP_AMT,
+  PASSTHRU_AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  ADC_REIMBURSED_AMT,
+  CPA_S_TYPE,
+  CSP_S_NUMBER,
+  COLLECTION_AMT,
+  COLLCTN_DSB_TO_AR,
+  FEE_AMT,
+  ZDEL_TYPE,
+  TOT_EXCESS_URA_AMT,
+  NBR_OF_COLLECTIONS,
+  NA_CURR_RECAP_AMT
+)
+values
+(
+  @yer,
+  @mnth,
+  @ptRecapAmt,
+  @ptRecapAmt,
+  @ptRecapAmt,
+  @ptRecapAmt,
+  @passthruAmount,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @adcReimbursedAmt,
+  @cpaSType,
+  @cspSNumber,
+  @ptRecapAmt,
+  @ptRecapAmt,
+  @ptRecapAmt,
+  @zdelType,
+  @ptRecapAmt,
+  @nbrOfCollections,
+  @ptRecapAmt
+)
+</value>
+   </data>
+   <data name="CreatePassthru">
+      <value>
+insert into CKT_DISB_TRAN
+(
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PROCESS_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST,
+  DISBURSEMENT_DATE,
+  CASH_NON_CASH_IND,
+  RECAPTURED_IND,
+  COLLECTION_DATE,
+  COLLCTN_PROCESS_DT,
+  PASSTHRU_DATE,
+  DBT_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  OTY_ID,
+  OTR_TYPE_DISB,
+  OTR_ID,
+  CPA_TYPE_DISB,
+  CSP_NUMBER_DISB,
+  OBG_ID,
+  CRD_ID,
+  CRV_ID,
+  CST_ID,
+  CRT_ID,
+  COL_ID,
+  INTERSTATE_IND,
+  PASSTHRU_PROC_DATE,
+  DESIGNATED_PAYEE,
+  REFERENCE_NUMBER,
+  URA_EXCOLL_SNBR,
+  INT_INTER_ID,
+  EXCESS_URA_IND
+)
+values
+(
+  @cpaType,
+  @cspNumber,
+  @disbTranId,
+  @type,
+  @amount,
+  @processDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdateTmst,
+  @disbursementDate,
+  @cashNonCashInd,
+  @recapturedInd,
+  @collectionDate,
+  @disbursementDate,
+  @passthruDate,
+  null,
+  null,
+  null,
+  @otrTypeDisb,
+  null,
+  @cpaTypeDisb,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  @interstateInd,
+  @passthruProcDate,
+  @designatedPayee,
+  @referenceNumber,
+  @uraExcollSnbr,
+  null,
+  @recapturedInd
+)
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePersonObligee">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT,
+  CREATED_TMST
+from
+  CKT_DEBT_DTL
+where
+  (OTY_TYPE = @otyType) and
+  (OTR_TYPE = @otrType) and
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OBG_GENERATED_ID = @obgGeneratedId)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PROCESS_DATE,
+  CASH_NON_CASH_IND,
+  COLLECTION_DATE,
+  DBT_GENERATED_ID,
+  INTERSTATE_IND,
+  PASSTHRU_PROC_DATE
+from
+  CKT_DISB_TRAN
+where
+  (TYPE = 'D') and
+  (INTERSTATE_IND in ('N', ' ')) and
+  (CASH_NON_CASH_IND &lt;&gt; 'N') and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (DBT_GENERATED_ID is not null) and
+  (
+    DBT_GENERATED_ID in (1, 19, 28,
+      64)
+  )
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionCollectionDisbursementTransactionRln">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.OTY_ID,
+  T1.OTR_TYPE_DISB,
+  T1.OTR_ID,
+  T1.CPA_TYPE_DISB,
+  T1.CSP_NUMBER_DISB,
+  T1.OBG_ID,
+  T1.CRD_ID,
+  T1.CRV_ID,
+  T1.CST_ID,
+  T1.CRT_ID,
+  T1.COL_ID,
+  T2.APPLIED_TO_CD,
+  T2.COLL_DT,
+  T3.DISB_TRAN_RLN_ID,
+  T3.DNR_GENERATED_ID,
+  T3.CSP_NUMBER,
+  T3.CPA_TYPE,
+  T3.DTR_GENERATED_ID
+from
+  CKT_COLLECTION T2
+  join
+  CKT_DISB_TRAN T1
+  on
+    (T2.COLL_ID = T1.COL_ID) and
+    (T2.OTY_ID = T1.OTY_ID) and
+    (T2.OBG_ID = T1.OBG_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER_DISB) and
+    (T2.CPA_TYPE = T1.CPA_TYPE_DISB) and
+    (T2.OTR_ID = T1.OTR_ID) and
+    (T2.OTR_TYPE = T1.OTR_TYPE_DISB) and
+    (T2.CRT_TYPE = T1.CRT_ID) and
+    (T2.CST_ID = T1.CST_ID) and
+    (T2.CRV_ID = T1.CRV_ID) and
+    (T2.CRD_ID = T1.CRD_ID) and
+    (T2.APPLIED_TO_CD = 'C')
+  join
+  CKT_DISB_TRAN_RLN T3
+  on
+    (T1.DISB_TRAN_ID = T3.DTR_P_GENERATED_ID) and
+    (T1.CPA_TYPE = T3.CPA_P_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_P_NUMBER) and
+    (@dtrGeneratedId = T3.DTR_GENERATED_ID) and
+    (@cpaType = T3.CPA_TYPE) and
+    (@cspNumber = T3.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadMaximumPassthru">
+      <value>
+select top(1)
+  MAX_PASSTHRU_ID,
+  AMOUNT,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_MAX_PASSTHRU
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+   <data name="ReadMonthlyObligeeSummary">
+      <value>
+select top(1)
+  YER,
+  MNTH,
+  PASSTHRU_AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  ADC_REIMBURSED_AMT,
+  CPA_S_TYPE,
+  CSP_S_NUMBER
+from
+  CKT_MNTHLY_OBE_SUM
+where
+  (@cpaSType = CPA_S_TYPE) and
+  (@cspSNumber = CSP_S_NUMBER) and
+  (YER = @yer) and
+  (MNTH = @mnth)
+</value>
+   </data>
+   <data name="UpdateMonthlyObligeeSummary">
+      <value>
+update CKT_MNTHLY_OBE_SUM
+set
+  PASSTHRU_AMOUNT = @passthruAmount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (YER = @yer) and
+  (MNTH = @mnth) and
+  (CPA_S_TYPE = @cpaSType) and
+  (CSP_S_NUMBER = @cspSNumber)
+</value>
+   </data>
+</root>

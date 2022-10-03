@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadApplicantRecipient">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.TYPE = 'C')
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompany">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CARRIER_CODE,
+  POLICY_CARRIER,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  END_DATE
+from
+  CKT_HEALTH_INS_CO
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverageCsePerson">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.POLICY_EXP_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.CSP_NUMBER,
+  T1.HIC_IDENTIFIER,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_HINS_COVERAGE T1
+  on
+    (@hicIdentifier = T1.HIC_IDENTIFIER) and
+    (T2.NUMB = T1.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select
+  HCV_ID,
+  CSP_NUMBER,
+  COVER_END_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_PERSONAL_HINS
+where
+  @hcvId = HCV_ID
+</value>
+   </data>
+   <data name="UpdateHealthInsuranceCompany">
+      <value>
+update CKT_HEALTH_INS_CO
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  END_DATE = @endDate
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateHealthInsuranceCoverage">
+      <value>
+update CKT_HINS_COVERAGE
+set
+  POLICY_EXP_DATE = @policyExpDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdatePersonalHealthInsurance">
+      <value>
+update CKT_PERSONAL_HINS
+set
+  COVER_END_DATE = @coverEndDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (HCV_ID = @hcvId) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

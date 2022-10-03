@@ -1,0 +1,46 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCsohCseOrgHierMaintenance"
+           program-name="SWECSOHP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCsohCseOrgHierMaintenance"
+           transaction="SR3A"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToCdvl" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromCdvl"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CSE_ORGANIZATION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpCsorCseOrganizationMaint"
+       send-command="DISPLAY">
+      <map from="ToCsor" to="Search"/>
+      <return-map from="ReturnSelect" to="FromCsor"/>
+   </on>
+   <map from="Parent" to="Parent"/>
+   <map from="Export1.Sel" to="Import1.Sel"/>
+   <map from="Export1.CseOrganization" to="Import1.CseOrganization"/>
+   <map from="Export1.ChildTypePrompt" to="Import1.ChildTypePrompt"/>
+   <map from="PromptParentCd" to="PromptParentCd"/>
+   <map from="StartingFilter" to="StartingFilter"/>
+   <map from="Export1.Hidden" to="Import1.Hidden"/>
+   <map from="ParentHidden" to="ParentHidden"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenCseOrganizationRelationship"
+        to="HiddenCseOrganizationRelationship"/>
+   <map from="CseOrganizationRelationship" to="CseOrganizationRelationship"/>
+   <map from="Hierarchy" to="Hierarchy"/>
+   <map from="PromptHierarchyType" to="PromptHierarchyType"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,94 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLappLegalAppeal"
+           program-name="SWELAPPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLappLegalAppeal"
+           transaction="SR9B"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLTRB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="RequiredTribunalsFor.StateAbbreviation"
+           to="SearchFips.StateAbbreviation"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="DlgflowSelected"/>
+      <return-map from="DlgflwSelectedTribunal" to="DlgflwSelectedTribunal"/>
+      <return-map from="DlgflwSelectedFips" to="DlgflwSelectedFips"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACN"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="FromFipsTribAddress" to="FipsTribAddress"/>
+      <map from="FromTribunal" to="SearchTribunal"/>
+      <map from="Fips.StateAbbreviation" to="SearchFips.StateAbbreviation"/>
+      <map from="Fips.CountyAbbreviation" to="SearchFips.CountyAbbreviation"/>
+      <map from="Fips.CountyDescription" to="SearchFips.CountyDescription"/>
+      <map from="LegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.Classification" to="SearchLegalAction.Classification"/>
+      <map from="LegalAction.ForeignOrderNumber"
+           to="SearchLegalAction.ForeignOrderNumber"/>
+      <return-map from="FipsTribAddress" to="FromFipsTribAddress"/>
+      <return-map from="SearchTribunal" to="FromTribunal"/>
+      <return-map from="SearchFips" to="Fips"/>
+      <return-map from="SearchLegalAction" to="FromLacn"/>
+      <return-map from="DlgflwSelected" to="LegalAction"/>
+   </on>
+   <map from="HiddenTribunal" to="HiddenTribunal"/>
+   <map from="DataExists" to="DataExists"/>
+   <map from="HiddenFipsTribAddress" to="HiddenFipsTribAddress"/>
+   <map from="ToTribunal" to="ToTribunal"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="HiddenPrevAppeal" to="HiddenPrevAppeal"/>
+   <map from="HiddenPrevLegalAction" to="HiddenPrevLegalAction"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="ActionTaken" to="ActionTaken"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="FromTribunal" to="FromTribunal"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="Fips" to="Fips"/>
+   <map from="ListTribunalsTo" to="ListTribunalsTo"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="ListTribunalFrom" to="ListTribunalFrom"/>
+   <map from="ToFipsTribAddress" to="ToFipsTribAddress"/>
+   <map from="FromFipsTribAddress" to="FromFipsTribAddress"/>
+   <map from="HiddenFips.StateAbbreviation" to="HiddenFips.StateAbbreviation"/>
+   <map from="HiddenFips.CountyAbbreviation" to="HiddenFips.CountyAbbreviation"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="Appeal.Identifier" to="Appeal.Identifier"/>
+   <map from="Appeal.DocketNumber" to="Appeal.DocketNumber"/>
+   <map from="Appeal.AppealDate" to="Appeal.AppealDate"/>
+   <map from="Appeal.DocketingStmtFiledDate" to="Appeal.DocketingStmtFiledDate"/>
+   <map from="Appeal.AttorneyLastName" to="Appeal.AttorneyLastName"/>
+   <map from="Appeal.AttorneyFirstName" to="Appeal.AttorneyFirstName"/>
+   <map from="Appeal.AttorneyMiddleInitial" to="Appeal.AttorneyMiddleInitial"/>
+   <map from="Appeal.AppellantBriefDate" to="Appeal.AppellantBriefDate"/>
+   <map from="Appeal.ReplyBriefDate" to="Appeal.ReplyBriefDate"/>
+   <map from="Appeal.OralArgumentDate" to="Appeal.OralArgumentDate"/>
+   <map from="Appeal.DecisionDate" to="Appeal.DecisionDate"/>
+   <map from="Appeal.FurtherAppealIndicator" to="Appeal.FurtherAppealIndicator"/>
+   <map from="Appeal.ExtentionReqGrantedDate"
+        to="Appeal.ExtentionReqGrantedDate"/>
+   <map from="Appeal.DateExtensionGranted" to="Appeal.DateExtensionGranted"/>
+   <map from="Appeal.DecisionResult" to="Appeal.DecisionResult"/>
+   <map from="LegalAction.FiledDate" to="LegalAction.FiledDate"/>
+   <map from="Appeal.FiledByFirstName" to="Appeal.FiledByFirstName"/>
+   <map from="Appeal.FiledByMi" to="Appeal.FiledByMi"/>
+   <map from="Appeal.FiledByLastName" to="Appeal.FiledByLastName"/>
+   <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="Appeal.CreatedTstamp" to="Appeal.CreatedTstamp"/>
+   <autoflow command="EXIT" exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"/>
+</procedure>

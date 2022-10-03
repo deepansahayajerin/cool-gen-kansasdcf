@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteInvalidSsn">
+      <value>
+delete from CKT_INVALID_SSN
+where
+  (CSP_NUMBER = @cspNumber) and
+  (SSN = @ssn)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER)
+order by
+  T1.STATUS_DATE desc
+</value>
+   </data>
+   <data name="ReadInvalidSsn">
+      <value>
+select
+  CSP_NUMBER,
+  SSN
+from
+  CKT_INVALID_SSN
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadInvalidSsnCsePerson">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.SSN,
+  T1.NEXT_CHECK_DATE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_INVALID_SSN T1
+  on
+    (T1.NEXT_CHECK_DATE &lt;= @nextCheckDate) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="UpdateInvalidSsn">
+      <value>
+update CKT_INVALID_SSN
+set
+  NEXT_CHECK_DATE = @nextCheckDate
+where
+  (CSP_NUMBER = @cspNumber) and
+  (SSN = @ssn)
+</value>
+   </data>
+</root>

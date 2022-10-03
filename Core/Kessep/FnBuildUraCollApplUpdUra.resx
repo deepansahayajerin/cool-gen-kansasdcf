@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateUraCollectionApplication">
+      <value>
+insert into CKT_URA_COLL_APPL
+(
+  COLL_AMT_APPLD,
+  CREATED_BY,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTY_IDENTIFIER,
+  OBG_IDENTIFIER,
+  OTR_IDENTIFIER,
+  OTR_TYPE,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_IDENTIFIER,
+  COL_IDENTIFIER,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER0,
+  IMS_MONTH,
+  IMS_YEAR,
+  CREATED_TSTAMP,
+  TYPE
+)
+values
+(
+  @collAmtAppld,
+  @createdBy,
+  @cspNumber,
+  @cpaType,
+  @otyIdentifier,
+  @obgIdentifier,
+  @otrIdentifier,
+  @otrType,
+  @cstIdentifier,
+  @crvIdentifier,
+  @crtIdentifier,
+  @crdIdentifier,
+  @colIdentifier,
+  @imhAeCaseNo,
+  @cspNumber0,
+  @imsMonth,
+  @imsYear,
+  @createdTstamp,
+  @type
+)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID
+from
+  CKT_COLLECTION
+where
+  (CSP_NUMBER = @cspNumber) and
+  (OBG_ID = @obgId) and
+  (OTR_ID = @otrId) and
+  (COLL_ID = @collId)
+</value>
+   </data>
+   <data name="ReadImHousehold">
+      <value>
+select top(1)
+  AE_CASE_NO
+from
+  CKT_IM_HOUSEHOLD
+where
+  AE_CASE_NO = @aeCaseNo
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum">
+      <value>
+select top(1)
+  YEAR0,
+  MONTH0,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber) and
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0)
+</value>
+   </data>
+   <data name="UpdateImHouseholdMbrMnthlySum">
+      <value>
+update CKT_IM_HH_MBR_MSUM
+set
+  URA_AMOUNT = @uraAmount,
+  URA_MEDICAL_AMOUNT = @uraMedicalAmount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0) and
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

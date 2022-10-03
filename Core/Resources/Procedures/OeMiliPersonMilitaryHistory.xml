@@ -1,0 +1,139 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeMiliPersonMilitaryHistory"
+           program-name="SWEMILIP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeMiliPersonMilitaryHistory"
+           transaction="SR6N"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="FromSelection"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_INCOME_SOURCE_DETAILS"
+       action="transfer"
+       to="SiIncsIncomeSourceDetails"
+       send-command="DISPLAY">
+      <map from="HincomeSource.Identifier" to="IncomeSource.Identifier"/>
+      <map from="HincomeSource.Type1" to="IncomeSource.Type1"/>
+      <map from="Name" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="Name" to="PersonName"/>
+      <map from="CsePerson" to="StartCsePerson"/>
+      <map from="Case1" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="List" to="Code"/>
+      <return-map from="DlgflwSelected" to="List"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SI_COMP_CASE_COMP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="Selected.Number" to="FromSelection.Number"/>
+      <return-map from="Selected.FormattedName" to="FromSelection.FormattedName"/>
+   </on>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="HcsePerson" to="HcsePerson"/>
+   <map from="WorkH" to="WorkH"/>
+   <map from="Work" to="Work"/>
+   <map from="Pages.PagesDetail" to="Pages.PagesDetail"/>
+   <map from="MilitaryBranch" to="MilitaryBranch"/>
+   <map from="MilitaryDutyStatus" to="MilitaryDutyStatus"/>
+   <map from="MilitaryRank" to="MilitaryRank"/>
+   <map from="WorkListDutyStatus" to="WorkListDutyStation"/>
+   <map from="WorkListBranch" to="WorkListBranch"/>
+   <map from="WorkListRank" to="WorkListRank"/>
+   <map from="LstLocAddrStatePrompt" to="LstLocAddrStatePrompt"/>
+   <map from="LstCountryCodePrompt" to="LstCountryCodePrompt"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="CsePersonPrompt" to="CsePersonPrompt"/>
+   <map from="PersonIncomeHistory" to="PersonIncomeHistory"/>
+   <map from="AlreadyDisplayed" to="AlreadyDisplayed"/>
+   <map from="Name" to="Name"/>
+   <map from="HincomeSource" to="HincomeSource"/>
+   <map from="Case1" to="Case1"/>
+   <map from="HiddenLastRead" to="HiddenLastRead"/>
+   <map from="HiddenListval" to="HiddenListval"/>
+   <map from="MilitaryService.DutyStatusCode"
+        to="MilitaryService.DutyStatusCode"/>
+   <map from="MilitaryService.ExpectedDischargeDate"
+        to="MilitaryService.ExpectedDischargeDate"/>
+   <map from="MilitaryService.BranchCode" to="MilitaryService.BranchCode"/>
+   <map from="MilitaryService.Rank" to="MilitaryService.Rank"/>
+   <map from="MilitaryService.CurrentUsDutyStation"
+        to="MilitaryService.CurrentUsDutyStation"/>
+   <map from="MilitaryService.Street1" to="MilitaryService.Street1"/>
+   <map from="MilitaryService.Street2" to="MilitaryService.Street2"/>
+   <map from="MilitaryService.City" to="MilitaryService.City"/>
+   <map from="MilitaryService.State" to="MilitaryService.State"/>
+   <map from="MilitaryService.ZipCode5" to="MilitaryService.ZipCode5"/>
+   <map from="MilitaryService.ZipCode4" to="MilitaryService.ZipCode4"/>
+   <map from="MilitaryService.Apo" to="MilitaryService.Apo"/>
+   <map from="MilitaryService.Country" to="MilitaryService.Country"/>
+   <map from="MilitaryService.StartDate" to="MilitaryService.StartDate"/>
+   <map from="MilitaryService.EndDate" to="MilitaryService.EndDate"/>
+   <map from="MilitaryService.CommandingOfficerLastName"
+        to="MilitaryService.CommandingOfficerLastName"/>
+   <map from="MilitaryService.CommandingOfficerFirstName"
+        to="MilitaryService.CommandingOfficerFirstName"/>
+   <map from="MilitaryService.CommandingOfficerMi"
+        to="MilitaryService.CommandingOfficerMi"/>
+   <map from="MilitaryService.OverseasDutyStation"
+        to="MilitaryService.OverseasDutyStation"/>
+   <map from="MilitaryService.ExpectedReturnDateToStates"
+        to="MilitaryService.ExpectedReturnDateToStates"/>
+   <map from="HmilitaryService.EffectiveDate"
+        to="HmilitaryService.EffectiveDate"/>
+   <map from="MilitaryService.EffectiveDate" to="MilitaryService.EffectiveDate"/>
+   <map from="MilitaryService.PhoneAreaCode" to="MilitaryService.PhoneAreaCode"/>
+   <map from="MilitaryService.Phone" to="MilitaryService.Phone"/>
+   <map from="MilitaryService.PhoneExt" to="MilitaryService.PhoneExt"/>
+   <map from="HmilitaryService.Street1" to="HmilitaryService.Street1"/>
+   <map from="HmilitaryService.Street2" to="HmilitaryService.Street2"/>
+   <map from="HmilitaryService.City" to="HmilitaryService.City"/>
+   <map from="HmilitaryService.State" to="HmilitaryService.State"/>
+   <map from="HmilitaryService.Province" to="HmilitaryService.Province"/>
+   <map from="HmilitaryService.PostalCode" to="HmilitaryService.PostalCode"/>
+   <map from="HmilitaryService.ZipCode5" to="HmilitaryService.ZipCode5"/>
+   <map from="HmilitaryService.ZipCode4" to="HmilitaryService.ZipCode4"/>
+   <map from="HmilitaryService.Zip3" to="HmilitaryService.Zip3"/>
+   <map from="HmilitaryService.Country" to="HmilitaryService.Country"/>
+   <map from="HmilitaryService.CommandingOfficerLastName"
+        to="HmilitaryService.CommandingOfficerLastName"/>
+   <map from="HmilitaryService.CommandingOfficerFirstName"
+        to="HmilitaryService.CommandingOfficerFirstName"/>
+   <map from="HmilitaryService.CommandingOfficerMi"
+        to="HmilitaryService.CommandingOfficerMi"/>
+   <map from="HmilitaryService.CurrentUsDutyStation"
+        to="HmilitaryService.CurrentUsDutyStation"/>
+   <map from="HmilitaryService.ExpectedReturnDateToStates"
+        to="HmilitaryService.ExpectedReturnDateToStates"/>
+   <map from="HmilitaryService.OverseasDutyStation"
+        to="HmilitaryService.OverseasDutyStation"/>
+   <map from="HmilitaryService.ExpectedDischargeDate"
+        to="HmilitaryService.ExpectedDischargeDate"/>
+   <map from="HmilitaryService.DutyStatusCode"
+        to="HmilitaryService.DutyStatusCode"/>
+   <map from="HmilitaryService.Rank" to="HmilitaryService.Rank"/>
+   <map from="HmilitaryService.EndDate" to="HmilitaryService.EndDate"/>
+   <map from="HmilitaryService.StartDate" to="HmilitaryService.StartDate"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

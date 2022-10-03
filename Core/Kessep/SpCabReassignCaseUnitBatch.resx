@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCaseUnitFunctionAssignmt">
+      <value>
+insert into CKT_ASSGN_CASE_UNT
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CSU_NO,
+  CAS_NO,
+  [FUNCTION]
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @csuNo,
+  @casNo,
+  @function
+)
+</value>
+   </data>
+   <data name="ReadCaseUnitCaseUnitFunctionAssignmt">
+      <value>
+select
+  T1.CU_NUMBER,
+  T1.[STATE],
+  T1.START_DATE,
+  T1.CLOSURE_DATE,
+  T1.CLOSURE_REASON_COD,
+  T1.CAS_NO,
+  T2.REASON_CODE,
+  T2.OVERRIDE_IND,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE,
+  T2.[FUNCTION]
+from
+  CKT_CASE_UNIT T1
+  join
+  CKT_ASSGN_CASE_UNT T2
+  on
+    (T1.CAS_NO = T2.CAS_NO) and
+    (T1.CU_NUMBER = T2.CSU_NO) and
+    (T2.REASON_CODE = 'RSP') and
+    (@casNo = T1.CAS_NO) and
+    (@spdId = T2.SPD_ID) and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.CLOSURE_DATE &gt; @startDate) and
+    (T2.EFFECTIVE_DATE &lt;= @startDate) and
+    (T2.DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="UpdateCaseUnitFunctionAssignmt">
+      <value>
+update CKT_ASSGN_CASE_UNT
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (CSU_NO = @csuNo) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+</root>

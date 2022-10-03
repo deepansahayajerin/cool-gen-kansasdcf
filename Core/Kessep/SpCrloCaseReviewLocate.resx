@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="Read1099LocateRequest">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  CREATED_TIMESTAMP,
+  REQUEST_SENT_DATE
+from
+  CKT_1099_LOC_REQ
+where
+  @cspNumber = CSP_NUMBER
+order by
+  REQUEST_SENT_DATE desc
+</value>
+   </data>
+   <data name="ReadAbsentParent">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (TYPE = 'AP')
+order by
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  AE_CASE_NUMBER,
+  DATE_OF_DEATH,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  UNEMPLOYMENT_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  AE_CASE_NUMBER,
+  DATE_OF_DEATH,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  UNEMPLOYMENT_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE
+from
+  CKT_CSE_PERS_ADDR with(readuncommitted)
+where
+  @cspNumber = CSP_NUMBER
+order by
+  VERIFIED_DATE desc
+</value>
+   </data>
+   <data name="ReadFplsLocateRequest">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  TRANSACTION_TYPE,
+  USERS_FIELD,
+  REQUEST_SENT_DATE,
+  SEND_REQUEST_TO
+from
+  CKT_FPLS_LOC_REQ
+where
+  @cspNumber = CSP_NUMBER
+order by
+  REQUEST_SENT_DATE desc
+</value>
+   </data>
+   <data name="ReadIncarceration1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  END_DATE,
+  START_DATE,
+  TYPE,
+  POFFR_LAST_NAME
+from
+  CKT_INCARCERATION with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (
+    (END_DATE &gt; dateadd(month, - 12, cast(@date as date))) or
+    (END_DATE = @endDate)
+  ) and
+  (TYPE in ('P', 'J'))
+order by
+  VERIFIED_DATE desc
+</value>
+   </data>
+   <data name="ReadIncarceration2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  END_DATE,
+  START_DATE,
+  TYPE
+from
+  CKT_INCARCERATION with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('T', 'R')) and
+  (VERIFIED_DATE &gt;= @verifiedDate) and
+  (END_DATE &gt; @endDate)
+</value>
+   </data>
+   <data name="ReadIncarceration3">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  END_DATE,
+  START_DATE,
+  TYPE
+from
+  CKT_INCARCERATION with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('T', 'R')) and
+  (VERIFIED_DATE &gt;= @verifiedDate) and
+  (END_DATE &gt; @endDate)
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  LAST_QTR_INCOME,
+  LAST_QTR,
+  LAST_QTR_YR,
+  SECOND_QTR_INCOME,
+  THIRD_QTR_INCOME,
+  FOURTH_QTR_INCOME,
+  RETURN_DT,
+  RETURN_CD,
+  CSP_I_NUMBER,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  @cspINumber = CSP_I_NUMBER
+order by
+  RETURN_DT desc
+</value>
+   </data>
+   <data name="ReadMonitoredActivityInfrastructure1">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.FED_NCOMP_DTE,
+  T1.START_DATE,
+  T1.CLOSURE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.INF_SYS_GEN_ID,
+  T2.EVENT_ID,
+  T2.EVENT_TYPE,
+  T2.REASON_CODE,
+  T2.BUSINESS_OBJECT_CD,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_TMST,
+  T2.[FUNCTION]
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (T2.CSE_PERSON_NUM = @csePersonNum) and
+    (
+      T1.ACTIVITY_CTRL_NUM in (44, 55, 80,
+        62)
+    )
+order by
+  T1.START_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadMonitoredActivityInfrastructure2">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.FED_NCOMP_DTE,
+  T1.START_DATE,
+  T1.CLOSURE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.INF_SYS_GEN_ID,
+  T2.EVENT_ID,
+  T2.EVENT_TYPE,
+  T2.REASON_CODE,
+  T2.BUSINESS_OBJECT_CD,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_TMST,
+  T2.[FUNCTION]
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (T2.CSE_PERSON_NUM = @csePersonNum) and
+    (
+      T1.ACTIVITY_CTRL_NUM in (44, 55, 80,
+        62)
+    )
+order by
+  T1.START_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadNarrativeDetail">
+      <value>
+select
+  INFRASTRUCTURE_ID,
+  CREATED_TIMESTAMP,
+  NARRATIVE_TEXT,
+  LINE_NUMBER
+from
+  CKT_NARR_DETAIL
+where
+  (INFRASTRUCTURE_ID = @infrastructureId) and
+  (substring(NARRATIVE_TEXT, 1, 10) = 'LOCATE -- ')
+order by
+  CREATED_TIMESTAMP desc,
+  LINE_NUMBER
+</value>
+   </data>
+</root>

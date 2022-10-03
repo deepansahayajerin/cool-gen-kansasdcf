@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonImHouseholdImHouseholdMbrMnthlyAdj">
+      <value>
+select
+  T4.CSP_NUMBER,
+  T4.IMH_AE_CASE_NO,
+  T3.TYPE,
+  T3.ADJUSTMENT_AMT,
+  T3.LEVEL_APPLIED_TO,
+  T3.CREATED_BY,
+  T3.CREATED_TMST,
+  T3.IMS_MONTH,
+  T3.IMS_YEAR,
+  T3.ADJUSTMENT_REASON,
+  T4.RELATIONSHIP
+from
+  CKT_IM_HH_MBR_MSUM T4
+  join
+  CKT_IM_HH_MBR_MADJ T3
+  on
+    (T4.YEAR0 = T3.IMS_YEAR) and
+    (T4.MONTH0 = T3.IMS_MONTH) and
+    (T4.IMH_AE_CASE_NO = T3.IMH_AE_CASE_NO) and
+    (T4.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T4.IMH_AE_CASE_NO = @imhAeCaseNo)
+order by
+  T3.IMS_YEAR desc,
+  T3.IMS_MONTH desc,
+  T3.CREATED_TMST desc
+</value>
+   </data>
+   <data name="ReadCsePersonImHouseholdImHouseholdMbrMnthlySum">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IMH_AE_CASE_NO,
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

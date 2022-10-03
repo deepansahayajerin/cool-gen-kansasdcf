@@ -1,0 +1,77 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeCredCreditReporting"
+           program-name="SWECREDP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeCredCreditReporting"
+           transaction="SRBQ"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CASE_PARTICIPATION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiPartCaseParticipation"
+       send-command="DISPLAY">
+      <map from="Ap.Number" to="Search.Number"/>
+      <map from="Ap.Ssn" to="Search.Ssn"/>
+      <map from="Ap.FormattedName" to="Search.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DlgflwDesired" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EXMP_ADM_ACT_EXEMPTN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeExmpAdminActionExemption"
+       send-command="DISPLAY">
+      <map from="DlgflwAllObligation" to="AllObligations"/>
+      <map from="Ap" to="CsePersonsWorkSet"/>
+      <map from="Dlgflw" to="AdministrativeAction"/>
+   </on>
+   <on exit-state="ECO_LNK_OBLO_ADM_ACTS_BY_OBLIGOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeObloAdminActionsByObligor"
+       send-command="DISPLAY">
+      <map from="Dlgflw" to="Required"/>
+      <map from="Ap.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="Ap.Ssn" to="CsePersonsWorkSet.Ssn"/>
+      <map from="Ap.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <map from="Export5Th" to="Import5Th"/>
+   <map from="Export4Th" to="Import4Th"/>
+   <map from="Export3Rd" to="Import3Rd"/>
+   <map from="Export2Nd" to="Import2Nd"/>
+   <map from="Export1St" to="Import1St"/>
+   <map from="CreditReportingAction" to="CreditReportingAction"/>
+   <map from="ListCseAction" to="ListCseAction"/>
+   <map from="CreditReporting" to="CreditReporting"/>
+   <map from="NotifiedBy" to="NotifiedBy"/>
+   <map from="Cra.DetailCra" to="Cra.DetailCra"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="MoreCseCasesInd" to="MoreCseCasesInd"/>
+   <map from="End" to="End"/>
+   <map from="H" to="H"/>
+   <map from="AdminExmpExists" to="AdminExmpExists"/>
+   <map from="GoodCauseExists" to="GoodCauseExists"/>
+   <map from="Ap.Number" to="Ap.Number"/>
+   <map from="Ap.FormattedName" to="Ap.FormattedName"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+</procedure>

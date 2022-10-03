@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadNewHireInitiative1">
+      <value>
+select top(1)
+  max(GROUP_ID)
+from
+  CKT_NH_INITIATIVE
+</value>
+   </data>
+   <data name="ReadNewHireInitiative2">
+      <value>
+select
+  GROUP_ID,
+  FEIN,
+  INTERVENTION_TYPE
+from
+  CKT_NH_INITIATIVE
+where
+  (FEIN = @fein) and
+  (
+    (cast(@groupId as integer) = 0) or
+    (GROUP_ID = @groupId)
+  )
+</value>
+   </data>
+</root>

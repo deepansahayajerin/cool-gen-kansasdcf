@@ -1,0 +1,65 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLaisLegActIncSrc"
+           program-name="SWELAISP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLaisLegActIncSrc"
+           transaction="SSAA"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ACO_NE0000_RETURN"
+       action="transfer"
+       to="LeLactLegalAction"
+       send-command="RETLAIS">
+      <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+      <map from="LegalAction.FiledDate" to="LegalAction.FiledDate"/>
+      <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+      <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+      <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.PaymentLocation" to="LegalAction.PaymentLocation"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_INCL_INC_SOURCE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETINCL"
+       to="SiInclIncomeSourceList"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="ToIncl" to="FromLais"/>
+      <return-map from="Selected.Selected1" to="SelectedFromIncl.SelectedFromIncl1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EIWH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEIWH"
+       to="LeEiwhEiwoHistory"
+       send-command="DISPLAY">
+      <map from="ToEiwhIwoTransaction.Identifier" to="IwoTransaction.Identifier"/>
+      <map from="ToEiwhIwoTransaction.TransactionNumber"
+           to="IwoTransaction.TransactionNumber"/>
+      <map from="ToEiwhIncomeSource" to="IncomeSource"/>
+      <map from="Case1" to="Case1"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="LactActionTaken" to="LactActionTaken"/>
+   <map from="Export1.Gcommon" to="Import1.Gcommon"/>
+   <map from="Export1.GincomeSource" to="Import1.GincomeSource"/>
+   <map from="Export1.GexportEiwo" to="Import1.GimportEiwo"/>
+   <map from="Export1.GiwoTransaction" to="Import1.GiwoTransaction"/>
+   <map from="Export1.GiwoAction" to="Import1.GiwoAction"/>
+   <map from="Case1" to="Case1"/>
+   <map from="PrintConfirmation" to="PrintConfirmation"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+   <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   <map from="LegalAction.FiledDate" to="LegalAction.FiledDate"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+</procedure>

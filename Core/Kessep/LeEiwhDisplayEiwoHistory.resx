@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadIwoAction">
+      <value>
+select
+  IDENTIFIER,
+  ACTION_TYPE,
+  STATUS_CD,
+  STATUS_DATE,
+  STATUS_REASON_CD,
+  DOC_TRACKING_ID,
+  SVRITY_CLEARED_IND,
+  ERROR_RECORD_TYPE,
+  ERROR_FIELD_1,
+  ERROR_FIELD_2,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER
+from
+  CKT_IWO_ACTION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@iwtIdentifier = IWT_IDENTIFIER)
+order by
+  IDENTIFIER
+</value>
+   </data>
+   <data name="ReadIwoActionHistory">
+      <value>
+select
+  IDENTIFIER,
+  ACTION_TAKEN,
+  ACTION_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER,
+  IWA_IDENTIFIER
+from
+  CKT_IWO_ACT_HIST
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@iwtIdentifier = IWT_IDENTIFIER) and
+  (@iwaIdentifier = IWA_IDENTIFIER)
+order by
+  IDENTIFIER
+</value>
+   </data>
+   <data name="ReadIwoTransaction">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TRANSACTION_NUMBER,
+  CURRENT_STATUS,
+  STATUS_DATE,
+  NOTE,
+  LGA_IDENTIFIER,
+  CSP_NUMBER
+from
+  CKT_IWO_TRANS
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier)
+</value>
+   </data>
+</root>

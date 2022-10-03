@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CSE_P_DSIG_PYE T2
+  on
+    (T1.NUMB = T2.CSE_PERS_NUM) and
+    (T2.CSE_PERSO_NUM = @csePersoNum) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadDisbursementStatus">
+      <value>
+select top(1)
+  DISB_STATUS_ID,
+  CODE
+from
+  CKT_DISB_STATUS
+where
+  DISB_STATUS_ID = @disbStatusId
+</value>
+   </data>
+   <data name="ReadDisbursementStatusHistory">
+      <value>
+select
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP
+from
+  CKT_DISB_STAT_HIST
+where
+  (@dtrGeneratedId = DTR_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CREATED_TIMESTAMP &gt;= @createdTimestamp)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionDisbursement">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.DISBURSEMENT_DATE,
+  T1.DBT_GENERATED_ID,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.DISB_TRAN_ID,
+  T2.TYPE,
+  T2.AMOUNT,
+  T2.PROCESS_DATE,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATE_TMST,
+  T2.DISBURSEMENT_DATE,
+  T2.CASH_NON_CASH_IND,
+  T2.RECAPTURED_IND,
+  T2.COLLECTION_DATE,
+  T2.DBT_GENERATED_ID,
+  T2.INTERSTATE_IND,
+  T2.PASSTHRU_PROC_DATE,
+  T2.DESIGNATED_PAYEE,
+  T2.REFERENCE_NUMBER
+from
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_TRAN T2
+  join
+  CKT_DISB_TRAN_RLN T3
+  on
+    (T2.DISB_TRAN_ID = @disbTranId) and
+    (T2.DISB_TRAN_ID = T3.DTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T3.CPA_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER)
+  on
+    (T1.DISB_TRAN_ID = T3.DTR_P_GENERATED_ID) and
+    (T1.CPA_TYPE = T3.CPA_P_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_P_NUMBER) and
+    (T1.CPA_TYPE = @cpaType) and
+    (T1.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDisbursementType">
+      <value>
+select top(1)
+  DISB_TYPE_ID,
+  CODE
+from
+  CKT_DISB_TYPE
+where
+  DISB_TYPE_ID = @disbTypeId
+</value>
+   </data>
+</root>

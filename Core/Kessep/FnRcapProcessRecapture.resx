@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = 'E') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionDisbursementType1">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.CASH_NON_CASH_IND,
+  T1.COLLECTION_DATE,
+  T1.DBT_GENERATED_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.REFERENCE_NUMBER,
+  T1.EXCESS_URA_IND,
+  T2.CODE,
+  T2.CURRENT_ARREARS_IN,
+  T2.RECAPTURE_IND,
+  T2.PROGRAM_CODE
+from
+  CKT_DISB_TYPE T2
+  join
+  CKT_DISB_TRAN T1
+  on
+    (T1.PRQ_GENERATED_ID = @prqGeneratedId) and
+    (T2.DISB_TYPE_ID = T1.DBT_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionDisbursementType2">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.CASH_NON_CASH_IND,
+  T1.COLLECTION_DATE,
+  T1.DBT_GENERATED_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.REFERENCE_NUMBER,
+  T1.EXCESS_URA_IND,
+  T2.CODE,
+  T2.CURRENT_ARREARS_IN,
+  T2.RECAPTURE_IND,
+  T2.PROGRAM_CODE
+from
+  CKT_DISB_TYPE T2
+  join
+  CKT_DISB_TRAN T1
+  on
+    (T1.PRQ_GENERATED_ID = @prqGeneratedId) and
+    (T1.AMOUNT &gt; 0) and
+    (T2.DISB_TYPE_ID = T1.DBT_GENERATED_ID)
+order by
+  T1.COLLECTION_DATE,
+  T1.REFERENCE_NUMBER,
+  T1.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadMonthlyObligeeSummary">
+      <value>
+select top(1)
+  YER,
+  MNTH,
+  PT_RECAP_AMT,
+  NA_ARS_RECAP_AMT,
+  PASSTHRU_AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CPA_S_TYPE,
+  CSP_S_NUMBER,
+  NA_CURR_RECAP_AMT
+from
+  CKT_MNTHLY_OBE_SUM
+where
+  (CSP_S_NUMBER = @cspSNumber) and
+  (YER = @yer) and
+  (MNTH = @mnth)
+</value>
+   </data>
+   <data name="ReadObligorRule">
+      <value>
+select top(1)
+  RECAPTURE_RULE_ID,
+  CPA_D_TYPE,
+  CSP_D_NUMBER,
+  EFFECTIVE_DATE,
+  NEGOTIATED_DATE,
+  DISCONTINUE_DATE,
+  NA_ARREARS_MAX_AMT,
+  NA_ARREARS_AMOUNT,
+  NA_ARREARS_PCT,
+  NA_CURR_MAX_AMOUNT,
+  NA_CURR_AMOUNT,
+  NA_CURR_PERCENTAGE,
+  PASSTHRU_PERCENTAG,
+  PASSTHRU_AMOUNT,
+  PASSTHRU_MAX_AMT,
+  TYPE
+from
+  CKT_RECAPTURE_RULE
+where
+  (CPA_D_TYPE is not null) and
+  (CSP_D_NUMBER = @cspDNumber) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+</root>

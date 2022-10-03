@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateRetrieveFieldValueTrigger">
+      <value>
+insert into CKT_RET_FLD_VAL_TR
+(
+  ARCHIVE_DATE,
+  INF_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  SRV_PRVD_LOGON_ID
+)
+values
+(
+  @archiveDate,
+  @infId,
+  @createdBy,
+  @createdTimestamp,
+  @srvPrvdLogonId
+)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  REFERENCE_DATE
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select
+  LAST_UPDATD_TSTAMP,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  FIELD_VAL_ARCH_DT,
+  FIELD_VAL_ARCH_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC with(readuncommitted)
+where
+  (DOC_EFFECTIVE_DTE is not null) and
+  (FIELD_VAL_ARCH_IND = 'Y') and
+  (LAST_UPDATD_TSTAMP between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+  (DOC_NAME = @docName)
+</value>
+   </data>
+   <data name="ReadRetrieveFieldValueTrigger">
+      <value>
+select top(1)
+  ARCHIVE_DATE,
+  INF_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  SRV_PRVD_LOGON_ID
+from
+  CKT_RET_FLD_VAL_TR
+where
+  (ARCHIVE_DATE = @archiveDate) and
+  (INF_ID = @infId)
+</value>
+   </data>
+</root>

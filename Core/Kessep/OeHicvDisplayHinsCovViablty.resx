@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP')
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson4">
+      <value>
+select distinct top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T1.NUMB &gt; @numb)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePerson5">
+      <value>
+select distinct top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T1.NUMB &lt; @numb)
+order by
+  T1.NUMB desc
+</value>
+   </data>
+   <data name="ReadCsePerson6">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson7">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePersonAbsentParent">
+      <value>
+select
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AP') and
+  (END_DATE &lt;= @endDate)
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonApplicantRecipient">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AR') and
+  (END_DATE &lt;= @endDate)
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonChild1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  AR_WAIVED_INS,
+  EMANCIPATION_DT,
+  IN_SCHOOL_OVER_18
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CASE_ROLE_ID = @caseRoleId) and
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'CH')
+</value>
+   </data>
+   <data name="ReadCsePersonChild2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  AR_WAIVED_INS,
+  EMANCIPATION_DT,
+  IN_SCHOOL_OVER_18
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CASE_ROLE_ID = @caseRoleId) and
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'CH')
+</value>
+   </data>
+   <data name="ReadCsePersonChild3">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  AR_WAIVED_INS,
+  EMANCIPATION_DT,
+  IN_SCHOOL_OVER_18
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'CH')
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonChild4">
+      <value>
+select
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  AR_WAIVED_INS,
+  EMANCIPATION_DT,
+  IN_SCHOOL_OVER_18
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'CH')
+order by
+  END_DATE desc,
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoveragePersonalHealthInsurance">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.PAID_BY_CSEP_IND,
+  T1.GROUP_NUMBER,
+  T1.VERIFIED_DATE,
+  T1.VERIFIED_USER_ID,
+  T1.POLICY_NUMBER,
+  T1.POLICY_EXP_DATE,
+  T1.COVERAGE_CODE_1,
+  T1.COVERAGE_CODE_2,
+  T1.COVERAGE_CODE_3,
+  T1.COVERAGE_CODE_4,
+  T1.COVERAGE_CODE_5,
+  T1.COVERAGE_CODE_6,
+  T1.COVERAGE_CODE_7,
+  T1.POLICY_EFF_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.CSP_NUMBER,
+  T1.OTH_COV_PERSONS,
+  T2.CSP_NUMBER,
+  T2.VERIFIED_USER_ID,
+  T2.COV_VERIFIED_DATE,
+  T2.INS_EXISTS_IND,
+  T2.COVER_COST_AMT,
+  T2.COVER_BEGIN_DATE,
+  T2.COVER_END_DATE,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.PREM_VERIFIED_DATE
+from
+  CKT_HINS_COVERAGE T1
+  join
+  CKT_PERSONAL_HINS T2
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.COVER_END_DATE &gt;= @coverEndDate) and
+    (T1.IDENTIFIER = T2.HCV_ID)
+order by
+  T1.GROUP_NUMBER,
+  T1.POLICY_NUMBER
+</value>
+   </data>
+   <data name="ReadHealthInsuranceViability">
+      <value>
+select top(1)
+  CRO_TYPE,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  CRO_IDENTIFIER,
+  HINSV_ID,
+  HINS_VIABLE_IND,
+  HINS_VIND_WORKER,
+  HINS_VIND_UPD_DT,
+  CSP_NUM
+from
+  CKT_HINS_VIABILITY
+where
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cspNum = CSP_NUM)
+order by
+  HINSV_ID desc
+</value>
+   </data>
+   <data name="ReadHinsViabNote">
+      <value>
+select
+  IDENTIFIER,
+  NOTE,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  HIV_ID
+from
+  CKT_HINS_VIAB_NOTE
+where
+  (@hivId = HIV_ID) and
+  (@casNumber = CAS_NUMBER) and
+  (@croId = CRO_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@croType = CRO_TYPE)
+order by
+  IDENTIFIER
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  CSP_I_NUMBER,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (START_DT &lt;= @startDt) and
+  (END_DT &gt;= @startDt)
+</value>
+   </data>
+   <data name="ReadLegalActionDetailObligationType">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.CURRENT_AMOUNT,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.OTY_ID,
+  T2.DEBT_TYP_CD
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_LEGAL_ACT_DTL T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T3.ACCOUNT_TYPE = 'R') and
+    (T1.END_DT &gt;= @endDt)
+  on
+    (T4.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T4.FILED_DT &gt; @filedDt) and
+    (T4.CLASSIFICATION = 'J')
+  on
+    T2.DEBT_TYP_ID = T1.OTY_ID
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionDetailObligationTypeLegalActionPerson">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.CURRENT_AMOUNT,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.OTY_ID,
+  T2.DEBT_TYP_CD,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.EFFECTIVE_DT,
+  T3.[ROLE],
+  T3.END_DT,
+  T3.ACCOUNT_TYPE,
+  T3.CURRENT_AMOUNT
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_LEGAL_ACTION T5
+  join
+  CKT_LEGAL_ACT_DTL T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T1.END_DT &gt;= @endDt)
+  on
+    (T5.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T5.FILED_DT &gt; @filedDt) and
+    (T5.CLASSIFICATION = 'J')
+  on
+    T2.DEBT_TYP_ID = T1.OTY_ID
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetailLegalActionPerson">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.TYPE,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T2.LA_DETAIL_NO,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.EFFECTIVE_DT,
+  T3.[ROLE],
+  T3.END_DT,
+  T3.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_DTL T2
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T3.ACCOUNT_TYPE = 'S') and
+    (T2.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T2.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (T2.NON_FIN_OBLG_TYPE = 'HIC') and
+    (T2.END_DT &gt;= @endDt)
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T1.CLASSIFICATION = 'J') and
+    (T1.FILED_DT &gt; @filedDt)
+order by
+  T2.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadPersonIncomeHistory">
+      <value>
+select
+  CSP_NUMBER,
+  ISR_IDENTIFIER,
+  IDENTIFIER,
+  INCOME_EFF_DT,
+  INCOME_AMT,
+  FREQ,
+  CSP_I_NUMBER,
+  BAQ_ALLOTMENT
+from
+  CKT_PERS_INC_HIST
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (@isrIdentifier = ISR_IDENTIFIER) and
+  (INCOME_EFF_DT &lt;= @incomeEffDt)
+order by
+  INCOME_EFF_DT desc
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select top(1)
+  HCV_ID,
+  CSP_NUMBER,
+  COVER_END_DATE
+from
+  CKT_PERSONAL_HINS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (COVER_END_DATE &gt;= @coverEndDate)
+order by
+  COVER_END_DATE desc
+</value>
+   </data>
+   <data name="ReadProgramPersonProgram">
+      <value>
+select distinct
+  T1.PROGRAM_ID,
+  T1.CODE,
+  T2.CSP_NUMBER,
+  T2.EFFECTIVE_DATE,
+  T2.STATUS,
+  T2.CLOSURE_REASON,
+  T2.ASSIGNED_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_TIMESTAMP
+from
+  CKT_PROGRAM T1
+  join
+  CKT_PERSON_PROGRAM T2
+  on
+    (T1.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+order by
+  T2.EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

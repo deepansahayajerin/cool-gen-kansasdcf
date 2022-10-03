@@ -1,0 +1,698 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateReportData1">
+      <value>
+insert into CKT_REPORT_DATA
+(
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+)
+values
+(
+  @type,
+  @sequenceNumber,
+  @firstPageOnlyIn,
+  @lineControl,
+  @lineText,
+  @jobName,
+  @jruSystemGenId
+)
+</value>
+   </data>
+   <data name="CreateReportData2">
+      <value>
+insert into CKT_REPORT_DATA
+(
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+)
+values
+(
+  @type,
+  @sequenceNumber,
+  @firstPageOnlyIn,
+  @lineControl,
+  @lineText,
+  @jobName,
+  @jruSystemGenId
+)
+</value>
+   </data>
+   <data name="CreateReportData3">
+      <value>
+insert into CKT_REPORT_DATA
+(
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+)
+values
+(
+  @type,
+  @sequenceNumber,
+  @firstPageOnlyIn,
+  @lineControl,
+  @lineText,
+  @jobName,
+  @jruSystemGenId
+)
+</value>
+   </data>
+   <data name="CreateReportData4">
+      <value>
+insert into CKT_REPORT_DATA
+(
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+)
+values
+(
+  @type,
+  @sequenceNumber,
+  @firstPageOnlyIn,
+  @lineControl,
+  @lineText,
+  @jobName,
+  @jruSystemGenId
+)
+</value>
+   </data>
+   <data name="CreateReportData5">
+      <value>
+insert into CKT_REPORT_DATA
+(
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+)
+values
+(
+  @type,
+  @sequenceNumber,
+  @firstPageOnlyIn,
+  @lineControl,
+  @lineText,
+  @jobName,
+  @jruSystemGenId
+)
+</value>
+   </data>
+   <data name="CreateReportData6">
+      <value>
+insert into CKT_REPORT_DATA
+(
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+)
+values
+(
+  @type,
+  @sequenceNumber,
+  @firstPageOnlyIn,
+  @lineControl,
+  @lineText,
+  @jobName,
+  @jruSystemGenId
+)
+</value>
+   </data>
+   <data name="CreateReportData7">
+      <value>
+insert into CKT_REPORT_DATA
+(
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+)
+values
+(
+  @type,
+  @sequenceNumber,
+  @firstPageOnlyIn,
+  @lineControl,
+  @lineText,
+  @jobName,
+  @jruSystemGenId
+)
+</value>
+   </data>
+   <data name="ReadCase1">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (@lgaId = T3.LGA_ID)
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (@lgaId = T3.LGA_ID)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  [STATE],
+  COUNTY,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadJob">
+      <value>
+select top(1)
+  NAME
+from
+  CKT_JOB
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="ReadJobRun">
+      <value>
+select top(1)
+  START_TIMESTAMP,
+  END_TIMESTAMP,
+  STATUS,
+  OUTPUT_TYPE,
+  ERROR_MSG,
+  PARM_INFO,
+  JOB_NAME,
+  SYSTEM_GEN_ID
+from
+  CKT_JOB_RUN
+where
+  (@jobName = JOB_NAME) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionAssigment1">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T2.OSP_EFFECTIVE_DATE,
+  T2.OSP_ROLE_CODE,
+  T2.OFF_GENERATED_ID,
+  T2.SPD_GENERATED_ID,
+  T2.EFFECTIVE_DT,
+  T2.END_DT,
+  T2.OVERRIDE_IND,
+  T2.CREATED_TIMESTAMP
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LA_SERV_PROV T2
+  on
+    (@ospRoleCode = T2.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T2.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T2.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt; @effectiveDt) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T1.STANDARD_NO = @standardNo) and
+    (T1.CREATED_TSTAMP &gt;= @createdTstamp) and
+    (
+      (cast(@classification as char(1)) = ' ') or
+      (T1.CLASSIFICATION = @classification)
+    ) and
+    (
+      (cast(@actionTaken as char(30)) = ' ') or
+      (T1.ACTION_TAKEN = @actionTaken)
+    ) and
+    (T1.FILED_DT &gt;= @filedDt) and
+    (
+      (cast(@overrideInd as char(1)) = ' ') or
+      (T2.OVERRIDE_IND = @overrideInd)
+    )
+order by
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP desc,
+  T1.LEGAL_ACTION_ID
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionAssigment2">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T2.OSP_EFFECTIVE_DATE,
+  T2.OSP_ROLE_CODE,
+  T2.OFF_GENERATED_ID,
+  T2.SPD_GENERATED_ID,
+  T2.EFFECTIVE_DT,
+  T2.END_DT,
+  T2.OVERRIDE_IND,
+  T2.CREATED_TIMESTAMP
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LA_SERV_PROV T2
+  on
+    (@ospRoleCode = T2.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T2.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T2.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt; @effectiveDt) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T1.CREATED_TSTAMP &gt;= @createdTstamp) and
+    (
+      (cast(@classification as char(1)) = ' ') or
+      (T1.CLASSIFICATION = @classification)
+    ) and
+    (
+      (cast(@actionTaken as char(30)) = ' ') or
+      (T1.ACTION_TAKEN = @actionTaken)
+    ) and
+    (T1.FILED_DT &gt;= @filedDt) and
+    (
+      (cast(@overrideInd as char(1)) = ' ') or
+      (T2.OVERRIDE_IND = @overrideInd)
+    )
+order by
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP desc,
+  T1.LEGAL_ACTION_ID
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionAssigmentCase1">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T2.OSP_EFFECTIVE_DATE,
+  T2.OSP_ROLE_CODE,
+  T2.OFF_GENERATED_ID,
+  T2.SPD_GENERATED_ID,
+  T2.EFFECTIVE_DT,
+  T2.END_DT,
+  T2.OVERRIDE_IND,
+  T2.CREATED_TIMESTAMP,
+  T4.CAS_NUMBER
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LA_SERV_PROV T2
+  on
+    (@ospRoleCode = T2.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T2.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T2.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt; @effectiveDt) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (
+      (cast(@standardNumber as char(20)) = ' ') or
+      (T1.STANDARD_NO = @standardNumber)
+    ) and
+    (T1.CREATED_TSTAMP &gt;= @createdTstamp) and
+    (
+      (cast(@classification as char(1)) = ' ') or
+      (T1.CLASSIFICATION = @classification)
+    ) and
+    (
+      (cast(@actionTaken as char(30)) = ' ') or
+      (T1.ACTION_TAKEN = @actionTaken)
+    ) and
+    (T1.FILED_DT &gt;= @filedDt) and
+    (
+      (cast(@overrideInd as char(1)) = ' ') or
+      (T2.OVERRIDE_IND = @overrideInd)
+    )
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (T1.LEGAL_ACTION_ID = T4.LGA_ID) and
+    (T4.CAS_NUMBER = @casNumber)
+order by
+  T4.CAS_NUMBER,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP desc,
+  T1.LEGAL_ACTION_ID
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionAssigmentCase2">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T2.OSP_EFFECTIVE_DATE,
+  T2.OSP_ROLE_CODE,
+  T2.OFF_GENERATED_ID,
+  T2.SPD_GENERATED_ID,
+  T2.EFFECTIVE_DT,
+  T2.END_DT,
+  T2.OVERRIDE_IND,
+  T2.CREATED_TIMESTAMP,
+  T4.CAS_NUMBER
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LA_SERV_PROV T2
+  on
+    (@ospRoleCode = T2.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T2.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T2.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt; @effectiveDt) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T1.STANDARD_NO = @standardNo) and
+    (T1.CREATED_TSTAMP &gt;= @createdTstamp) and
+    (
+      (cast(@classification as char(1)) = ' ') or
+      (T1.CLASSIFICATION = @classification)
+    ) and
+    (
+      (cast(@actionTaken as char(30)) = ' ') or
+      (T1.ACTION_TAKEN = @actionTaken)
+    ) and
+    (T1.FILED_DT &gt;= @filedDt) and
+    (
+      (cast(@overrideInd as char(1)) = ' ') or
+      (T2.OVERRIDE_IND = @overrideInd)
+    )
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    T1.LEGAL_ACTION_ID = T4.LGA_ID
+order by
+  T4.CAS_NUMBER,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP desc,
+  T1.LEGAL_ACTION_ID
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionAssigmentCase3">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T2.OSP_EFFECTIVE_DATE,
+  T2.OSP_ROLE_CODE,
+  T2.OFF_GENERATED_ID,
+  T2.SPD_GENERATED_ID,
+  T2.EFFECTIVE_DT,
+  T2.END_DT,
+  T2.OVERRIDE_IND,
+  T2.CREATED_TIMESTAMP,
+  T4.CAS_NUMBER
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LA_SERV_PROV T2
+  on
+    (@ospRoleCode = T2.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T2.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T2.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt; @effectiveDt) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T1.CREATED_TSTAMP &gt;= @createdTstamp) and
+    (
+      (cast(@classification as char(1)) = ' ') or
+      (T1.CLASSIFICATION = @classification)
+    ) and
+    (
+      (cast(@actionTaken as char(30)) = ' ') or
+      (T1.ACTION_TAKEN = @actionTaken)
+    ) and
+    (T1.FILED_DT &gt;= @filedDt) and
+    (
+      (cast(@overrideInd as char(1)) = ' ') or
+      (T2.OVERRIDE_IND = @overrideInd)
+    )
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    T1.LEGAL_ACTION_ID = T4.LGA_ID
+order by
+  T4.CAS_NUMBER,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP desc,
+  T1.LEGAL_ACTION_ID
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionAssigmentCase4">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T2.OSP_EFFECTIVE_DATE,
+  T2.OSP_ROLE_CODE,
+  T2.OFF_GENERATED_ID,
+  T2.SPD_GENERATED_ID,
+  T2.EFFECTIVE_DT,
+  T2.END_DT,
+  T2.OVERRIDE_IND,
+  T2.CREATED_TIMESTAMP,
+  T4.CAS_NUMBER
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LA_SERV_PROV T2
+  on
+    (@ospRoleCode = T2.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T2.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T2.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt; @effectiveDt) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (
+      (cast(@standardNumber as char(20)) = ' ') or
+      (T1.STANDARD_NO = @standardNumber)
+    ) and
+    (T1.CREATED_TSTAMP &gt;= @createdTstamp) and
+    (
+      (cast(@classification as char(1)) = ' ') or
+      (T1.CLASSIFICATION = @classification)
+    ) and
+    (
+      (cast(@actionTaken as char(30)) = ' ') or
+      (T1.ACTION_TAKEN = @actionTaken)
+    ) and
+    (T1.FILED_DT &gt;= @filedDt) and
+    (
+      (cast(@overrideInd as char(1)) = ' ') or
+      (T2.OVERRIDE_IND = @overrideInd)
+    )
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (T1.LEGAL_ACTION_ID = T4.LGA_ID) and
+    (T4.CAS_NUMBER = @casNumber)
+order by
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP desc,
+  T1.LEGAL_ACTION_ID,
+  T4.CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOffice">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.NAME,
+  T2.OFF_OFFICE
+from
+  CKT_OFFICE T2 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T1 with(readuncommitted)
+  on
+    (@spdGeneratedId = T1.SPD_GENERATED_ID) and
+    (T2.OFFICE_ID = T1.OFF_GENERATED_ID) and
+    (T2.OFFICE_ID = @officeId) and
+    (T1.ROLE_CODE = @roleCode) and
+    (T1.EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER with(readuncommitted)
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="ReadTribunal1">
+      <value>
+select top(1)
+  FIP_LOCATION,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  (IDENTIFIER = @identifier1) and
+  (IDENTIFIER = @identifier2)
+</value>
+   </data>
+   <data name="ReadTribunal2">
+      <value>
+select top(1)
+  FIP_LOCATION,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateJobRun1">
+      <value>
+update CKT_JOB_RUN
+set
+  STATUS = @status
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+   <data name="UpdateJobRun2">
+      <value>
+update CKT_JOB_RUN
+set
+  STATUS = @status
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+   <data name="UpdateJobRun3">
+      <value>
+update CKT_JOB_RUN
+set
+  STATUS = @status
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+</root>

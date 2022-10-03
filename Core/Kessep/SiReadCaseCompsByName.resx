@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T1.DUP_CASE_INDICATOR
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.NUMB &gt;= @numb)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('FA', 'MO')) and
+  (END_DATE &lt; @endDate)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('FA', 'MO')) and
+  (END_DATE &gt;= @endDate)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME,
+  T2.FAMILY_VIOL_IND,
+  T2.FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE in ('AR', 'AP', 'CH')) and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.TYPE,
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME,
+  T2.FAMILY_VIOL_IND,
+  T2.FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE in ('AR', 'AP', 'CH')) and
+    (T1.START_DATE &gt; @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.TYPE,
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson3">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME,
+  T2.FAMILY_VIOL_IND,
+  T2.FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE in ('AR', 'AP', 'CH')) and
+    (T1.END_DATE &lt; @endDate) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.TYPE,
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME,
+  FAMILY_VIOL_IND,
+  FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb) and
+  (TYPE = 'C')
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME,
+  FAMILY_VIOL_IND,
+  FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb) and
+  (TYPE = 'O')
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (KS_CASE_IND = 'N')
+</value>
+   </data>
+</root>

@@ -1,0 +1,43 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpAllsListAlerts"
+           program-name="SWEALLSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpAllsListAlerts"
+           transaction="SRPW"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_ALMN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETALMN"
+       to="SpAlmnAlertMaintenance"
+       send-command="DISPLAY">
+      <map from="Selected.ControlNumber" to="Alert.ControlNumber"/>
+      <map from="Selected.Name" to="Alert.Name"/>
+      <return-map from="Alert" to="Start"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpInfmInfrastructureMgmtMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Start" to="Start"/>
+   <map from="Group.GrAlert" to="Group.GrAlert"/>
+   <map from="Group.GrCommon" to="Group.GrCommon"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+   <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+   <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+   <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+   <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+   <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+   <map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+   <map from="Hidden.MiscText1" to="Hidden.MiscText1"/>
+   <map from="Hidden.MiscText2" to="Hidden.MiscText2"/>
+   <map from="Hidden.MiscNum1" to="Hidden.MiscNum1"/>
+   <map from="Hidden.MiscNum2" to="Hidden.MiscNum2"/>
+   <map from="Hidden.MiscNum1V2" to="Hidden.MiscNum1V2"/>
+   <map from="Hidden.MiscNum2V2" to="Hidden.MiscNum2V2"/>
+</procedure>

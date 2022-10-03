@@ -1,0 +1,65 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpOfcdOfcCaselodAsgnmtDsply"
+           program-name="SWEOFCDP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpOfcdOfcCaselodAsgnmtDsply"
+           transaction="SR3X"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OFCA"
+       action="link"
+       return-when="ACO_NE0000_RETURN SP0000_REDISTRIBUTION_CANCELED"
+       return-command-type="current"
+       to="SpOfcaOfcCaselodAsgnmtMaint"
+       send-command-type="current">
+      <map from="ActiveOffice" to="InactiveOffice"/>
+      <map from="SearchType" to="TypeSearch"/>
+      <map from="OfficeAddress" to="OfficeAddress"/>
+      <map from="Office" to="Office"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_OFFICE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOFCL"
+       return-current-exit-state="true"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="SelectedOffice"/>
+   </on>
+   <map from="ActiveOffice" to="ActiveOffice"/>
+   <map from="Export1.OfficeCaseloadAssignment"
+        to="Import1.OfficeCaseloadAssignment"/>
+   <map from="SearchType" to="SearchType"/>
+   <map from="ListCodeValue" to="ListCodeValue"/>
+   <map from="Code" to="Code"/>
+   <map from="CodeValue" to="CodeValue"/>
+   <map from="Export1.Program" to="Import1.Program"/>
+   <map from="Export1.ServiceProvider" to="Import1.ServiceProvider"/>
+   <map from="Export1.OfficeServiceProvider" to="Import1.OfficeServiceProvider"/>
+   <map from="Office" to="Office"/>
+   <map from="OfficeType" to="OfficeType"/>
+   <map from="ListOffice" to="ListOffice"/>
+   <map from="OfficeAddress" to="OfficeAddress"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Tribunal" to="Import1.Tribunal"/>
+   <map from="Priority" to="Priority"/>
+   <map from="ServiceProvider.SystemGeneratedId"
+        to="ServiceProvider.SystemGeneratedId"/>
+   <map from="ServiceProvider.LastName" to="ServiceProvider.LastName"/>
+   <map from="SearchAsgnInd.AssignmentIndicator"
+        to="SearchAsgnInd.AssignmentIndicator"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadManualDistributionAudit1">
+      <value>
+select
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  MNL_DIST_INSTR
+from
+  CKT_MNL_DIST_AUDIT
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (DISCONTINUE_DT &gt;= @discontinueDt)
+order by
+  EFFECTIVE_DT
+</value>
+   </data>
+   <data name="ReadManualDistributionAudit2">
+      <value>
+select
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  MNL_DIST_INSTR
+from
+  CKT_MNL_DIST_AUDIT
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (
+    (cast(@effectiveDt as date) &lt;= cast(@date as date)) or
+    (EFFECTIVE_DT &lt; @effectiveDt)
+  )
+order by
+  EFFECTIVE_DT
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (CPA_TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+</root>

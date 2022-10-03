@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadObligationTransactionDebtDetailCsePerson1">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T1.DEBT_ADJ_PROC_DATE,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OTR_GENERATED_ID,
+  T2.OTY_TYPE,
+  T2.OTR_TYPE,
+  T2.DUE_DT,
+  T4.CSP_P_NUMBER
+from
+  CKT_OB_TRN T1
+  join
+  CKT_OB_TRN_RLN T4
+  on
+    (T1.OB_TRN_TYP = 'DA') and
+    (T1.OTY_TYPE = T4.OTY_TYPE_SECONDARY) and
+    (T1.OB_TRN_TYP = T4.OTR_TYPE) and
+    (T1.OB_TRN_ID = T4.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T4.CPA_TYPE) and
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T1.OBG_GENERATED_ID = T4.OBG_GENERATED_ID) and
+    (T4.CSP_P_NUMBER = @cspPNumber) and
+    (T1.DEBT_ADJ_PROC_DATE = @debtAdjProcDate)
+  join
+  CKT_DEBT_DTL T2
+  on
+    (T4.OTY_TYPE_PRIMARY = T2.OTY_TYPE) and
+    (T4.OBG_P_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T4.OTR_P_TYPE = T2.OTR_TYPE) and
+    (T4.OTR_P_GENERATED_ID = T2.OTR_GENERATED_ID) and
+    (T4.CPA_P_TYPE = T2.CPA_TYPE) and
+    (T4.CSP_P_NUMBER = T2.CSP_NUMBER)
+order by
+  T2.DUE_DT
+</value>
+   </data>
+   <data name="ReadObligationTransactionDebtDetailCsePerson2">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T1.DEBT_ADJ_PROC_DATE,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OTR_GENERATED_ID,
+  T2.OTY_TYPE,
+  T2.OTR_TYPE,
+  T2.DUE_DT,
+  T4.CSP_P_NUMBER
+from
+  CKT_OB_TRN T1
+  join
+  CKT_OB_TRN_RLN T4
+  on
+    (T1.OB_TRN_TYP = 'DA') and
+    (T1.OTY_TYPE = T4.OTY_TYPE_SECONDARY) and
+    (T1.OB_TRN_TYP = T4.OTR_TYPE) and
+    (T1.OB_TRN_ID = T4.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T4.CPA_TYPE) and
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T1.OBG_GENERATED_ID = T4.OBG_GENERATED_ID) and
+    (T1.DEBT_ADJ_PROC_DATE = @debtAdjProcDate)
+  join
+  CKT_DEBT_DTL T2
+  on
+    (T4.OTY_TYPE_PRIMARY = T2.OTY_TYPE) and
+    (T4.OBG_P_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T4.OTR_P_TYPE = T2.OTR_TYPE) and
+    (T4.OTR_P_GENERATED_ID = T2.OTR_GENERATED_ID) and
+    (T4.CPA_P_TYPE = T2.CPA_TYPE) and
+    (T4.CSP_P_NUMBER = T2.CSP_NUMBER)
+order by
+  T4.CSP_P_NUMBER,
+  T2.DUE_DT
+</value>
+   </data>
+   <data name="UpdateObligationTransaction">
+      <value>
+update CKT_OB_TRN
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  DEBT_ADJ_PROC_DATE = @debtAdjProcDate
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OB_TRN_ID = @obTrnId) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+</root>

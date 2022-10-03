@@ -1,0 +1,39 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeAactAdministrativeAction"
+           program-name="SWEAACTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeAactAdministrativeAction"
+           transaction="SR8C"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="CoStbmSupportTablesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_ADMIN_ACTION_AVAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeAdaaLstAdminActionsAvail"
+       send-command="DISPLAY">
+      <map from="Standard" to="Standard"/>
+      <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+      <map from="HiddenSecurity" to="HiddenSecurity1"/>
+      <return-map from="Standard" to="Standard"/>
+      <return-map from="HiddenSelected" to="AdministrativeAction"/>
+      <return-map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+      <return-map from="HiddenSecurity1" to="HiddenSecurity"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MAIN_ADM_ACTION_CRIT"
+       action="transfer"
+       to="LeCritAdminActCriteria"
+       send-command="DISPLAY">
+      <map from="AdministrativeAction" to="AdministrativeAction"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="AdministrativeAction" to="AdministrativeAction"/>
+   <map from="HiddenAdministrativeAction" to="HiddenAdministrativeAction"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity" to="HiddenSecurity"/>
+   <map from="ListAdminActions" to="ListAdminActions"/>
+</procedure>

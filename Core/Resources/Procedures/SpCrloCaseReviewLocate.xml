@@ -1,0 +1,203 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCrloCaseReviewLocate"
+           program-name="SWECRLOP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCrloCaseReviewLocate"
+           transaction="SR4G"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CR_MEDICAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SpCrmdCaseReviewMedical"
+       send-command="DISPLAY">
+      <map from="CaseClosedIndicator" to="CaseClosedIndicator"/>
+      <map from="HiddenPassed1" to="HiddenPass"/>
+      <map from="HiddenPassedReviewType" to="HiddenPassedReviewType"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden" to="Hidden"/>
+      <map from="HiddenPassed.GexportHiddenPassed"
+           to="HiddenPassed.GimportHiddenPassed"/>
+      <map from="HiddenPassed.GexportH" to="HiddenPassed.GimportH"/>
+      <map from="ApSelected" to="ApSelected"/>
+      <map from="SelectedApCsePersonsWorkSet" to="SelectedAp"/>
+      <map from="MultiAp" to="MultiAp"/>
+      <return-map from="HiddenPass" to="HiddenPassed1"/>
+      <return-map from="HiddenPassed.GexportHiddenPassed"
+                  to="HiddenPassed.GimportHiddenPassed"/>
+      <return-map from="HiddenPassed.GexportH" to="HiddenPassed.GimportH"/>
+      <return-map from="HiddenPassedReviewType" to="HiddenPassedReviewType"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+      <return-map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+      <return-map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+      <return-map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+      <return-map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+      <return-map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+      <return-map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+      <return-map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+      <return-map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+      <return-map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+      <return-map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+      <return-map from="Hidden.MiscText1" to="Hidden.MiscText1"/>
+      <return-map from="Hidden.MiscText2" to="Hidden.MiscText2"/>
+      <return-map from="Hidden.MiscNum1" to="Hidden.MiscNum1"/>
+      <return-map from="Hidden.MiscNum2" to="Hidden.MiscNum2"/>
+      <return-map from="Hidden.MiscNum1V2" to="Hidden.MiscNum1V2"/>
+      <return-map from="Hidden.MiscNum2V2" to="Hidden.MiscNum2V2"/>
+      <return-map from="ApSelected" to="ApSelected"/>
+      <return-map from="SelectedAp" to="SelectedAp"/>
+      <return-map from="MultiAp" to="MultiAp"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_INCOME_SOURCE_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIncsIncomeSourceDetails"
+       send-command="DISPLAY">
+      <map from="SelectedApCsePerson.Type1" to="CsePerson.Type1"/>
+      <map from="SelectedApCsePerson.Number" to="CsePerson.Number"/>
+      <map from="SelectedApCsePerson" to="FromMenu"/>
+      <map from="Ap2" to="CsePersonsWorkSet"/>
+      <map from="Case1" to="Next"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PERSON_INCARCERATION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeJailIncarceration"
+       send-command="DISPLAY">
+      <map from="SelectedApCsePerson" to="CsePerson"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden" to="Hidden"/>
+      <return-map from="Hidden" to="Hidden"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       action="transfer"
+       to="SpCrmeCaseReviewMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_INCOME_SRC_LIST_BY_AP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiInclIncomeSourceList"
+       send-command="DISPLAY">
+      <map from="Ap2" to="CsePersonsWorkSet"/>
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_RESOURCE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeResoPersonResource"
+       send-command="DISPLAY">
+      <map from="SelectedApCsePerson" to="CsePerson"/>
+      <map from="Ap2.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="Ap2.Ssn" to="CsePersonsWorkSet.Ssn"/>
+      <map from="Ap2.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_AP_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiApdsApDetails"
+       send-command="DISPLAY">
+      <map from="SelectedApCsePerson.Type1" to="ApCsePerson.Type1"/>
+      <map from="SelectedApCsePerson.AeCaseNumber" to="ApCsePerson.AeCaseNumber"/>
+      <map from="SelectedApCsePerson.DateOfDeath" to="ApCsePerson.DateOfDeath"/>
+      <map from="Ap2.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="Ap2.Ssn" to="ApCsePersonsWorkSet.Ssn"/>
+      <map from="Ap2" to="ApSelected"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Case1" to="Next"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PROCESS_FPLS_TRANSCTN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeFplsProcessFpls"
+       send-command="DISPLAY">
+      <map from="Selected.RequestSentDate" to="FplsLocateRequest.RequestSentDate"/>
+      <map from="Selected.Identifier" to="FplsLocateRequest.Identifier"/>
+      <map from="Selected.TransactionType" to="FplsLocateRequest.TransactionType"/>
+      <map from="SelectedApCsePerson" to="StartingCsePerson"/>
+      <map from="Ap2.Number" to="StartingCsePersonsWorkSet.Number"/>
+      <map from="Ap2.Ssn" to="StartingCsePersonsWorkSet.Ssn"/>
+      <map from="Ap2.FormattedName" to="StartingCsePersonsWorkSet.FormattedName"/>
+      <map from="Case1" to="StartingCase"/>
+      <map from="Hidden" to="HiddenNextTranInfo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADDRESS_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiAddrAddressMaintenance"
+       send-command="DISPLAY">
+      <map from="Ap2.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="Ap2.FormattedName" to="ApCsePersonsWorkSet.FormattedName"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Case1" to="Next"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <map from="MoreAps" to="MoreAps"/>
+   <map from="Ap.AddressNotVerfMsg" to="Ap.AddressNotVerfMsg"/>
+   <map from="Ap.Compliance" to="Ap.Compliance"/>
+   <map from="Ap.Start" to="Ap.Start"/>
+   <map from="Ap.Common" to="Ap.Common"/>
+   <map from="Ap.SesaFplsLocateRequest" to="Ap.Sesa"/>
+   <map from="Ap.FplsFplsLocateRequest" to="Ap.Fpls"/>
+   <map from="Ap.Data1099LocateRequest" to="Ap.Data1099LocateRequest"/>
+   <map from="Ap.ParolOfficer" to="Ap.ParolOfficer"/>
+   <map from="Ap.FederalCompliance" to="Ap.FederalCompliance"/>
+   <map from="Ap.DaysRemaining" to="Ap.DaysRemaining"/>
+   <map from="Ap.ApCsePerson" to="Ap.ApCsePerson"/>
+   <map from="Ap.Incarceration" to="Ap.Incarceration"/>
+   <map from="Ap.AltAlias" to="Ap.AltAlias"/>
+   <map from="Ap.LastVerifiedEmpDat" to="Ap.LastVerifiedEmpDat"/>
+   <map from="Ap.ActivityLiteral" to="Ap.ActivityLiteral"/>
+   <map from="Case1" to="Case1"/>
+   <map from="TotalChildren" to="TotalChildren"/>
+   <map from="Ap.PersonIncomeHistory" to="Ap.PersonIncomeHistory"/>
+   <map from="HiddenPassedReviewType" to="HiddenPassedReviewType"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenPassed1" to="HiddenPassed1"/>
+   <map from="Ap.MedicalInsuAvailabl" to="Ap.MedicalInsuAvailabl"/>
+   <map from="Ap.Bankruptcy" to="Ap.Bankruptcy"/>
+   <map from="Ap2" to="ApCsePersonsWorkSet"/>
+   <map from="Incarceration" to="Incarceration"/>
+   <map from="Bankruptcy" to="Bankruptcy"/>
+   <map from="ApAddrProbMsg" to="ApAddrProbMsg"/>
+   <map from="Ap.HiliteAddrField" to="Ap.HiliteAddrField"/>
+   <map from="CaseClosedIndicator" to="CaseClosedIndicator"/>
+   <map from="Ap.TotalChildren" to="Ap.TotalChildren"/>
+   <map from="HiddenPassed.GexportHiddenPassed"
+        to="HiddenPassed.GimportHiddenPassed"/>
+   <map from="MultiAp" to="MultiAp"/>
+   <map from="Ap1" to="Ap1"/>
+   <map from="ApSelected" to="ApSelected"/>
+   <map from="SelectedApCsePersonsWorkSet" to="SelectedAp"/>
+   <map from="HiddenPassed.GexportH" to="HiddenPassed.GimportH"/>
+   <map from="LocateReview" to="LocateReview"/>
+   <map from="ActivityLiteral" to="ActivityLiteral"/>
+   <map from="Ap.EmpIncome" to="Ap.EmpIncome"/>
+   <map from="Ap.OtherIncome" to="Ap.OtherIncome"/>
+   <map from="Ap.ApCsePersonAddress.VerifiedDate"
+        to="Ap.ApCsePersonAddress.VerifiedDate"/>
+   <map from="Ap.ApCsePersonsWorkSet.Number" to="Ap.ApCsePersonsWorkSet.Number"/>
+   <map from="Ap.ApCsePersonsWorkSet.Ssn" to="Ap.ApCsePersonsWorkSet.Ssn"/>
+   <map from="Ap.ApCsePersonsWorkSet.FormattedName"
+        to="Ap.ApCsePersonsWorkSet.FormattedName"/>
+   <map from="Ap.ApCsePersonAddress.Identifier"
+        to="Ap.ApCsePersonAddress.Identifier"/>
+   <map from="SelectedApCsePerson.Type1" to="ApCsePerson.Type1"/>
+   <map from="SelectedApCsePerson.AeCaseNumber" to="ApCsePerson.AeCaseNumber"/>
+   <map from="SelectedApCsePerson.DateOfDeath" to="ApCsePerson.DateOfDeath"/>
+</procedure>

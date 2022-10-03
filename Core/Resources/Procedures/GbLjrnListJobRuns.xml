@@ -1,0 +1,57 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="GbLjrnListJobRuns"
+           program-name="SWELJRNP"
+           class="Gov.Kansas.DCF.Cse.Kessep.GbLjrnListJobRuns"
+           transaction="SRB2"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <on exit-state="CO_LNK_TO_DRPT"
+       action="link"
+       return-when="OE0000_RETURN_LNK_BLANK"
+       return-command-type="none"
+       display-first-on-return="true"
+       to="CoDrptDisplayReport"
+       send-command="DISPLAY">
+      <map from="Job.Name" to="Job.Name"/>
+      <map from="Dlgflw.StartTimestamp" to="JobRun.StartTimestamp"/>
+      <map from="Dlgflw.SystemGenId" to="JobRun.SystemGenId"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST1"
+       action="link"
+       return-when="OE0000_RETURN_LNK_BLANK"
+       return-command="DISPLAY"
+       to="GbLjobListJobs"
+       send-command="DISPLAY">
+      <return-map from="Dlgflw" to="Job"/>
+   </on>
+   <map from="Starting" to="Starting"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.JobRun" to="Group.JobRun"/>
+   <map from="Group.ServiceProvider" to="Group.ServiceProvider"/>
+   <map from="Group.CsePersonsWorkSet" to="Group.CsePersonsWorkSet"/>
+   <map from="PromptToLjob" to="PromptToLjob"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Job" to="Job"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+   <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+   <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+   <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+   <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+   <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+   <map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+   <map from="Hidden.MiscText1" to="Hidden.MiscText1"/>
+   <map from="Hidden.MiscText2" to="Hidden.MiscText2"/>
+   <map from="Hidden.MiscNum1" to="Hidden.MiscNum1"/>
+   <map from="Hidden.MiscNum2" to="Hidden.MiscNum2"/>
+   <map from="Hidden.MiscNum1V2" to="Hidden.MiscNum1V2"/>
+   <map from="Hidden.MiscNum2V2" to="Hidden.MiscNum2V2"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFcrSvesAddress">
+      <value>
+insert into CKT_FCR_SVES_ADDR
+(
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  ADDRESS_TYPE,
+  ADDR_SCRUB_IND_1,
+  ADDR_SCRUB_IND_2,
+  ADDR_SCRUB_IND_3,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  [STATE],
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  CITY,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  ADDRESS_LINE_3,
+  ADDRESS_LINE_4
+)
+values
+(
+  @fcgMemberId,
+  @fcgLSRspAgy,
+  @addressType,
+  @addrScrubInd1,
+  @addrScrubInd2,
+  @addrScrubInd3,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @state,
+  @zipCode5,
+  @zipCode4,
+  @zip3,
+  @city,
+  @addressLine1,
+  @addressLine2,
+  @addressLine3,
+  @addressLine4
+)
+</value>
+   </data>
+   <data name="CreateFcrSvesGenInfo">
+      <value>
+insert into CKT_FCR_SVES_GEN
+(
+  MEMBER_ID,
+  LOC_SRC_RSP_AGY_CD,
+  SVES_MATCH_TYPE,
+  TRNSMTR_ST_TERR_CD,
+  SEX_CODE,
+  RETURNED_DOB,
+  RETURNED_DOD,
+  SUBMITTED_DOB,
+  SSN,
+  LOCATE_CLOSED_IND,
+  FIPS_COUNTY_CODE,
+  LOCATE_REQUEST_TYP,
+  LOCATE_RESPONSE_CD,
+  MULTIPLE_SSN_IND,
+  MULTIPLE_SSN,
+  PARTICIPANT_TYPE,
+  FV_STATE_1,
+  FV_STATE_2,
+  FV_STATE_3,
+  SORT_STATE_CODE,
+  REQUEST_DT,
+  RESPONSE_RECEVD_DT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RETD_FIRST_NAME,
+  RETD_MIDDLE_NAME,
+  RETD_LAST_NAME,
+  SUBMITD_FIRST_NAME,
+  SUBMTD_MIDDLE_NAME,
+  SUBMITD_LAST_NAME,
+  USER_FIELD
+)
+values
+(
+  @memberId,
+  @locSrcRspAgyCd,
+  @svesMatchType,
+  @trnsmtrStTerrCd,
+  @sexCode,
+  @returnedDob,
+  @returnedDod,
+  @submittedDob,
+  @ssn,
+  @locateClosedInd,
+  @fipsCountyCode,
+  @locateRequestTyp,
+  @locateResponseCd,
+  @multipleSsnInd,
+  @multipleSsn,
+  @participantType,
+  @fvState1,
+  @fvState2,
+  @fvState3,
+  @sortStateCode,
+  @requestDt,
+  @responseRecevdDt,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @retdFirstName,
+  @retdMiddleName,
+  @retdLastName,
+  @submitdFirstName,
+  @submtdMiddleName,
+  @submitdLastName,
+  @userField
+)
+</value>
+   </data>
+   <data name="ReadFcrSvesAddress">
+      <value>
+select top(1)
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  ADDRESS_TYPE,
+  ADDR_SCRUB_IND_1,
+  ADDR_SCRUB_IND_2,
+  ADDR_SCRUB_IND_3,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  [STATE],
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  CITY,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  ADDRESS_LINE_3,
+  ADDRESS_LINE_4
+from
+  CKT_FCR_SVES_ADDR
+where
+  (ADDRESS_TYPE = @addressType) and
+  (@fcgMemberId = FCG_MEMBER_ID) and
+  (@fcgLSRspAgy = FCG_L_S_RSP_AGY)
+</value>
+   </data>
+   <data name="ReadFcrSvesGenInfo">
+      <value>
+select top(1)
+  MEMBER_ID,
+  LOC_SRC_RSP_AGY_CD,
+  SVES_MATCH_TYPE,
+  TRNSMTR_ST_TERR_CD,
+  SEX_CODE,
+  RETURNED_DOB,
+  RETURNED_DOD,
+  SUBMITTED_DOB,
+  SSN,
+  LOCATE_CLOSED_IND,
+  FIPS_COUNTY_CODE,
+  LOCATE_REQUEST_TYP,
+  LOCATE_RESPONSE_CD,
+  MULTIPLE_SSN_IND,
+  MULTIPLE_SSN,
+  PARTICIPANT_TYPE,
+  FV_STATE_1,
+  FV_STATE_2,
+  FV_STATE_3,
+  SORT_STATE_CODE,
+  REQUEST_DT,
+  RESPONSE_RECEVD_DT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RETD_FIRST_NAME,
+  RETD_MIDDLE_NAME,
+  RETD_LAST_NAME,
+  SUBMITD_FIRST_NAME,
+  SUBMTD_MIDDLE_NAME,
+  SUBMITD_LAST_NAME,
+  USER_FIELD
+from
+  CKT_FCR_SVES_GEN
+where
+  (MEMBER_ID = @memberId) and
+  (LOC_SRC_RSP_AGY_CD = @locSrcRspAgyCd)
+</value>
+   </data>
+   <data name="ReadFplsLocateRequest">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  REQUEST_SENT_DATE
+from
+  CKT_FPLS_LOC_REQ
+where
+  CSP_NUMBER = @cspNumber
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="UpdateFcrSvesAddress">
+      <value>
+update CKT_FCR_SVES_ADDR
+set
+  ADDR_SCRUB_IND_1 = @addrScrubInd1,
+  ADDR_SCRUB_IND_2 = @addrScrubInd2,
+  ADDR_SCRUB_IND_3 = @addrScrubInd3,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  [STATE] = @state,
+  ZIP_CODE5 = @zipCode5,
+  ZIP_CODE4 = @zipCode4,
+  ZIP3 = @zip3,
+  CITY = @city,
+  ADDRESS_LINE_1 = @addressLine1,
+  ADDRESS_LINE_2 = @addressLine2,
+  ADDRESS_LINE_3 = @addressLine3,
+  ADDRESS_LINE_4 = @addressLine4
+where
+  (FCG_MEMBER_ID = @fcgMemberId) and
+  (FCG_L_S_RSP_AGY = @fcgLSRspAgy) and
+  (ADDRESS_TYPE = @addressType)
+</value>
+   </data>
+   <data name="UpdateFcrSvesGenInfo">
+      <value>
+update CKT_FCR_SVES_GEN
+set
+  SVES_MATCH_TYPE = @svesMatchType,
+  TRNSMTR_ST_TERR_CD = @trnsmtrStTerrCd,
+  SEX_CODE = @sexCode,
+  RETURNED_DOB = @returnedDob,
+  RETURNED_DOD = @returnedDod,
+  SUBMITTED_DOB = @submittedDob,
+  SSN = @ssn,
+  LOCATE_CLOSED_IND = @locateClosedInd,
+  FIPS_COUNTY_CODE = @fipsCountyCode,
+  LOCATE_REQUEST_TYP = @locateRequestTyp,
+  LOCATE_RESPONSE_CD = @locateResponseCd,
+  MULTIPLE_SSN_IND = @multipleSsnInd,
+  MULTIPLE_SSN = @multipleSsn,
+  PARTICIPANT_TYPE = @participantType,
+  FV_STATE_1 = @fvState1,
+  FV_STATE_2 = @fvState2,
+  FV_STATE_3 = @fvState3,
+  SORT_STATE_CODE = @sortStateCode,
+  REQUEST_DT = @requestDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RETD_FIRST_NAME = @retdFirstName,
+  RETD_MIDDLE_NAME = @retdMiddleName,
+  RETD_LAST_NAME = @retdLastName,
+  SUBMITD_FIRST_NAME = @submitdFirstName,
+  SUBMTD_MIDDLE_NAME = @submtdMiddleName,
+  SUBMITD_LAST_NAME = @submitdLastName,
+  USER_FIELD = @userField
+where
+  (MEMBER_ID = @memberId) and
+  (LOC_SRC_RSP_AGY_CD = @locSrcRspAgyCd)
+</value>
+   </data>
+</root>

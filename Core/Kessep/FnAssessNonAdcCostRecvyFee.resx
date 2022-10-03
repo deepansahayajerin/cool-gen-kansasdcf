@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateMonthlyCourtOrderFee">
+      <value>
+insert into CKT_MO_CT_ORDR_FEE
+(
+  CPA_TYPE,
+  CSP_NUMBER,
+  COURT_ORDER_NUMBER,
+  YEAR_MONTH,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @cpaType,
+  @cspNumber,
+  @courtOrderNumber,
+  @yearMonth,
+  @amount,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  OTY_ID,
+  OTR_TYPE_DISB,
+  OTR_ID,
+  CPA_TYPE_DISB,
+  CSP_NUMBER_DISB,
+  OBG_ID,
+  CRD_ID,
+  CRV_ID,
+  CST_ID,
+  CRT_ID,
+  COL_ID
+from
+  CKT_DISB_TRAN
+where
+  (@colId = COL_ID) and
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumberDisb = CSP_NUMBER_DISB) and
+  (@cpaTypeDisb = CPA_TYPE_DISB) and
+  (@otrId = OTR_ID) and
+  (@otrTypeDisb = OTR_TYPE_DISB) and
+  (@crtId = CRT_ID) and
+  (@cstId = CST_ID) and
+  (@crvId = CRV_ID) and
+  (@crdId = CRD_ID) and
+  (DISB_TRAN_ID &lt;&gt; @disbTranId)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction2">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.DBT_GENERATED_ID
+from
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_TRAN_RLN T3
+  on
+    (T1.DBT_GENERATED_ID = @dbtGeneratedId) and
+    (T1.DISB_TRAN_ID = T3.DTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (@dtrPGeneratedId = T3.DTR_P_GENERATED_ID) and
+    (@cpaPType = T3.CPA_P_TYPE) and
+    (@cspPNumber = T3.CSP_P_NUMBER) and
+    (@dnrGeneratedId = T3.DNR_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  STANDARD_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadMonthlyCourtOrderFee">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  COURT_ORDER_NUMBER,
+  YEAR_MONTH,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_MO_CT_ORDR_FEE
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (YEAR_MONTH = @yearMonth) and
+  (COURT_ORDER_NUMBER = @courtOrderNumber)
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  FIP_LOCATION,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadTribunalFeeInformation">
+      <value>
+select top(1)
+  TRB_ID,
+  TRIBUNAL_FEE_ID,
+  EFFECTIVE_DATE,
+  RATE,
+  CAP,
+  DISCONTINUE_DATE
+from
+  CKT_TRIB_FEE_INFO
+where
+  (@trbId = TRB_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="UpdateMonthlyCourtOrderFee">
+      <value>
+update CKT_MO_CT_ORDR_FEE
+set
+  AMOUNT = @amount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (COURT_ORDER_NUMBER = @courtOrderNumber) and
+  (YEAR_MONTH = @yearMonth)
+</value>
+   </data>
+</root>

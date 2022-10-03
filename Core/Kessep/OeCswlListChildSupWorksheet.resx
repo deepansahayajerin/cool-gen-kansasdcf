@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseRoleCaseCsePersonSupportWorksheetChildSupportWorksheet">
+      <value>
+select
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.CRO_TYPE,
+  T3.CRO_IDENTIFIER,
+  T3.IDENTIFER,
+  T3.NET_ADJ_PRTL_CSAMT,
+  T3.CREATED_TIMESTAMP,
+  T3.LAST_UPDATED_BY,
+  T3.LAST_UPDATED_TMST,
+  T3.CSW_IDENTIFIER,
+  T3.CSS_GUIDELINE_YR,
+  T4.LGA_IDENTIFIER,
+  T4.STATUS
+from
+  CKT_CH_SUPP_WSHEET T4
+  join
+  CKT_PSUPP_WSHEET T3
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T4.IDENTIFIER = T3.CSW_IDENTIFIER) and
+    (T4.CS_GUIDELINE_YEAR = T3.CSS_GUIDELINE_YR)
+order by
+  T3.CAS_NUMBER,
+  T4.STATUS,
+  T3.LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePersonSupportWorksheetChildSupportWorksheet">
+      <value>
+select
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_IDENTIFIER,
+  T2.IDENTIFER,
+  T2.NET_ADJ_PRTL_CSAMT,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.CSW_IDENTIFIER,
+  T2.CSS_GUIDELINE_YR,
+  T3.LGA_IDENTIFIER,
+  T3.STATUS
+from
+  CKT_CH_SUPP_WSHEET T3
+  join
+  CKT_PSUPP_WSHEET T2
+  on
+    (@casNumber = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T3.IDENTIFIER = T2.CSW_IDENTIFIER) and
+    (T3.CS_GUIDELINE_YEAR = T2.CSS_GUIDELINE_YR)
+order by
+  T3.STATUS,
+  T2.LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+</root>

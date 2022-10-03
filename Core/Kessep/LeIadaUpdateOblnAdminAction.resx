@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeAction">
+      <value>
+select top(1)
+  TYPE
+from
+  CKT_ADMIN_ACTION
+where
+  TYPE = @type
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  LGA_ID
+from
+  CKT_OBLIGATION
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationAdministrativeAction">
+      <value>
+select top(1)
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  TAKEN_DT,
+  RESPONSE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  RESPONSE
+from
+  CKT_OBLIG_ADMIN_AC
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (@aatType = AAT_TYPE) and
+  (TAKEN_DT = @takenDt)
+</value>
+   </data>
+   <data name="ReadObligationTribunal">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.IDENTIFIER,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_OBLIGATION T1
+  on
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T3.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T3.COURT_CASE_NO = @courtCaseNo)
+  on
+    T2.IDENTIFIER = T3.TRB_ID
+</value>
+   </data>
+   <data name="UpdateObligationAdministrativeAction">
+      <value>
+update CKT_OBLIG_ADMIN_AC
+set
+  RESPONSE_DT = @responseDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  RESPONSE = @response
+where
+  (OTY_TYPE = @otyType) and
+  (AAT_TYPE = @aatType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (TAKEN_DT = @takenDt)
+</value>
+   </data>
+</root>

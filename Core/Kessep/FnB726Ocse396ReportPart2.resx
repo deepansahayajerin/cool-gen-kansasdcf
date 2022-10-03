@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDisbursementSummaryCsePersonCsePerson">
+      <value>
+select
+  FISCAL_YEAR,
+  NON_TAF_AMOUNT,
+  THRESHOLD_DATE,
+  CSP_NUMBER_OBLGEE,
+  CPA_TYPE_OBLGEE,
+  CSP_NUMBER_OBLGR,
+  CPA_TYPE_OBLGR
+from
+  CKT_DISB_SUMMARY with(readuncommitted)
+where
+  (
+    (
+      (FISCAL_YEAR = @fiscalYear1) and
+      (THRESHOLD_DATE between cast(@date1 as date) and cast(@date2 as date))
+    ) or
+    (
+      (FISCAL_YEAR = @fiscalYear2) and
+      (THRESHOLD_DATE between cast(@date3 as date) and cast(@date4 as date))
+    )
+  ) and
+  (
+    (FISCAL_YEAR &gt; @fiscalYear3) or
+    (
+      (FISCAL_YEAR = @fiscalYear3) and
+      (THRESHOLD_DATE &gt; @thresholdDate)
+    ) or
+    (
+      (FISCAL_YEAR = @fiscalYear3) and
+      (THRESHOLD_DATE = @thresholdDate) and
+      (CSP_NUMBER_OBLGEE &gt; @cspNumberOblgee)
+    )
+  )
+order by
+  FISCAL_YEAR,
+  THRESHOLD_DATE,
+  CSP_NUMBER_OBLGEE
+</value>
+   </data>
+</root>

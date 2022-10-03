@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePaymentRequest">
+      <value>
+insert into CKT_PMNT_REQUEST
+(
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  RECOVERY_FILLER,
+  RECAPTURE_FILLER,
+  ACH_FORMAT_CODE,
+  INTERFUND_VOUCHER,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  RCT_R_TSTAMP,
+  PTP_PROCESS_DATE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND,
+  RECOUPMENT_IND_KPC
+)
+values
+(
+  @paymentRequestId,
+  @processDate,
+  @amount,
+  @createdBy,
+  @createdTimestamp,
+  @dpCsePerNum,
+  @csePersonNumber,
+  @imprestFundCode,
+  @classification,
+  @recoveryFiller,
+  @recoveryFiller,
+  @achFormatCode,
+  @recoveryFiller,
+  @number,
+  @printDate,
+  @type,
+  null,
+  null,
+  null,
+  @interstateInd,
+  @recoveryFiller
+)
+</value>
+   </data>
+   <data name="ReadCsePersonDesigPayeeCsePerson">
+      <value>
+select top(1)
+  SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CSE_PERSO_NUM,
+  CSE_PERS_NUM
+from
+  CKT_CSE_P_DSIG_PYE
+where
+  (CSE_PERSO_NUM = @csePersoNum) and
+  (CSE_PERS_NUM is not null) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadPersonPreferredPaymentMethod">
+      <value>
+select top(1)
+  PMT_GENERATED_ID,
+  PERSN_PMNT_METH_ID,
+  ABA_ROUTING_NUMBER,
+  DFI_ACCOUNT_NO,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CSP_P_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_PER_PRF_PMNT_M
+where
+  (CSP_P_NUMBER = @cspPNumber) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+</root>

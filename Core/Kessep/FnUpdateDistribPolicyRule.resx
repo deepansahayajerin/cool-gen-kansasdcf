@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDistributionPolicy">
+      <value>
+select top(1)
+  DIST_PLCY_ID,
+  DIST_PLCY_NM,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  MAX_PRCD_DT
+from
+  CKT_DIST_PLCY
+where
+  DIST_PLCY_ID = @distPlcyId
+</value>
+   </data>
+   <data name="ReadDistributionPolicyRule">
+      <value>
+select top(1)
+  DBP_GENERATED_ID,
+  DIST_PLCY_RL_ID,
+  DEBT_FUNC_TYP,
+  DEBT_STATE,
+  APPLY_TO,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DPR_NEXT_ID,
+  DIST_TO_ORD_TYP_CD
+from
+  CKT_DIST_PLCY_RL
+where
+  (DIST_PLCY_RL_ID = @distPlcyRlId) and
+  (@dbpGeneratedId = DBP_GENERATED_ID)
+</value>
+   </data>
+   <data name="UpdateDistributionPolicyRule">
+      <value>
+update CKT_DIST_PLCY_RL
+set
+  DEBT_FUNC_TYP = @debtFuncTyp,
+  DEBT_STATE = @debtState,
+  APPLY_TO = @applyTo,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  DIST_TO_ORD_TYP_CD = @distToOrdTypCd
+where
+  (DBP_GENERATED_ID = @dbpGeneratedId) and
+  (DIST_PLCY_RL_ID = @distPlcyRlId)
+</value>
+   </data>
+</root>

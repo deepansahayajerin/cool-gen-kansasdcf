@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCashReceipt">
+      <value>
+insert into CKT_CASH_RECEIPT
+(
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  RECEIPT_DATE,
+  CHECK_TYPE,
+  CHECK_NUMBER,
+  CHECK_DATE,
+  RECEIVED_DATE,
+  DEPOSIT_RLSE_DT,
+  REFERENCE_NUMBER,
+  PAYOR_ORGANIZATION,
+  PAYOR_FIRST_NAME,
+  PAYOR_MIDDLE_NAME,
+  PAYOR_LAST_NAME,
+  FRWRD_TO_NAME,
+  FRWRD_STREET_1,
+  FRWRD_STREET_2,
+  FRWRD_CITY,
+  FRWRD_STATE,
+  FRWRD_ZIP5,
+  FRWRD_ZIP4,
+  FRWRD_ZIP3,
+  BAL_TMST,
+  TOTAL_CASH_TRANSAC,
+  TOT_NONCSH_TRN_AMT,
+  TOT_CASH_TRAN_CNT,
+  TOT_NOCSH_TRAN_CNT,
+  TOT_DETAIL_ADJ_CNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FTR_IDENTIFIER,
+  CASH_BAL_AMT,
+  CASH_BAL_RSN,
+  CASH_DUE,
+  TOTAL_NC_FEE_AMT,
+  TOT_CASH_FEE_AMT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  NOTE,
+  PAYOR_SSN
+)
+values
+(
+  @crvIdentifier,
+  @cstIdentifier,
+  @crtIdentifier,
+  @receiptAmount,
+  @cashReceiptId,
+  @receiptDate,
+  @checkType,
+  @checkNumber,
+  @checkDate,
+  @receivedDate,
+  @depositRlseDt,
+  @referenceNumber,
+  @payorOrganization,
+  @payorFirstName,
+  @payorMiddleName,
+  @payorLastName,
+  @frwrdToName,
+  @frwrdStreet1,
+  @frwrdStreet2,
+  @frwrdCity,
+  @frwrdState,
+  @frwrdZip5,
+  @frwrdZip4,
+  @frwrdZip3,
+  @balTmst,
+  @totalCashTransac,
+  @totNoncshTrnAmt,
+  @totCashTranCnt,
+  @totNocshTranCnt,
+  @totDetailAdjCnt,
+  @createdBy,
+  @createdTimestamp,
+  null,
+  null,
+  null,
+  null,
+  null,
+  @cashBalAmt,
+  @cashBalRsn,
+  @cashDue,
+  @totalNcFeeAmt,
+  @totalNcFeeAmt,
+  @lastUpdatedBy,
+  @balTmst,
+  @note,
+  @payorSsn
+)
+</value>
+   </data>
+   <data name="CreateCashReceiptEvent">
+      <value>
+insert into CKT_CR_EVENT
+(
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  RECEIVED_DATE,
+  SOURCE_CREATION_DT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  TOT_NON_CSHTRN_CNT,
+  TOT_ADJUSTMENT_CNT,
+  TOT_CASH_FEE_AMT,
+  TOT_NONCSH_FEE_AMT,
+  ANTIC_CHECK_AMT,
+  TOTAL_CASH_AMT,
+  TOT_CASH_TRAN_CNT,
+  TOT_NON_CASH_AMT
+)
+values
+(
+  @cstIdentifier,
+  @creventId,
+  @receivedDate,
+  @sourceCreationDt,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @totNonCshtrnCnt,
+  @totNonCshtrnCnt,
+  @totCashFeeAmt,
+  @totCashFeeAmt,
+  @anticCheckAmt,
+  @totalCashAmt,
+  @totNonCshtrnCnt,
+  @totCashFeeAmt
+)
+</value>
+   </data>
+   <data name="CreateCashReceiptStatusHistory">
+      <value>
+insert into CKT_CR_STATUS_HIST
+(
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DISCONTINUE_DATE,
+  REASON_TEXT,
+  CDR_IDENTIFIER
+)
+values
+(
+  @crtIdentifier,
+  @cstIdentifier,
+  @crvIdentifier,
+  @crsIdentifier,
+  @createdTimestamp,
+  @createdBy,
+  @discontinueDate,
+  @reasonText,
+  null
+)
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  RECEIVED_DATE,
+  SOURCE_CREATION_DT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  ANTIC_CHECK_AMT,
+  TOTAL_CASH_AMT
+from
+  CKT_CR_EVENT
+where
+  (CREVENT_ID = @creventId) and
+  (@cstIdentifier = CST_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus">
+      <value>
+select top(1)
+  CR_STATUS_ID
+from
+  CKT_CR_STATUS
+where
+  CR_STATUS_ID = @crStatusId
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+</root>

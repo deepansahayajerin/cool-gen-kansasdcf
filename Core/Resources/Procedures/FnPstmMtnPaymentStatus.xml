@@ -1,0 +1,27 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnPstmMtnPaymentStatus"
+           program-name="SWEPSTMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnPstmMtnPaymentStatus"
+           transaction="SR95"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_PAYMENT_STATUSES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPSTL"
+       to="FnPstlLstPaymentStatuses"
+       send-command="DISPLAY">
+      <return-map from="Flag" to="Flag"/>
+      <return-map from="FlowSelection" to="FlowSelection"/>
+   </on>
+   <map from="PaymentStatus" to="PaymentStatus"/>
+   <map from="HiddenId" to="HiddenId"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenDisplayOk" to="HiddenDisplayOk"/>
+   <map from="PromptTextWorkArea" to="PromptTextWorkArea"/>
+</procedure>

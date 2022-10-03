@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInterstateRequestObligation">
+      <value>
+insert into CKT_INT_RQST_OBG
+(
+  OTY_TYPE,
+  CPA_TYPE,
+  CSP_NUMBER,
+  OBG_GENERATED_ID,
+  INT_GENERATED_ID,
+  LAST_UPDATED_TIMES,
+  LAST_UPDATED_BY,
+  ORDER_FREQ_AMOUNT,
+  ORDER_EFF_DATE,
+  ORDER_END_DATE
+)
+values
+(
+  @otyType,
+  @cpaType,
+  @cspNumber,
+  @obgGeneratedId,
+  @intGeneratedId,
+  @lastUpdatedTimes,
+  @lastUpdatedBy,
+  @orderFreqAmount,
+  @orderEffDate,
+  @orderEndDate
+)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadContractorHistoryCseOrganizationCseOrganization1">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.EFFECTIVE_DATE,
+  T1.END_DATE,
+  T1.FK_CKT_CSE_ORGATYPE_CODE,
+  T1.FK_CKT_CSE_ORGAORGANZTN_ID,
+  T1.FK0CKT_CSE_ORGATYPE_CODE,
+  T1.FK0CKT_CSE_ORGAORGANZTN_ID,
+  T2.NAME,
+  T3.NAME
+from
+  CKT_CSE_ORGANIZATN T3
+  join
+  CKT_CSE_ORGANIZATN T2
+  join
+  CKT_CONTRACTOR_HST T1
+  on
+    (T2.TYPE_CODE = T1.FK0CKT_CSE_ORGATYPE_CODE) and
+    (T2.ORGANZTN_ID = T1.FK0CKT_CSE_ORGAORGANZTN_ID)
+  on
+    (T3.TYPE_CODE = T1.FK_CKT_CSE_ORGATYPE_CODE) and
+    (T3.ORGANZTN_ID = T1.FK_CKT_CSE_ORGAORGANZTN_ID) and
+    (
+      (
+        (T1.END_DATE = @endDate) and
+        (T2.ORGANZTN_ID = @organztnId1) and
+        (T3.ORGANZTN_ID = @organztnId2)
+      ) or
+      (
+        (T1.END_DATE = @endDate) and
+        (T2.ORGANZTN_ID &gt; @organztnId1)
+      ) or
+      (
+        (T1.END_DATE = @endDate) and
+        (T2.ORGANZTN_ID = @organztnId1) and
+        (T3.ORGANZTN_ID &gt; @organztnId2)
+      ) or
+      (T1.END_DATE &lt; @endDate)
+    )
+order by
+  T1.END_DATE desc,
+  T1.FK0CKT_CSE_ORGAORGANZTN_ID,
+  T1.FK_CKT_CSE_ORGAORGANZTN_ID
+</value>
+   </data>
+   <data name="ReadContractorHistoryCseOrganizationCseOrganization2">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.EFFECTIVE_DATE,
+  T1.END_DATE,
+  T1.FK_CKT_CSE_ORGATYPE_CODE,
+  T1.FK_CKT_CSE_ORGAORGANZTN_ID,
+  T1.FK0CKT_CSE_ORGATYPE_CODE,
+  T1.FK0CKT_CSE_ORGAORGANZTN_ID,
+  T2.NAME,
+  T3.NAME
+from
+  CKT_CSE_ORGANIZATN T3
+  join
+  CKT_CSE_ORGANIZATN T2
+  join
+  CKT_CONTRACTOR_HST T1
+  on
+    (T2.TYPE_CODE = T1.FK0CKT_CSE_ORGATYPE_CODE) and
+    (T2.ORGANZTN_ID = T1.FK0CKT_CSE_ORGAORGANZTN_ID)
+  on
+    (T3.TYPE_CODE = T1.FK_CKT_CSE_ORGATYPE_CODE) and
+    (T3.ORGANZTN_ID = T1.FK_CKT_CSE_ORGAORGANZTN_ID)
+order by
+  T1.END_DATE desc,
+  T1.FK0CKT_CSE_ORGAORGANZTN_ID,
+  T1.FK_CKT_CSE_ORGAORGANZTN_ID
+</value>
+   </data>
+   <data name="ReadCseOrganization1">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE,
+  NAME
+from
+  CKT_CSE_ORGANIZATN
+where
+  (ORGANZTN_ID = @organztnId) and
+  (TYPE_CODE = 'X')
+</value>
+   </data>
+   <data name="ReadCseOrganization2">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE,
+  NAME
+from
+  CKT_CSE_ORGANIZATN
+where
+  (ORGANZTN_ID = @organztnId) and
+  (TYPE_CODE = 'J')
+</value>
+   </data>
+</root>

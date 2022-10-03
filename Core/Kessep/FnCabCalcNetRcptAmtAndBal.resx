@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  CASH_DUE
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (
+      (
+        (@crtIIdentifier = T1.CRT_I_IDENTIFIER) and
+        (@cstIIdentifier = T1.CST_I_IDENTIFIER) and
+        (@crvIIdentifier = T1.CRV_I_IDENTIFIER)
+      ) or
+      (
+        (@crtIIdentifier = T1.CRT_IDENTIFIER) and
+        (@cstIIdentifier = T1.CST_IDENTIFIER) and
+        (@crvIIdentifier = T1.CRV_IDENTIFIER)
+      )
+    ) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn2">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) + T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIIdentifier = T1.CRT_I_IDENTIFIER) and
+    (@cstIIdentifier = T1.CST_I_IDENTIFIER) and
+    (@crvIIdentifier = T1.CRV_I_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn3">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) - T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+</root>

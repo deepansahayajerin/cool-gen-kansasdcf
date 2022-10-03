@@ -1,0 +1,82 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeHiclHealthInsuCompanyList"
+           program-name="SWEHICLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeHiclHealthInsuCompanyList"
+           transaction="SR5V"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeHinmHealthInsuranceMenu"
+       send-command-type="none">
+      <map from="HiddenCase" to="StartCase"/>
+      <map from="HiddenCsePerson" to="StartCsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_HICO"
+       action="transfer"
+       to="OeHicoHealthInsuranceCompany"
+       send-command="XFERHICL">
+      <map from="SelectedHealthInsuranceCompany.InsurancePolicyCarrier"
+           to="PromptHealthInsuranceCompany.InsurancePolicyCarrier"/>
+      <map from="SelectedHealthInsuranceCompany.CarrierCode"
+           to="PromptHealthInsuranceCompany.CarrierCode"/>
+      <map from="SelectedHealthInsuranceCompany.Identifier"
+           to="PromptHealthInsuranceCompany.Identifier"/>
+      <map from="SelectedHealthInsuranceCompany.InsurerPhoneAreaCode"
+           to="PromptHealthInsuranceCompany.InsurerPhoneAreaCode"/>
+      <map from="SelectedHealthInsuranceCompany.InsurerFaxAreaCode"
+           to="PromptHealthInsuranceCompany.InsurerFaxAreaCode"/>
+      <map from="SelectedHealthInsuranceCompany.InsurerPhoneExt"
+           to="PromptHealthInsuranceCompany.InsurerPhoneExt"/>
+      <map from="SelectedHealthInsuranceCompany.InsurerPhone"
+           to="PromptHealthInsuranceCompany.InsurerPhone"/>
+      <map from="SelectedHealthInsuranceCompany.InsurerFax"
+           to="PromptHealthInsuranceCompany.InsurerFax"/>
+      <map from="SelectedHealthInsuranceCompany.StartDate"
+           to="PromptHealthInsuranceCompany.StartDate"/>
+      <map from="SelectedHealthInsuranceCompany.EndDate"
+           to="PromptHealthInsuranceCompany.EndDate"/>
+      <map from="SelectedHealthInsuranceCompany.ContactName"
+           to="PromptHealthInsuranceCompany.ContactName"/>
+      <map from="HiclSelectionCount" to="HiclSelectionCount"/>
+      <map from="SelectedHealthInsuranceCompanyAddress.City"
+           to="PromptHealthInsuranceCompanyAddress.City"/>
+      <map from="SelectedHealthInsuranceCompanyAddress.State"
+           to="PromptHealthInsuranceCompanyAddress.State"/>
+      <map from="SelectedHealthInsuranceCompanyAddress.Street1"
+           to="PromptHealthInsuranceCompanyAddress.Street1"/>
+      <map from="SelectedHealthInsuranceCompanyAddress.Street2"
+           to="PromptHealthInsuranceCompanyAddress.Street2"/>
+      <map from="SelectedHealthInsuranceCompanyAddress.ZipCode5"
+           to="PromptHealthInsuranceCompanyAddress.ZipCode5"/>
+      <map from="SelectedHealthInsuranceCompanyAddress.ZipCode4"
+           to="PromptHealthInsuranceCompanyAddress.ZipCode4"/>
+      <map from="HiddenCase" to="HiddenCase"/>
+      <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   </on>
+   <map from="HiddenFromHiph" to="HiddenFromHiph"/>
+   <map from="SelectedHealthInsuranceCompany"
+        to="SelectedHealthInsuranceCompany"/>
+   <map from="Export1.DetailHealthInsuranceCompany"
+        to="Import1.DetailHealthInsuranceCompany"/>
+   <map from="Export1.DetailExpiredFlag" to="Import1.DetailExpiredFlag"/>
+   <map from="ShowAll" to="ShowAll"/>
+   <map from="SelectedHealthInsuranceCompanyAddress"
+        to="SelectedHealthInsuranceCompanyAddress"/>
+   <map from="Export1.DetailHealthInsuranceCompanyAddress"
+        to="Import1.DetailHealthInsuranceCompanyAddress"/>
+   <map from="StartingHealthInsuranceCompany"
+        to="StartingHealthInsuranceCompany"/>
+   <map from="StartingHealthInsuranceCompanyAddress"
+        to="StartingHealthInsuranceCompanyAddress"/>
+   <map from="NextHealthInsuranceCompany" to="NextHealthInsuranceCompany"/>
+   <map from="NextHealthInsuranceCompanyAddress"
+        to="NextHealthInsuranceCompanyAddress"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Export1.DetailWork" to="Import1.DetailWork"/>
+   <map from="HiddenCase" to="HiddenCase"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

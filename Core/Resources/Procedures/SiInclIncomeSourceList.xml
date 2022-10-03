@@ -1,0 +1,62 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiInclIncomeSourceList"
+           program-name="SWEINCLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiInclIncomeSourceList"
+           transaction="SRBO"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+      <map from="ToMenu" to="StartCsePerson"/>
+      <map from="Next" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCOME_SOURCE_DETAIL"
+       action="transfer"
+       to="SiIncsIncomeSourceDetails"
+       send-command-type="current">
+      <map from="Incs" to="Incl"/>
+      <map from="IncsScreenState" to="ScreenPrevCommand"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+      <map from="Selected1.Identifier" to="IncomeSource.Identifier"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCOME_HISTORY"
+       action="transfer"
+       to="SiInchIncomeSourceHistory"
+       send-command="DISPLAY">
+      <map from="Selected1.Identifier" to="IncomeSource.Identifier"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="Incs" to="Incs"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenIncomeSource" to="HiddenIncomeSource"/>
+   <map from="Next" to="Next"/>
+   <map from="Search" to="Search"/>
+   <map from="Case1.CaseDetail" to="Case1.CaseDetail"/>
+   <map from="HiddenCase" to="HiddenCase"/>
+   <map from="Case2" to="Case2"/>
+   <map from="HiddenCasePgKeys.HiddenCasePgKey"
+        to="HiddenCasePgKeys.HiddenCasePgKey"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="HiddenPageKeys.HiddenPageKey" to="HiddenPageKeys.HiddenPageKey"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="Export1.DetailIncomeSource" to="Import1.DetailIncomeSource"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailMnthlyIncm" to="Import1.DetailMnthlyIncm"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Export1.Eiwo" to="Import1.Eiwo"/>
+   <map from="FromLais" to="FromLais"/>
+   <map from="Selected.Selected1" to="Selected.Selected1"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

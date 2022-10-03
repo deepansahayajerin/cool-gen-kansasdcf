@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateImHouseholdMbrMnthlySum">
+      <value>
+insert into CKT_IM_HH_MBR_MSUM
+(
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+)
+values
+(
+  @year0,
+  @month0,
+  @relationship,
+  @grantAmt,
+  @grantMedAmt,
+  @uraAmount,
+  @uraMedicalAmount,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @imhAeCaseNo,
+  @cspNumber
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadImHousehold">
+      <value>
+select top(1)
+  AE_CASE_NO
+from
+  CKT_IM_HOUSEHOLD
+where
+  AE_CASE_NO = @aeCaseNo
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum">
+      <value>
+select top(1)
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@imhAeCaseNo = IMH_AE_CASE_NO) and
+  (MONTH0 = @month0) and
+  (YEAR0 = @year0)
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySumCsePersonAccount">
+      <value>
+select
+  T1.YEAR0,
+  T1.MONTH0,
+  T1.RELATIONSHIP,
+  T1.GRANT_AMT,
+  T1.GRANT_MED_AMT,
+  T1.URA_AMOUNT,
+  T1.URA_MEDICAL_AMOUNT,
+  T1.CREATED_BY,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.IMH_AE_CASE_NO,
+  T1.CSP_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.RECOMP_BAL_FROM_DT,
+  T2.TRIGGER_TYPE
+from
+  CKT_IM_HH_MBR_MSUM T1
+  join
+  CKT_CSE_PERSON_ACC T2
+  on
+    (T1.IMH_AE_CASE_NO = @imhAeCaseNo) and
+    (T1.MONTH0 = @month0) and
+    (T1.YEAR0 = @year0) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T2.TYPE = 'S')
+</value>
+   </data>
+   <data name="ReadPersonProgram1">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.STATUS,
+  T1.CLOSURE_REASON,
+  T1.ASSIGNED_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.CHANGED_IND,
+  T1.CHANGE_DATE,
+  T1.PRG_GENERATED_ID,
+  T1.MED_TYPE_DISC_DATE,
+  T1.MED_TYPE
+from
+  CKT_PROGRAM T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (
+      T2.CODE in ('FC', 'AF', 'AFI',
+        'NF', 'NC', 'FCI')
+    ) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+   <data name="ReadPersonProgram2">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.STATUS,
+  T1.CLOSURE_REASON,
+  T1.ASSIGNED_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.CHANGED_IND,
+  T1.CHANGE_DATE,
+  T1.PRG_GENERATED_ID,
+  T1.MED_TYPE_DISC_DATE,
+  T1.MED_TYPE
+from
+  CKT_PROGRAM T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (
+      T2.CODE in ('AF', 'MA', 'MAI',
+        'MK', 'NF', 'FC',
+        'NC', 'SI', 'MP')
+    ) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+   <data name="UpdateCsePersonAccount">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt,
+  TRIGGER_TYPE = @triggerType
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="UpdateImHouseholdMbrMnthlySum">
+      <value>
+update CKT_IM_HH_MBR_MSUM
+set
+  GRANT_AMT = @grantAmt,
+  GRANT_MED_AMT = @grantMedAmt,
+  URA_AMOUNT = @uraAmount,
+  URA_MEDICAL_AMOUNT = @uraMedicalAmount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0) and
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateCase">
+      <value>
+select
+  TRANS_SERIAL_NBR,
+  TRANSACTION_DATE,
+  KS_CASE_ID,
+  INTERSTATE_CASE_ID
+from
+  CKT_INTERST_CASE
+where
+  TRANS_SERIAL_NBR = @transSerialNbr
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory">
+      <value>
+select
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  TRANSACTION_SERIAL
+from
+  CKT_INT_RQST_HIST
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (TRANSACTION_SERIAL &gt; 0)
+</value>
+   </data>
+   <data name="UpdateInterstateCase">
+      <value>
+update CKT_INTERST_CASE
+set
+  INTERSTATE_CASE_ID = @interstateCaseId
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="UpdateInterstateRequest">
+      <value>
+update CKT_INTERSTAT_RQST
+set
+  OTHER_STATE_CAS_ID = @otherStateCasId,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  OTH_ST_CASE_STATUS = @othStCaseStatus,
+  CASE_TYPE = @caseType,
+  KS_CASE_IND = @ksCaseInd,
+  OTH_STATE_CLS_RES = @othStateClsRes,
+  OTH_STATE_CLS_DTE = @othStateClsDte
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

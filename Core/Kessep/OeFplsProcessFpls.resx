@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseRole1">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_SERVICE_PRVDER T5
+  join
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.TYPE = 'AP') and
+    (T1.STATUS = 'O') and
+    (T1.NUMB = @numb)
+  join
+  CKT_ASSIGN_CASE T3
+  on
+    (T1.NUMB = T3.CAS_NO) and
+    (T3.EFFECTIVE_DATE &lt;= @startDate) and
+    (T3.DISCONTINUE_DATE &gt;= @startDate)
+  on
+    (T5.SERVICE_PRVDER_ID = T3.SPD_ID) and
+    (T5.USER_ID = @userId)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseCaseRole2">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_SERVICE_PRVDER T5
+  join
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.TYPE in ('AP', 'AR')) and
+    (T1.STATUS = 'O')
+  join
+  CKT_ASSIGN_CASE T3
+  on
+    (T1.NUMB = T3.CAS_NO) and
+    (T3.EFFECTIVE_DATE &lt;= @startDate) and
+    (T3.DISCONTINUE_DATE &gt;= @startDate)
+  on
+    (T5.SERVICE_PRVDER_ID = T3.SPD_ID) and
+    (T5.USER_ID = @userId)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

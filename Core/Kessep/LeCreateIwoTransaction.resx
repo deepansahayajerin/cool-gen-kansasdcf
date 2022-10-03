@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateIwoAction">
+      <value>
+update CKT_IWO_ACTION
+set
+  INF_ID = @infId
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IWT_IDENTIFIER = @iwtIdentifier)
+</value>
+   </data>
+   <data name="AssociateIwoTransaction">
+      <value>
+update CKT_IWO_TRANS
+set
+  CSP_I_NUMBER = @cspINumber,
+  ISR_IDENTIFIER = @isrIdentifier
+where
+  (IDENTIFIER = @identifier) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="CreateIwoAction">
+      <value>
+insert into CKT_IWO_ACTION
+(
+  IDENTIFIER,
+  ACTION_TYPE,
+  STATUS_CD,
+  STATUS_DATE,
+  STATUS_REASON_CD,
+  DOC_TRACKING_ID,
+  FILE_CONTROL_ID,
+  BATCH_CONTROL_ID,
+  SVRITY_CLEARED_IND,
+  ERROR_RECORD_TYPE,
+  ERROR_FIELD_1,
+  ERROR_FIELD_2,
+  MORE_ERRORS_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER,
+  INF_ID
+)
+values
+(
+  @identifier,
+  @actionType,
+  @statusCd,
+  @statusDate,
+  @statusReasonCd,
+  @docTrackingId,
+  @fileControlId,
+  @batchControlId,
+  @svrityClearedInd,
+  @errorRecordType,
+  @errorField1,
+  @errorField2,
+  @moreErrorsInd,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @cspNumber,
+  @lgaIdentifier,
+  @iwtIdentifier,
+  null
+)
+</value>
+   </data>
+   <data name="CreateIwoActionHistory">
+      <value>
+insert into CKT_IWO_ACT_HIST
+(
+  IDENTIFIER,
+  ACTION_TAKEN,
+  ACTION_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER,
+  IWA_IDENTIFIER
+)
+values
+(
+  @identifier,
+  @actionTaken,
+  @actionDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @cspNumber,
+  @lgaIdentifier,
+  @iwtIdentifier,
+  @iwaIdentifier
+)
+</value>
+   </data>
+   <data name="CreateIwoTransaction">
+      <value>
+insert into CKT_IWO_TRANS
+(
+  IDENTIFIER,
+  TRANSACTION_NUMBER,
+  CURRENT_STATUS,
+  STATUS_DATE,
+  NOTE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  LGA_IDENTIFIER,
+  CSP_NUMBER,
+  CSP_I_NUMBER,
+  ISR_IDENTIFIER
+)
+values
+(
+  @identifier,
+  @transactionNumber,
+  @currentStatus,
+  @statusDate,
+  @note,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @lgaIdentifier,
+  @cspNumber,
+  null,
+  null
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_I_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  DETAIL
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadIwoAction1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  ACTION_TYPE,
+  STATUS_CD,
+  STATUS_DATE,
+  STATUS_REASON_CD,
+  DOC_TRACKING_ID,
+  FILE_CONTROL_ID,
+  BATCH_CONTROL_ID,
+  SVRITY_CLEARED_IND,
+  ERROR_RECORD_TYPE,
+  ERROR_FIELD_1,
+  ERROR_FIELD_2,
+  MORE_ERRORS_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER,
+  INF_ID
+from
+  CKT_IWO_ACTION
+where
+  (IDENTIFIER = @identifier) and
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@iwtIdentifier = IWT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadIwoAction2">
+      <value>
+select top(1)
+  max(IDENTIFIER)
+from
+  CKT_IWO_ACTION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@iwtIdentifier = IWT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadIwoTransaction1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TRANSACTION_NUMBER,
+  CURRENT_STATUS,
+  STATUS_DATE,
+  NOTE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  LGA_IDENTIFIER,
+  CSP_NUMBER,
+  CSP_I_NUMBER,
+  ISR_IDENTIFIER
+from
+  CKT_IWO_TRANS
+where
+  TRANSACTION_NUMBER = @transactionNumber
+</value>
+   </data>
+   <data name="ReadIwoTransaction2">
+      <value>
+select top(1)
+  max(IDENTIFIER)
+from
+  CKT_IWO_TRANS
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadIwoTransaction3">
+      <value>
+select top(1)
+  max(TRANSACTION_NUMBER)
+from
+  CKT_IWO_TRANS
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select top(1)
+  PRNT_SUCESSFUL_IND,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  @infId = INF_ID
+</value>
+   </data>
+   <data name="UpdateInfrastructure">
+      <value>
+update CKT_INFRASTRUCTURE
+set
+  DETAIL = @detail
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="UpdateIwoAction">
+      <value>
+update CKT_IWO_ACTION
+set
+  SVRITY_CLEARED_IND = @svrityClearedInd,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IWT_IDENTIFIER = @iwtIdentifier)
+</value>
+   </data>
+   <data name="UpdateIwoTransaction">
+      <value>
+update CKT_IWO_TRANS
+set
+  CURRENT_STATUS = @currentStatus,
+  STATUS_DATE = @statusDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (IDENTIFIER = @identifier) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateOutgoingDocument">
+      <value>
+update CKT_OUTGOING_DOC
+set
+  PRNT_SUCESSFUL_IND = @prntSucessfulInd,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATD_TSTAMP = @lastUpdatdTstamp
+where
+  INF_ID = @infId
+</value>
+   </data>
+</root>

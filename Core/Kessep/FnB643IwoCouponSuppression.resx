@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalActionIncomeSource">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  ISR_IDENTIFIER,
+  EFFECTIVE_DT,
+  END_DT,
+  IDENTIFIER
+from
+  CKT_LEGAL_ACT_ISRC
+where
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DT &lt; @effectiveDt) and
+  (END_DT &gt; @effectiveDt)
+</value>
+   </data>
+</root>

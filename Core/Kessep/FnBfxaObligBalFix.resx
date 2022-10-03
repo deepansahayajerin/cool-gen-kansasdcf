@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  sum(OB_TRN_AMT)
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrId = OTR_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgId = OBG_ID) and
+  (ADJ_IND = 'N')
+</value>
+   </data>
+   <data name="ReadDebtAdjustment">
+      <value>
+select distinct
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.OB_TRN_AMT,
+  T1.DEBT_ADJ_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE
+from
+  CKT_OB_TRN T1
+  join
+  CKT_OB_TRN_RLN T2
+  on
+    (T1.OTY_TYPE = T2.OTY_TYPE_SECONDARY) and
+    (T1.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T1.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (@otyTypePrimary = T2.OTY_TYPE_PRIMARY) and
+    (@otrPType = T2.OTR_P_TYPE) and
+    (@otrPGeneratedId = T2.OTR_P_GENERATED_ID) and
+    (@cpaPType = T2.CPA_P_TYPE) and
+    (@cspPNumber = T2.CSP_P_NUMBER) and
+    (@obgPGeneratedId = T2.OBG_P_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadDebtDebtDetailObligationObligationType">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.OB_TRN_AMT,
+  T1.CREATED_BY,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.DUE_DT,
+  T2.BAL_DUE_AMT
+from
+  CKT_OB_TRN T1
+  join
+  CKT_DEBT_DTL T2
+  on
+    (T1.OTY_TYPE = T2.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T1.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadObligorCsePerson">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  AOD_TOT_GIFT_COLL
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,114 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiPar1PaReferralPage1"
+           program-name="SWEPAR1P"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiPar1PaReferralPage1"
+           transaction="SR1Y"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="PaReferral" to="FromPaReferral"/>
+      <map from="FromPar1" to="FromPar1"/>
+      <map from="Phonetic" to="Phonetic"/>
+      <map from="Search.Number" to="SearchCsePersonsWorkSet.Number"/>
+      <map from="Search.Sex" to="SearchCsePersonsWorkSet.Sex"/>
+      <map from="Search.Dob" to="SearchCsePersonsWorkSet.Dob"/>
+      <map from="Search.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+      <map from="Search.FirstName" to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="Search.MiddleInitial" to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <map from="Search.LastName" to="SearchCsePersonsWorkSet.LastName"/>
+      <map from="InitialExecution" to="InitialExecution"/>
+      <return-map from="Selected" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiRefmPaReferralMenu"
+       send-command="XXFMMENU">
+      <map from="ServiceProviderAddress.City" to="ServiceProviderAddress.City"/>
+      <map from="PaReferral" to="PaReferral"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="Office" to="Office"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_REGISTER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETREGI"
+       to="SiRegiCaseRegistration"
+       send-command="FROMNAME">
+      <map from="ToRegi.Gregi" to="FromName.NameDetail"/>
+      <map from="FromPar1" to="FromPar1"/>
+      <map from="PaReferral" to="FromPaReferral"/>
+      <return-map from="HiddenSelected" to="RegiCsePersonsWorkSet"/>
+      <return-map from="Case1" to="RegiCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PA_REFERRAL_P2"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPAREF"
+       to="SiPar2PaReferralPage2"
+       send-command="DISPLAY">
+      <map from="PaReferral.Type1" to="PaReferral.Type1"/>
+      <map from="PaReferral.CaseNumber" to="PaReferral.CaseNumber"/>
+      <map from="PaReferral.Number" to="PaReferral.Number"/>
+      <map from="PaReferral.PgmCode" to="PaReferral.PgmCode"/>
+      <map from="PaReferral.From" to="PaReferral.From"/>
+      <map from="PaReferral.CreatedTimestamp" to="PaReferral.CreatedTimestamp"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PA_REFERRAL_FC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPAREF"
+       to="SiPar3PaReferralFosterCare"
+       send-command="DISPLAY">
+      <map from="PaReferral.Type1" to="PaReferral.Type1"/>
+      <map from="PaReferral.CaseNumber" to="PaReferral.CaseNumber"/>
+      <map from="PaReferral.Number" to="PaReferral.Number"/>
+      <map from="PaReferral.From" to="PaReferral.From"/>
+      <map from="PaReferral.CreatedTimestamp" to="PaReferral.CreatedTimestamp"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ASIN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETASIN"
+       to="SpAsinOspAssignment"
+       send-command="DISPLAY">
+      <map from="PaReferral" to="HpaReferral"/>
+      <map from="AsinObject" to="HeaderObject"/>
+   </on>
+   <map from="Children.GchildName" to="Children.GchildName"/>
+   <map from="Children.GchildPaReferralParticipant"
+        to="Children.GchildPaReferralParticipant"/>
+   <map from="Children.GchildCaseRole" to="Children.GchildCaseRole"/>
+   <map from="PaReferral" to="PaReferral"/>
+   <map from="Save" to="Save"/>
+   <map from="ApMail" to="ApMail"/>
+   <map from="ApHome" to="ApHome"/>
+   <map from="OtherName" to="OtherName"/>
+   <map from="ApName" to="ApName"/>
+   <map from="ArName" to="ArName"/>
+   <map from="Other" to="Other"/>
+   <map from="Ar" to="Ar"/>
+   <map from="Ap" to="Ap"/>
+   <map from="MoreReferralsMinus" to="MoreReferralsMinus"/>
+   <map from="MoreReferralsPlus" to="MoreReferralsPlus"/>
+   <map from="SaveSubscript" to="SaveSubscript"/>
+   <map from="ToRegi.Gregi" to="ToRegi.Gregi"/>
+   <map from="Search" to="Search"/>
+   <map from="Standard" to="Standard"/>
+   <map from="BeenThere" to="BeenThere"/>
+   <map from="FromPar1" to="FromPar1"/>
+   <map from="Screen" to="Screen"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Office" to="Office"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+   <map from="HiddenNextTranInfo" to="Hidden"/>
+   <map from="WarningMsg" to="WarningMsg"/>
+   <map from="Deact.Text33" to="Deact.Text33"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

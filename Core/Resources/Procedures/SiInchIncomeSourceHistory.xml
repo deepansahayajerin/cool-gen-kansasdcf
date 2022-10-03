@@ -1,0 +1,70 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiInchIncomeSourceHistory"
+           program-name="SWEINCHP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiInchIncomeSourceHistory"
+           transaction="SR1O"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+      <map from="ToMenu" to="StartCsePerson"/>
+      <map from="Next" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCOME_SOURCE_DETAIL"
+       action="transfer"
+       to="SiIncsIncomeSourceDetails"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="IncomeSource.Name" to="IncomeSource.Name"/>
+      <map from="IncomeSource.Type1" to="IncomeSource.Type1"/>
+      <map from="IncomeSource.Identifier" to="IncomeSource.Identifier"/>
+      <map from="IncomeSource.StartDt" to="IncomeSource.StartDt"/>
+      <map from="IncomeSource.EndDt" to="IncomeSource.EndDt"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCOME_SOURCE_LIST"
+       action="transfer"
+       to="SiInclIncomeSourceList"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="IncHist" to="IncHist"/>
+   <map from="PageKeysCases.PageKey" to="PageKeysCases.PageKey"/>
+   <map from="PageKeysIncHist.PageKey" to="PageKeysIncHist.PageKey"/>
+   <map from="Cases1" to="Cases1"/>
+   <map from="IncomeHistory.PersonIncomeHistory"
+        to="IncomeHistory.PersonIncomeHistory"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Next" to="Next"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="PersonPrompt" to="PersonPrompt"/>
+   <map from="Cases.Case1" to="Cases.Case1"/>
+   <map from="IncomeSource" to="IncomeSource"/>
+   <map from="IncomeHistory.Common" to="IncomeHistory.Common"/>
+   <map from="IncomeHistory.FreqPrompt" to="IncomeHistory.FreqPrompt"/>
+   <map from="HiddenIncomeHist.Hidden" to="HiddenIncomeHist.Hidden"/>
+   <map from="HiddenIncomeHist.LastReadTotal"
+        to="HiddenIncomeHist.LastReadTotal"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

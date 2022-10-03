@@ -1,0 +1,38 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnClbrLstCashRcptBalRsns"
+           program-name="SWECLBRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnClbrLstCashRcptBalRsns"
+           transaction="SR22"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnCsamCashMgtAdminMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_CASH_MNGMNT_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CMBR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCmbrMtnCashRcptBalRsns"
+       send-command="DISPLAY">
+      <map from="HiddenSelection.SystemGeneratedIdentifier"
+           to="CashReceiptRlnRsn.SystemGeneratedIdentifier"/>
+      <map from="HiddenSelection.Code" to="CashReceiptRlnRsn.Code"/>
+      <map from="HiddenSelection.Name" to="CashReceiptRlnRsn.Name"/>
+      <map from="HiddenSelection.EffectiveDate"
+           to="CashReceiptRlnRsn.EffectiveDate"/>
+      <map from="HiddenSelection.DiscontinueDate"
+           to="CashReceiptRlnRsn.DiscontinueDate"/>
+   </on>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.CashReceiptRlnRsn" to="Import1.CashReceiptRlnRsn"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="FromAdminMenu" to="FromAdminMenu"/>
+</procedure>

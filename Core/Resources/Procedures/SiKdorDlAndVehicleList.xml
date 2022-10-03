@@ -1,0 +1,68 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiKdorDlAndVehicleList"
+           program-name="SWEKDORP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiKdorDlAndVehicleList"
+           transaction="SSAJ"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CODE_VALUES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToCdvl" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromCdvl"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADDRESS_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETADDR"
+       to="SiAddrAddressMaintenance"
+       send-command="XXFMMENU">
+      <map from="ToAddrCommon" to="EmptyAddrSelect"/>
+      <map from="ToAddrCase" to="Next"/>
+      <map from="HiddenCsePersonAddress.LocationType" to="EmptyAddr.LocationType"/>
+      <map from="HiddenCsePersonAddress.Street1" to="EmptyAddr.Street1"/>
+      <map from="HiddenCsePersonAddress.Street2" to="EmptyAddr.Street2"/>
+      <map from="HiddenCsePersonAddress.City" to="EmptyAddr.City"/>
+      <map from="HiddenCsePersonAddress.State" to="EmptyAddr.State"/>
+      <map from="HiddenCsePersonAddress.ZipCode" to="EmptyAddr.ZipCode"/>
+      <map from="HiddenCsePersonAddress.Zip4" to="EmptyAddr.Zip4"/>
+      <map from="HiddenCsePersonAddress.Source" to="EmptyAddr.Source"/>
+      <map from="HiddenCsePersonAddress.Type1" to="EmptyAddr.Type1"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="ApCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NAME"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="FromName"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="PromptPerson" to="PromptPerson"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="RecordType" to="RecordType"/>
+   <map from="PromptRecordType" to="PromptRecordType"/>
+   <map from="Export1.G" to="Import1.G"/>
+   <map from="Export1.GexportHighlight" to="Import1.GimportHighlight"/>
+   <map from="HiddenRecordType" to="HiddenRecordType"/>
+   <map from="XofX" to="XofX"/>
+   <map from="AdditionalPfKeys" to="AdditionalPfKeys"/>
+   <map from="TotalVehicles" to="TotalVehicles"/>
+   <map from="KdorVehicle" to="KdorVehicle"/>
+   <map from="VehicleNumber" to="VehicleNumber"/>
+   <map from="HiddenCsePersonAddress" to="HiddenCsePersonAddress"/>
+   <map from="DeletePfKey" to="DeletePfKey"/>
+   <map from="DeleteEligible" to="DeleteEligible"/>
+</procedure>

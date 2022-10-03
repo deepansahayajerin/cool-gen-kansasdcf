@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAbsentParent">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CASE_ROLE_ID = @caseRoleId) and
+  (TYPE = @type) and
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadChild">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadGeneticTest">
+      <value>
+select
+  TEST_NUMBER,
+  LAB_CASE_NO,
+  TEST_TYPE,
+  ACTUAL_TEST_DATE,
+  RESULT_RCVD_DATE,
+  PAT_EXCL_IND,
+  PAT_PROBABILITY,
+  CONTEST_RCVD_IND,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_IDENTIFIER,
+  CAS_M_NUMBER,
+  CSP_M_NUMBER,
+  CRO_M_TYPE,
+  CRO_M_IDENTIFIER,
+  CAS_A_NUMBER,
+  CSP_A_NUMBER,
+  CRO_A_TYPE,
+  CRO_A_IDENTIFIER
+from
+  CKT_GENETIC_TEST
+where
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  PAT_PROBABILITY desc
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadMother">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CASE_ROLE_ID = @caseRoleId) and
+  (TYPE = @type) and
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest1">
+      <value>
+select top(1)
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SPECIMEN_ID,
+  SAMPLE_USABLE_IND,
+  COLLECT_SAMPLE_IND,
+  SHOW_IND,
+  SAMPLE_COLL_IND,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  PGT_IDENTIFIER,
+  CSP_R_NUMBER,
+  GTE_R_TEST_NUMBER
+from
+  CKT_PERSON_GEN_TST
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@gteTestNumber = GTE_TEST_NUMBER)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest2">
+      <value>
+select top(1)
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SPECIMEN_ID,
+  SAMPLE_USABLE_IND,
+  COLLECT_SAMPLE_IND,
+  SHOW_IND,
+  SAMPLE_COLL_IND,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  PGT_IDENTIFIER,
+  CSP_R_NUMBER,
+  GTE_R_TEST_NUMBER
+from
+  CKT_PERSON_GEN_TST
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (GTE_TEST_NUMBER = @gteTestNumber)
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest3">
+      <value>
+select top(1)
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SPECIMEN_ID,
+  SAMPLE_USABLE_IND,
+  COLLECT_SAMPLE_IND,
+  SHOW_IND,
+  SAMPLE_COLL_IND,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  PGT_IDENTIFIER,
+  CSP_R_NUMBER,
+  GTE_R_TEST_NUMBER
+from
+  CKT_PERSON_GEN_TST
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@gteTestNumber = GTE_TEST_NUMBER)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest4">
+      <value>
+select top(1)
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SPECIMEN_ID,
+  SAMPLE_USABLE_IND,
+  COLLECT_SAMPLE_IND,
+  SHOW_IND,
+  SAMPLE_COLL_IND,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  PGT_IDENTIFIER,
+  CSP_R_NUMBER,
+  GTE_R_TEST_NUMBER
+from
+  CKT_PERSON_GEN_TST
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@gteTestNumber = GTE_TEST_NUMBER)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest5">
+      <value>
+select top(1)
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  PGT_IDENTIFIER,
+  CSP_R_NUMBER,
+  GTE_R_TEST_NUMBER
+from
+  CKT_PERSON_GEN_TST
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (GTE_TEST_NUMBER = @gteTestNumber)
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest6">
+      <value>
+select top(1)
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  PGT_IDENTIFIER,
+  CSP_R_NUMBER,
+  GTE_R_TEST_NUMBER
+from
+  CKT_PERSON_GEN_TST
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (GTE_TEST_NUMBER = @gteTestNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,77 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnRhstLstRcptureInstrucHist"
+           program-name="SWERHSTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnRhstLstRcptureInstrucHist"
+           transaction="SR82"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="FN0000_LNK_RCAP_LST_RECOV_OBLIGS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnRcapMtnRecaptureInstructns"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="FN0000_LNK_RHST_LST_RC_INSTR_HST FN0000_LNK_ROHL_LST_OB_RC_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnRohlLstObligRecapHist"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CsePerson" to="CsePerson"/>
+   </on>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="Prev" to="Prev"/>
+   <map from="PromptCsePerson" to="PromptCsePerson"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.Select" to="Group.Select"/>
+   <map from="Group.Negotiated" to="Group.Negotiated"/>
+   <map from="Group.ObligorRule.Type1" to="Group.ObligorRule.Type1"/>
+   <map from="Group.ObligorRule.NonAdcArrearsMaxAmount"
+        to="Group.ObligorRule.NonAdcArrearsMaxAmount"/>
+   <map from="Group.ObligorRule.NonAdcArrearsAmount"
+        to="Group.ObligorRule.NonAdcArrearsAmount"/>
+   <map from="Group.ObligorRule.NonAdcArrearsPercentage"
+        to="Group.ObligorRule.NonAdcArrearsPercentage"/>
+   <map from="Group.ObligorRule.NonAdcCurrentMaxAmount"
+        to="Group.ObligorRule.NonAdcCurrentMaxAmount"/>
+   <map from="Group.ObligorRule.NonAdcCurrentAmount"
+        to="Group.ObligorRule.NonAdcCurrentAmount"/>
+   <map from="Group.ObligorRule.NonAdcCurrentPercentage"
+        to="Group.ObligorRule.NonAdcCurrentPercentage"/>
+   <map from="Group.ObligorRule.PassthruPercentage"
+        to="Group.ObligorRule.PassthruPercentage"/>
+   <map from="Group.ObligorRule.PassthruAmount"
+        to="Group.ObligorRule.PassthruAmount"/>
+   <map from="Group.ObligorRule.PassthruMaxAmount"
+        to="Group.ObligorRule.PassthruMaxAmount"/>
+   <map from="Group.ObligorRule.EffectiveDate"
+        to="Group.ObligorRule.EffectiveDate"/>
+   <map from="Group.ObligorRule.DiscontinueDate"
+        to="Group.ObligorRule.DiscontinueDate"/>
+   <map from="Group.ObligorRule.NegotiatedDate"
+        to="Group.ObligorRule.NegotiatedDate"/>
+   <map from="Group.ObligorRule.LastUpdatedBy"
+        to="Group.ObligorRule.LastUpdatedBy"/>
+   <map from="Group.ObligorRule.LastUpdatedTmst"
+        to="Group.ObligorRule.LastUpdatedTmst"/>
+   <map from="Group.ObligorRule.SystemGeneratedIdentifier"
+        to="Group.ObligorRule.SystemGeneratedIdentifier"/>
+</procedure>

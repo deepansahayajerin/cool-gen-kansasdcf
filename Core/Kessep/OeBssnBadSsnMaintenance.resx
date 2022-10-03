@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInvalidSsn">
+      <value>
+insert into CKT_INVALID_SSN
+(
+  CSP_NUMBER,
+  SSN,
+  FCR_SENT_DATE,
+  NEXT_CHECK_DATE,
+  FCR_PROCESS_IND,
+  CREATED_BY,
+  CREATED_TSTAMP
+)
+values
+(
+  @cspNumber,
+  @ssn,
+  @fcrSentDate,
+  @nextCheckDate,
+  @fcrProcessInd,
+  @createdBy,
+  @createdTstamp
+)
+</value>
+   </data>
+   <data name="DeleteInvalidSsn">
+      <value>
+delete from CKT_INVALID_SSN
+where
+  (CSP_NUMBER = @cspNumber) and
+  (SSN = @ssn)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH,
+  FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonInvalidSsn1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH,
+  T1.FAMILY_VIOL_IND,
+  T2.SSN,
+  T2.FCR_SENT_DATE,
+  T2.NEXT_CHECK_DATE,
+  T2.FCR_PROCESS_IND,
+  T2.CREATED_BY,
+  T2.CREATED_TSTAMP
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_INVALID_SSN T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.SSN = @ssn)
+</value>
+   </data>
+   <data name="ReadCsePersonInvalidSsn2">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH,
+  T1.FAMILY_VIOL_IND,
+  T2.SSN,
+  T2.FCR_SENT_DATE,
+  T2.NEXT_CHECK_DATE,
+  T2.FCR_PROCESS_IND,
+  T2.CREATED_BY,
+  T2.CREATED_TSTAMP
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_INVALID_SSN T2
+  on
+    (T2.SSN = @ssn) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T1.NUMB &gt;= @numb)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePersonInvalidSsn3">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH,
+  T1.FAMILY_VIOL_IND,
+  T2.SSN,
+  T2.FCR_SENT_DATE,
+  T2.NEXT_CHECK_DATE,
+  T2.FCR_PROCESS_IND,
+  T2.CREATED_BY,
+  T2.CREATED_TSTAMP
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_INVALID_SSN T2
+  on
+    (T2.SSN = @ssn) and
+    (T1.NUMB = T2.CSP_NUMBER)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePersonInvalidSsn4">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH,
+  T1.FAMILY_VIOL_IND,
+  T2.SSN,
+  T2.FCR_SENT_DATE,
+  T2.NEXT_CHECK_DATE,
+  T2.FCR_PROCESS_IND,
+  T2.CREATED_BY,
+  T2.CREATED_TSTAMP
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_INVALID_SSN T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CREATED_TSTAMP &gt;= @createdTstamp1) and
+    (T2.CREATED_TSTAMP &lt; @createdTstamp2) and
+    (
+      (
+        (T1.NUMB = @numb) and
+        (T1.NUMB = T2.CSP_NUMBER) and
+        (T2.SSN &gt;= @ssn)
+      ) or
+      (T1.NUMB &gt; @numb)
+    )
+order by
+  T1.NUMB,
+  T2.SSN
+</value>
+   </data>
+   <data name="ReadCsePersonInvalidSsn5">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH,
+  T1.FAMILY_VIOL_IND,
+  T2.SSN,
+  T2.FCR_SENT_DATE,
+  T2.NEXT_CHECK_DATE,
+  T2.FCR_PROCESS_IND,
+  T2.CREATED_BY,
+  T2.CREATED_TSTAMP
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_INVALID_SSN T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CREATED_TSTAMP &gt;= @createdTstamp1) and
+    (T2.CREATED_TSTAMP &lt; @createdTstamp2)
+order by
+  T1.NUMB,
+  T2.SSN
+</value>
+   </data>
+   <data name="ReadInvalidSsn1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  SSN,
+  FCR_SENT_DATE,
+  NEXT_CHECK_DATE,
+  FCR_PROCESS_IND,
+  CREATED_BY,
+  CREATED_TSTAMP
+from
+  CKT_INVALID_SSN
+where
+  (SSN = @ssn) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadInvalidSsn2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  SSN,
+  FCR_SENT_DATE,
+  NEXT_CHECK_DATE,
+  FCR_PROCESS_IND,
+  CREATED_BY,
+  CREATED_TSTAMP
+from
+  CKT_INVALID_SSN
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadInvalidSsn3">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  SSN,
+  FCR_SENT_DATE,
+  NEXT_CHECK_DATE,
+  FCR_PROCESS_IND,
+  CREATED_BY,
+  CREATED_TSTAMP
+from
+  CKT_INVALID_SSN
+where
+  SSN = @ssn
+</value>
+   </data>
+   <data name="ReadInvalidSsnCsePerson1">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.SSN,
+  T1.FCR_SENT_DATE,
+  T1.NEXT_CHECK_DATE,
+  T1.FCR_PROCESS_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T2.TYPE,
+  T2.DATE_OF_DEATH,
+  T2.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_INVALID_SSN T1
+  on
+    (T1.SSN = @ssn) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.NUMB = @numb)
+</value>
+   </data>
+   <data name="ReadInvalidSsnCsePerson2">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.SSN,
+  T1.FCR_SENT_DATE,
+  T1.NEXT_CHECK_DATE,
+  T1.FCR_PROCESS_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T2.TYPE,
+  T2.DATE_OF_DEATH,
+  T2.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_INVALID_SSN T1
+  on
+    (T2.NUMB = @numb) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.SSN &gt;= @ssn)
+order by
+  T1.SSN
+</value>
+   </data>
+   <data name="ReadInvalidSsnCsePerson3">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.SSN,
+  T1.FCR_SENT_DATE,
+  T1.NEXT_CHECK_DATE,
+  T1.FCR_PROCESS_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T2.TYPE,
+  T2.DATE_OF_DEATH,
+  T2.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_INVALID_SSN T1
+  on
+    (T2.NUMB = @numb) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.SSN
+</value>
+   </data>
+</root>

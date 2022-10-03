@@ -1,0 +1,63 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpSvprServiceProviderMaint"
+           program-name="SWESVPRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpSvprServiceProviderMaint"
+           transaction="SR3M"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenToCodeValueList" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenFromCodValList"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected1" to="HiddenFromList"/>
+   </on>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="PromptServiceProvider" to="PromptServiceProvider"/>
+   <map from="Group.Hidden" to="Group.Hidden"/>
+   <map from="Group.ServiceProviderAddress" to="Group.ServiceProviderAddress"/>
+   <map from="Group.AddressTypeDesc" to="Group.AddressTypeDesc"/>
+   <map from="Group.PromptAddressType" to="Group.PromptAddressType"/>
+   <map from="Group.PromptState" to="Group.PromptState"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="PromptRoleCode" to="PromptRoleCode"/>
+   <map from="Discontinue" to="Discontinue"/>
+   <map from="HiddenServiceProvider.FirstName"
+        to="HiddenServiceProvider.FirstName"/>
+   <map from="HiddenServiceProvider.MiddleInitial"
+        to="HiddenServiceProvider.MiddleInitial"/>
+   <map from="HiddenServiceProvider.SystemGeneratedId"
+        to="HiddenServiceProvider.SystemGeneratedId"/>
+   <map from="HiddenServiceProvider.LastName"
+        to="HiddenServiceProvider.LastName"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="HiddenServiceProvider.UserId" to="HiddenServiceProvider.UserId"/>
+   <map from="HiddenServiceProvider.RoleCode"
+        to="HiddenServiceProvider.RoleCode"/>
+   <map from="HiddenServiceProvider.PhoneAreaCode"
+        to="HiddenServiceProvider.PhoneAreaCode"/>
+   <map from="HiddenServiceProvider.PhoneNumber"
+        to="HiddenServiceProvider.PhoneNumber"/>
+   <map from="HiddenServiceProvider.PhoneExtension"
+        to="HiddenServiceProvider.PhoneExtension"/>
+   <map from="HiddenServiceProvider.EffectiveDate"
+        to="HiddenServiceProvider.EffectiveDate"/>
+   <map from="HiddenServiceProvider.DiscontinueDate"
+        to="HiddenServiceProvider.DiscontinueDate"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

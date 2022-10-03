@@ -1,0 +1,68 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnEhstLstEftStatusHist"
+           program-name="SWEEHSTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnEhstLstEftStatusHist"
+           transaction="SR72"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_MTN_PREF_PMNT_METHOD"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnPpmtMtnPreferredPmtMethod"
+       send-command="DISPLAY">
+      <map from="Payee" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_EFT_DETAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnEdtlLstEftDetail"
+       send-command="DISPLAY">
+      <map from="ElectronicFundTransmission.ReceivingDfiIdentification"
+           to="ElectronicFundTransmission.ReceivingDfiIdentification"/>
+      <map from="ElectronicFundTransmission.ReceivingDfiAccountNumber"
+           to="ElectronicFundTransmission.ReceivingDfiAccountNumber"/>
+      <map from="ElectronicFundTransmission.TransmissionIdentifier"
+           to="ElectronicFundTransmission.TransmissionIdentifier"/>
+      <map from="ElectronicFundTransmission.CheckDigit"
+           to="ElectronicFundTransmission.CheckDigit"/>
+      <map from="ElectronicFundTransmission.EffectiveEntryDate"
+           to="ElectronicFundTransmission.EffectiveEntryDate"/>
+      <return-map from="ElectronicFundTransmission" to="ElectronicFundTransmission"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_EFT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnEftlLstEfts"
+       send-command="DISPLAY">
+      <map from="Payee" to="CsePersonsWorkSet"/>
+      <return-map from="PassElectronicFundTransmission.TransmissionIdentifier"
+                  to="ElectronicFundTransmission.TransmissionIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_LST_PAYEE_ACCT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="Payee" to="Received"/>
+      <map from="PayeePassThruFlow" to="CsePerson"/>
+   </on>
+   <map from="PayeePassThruFlow" to="PayeePassThruFlow"/>
+   <map from="Payee" to="Payee"/>
+   <map from="DesignatedPayee" to="DesignatedPayee"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="EftPrompt" to="EftPrompt"/>
+   <map from="ElectronicFundTransmission" to="ElectronicFundTransmission"/>
+   <map from="Export1.DetailPaymentStatus" to="Import1.DetailPaymentStatus"/>
+   <map from="Export1.DetailPaymentStatusHistory"
+        to="Import1.DetailPaymentStatusHistory"/>
+   <map from="PaymentRequest.Amount" to="PaymentRequest.Amount"/>
+</procedure>

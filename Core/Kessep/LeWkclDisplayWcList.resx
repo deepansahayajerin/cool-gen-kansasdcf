@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadWorkersCompClaim">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  DOCKET_NUMBER,
+  INSURER_NAME,
+  LOSS_DATE,
+  ADMIN_CLAIM_NO,
+  CREATED_TIMESTAMP
+from
+  CKT_WRK_COMP_CLAIM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (
+    (LOSS_DATE &lt; @lossDate) or
+    (
+      (LOSS_DATE = @lossDate) and
+      (CREATED_TIMESTAMP &lt;= @createdTimestamp)
+    )
+  )
+order by
+  LOSS_DATE desc,
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

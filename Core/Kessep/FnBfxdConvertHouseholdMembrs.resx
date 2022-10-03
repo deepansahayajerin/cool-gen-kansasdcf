@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateImHouseholdMbrMnthlySum">
+      <value>
+insert into CKT_IM_HH_MBR_MSUM
+(
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+)
+values
+(
+  @year0,
+  @month0,
+  @relationship,
+  @grantAmt,
+  @grantMedAmt,
+  @uraAmount,
+  @uraMedicalAmount,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @imhAeCaseNo,
+  @cspNumber
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonImHouseholdMember">
+      <value>
+select
+  CSP_NUMBER,
+  IMH_AE_CASE_NO,
+  START_DATE,
+  END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  RELATIONSHIP,
+  CSE_CASE_NUMBER,
+  AE_PARTICIPAT_CODE,
+  END_COLLECTION_DT
+from
+  CKT_IM_HSHLD_MBR with(readuncommitted)
+where
+  (@imhAeCaseNo = IMH_AE_CASE_NO) and
+  (AE_PARTICIPAT_CODE in ('IN', 'EP', 'NP')) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate)
+order by
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadImHousehold">
+      <value>
+select top(1)
+  AE_CASE_NO
+from
+  CKT_IM_HOUSEHOLD with(readuncommitted)
+where
+  AE_CASE_NO = @aeCaseNo
+</value>
+   </data>
+   <data name="ReadImHouseholdMonthlyDebitSummaImHousehold">
+      <value>
+select
+  SEQUENCE_NUMBER,
+  MONTH0,
+  YEAR0,
+  GRANT_TOTAL,
+  PASSTHRU_TOTAL,
+  MED_GRANT_TOTAL,
+  IMH_AE_CASE_NO
+from
+  CKT_IMHLD_MDBT_SUM with(readuncommitted)
+where
+  IMH_AE_CASE_NO &gt;= @imhAeCaseNo
+order by
+  IMH_AE_CASE_NO,
+  YEAR0,
+  MONTH0,
+  SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadProgramCheckpointRestart1">
+      <value>
+select top(1)
+  PROGRAM_NAME,
+  UPDATE_FREQUENCY_C,
+  READ_FREQUENCY_COU,
+  CHECKPOINT_COUNT,
+  LST_CHKPNT_TMST,
+  RESTART_IND,
+  RESTART_INFO
+from
+  CKT_PGM_CHKPNT_RST
+where
+  PROGRAM_NAME = 'SWEFBFXD'
+</value>
+   </data>
+   <data name="ReadProgramCheckpointRestart2">
+      <value>
+select top(1)
+  PROGRAM_NAME,
+  UPDATE_FREQUENCY_C,
+  READ_FREQUENCY_COU,
+  CHECKPOINT_COUNT,
+  LST_CHKPNT_TMST,
+  RESTART_IND,
+  RESTART_INFO
+from
+  CKT_PGM_CHKPNT_RST
+where
+  PROGRAM_NAME = 'SWEFBFXD'
+</value>
+   </data>
+   <data name="UpdateProgramCheckpointRestart1">
+      <value>
+update CKT_PGM_CHKPNT_RST
+set
+  LST_CHKPNT_TMST = @lstChkpntTmst,
+  RESTART_IND = @restartInd,
+  RESTART_INFO = @restartInfo
+where
+  PROGRAM_NAME = @programName
+</value>
+   </data>
+   <data name="UpdateProgramCheckpointRestart2">
+      <value>
+update CKT_PGM_CHKPNT_RST
+set
+  LST_CHKPNT_TMST = @lstChkpntTmst,
+  RESTART_IND = @restartInd,
+  RESTART_INFO = @restartInfo
+where
+  PROGRAM_NAME = @programName
+</value>
+   </data>
+</root>

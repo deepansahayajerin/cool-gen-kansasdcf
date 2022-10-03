@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseRoleCsePerson">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER &lt;&gt; @casNumber) and
+  (TYPE = 'CH') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'CH') and
+  (CSP_NUMBER = @cspNumber) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (TYPE = 'AR') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate)
+order by
+  START_DATE
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AR') and
+  (START_DATE &lt;= @startDate1) and
+  (END_DATE &gt;= @endDate1) and
+  (START_DATE &lt;= @startDate2) and
+  (END_DATE &gt;= @endDate2) and
+  (CSP_NUMBER &lt;&gt; @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T1.PAT_ESTAB_IND,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T2.CAS_NUMBER = @casNumber) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'CH')
+order by
+  T2.START_DATE
+</value>
+   </data>
+</root>

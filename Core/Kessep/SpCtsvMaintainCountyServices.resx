@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadOfficeCaseloadAssignment">
+      <value>
+select distinct top(1)
+  T1.OFCE_CSLD_ASSGN_ID,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_GENERATED_ID,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.[FUNCTION],
+  T1.PRG_GENERATED_ID
+from
+  CKT_OFCE_CSLD_ASGT T1,
+  CKT_PROGRAM T4
+where
+  (T1.OFF_GENERATED_ID = @offGeneratedId) and
+  (T1.COG_TYPE_CODE is not null) and
+  (T1.COG_CODE = @cogCode) and
+  (
+    (
+      (T4.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+      (T4.PROGRAM_ID = @programId)
+    ) or
+    (T1.[FUNCTION] = @function)
+  )
+</value>
+   </data>
+</root>

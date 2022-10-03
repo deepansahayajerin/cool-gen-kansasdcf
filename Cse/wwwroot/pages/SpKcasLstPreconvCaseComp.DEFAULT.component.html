@@ -1,0 +1,495 @@
+﻿<!--Name: SP_KCAS_LST_PRECONV_CASE_COMP, ID: 371751370, model: 746-->
+<div coolContent coolName="SP_KCAS_LST_PRECONV_CASE_COMP" coolType="SCREEN"
+  (coolInit)="scrollSize = 100; pageSize = 12">
+   <div coolType="field" coolColor="green" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 23.75%; top: 0; width: 52.5%; height: 4%;" coolCol="20"
+     coolRow="1" coolLength="42">CSE - PRECONVERTED CASE COMPOSITION - KCAS</div>
+   
+   <div coolType="field" coolColor="white"
+     style="left: 88.75%; top: 0; width: 10%; height: 4%;" coolCol="72"
+     coolRow="1" coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="white"
+     style="left: 88.75%; top: 4%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':0}}</div>
+   
+   <div coolType="prompt"
+     style="left: 23.75%; top: 12%; width: 10%; height: 4%;" coolCol="20"
+     coolRow="4" coolLength="8">Person #</div>
+   <input type="text" coolType="field" name="field_4_30"
+     [(ngModel)]="in.searchCsePersonsWorkSet.number"
+     [coolVideo]="out.searchCsePersonsWorkSet.screenField?.number" coolAutotab
+     coolFocus coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="10"
+     style="left: 36.25%; top: 12%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="4" coolLength="10">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 16%; width: 32.5%; height: 4%;" coolCol="2"
+     coolRow="5" coolLength="26">Pre Conversion Case Number</div>
+   <input type="text" coolType="field" name="field_5_30"
+     [(ngModel)]="in.searchPreconvCaseHist.kaecsesCaseNumber"
+     [coolVideo]="out.searchPreconvCaseHist.screenField?.kaecsesCaseNumber"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="12"
+     style="left: 36.25%; top: 16%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="5" coolLength="12">
+   
+   <div coolType="prompt"
+     style="left: 57.5%; top: 24%; width: 16.25%; height: 4%;" coolCol="47"
+     coolRow="7" coolLength="13">Pre Converted</div>
+   
+   <div coolType="literal"
+     style="left: 80%; top: 24%; width: 6.25%; height: 4%;" coolCol="65"
+     coolRow="7" coolLength="5">Start</div>
+   
+   <div coolType="literal"
+     style="left: 92.5%; top: 24%; width: 3.75%; height: 4%;" coolCol="75"
+     coolRow="7" coolLength="3">End</div>
+   
+   <div coolType="prompt" style="left: 0; top: 28%; width: 3.75%; height: 4%;"
+     coolCol="1" coolRow="8" coolLength="3">SEL</div>
+   
+   <div coolType="prompt" style="left: 5%; top: 28%; width: 10%; height: 4%;"
+     coolCol="5" coolRow="8" coolLength="8">Person #</div>
+   
+   <div coolType="prompt" style="left: 18.75%; top: 28%; width: 5%; height: 4%;"
+     coolCol="16" coolRow="8" coolLength="4">Name</div>
+   
+   <div coolType="literal"
+     style="left: 63.75%; top: 28%; width: 5%; height: 4%;" coolCol="52"
+     coolRow="8" coolLength="4">Case</div>
+   
+   <div coolType="prompt"
+     style="left: 73.75%; top: 28%; width: 3.75%; height: 4%;" coolCol="60"
+     coolRow="8" coolLength="3">Rel</div>
+   
+   <div coolType="prompt" style="left: 81.25%; top: 28%; width: 5%; height: 4%;"
+     coolCol="66" coolRow="8" coolLength="4">Date</div>
+   
+   <div coolType="prompt" style="left: 92.5%; top: 28%; width: 5%; height: 4%;"
+     coolCol="75" coolRow="8" coolLength="4">Date</div>
+   <input type="text" coolType="field" name="field_9_2"
+     [(ngModel)]="ref(in.import1, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab #field_9_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 32%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 32%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="9" coolLength="10" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 32%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="9" coolLength="32" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 32%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="9" coolLength="12" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 32%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="9" coolLength="2" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 32%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 32%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= 100">{{in.import1?.[pageOffset]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_10_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab #field_10_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 36%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 1 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 36%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="10" coolLength="10" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 36%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="10" coolLength="32" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 36%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="10" coolLength="12" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 36%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="10" coolLength="2" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 36%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 36%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 1 >= 100">{{in.import1?.[pageOffset + 1]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_11_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab #field_11_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 40%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 2 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 40%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="11" coolLength="10" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 40%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="11" coolLength="32" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 40%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="11" coolLength="12" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 40%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="11" coolLength="2" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 40%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 40%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= 100">{{in.import1?.[pageOffset + 2]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_12_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab #field_12_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 44%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 3 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 44%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 44%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="12" coolLength="32" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 44%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="12" coolLength="12" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 44%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="12" coolLength="2" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 44%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 44%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 3 >= 100">{{in.import1?.[pageOffset + 3]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_13_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab #field_13_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 48%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 4 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 48%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 48%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="13" coolLength="32" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 48%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="13" coolLength="12" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 48%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="13" coolLength="2" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 48%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 48%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 4 >= 100">{{in.import1?.[pageOffset + 4]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_14_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab #field_14_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 52%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 5 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 52%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 52%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="14" coolLength="32" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 52%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="14" coolLength="12" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 52%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="14" coolLength="2" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 52%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 52%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 5 >= 100">{{in.import1?.[pageOffset + 5]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_15_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab #field_15_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 56%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 6 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 56%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 56%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="15" coolLength="32" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 56%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="15" coolLength="12" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 56%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="15" coolLength="2" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 56%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 56%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 6 >= 100">{{in.import1?.[pageOffset + 6]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_16_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab #field_16_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 60%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 7 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 60%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 60%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="16" coolLength="32" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 60%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="16" coolLength="12" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 60%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="16" coolLength="2" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 60%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 60%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 7 >= 100">{{in.import1?.[pageOffset + 7]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_17_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab #field_17_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 64%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 8 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 64%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 64%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="17" coolLength="32" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 64%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="17" coolLength="12" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 64%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="17" coolLength="2" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 64%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 64%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 8 >= 100">{{in.import1?.[pageOffset + 8]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_18_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab #field_18_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 68%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 9 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 68%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 68%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="18" coolLength="32" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 68%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="18" coolLength="12" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 68%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="18" coolLength="2" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 68%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 68%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 9 >= 100">{{in.import1?.[pageOffset + 9]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_19_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab #field_19_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 72%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 10 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 72%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 72%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="19" coolLength="32" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 72%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="19" coolLength="12" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 72%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="19" coolLength="2" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 72%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 72%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 10 >= 100">{{in.import1?.[pageOffset + 10]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   <input type="text" coolType="field" name="field_20_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 11, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 11]?.common.screenField?.selectChar"
+     coolAutotab #field_20_2 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 1.25%; top: 76%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 11 >= 100">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 3.75%; top: 76%; width: 12.5%; height: 4%;" coolCol="4"
+     coolRow="20" coolLength="10" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.preconvCaseHist.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 76%; width: 40%; height: 4%;" coolCol="15"
+     coolRow="20" coolLength="32" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 58.75%; top: 76%; width: 15%; height: 4%;" coolCol="48"
+     coolRow="20" coolLength="12" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.preconvCaseHist.kaecsesCaseNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 75%; top: 76%; width: 2.5%; height: 4%;" coolCol="61"
+     coolRow="20" coolLength="2" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.preconvCaseHist.kaecsesRelationship}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 78.75%; top: 76%; width: 10%; height: 4%;" coolCol="64"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.preconvCaseHist.kaecsesStartDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 76%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 11 >= 100">{{in.import1?.[pageOffset + 11]?.preconvCaseHist.kaecsesEndDate|coolDate:'yyyyMMdd':0}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="8"
+     style="left: 86.25%; top: 80%; width: 10%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 82.5%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="66">PFKEY:  1 Help  2 Disp  3 Exit  7 Prev  8 Next 11 Clear 12 SignOff</div>
+   
+   <div coolType="literal" style="left: 10%; top: 92%; width: 20%; height: 4%;"
+     coolCol="9" coolRow="24" coolLength="16">15 NAME  16 NARR</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="NAME" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=NAME</a>
+   <a coolType="action" coolCommand="NARR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=NARR</a>
+   </div>

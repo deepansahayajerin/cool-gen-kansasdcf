@@ -1,0 +1,133 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeServServiceInformation"
+           program-name="SWESERVP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeServServiceInformation"
+           transaction="SR9M"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLLGLACT"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="LegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="LegalAction.Classification" to="SearchLegalAction.Classification"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.ForeignOrderNumber"
+           to="SearchLegalAction.ForeignOrderNumber"/>
+      <map from="LegalAction.StandardNumber" to="SearchLegalAction.StandardNumber"/>
+      <map from="Fips" to="SearchFips"/>
+      <map from="Tribunal" to="SearchTribunal"/>
+      <return-map from="DlgflwSelected" to="LegalAction"/>
+      <return-map from="HiddenSecurity" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_LGL_ACT_BY_CP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLLGLACT"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <return-map from="Selected.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="Selected.Classification" to="LegalAction.Classification"/>
+      <return-map from="Selected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <map from="Tribunal" to="SearchTribunal"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="FipsTribAddress"/>
+      <return-map from="DlgflwSelectedFips" to="DlgflwSelectedFips"/>
+      <return-map from="DlgflwSelectedTribunal" to="DlgflwSelectedTribunal"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="RequiredCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedCodeValue"/>
+   </on>
+   <map from="PromptClass" to="PromptClass"/>
+   <map from="PromptDocType" to="PromptDocType"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HiddenPrevLegalAction" to="HiddenPrevLegalAction"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="PromptMethodOfService" to="PromptMethodOfService"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="PromptTribunal" to="PromptTribunal"/>
+   <map from="HiddenTribunal" to="HiddenTribunal"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity.HiddenSecurityCommand"
+        to="HiddenSecurity.HiddenSecurityCommand"/>
+   <map from="HiddenSecurity.HiddenSecurityProfileAuthorization"
+        to="HiddenSecurity.HiddenSecurityProfileAuthorization"/>
+   <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   <map from="ActionTaken" to="ActionTaken"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="ServiceProcess.MethodOfService"
+        to="ServiceProcess.MethodOfService"/>
+   <map from="ServiceProcess.ServiceDocumentType"
+        to="ServiceProcess.ServiceDocumentType"/>
+   <map from="ServiceProcess.ServiceDate" to="ServiceProcess.ServiceDate"/>
+   <map from="ServiceProcess.ServiceRequestDate"
+        to="ServiceProcess.ServiceRequestDate"/>
+   <map from="ServiceProcess.ReturnDate" to="ServiceProcess.ReturnDate"/>
+   <map from="ServiceProcess.ServerName" to="ServiceProcess.ServerName"/>
+   <map from="ServiceProcess.RequestedServee"
+        to="ServiceProcess.RequestedServee"/>
+   <map from="ServiceProcess.Servee" to="ServiceProcess.Servee"/>
+   <map from="ServiceProcess.ServeeRelationship"
+        to="ServiceProcess.ServeeRelationship"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="ServiceProcess.ServiceLocation"
+        to="ServiceProcess.ServiceLocation"/>
+   <map from="ServiceProcess.ServiceResult" to="ServiceProcess.ServiceResult"/>
+   <map from="HiddenPrevServiceProcess.MethodOfService"
+        to="HiddenPrevServiceProcess.MethodOfService"/>
+   <map from="HiddenPrevServiceProcess.ServiceDocumentType"
+        to="HiddenPrevServiceProcess.ServiceDocumentType"/>
+   <map from="HiddenPrevServiceProcess.ServiceLocation"
+        to="HiddenPrevServiceProcess.ServiceLocation"/>
+   <map from="HiddenPrevServiceProcess.ServiceDate"
+        to="HiddenPrevServiceProcess.ServiceDate"/>
+   <map from="HiddenPrevServiceProcess.ServiceRequestDate"
+        to="HiddenPrevServiceProcess.ServiceRequestDate"/>
+   <map from="HiddenPrevServiceProcess.ReturnDate"
+        to="HiddenPrevServiceProcess.ReturnDate"/>
+   <map from="HiddenPrevServiceProcess.ServiceResult"
+        to="HiddenPrevServiceProcess.ServiceResult"/>
+   <map from="HiddenPrevServiceProcess.ServerName"
+        to="HiddenPrevServiceProcess.ServerName"/>
+   <map from="HiddenPrevServiceProcess.RequestedServee"
+        to="HiddenPrevServiceProcess.RequestedServee"/>
+   <map from="HiddenPrevServiceProcess.Servee"
+        to="HiddenPrevServiceProcess.Servee"/>
+   <map from="HiddenPrevServiceProcess.ServeeRelationship"
+        to="HiddenPrevServiceProcess.ServeeRelationship"/>
+   <map from="ServiceProcess.Identifier" to="ServiceProcess.Identifier"/>
+   <map from="HiddenPrevServiceProcess.Identifier"
+        to="HiddenPrevServiceProcess.Identifier"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Fips.StateAbbreviation" to="Fips.StateAbbreviation"/>
+   <map from="Fips.CountyAbbreviation" to="Fips.CountyAbbreviation"/>
+   <map from="Fips.CountyDescription" to="Fips.CountyDescription"/>
+   <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+   <map from="ServiceProcess.CreatedTstamp"
+        to="HiddenPrevServiceProcess.CreatedTstamp"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

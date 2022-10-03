@@ -1,0 +1,95 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeUracUraByCourtOrder"
+           program-name="SWEURACP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeUracUraByCourtOrder"
+           transaction="SR5D"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LACS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACS"
+       to="LeLacsLstLglActnByCseCase"
+       send-command="DISPLAY">
+      <return-map from="DlgflwSelected" to="FromLacs"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_PART_CASE_PARTICIPATN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPART"
+       to="SiPartCaseParticipation"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_TO_UCOL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUcolListUraCollections"
+       send-command="DISPLAY">
+      <map from="DialogFlowLegalAction" to="SearchLegalAction"/>
+      <map from="DialogFlowDateWorkAttributes" to="PassFromDateWorkAttributes"/>
+      <map from="SearchTo" to="PassToDateWorkAttributes"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UHMM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUhmmUraHouseholdMbrMaint"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_TO_IMHH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeImhhListHhInfo"
+       send-command="DISPLAY">
+      <map from="DialogFlowLegalAction" to="SearchCriteria.SearchLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CURA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeCuraMembersUra"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_TO_URAH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUrahHouseholdUra"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_TO_URAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUralListUraAdj"
+       send-command="DISPLAY"/>
+   <map from="Search" to="Search"/>
+   <map from="Detail.DtlCommon" to="Detail.DtlCommon"/>
+   <map from="Detail.DtlDateWorkAttributes" to="Detail.DtlDateWorkAttributes"/>
+   <map from="Detail.DtlGrpLabel1" to="Detail.DtlGrpLabel1"/>
+   <map from="Detail.DtlGrpLabel2" to="Detail.DtlGrpLabel2"/>
+   <map from="Detail.DtlImHouseholdMbrMnthlySum"
+        to="Detail.DtlImHouseholdMbrMnthlySum"/>
+   <map from="Detail.DtlGrpAfFcColl" to="Detail.DtlGrpAfFcColl"/>
+   <map from="Detail.DtlGrpMedicalColl" to="Detail.DtlGrpMedicalColl"/>
+   <map from="Detail.DtlGrpSsColl" to="Detail.DtlGrpSsColl"/>
+   <map from="Detail.DtlGrpAfFc" to="Detail.DtlGrpAfFc"/>
+   <map from="Detail.DtlGrpMedical" to="Detail.DtlGrpMedical"/>
+   <map from="TotGrp" to="TotGrp"/>
+   <map from="TotGrpAfFcColl" to="TotGrpAfFcColl"/>
+   <map from="TotGrpMedicalColl" to="TotGrpMedicalColl"/>
+   <map from="TotGrpSsColl" to="TotGrpSsColl"/>
+   <map from="First" to="First"/>
+   <map from="Second" to="Second"/>
+   <map from="TotGrpAfFc" to="TotGrpAfFc"/>
+   <map from="TotGrpMedical" to="TotGrpMedical"/>
+   <map from="Standard" to="Standard"/>
+   <map from="TotGrpAfFcOwed" to="TotGrpAfFcOwed"/>
+   <map from="TotGrpMedicalOwed" to="TotGrpMedicalOwed"/>
+   <map from="CourtOrder" to="CourtOrder"/>
+   <map from="SearchFrom.TextMonthYear" to="SearchFrom.TextMonthYear"/>
+   <map from="SearchTo.TextMonthYear" to="SearchTo.TextMonthYear"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

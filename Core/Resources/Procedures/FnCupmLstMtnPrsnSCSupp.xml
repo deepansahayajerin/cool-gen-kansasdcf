@@ -1,0 +1,33 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCupmLstMtnPrsnSCSupp"
+           program-name="SWECUPMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCupmLstMtnPrsnSCSupp"
+           transaction="SR20"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="FromListCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <map from="NextTranInfo" to="NextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="PersonPrompt" to="PersonPrompt"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="History" to="History"/>
+   <map from="HiddenPrevHistory" to="HiddenPrevHistory"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.DetStmtCouponSuppStatusHist"
+        to="Import1.DetStmtCouponSuppStatusHist"/>
+   <map from="Export1.DetPrev" to="Import1.DetPrev"/>
+   <map from="Export1.DetTextWorkArea" to="Import1.DetTextWorkArea"/>
+</procedure>

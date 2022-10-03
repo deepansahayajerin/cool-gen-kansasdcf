@@ -1,0 +1,168 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeMbdtFcrCaseMemberDetail"
+           program-name="SWEMBDTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeMbdtFcrCaseMemberDetail"
+           transaction="SRSV"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_ALT_SSN_AND_ALIAS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiAltsAlternateSsnAndAlias"
+       send-command="DISPLAY">
+      <map from="PassCaseNumber" to="Next"/>
+      <map from="PassCaseNumber" to="Case1"/>
+      <map from="PassAp.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="PassAp.Sex" to="ApCsePersonsWorkSet.Sex"/>
+      <map from="PassAp.Dob" to="ApCsePersonsWorkSet.Dob"/>
+      <map from="PassAp.Ssn" to="ApCsePersonsWorkSet.Ssn"/>
+      <map from="PassAp.FirstName" to="ApCsePersonsWorkSet.FirstName"/>
+      <map from="PassAp.MiddleInitial" to="ApCsePersonsWorkSet.MiddleInitial"/>
+      <map from="PassAp.LastName" to="ApCsePersonsWorkSet.LastName"/>
+      <map from="PassAp.ReplicationIndicator"
+           to="ApCsePersonsWorkSet.ReplicationIndicator"/>
+      <map from="PassAr.Number" to="ArCsePersonsWorkSet.Number"/>
+      <map from="PassAr.LastName" to="ArCsePersonsWorkSet.LastName"/>
+      <map from="PassAr.FirstName" to="ArCsePersonsWorkSet.FirstName"/>
+      <map from="PassAr.MiddleInitial" to="ArCsePersonsWorkSet.MiddleInitial"/>
+      <map from="PassAr.Ssn" to="ArCsePersonsWorkSet.Ssn"/>
+      <map from="PassAr.Dob" to="ArCsePersonsWorkSet.Dob"/>
+      <map from="PassAr.Sex" to="ArCsePersonsWorkSet.Sex"/>
+      <map from="PassAr.ReplicationIndicator"
+           to="ArCsePersonsWorkSet.ReplicationIndicator"/>
+      <map from="PassCh.LastName" to="ChCsePersonsWorkSet.LastName"/>
+      <map from="PassCh.FirstName" to="ChCsePersonsWorkSet.FirstName"/>
+      <map from="PassCh.MiddleInitial" to="ChCsePersonsWorkSet.MiddleInitial"/>
+      <map from="PassCh.Ssn" to="ChCsePersonsWorkSet.Ssn"/>
+      <map from="PassCh.Sex" to="ChCsePersonsWorkSet.Sex"/>
+      <map from="PassCh.Dob" to="ChCsePersonsWorkSet.Dob"/>
+      <map from="PassCh.Number" to="ChCsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_AP_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiApdsApDetails"
+       send-command="DISPLAY">
+      <map from="PassCaseNumber" to="Next"/>
+      <map from="PassCaseNumber" to="Case1"/>
+      <map from="PassAp" to="ApCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ALOM_MENU"
+       display-first="true"
+       action="transfer"
+       to="OeAlomLocateInterfacesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_AR_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiArdsArDetails"
+       send-command="DISPLAY">
+      <map from="PassCaseNumber.Number" to="Case1.Number"/>
+      <map from="PassCaseNumber" to="Next"/>
+      <map from="PassAp.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="PassAp.ReplicationIndicator"
+           to="ApCsePersonsWorkSet.ReplicationIndicator"/>
+      <map from="PassAr" to="ArCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CHDS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiChdsChildDetails"
+       send-command="DISPLAY">
+      <map from="PassCaseNumber" to="Next"/>
+      <map from="PassCaseNumber" to="Case1"/>
+      <map from="PassAp.Number" to="Ap.Number"/>
+      <map from="PassAp.FirstName" to="Ap.FirstName"/>
+      <map from="PassAp.MiddleInitial" to="Ap.MiddleInitial"/>
+      <map from="PassAp.LastName" to="Ap.LastName"/>
+      <map from="PassAp.ReplicationIndicator" to="Ap.ReplicationIndicator"/>
+      <map from="PassAr.Number" to="Ar.Number"/>
+      <map from="PassAr.ReplicationIndicator" to="Ar.ReplicationIndicator"/>
+      <map from="PassCh.LastName" to="ChCsePersonsWorkSet.LastName"/>
+      <map from="PassCh.FirstName" to="ChCsePersonsWorkSet.FirstName"/>
+      <map from="PassCh.MiddleInitial" to="ChCsePersonsWorkSet.MiddleInitial"/>
+      <map from="PassCh.Ssn" to="ChCsePersonsWorkSet.Ssn"/>
+      <map from="PassCh.Sex" to="ChCsePersonsWorkSet.Sex"/>
+      <map from="PassCh.Dob" to="ChCsePersonsWorkSet.Dob"/>
+      <map from="PassCh.Number" to="ChCsePersonsWorkSet.Number"/>
+   </on>
+   <map from="FcrCaseMaster" to="FcrCaseMaster"/>
+   <map from="FcrMember" to="FcrMember"/>
+   <map from="FcrSsaLastResi" to="FcrSsaLastResi"/>
+   <map from="FcrSsaLastLsum" to="FcrSsaLastLsum"/>
+   <map from="HiddnStartPrevCaseId" to="HiddnStartPrevCaseId"/>
+   <map from="HiddnPrevMemberId" to="HiddnPrevMemberId"/>
+   <map from="CurrentMemberCount" to="CurrentMemberCount"/>
+   <map from="NextTran" to="NextTran"/>
+   <map from="CseMemberInfo.DateOfBirth" to="CseMemberInfo.DateOfBirth"/>
+   <map from="CseMemberInfo.Ssn" to="CseMemberInfo.Ssn"/>
+   <map from="CseMemberInfo.LastName" to="CseMemberInfo.LastName"/>
+   <map from="CseMemberInfo.FirstName" to="CseMemberInfo.FirstName"/>
+   <map from="CseMemberInfo.PreviousSsn" to="CseMemberInfo.PreviousSsn"/>
+   <map from="CseMemberInfo.AdditionalSsn1" to="CseMemberInfo.AdditionalSsn1"/>
+   <map from="CseMemberInfo.AdditionalLastName1"
+        to="CseMemberInfo.AdditionalLastName1"/>
+   <map from="CseMemberInfo.AdditionalFirstName1"
+        to="CseMemberInfo.AdditionalFirstName1"/>
+   <map from="CseMemberInfo.AdditionalSsn2" to="CseMemberInfo.AdditionalSsn2"/>
+   <map from="CseMemberInfo.AdditionalLastName2"
+        to="CseMemberInfo.AdditionalLastName2"/>
+   <map from="CseMemberInfo.AdditionalFirstName2"
+        to="CseMemberInfo.AdditionalFirstName2"/>
+   <map from="FcrMemberInfo.DateOfBirth" to="FcrMemberInfo.DateOfBirth"/>
+   <map from="FcrMemberInfo.SsaDateOfBirthIndicator"
+        to="CseMemberInfo.SsaDateOfBirthIndicator"/>
+   <map from="FcrMemberInfo.Ssn" to="FcrMemberInfo.Ssn"/>
+   <map from="FcrMemberInfo.SsnValidityCode" to="FcrMemberInfo.SsnValidityCode"/>
+   <map from="FcrMemberInfo.ProvidedOrCorrectedSsn"
+        to="FcrMemberInfo.ProvidedOrCorrectedSsn"/>
+   <map from="FcrMemberInfo.PreviousSsn" to="FcrMemberInfo.PreviousSsn"/>
+   <map from="FcrMemberInfo.AdditionalSsn1" to="FcrMemberInfo.AdditionalSsn1"/>
+   <map from="FcrMemberInfo.AdditionalSsn1ValidityCode"
+        to="FcrMemberInfo.AdditionalSsn1ValidityCode"/>
+   <map from="FcrMemberInfo.AdditionalSsn2" to="FcrMemberInfo.AdditionalSsn2"/>
+   <map from="FcrMemberInfo.AdditionalSsn2ValidityCode"
+        to="FcrMemberInfo.AdditionalSsn2ValidityCode"/>
+   <map from="FcrMemberInfo.AdditionalLastName1"
+        to="FcrMemberInfo.AdditionalLastName1"/>
+   <map from="FcrMemberInfo.AdditionalFirstName1"
+        to="FcrMemberInfo.AdditionalFirstName1"/>
+   <map from="FcrMemberInfo.AdditionalLastName2"
+        to="FcrMemberInfo.AdditionalLastName2"/>
+   <map from="FcrMemberInfo.AdditionalFirstName2"
+        to="FcrMemberInfo.AdditionalFirstName2"/>
+   <map from="FcrMemberInfo.DateOfDeath" to="FcrMemberInfo.DateOfDeath"/>
+   <map from="FcrMemberList.FcrCaseMembers.MemberId"
+        to="FcrMemberList.FcrCaseMembers.MemberId"/>
+   <map from="FcrMemberList.FcrCaseMembers.ParticipantType"
+        to="FcrMemberList.FcrCaseMembers.ParticipantType"/>
+   <map from="FcrMemberList.FcrCaseMembers.FirstName"
+        to="FcrMemberList.FcrCaseMembers.FirstName"/>
+   <map from="FcrMemberList.FcrCaseMembers.MiddleName"
+        to="FcrMemberList.FcrCaseMembers.MiddleName"/>
+   <map from="FcrMemberList.FcrCaseMembers.LastName"
+        to="FcrMemberList.FcrCaseMembers.LastName"/>
+   <map from="FcrMemberList.FcrCaseMembers.ActionTypeCode"
+        to="FcrMemberList.FcrCaseMembers.ActionTypeCode"/>
+   <map from="CseMemberInfo.MiddleName" to="CseMemberInfo.MiddleName"/>
+   <map from="FcrMemberInfo.FcrPrimaryMiddleName"
+        to="FcrMemberInfo.FcrPrimaryMiddleName"/>
+   <map from="FcrMemberInfo.FcrPrimaryFirstName"
+        to="FcrMemberInfo.FcrPrimaryFirstName"/>
+   <map from="FcrMemberInfo.FcrPrimaryLastName"
+        to="FcrMemberInfo.FcrPrimaryLastName"/>
+   <map from="CseMemberInfo.AdditionalMiddleName1"
+        to="CseMemberInfo.AdditionalMiddleName1"/>
+   <map from="FcrMemberInfo.AdditionalMiddleName1"
+        to="FcrMemberInfo.AdditionalMiddleName1"/>
+   <map from="CseMemberInfo.AdditionalMiddleName2"
+        to="CseMemberInfo.AdditionalMiddleName2"/>
+   <map from="FcrMemberInfo.AdditionalMiddleName2"
+        to="FcrMemberInfo.AdditionalMiddleName2"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+</procedure>

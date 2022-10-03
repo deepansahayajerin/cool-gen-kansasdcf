@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  TRIBUNAL_NM,
+  JUDICIAL_DISTRICT,
+  IDENTIFIER
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadTribunalFeeInformation1">
+      <value>
+select top(1)
+  TRB_ID,
+  TRIBUNAL_FEE_ID,
+  EFFECTIVE_DATE,
+  RATE,
+  CAP,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DESCRIPTION
+from
+  CKT_TRIB_FEE_INFO
+where
+  (TRIBUNAL_FEE_ID = @tribunalFeeId) and
+  (@trbId = TRB_ID) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadTribunalFeeInformation2">
+      <value>
+select top(1)
+  TRB_ID,
+  TRIBUNAL_FEE_ID,
+  EFFECTIVE_DATE,
+  RATE,
+  CAP,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DESCRIPTION
+from
+  CKT_TRIB_FEE_INFO
+where
+  (TRIBUNAL_FEE_ID = @tribunalFeeId) and
+  (@trbId = TRB_ID)
+</value>
+   </data>
+   <data name="ReadTribunalFeeInformation3">
+      <value>
+select top(1)
+  TRB_ID,
+  TRIBUNAL_FEE_ID,
+  EFFECTIVE_DATE,
+  RATE,
+  CAP,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DESCRIPTION
+from
+  CKT_TRIB_FEE_INFO
+where
+  @trbId = TRB_ID
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadTribunalFeeInformation4">
+      <value>
+select top(1)
+  TRB_ID,
+  TRIBUNAL_FEE_ID,
+  EFFECTIVE_DATE,
+  RATE,
+  CAP,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DESCRIPTION
+from
+  CKT_TRIB_FEE_INFO
+where
+  @trbId = TRB_ID
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadTribunalFeeInformation5">
+      <value>
+select
+  TRB_ID,
+  TRIBUNAL_FEE_ID,
+  EFFECTIVE_DATE,
+  RATE,
+  CAP,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DESCRIPTION
+from
+  CKT_TRIB_FEE_INFO
+where
+  (@trbId = TRB_ID) and
+  (TRIBUNAL_FEE_ID &lt;&gt; @tribunalFeeId)
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="UpdateTribunalFeeInformation">
+      <value>
+update CKT_TRIB_FEE_INFO
+set
+  EFFECTIVE_DATE = @effectiveDate,
+  RATE = @rate,
+  CAP = @cap,
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  DESCRIPTION = @description
+where
+  (TRB_ID = @trbId) and
+  (TRIBUNAL_FEE_ID = @tribunalFeeId)
+</value>
+   </data>
+</root>

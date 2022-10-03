@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateDisbursementTransaction">
+      <value>
+update CKT_DISB_TRAN
+set
+  INT_INTER_ID = @intInterId
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+   <data name="CreateDisbursementStatusHistory">
+      <value>
+insert into CKT_DISB_STAT_HIST
+(
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT,
+  SUPPRESSION_REASON
+)
+values
+(
+  @dbsGeneratedId,
+  @dtrGeneratedId,
+  @cspNumber,
+  @cpaType,
+  @disbStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText,
+  @suppressionReason
+)
+</value>
+   </data>
+   <data name="CreateDisbursementTransaction">
+      <value>
+insert into CKT_DISB_TRAN
+(
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PROCESS_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST,
+  DISBURSEMENT_DATE,
+  CASH_NON_CASH_IND,
+  RECAPTURED_IND,
+  COLLECTION_DATE,
+  COLLCTN_PROCESS_DT,
+  PASSTHRU_DATE,
+  DBT_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  OTY_ID,
+  OTR_TYPE_DISB,
+  OTR_ID,
+  CPA_TYPE_DISB,
+  CSP_NUMBER_DISB,
+  OBG_ID,
+  CRD_ID,
+  CRV_ID,
+  CST_ID,
+  CRT_ID,
+  COL_ID,
+  INTERSTATE_IND,
+  PASSTHRU_PROC_DATE,
+  DESIGNATED_PAYEE,
+  REFERENCE_NUMBER,
+  URA_EXCOLL_SNBR,
+  INT_INTER_ID,
+  EXCESS_URA_IND
+)
+values
+(
+  @cpaType,
+  @cspNumber,
+  @disbTranId,
+  @type,
+  @amount,
+  @processDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdateTmst,
+  @disbursementDate,
+  @cashNonCashInd,
+  @recapturedInd,
+  @collectionDate,
+  @collctnProcessDt,
+  @collctnProcessDt,
+  @dbtGeneratedId,
+  null,
+  null,
+  @otrTypeDisb,
+  null,
+  @cpaTypeDisb,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  @interstateInd,
+  @passthruProcDate,
+  @designatedPayee,
+  @referenceNumber,
+  @uraExcollSnbr,
+  null,
+  @excessUraInd
+)
+</value>
+   </data>
+   <data name="CreateDisbursementTransactionRln">
+      <value>
+insert into CKT_DISB_TRAN_RLN
+(
+  DISB_TRAN_RLN_ID,
+  DESCRIPTION,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DNR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DTR_GENERATED_ID,
+  CSP_P_NUMBER,
+  CPA_P_TYPE,
+  DTR_P_GENERATED_ID
+)
+values
+(
+  @disbTranRlnId,
+  @description,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @dnrGeneratedId,
+  @cspNumber,
+  @cpaType,
+  @dtrGeneratedId,
+  @cspPNumber,
+  @cpaPType,
+  @dtrPGeneratedId
+)
+</value>
+   </data>
+   <data name="ReadDisbursementStatus">
+      <value>
+select top(1)
+  DISB_STATUS_ID
+from
+  CKT_DISB_STATUS
+where
+  DISB_STATUS_ID = @disbStatusId
+</value>
+   </data>
+   <data name="ReadDisbursementTranRlnRsn">
+      <value>
+select top(1)
+  DISB_TRN_RLN_RS_ID
+from
+  CKT_DSB_TRN_RLN_RS
+where
+  DISB_TRN_RLN_RS_ID = @disbTrnRlnRsId
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PROCESS_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST,
+  COLLECTION_DATE,
+  COLLCTN_PROCESS_DT,
+  INTERSTATE_IND,
+  DESIGNATED_PAYEE,
+  REFERENCE_NUMBER,
+  INT_INTER_ID,
+  EXCESS_URA_IND
+from
+  CKT_DISB_TRAN
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+   <data name="ReadDisbursementType">
+      <value>
+select top(1)
+  DISB_TYPE_ID,
+  RECAPTURE_IND
+from
+  CKT_DISB_TYPE
+where
+  DISB_TYPE_ID = @disbTypeId
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadObligee">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

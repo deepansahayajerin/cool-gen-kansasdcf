@@ -1,0 +1,37 @@
+Feature: ISSUE-67-address-Data-Getting-Lost
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+
+  Scenario Outline: Scenario1
+    When user enters "ADDR" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Address - ADDR" window appears
+    #When user enters "<CASE_N>" in "Case #"
+    When user enters "<CASE_N>" in first field under text "CSE - Address - ADDR"
+    When user presses "F2"
+    When user enters "S" in first field under text "Sel"
+    And user enters "<STREET_1>" in first field under text "Street 1"
+    And user enters "<CITY>" in second field to the right
+    And user enters "<ST>" in the next field
+    And user enters "<ZIP>" in second field under text "Street 1"
+    And user enters "<4>" in the next field
+    And user enters "<SEND_DT>" in the next field
+    And user enters "<TYPE>" in the next field
+    And user enters "<SOURCE>" in second field to the right
+    And user enters "<VER_DT>" in second field to the right
+    Then take snapshot "Sc1_page1"
+    And presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    Then take snapshot "Sc1_page2"
+    Then "CSE - Dead Document - DDOC" window appears
+    Then take snapshot "Sc1_page3"
+
+    Examples:
+      | CASE_N     | STREET_1        | CITY    | ST | ZIP   | 4    | SEND_DT | TYPE | SOURCE | VER_DT |
+      # | 566474 | 2590 S ELMHURST | HOUSTON | TX | 77005 | 2310 | Today   | R    | AP     | Today  |
+      | 0000566476 | 2540 S ELMHURST | HOUSTON | TX | 77005 | 2310 | Today   | R    | AP     | Today  |
+

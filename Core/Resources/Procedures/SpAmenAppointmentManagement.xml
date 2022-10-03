@@ -1,0 +1,124 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpAmenAppointmentManagement"
+           program-name="SWEAMENP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpAmenAppointmentManagement"
+           transaction="SRPS"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_SI_COMP_CASE_COMP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="SearchCase" to="Case1"/>
+      <return-map from="Selected" to="ReturnCsePersonsWorkSet"/>
+      <return-map from="Case1" to="ReturnCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="PassCode" to="Code"/>
+      <map from="PassCode.CodeName" to="Selected.CodeName"/>
+      <return-map from="DlgflwSelected" to="PassCodeValue"/>
+      <return-map from="Code.CodeName" to="PassCode.CodeName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <map from="SearchOffice.SystemGeneratedId" to="Office.SystemGeneratedId"/>
+      <map from="SearchOffice.Name" to="Office.Name"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="ReturnOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionOffice" to="ReturnOffice"/>
+      <return-map from="HiddenSelectionServiceProvider" to="ReturnServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command="CLEAR"/>
+   <on exit-state="ECO_XFR_TO_SP_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="SpHistHistory"
+       send-command="LINK">
+      <map from="PassInfrastructure" to="HeaderInfrastructure"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="ToDocmFilter" to="FilterDocument"/>
+      <map from="DocmProtectFilter" to="ProtectFilter"/>
+      <return-map from="ReturnDoc" to="Ret"/>
+   </on>
+   <map from="SearchHiddenCheckOfficeServiceProvider"
+        to="SearchHiddenCheckOfficeServiceProvider"/>
+   <map from="Export1.GrOfficeServiceProvider"
+        to="Import1.GrOfficeServiceProvider"/>
+   <map from="SearchOfficeServiceProvider" to="SearchOfficeServiceProvider"/>
+   <map from="HiddenCheck.GrExportHiddenCheckOfficeServiceProvider"
+        to="HiddenCheck.GrImportHiddenCheckOfficeServiceProvider"/>
+   <map from="Standard" to="Standard"/>
+   <map from="SearchCase" to="SearchCase"/>
+   <map from="SearchCsePerson" to="SearchCsePerson"/>
+   <map from="Comp" to="Comp"/>
+   <map from="Starting" to="Starting"/>
+   <map from="DisplayAll" to="DisplayAll"/>
+   <map from="SearchServiceProvider" to="SearchServiceProvider"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="FormattedSrvcprvdrName" to="FormattedSrvcprvdrName"/>
+   <map from="SearchOffice" to="SearchOffice"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Export1.GrExportLineSelect" to="Import1.GrImportLineSelect"/>
+   <map from="Export1.GrCase" to="Import1.GrCase"/>
+   <map from="Export1.GrCsePerson" to="Import1.GrCsePerson"/>
+   <map from="Export1.GrExportCsePerson" to="Import1.GrImportCsePerson"/>
+   <map from="Export1.GrAppointment" to="Import1.GrAppointment"/>
+   <map from="Export1.GrOffice" to="Import1.GrOffice"/>
+   <map from="Export1.GrServiceProvider" to="Import1.GrServiceProvider"/>
+   <map from="Export1.GrExportCdvlReason" to="Import1.GrImportCdvlReason"/>
+   <map from="Export1.GrExportCdvlType" to="Import1.GrImportCdvlType"/>
+   <map from="Export1.GrExportCdvlResult" to="Import1.GrImportCdvlResult"/>
+   <map from="Export1.GrExportServiceProvider"
+        to="Import1.GrImportServiceProvider"/>
+   <map from="HiddenCheck.GrExportHiddenCheckCase"
+        to="HiddenCheck.GrImportHiddenCheckCase"/>
+   <map from="HiddenCheck.GrExportHiddenCheckCsePerson"
+        to="HiddenCheck.GrImportHiddenCheckCsePerson"/>
+   <map from="HiddenCheck.GrExportHiddenCheckAppointment"
+        to="HiddenCheck.GrImportHiddenCheckAppointment"/>
+   <map from="HiddenCheck.GrExportHiddenCheckOffice"
+        to="HiddenCheck.GrImportHiddenCheckOffice"/>
+   <map from="HiddenCheck.GrExportHiddenCheckServiceProvider"
+        to="HiddenCheck.GrImportHiddenCheckServiceProvider"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="HiddenPageCount" to="HiddenPageCount"/>
+   <map from="SearchHiddenCheckCsePerson" to="SearchHiddenCheckCsePerson"/>
+   <map from="SearchHiddenCheckCase" to="SearchHiddenCheckCase"/>
+   <map from="DiplayAllHiddenCheck" to="DisplayAllHiddenCheck"/>
+   <map from="StartingHiddenCheck" to="StartingHiddenCheck"/>
+   <map from="SearchHiddenCheckOffice" to="SearchHiddenCheckOffice"/>
+   <map from="SearchHiddenCheckServiceProvider"
+        to="SearchHiddenCheckServiceProvider"/>
+   <map from="Exp3.Exp3LastReadHidden" to="Imp3.Imp3LastReadHidden"/>
+   <map from="Export1.GrExportAmPmInd" to="Import1.GrImportAmPmInd"/>
+   <map from="HiddenCheck.GrExportHiddenAmPmInd"
+        to="HiddenCheck.GrImportHiddenAmPmInd"/>
+   <map from="Export1.GrCaseRole" to="Import1.GrCaseRole"/>
+   <map from="PassCode.CodeName" to="PassCode.CodeName"/>
+   <map from="HiddenPageKeys.GexportHiddenPageKeys.Date"
+        to="HiddenPageKeys.GimportHiddenPageKeys.Date"/>
+   <map from="HiddenPageKeys.GexportHiddenPageKeys.Time"
+        to="HiddenPageKeys.GimportHiddenPageKeys.Time"/>
+   <map from="HiddenPageKeys.GexportHiddenPageKeys.CreatedTimestamp"
+        to="HiddenPageKeys.GimportHiddenPageKeys.CreatedTimestamp"/>
+</procedure>

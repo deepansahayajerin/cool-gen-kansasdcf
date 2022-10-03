@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCashReceiptCashReceiptEvent">
+      <value>
+select top(1)
+  cast(@crvId as integer),
+  cast(@cstId as smallint),
+  cast(@crtId as smallint),
+  cast(@crdId as smallint),
+  T2.CRV_IDENTIFIER,
+  T2.CST_IDENTIFIER,
+  T2.CRT_IDENTIFIER,
+  T2.CASH_RECEIPT_ID,
+  T2.RECEIVED_DATE,
+  T3.RECEIVED_DATE
+from
+  CKT_CR_EVENT T3
+  join
+  CKT_CASH_RECEIPT T2
+  on
+    (T2.CRT_IDENTIFIER = @crtId) and
+    (T2.CST_IDENTIFIER = @cstId) and
+    (T2.CRV_IDENTIFIER = @crvId) and
+    (T3.CREVENT_ID = T2.CRV_IDENTIFIER) and
+    (T3.CST_IDENTIFIER = T2.CST_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PROCESS_DATE,
+  CREATED_TIMESTAMP,
+  DISBURSEMENT_DATE,
+  COLLCTN_PROCESS_DT,
+  OTY_ID,
+  OTR_TYPE_DISB,
+  OTR_ID,
+  CPA_TYPE_DISB,
+  CSP_NUMBER_DISB,
+  OBG_ID,
+  CRD_ID,
+  CRV_ID,
+  CST_ID,
+  CRT_ID,
+  COL_ID,
+  REFERENCE_NUMBER
+from
+  CKT_DISB_TRAN
+where
+  (DISB_TRAN_ID = @disbTranId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionDisbursementType">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.PROCESS_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.DISBURSEMENT_DATE,
+  T1.CASH_NON_CASH_IND,
+  T1.RECAPTURED_IND,
+  T1.DBT_GENERATED_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.REFERENCE_NUMBER,
+  T1.EXCESS_URA_IND,
+  T2.CODE
+from
+  CKT_DISB_TYPE T2
+  join
+  CKT_DISB_TRAN T1
+  on
+    (@prqGeneratedId = T1.PRQ_GENERATED_ID) and
+    (T2.DISB_TYPE_ID = T1.DBT_GENERATED_ID)
+order by
+  T1.DISBURSEMENT_DATE,
+  T1.REFERENCE_NUMBER,
+  T2.CODE,
+  T1.EXCESS_URA_IND
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionRln">
+      <value>
+select top(1)
+  DISB_TRAN_RLN_ID,
+  DESCRIPTION,
+  CREATED_TIMESTAMP,
+  DNR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DTR_GENERATED_ID,
+  CSP_P_NUMBER,
+  CPA_P_TYPE,
+  DTR_P_GENERATED_ID
+from
+  CKT_DISB_TRAN_RLN
+where
+  (@dtrGeneratedId = DTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,62 @@
+<div coolDialog #dialog="dialog" [attr.mode]="appInfo?.environmentName">
+  <form autocomplete="off"
+        *ngFor="let window of dialog.windows; trackBy: windowId"
+        [coolWindow]="window"
+        coolPopup #popup="popup"
+        [class.coolLocked]="window.locked"
+        [class.coolActive]="window.active"
+        [class.coolModal]="window.modal"
+        [class.coolFixedSize]="!window.resizable"
+        [class.coolPrint]="window.print"
+        [class.minimized]="window.state.minimized"
+        [class.maximized]="window.state.maximized"
+        [class.online]="window.procedure.type === 'online'"
+        [style.z-index]="window.order"
+        [(left)]="window.state.left"
+        [(top)]="window.state.top"
+        [(width)]="window.state.width"
+        [(height)]="window.state.height"
+        [resizable]="window.resizable && !window.state.minimized && !window.state.maximized"
+        [draggable]="!window.state.maximized"
+        (activate)="dialog.activate(window).subscribe()">
+    <header>
+      <span class="appIcon"></span>
+      <span class="appTitle"
+            (dblclick)="window.state.maximized = !window.state.maximized"><span class="title">{{window.caption}}</span><span class="debug-info"> [{{appInfo?.version}}]</span></span>
+      <span class="popupIcons">
+        <b title="Print" coolAccesskey="Ctrl+Shift+F12"
+           (click)="print(window)">&#x2399;</b><b title="Minimize" coolMinButton
+                                                  (click)="window.state.minimized = !window.state.minimized"></b><b title="Maximize" coolMaxButton
+                                                                                                                    (click)="window.state.maximized = !window.state.maximized || window.state.minimized; window.state.minimized = false"></b><b title="Close" coolCloseButton
+                                                                                                                                                                                                                                                (click)="dialog.close(window).subscribe()"></b>
+      </span>
+    </header>
+    <content coolTabScope
+             [style.font-size]="window.procedure.type === 'online' ? 'calc(' + popup.width + '/50)' : null">
+      <ng-container [ngComponentOutlet]="window.page.component"></ng-container>
+    </content>
+  </form>
+
+  <div class="progress">
+    <div class="progress-bar"></div>
+  </div>
+
+  <div class="watermark">{{appInfo?.environmentName}}<small>{{appInfo?.version}}</small></div>
+
+   <div *ngIf="!showWelcome" class="app-toolbars">
+      <a href="#" (click)="restart()">Restart</a>
+   </div>
+
+   <app-welcome *ngIf="showWelcome" 
+      [appInfo]="appInfo"
+      (start)="showWelcome=false; dialog.start($event).subscribe()"
+      (close)="showWelcome=false">
+   </app-welcome>
+  
+    <a href="#" accesskey="f"></a>
+    <a href="#" accesskey="p"></a>
+    <a href="#" accesskey="d"></a>
+    <a href="#" accesskey="a"></a>
+    <a href="#" accesskey="c"></a>
+    <a href="#" accesskey="t"></a>
+</div>

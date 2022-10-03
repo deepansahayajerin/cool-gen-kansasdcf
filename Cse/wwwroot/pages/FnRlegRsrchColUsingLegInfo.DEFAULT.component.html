@@ -1,0 +1,513 @@
+﻿<!--Name: FN_RLEG_RSRCH_COL_USING_LEG_INFO, ID: 371774948, model: 746-->
+<div coolContent coolName="FN_RLEG_RSRCH_COL_USING_LEG_INFO" coolType="SCREEN"
+  (coolInit)="scrollSize = 50; pageSize = 16">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 20%; top: 0; width: 61.25%; height: 4%;"
+     coolCol="17" coolRow="1" coolLength="49">CSE - Research Collection Using Legal Info - RLEG</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">Next</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="literal" style="left: 6.25%; top: 8%; width: 10%; height: 4%;"
+     coolCol="6" coolRow="3" coolLength="8">Obligor/</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 12%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="4" coolLength="3">Sel</div>
+   
+   <div coolType="prompt"
+     style="left: 6.25%; top: 12%; width: 11.25%; height: 4%;" coolCol="6"
+     coolRow="4" coolLength="9">Obligee #</div>
+   
+   <div coolType="prompt" style="left: 20%; top: 12%; width: 3.75%; height: 4%;"
+     coolCol="17" coolRow="4" coolLength="3" coolColor="white">R/E</div>
+   
+   <div coolType="prompt" style="left: 32.5%; top: 12%; width: 25%; height: 4%;"
+     coolCol="27" coolRow="4" coolLength="20">Obligor/Obligee Name</div>
+   
+   <div coolType="literal"
+     style="left: 70%; top: 12%; width: 13.75%; height: 4%;" coolCol="57"
+     coolRow="4" coolLength="11">Court Order</div>
+   
+   <div coolType="prompt"
+     style="left: 88.75%; top: 12%; width: 7.5%; height: 4%;" coolCol="72"
+     coolRow="4" coolLength="6" coolColor="white">Case #</div>
+   <input type="text" coolType="field" name="field_5_3"
+     [(ngModel)]="ref(in.group, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 16%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="5" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 16%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="5" coolLength="10" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 16%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="5" coolLength="1" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 16%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="5" coolLength="33" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 16%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="5" coolLength="12" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 16%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="5" coolLength="10" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_6_3"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 20%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="6" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 20%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="6" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 20%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="6" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 20%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="6" coolLength="33" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 20%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="6" coolLength="12" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 20%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="6" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_7_3"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 24%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 24%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="7" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 24%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="7" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 24%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="7" coolLength="33" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 24%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="7" coolLength="12" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 24%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="7" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_8_3"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 28%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 28%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="8" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 28%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 28%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="8" coolLength="33" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 28%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="8" coolLength="12" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 28%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="8" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 32%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="9" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 32%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 32%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="9" coolLength="33" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 32%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="9" coolLength="12" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 32%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="9" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_10_3"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 36%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="10" coolLength="10" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 36%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 36%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="10" coolLength="33" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 36%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="10" coolLength="12" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 36%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="10" coolLength="10" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_11_3"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 40%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="11" coolLength="10" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 40%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 40%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="11" coolLength="33" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 40%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="11" coolLength="12" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 40%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="11" coolLength="10" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_12_3"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 44%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 44%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 44%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="12" coolLength="33" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 44%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="12" coolLength="12" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 44%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 8 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 48%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 48%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 48%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="13" coolLength="33" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 48%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="13" coolLength="12" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 48%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_14_3"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 9 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 52%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 52%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 52%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="14" coolLength="33" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 52%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="14" coolLength="12" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 52%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_15_3"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 10 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 56%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 56%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 56%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="15" coolLength="33" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 56%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="15" coolLength="12" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 56%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_16_3"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 11 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 60%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 60%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 60%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="16" coolLength="33" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 60%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="16" coolLength="12" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 60%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.group, pageOffset + 12, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 12]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 12 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 64%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 64%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 64%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="17" coolLength="33" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 64%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="17" coolLength="12" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 64%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_18_3"
+     [(ngModel)]="ref(in.group, pageOffset + 13, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 13]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 13 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 68%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 68%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 68%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="18" coolLength="33" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 68%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="18" coolLength="12" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 68%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_19_3"
+     [(ngModel)]="ref(in.group, pageOffset + 14, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 14]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 14 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 72%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 14 >= length(in.group)">{{in.group?.[pageOffset + 14]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 72%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 14 >= length(in.group)">{{in.group?.[pageOffset + 14]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 72%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="19" coolLength="33" [hidden]="pageOffset + 14 >= length(in.group)">{{in.group?.[pageOffset + 14]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 72%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="19" coolLength="12" [hidden]="pageOffset + 14 >= length(in.group)">{{in.group?.[pageOffset + 14]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 72%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 14 >= length(in.group)">{{in.group?.[pageOffset + 14]?.case1.number}}</div>
+   <input type="text" coolType="field" name="field_20_3"
+     [(ngModel)]="ref(in.group, pageOffset + 15, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 15]?.common.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 76%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 15 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 76%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="20" coolLength="10" [hidden]="pageOffset + 15 >= length(in.group)">{{in.group?.[pageOffset + 15]?.ap.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 21.25%; top: 76%; width: 1.25%; height: 4%;" coolCol="18"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 15 >= length(in.group)">{{in.group?.[pageOffset + 15]?.legalActionPerson.accountType}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 76%; width: 41.25%; height: 4%;" coolCol="21"
+     coolRow="20" coolLength="33" [hidden]="pageOffset + 15 >= length(in.group)">{{in.group?.[pageOffset + 15]?.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 76%; width: 15%; height: 4%;" coolCol="56"
+     coolRow="20" coolLength="12" [hidden]="pageOffset + 15 >= length(in.group)">{{in.group?.[pageOffset + 15]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 76%; width: 12.5%; height: 4%;" coolCol="70"
+     coolRow="20" coolLength="10" [hidden]="pageOffset + 15 >= length(in.group)">{{in.group?.[pageOffset + 15]?.case1.number}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 87.5%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="70">PF KEY: 1 Help  7 Prev  8 Next  9 Return  12 Signoff  15 OCTO  16 COMP</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="OCTO" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=OCTO</a>
+   <a coolType="action" coolCommand="COMP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=COMP</a>
+   </div>

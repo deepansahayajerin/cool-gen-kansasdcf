@@ -1,0 +1,31 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpFdlmFieldListAndMaintain"
+           program-name="SWEFDLMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpFdlmFieldListAndMaintain"
+           transaction="SRPB"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpDmnuDocumentMaintMenu"
+       send-command-type="none"/>
+   <map from="Filter" to="Filter"/>
+   <map from="PreviousFilter" to="PreviousFilter"/>
+   <map from="HiddenPageKeys.GexportHidden" to="HiddenPageKeys.GimportHidden"/>
+   <map from="Scrolling" to="Scrolling"/>
+   <map from="Export1.Gcommon" to="Import1.Gcommon"/>
+   <map from="Export1.Gfield" to="Import1.Gfield"/>
+   <map from="Export1.GexportScreenPrompt" to="Import1.GimportScreenPrompt"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.GexportPrevious" to="Import1.GimportPrevious"/>
+</procedure>

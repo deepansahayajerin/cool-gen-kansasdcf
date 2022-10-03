@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteCseOrganizationRelationship">
+      <value>
+delete from CKT_CSE_ORG_RELATN
+where
+  (COG_PARENT_CODE = @cogParentCode) and
+  (COG_PARENT_TYPE = @cogParentType) and
+  (COG_CHILD_CODE = @cogChildCode) and
+  (COG_CHILD_TYPE = @cogChildType)
+</value>
+   </data>
+   <data name="ReadCseOrganization1">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE
+from
+  CKT_CSE_ORGANIZATN
+where
+  (TYPE_CODE = @typeCode) and
+  (ORGANZTN_ID = @organztnId)
+</value>
+   </data>
+   <data name="ReadCseOrganization2">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE
+from
+  CKT_CSE_ORGANIZATN
+where
+  (TYPE_CODE = @typeCode) and
+  (ORGANZTN_ID = @organztnId)
+</value>
+   </data>
+   <data name="ReadCseOrganizationRelationship">
+      <value>
+select top(1)
+  COG_PARENT_CODE,
+  COG_PARENT_TYPE,
+  COG_CHILD_CODE,
+  COG_CHILD_TYPE,
+  REASON_CODE,
+  CREATED_BY,
+  CREATED_TIMESTAMP
+from
+  CKT_CSE_ORG_RELATN
+where
+  (@cogChildType = COG_CHILD_TYPE) and
+  (@cogChildCode = COG_CHILD_CODE) and
+  (@cogParentType = COG_PARENT_TYPE) and
+  (@cogParentCode = COG_PARENT_CODE)
+</value>
+   </data>
+</root>

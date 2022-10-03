@@ -1,0 +1,55 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeLoclLocateInterfaceList"
+           program-name="SWELOCLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeLoclLocateInterfaceList"
+           transaction="SRDP"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeAlomLocateInterfacesMenu"
+       send-command="SPACES"/>
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <map from="Office.SystemGeneratedId" to="Office.SystemGeneratedId"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="FromSvpoOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionServiceProvider" to="FromSvpoServiceProvider"/>
+      <return-map from="HiddenSelectionOffice" to="FromSvpoOffice"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LOCA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeLocaLocateInterfaceResp"
+       send-command="LOCA">
+      <map from="Selected.CsePersonNumber" to="LocateRequest2.CsePersonNumber"/>
+      <map from="Selected.ResponseDate" to="LocateRequest2.ResponseDate"/>
+      <map from="Selected.SequenceNumber" to="LocateRequest2.SequenceNumber"/>
+      <map from="Selected.CreatedTimestamp" to="LocateRequest2.CreatedTimestamp"/>
+      <map from="Selected.AgencyNumber" to="LocateRequest2.AgencyNumber"/>
+      <return-map from="LocateRequest" to="LastKeyToLoca"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Office" to="Office"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="PromptServiceProvider" to="PromptServiceProvider"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.CsePersonsWorkSet" to="Group.CsePersonsWorkSet"/>
+   <map from="Group.LocateRequest" to="Group.LocateRequest"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="ScrollIndicator" to="ScrollIndicator"/>
+   <map from="PrevHServiceProvider" to="PrevHServiceProvider"/>
+   <map from="PrevHOffice" to="PrevHOffice"/>
+   <map from="PrevHCsePerson" to="PrevHCsePerson"/>
+   <map from="PrevHCommon" to="PrevHCommon"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="LastKeyToLoca" to="LastKeyToLoca"/>
+   <map from="DateWorkArea.Date" to="DateWorkArea.Date"/>
+   <map from="PrevHDateWorkArea.Date" to="PrevHDateWorkArea.Date"/>
+</procedure>

@@ -1,0 +1,73 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCsamCashMgtAdminMenu"
+           program-name="SWECSAMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCsamCashMgtAdminMenu"
+           transaction="SRIR"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LST_CASH_RECIEPT_TYPE"
+       action="transfer"
+       to="FnCrtlLstCashReceiptTypes"
+       send-command="DISPLAY">
+      <map from="MenuIndicator" to="FromAdminMenu"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_CASH_SOURCES"
+       action="transfer"
+       to="FnCrslLstCashRcptSources"
+       send-command="DISPLAY">
+      <map from="MenuIndicator" to="FromAdminMenu"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_CASH_RCPT_DTL_ST"
+       action="transfer"
+       to="FnRsdlLstCashRcptDtlStatus"
+       send-command="DISPLAY">
+      <map from="MenuIndicator" to="MenuIndicator"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnFmenFnclMgmtMainMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_CR_BAL_RSN_CODE"
+       action="transfer"
+       to="FnCldrLstCshRcptDtlBalRsn"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_LST_CR_DELETE_RSN"
+       action="transfer"
+       to="FnCrdrLstCashRcptDeleteRsn"
+       send-command="DISPLAY">
+      <map from="MenuIndicator" to="FromAdminMenu"/>
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_FEE_TYPES"
+       action="transfer"
+       to="FnFetlLstFeeTypes"
+       send-command="DISPLAY">
+      <map from="MenuIndicator" to="FlowToAdminMenu"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_CASH_RCPT_STATUS"
+       action="transfer"
+       to="FnRstlLstCashReceiptStatus"
+       send-command="DISPLAY">
+      <map from="MenuIndicator" to="MenuInd"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_CR_BALANCE_RSN"
+       action="transfer"
+       to="FnClbrLstCashRcptBalRsns"
+       send-command="DISPLAY">
+      <map from="MenuIndicator" to="FromAdminMenu"/>
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_COLLECTION_TYPES"
+       action="transfer"
+       to="FnClctLstCollectionTypes"
+       send-command="DISPLAY">
+      <map from="MenuIndicator" to="FromAdminMenu"/>
+   </on>
+   <on exit-state="ECO_LNK_MTN_CR_BALANCE_RSN ECO_LNK_TO_CMBR"
+       action="transfer"
+       to="FnCmbrMtnCashRcptBalRsns"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+</procedure>

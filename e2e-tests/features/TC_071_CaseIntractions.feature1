@@ -1,0 +1,59 @@
+Feature: TC_071_MAN-FAMILY-VIOLENCE
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+    When user enters "1" in a field next to the 'select an option'
+    And presses "Enter"
+    Then "CSE - Service Initiation Menu - SINM" window appears
+    When user enters "1" in "option"
+    And presses "Enter"
+    Then "CSE - Information Request Menu - INRM" window appears
+    When user enters "1" in "select an option"
+    And presses "Enter"
+    Then "CSE - Information Request Details - INRD" window appears
+
+
+    When user enters "<ENROLLMENT_TYPE>" in "Enrollment Type"
+    When user enters "<APPLICANT_ADDRESS_1>" in "Applicant"
+    When user enters "<APPLICANT_ADDRESS_2>" in the next field
+    When user enters "<ENROLLMENT_SENT>" in "Enrollment Sent"
+    When user enters "<NONPARENT>" in "NONPARENT"
+    When user enters "<DATE_ENROLLMENT_SENT>" in "Date Enrollment Sent"
+    When user enters "<DATE_RECEIVED_COMPLETE>" in "Date Received Complete"
+    When user enters "<FULL_SERVICE>" in "Full Service"
+    Then snapshot "Sc1_page1"
+    When user presses "F5"
+    When user presses "Shift+F4"
+    Then message "Information Request processed successfully." is displayed
+    Then snapshot "Sc1_page2"
+
+    When user presses "Shift+F3"
+    Then "CSE - Name List - NAME" window appears
+    Then snapshot "Sc1_page3"
+
+    When user enters "<LAST>" in "Last"
+    And user enters "<FIRST>" in "First"
+    And user presses "F2"
+    And user presses "Shift+F3"
+    Then "CSE - Case Registration - REGI" window appears
+
+    When user enters "<OFFICE>" in "Office"
+    And user presses "Shift+F5"
+    Then "CSE - Organization Maintenance - ORGZ" window appears
+
+    when user enters "<STARTING_ORG_N>" in "Starting Org #"
+    And user presses "F2"
+    Then message "" is displayed
+
+
+    Examples:
+      | ENROLLMENT_TYPE | APPLICANT_ADDRESS_1 | APPLICANT_ADDRESS_2 | ENROLLMENT_SENT | NONPARENT | DATE_ENROLLMENT_SENT | DATE_RECEIVED_COMPLETE | FULL_SERVICE | LAST | FIRST | OFFICE | STARTING_ORG_N |
+      | F               | state               | of Kansas           | Y               | Y         | Today                | Today                  | Y            | KOKO | POPO  | 107    | 17o            |
+

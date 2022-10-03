@@ -1,0 +1,30 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnRlegRsrchColUsingLegInfo"
+           program-name="SWERLEGP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnRlegRsrchColUsingLegInfo"
+           transaction="SROQ">
+   <on exit-state="ECO_LNK_TO_LST_OBLIG_BY_CRT_ORDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnOctoLstObligByCourtOrder"
+       send-command="DISPLAY">
+      <map from="SelectedLegalAction.StandardNumber" to="Search.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="SelectedCase" to="Case1"/>
+   </on>
+   <map from="Group.LegalAction" to="Group.LegalAction"/>
+   <map from="Group.Ap" to="Group.Ap"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Case1" to="Group.Case1"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.LegalActionPerson" to="Group.LegalActionPerson"/>
+   <map from="Group.CsePersonsWorkSet.FormattedName"
+        to="Group.CsePersonsWorkSet.FormattedName"/>
+</procedure>

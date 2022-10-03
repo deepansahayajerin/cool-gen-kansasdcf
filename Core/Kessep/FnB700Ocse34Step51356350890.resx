@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection">
+      <value>
+select
+  COLL_ID,
+  APPLIED_TO_CD,
+  ADJ_IND,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_DT,
+  CREATED_TMST,
+  OB_TRN_AMT,
+  PGM_APPLD_TO,
+  APPL_TO_ORD_TYP_CD,
+  OCSE34_RPT_PERIOD,
+  APPLIED_TO_FUT_IND
+from
+  CKT_COLLECTION with(readuncommitted)
+where
+  COLL_ID = @collId
+</value>
+   </data>
+   <data name="ReadCsePersonCsePersonAccountObligationTransaction">
+      <value>
+select top(1)
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  OTY_TYPE
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (CPA_SUP_TYPE is not null) and
+  (CSP_SUP_NUMBER is not null) and
+  (OTY_TYPE = @otyType) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OB_TRN_ID = @obTrnId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OBG_GENERATED_ID = @obgGeneratedId)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction1">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  CREATED_TIMESTAMP,
+  DBT_GENERATED_ID,
+  URA_EXCOLL_SNBR
+from
+  CKT_DISB_TRAN with(readuncommitted)
+where
+  (DBT_GENERATED_ID is not null) and
+  (DBT_GENERATED_ID in (348, 349)) and
+  (TYPE = 'D') and
+  (CREATED_TIMESTAMP between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction2">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.CREATED_TIMESTAMP,
+  T1.DBT_GENERATED_ID,
+  T1.URA_EXCOLL_SNBR
+from
+  CKT_DISB_TRAN T1 with(readuncommitted)
+  join
+  CKT_DISB_TRAN_RLN T2 with(readuncommitted)
+  on
+    (T1.DISB_TRAN_ID = T2.DTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (@dtrPGeneratedId = T2.DTR_P_GENERATED_ID) and
+    (@cpaPType = T2.CPA_P_TYPE) and
+    (@cspPNumber = T2.CSP_P_NUMBER) and
+    (T1.TYPE = 'X')
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID
+from
+  CKT_OB_TYPE with(readuncommitted)
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (PRG_GENERATED_ID in (2, 15)) and
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadUraExcessCollection">
+      <value>
+select top(1)
+  SEQ_NUMBER,
+  INITIATING_COLL
+from
+  CKT_URA_XS_COLL with(readuncommitted)
+where
+  SEQ_NUMBER = @seqNumber
+</value>
+   </data>
+</root>

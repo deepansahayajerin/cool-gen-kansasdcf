@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateContact">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  START_DATE
+from
+  CKT_INT_CONTACT with(readuncommitted)
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (START_DATE = @startDate)
+</value>
+   </data>
+   <data name="ReadInterstateContactAddress">
+      <value>
+select
+  ICO_CONT_START_DT,
+  INT_GENERATED_ID,
+  START_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  END_DATE,
+  COUNTY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE
+from
+  CKT_INT_CNTCT_ADDR
+where
+  (ICO_CONT_START_DT = @icoContStartDt) and
+  (INT_GENERATED_ID = @intGeneratedId)
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateInterstateContactAddress">
+      <value>
+update CKT_INT_CNTCT_ADDR
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  TYPE = @type,
+  STREET1 = @street1,
+  STREET2 = @street2,
+  CITY = @city,
+  END_DATE = @endDate,
+  COUNTY = @county,
+  [STATE] = @state,
+  ZIP_CODE = @zipCode,
+  ZIP4 = @zip4,
+  ZIP3 = @zip3,
+  STREET_3 = @street3,
+  STREET_4 = @street4,
+  PROVINCE = @province,
+  POSTAL_CODE = @postalCode,
+  COUNTRY = @country,
+  LOCATION_TYPE = @locationType
+where
+  (ICO_CONT_START_DT = @icoContStartDt) and
+  (INT_GENERATED_ID = @intGeneratedId) and
+  (START_DATE = @startDate)
+</value>
+   </data>
+</root>

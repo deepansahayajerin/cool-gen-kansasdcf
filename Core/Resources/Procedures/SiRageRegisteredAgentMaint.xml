@@ -1,0 +1,41 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiRageRegisteredAgentMaint"
+           program-name="SWERAGEP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiRageRegisteredAgentMaint"
+           transaction="SR2R"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CODE_TABLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="Next" to="StartCase"/>
+   </on>
+   <map from="Plus" to="Plus"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Next" to="Next"/>
+   <map from="SearchRegisteredAgent" to="SearchRegisteredAgent"/>
+   <map from="SearchRegisteredAgentAddress" to="SearchRegisteredAgentAddress"/>
+   <map from="Group.GdetailCommon" to="Group.GdetailCommon"/>
+   <map from="Group.GdetailRegisteredAgent" to="Group.GdetailRegisteredAgent"/>
+   <map from="Group.GdetailRegisteredAgentAddress"
+        to="Group.GdetailRegisteredAgentAddress"/>
+   <map from="Group.GdetailPrompt" to="Group.GdetailPrompt"/>
+   <map from="PageKeys.GpageKeyRegisteredAgentAddress"
+        to="PageKeys.GpageKeyRegisteredAgentAddress"/>
+   <map from="PageKeys.GpageKeyRegisteredAgent"
+        to="PageKeys.GpageKeyRegisteredAgent"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard.PageNumber" to="Standard.PageNumber"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

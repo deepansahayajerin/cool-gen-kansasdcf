@@ -1,0 +1,48 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeGldvCsGuidelinesDeviation"
+           program-name="SWEGLDVP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeGldvCsGuidelinesDeviation"
+           transaction="SSAK"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CSWL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="none"
+       to="OeCswlChildSupWorksheetList"
+       send-command="DISPLAY">
+      <map from="LactCase" to="SearchCase"/>
+      <map from="LactCsePerson" to="SearchCsePerson"/>
+      <map from="FromGldv" to="FromGldv"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SVPL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPL"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected1" to="IvdAttorney"/>
+   </on>
+   <map from="Hidden" to="Hidden"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="Group.Att" to="Group.Att"/>
+   <map from="Group.Question" to="Group.Question"/>
+   <map from="Group.Answer" to="Group.Answer"/>
+   <map from="Group.Legend" to="Group.Legend"/>
+   <map from="LactCaseRole" to="LactCaseRole"/>
+   <map from="LactCase" to="LactCase"/>
+   <map from="CswlReturn" to="CswlReturn"/>
+   <map from="GuidelineDeviations" to="GuidelineDeviations"/>
+   <map from="LactCsePerson" to="LactCsePerson"/>
+   <map from="PageCount" to="PageCount"/>
+   <map from="FromLacs" to="FromLacs"/>
+   <map from="FromLact" to="FromLact"/>
+   <map from="CswlCheck" to="CswlCheck"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="IvdAttorney.SystemGeneratedId" to="IvdAttorney.SystemGeneratedId"/>
+</procedure>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseRole">
+      <value>
+select
+  T1.NUMB,
+  T1.STATUS,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.END_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE in ('AP', 'AR', 'CH')) and
+    (@cspNumber = T2.CSP_NUMBER)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInvalidSsn1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  SSN,
+  FCR_SENT_DATE,
+  FCR_PROCESS_IND
+from
+  CKT_INVALID_SSN
+where
+  (@cspNumber = CSP_NUMBER) and
+  (SSN = @ssn)
+</value>
+   </data>
+   <data name="ReadInvalidSsn2">
+      <value>
+select
+  CSP_NUMBER,
+  SSN,
+  FCR_SENT_DATE,
+  FCR_PROCESS_IND
+from
+  CKT_INVALID_SSN
+where
+  FCR_SENT_DATE &lt;= @fcrSentDate
+</value>
+   </data>
+   <data name="UpdateInvalidSsn">
+      <value>
+update CKT_INVALID_SSN
+set
+  FCR_SENT_DATE = @fcrSentDate
+where
+  (CSP_NUMBER = @cspNumber) and
+  (SSN = @ssn)
+</value>
+   </data>
+</root>

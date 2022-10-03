@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateLegalReferralAttachment">
+      <value>
+insert into CKT_LEG_REF_ATTCHM
+(
+  LGR_IDENTIFIER,
+  CAS_NUMBER,
+  LINE_NO,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  COMMENT_LINE
+)
+values
+(
+  @lgrIdentifier,
+  @casNumber,
+  @lineNo,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @commentLine
+)
+</value>
+   </data>
+   <data name="CreateLegalReferralComment">
+      <value>
+insert into CKT_LGL_REF_COMMNT
+(
+  LGR_IDENTIFIER,
+  CAS_NUMBER,
+  LINE_NO,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  COMMENT_LINE
+)
+values
+(
+  @lgrIdentifier,
+  @casNumber,
+  @lineNo,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @commentLine
+)
+</value>
+   </data>
+   <data name="DeleteLegalReferralAttachment">
+      <value>
+delete from CKT_LEG_REF_ATTCHM
+where
+  (LGR_IDENTIFIER = @lgrIdentifier) and
+  (CAS_NUMBER = @casNumber) and
+  (LINE_NO = @lineNo)
+</value>
+   </data>
+   <data name="DeleteLegalReferralComment">
+      <value>
+delete from CKT_LGL_REF_COMMNT
+where
+  (LGR_IDENTIFIER = @lgrIdentifier) and
+  (CAS_NUMBER = @casNumber) and
+  (LINE_NO = @lineNo)
+</value>
+   </data>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInfrastructure1">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT_CD,
+  DENORM_NUMERIC_12,
+  CASE_NUMBER
+from
+  CKT_INFRASTRUCTURE
+where
+  (CASE_NUMBER = @caseNumber) and
+  (DENORM_NUMERIC_12 = @denormNumeric12)
+</value>
+   </data>
+   <data name="ReadInfrastructure2">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT_CD,
+  DENORM_NUMERIC_12,
+  CASE_NUMBER
+from
+  CKT_INFRASTRUCTURE
+where
+  CASE_NUMBER = @caseNumber
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION
+from
+  CKT_CASE_ROLE T3
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T2
+  on
+    T1.LEGAL_ACTION_ID = T2.LGA_ID
+  on
+    (T3.CASE_ROLE_ID = T2.CRO_IDENTIFIER) and
+    (T3.TYPE = T2.CRO_TYPE) and
+    (T3.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T3.CAS_NUMBER = T2.CAS_NUMBER) and
+    (T3.END_DATE &gt;= @endDate) and
+    (@casNumber = T3.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionAssigment">
+      <value>
+select
+  LGA_IDENTIFIER,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID,
+  EFFECTIVE_DT,
+  END_DT,
+  REASON_CODE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_LA_SERV_PROV
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@ospRoleCode = OSP_ROLE_CODE) and
+  (@ospEffectiveDate = OSP_EFFECTIVE_DATE) and
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (@spdGeneratedId = SPD_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadLegalReferral1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  IDENTIFIER,
+  REF_BY_USER_ID,
+  STATUS_DATE,
+  STATUS,
+  REFERRAL_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REFERRAL_REASON_1,
+  REFERRAL_REASON_2,
+  REFERRAL_REASON_3,
+  REFERRAL_REASON_4,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_REFERRAL
+where
+  (@casNumber = CAS_NUMBER) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalReferral2">
+      <value>
+select
+  CAS_NUMBER,
+  IDENTIFIER,
+  STATUS
+from
+  CKT_LEGAL_REFERRAL
+where
+  (@casNumber = CAS_NUMBER) and
+  (STATUS in ('S', 'O'))
+</value>
+   </data>
+   <data name="ReadLegalReferralAssignment1">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO,
+  LGR_ID
+from
+  CKT_ASSGN_LEG_REF
+where
+  (@lgrId = LGR_ID) and
+  (@casNo = CAS_NO) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (@ospDate = OSP_DATE) and
+  (@ospCode = OSP_CODE) and
+  (@offId = OFF_ID) and
+  (@spdId = SPD_ID)
+</value>
+   </data>
+   <data name="ReadLegalReferralAssignment2">
+      <value>
+select
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO,
+  LGR_ID
+from
+  CKT_ASSGN_LEG_REF
+where
+  (@lgrId = LGR_ID) and
+  (@casNo = CAS_NO)
+</value>
+   </data>
+   <data name="ReadLegalReferralAttachment">
+      <value>
+select
+  LGR_IDENTIFIER,
+  CAS_NUMBER,
+  LINE_NO,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  COMMENT_LINE
+from
+  CKT_LEG_REF_ATTCHM
+where
+  (@lgrIdentifier = LGR_IDENTIFIER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalReferralComment">
+      <value>
+select
+  LGR_IDENTIFIER,
+  CAS_NUMBER,
+  LINE_NO,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  COMMENT_LINE
+from
+  CKT_LGL_REF_COMMNT
+where
+  (@lgrIdentifier = LGR_IDENTIFIER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  CLOSURE_REASON_COD,
+  INF_SYS_GEN_ID
+from
+  CKT_MONITORED_ACT
+where
+  @infSysGenId = INF_SYS_GEN_ID
+</value>
+   </data>
+   <data name="ReadMonitoredActivityAssignment">
+      <value>
+select
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  MAC_ID
+from
+  CKT_ASSGN_MNT_ACT
+where
+  (@macId = MAC_ID) and
+  (@ospDate = OSP_DATE) and
+  (@ospCode = OSP_CODE) and
+  (@offId = OFF_ID) and
+  (@spdId = SPD_ID)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="UpdateLegalActionAssigment">
+      <value>
+update CKT_LA_SERV_PROV
+set
+  END_DT = @endDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="UpdateLegalReferral">
+      <value>
+update CKT_LEGAL_REFERRAL
+set
+  REF_BY_USER_ID = @refByUserId,
+  STATUS_DATE = @statusDate,
+  STATUS = @status,
+  REFERRAL_DATE = @referralDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  REFERRAL_REASON_1 = @referralReason1,
+  REFERRAL_REASON_2 = @referralReason2,
+  REFERRAL_REASON_3 = @referralReason3,
+  REFERRAL_REASON_4 = @referralReason4,
+  COURT_CASE_NO = @courtCaseNo,
+  TRB_ID = @trbId
+where
+  (CAS_NUMBER = @casNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="UpdateLegalReferralAssignment">
+      <value>
+update CKT_ASSGN_LEG_REF
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (CAS_NO = @casNo) and
+  (LGR_ID = @lgrId)
+</value>
+   </data>
+   <data name="UpdateMonitoredActivityAssignment">
+      <value>
+update CKT_ASSGN_MNT_ACT
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (MAC_ID = @macId)
+</value>
+   </data>
+</root>

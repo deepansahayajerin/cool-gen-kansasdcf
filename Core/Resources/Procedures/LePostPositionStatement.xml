@@ -1,0 +1,83 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LePostPositionStatement"
+           program-name="SWEPOSTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LePostPositionStatement"
+           transaction="SR9H"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_2_ADMN_APPEAL_BY_CSE_PER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeAapsLstAdmApplsByCsePer"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+      <return-map from="Selected" to="AdministrativeAppeal"/>
+      <return-map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ADMIN_APPEAL_ADDRESS"
+       action="transfer"
+       to="LeAaadAdminAppealAddress"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAppeal.Identifier"
+           to="AdministrativeAppeal.Identifier"/>
+      <map from="AdministrativeAppeal.Number" to="AdministrativeAppeal.Number"/>
+      <map from="AdministrativeAppeal.Type1" to="AdministrativeAppeal.Type1"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ADMIN_APPEAL_HEARING"
+       action="transfer"
+       to="LeAheaAdminAppealHearing"
+       send-command="DISPLAY">
+      <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_ADMIN_APPEALS"
+       action="transfer"
+       to="LeAappAdministrativeAppealP1"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAction" to="AdministrativeAction"/>
+      <map from="AdministrativeAppeal.Identifier"
+           to="AdministrativeAppeal.Identifier"/>
+      <map from="AdministrativeAppeal.Number" to="AdministrativeAppeal.Number"/>
+      <map from="AdministrativeAppeal.Type1" to="AdministrativeAppeal.Type1"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity"/>
+   </on>
+   <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+   <map from="Export1.PositionStatement" to="Import1.PositionStatement"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="HiddenAdministrativeAction" to="HiddenAdministrativeAction"/>
+   <map from="Hidden.HiddenCommon" to="Hidden.HiddenCommon"/>
+   <map from="Hidden.HiddenPositionStatement"
+        to="Hidden.HiddenPositionStatement"/>
+   <map from="HiddenAdministrativeAppeal" to="HiddenAdministrativeAppeal"/>
+   <map from="PromptAdmAppeal" to="PromptAdmAppeal"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   <map from="HiddenSecurity.HiddenSecurityCommand"
+        to="HiddenSecurity.HiddenSecurityCommand"/>
+   <map from="HiddenSecurity.HiddenSecurityProfileAuthorization"
+        to="HiddenSecurity.HiddenSecurityProfileAuthorization"/>
+   <map from="AdministrativeAction.Description"
+        to="AdministrativeAction.Description"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="HiddenCsePersonsWorkSet.Number"
+        to="HiddenCsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+</procedure>

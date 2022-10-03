@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateOcse157Data">
+      <value>
+insert into CKT_OCSE157_DATA
+(
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  LINE_NUMBER,
+  COLUMN0,
+  CREATED_TIMESTAMP,
+  NUMBER
+)
+values
+(
+  @fiscalYear,
+  @runNumber,
+  @lineNumber,
+  @column0,
+  @createdTimestamp,
+  @number
+)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select
+  COLL_ID,
+  COLL_DT,
+  ADJ_IND,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_DT,
+  CREATED_TMST,
+  OB_TRN_AMT
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrId = OTR_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgId = OBG_ID) and
+  (
+    (
+      (CREATED_TMST &lt;= @createdTmst) and
+      (ADJ_IND = 'Y') and
+      (COLL_ADJ_DT &gt; @collAdjDt)
+    ) or
+    (
+      (CREATED_TMST &gt; @createdTmst) and
+      (ADJ_IND = 'N')
+    )
+  )
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDebtDetailCsePersonObligationTransactionObligation">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.BAL_DUE_AMT,
+  T1.RETIRED_DT,
+  T1.CVRD_PRD_START_DT,
+  T1.CVD_PRD_END_DT,
+  T1.PRECNVRSN_PGM_CD,
+  T2.NUMB,
+  T2.TYPE,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE,
+  T4.PRIM_SEC_CD,
+  T4.ORD_TYP_CD
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_OBLIGATION T4
+  join
+  CKT_OB_TRN T3
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T1.DUE_DT &lt;= @dueDt) and
+    (
+      (T1.RETIRED_DT &gt;= @dueDt) or
+      (T1.RETIRED_DT = @retiredDt)
+    ) and
+    (T3.OTY_TYPE = T1.OTY_TYPE) and
+    (T3.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T3.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T3.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER)
+  on
+    (T4.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T4.OB_ID = T3.OBG_GENERATED_ID) and
+    (T4.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T4.CPA_TYPE = T3.CPA_TYPE) and
+    (T4.PRIM_SEC_CD &lt;&gt; 'S')
+  on
+    (T2.NUMB = T4.CSP_NUMBER) and
+    (T2.NUMB &gt; @numb)
+order by
+  T2.NUMB
+</value>
+   </data>
+   <data name="ReadObligationTransactionRlnObligationTransaction">
+      <value>
+select
+  T1.ONR_GENERATED_ID,
+  T1.OTR_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OBG_GENERATED_ID,
+  T1.OTR_P_TYPE,
+  T1.OTR_P_GENERATED_ID,
+  T1.CPA_P_TYPE,
+  T1.CSP_P_NUMBER,
+  T1.OBG_P_GENERATED_ID,
+  T1.OB_TRN_RLN_ID,
+  T1.OTY_TYPE_PRIMARY,
+  T1.OTY_TYPE_SECONDARY,
+  T2.OB_TRN_AMT,
+  T2.DEBT_ADJ_TYP,
+  T2.DEB_ADJ_DT,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE,
+  T2.RSN_CD
+from
+  CKT_OB_TRN T2
+  join
+  CKT_OB_TRN_RLN T1
+  on
+    (@otyTypePrimary = T1.OTY_TYPE_PRIMARY) and
+    (@otrPType = T1.OTR_P_TYPE) and
+    (@otrPGeneratedId = T1.OTR_P_GENERATED_ID) and
+    (@cpaPType = T1.CPA_P_TYPE) and
+    (@cspPNumber = T1.CSP_P_NUMBER) and
+    (@obgPGeneratedId = T1.OBG_P_GENERATED_ID) and
+    (T2.OTY_TYPE = T1.OTY_TYPE_SECONDARY) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = 'DA') and
+    (T2.DEB_ADJ_DT &gt; @debAdjDt)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadOcse157Data">
+      <value>
+select top(1)
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  LINE_NUMBER,
+  COLUMN0,
+  CREATED_TIMESTAMP,
+  NUMBER
+from
+  CKT_OCSE157_DATA
+where
+  (FISCAL_YEAR = @fiscalYear) and
+  (RUN_NUMBER = 1) and
+  (LINE_NUMBER = @lineNumber)
+</value>
+   </data>
+   <data name="ReadProgram">
+      <value>
+select
+  PROGRAM_ID,
+  CODE,
+  INTERSTATE_IND
+from
+  CKT_PROGRAM with(readuncommitted)
+</value>
+   </data>
+   <data name="UpdateOcse157Data">
+      <value>
+update CKT_OCSE157_DATA
+set
+  NUMBER = @number
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

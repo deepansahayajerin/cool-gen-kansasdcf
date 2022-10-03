@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFplsLocateRequest">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  TRANSACTION_STATUS,
+  TRANSACTION_ERROR,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES
+from
+  CKT_FPLS_LOC_REQ
+where
+  (@cspNumber = CSP_NUMBER) and
+  (IDENTIFIER = cast(@fplsLocateRequestIdentifier as integer))
+</value>
+   </data>
+   <data name="ReadProgramRun">
+      <value>
+select top(1)
+  PPI_CREATED_TSTAMP,
+  PPI_NAME,
+  START_TIMESTAMP
+from
+  CKT_PROGRAM_RUN
+where
+  (START_TIMESTAMP = @startTimestamp) and
+  (PPI_NAME = @ppiName) and
+  (PPI_CREATED_TSTAMP = @ppiCreatedTstamp)
+</value>
+   </data>
+   <data name="UpdateFplsLocateRequest">
+      <value>
+update CKT_FPLS_LOC_REQ
+set
+  TRANSACTION_ERROR = @transactionError,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

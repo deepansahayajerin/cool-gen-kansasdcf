@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseAssignmentOfficeOfficeServiceProvider">
+      <value>
+select
+  T2.CAS_NO,
+  T2.REASON_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_TIMESTAMP,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE,
+  T3.OFFICE_ID,
+  T3.OFF_OFFICE
+from
+  CKT_OFFICE T3 with(readuncommitted)
+  join
+  CKT_ASSIGN_CASE T2 with(readuncommitted)
+  on
+    (T3.OFFICE_ID &gt;= @officeId1) and
+    (
+      (T3.OFFICE_ID &gt; @officeId1) or
+      (
+        (T3.OFFICE_ID = @officeId1) and
+        (T2.SPD_ID &gt;= @spdId) and
+        (
+          (T2.SPD_ID &gt; @spdId) or
+          (
+            (T2.SPD_ID = @spdId) and
+            (T2.CAS_NO &gt; @casNo)
+          )
+        )
+      )
+    ) and
+    (T3.OFFICE_ID = T2.OFF_ID) and
+    (T2.REASON_CODE = 'RSP') and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T3.OFFICE_ID between cast(@officeId2 as smallint) and cast(@officeId3 as smallint))
+order by
+  T3.OFFICE_ID,
+  T2.SPD_ID,
+  T2.CAS_NO
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.OUT_OF_WEDLOCK,
+  T1.PAT_ESTAB_IND,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.EMANCIPATION_DT
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @endDate) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH')
+order by
+  T1.NUMB
+</value>
+   </data>
+</root>

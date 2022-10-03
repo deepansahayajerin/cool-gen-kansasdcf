@@ -1,0 +1,1287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateLaPersonLaCaseRole1">
+      <value>
+insert into CKT_LA_PER_LA_CROL
+(
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+)
+values
+(
+  @identifier,
+  @croId,
+  @croType,
+  @cspNum,
+  @casNum,
+  @lgaId,
+  @lapId
+)
+</value>
+   </data>
+   <data name="CreateLaPersonLaCaseRole2">
+      <value>
+insert into CKT_LA_PER_LA_CROL
+(
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+)
+values
+(
+  @identifier,
+  @croId,
+  @croType,
+  @cspNum,
+  @casNum,
+  @lgaId,
+  @lapId
+)
+</value>
+   </data>
+   <data name="CreateLegalActionCaseRole">
+      <value>
+insert into CKT_LEG_ACT_CAS_RL
+(
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  INIT_CR_IND
+)
+values
+(
+  @casNumber,
+  @cspNumber,
+  @croType,
+  @croIdentifier,
+  @lgaId,
+  @createdBy,
+  @createdTstamp,
+  @initCrInd
+)
+</value>
+   </data>
+   <data name="ReadCase1">
+      <value>
+select distinct top(1)
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T2.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T2.TYPE = T3.CRO_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T3.LGA_ID = @lgaId)
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T2.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T2.TYPE = T3.CRO_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T3.CAS_NUMBER)
+  on
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T4.COURT_CASE_NO = @courtCaseNo) and
+    (@trbId = T4.TRB_ID)
+</value>
+   </data>
+   <data name="ReadCase3">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T2.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T2.TYPE = T3.CRO_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T3.LGA_ID = @lgaId)
+</value>
+   </data>
+   <data name="ReadCase4">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T2.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T2.TYPE = T3.CRO_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T3.CAS_NUMBER) and
+    (@lgaId = T3.LGA_ID)
+</value>
+   </data>
+   <data name="ReadCaseAssignment">
+      <value>
+select top(1)
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO
+from
+  CKT_LEGAL_ACTION T5
+  join
+  CKT_ASSIGN_CASE T1
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T1.CAS_NO = T4.CAS_NUMBER) and
+    (T1.OSP_CODE = @ospCode) and
+    (T1.OFF_ID = @offId) and
+    (T1.SPD_ID = @spdId)
+  on
+    (T5.LEGAL_ACTION_ID = T4.LGA_ID) and
+    (T5.COURT_CASE_NO = @courtCaseNo) and
+    (@trbId = T5.TRB_ID)
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.EMANCIPATION_DT
+from
+  CKT_CASE_ROLE T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.LGA_R_IDENTIFIER = @lgaRIdentifier) and
+    (T3.LAD_R_NUMBER = @ladRNumber) and
+    (T1.TYPE = 'CH') and
+    (T1.END_DATE &gt; @endDate) and
+    (T1.START_DATE &lt;= @endDate) and
+    (T3.ACCOUNT_TYPE = 'S') and
+    (T3.EFFECTIVE_DT &lt;= @endDate) and
+    (T3.END_DT &gt; @endDate)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.ACCOUNT_TYPE = 'R') and
+    (T2.LAD_R_NUMBER is not null)
+  on
+    (T4.LEGAL_ACTION_ID = T2.LGA_R_IDENTIFIER) and
+    (T4.COURT_CASE_NO = @courtCaseNo) and
+    (@trbId = T4.TRB_ID)
+</value>
+   </data>
+   <data name="ReadEmployer1">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.NAME,
+  T1.EIWO_END_DATE,
+  T1.EIWO_START_DATE
+from
+  CKT_EMPLOYER T1
+  join
+  CKT_INCOME_SOURCE T2
+  on
+    (T1.IDENTIFIER = T2.EMP_ID) and
+    (T2.IDENTIFIER = @identifier) and
+    (@cspINumber = T2.CSP_I_NUMBER)
+</value>
+   </data>
+   <data name="ReadEmployer2">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.NAME,
+  T1.EIWO_END_DATE,
+  T1.EIWO_START_DATE
+from
+  CKT_EMPLOYER T1
+  join
+  CKT_INCOME_SOURCE T2
+  on
+    (T1.IDENTIFIER = T2.EMP_ID) and
+    (T2.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadEmployerAddress">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.EMP_ID,
+  T1.NOTE
+from
+  CKT_EMPLOYER_ADDR T1
+  join
+  CKT_INCOME_SOURCE T3
+  on
+    (T1.EMP_ID = T3.EMP_ID) and
+    (@cspINumber = T3.CSP_I_NUMBER) and
+    (T3.IDENTIFIER = @identifier) and
+    (substring(T1.NOTE, 1, 1) = '*')
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadGoodCause">
+      <value>
+select distinct
+  T1.CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_IDENTIFIER,
+  T1.CAS_NUMBER1,
+  T1.CSP_NUMBER1,
+  T1.CRO_TYPE1,
+  T1.CRO_IDENTIFIER1
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_GOOD_CAUSE T1
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T2.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.TYPE = T1.CRO_TYPE) and
+    (T2.CASE_ROLE_ID = T1.CRO_IDENTIFIER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @effectiveDate) and
+    (T2.END_DATE &gt; @effectiveDate) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T1.CAS_NUMBER1 is not null) and
+    (T1.CRO_IDENTIFIER1 is not null) and
+    (T1.CRO_TYPE1 = 'AP') and
+    (@cspNumber1 = T1.CSP_NUMBER1)
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadHealthInsuranceViability">
+      <value>
+select top(1)
+  CRO_TYPE,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  CRO_IDENTIFIER,
+  HINSV_ID,
+  HINS_VIABLE_IND
+from
+  CKT_HINS_VIABILITY
+where
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (HINS_VIABLE_IND = 'N')
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_CD,
+  CODE,
+  CSP_I_NUMBER,
+  EMP_ID,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST
+where
+  (CRO_ID is not null) and
+  (CAS_NUMBER is not null) and
+  (CRO_TYPE = 'AP') and
+  (@cspNumber = CSP_NUMBER) and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (@casINumber = CAS_I_NUMBER)
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_INT_RQST_HIST
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (FUNCTIONAL_TYPE_CO in ('CSI', 'LO1'))
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory2">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_INT_RQST_HIST
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (FUNCTIONAL_TYPE_CO &lt;&gt; 'CSI') and
+  (FUNCTIONAL_TYPE_CO &lt;&gt; 'LO1')
+</value>
+   </data>
+   <data name="ReadLaDetFinancialLegalAction">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.PERIOD_IND,
+  T1.OTY_ID,
+  T2.CLASSIFICATION,
+  T2.ACTION_TAKEN,
+  T2.TYPE,
+  T2.FILED_DT,
+  T2.INITIATING_STATE,
+  T2.COURT_CASE_NO,
+  T2.END_DT,
+  T2.STANDARD_NO,
+  T2.CREATED_TSTAMP,
+  T2.TRB_ID
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_LEGAL_ACT_DTL T1
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T2.COURT_CASE_NO = @courtCaseNo) and
+    (T2.CLASSIFICATION = 'J') and
+    (T2.END_DT &gt; @endDt) and
+    (T2.FILED_DT &gt; @filedDt) and
+    (T2.FILED_DT &lt;= @endDt) and
+    (@trbId = T2.TRB_ID) and
+    (T1.END_DT &gt; @endDt)
+  on
+    (T3.DEBT_TYP_ID = T1.OTY_ID) and
+    (T3.DEBT_TYP_CLASS = 'A')
+order by
+  T2.FILED_DT desc
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRoleLegalActionCaseRoleCaseRole">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.CRO_ID,
+  T1.CRO_TYPE,
+  T1.CSP_NUM,
+  T1.CAS_NUM,
+  T1.LGA_ID,
+  T1.LAP_ID,
+  T2.INIT_CR_IND,
+  T3.START_DATE,
+  T3.END_DATE,
+  T3.EMANCIPATION_DT
+from
+  CKT_CASE_ROLE T3
+  join
+  CKT_LEG_ACT_CAS_RL T2
+  join
+  CKT_LA_PER_LA_CROL T1
+  on
+    (@lapId = T1.LAP_ID) and
+    (T2.LGA_ID = T1.LGA_ID) and
+    (T2.CAS_NUMBER = T1.CAS_NUM) and
+    (T2.CRO_IDENTIFIER = T1.CRO_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUM) and
+    (T2.CRO_TYPE = T1.CRO_TYPE)
+  on
+    (T3.CASE_ROLE_ID = T2.CRO_IDENTIFIER) and
+    (T3.TYPE = T2.CRO_TYPE) and
+    (T3.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T3.CAS_NUMBER = T2.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  STANDARD_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  TYPE,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (CLASSIFICATION = 'I') and
+  (ACTION_TAKEN = 'TERMMWOO') and
+  (FILED_DT &gt; @filedDt)
+</value>
+   </data>
+   <data name="ReadLegalAction3">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  TYPE,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (CLASSIFICATION = 'I') and
+  (ACTION_TAKEN = 'MWO') and
+  (FILED_DT &lt;= @filedDt) and
+  (FILED_DT is not null) and
+  (END_DT &gt; @filedDt)
+order by
+  FILED_DT desc
+</value>
+   </data>
+   <data name="ReadLegalAction4">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalAction5">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  TYPE,
+  FILED_DT,
+  INITIATING_STATE,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (CLASSIFICATION in ('J', 'O')) and
+  (FILED_DT &gt; @filedDt1) and
+  (FILED_DT &lt;= @filedDt2) and
+  (END_DT &gt; @filedDt2)
+order by
+  FILED_DT desc
+</value>
+   </data>
+   <data name="ReadLegalAction6">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  TYPE,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (CLASSIFICATION = 'I') and
+  (
+    ACTION_TAKEN in ('IWO', 'IWONOTKS', 'IWOMODO',
+      'IWONOTKM')
+  )
+order by
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalAction7">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  TYPE,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (ACTION_TAKEN = 'NOIIWON')
+order by
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalAction8">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  TYPE,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (ACTION_TAKEN in ('IWOTERM', 'IWONOTKT')) and
+  (CREATED_TSTAMP &gt; @createdTstamp)
+</value>
+   </data>
+   <data name="ReadLegalAction9">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  INITIATING_STATE,
+  COURT_CASE_NO,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (COURT_CASE_NO = @courtCaseNo) and
+  (@trbId = TRB_ID)
+order by
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalActionAssigment">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_LA_SERV_PROV
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (END_DT &gt;= @endDt) and
+  (REASON_CODE = 'RSP')
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  INIT_CR_IND
+from
+  CKT_LEG_ACT_CAS_RL
+where
+  (@lgaId = LGA_ID) and
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRole2">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_IDENTIFIER,
+  T1.LGA_ID,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.INIT_CR_IND
+from
+  CKT_CASE_ROLE T3
+  join
+  CKT_LEG_ACT_CAS_RL T1
+  on
+    (T1.LGA_ID = @lgaId) and
+    (T3.CASE_ROLE_ID = T1.CRO_IDENTIFIER) and
+    (T3.TYPE = T1.CRO_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T3.END_DATE &gt;= @endDate) and
+    (@cspNumber = T3.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail1">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE
+from
+  CKT_LEGAL_ACT_DTL T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T1.LA_DETAIL_NO = T2.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T2.LGA_R_IDENTIFIER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.ACCOUNT_TYPE = 'R') and
+    (T1.DETAIL_TYPE = 'N') and
+    (T1.NON_FIN_OBLG_TYPE = 'HIC') and
+    (T1.END_DT &gt; @endDt) and
+    (T1.EFFECTIVE_DT &lt;= @endDt) and
+    (T1.EFFECTIVE_DT &lt;&gt; @effectiveDt)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail2">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.BOND_AMT,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.PERIOD_IND,
+  T1.DESCRIPTION,
+  T1.OTY_ID
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_LEGAL_ACT_DTL T1
+  on
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (T2.DEBT_TYP_CD = 'WA')
+</value>
+   </data>
+   <data name="ReadLegalActionDetail3">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.BOND_AMT,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.PERIOD_IND,
+  T1.DESCRIPTION,
+  T1.OTY_ID
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_LEGAL_ACT_DTL T1
+  on
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (
+      (
+        (T2.DEBT_TYP_CD = 'WA') and
+        (T1.ARREARS_AMOUNT = 0)
+      ) or
+      (
+        (T2.DEBT_TYP_CD = 'WC') and
+        (T1.CURRENT_AMOUNT = 0)
+      )
+    )
+</value>
+   </data>
+   <data name="ReadLegalActionDetail4">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.BOND_AMT,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.PERIOD_IND,
+  T1.DESCRIPTION,
+  T1.OTY_ID
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_LEGAL_ACT_DTL T1
+  on
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (
+      (
+        (T2.DEBT_TYP_CD = 'WA') and
+        (T1.ARREARS_AMOUNT &lt;&gt; 0)
+      ) or
+      (
+        (T2.DEBT_TYP_CD = 'WC') and
+        (T1.CURRENT_AMOUNT &lt;&gt; 0)
+      )
+    )
+</value>
+   </data>
+   <data name="ReadLegalActionDetailObligationType">
+      <value>
+select
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.BOND_AMT,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.PERIOD_IND,
+  T1.DESCRIPTION,
+  T1.OTY_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_LEGAL_ACT_DTL T1
+  on
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (T2.DEBT_TYP_CD in ('WC', 'WA'))
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSource">
+      <value>
+select distinct
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.ISR_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.WITHHOLDING_TYPE,
+  T1.END_DT,
+  T1.WAGE_OR_NON_WAGE,
+  T1.ORDER_TYPE,
+  T1.IDENTIFIER
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_INCOME_SOURCE T2
+  join
+  CKT_LEGAL_ACT_ISRC T1
+  on
+    (T1.END_DT &gt; @endDt) and
+    (T2.CSP_I_NUMBER = T1.CSP_NUMBER) and
+    (T2.IDENTIFIER = T1.ISR_IDENTIFIER) and
+    (@empId = T2.EMP_ID)
+  on
+    (T3.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T3.COURT_CASE_NO = @courtCaseNo) and
+    (T3.CLASSIFICATION = 'I') and
+    (@trbId = T3.TRB_ID)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson1">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  END_REASON,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (ACCOUNT_TYPE = 'R') and
+  (@ladRNumber = LAD_R_NUMBER) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson2">
+      <value>
+select top(1)
+  LA_PERSON_ID
+from
+  CKT_LEGAL_ACT_PERS
+where
+  LA_PERSON_ID = @laPersonId
+</value>
+   </data>
+   <data name="ReadLegalActionPerson3">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (ACCOUNT_TYPE = 'R') and
+  (LAD_R_NUMBER is not null) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson4">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (ACCOUNT_TYPE = 'R') and
+  (LAD_R_NUMBER is not null) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson5">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (ACCOUNT_TYPE = 'R') and
+  (LAD_R_NUMBER is not null) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson6">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (ACCOUNT_TYPE = 'R') and
+  (LAD_R_NUMBER is not null) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonCsePerson">
+      <value>
+select
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  END_REASON,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (CSP_NUMBER is not null) and
+  (@ladRNumber = LAD_R_NUMBER) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID,
+  T2.FIP_LOCATION,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_CASE_ROLE T4
+  join
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    T2.IDENTIFIER = T1.TRB_ID
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    T1.LEGAL_ACTION_ID = T3.LGA_ID
+  on
+    (T4.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T4.TYPE = T3.CRO_TYPE) and
+    (T4.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T4.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T4.TYPE = 'AP') and
+    (T4.END_DATE &gt; @endDate) and
+    (@cspNumber = T4.CSP_NUMBER)
+order by
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+</value>
+   </data>
+   <data name="ReadObligationObligationType">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_IDENTIFIER,
+  T1.LAD_NUMBER,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_OBLIGATION T1
+  on
+    (@ladNumber = T1.LAD_NUMBER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T2.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (T1.CPA_TYPE = 'R') and
+    (@cspNumber = T1.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOffice1">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFFICE_ID,
+  T2.OFF_OFFICE
+from
+  CKT_OFFC_SRVC_PRVR T1,
+  CKT_OFFICE T2
+where
+  (@spdGeneratedId = T1.SPD_GENERATED_ID) and
+  (T1.ROLE_CODE = @roleCode) and
+  (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (T1.DISCONTINUE_DATE = @discontinueDate) and
+  (T2.OFFICE_ID = @officeId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOffice2">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE
+from
+  CKT_OFFICE T2
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    (@spdGeneratedId = T1.SPD_GENERATED_ID) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.OFFICE_ID = T1.OFF_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select top(1)
+  T1.HCV_ID,
+  T1.CSP_NUMBER,
+  T1.COVER_BEGIN_DATE,
+  T1.COVER_END_DATE
+from
+  CKT_HINS_COVERAGE T3
+  join
+  CKT_PERSONAL_HINS T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T3.IDENTIFIER = T1.HCV_ID) and
+    (T1.COVER_BEGIN_DATE &lt;= @coverBeginDate) and
+    (T1.COVER_END_DATE &gt;= @coverBeginDate) and
+    (T3.POLICY_EFF_DATE &lt;= @coverBeginDate) and
+    (T3.POLICY_EXP_DATE &gt;= @coverBeginDate)
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME
+from
+  CKT_SERVICE_PRVDER
+where
+  (LAST_NAME = cast(@countyDescription as char(20))) and
+  (FIRST_NAME = 'K')
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="UpdateLegalActionIncomeSource">
+      <value>
+update CKT_LEGAL_ACT_ISRC
+set
+  END_DT = @endDt
+where
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

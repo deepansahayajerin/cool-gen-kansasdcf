@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFcrSvesPrison">
+      <value>
+insert into CKT_FCR_SVES_PRISN
+(
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  SEQ_NO,
+  FACILITY_TYPE,
+  FACILITY_PHONE,
+  FACILITY_FAX_NUM,
+  PRISONER_ID_NUMBER,
+  PRISON_RPTD_SSN,
+  PRISON_RPTD_SUFFIX,
+  CONFINEMENT_DATE,
+  RELEASE_DATE,
+  REPORT_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FACILITY_NAME,
+  FACILITY_CONTACT,
+  REPORTER_NAME
+)
+values
+(
+  @fcgMemberId,
+  @fcgLSRspAgy,
+  @seqNo,
+  @facilityType,
+  @facilityPhone,
+  @facilityFaxNum,
+  @prisonerIdNumber,
+  @prisonRptdSsn,
+  @prisonRptdSuffix,
+  @confinementDate,
+  @releaseDate,
+  @reportDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @facilityName,
+  @facilityContact,
+  @reporterName
+)
+</value>
+   </data>
+   <data name="ReadFcrSvesGenInfo">
+      <value>
+select top(1)
+  MEMBER_ID,
+  LOC_SRC_RSP_AGY_CD
+from
+  CKT_FCR_SVES_GEN
+where
+  (MEMBER_ID = @memberId) and
+  (LOC_SRC_RSP_AGY_CD = @locSrcRspAgyCd)
+</value>
+   </data>
+   <data name="ReadFcrSvesPrison">
+      <value>
+select top(1)
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  SEQ_NO,
+  FACILITY_TYPE,
+  FACILITY_PHONE,
+  FACILITY_FAX_NUM,
+  PRISONER_ID_NUMBER,
+  PRISON_RPTD_SSN,
+  PRISON_RPTD_SUFFIX,
+  CONFINEMENT_DATE,
+  RELEASE_DATE,
+  REPORT_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FACILITY_NAME,
+  FACILITY_CONTACT,
+  REPORTER_NAME
+from
+  CKT_FCR_SVES_PRISN
+where
+  (SEQ_NO = @seqNo) and
+  (@fcgLSRspAgy = FCG_L_S_RSP_AGY) and
+  (@fcgMemberId = FCG_MEMBER_ID)
+</value>
+   </data>
+   <data name="UpdateFcrSvesPrison">
+      <value>
+update CKT_FCR_SVES_PRISN
+set
+  FACILITY_TYPE = @facilityType,
+  FACILITY_PHONE = @facilityPhone,
+  FACILITY_FAX_NUM = @facilityFaxNum,
+  PRISONER_ID_NUMBER = @prisonerIdNumber,
+  PRISON_RPTD_SSN = @prisonRptdSsn,
+  PRISON_RPTD_SUFFIX = @prisonRptdSuffix,
+  CONFINEMENT_DATE = @confinementDate,
+  RELEASE_DATE = @releaseDate,
+  REPORT_DATE = @reportDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  FACILITY_NAME = @facilityName,
+  FACILITY_CONTACT = @facilityContact,
+  REPORTER_NAME = @reporterName
+where
+  (FCG_MEMBER_ID = @fcgMemberId) and
+  (FCG_L_S_RSP_AGY = @fcgLSRspAgy) and
+  (SEQ_NO = @seqNo)
+</value>
+   </data>
+</root>

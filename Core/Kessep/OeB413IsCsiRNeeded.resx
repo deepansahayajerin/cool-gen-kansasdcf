@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseRoleCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.STATUS
+from
+  CKT_CASE T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.TYPE = 'AP') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt; @startDate) and
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (T2.STATUS = 'O')
+order by
+  T1.CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select top(1)
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE_VALUE
+where
+  (COD_ID = @codId) and
+  (CDVALUE = cast(@transmitterStateOrTerrCode as char(2))) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.OTHR_STATE_FIPS_CD,
+  T1.OTH_ST_CASE_STATUS,
+  T1.KS_CASE_IND,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_ID
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_INTERSTAT_RQST T1
+  on
+    (T1.OTHR_STATE_FIPS_CD = @othrStateFipsCd) and
+    (T2.CASE_ROLE_ID = T1.CRO_ID) and
+    (T2.TYPE = T1.CRO_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate) and
+    (T2.TYPE = 'AP') and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateUraExcessCollection">
+      <value>
+insert into CKT_URA_XS_COLL
+(
+  SEQ_NUMBER,
+  COLLECTION_MONTH,
+  COLLECTION_YEAR,
+  AMOUNT,
+  TYPE,
+  COLLECTION_ACTION,
+  ACT_IM_HOUSEHOLD,
+  SUPPLYING_CSE_PER,
+  INITIATING_COLL,
+  IMH_AE_CASE_NO,
+  RECV_CSE_PERSON,
+  INITIATING_CSE_PER,
+  INITIATE_IM_HHOLD
+)
+values
+(
+  @seqNumber,
+  @collectionMonth,
+  @collectionYear,
+  @amount,
+  @type,
+  @collectionAction,
+  @actImHousehold,
+  @supplyingCsePer,
+  @initiatingColl,
+  @imhAeCaseNo,
+  @recvCsePerson,
+  @initiatingCsePer,
+  @initiateImHhold
+)
+</value>
+   </data>
+   <data name="ReadImHousehold">
+      <value>
+select top(1)
+  AE_CASE_NO
+from
+  CKT_IM_HOUSEHOLD
+where
+  AE_CASE_NO = @aeCaseNo
+</value>
+   </data>
+   <data name="ReadUraExcessCollection">
+      <value>
+select top(1)
+  max(SEQ_NUMBER)
+from
+  CKT_URA_XS_COLL
+</value>
+   </data>
+</root>

@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  TYPE
+from
+  CKT_DISB_SUPPR_STS
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'D') and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadDisbursementStatus1">
+      <value>
+select top(1)
+  DISB_STATUS_ID,
+  CODE
+from
+  CKT_DISB_STATUS
+where
+  DISB_STATUS_ID = @disbStatusId
+</value>
+   </data>
+   <data name="ReadDisbursementStatus2">
+      <value>
+select top(1)
+  DISB_STATUS_ID,
+  CODE
+from
+  CKT_DISB_STATUS
+where
+  DISB_STATUS_ID = @disbStatusId
+</value>
+   </data>
+   <data name="ReadDisbursementStatusDisbursementStatusHistory1">
+      <value>
+select top(1)
+  T1.DISB_STATUS_ID,
+  T1.CODE,
+  T2.DTR_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.DISB_STAT_HIST_ID,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.REASON_TEXT,
+  T2.SUPPRESSION_REASON,
+  T3.TYPE,
+  T3.AMOUNT,
+  T3.DISBURSEMENT_DATE,
+  T3.COLLECTION_DATE,
+  T3.DBT_GENERATED_ID,
+  T3.INTERSTATE_IND,
+  T3.REFERENCE_NUMBER,
+  T3.EXCESS_URA_IND
+from
+  CKT_DISB_STATUS T1
+  join
+  CKT_DISB_TRAN T3
+  join
+  CKT_DISB_STAT_HIST T2
+  on
+    (T3.DISB_TRAN_ID = @disbTranId) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T3.DISB_TRAN_ID = T2.DTR_GENERATED_ID) and
+    (T3.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T3.CPA_TYPE = T2.CPA_TYPE) and
+    (T2.REASON_TEXT &lt;&gt; 'PROCESSED')
+  on
+    (T1.DISB_STATUS_ID = T2.DBS_GENERATED_ID) and
+    (T1.DISB_STATUS_ID = 3)
+</value>
+   </data>
+   <data name="ReadDisbursementStatusDisbursementStatusHistory2">
+      <value>
+select top(1)
+  T1.DISB_STATUS_ID,
+  T1.CODE,
+  T2.DTR_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.DISB_STAT_HIST_ID,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.REASON_TEXT,
+  T2.SUPPRESSION_REASON,
+  T3.TYPE,
+  T3.AMOUNT,
+  T3.DISBURSEMENT_DATE,
+  T3.COLLECTION_DATE,
+  T3.DBT_GENERATED_ID,
+  T3.INTERSTATE_IND,
+  T3.REFERENCE_NUMBER,
+  T3.EXCESS_URA_IND
+from
+  CKT_DISB_STATUS T1
+  join
+  CKT_DISB_TRAN T3
+  join
+  CKT_DISB_STAT_HIST T2
+  on
+    (T3.DISB_TRAN_ID = @disbTranId) and
+    (T3.DISB_TRAN_ID = T2.DTR_GENERATED_ID) and
+    (T3.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T3.CPA_TYPE = T2.CPA_TYPE) and
+    (T2.DISCONTINUE_DATE = @discontinueDate)
+  on
+    (T1.DISB_STATUS_ID = T2.DBS_GENERATED_ID) and
+    (T1.DISB_STATUS_ID = 1)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  CREATED_TIMESTAMP,
+  REFERENCE_NUMBER
+from
+  CKT_DISB_TRAN
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = 'E') and
+  (TYPE = 'D') and
+  (REFERENCE_NUMBER = @referenceNumber)
+order by
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionDisbursementStatusHistory1">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.DISBURSEMENT_DATE,
+  T1.COLLECTION_DATE,
+  T1.DBT_GENERATED_ID,
+  T1.INTERSTATE_IND,
+  T1.REFERENCE_NUMBER,
+  T1.EXCESS_URA_IND,
+  T2.DBS_GENERATED_ID,
+  T2.DISB_STAT_HIST_ID,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.REASON_TEXT,
+  T2.SUPPRESSION_REASON,
+  T3.CODE
+from
+  CKT_DISB_TYPE T6
+  join
+  CKT_DISB_STATUS T3
+  join
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_STAT_HIST T2
+  on
+    (T1.REFERENCE_NUMBER = @referenceNumber) and
+    (T1.DISB_TRAN_ID = T2.DTR_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T2.DISCONTINUE_DATE = @discontinueDate)
+  on
+    (T3.DISB_STATUS_ID = T2.DBS_GENERATED_ID) and
+    (T3.DISB_STATUS_ID = 1)
+  on
+    (T6.DISB_TYPE_ID = T1.DBT_GENERATED_ID) and
+    (T6.CODE = @code)
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionDisbursementStatusHistory2">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.DISBURSEMENT_DATE,
+  T1.COLLECTION_DATE,
+  T1.DBT_GENERATED_ID,
+  T1.INTERSTATE_IND,
+  T1.REFERENCE_NUMBER,
+  T1.EXCESS_URA_IND,
+  T2.DBS_GENERATED_ID,
+  T2.DISB_STAT_HIST_ID,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.REASON_TEXT,
+  T2.SUPPRESSION_REASON,
+  T3.CODE
+from
+  CKT_DISB_STATUS T3
+  join
+  CKT_DISB_TYPE T6
+  join
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_STAT_HIST T2
+  on
+    (T1.REFERENCE_NUMBER = @referenceNumber) and
+    (T1.DISB_TRAN_ID = T2.DTR_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T2.REASON_TEXT &lt;&gt; 'PROCESSED')
+  on
+    (T6.DISB_TYPE_ID = T1.DBT_GENERATED_ID) and
+    (T6.CODE = @code)
+  on
+    (T3.DISB_STATUS_ID = T2.DBS_GENERATED_ID) and
+    (T3.DISB_STATUS_ID = 3)
+</value>
+   </data>
+   <data name="ReadServiceProviderProfile">
+      <value>
+select top(1)
+  T1.CREATED_TIMESTAMP,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.PRO_NAME,
+  T1.SPD_GEN_ID
+from
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_SERV_PROV_PRO T1
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T1.PRO_NAME = 'DEVELOPERS') and
+    (T3.SERVICE_PRVDER_ID = T1.SPD_GEN_ID) and
+    (T3.USER_ID = @userId)
+</value>
+   </data>
+   <data name="UpdateDisbSuppressionStatusHistory">
+      <value>
+update CKT_DISB_SUPPR_STS
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DSS_GENERATED_ID = @dssGeneratedId)
+</value>
+   </data>
+   <data name="UpdateDisbursementStatusHistory">
+      <value>
+update CKT_DISB_STAT_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  SUPPRESSION_REASON = @suppressionReason
+where
+  (DBS_GENERATED_ID = @dbsGeneratedId) and
+  (DTR_GENERATED_ID = @dtrGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (DISB_STAT_HIST_ID = @disbStatHistId)
+</value>
+   </data>
+</root>

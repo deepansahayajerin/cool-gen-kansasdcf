@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCaseAssignment">
+      <value>
+insert into CKT_ASSIGN_CASE
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @casNo
+)
+</value>
+   </data>
+   <data name="CreateCaseUnitFunctionAssignmt">
+      <value>
+insert into CKT_ASSGN_CASE_UNT
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CSU_NO,
+  CAS_NO,
+  [FUNCTION]
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @csuNo,
+  @casNo,
+  @function
+)
+</value>
+   </data>
+   <data name="CreateInterstateCaseAssignment">
+      <value>
+insert into CKT_ASSGN_INT_CASE
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  ICS_DATE,
+  ICS_NO
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @icsDate,
+  @icsNo
+)
+</value>
+   </data>
+   <data name="CreateMonitoredActivityAssignment">
+      <value>
+insert into CKT_ASSGN_MNT_ACT
+(
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  RESPONSIBILITY_COD,
+  EFFECTIVE_DATE,
+  OVERRIDE_IND,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  MAC_ID
+)
+values
+(
+  @systemGeneratedI,
+  @reasonCode,
+  @responsibilityCod,
+  @effectiveDate,
+  @overrideInd,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @macId
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseAssignment">
+      <value>
+select
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (@ospDate = OSP_DATE) and
+  (@ospCode = OSP_CODE) and
+  (@offId = OFF_ID) and
+  (@spdId = SPD_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (REASON_CODE = @reasonCode)
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (START_DATE &lt;= @startDate) and
+  (CLOSURE_DATE &gt;= @startDate) and
+  (CLOSURE_REASON_COD = ' ')
+</value>
+   </data>
+   <data name="ReadCaseUnitFunctionAssignmt">
+      <value>
+select
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CSU_NO,
+  CAS_NO,
+  [FUNCTION]
+from
+  CKT_ASSGN_CASE_UNT
+where
+  (@casNo = CAS_NO) and
+  (@csuNo = CSU_NO) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (REASON_CODE = @reasonCode)
+</value>
+   </data>
+   <data name="ReadGlobalReassignment">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PROCESS_DATE,
+  STATUS_FLAG,
+  OVERRIDE_FLAG,
+  BUSINESS_OBJ_CODE,
+  ASSIGN_REASON_CODE,
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  OSP_ROLE_CODE,
+  OSP_EFFECTIVE_DATE,
+  SPD_GENERATED_ID1,
+  OFF_GENERATED_ID1,
+  OSP_ROLE_COD,
+  OSP_EFFECTIVE_DAT,
+  BO_COUNT,
+  MON_COUNT
+from
+  CKT_GLOBAL_REASSGN
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  SITUATION_NUMBER,
+  PROCESS_STATUS,
+  EVENT_ID,
+  EVENT_TYPE,
+  EVENT_DETAIL_NAME,
+  REASON_CODE,
+  BUSINESS_OBJECT_CD,
+  DENORM_NUMERIC_12,
+  DENORM_TEXT_12,
+  DENORM_DATE,
+  DENORM_TIMESTAMP,
+  INITIATING_ST_CD,
+  CSENET_IN_OUT_CODE,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  CASE_UNIT_NUM,
+  USER_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REFERENCE_DATE,
+  [FUNCTION],
+  CASE_UNIT_STATE,
+  DETAIL
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select
+  TRANS_SERIAL_NBR,
+  TRANSACTION_DATE,
+  KS_CASE_ID
+from
+  CKT_INTERST_CASE
+where
+  KS_CASE_ID = @ksCaseId
+</value>
+   </data>
+   <data name="ReadInterstateCaseAssignment">
+      <value>
+select top(1)
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  ICS_DATE,
+  ICS_NO
+from
+  CKT_ASSGN_INT_CASE
+where
+  (@icsNo = ICS_NO) and
+  (@icsDate = ICS_DATE) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadInterstateRequest1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND = 'N')
+</value>
+   </data>
+   <data name="ReadInterstateRequest2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadLegalReferralAssignment">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO,
+  LGR_ID
+from
+  CKT_ASSGN_LEG_REF
+where
+  (@ospDate = OSP_DATE) and
+  (@ospCode = OSP_CODE) and
+  (@offId = OFF_ID) and
+  (@spdId = SPD_ID) and
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (@casNo = CAS_NO)
+</value>
+   </data>
+   <data name="ReadMonitoredActivityAssignmentMonitoredActivity">
+      <value>
+select distinct
+  T1.SYSTEM_GENERATED_I,
+  T1.REASON_CODE,
+  T1.RESPONSIBILITY_COD,
+  T1.EFFECTIVE_DATE,
+  T1.OVERRIDE_IND,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.MAC_ID,
+  T2.ACTIVITY_CTRL_NUM,
+  T2.TYPE_CODE,
+  T2.CLOSURE_REASON_COD,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.INF_SYS_GEN_ID
+from
+  CKT_INFRASTRUCTURE T3
+  join
+  CKT_MONITORED_ACT T2
+  join
+  CKT_ASSGN_MNT_ACT T1
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.SYSTEM_GENERATED_I = T1.MAC_ID) and
+    (T2.CLOSURE_REASON_COD = ' ') and
+    (T2.TYPE_CODE = 'AUT')
+  on
+    (T3.SYSTEM_GENERATED_I = T2.INF_SYS_GEN_ID) and
+    (T3.CASE_NUMBER = @caseNumber)
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider1">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId1) and
+  (SPD_GENERATED_ID = @spdGeneratedId1) and
+  (@offGeneratedId2 = OFF_GENERATED_ID) and
+  (@spdGeneratedId2 = SPD_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider2">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider3">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate1) and
+  (ROLE_CODE = @roleCode1) and
+  (OFF_GENERATED_ID = @offGeneratedId1) and
+  (SPD_GENERATED_ID = @spdGeneratedId1) and
+  (SPD_GENERATED_ID = @spdGeneratedId2) and
+  (OFF_GENERATED_ID = @offGeneratedId2) and
+  (ROLE_CODE = @roleCode2) and
+  (EFFECTIVE_DATE = @effectiveDate2)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider4">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="UpdateCaseAssignment">
+      <value>
+update CKT_ASSIGN_CASE
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="UpdateCaseUnitFunctionAssignmt">
+      <value>
+update CKT_ASSGN_CASE_UNT
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (CSU_NO = @csuNo) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="UpdateInterstateCaseAssignment">
+      <value>
+update CKT_ASSGN_INT_CASE
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (ICS_DATE = @icsDate) and
+  (ICS_NO = @icsNo)
+</value>
+   </data>
+   <data name="UpdateMonitoredActivityAssignment">
+      <value>
+update CKT_ASSGN_MNT_ACT
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (MAC_ID = @macId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadProfile1">
+      <value>
+select top(1)
+  NAME,
+  PROFILE_DESC
+from
+  CKT_PROFILE
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="ReadProfile2">
+      <value>
+select top(1)
+  NAME,
+  PROFILE_DESC
+from
+  CKT_PROFILE
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+   <data name="ReadServiceProviderProfile">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  PRO_NAME,
+  SPD_GEN_ID
+from
+  CKT_SERV_PROV_PRO
+where
+  @spdGenId = SPD_GEN_ID
+</value>
+   </data>
+   <data name="ReadServiceProviderProfileServiceProvider1">
+      <value>
+select
+  T1.CREATED_TIMESTAMP,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.PRO_NAME,
+  T1.SPD_GEN_ID,
+  T2.USER_ID,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_SERV_PROV_PRO T1
+  on
+    (@proName = T1.PRO_NAME) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GEN_ID) and
+    (T2.LAST_NAME &gt;= cast(@text12 as char(12)))
+order by
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadServiceProviderProfileServiceProvider2">
+      <value>
+select
+  T1.CREATED_TIMESTAMP,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.PRO_NAME,
+  T1.SPD_GEN_ID,
+  T2.USER_ID,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_SERV_PROV_PRO T1
+  on
+    (@proName = T1.PRO_NAME) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GEN_ID) and
+    (T2.USER_ID &gt;= cast(@text12 as char(12)))
+order by
+  T2.USER_ID,
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadServiceProviderProfileServiceProvider3">
+      <value>
+select
+  T1.CREATED_TIMESTAMP,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.PRO_NAME,
+  T1.SPD_GEN_ID,
+  T2.USER_ID,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_SERV_PROV_PRO T1
+  on
+    (@proName = T1.PRO_NAME) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GEN_ID)
+order by
+  T1.DISCONTINUE_DATE desc,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL desc
+</value>
+   </data>
+   <data name="ReadServiceProviderProfileServiceProvider4">
+      <value>
+select
+  T1.CREATED_TIMESTAMP,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.PRO_NAME,
+  T1.SPD_GEN_ID,
+  T2.USER_ID,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_SERV_PROV_PRO T1
+  on
+    (@proName = T1.PRO_NAME) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GEN_ID)
+order by
+  T1.EFFECTIVE_DATE desc,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL desc
+</value>
+   </data>
+</root>

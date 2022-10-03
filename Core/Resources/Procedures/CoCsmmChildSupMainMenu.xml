@@ -1,0 +1,50 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="CoCsmmChildSupMainMenu"
+           program-name="SWECSMMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.CoCsmmChildSupMainMenu"
+           transaction="SRNM"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_SERVICE_INIT_MENU"
+       action="transfer"
+       to="SiSinmServiceInitiationMenu"
+       send-command="XXFMMENU">
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_FMEN_MENU"
+       action="transfer"
+       to="FnFmenFnclMgmtMainMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_BCPM"
+       action="link"
+       return-when="BXP_RETURN"
+       return-command="XXFMMENU"
+       to="GbBchmBatchProcessingMenu"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_TO_CPMM_MENU"
+       action="transfer"
+       to="SpCpmmServicePlanMaintMenu"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_TO_OBLM_OBLIGATION_MENU"
+       action="transfer"
+       to="OeOblmObligationEstbMenu"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_TO_LEGAL_ENFORCMNT_MENU"
+       action="transfer"
+       to="LeLmnuLegalAndEnfrcmntMenu"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_2_SERVICE_PLAN_MGT_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_TO_STBM_SUPPRT_TBL_MENU"
+       action="transfer"
+       to="CoStbmSupportTablesMenu"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_TO_QAMN_MENU"
+       action="transfer"
+       to="QaQamnQualityAssuranceMenu"
+       send-command="XXFMMENU"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+</procedure>

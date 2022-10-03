@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCsePersonCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T3.CSE_OPEN_DATE,
+  T3.PA_MEDICAL_SERVICE,
+  T3.INTERSTATE_CASE_ID
+from
+  CKT_CASE T3 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T3.NUMB = T1.CAS_NUMBER) and
+    (T1.TYPE = 'AR') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @endDate) and
+    (T3.NUMB &gt; @numb) and
+    (T3.NUMB between cast(@caseNumber1 as char(10)) and cast(@caseNumber2 as char(10)))
+order by
+  T1.CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadNonCooperation1">
+      <value>
+select
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER
+from
+  CKT_NON_COPERATION with(readuncommitted)
+where
+  (CREATED_TIMESTAMP &gt; @createdTimestamp) and
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (CODE &lt;&gt; 'Y') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadNonCooperation2">
+      <value>
+select
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER
+from
+  CKT_NON_COPERATION with(readuncommitted)
+where
+  (CODE = 'Y') and
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadOcse157Data">
+      <value>
+select top(1)
+  max(RUN_NUMBER)
+from
+  CKT_OCSE157_DATA with(readuncommitted)
+where
+  (FISCAL_YEAR = @fiscalYear) and
+  (LINE_NUMBER = '01 ')
+</value>
+   </data>
+   <data name="ReadOcse157Verification">
+      <value>
+select top(1)
+  min(CASE_NUMBER)
+from
+  CKT_OCSE157_VERIFI with(readuncommitted)
+where
+  (COLUMN0 &lt;&gt; ' ') and
+  (FISCAL_YEAR = @fiscalYear) and
+  (RUN_NUMBER = @runNumber) and
+  (LINE_NUMBER = '01 ') and
+  (CASE_NUMBER = @caseNumber)
+</value>
+   </data>
+</root>

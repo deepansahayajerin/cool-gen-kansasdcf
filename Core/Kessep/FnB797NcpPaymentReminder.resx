@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  @casNo = CAS_NO
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH,
+  OTHER_NUMBER,
+  OTHER_AREA_CODE,
+  OTHER_PHONE_TYPE,
+  TEXT_MESSAGE_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  VERIFIED_DATE,
+  END_DATE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (VERIFIED_DATE &gt; @verifiedDate) and
+  (END_DATE &gt; @endDate)
+order by
+  VERIFIED_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonObligor">
+      <value>
+select distinct
+  T1.NUMB,
+  T5.CSP_NUMBER,
+  T5.CPA_TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_DEBT_DTL T5
+  on
+    (T1.NUMB = T5.CSP_NUMBER) and
+    (T5.CPA_TYPE = 'R') and
+    (T5.BAL_DUE_AMT &gt; 0) and
+    (T5.DUE_DT &lt; @dueDt) and
+    (T1.NUMB &gt; @numb)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  INMATE_NUMBER,
+  END_DATE,
+  START_DATE,
+  TYPE,
+  CREATED_TIMESTAMP,
+  INCARCERATED
+from
+  CKT_INCARCERATION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('P', 'J'))
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND = 'Y') and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+</root>

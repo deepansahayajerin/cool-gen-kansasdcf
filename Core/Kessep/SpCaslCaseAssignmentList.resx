@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1
+  join
+  CKT_ASSIGN_CASE T2
+  on
+    (T1.STATUS = @status) and
+    (T1.NUMB = T2.CAS_NO) and
+    (@ospDate = T2.OSP_DATE) and
+    (@ospCode = T2.OSP_CODE) and
+    (@offId = T2.OFF_ID) and
+    (@spdId = T2.SPD_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (
+      (cast(@overrideInd as char(1)) = ' ') or
+      (T2.OVERRIDE_IND = @overrideInd)
+    )
+</value>
+   </data>
+   <data name="ReadCaseCaseAssignment1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_ASSIGN_CASE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NO) and
+    (@ospDate = T2.OSP_DATE) and
+    (@ospCode = T2.OSP_CODE) and
+    (@offId = T2.OFF_ID) and
+    (@spdId = T2.SPD_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T1.STATUS = @status) and
+    (
+      (cast(@overrideInd as char(1)) = ' ') or
+      (T2.OVERRIDE_IND = @overrideInd)
+    )
+</value>
+   </data>
+   <data name="ReadCaseCaseAssignment2">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_ASSIGN_CASE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NO) and
+    (@ospDate = T2.OSP_DATE) and
+    (@ospCode = T2.OSP_CODE) and
+    (@offId = T2.OFF_ID) and
+    (@spdId = T2.SPD_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T1.STATUS = @status)
+</value>
+   </data>
+   <data name="ReadCaseCaseAssignment3">
+      <value>
+select
+  T1.NUMB,
+  T1.STATUS,
+  T2.REASON_CODE,
+  T2.OVERRIDE_IND,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_ASSIGN_CASE T2 with(readuncommitted)
+  on
+    (T1.NUMB &gt;= @numb) and
+    (T1.NUMB = T2.CAS_NO) and
+    (@ospDate = T2.OSP_DATE) and
+    (@ospCode = T2.OSP_CODE) and
+    (@offId = T2.OFF_ID) and
+    (@spdId = T2.SPD_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T1.STATUS = @status) and
+    (
+      (cast(@overrideInd as char(1)) = ' ') or
+      (
+        (cast(@overrideInd as char(1)) &lt;&gt; ' ') and
+        (T2.OVERRIDE_IND = @overrideInd)
+      )
+    )
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = @type) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = @type) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CASE_UNIT with(readuncommitted)
+where
+  (@casNo = CAS_NO) and
+  (START_DATE &lt;= @startDate) and
+  (CLOSURE_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.TRB_ID
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T1.TRB_ID = @trbId)
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE with(readuncommitted)
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.NAME,
+  T1.OFF_OFFICE,
+  T2.SPD_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_OFFICE T1 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T2 with(readuncommitted)
+  on
+    (@spdGeneratedId = T2.SPD_GENERATED_ID) and
+    (T1.OFFICE_ID = T2.OFF_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  T1.OFFICE_ID
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR with(readuncommitted)
+where
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode)
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER with(readuncommitted)
+where
+  USER_ID = @userId
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER with(readuncommitted)
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="ReadTribunal1">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadTribunal2">
+      <value>
+select distinct
+  T1.IDENTIFIER
+from
+  CKT_TRIBUNAL T1
+  join
+  CKT_LEGAL_ACTION T2
+  on
+    (T1.IDENTIFIER = @identifier) and
+    (T1.IDENTIFIER = T2.TRB_ID)
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (@casNumber = T3.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadTribunal3">
+      <value>
+select distinct
+  T1.IDENTIFIER
+from
+  CKT_TRIBUNAL T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T2 with(readuncommitted)
+  on
+    (T1.IDENTIFIER = T2.TRB_ID) and
+    (
+      (cast(@number1 as char(10)) &gt; cast(@number2 as char(10))) or
+      (
+        (cast(@number1 as char(10)) = cast(@number2 as char(10))) and
+        (T1.IDENTIFIER &gt;= @identifier)
+      )
+    )
+  join
+  CKT_LEG_ACT_CAS_RL T3 with(readuncommitted)
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (@casNumber = T3.CAS_NUMBER)
+order by
+  T1.IDENTIFIER
+</value>
+   </data>
+</root>

@@ -1,0 +1,51 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnPpltLstPreferredPmtMethod"
+           program-name="SWEPPLTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnPpltLstPreferredPmtMethod"
+           transaction="SRIY"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="SearchCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_MTN_PREF_PMNT_METHOD"
+       action="transfer"
+       to="FnPpmtMtnPreferredPmtMethod"
+       send-command="RETPPLT">
+      <map from="Common" to="Flag"/>
+      <map from="SearchCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="ToTranPaymentMethodType" to="PaymentMethodType"/>
+      <map from="ToTranPersonPreferredPaymentMethod.SystemGeneratedIdentifier"
+           to="PersonPreferredPaymentMethod.SystemGeneratedIdentifier"/>
+      <map from="ToTranPersonPreferredPaymentMethod.AbaRoutingNumber"
+           to="PersonPreferredPaymentMethod.AbaRoutingNumber"/>
+      <map from="ToTranPersonPreferredPaymentMethod.DfiAccountNumber"
+           to="PersonPreferredPaymentMethod.DfiAccountNumber"/>
+      <map from="ToTranPersonPreferredPaymentMethod.EffectiveDate"
+           to="PersonPreferredPaymentMethod.EffectiveDate"/>
+      <map from="ToTranPersonPreferredPaymentMethod.DiscontinueDate"
+           to="PersonPreferredPaymentMethod.DiscontinueDate"/>
+      <map from="ToTranPersonPreferredPaymentMethod.LastUpdateBy"
+           to="PersonPreferredPaymentMethod.LastUpdateBy"/>
+   </on>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="SearchCsePersonsWorkSet" to="SearchCsePersonsWorkSet"/>
+   <map from="SearchPersonPreferredPaymentMethod"
+        to="SearchPersonPreferredPaymentMethod"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.PaymentMethodType" to="Group.PaymentMethodType"/>
+   <map from="Group.PersonPreferredPaymentMethod"
+        to="Group.PersonPreferredPaymentMethod"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="CsePerson" to="CsePerson"/>
+</procedure>

@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateContactAddress">
+      <value>
+insert into CKT_CONTACT_ADDR
+(
+  CON_NUMBER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @conNumber,
+  @cspNumber,
+  @effectiveDate,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @province,
+  @postalCode,
+  @zipCode5,
+  @zipCode4,
+  @zip3,
+  @country,
+  @addressType,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="CreateContactDetail">
+      <value>
+insert into CKT_CONTACT_DETAIL
+(
+  CON_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  CONTACT_TIME,
+  CONTACT_DATE,
+  CONTACTED_USERID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  NOTE
+)
+values
+(
+  @conNumber,
+  @cspNumber,
+  @identifier,
+  @contactTime,
+  @contactDate,
+  @contactedUserid,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @note
+)
+</value>
+   </data>
+   <data name="DeleteContactDetail">
+      <value>
+delete from CKT_CONTACT_DETAIL
+where
+  (CON_NUMBER = @conNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadContact">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CONTACT_NUMBER,
+  FAX,
+  NAME_TITLE,
+  COMPANY_NAME,
+  REL_TO_CSE_PERSON,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  HOME_PHONE,
+  WORK_PHONE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  WORK_PHONE_EXT,
+  FAX_EXT,
+  WORK_PHONE_AREA,
+  HOME_PHONE_AREA,
+  FAX_AREA,
+  VERIFIED_DATE,
+  VERIFIED_USER_ID
+from
+  CKT_CONTACT
+where
+  (@cspNumber = CSP_NUMBER) and
+  (CONTACT_NUMBER = @contactNumber)
+</value>
+   </data>
+   <data name="ReadContactAddress">
+      <value>
+select top(1)
+  CON_NUMBER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_CONTACT_ADDR
+where
+  (@conNumber = CON_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadContactDetail">
+      <value>
+select
+  CON_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  CONTACT_TIME,
+  CONTACT_DATE,
+  CONTACTED_USERID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  NOTE
+from
+  CKT_CONTACT_DETAIL
+where
+  (@conNumber = CON_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateContact">
+      <value>
+update CKT_CONTACT
+set
+  FAX = @fax,
+  NAME_TITLE = @nameTitle,
+  COMPANY_NAME = @companyName,
+  REL_TO_CSE_PERSON = @relToCsePerson,
+  LAST_NAME = @lastName,
+  FIRST_NAME = @firstName,
+  MIDDLE_INITIAL = @middleInitial,
+  HOME_PHONE = @homePhone,
+  WORK_PHONE = @workPhone,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  WORK_PHONE_EXT = @workPhoneExt,
+  FAX_EXT = @faxExt,
+  WORK_PHONE_AREA = @workPhoneArea,
+  HOME_PHONE_AREA = @homePhoneArea,
+  FAX_AREA = @faxArea,
+  VERIFIED_DATE = @verifiedDate,
+  VERIFIED_USER_ID = @verifiedUserId
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CONTACT_NUMBER = @contactNumber)
+</value>
+   </data>
+   <data name="UpdateContactAddress">
+      <value>
+update CKT_CONTACT_ADDR
+set
+  STREET_1 = @street1,
+  STREET_2 = @street2,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CODE5 = @zipCode5,
+  ZIP_CODE4 = @zipCode4,
+  ZIP3 = @zip3,
+  ADDRESS_TYPE = @addressType,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CON_NUMBER = @conNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+</root>

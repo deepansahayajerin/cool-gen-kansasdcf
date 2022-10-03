@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID,
+  RECEIVED_DATE
+from
+  CKT_CASH_RECEIPT
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (RECEIVED_DATE &lt;= @receivedDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  COLLECTION_AMOUNT,
+  OBLGOR_PRSN_NBR,
+  OBLGOR_FIRST_NM,
+  OBLGOR_LAST_NM,
+  OBLGOR_MID_NM,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  COLLAMT_APPL_IND
+from
+  CKT_CR_DETAIL
+where
+  (COLLAMT_APPL_IND = ' ') and
+  (ADJUSTMENT_IND &lt;&gt; 'Y') and
+  (CRT_IDENTIFIER &lt;&gt; 2) and
+  (CRT_IDENTIFIER &lt;&gt; 7)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatus">
+      <value>
+select top(1)
+  T1.CRDETAIL_STAT_ID,
+  T1.CODE
+from
+  CKT_CR_DETAIL_STAT T1
+  join
+  CKT_CRDTL_STATHIST T2
+  on
+    (T1.CRDETAIL_STAT_ID = T2.CDS_IDENTIFIER) and
+    (T2.DISCONTINUE_DATE = @discontinueDate) and
+    (@crdIdentifier = T2.CRD_IDENTIFIER) and
+    (@crvIdentifier = T2.CRV_IDENTIFIER) and
+    (@cstIdentifier = T2.CST_IDENTIFIER) and
+    (@crtIdentifier = T2.CRT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceTypeCashReceiptEvent">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  cast(@cstIdentifier as smallint),
+  cast(@crvIdentifier as integer)
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @cstIdentifier
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRoleCaseAssignmentServiceProvider">
+      <value>
+select top(1)
+  T2.CSP_NUMBER,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.CREATED_TIMESTAMP,
+  T3.SPD_ID,
+  T3.OFF_ID,
+  T3.OSP_CODE,
+  T3.OSP_DATE,
+  T3.CAS_NO,
+  T4.SERVICE_PRVDER_ID,
+  T4.USER_ID
+from
+  CKT_SERVICE_PRVDER T4
+  join
+  CKT_CASE_ROLE T2
+  join
+  CKT_ASSIGN_CASE T3
+  on
+    (T2.CAS_NUMBER = T3.CAS_NO) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.TYPE = 'AP') and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    T4.SERVICE_PRVDER_ID = T3.SPD_ID
+order by
+  T3.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRoleCaseAssignmentServiceProvider">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.STANDARD_NO,
+  T5.CAS_NUMBER,
+  T5.CSP_NUMBER,
+  T5.CRO_TYPE,
+  T5.CRO_IDENTIFIER,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.CREATED_TIMESTAMP,
+  T3.SPD_ID,
+  T3.OFF_ID,
+  T3.OSP_CODE,
+  T3.OSP_DATE,
+  T3.CAS_NO,
+  T4.SERVICE_PRVDER_ID,
+  T4.USER_ID
+from
+  CKT_SERVICE_PRVDER T4
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T5
+  on
+    (T1.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T1.STANDARD_NO = @standardNo) and
+    (T5.CRO_TYPE = 'AP')
+  join
+  CKT_ASSIGN_CASE T3
+  on
+    (T5.CAS_NUMBER = T3.CAS_NO) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    T4.SERVICE_PRVDER_ID = T3.SPD_ID
+order by
+  T3.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  (OFFICE_ID = @officeId) and
+  (cast(@servicePrvderId as integer) = cast(@spdId as integer))
+</value>
+   </data>
+   <data name="ReadProgramProcessingInfo">
+      <value>
+select top(1)
+  NAME,
+  CREATED_TIMESTAMP,
+  PROCESS_DATE
+from
+  CKT_PGM_PRCSS_INFO
+where
+  NAME = 'SWEFB730'
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

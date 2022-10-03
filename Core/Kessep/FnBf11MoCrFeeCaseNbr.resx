@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteMonthlyCourtOrderFee">
+      <value>
+delete from CKT_MO_CT_ORDR_FEE
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (COURT_ORDER_NUMBER = @courtOrderNumber) and
+  (YEAR_MONTH = @yearMonth)
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionCsePersonLegalAction">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.DBT_GENERATED_ID,
+  T2.NUMB,
+  T2.TYPE,
+  T3.LEGAL_ACTION_ID,
+  T3.COURT_CASE_NO,
+  T3.STANDARD_NO,
+  T3.TRB_ID,
+  T5.COLL_ID,
+  T5.COLL_DT,
+  T5.CRT_TYPE,
+  T5.CST_ID,
+  T5.CRV_ID,
+  T5.CRD_ID,
+  T5.OBG_ID,
+  T5.CSP_NUMBER,
+  T5.CPA_TYPE,
+  T5.OTR_ID,
+  T5.OTR_TYPE,
+  T5.OTY_ID
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_OBLIGATION T11
+  join
+  CKT_COLLECTION T5
+  join
+  CKT_DISB_TRAN T9
+  join
+  CKT_CSE_PERSON T2
+  join
+  CKT_DISB_TRAN T1
+  on
+    (T1.CPA_TYPE = 'E') and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.NUMB between cast(@number1 as char(10)) and cast(@number2 as char(10))) and
+    (T1.DBT_GENERATED_ID = 73)
+  join
+  CKT_DISB_TRAN_RLN T8
+  on
+    (T1.DISB_TRAN_ID = T8.DTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T8.CPA_TYPE) and
+    (T1.CSP_NUMBER = T8.CSP_NUMBER)
+  on
+    (T9.DISB_TRAN_ID = T8.DTR_P_GENERATED_ID) and
+    (T9.CPA_TYPE = T8.CPA_P_TYPE) and
+    (T9.CSP_NUMBER = T8.CSP_P_NUMBER)
+  on
+    (T5.COLL_ID = T9.COL_ID) and
+    (T5.OTY_ID = T9.OTY_ID) and
+    (T5.OBG_ID = T9.OBG_ID) and
+    (T5.CSP_NUMBER = T9.CSP_NUMBER_DISB) and
+    (T5.CPA_TYPE = T9.CPA_TYPE_DISB) and
+    (T5.OTR_ID = T9.OTR_ID) and
+    (T5.OTR_TYPE = T9.OTR_TYPE_DISB) and
+    (T5.CRT_TYPE = T9.CRT_ID) and
+    (T5.CST_ID = T9.CST_ID) and
+    (T5.CRV_ID = T9.CRV_ID) and
+    (T5.CRD_ID = T9.CRD_ID)
+  on
+    (T11.DTY_GENERATED_ID = T5.OTY_ID) and
+    (T11.OB_ID = T5.OBG_ID) and
+    (T11.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T11.CPA_TYPE = T5.CPA_TYPE)
+  on
+    (T3.LEGAL_ACTION_ID = T11.LGA_ID) and
+    (T3.TRB_ID is not null) and
+    (T3.TRB_ID in (2752, 699))
+order by
+  T2.NUMB,
+  T3.STANDARD_NO,
+  T1.COLLECTION_DATE
+</value>
+   </data>
+   <data name="ReadMonthlyCourtOrderFee">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  COURT_ORDER_NUMBER,
+  YEAR_MONTH,
+  AMOUNT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_MO_CT_ORDR_FEE
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

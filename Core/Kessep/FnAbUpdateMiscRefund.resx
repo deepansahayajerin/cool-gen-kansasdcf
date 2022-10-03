@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  AMOUNT,
+  RCT_R_TSTAMP,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  @rctRTstamp = RCT_R_TSTAMP
+</value>
+   </data>
+   <data name="ReadPaymentRequestPaymentStatusHistoryPaymentStatus">
+      <value>
+select top(1)
+  T1.PAYMENT_REQUEST_ID,
+  T1.NUMBER,
+  T1.PRINT_DATE,
+  T1.TYPE,
+  T1.RCT_R_TSTAMP,
+  T1.PRQ_R_GENERATED_ID,
+  T2.PST_GENERATED_ID,
+  T2.PYMNT_STAT_HIST_ID,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T3.CODE
+from
+  CKT_PAYMENT_STATUS T3
+  join
+  CKT_PMNT_REQUEST T1
+  join
+  CKT_PMNT_STAT_HIST T2
+  on
+    (@rctRTstamp = T1.RCT_R_TSTAMP) and
+    (T1.PAYMENT_REQUEST_ID = T2.PRQ_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    T3.PAYMENT_STATUS_ID = T2.PST_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadReceiptRefund">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  REQUEST_DATE,
+  REASON_TEXT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_RECEIPT_REFUND
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="UpdatePaymentRequest">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  AMOUNT = @amount
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="UpdateReceiptRefund">
+      <value>
+update CKT_RECEIPT_REFUND
+set
+  REASON_CODE = @reasonCode,
+  TAXID = @taxid,
+  PAYEE_NAME = @payeeName,
+  AMOUNT = @amount,
+  REQUEST_DATE = @requestDate,
+  REASON_TEXT = @reasonText,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

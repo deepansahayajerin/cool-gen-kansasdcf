@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignment">
+      <value>
+select
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (DISCONTINUE_DATE &lt; @discontinueDate) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (REASON_CODE = 'RSP') and
+  (CAS_NO = @casNo)
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'EXCLUDED TIER 1 DOCUMENTS') and
+    (T1.CDVALUE = @cdvalue) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  T1.ORGANZTN_ID,
+  T1.TYPE_CODE,
+  T1.NAME
+from
+  CKT_CSE_ORGANIZATN T1
+  join
+  CKT_OFFICE T2
+  on
+    (T1.TYPE_CODE = 'C') and
+    (T1.TYPE_CODE = T2.COG_TYPE_CODE) and
+    (T1.ORGANZTN_ID = T2.COG_CODE) and
+    (T2.OFFICE_ID = @officeId)
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select distinct
+  T1.NAME,
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME
+from
+  CKT_FIELD T1
+  join
+  CKT_DOCUMENT_FIELD T2
+  on
+    (T1.NAME = T2.FLD_NAME) and
+    (T2.DOC_NAME = @docName) and
+    (T2.DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+    (T1.DEPENDANCY = @dependancy)
+order by
+  T1.SUBROUTINE_NAME,
+  T1.NAME
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select top(1)
+  OFFICE_ID,
+  MAIN_PHONE_NUMBER,
+  MAIN_FAX_NUMBER,
+  NAME,
+  MAIN_PHONE_AREA_CD,
+  FAX_AREA_CD,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeAddress">
+      <value>
+select top(1)
+  OFF_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  POSTAL_CODE,
+  ZIP,
+  ZIP4,
+  COUNTRY,
+  ZIP3
+from
+  CKT_OFFICE_ADDRESS
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (TYPE = 'M')
+</value>
+   </data>
+   <data name="ReadOfficeOfficeAddress">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.MAIN_PHONE_NUMBER,
+  T1.MAIN_FAX_NUMBER,
+  T1.NAME,
+  T1.MAIN_PHONE_AREA_CD,
+  T1.FAX_AREA_CD,
+  T1.OFF_OFFICE,
+  T2.TYPE,
+  T2.STREET_1,
+  T2.STREET_2,
+  T2.CITY,
+  T2.STATE_PROVINCE,
+  T2.POSTAL_CODE,
+  T2.ZIP,
+  T2.ZIP4,
+  T2.COUNTRY,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATD_TSTAMP,
+  T2.ZIP3
+from
+  CKT_OFFICE T1
+  join
+  CKT_OFFICE_ADDRESS T2
+  on
+    (T1.OFFICE_ID = @officeId) and
+    (T1.OFFICE_ID = T2.OFF_GENERATED_ID) and
+    (T2.TYPE = 'M')
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.WORK_PHONE_NUMBER,
+  T1.WORK_FAX_NUMBER,
+  T1.DISCONTINUE_DATE,
+  T1.WORK_FAX_AREA_CD,
+  T1.WORK_PHONE_EXT,
+  T1.WORK_PHONE_AREA_CD,
+  T1.LOC_CONT_FOR_IRS,
+  T2.MAIN_PHONE_NUMBER,
+  T2.MAIN_FAX_NUMBER,
+  T2.TYPE_CODE,
+  T2.NAME,
+  T2.COG_TYPE_CODE,
+  T2.COG_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.MAIN_PHONE_AREA_CD,
+  T2.FAX_AREA_CD,
+  T2.OFF_OFFICE,
+  T3.USER_ID,
+  T3.LAST_NAME,
+  T3.FIRST_NAME,
+  T3.MIDDLE_INITIAL,
+  T3.CERTIFICATION_NO
+from
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFICE T2
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    (T1.EFFECTIVE_DATE = @effectiveDate1) and
+    (T1.ROLE_CODE = @roleCode) and
+    (T1.OFF_GENERATED_ID = @offGeneratedId) and
+    (T1.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T2.OFFICE_ID = T1.OFF_GENERATED_ID) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate2) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate2)
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadServiceProviderAddress">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  POSTAL_CODE,
+  ZIP,
+  ZIP4,
+  COUNTRY,
+  ZIP3
+from
+  CKT_SRVCE_PRVR_ADR
+where
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (TYPE = 'M')
+</value>
+   </data>
+</root>

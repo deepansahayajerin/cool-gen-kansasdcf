@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollectionDebtDetail">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.COLL_ADJ_PROC_DATE,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.BAL_BEF_COLL,
+  T1.CUM_INT_CHRGD,
+  T1.CUM_INT_COLL_AFT,
+  T1.INT_BAL_AFT_COLL,
+  T1.COL_ADJ_RSN_TXT,
+  T1.APPLIED_TO_FUT_IND,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OTR_GENERATED_ID,
+  T2.OTY_TYPE,
+  T2.OTR_TYPE,
+  T2.DUE_DT,
+  T2.BAL_DUE_AMT,
+  T2.INT_BAL_DUE_AMT,
+  T2.CREATED_TMST
+from
+  CKT_COLLECTION T1
+  join
+  CKT_DEBT_DTL T2
+  on
+    (@otyId = T1.OTY_ID) and
+    (T1.OTY_ID = T2.OTY_TYPE) and
+    (T1.OBG_ID = T2.OBG_GENERATED_ID) and
+    (T1.OTR_TYPE = T2.OTR_TYPE) and
+    (T1.OTR_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.APPLIED_TO_FUT_IND = 'N')
+order by
+  T1.CREATED_TMST desc
+</value>
+   </data>
+   <data name="ReadDebt">
+      <value>
+select
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  OB_TRN_AMT,
+  CREATED_TMST,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN
+where
+  (@otyType = OTY_TYPE) and
+  (CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+</value>
+   </data>
+   <data name="ReadDebtAdjustment1">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.OB_TRN_AMT,
+  T1.DEBT_ADJ_TYP,
+  T1.DEB_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T1.DEBT_ADJ_PROC_DATE,
+  T1.DA_CA_PROC_DT,
+  T1.RSN_CD
+from
+  CKT_OB_TRN T1
+  join
+  CKT_OB_TRN_RLN T2
+  on
+    (T1.OTY_TYPE = T2.OTY_TYPE_SECONDARY) and
+    (T1.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T1.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (@otyTypePrimary = T2.OTY_TYPE_PRIMARY) and
+    (@otrPType = T2.OTR_P_TYPE) and
+    (@otrPGeneratedId = T2.OTR_P_GENERATED_ID) and
+    (@cpaPType = T2.CPA_P_TYPE) and
+    (@cspPNumber = T2.CSP_P_NUMBER) and
+    (@obgPGeneratedId = T2.OBG_P_GENERATED_ID) and
+    (T1.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+</value>
+   </data>
+   <data name="ReadDebtAdjustment2">
+      <value>
+select
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  OB_TRN_AMT,
+  DEBT_ADJ_TYP,
+  DEB_ADJ_DT,
+  CREATED_TMST,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE,
+  DEBT_ADJ_PROC_DATE,
+  DA_CA_PROC_DT,
+  RSN_CD
+from
+  CKT_OB_TRN
+where
+  @otyType = OTY_TYPE
+order by
+  CREATED_TMST desc
+</value>
+   </data>
+   <data name="ReadDebtDetail1">
+      <value>
+select top(1)
+  sum(BAL_DUE_AMT),
+  sum(INT_BAL_DUE_AMT)
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (DUE_DT &lt;= @dueDt)
+</value>
+   </data>
+   <data name="ReadDebtDetail2">
+      <value>
+select top(1)
+  sum(BAL_DUE_AMT),
+  sum(INT_BAL_DUE_AMT)
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (DUE_DT &lt; @dueDt)
+</value>
+   </data>
+   <data name="ReadObligationTransactionRlnRsnDebtDetail1">
+      <value>
+select top(1)
+  T1.OB_TRN_RLN_RSN_ID,
+  T1.OB_TRN_RLN_RSN_CD,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OTR_GENERATED_ID,
+  T2.OTY_TYPE,
+  T2.OTR_TYPE,
+  T2.DUE_DT,
+  T2.BAL_DUE_AMT,
+  T2.INT_BAL_DUE_AMT,
+  T2.CREATED_TMST
+from
+  CKT_DEBT_DTL T2
+  join
+  CKT_OB_TRN_RLN_RSN T1
+  join
+  CKT_OB_TRN_RLN T3
+  on
+    (T1.OB_TRN_RLN_RSN_ID = T3.ONR_GENERATED_ID) and
+    (@otyTypePrimary = T3.OTY_TYPE_PRIMARY) and
+    (@otrPType = T3.OTR_P_TYPE) and
+    (@otrPGeneratedId = T3.OTR_P_GENERATED_ID) and
+    (@cpaPType = T3.CPA_P_TYPE) and
+    (@cspPNumber = T3.CSP_P_NUMBER) and
+    (@obgPGeneratedId = T3.OBG_P_GENERATED_ID)
+  on
+    (T2.OTY_TYPE = T3.OTY_TYPE_SECONDARY) and
+    (T2.OTR_TYPE = T3.OTR_TYPE) and
+    (T2.OTR_GENERATED_ID = T3.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T3.CPA_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T3.OBG_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadObligationTransactionRlnRsnDebtDetail2">
+      <value>
+select top(1)
+  T1.OB_TRN_RLN_RSN_ID,
+  T1.OB_TRN_RLN_RSN_CD,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OTR_GENERATED_ID,
+  T2.OTY_TYPE,
+  T2.OTR_TYPE,
+  T2.DUE_DT,
+  T2.BAL_DUE_AMT,
+  T2.INT_BAL_DUE_AMT,
+  T2.CREATED_TMST
+from
+  CKT_DEBT_DTL T2
+  join
+  CKT_OB_TRN_RLN_RSN T1
+  join
+  CKT_OB_TRN_RLN T3
+  on
+    (T1.OB_TRN_RLN_RSN_ID = T3.ONR_GENERATED_ID) and
+    (@otyTypeSecondary = T3.OTY_TYPE_SECONDARY) and
+    (@otrType = T3.OTR_TYPE) and
+    (@otrGeneratedId = T3.OTR_GENERATED_ID) and
+    (@cpaType = T3.CPA_TYPE) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (@obgGeneratedId = T3.OBG_GENERATED_ID)
+  on
+    (T2.OTY_TYPE = T3.OTY_TYPE_PRIMARY) and
+    (T2.OTR_TYPE = T3.OTR_P_TYPE) and
+    (T2.OTR_GENERATED_ID = T3.OTR_P_GENERATED_ID) and
+    (T2.CPA_TYPE = T3.CPA_P_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_P_NUMBER) and
+    (T2.OBG_GENERATED_ID = T3.OBG_P_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_NM,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_CLASS = @debtTypClass
+</value>
+   </data>
+</root>

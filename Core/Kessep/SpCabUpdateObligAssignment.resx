@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadObligationAssignment">
+      <value>
+select top(1)
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  OTY_ID,
+  CPA_TYPE,
+  CSP_NO,
+  OBG_ID
+from
+  CKT_ASSGN_OBG
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (OBG_ID = @obgId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NO = @cspNo) and
+  (OTY_ID = @otyId) and
+  (OSP_DATE = @ospDate) and
+  (OSP_CODE = @ospCode) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId)
+</value>
+   </data>
+   <data name="UpdateObligationAssignment">
+      <value>
+update CKT_ASSGN_OBG
+set
+  REASON_CODE = @reasonCode,
+  OVERRIDE_IND = @overrideInd,
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (OTY_ID = @otyId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NO = @cspNo) and
+  (OBG_ID = @obgId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  STANDARD_NO,
+  FOREIGN_ORDER_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadManualDistributionAudit">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT
+from
+  CKT_MNL_DIST_AUDIT
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (DISCONTINUE_DT &gt; @effectiveDt)
+</value>
+   </data>
+   <data name="ReadObligCollProtectionHist">
+      <value>
+select top(1)
+  DEACTIVATION_DATE,
+  CREATED_TMST,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTY_IDENTIFIER,
+  OBG_IDENTIFIER
+from
+  CKT_OB_COLL_PHIST
+where
+  (@cpaType = CPA_TYPE) and
+  (@obgIdentifier = OBG_IDENTIFIER) and
+  (@otyIdentifier = OTY_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER) and
+  (DEACTIVATION_DATE = @deactivationDate)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  LGA_ID,
+  OB_DSC,
+  HISTORY_IND,
+  PRIM_SEC_CD,
+  PRE_CONV_DEBT_NO,
+  PRECNVRSN_CASE_NBR,
+  AOD_NAD_ARR_BAL,
+  AOD_NAD_INT_BAL,
+  AOD_ADC_ARR_BAL,
+  AOD_ADC_INT_BAL,
+  AOD_REC_BAL,
+  AOD_REC_INT_BAL,
+  AOD_FEE_BAL,
+  AOD_FEE_INT_BAL,
+  AOD_BAL_CURR_ARR,
+  TD_CS_COL_CUR_ARR,
+  TD_SP_COL_CUR_ARR,
+  TD_MS_COL_CUR_ARR,
+  TD_NAD_ARR_COLL,
+  TD_NAD_INT_COLL,
+  TD_ADC_ARR_COLL,
+  TD_ADC_INT_COLL,
+  AOD_REC_COLL,
+  AOD_REC_INT_COLL,
+  AOD_FEE_COLL,
+  AOD_FEE_INT_COLL,
+  AOD_COLL_ALL,
+  LAST_PYMNT_AMT,
+  LAST_PYMNT_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST,
+  ORD_TYP_CD
+from
+  CKT_OBLIGATION with(readuncommitted)
+where
+  (CPA_TYPE = @cpaType) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  OB_ID desc
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadMilitaryService1">
+      <value>
+select distinct
+  T1.EFFECTIVE_DATE,
+  T1.CSP_NUMBER
+from
+  CKT_MILITARY_SRV T1
+  join
+  CKT_INCOME_SOURCE T3
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.EFFECTIVE_DATE = T3.MSE_EFFECTIVE_DATE) and
+    (T1.CSP_NUMBER = T3.CSP_S_NUMBER) and
+    (T1.CSP_NUMBER = T3.CSP_I_NUMBER) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T3.IDENTIFIER = @identifier)
+order by
+  T1.EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadMilitaryService2">
+      <value>
+select
+  EFFECTIVE_DATE,
+  CSP_NUMBER
+from
+  CKT_MILITARY_SRV
+where
+  CSP_NUMBER = @cspNumber
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

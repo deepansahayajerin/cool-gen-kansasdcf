@@ -1,0 +1,182 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OePlomPersonLocateMenu"
+           program-name="SWEPLOMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OePlomPersonLocateMenu"
+           transaction="SR6Z"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFER_TO_DEDE"
+       action="transfer"
+       to="SiDedeDeleteDuplicateEmployr"
+       send-command="DISPLAY">
+      <map from="StartCsePerson" to="HiddenCsePerson"/>
+      <map from="StartCase" to="HiddenCase"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_REG_AGENT_FOR_EMPL"
+       action="transfer"
+       to="SiRafeRegisteredAgentForEmp"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCS_INCOME_SRC_DTL"
+       action="transfer"
+       to="SiIncsIncomeSourceDetails"
+       send-command="XXFMMENU">
+      <map from="StartCsePerson" to="FromMenu"/>
+      <map from="StartCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeOblmObligationEstbMenu"
+       send-command="XXFMMENU">
+      <map from="PersonName" to="PersonNameH"/>
+      <map from="StartCsePerson" to="CurrentHCsePerson"/>
+      <map from="StartCase" to="CurrentHCase"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_JAIL"
+       action="transfer"
+       to="OeJailIncarceration"
+       send-command="XXFMMENU">
+      <map from="StartCsePerson" to="CsePerson"/>
+      <map from="StartCase" to="Case1"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_CARS"
+       action="transfer"
+       to="OeCarsPersonVehicle"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+      <map from="PersonName.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_APRL"
+       action="transfer"
+       to="OeReslPersonResourceList"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="StartingCase"/>
+      <map from="StartCsePerson.Number" to="StartingCsePerson.Number"/>
+      <map from="PersonName.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_APRE"
+       action="transfer"
+       to="OeResoPersonResource"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+      <map from="PersonName.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_MARH"
+       action="transfer"
+       to="OeMarhMarriageHistory"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+      <map from="PersonName" to="PrimeCsePersonsWorkSet"/>
+      <map from="StartCsePerson" to="PrimeCsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_MARL"
+       action="transfer"
+       to="OeMarlMarriageHistoryList"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+      <map from="PersonName" to="CsePersonsWorkSet"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_PCOL"
+       action="transfer"
+       to="OePcolPersonContactList"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+      <map from="PersonName.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_PCON"
+       action="transfer"
+       to="OePconPersonContact"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+      <map from="PersonName.FormattedName" to="Work.FormattedName"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_MILI"
+       action="transfer"
+       to="OeMiliPersonMilitaryHistory"
+       send-command="XXFMMENU">
+      <map from="PersonName.FormattedName" to="Name.FormattedName"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+      <map from="StartCase" to="Case1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_FOREIGN_ADDRESS"
+       action="transfer"
+       to="SiFadsForeignAddressMaint"
+       send-command="DISPLAY">
+      <map from="StartCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCOME_HISTORY"
+       action="transfer"
+       to="SiInchIncomeSourceHistory"
+       send-command="XXFMMENU">
+      <map from="StartCsePerson" to="FromMenu"/>
+      <map from="StartCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCOME_SOURCE_LIST1"
+       action="transfer"
+       to="SiInclIncomeSourceList"
+       send-command="XXFMMENU">
+      <map from="StartCsePerson" to="FromMenu"/>
+      <map from="StartCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ADDRESS"
+       action="transfer"
+       to="SiAddrAddressMaintenance"
+       send-command="DISPLAY">
+      <map from="StartCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_REGISTERED_AGENTS"
+       action="transfer"
+       to="SiRageRegisteredAgentMaint"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_FACL"
+       action="transfer"
+       to="OeFaclKsCorrectionalFacility"
+       send-command="DISPLAY">
+      <map from="StartCsePerson" to="H"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_KDOR"
+       action="transfer"
+       to="SiKdorDlAndVehicleList"
+       send-command="FROMMENU">
+      <map from="StartCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_WKCD"
+       action="transfer"
+       to="LeWkcdWorkersCompDetail"
+       send-command="FROMMENU">
+      <map from="StartCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_WKCL"
+       action="transfer"
+       to="LeWkclWorkersCompList"
+       send-command="FROMMENU">
+      <map from="StartCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_EMAIL_ADDR"
+       action="transfer"
+       to="SiEmailAddressMaintenance"
+       send-command="DISPLAY">
+      <map from="StartCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_EMPLOYER_MAINTENANCE"
+       action="transfer"
+       to="SiEmplEmployerMaintenance"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Next"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Current" to="Current"/>
+   <map from="StartCsePerson" to="StartCsePerson"/>
+   <map from="PersonName" to="PersonName"/>
+   <map from="StartCase" to="StartCase"/>
+   <map from="Hidden" to="Hidden"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,26 @@
+
+Feature: TC-070-test1
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+    When user enters "CADS" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Case Details - CADS" window appears
+    Then snapshot "test"
+    #When user enters "<CASE_N>" in "Case #"
+    When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+    When user presses "F2"
+
+    Examples:
+      | CASE_N |
+      | 566477 |
+
+
+

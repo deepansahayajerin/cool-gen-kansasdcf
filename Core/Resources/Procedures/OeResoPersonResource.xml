@@ -1,0 +1,185 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeResoPersonResource"
+           program-name="SWERESOP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeResoPersonResource"
+           transaction="SR5A"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CARS_LIST_VEHICLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCARS"
+       to="OeCarsPersonVehicle"
+       send-command="DISPLAY">
+      <map from="AllowChangePersonNo" to="HiddenAllowChgOfPersn"/>
+      <map from="Case1" to="Case1"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CsePersonVehicle" to="Starting"/>
+      <return-map from="HiddenSelectedCsePersonVehicle"
+                  to="HiddenSelectedCsePersonVehicle"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCOME_SOURCE_DETAIL1"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMINCS"
+       to="SiIncsIncomeSourceDetails"
+       send-command="DISPLAY">
+      <map from="ResourceTypeDesc" to="Reso"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CsePersonResource" to="CsePersonResource"/>
+      <map from="ResourceLocationAddress" to="ResourceLocationAddress"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_EXTERNAL_AGENCY"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEXAL"
+       to="OeExalExternalAgencyList"
+       send-command="EXAL">
+      <return-map from="Selected" to="HiddenSelectedExternalAgency"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="Case1" to="StartCase"/>
+      <map from="CsePerson" to="StartCsePerson"/>
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="Selected.Number" to="CsePersonsWorkSet.Number"/>
+      <return-map from="Selected.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_RESOURCE_LIST1"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETRESL"
+       to="OeReslPersonResourceList"
+       send-command="DISPLAY">
+      <map from="Case1" to="StartingCase"/>
+      <map from="CsePerson.Number" to="StartingCsePerson.Number"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Selected.ResourceNo" to="CsePersonResource.ResourceNo"/>
+      <return-map from="Selected.Type1" to="CsePersonResource.Type1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="DocmFilter" to="FilterDocument"/>
+      <map from="DocmProtectFilter" to="ProtectFilter"/>
+      <return-map from="ReturnDoc" to="Print"/>
+   </on>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="ResourceLocationAddress" to="ResourceLocationAddress"/>
+   <map from="ResourceLienHolderAddress" to="ResourceLienHolderAddress"/>
+   <map from="ListCsePersons" to="ListCsePersons"/>
+   <map from="HiddenPreviousCsePerson" to="HiddenPreviousCsePerson"/>
+   <map from="HiddenPreviousCsePersonResource"
+        to="HiddenPreviousCsePersonResource"/>
+   <map from="CsePersonVehicle" to="CsePersonVehicle"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="HiddenDisplaySuccessful" to="HiddenDisplaySuccessful"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="ResourceTypeDesc" to="ResourceTypeDesc"/>
+   <map from="CseActionCodeDesc" to="CseActionCodeDesc"/>
+   <map from="LastUpdated" to="LastUpdated"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="ListResourceTypes" to="ListResourceTypes"/>
+   <map from="ListResLocnAddrStates" to="ListResLocnAddrStates"/>
+   <map from="Case1" to="Case1"/>
+   <map from="HiddenPreviousCsePersonVehicle"
+        to="HiddenPreviousCsePersonVehicle"/>
+   <map from="LegalActionPersonResource" to="LegalActionPersonResource"/>
+   <map from="ExternalAgency" to="ExternalAgency"/>
+   <map from="ListExternalAgencies" to="ListExternalAgencies"/>
+   <map from="ListLienHolderStates" to="ListLienHolderStates"/>
+   <map from="Code" to="Code"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="AbendData" to="AbendData"/>
+   <map from="HiddenSelectedCsePersonVehicle"
+        to="HiddenSelectedCsePersonVehicle"/>
+   <map from="HiddenSelectedExternalAgency" to="HiddenSelectedExternalAgency"/>
+   <map from="HiddenPreviousExternalAgency" to="HiddenPreviousExternalAgency"/>
+   <map from="LegalActionLienType" to="LegalActionLienType"/>
+   <map from="FromIncomeSource" to="FromIncomeSource"/>
+   <map from="HiddenResourceLocationAddress" to="HiddenResourceLocationAddress"/>
+   <map from="CsePersonResource.Equity" to="CsePersonResource.Equity"/>
+   <map from="CsePersonResource.Value" to="CsePersonResource.Value"/>
+   <map from="CsePersonResource.Location" to="CsePersonResource.Location"/>
+   <map from="CsePersonResource.ResourceDescription"
+        to="CsePersonResource.ResourceDescription"/>
+   <map from="CsePersonResource.AccountNumber"
+        to="CsePersonResource.AccountNumber"/>
+   <map from="CsePersonResource.AccountHolderName"
+        to="CsePersonResource.AccountHolderName"/>
+   <map from="CsePersonResource.ResourceNo" to="CsePersonResource.ResourceNo"/>
+   <map from="CsePersonResource.VerifiedDate"
+        to="CsePersonResource.VerifiedDate"/>
+   <map from="CsePersonResource.ResourceDisposalDate"
+        to="CsePersonResource.ResourceDisposalDate"/>
+   <map from="CsePersonResource.OtherLienHolderName"
+        to="CsePersonResource.OtherLienHolderName"/>
+   <map from="CsePersonResource.LienHolderStateOfKansasInd"
+        to="CsePersonResource.LienHolderStateOfKansasInd"/>
+   <map from="CsePersonResource.CoOwnerName" to="CsePersonResource.CoOwnerName"/>
+   <map from="CsePersonResource.CreatedBy" to="CsePersonResource.CreatedBy"/>
+   <map from="CsePersonResource.CreatedTimestamp"
+        to="CsePersonResource.CreatedTimestamp"/>
+   <map from="CsePersonResource.LastUpdatedBy"
+        to="CsePersonResource.LastUpdatedBy"/>
+   <map from="CsePersonResource.LastUpdatedTimestamp"
+        to="CsePersonResource.LastUpdatedTimestamp"/>
+   <map from="CsePersonResource.LocationCounty"
+        to="CsePersonResource.LocationCounty"/>
+   <map from="CsePersonResource.CseActionTakenCode"
+        to="CsePersonResource.CseActionTakenCode"/>
+   <map from="CsePersonResource.Type1" to="CsePersonResource.Type1"/>
+   <map from="CsePersonResource.OtherLienPlacedDate"
+        to="CsePersonResource.OtherLienPlacedDate"/>
+   <map from="CsePersonResource.OtherLienRemovedDate"
+        to="CsePersonResource.OtherLienRemovedDate"/>
+   <map from="CsePersonResource.VerifiedUserId"
+        to="CsePersonResource.VerifiedUserId"/>
+   <map from="CodeValue.Id" to="DlgflwSelectedPf24Lett.Id"/>
+   <map from="CodeValue.Cdvalue" to="CodeValue.Cdvalue"/>
+   <map from="CodeValue.EffectiveDate"
+        to="DlgflwSelectedPf24Lett.EffectiveDate"/>
+   <map from="CodeValue.ExpirationDate"
+        to="DlgflwSelectedPf24Lett.ExpirationDate"/>
+   <map from="HiddenNextTranInfo.CsePersonNumber"
+        to="HiddenNextTranInfo.CsePersonNumber"/>
+   <map from="HiddenNextTranInfo.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+   <map from="HiddenNextTranInfo.CourtCaseNumber"
+        to="HiddenNextTranInfo.CourtCaseNumber"/>
+   <map from="CodeValue.Description" to="CodeValue.Description"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+   <autoflow command="CDVL" exit-state="ECO_LNK_TO_LIST_CODE_VALUE"/>
+</procedure>

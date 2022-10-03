@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadGlobalReassignmentOfficeOfficeServiceProvider">
+      <value>
+select
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.PROCESS_DATE,
+  T1.STATUS_FLAG,
+  T1.OVERRIDE_FLAG,
+  T1.BUSINESS_OBJ_CODE,
+  T1.ASSIGN_REASON_CODE,
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.OSP_ROLE_CODE,
+  T1.OSP_EFFECTIVE_DATE,
+  T1.SPD_GENERATED_ID1,
+  T1.OFF_GENERATED_ID1,
+  T1.OSP_ROLE_COD,
+  T1.OSP_EFFECTIVE_DAT,
+  T1.BO_COUNT,
+  T1.MON_COUNT,
+  T2.OFFICE_ID,
+  T2.OFF_OFFICE,
+  T4.SERVICE_PRVDER_ID,
+  T4.USER_ID,
+  T5.OFFICE_ID,
+  T5.OFF_OFFICE,
+  T7.SERVICE_PRVDER_ID,
+  T7.USER_ID
+from
+  CKT_SERVICE_PRVDER T7
+  join
+  CKT_OFFICE T5
+  join
+  CKT_SERVICE_PRVDER T4
+  join
+  CKT_OFFICE T2
+  join
+  CKT_GLOBAL_REASSGN T1
+  on
+    (T2.OFFICE_ID &gt;= @officeId) and
+    (T1.BUSINESS_OBJ_CODE &gt;= @businessObjCode) and
+    (T1.CREATED_TIMESTAMP &lt;&gt; @createdTimestamp) and
+    (T1.PROCESS_DATE &lt;= @processDate) and
+    (T1.STATUS_FLAG = 'Q') and
+    (T1.OSP_EFFECTIVE_DAT is not null) and
+    (T1.OSP_ROLE_COD is not null) and
+    (T2.OFFICE_ID = T1.OFF_GENERATED_ID1) and
+    (T1.OSP_EFFECTIVE_DATE is not null) and
+    (T1.OSP_ROLE_CODE is not null)
+  on
+    (T4.SERVICE_PRVDER_ID &gt;= @servicePrvderId) and
+    (T4.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID1)
+  on
+    T5.OFFICE_ID = T1.OFF_GENERATED_ID
+  on
+    T7.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID
+order by
+  T2.OFFICE_ID,
+  T4.SERVICE_PRVDER_ID,
+  T1.BUSINESS_OBJ_CODE,
+  T1.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="UpdateGlobalReassignment1">
+      <value>
+update CKT_GLOBAL_REASSGN
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  STATUS_FLAG = @statusFlag,
+  BO_COUNT = @boCount,
+  MON_COUNT = @monCount
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="UpdateGlobalReassignment2">
+      <value>
+update CKT_GLOBAL_REASSGN
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  STATUS_FLAG = @statusFlag,
+  BO_COUNT = @boCount,
+  MON_COUNT = @monCount
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

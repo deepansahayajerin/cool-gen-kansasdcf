@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CSE_OPEN_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.NUMB &lt;&gt; @numb) and
+    (T1.STATUS = 'O') and
+    (T2.START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select top(1)
+  CLOSURE_REASON,
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCollectionType1">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.CASE_NUMBER,
+  T1.RECEIVED_AMOUNT,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.CODE = 'F') and
+    (T1.COURT_ORDER_NUMBER = @courtOrderNumber)
+order by
+  T1.COLLECTION_DATE desc
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCollectionType2">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.CASE_NUMBER,
+  T1.RECEIVED_AMOUNT,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.CODE = 'F') and
+    (
+      (
+        (T1.OBLGOR_SSN &gt; '000000000') and
+        (T1.OBLGOR_SSN = @oblgorSsn)
+      ) or
+      (T1.OBLGOR_PRSN_NBR = @oblgorPrsnNbr)
+    )
+order by
+  T1.COLLECTION_DATE desc
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCollectionType3">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.CASE_NUMBER,
+  T1.RECEIVED_AMOUNT,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.CODE in ('T', 'Y', 'Z')) and
+    (T1.COURT_ORDER_NUMBER = @courtOrderNumber)
+order by
+  T1.COLLECTION_DATE desc
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCollectionType4">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.CASE_NUMBER,
+  T1.RECEIVED_AMOUNT,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.CODE in ('T', 'Y', 'Z')) and
+    (
+      (
+        (T1.OBLGOR_SSN &gt; '000000000') and
+        (T1.OBLGOR_SSN = @oblgorSsn)
+      ) or
+      (T1.OBLGOR_PRSN_NBR = @oblgorPrsnNbr)
+    )
+order by
+  T1.COLLECTION_DATE desc
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCollectionType5">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.CASE_NUMBER,
+  T1.RECEIVED_AMOUNT,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (
+      T2.CODE in ('S', 'K', 'U',
+        'R')
+    ) and
+    (T1.COURT_ORDER_NUMBER = @courtOrderNumber)
+order by
+  T1.COLLECTION_DATE desc
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCollectionType6">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.CASE_NUMBER,
+  T1.RECEIVED_AMOUNT,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (
+      T2.CODE in ('S', 'K', 'U',
+        'R')
+    ) and
+    (
+      (
+        (T1.OBLGOR_SSN &gt; '000000000') and
+        (T1.OBLGOR_SSN = @oblgorSsn)
+      ) or
+      (T1.OBLGOR_PRSN_NBR = @oblgorPrsnNbr)
+    )
+order by
+  T1.COLLECTION_DATE desc
+</value>
+   </data>
+   <data name="ReadCodeValue1">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.DESCRIPTION
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T1.CDVALUE = cast(@closureReason as char(2))) and
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'CASE CLOSURE REASON')
+</value>
+   </data>
+   <data name="ReadCodeValue2">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.DESCRIPTION
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T1.CDVALUE = cast(@code as char(3))) and
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'PROGRAM')
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select distinct
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.CT_ORD_APPLIED_TO
+from
+  CKT_OBLIGATION T3
+  join
+  CKT_COLLECTION T1
+  on
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.LGA_ID = @lgaId) and
+    (T1.ADJ_IND = 'N') and
+    (T1.CONCURRENT_IND = 'N')
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T1.NUMB = @numb) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson4">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  LAST_MOD_REVIEW_DT,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  TYPE,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION
+where
+  STANDARD_NO = @standardNo
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.LAST_MOD_REVIEW_DT,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.TYPE,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T1.CLASSIFICATION = 'J') and
+    (T2.CRO_TYPE = 'AP') and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_CSE_PERSON_ACC T6
+  on
+    (T2.CSP_NUMBER = T6.CSP_NUMBER) and
+    (T6.TYPE = 'R')
+order by
+  T1.STANDARD_NO desc
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

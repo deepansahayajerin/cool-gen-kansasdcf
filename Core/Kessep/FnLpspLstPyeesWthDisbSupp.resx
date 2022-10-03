@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCase">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('AR', 'AP')) and
+  (START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCollectionType1">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE
+from
+  CKT_COLLTN_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCollectionType2">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadControlTable">
+      <value>
+select top(1)
+  CNTL_TBL_ID,
+  LAST_USED_NUMBER
+from
+  CKT_CONTROL_TABLE
+where
+  CNTL_TBL_ID = 'URA SUPPRESSION LENGTH'
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistoryCsePerson1">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  CLT_SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  TYPE,
+  LGA_IDENTIFIER
+from
+  CKT_DISB_SUPPR_STS
+where
+  EFFECTIVE_DATE between cast(@effectiveDate as date) and cast(@discontinueDate as date)
+order by
+  CSP_NUMBER,
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistoryCsePerson2">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  CLT_SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  TYPE,
+  LGA_IDENTIFIER
+from
+  CKT_DISB_SUPPR_STS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DATE between cast(@effectiveDate as date) and cast(@discontinueDate as date))
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+</root>

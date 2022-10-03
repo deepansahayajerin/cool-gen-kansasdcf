@@ -1,0 +1,52 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiInraInqListByApplicantNm"
+           program-name="SWEINRAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiInraInqListByApplicantNm"
+           transaction="SR1Q"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_INQUIRY_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiInrdInquiryMaintenance"
+       send-command="DISPLAY">
+      <map from="HiddenMenuEntry.ApplicantLastName"
+           to="InformationRequest.ApplicantLastName"/>
+      <map from="HiddenMenuEntry.ApplicantFirstName"
+           to="InformationRequest.ApplicantFirstName"/>
+      <map from="HiddenMenuEntry.ApplicantMiddleInitial"
+           to="InformationRequest.ApplicantMiddleInitial"/>
+      <map from="HiddenMenuEntry.Number" to="InformationRequest.Number"/>
+      <return-map from="InformationRequest" to="MenuEntry"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiInrmInformationRequestMenu"
+       send-command-type="none">
+      <map from="MenuEntry.ApplicantLastName"
+           to="InformationRequest.ApplicantLastName"/>
+      <map from="MenuEntry.ApplicantFirstName"
+           to="InformationRequest.ApplicantFirstName"/>
+      <map from="MenuEntry.ApplicantMiddleInitial"
+           to="InformationRequest.ApplicantMiddleInitial"/>
+      <map from="MenuEntry.Number" to="InformationRequest.Number"/>
+   </on>
+   <map from="MenuEntry" to="MenuEntry"/>
+   <map from="HiddenMenuEntry" to="HiddenMenuEntry"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Group.InformationRequest.ApplicantLastName"
+        to="Group.InformationRequest.ApplicantLastName"/>
+   <map from="Group.InformationRequest.ApplicantFirstName"
+        to="Group.InformationRequest.ApplicantFirstName"/>
+   <map from="Group.InformationRequest.ApplicantMiddleInitial"
+        to="Group.InformationRequest.ApplicantMiddleInitial"/>
+   <map from="Group.InformationRequest.DateApplicationSent"
+        to="Group.InformationRequest.DateApplicationSent"/>
+   <map from="Group.InformationRequest.DateReceivedByCseComplete"
+        to="Group.InformationRequest.DateReceivedByCseComplete"/>
+   <map from="Group.InformationRequest.Number"
+        to="Group.InformationRequest.Number"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+</procedure>

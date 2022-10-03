@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateLaPersonLaCaseRole1">
+      <value>
+insert into CKT_LA_PER_LA_CROL
+(
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+)
+values
+(
+  @identifier,
+  @croId,
+  @croType,
+  @cspNum,
+  @casNum,
+  @lgaId,
+  @lapId
+)
+</value>
+   </data>
+   <data name="CreateLaPersonLaCaseRole2">
+      <value>
+insert into CKT_LA_PER_LA_CROL
+(
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+)
+values
+(
+  @identifier,
+  @croId,
+  @croType,
+  @cspNum,
+  @casNum,
+  @lgaId,
+  @lapId
+)
+</value>
+   </data>
+   <data name="CreateLegalActionCaseRole1">
+      <value>
+insert into CKT_LEG_ACT_CAS_RL
+(
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  INIT_CR_IND
+)
+values
+(
+  @casNumber,
+  @cspNumber,
+  @croType,
+  @croIdentifier,
+  @lgaId,
+  @createdBy,
+  @createdTstamp,
+  @initCrInd
+)
+</value>
+   </data>
+   <data name="CreateLegalActionCaseRole2">
+      <value>
+insert into CKT_LEG_ACT_CAS_RL
+(
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  INIT_CR_IND
+)
+values
+(
+  @casNumber,
+  @cspNumber,
+  @croType,
+  @croIdentifier,
+  @lgaId,
+  @createdBy,
+  @createdTstamp,
+  @initCrInd
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AP') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'CH') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRole1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+from
+  CKT_LA_PER_LA_CROL
+where
+  (@lgaId = LGA_ID) and
+  (@casNum = CAS_NUM) and
+  (@croId = CRO_ID) and
+  (@cspNum = CSP_NUM) and
+  (@croType = CRO_TYPE) and
+  (@lapId = LAP_ID)
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRole2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+from
+  CKT_LA_PER_LA_CROL
+where
+  (@lgaId = LGA_ID) and
+  (@casNum = CAS_NUM) and
+  (@croId = CRO_ID) and
+  (@cspNum = CSP_NUM) and
+  (@croType = CRO_TYPE) and
+  (@lapId = LAP_ID)
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  INIT_CR_IND
+from
+  CKT_LEG_ACT_CAS_RL
+where
+  (@lgaId = LGA_ID) and
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  INIT_CR_IND
+from
+  CKT_LEG_ACT_CAS_RL
+where
+  (@lgaId = LGA_ID) and
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRole3">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  INIT_CR_IND
+from
+  CKT_LEG_ACT_CAS_RL
+where
+  (@lgaId = LGA_ID) and
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetailLegalActionPerson">
+      <value>
+select
+  T3.LGA_R_IDENTIFIER,
+  T3.LAD_R_NUMBER,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.LGA_IDENTIFIER,
+  T3.EFFECTIVE_DT,
+  T3.[ROLE],
+  T3.END_DT,
+  T3.ACCOUNT_TYPE,
+  T4.LA_PERSON_ID,
+  T4.CSP_NUMBER,
+  T4.LGA_IDENTIFIER,
+  T4.EFFECTIVE_DT,
+  T4.[ROLE],
+  T4.END_DT,
+  T4.LGA_R_IDENTIFIER,
+  T4.LAD_R_NUMBER,
+  T4.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS T3
+  join
+  CKT_LEGAL_ACT_PERS T4
+  on
+    (@cspNumber1 = T3.CSP_NUMBER) and
+    (@cspNumber2 = T4.CSP_NUMBER) and
+    (T3.ACCOUNT_TYPE = 'R') and
+    (T4.ACCOUNT_TYPE = 'S') and
+    (T3.LAD_R_NUMBER = T4.LAD_R_NUMBER) and
+    (T3.LGA_R_IDENTIFIER = T4.LGA_R_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionPersonLegalActionPerson">
+      <value>
+select
+  T2.LGA_IDENTIFIER,
+  T2.LA_PERSON_ID,
+  T2.CSP_NUMBER,
+  T2.EFFECTIVE_DT,
+  T2.[ROLE],
+  T2.END_DT,
+  T2.LGA_R_IDENTIFIER,
+  T2.LAD_R_NUMBER,
+  T2.ACCOUNT_TYPE,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.LGA_IDENTIFIER,
+  T3.EFFECTIVE_DT,
+  T3.[ROLE],
+  T3.END_DT,
+  T3.LGA_R_IDENTIFIER,
+  T3.LAD_R_NUMBER,
+  T3.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS T2
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (@cspNumber1 = T2.CSP_NUMBER) and
+    (@cspNumber2 = T3.CSP_NUMBER) and
+    (T2.[ROLE] &lt;&gt; 'C') and
+    (T3.[ROLE] = 'C') and
+    (T2.LGA_IDENTIFIER = T3.LGA_IDENTIFIER)
+</value>
+   </data>
+</root>

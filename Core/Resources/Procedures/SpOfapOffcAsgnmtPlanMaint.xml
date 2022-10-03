@@ -1,0 +1,52 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpOfapOffcAsgnmtPlanMaint"
+           program-name="SWEOFAPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpOfapOffcAsgnmtPlanMaint"
+           transaction="SR3D"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_OFFICE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOFCL"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="Office"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <map from="PrevSearch" to="PrevSearch"/>
+   <map from="Export1.PrevOfficeAssignmentPlan"
+        to="Import1.PrevOfficeAssignmentPlan"/>
+   <map from="Export1.OfficeAssignmentPlan" to="Import1.OfficeAssignmentPlan"/>
+   <map from="OfficeAddress" to="OfficeAddress"/>
+   <map from="ListOffice" to="ListOffice"/>
+   <map from="PrevCodeValue" to="PrevCodeValue"/>
+   <map from="Export1.PrevCommon" to="Import1.PrevCommon"/>
+   <map from="HiddenOffice" to="HiddenOffice"/>
+   <map from="Search" to="Search"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="ListCodeValue" to="ListCodeValue"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Office.SystemGeneratedId" to="Office.SystemGeneratedId"/>
+   <map from="Office.Name" to="Office.Name"/>
+   <map from="CodeValue.Description" to="CodeValue.Description"/>
+   <map from="PrevOfficeAddress.City" to="PrevOfficeAddress.City"/>
+   <map from="PrevOffice.SystemGeneratedId" to="PrevOffice.SystemGeneratedId"/>
+   <map from="PrevOffice.TypeCode" to="PrevOffice.TypeCode"/>
+   <map from="PrevOffice.Name" to="PrevOffice.Name"/>
+   <map from="Office.TypeCode" to="Office.TypeCode"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

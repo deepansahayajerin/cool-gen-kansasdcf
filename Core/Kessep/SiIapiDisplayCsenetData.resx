@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  EVENT_ID,
+  EVENT_DETAIL_NAME,
+  REASON_CODE,
+  DENORM_NUMERIC_12,
+  DENORM_DATE,
+  REFERENCE_DATE
+from
+  CKT_INFRASTRUCTURE
+where
+  (EVENT_ID = 777) and
+  (REASON_CODE = 'CSENETREFRECD') and
+  (DENORM_DATE = @denormDate) and
+  (DENORM_NUMERIC_12 = @denormNumeric12)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  NAME,
+  ACTIVITY_CTRL_NUM,
+  TYPE_CODE,
+  FED_NCOMP_DTE,
+  FED_NEAR_NCOMP_DTE,
+  OTHER_NCOMP_DTE,
+  OTHR_NEAR_NCOM_DTE,
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CASE_UNIT_CLOSED_I,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  INF_SYS_GEN_ID
+from
+  CKT_MONITORED_ACT
+where
+  @infSysGenId = INF_SYS_GEN_ID
+order by
+  START_DATE desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,62 @@
+<h1>Welcome to Kansas DCF project</h1>
+<h3>Start page</h3>
+
+<table>
+    <tr>
+        <th>Start procedure step, optional:</th>
+        <td>
+            <input list="procedures" 
+                placeholder="Please select a start procedure step"
+                [(ngModel)]="startProcedure"/>
+            <datalist id="procedures">
+                <option *ngFor="let procedure of procedures" [value]="procedure.name">
+                    trancode: {{procedure.trancode}}
+                </option>
+            </datalist>
+        </td>
+    </tr>
+    <tr>
+        <th>Command line arguments, if any:</th>
+        <td>
+            <input type="text" [(ngModel)]="commandLine" />
+        </td>
+    </tr>
+    <tr *ngIf="appInfo?.allowTrace">
+        <th>Trace file name, optional:</th>
+        <td>
+            <input type="text" [(ngModel)]="traceFile"/>
+        </td>
+    </tr>
+    <tr *ngIf="appInfo?.allowTrace">
+        <th>Create a new trace file (optional)?</th>
+        <td>
+            <input type="checkbox" [(ngModel)]="newTrace" [disabled]="!traceFile"/>
+        </td>
+    </tr>
+    <tr>
+        <th>Impersonate as, optional:</th>
+        <td>
+            <input type="text" [(ngModel)]="runAs" />
+        </td>
+    </tr>
+    <tr *ngIf="appInfo.allowChangeDate">
+        <th>Set current date, optional:</th>
+        <td>
+            <input type="date" [(ngModel)]="currentDate"/>
+        </td>
+    </tr>
+    <tr>
+        <th>DB connection, optional:</th>
+        <td>
+            <select [(ngModel)]="connection">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let conn of appInfo.connections" [ngValue]="conn">{{conn}}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: center; padding-top: 1em;">
+            <button type="button" (click)="startApplication()">Start</button>
+        </td>
+    </tr>   
+</table>

@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDolUiWithholding">
+      <value>
+insert into CKT_DOL_UI_IWO
+(
+  CSP_NUMBER,
+  IWO_CERT_DATE,
+  STANDARD_NUMBER,
+  SSN,
+  WA_AMOUNT,
+  WC_AMOUNT,
+  MAX_WITHHOLD_PCT,
+  FIRST_NAME,
+  LAST_NAME,
+  MIDDLE_INITIAL
+)
+values
+(
+  @cspNumber,
+  @iwoCertDate,
+  @standardNumber,
+  @ssn,
+  @waAmount,
+  @wcAmount,
+  @maxWithholdPct,
+  @firstName,
+  @lastName,
+  @middleInitial
+)
+</value>
+   </data>
+   <data name="DeleteDolUiWithholding">
+      <value>
+delete from CKT_DOL_UI_IWO
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IWO_CERT_DATE = @iwoCertDate) and
+  (STANDARD_NUMBER = @standardNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE
+from
+  CKT_LEGAL_ACT_DTL T3
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.ACCOUNT_TYPE = 'R') and
+    (T1.NUMB &gt; @numb)
+  on
+    (T3.LA_DETAIL_NO = T2.LAD_R_NUMBER) and
+    (T3.LGA_IDENTIFIER = T2.LGA_R_IDENTIFIER) and
+    (T3.OTY_ID is not null) and
+    (T3.OTY_ID in (20, 21))
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadDolUiWithholding1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IWO_CERT_DATE,
+  STANDARD_NUMBER,
+  SSN,
+  WA_AMOUNT,
+  WC_AMOUNT,
+  MAX_WITHHOLD_PCT,
+  FIRST_NAME,
+  LAST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_DOL_UI_IWO
+where
+  (IWO_CERT_DATE = @iwoCertDate) and
+  (STANDARD_NUMBER = @standardNumber) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDolUiWithholding2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IWO_CERT_DATE,
+  STANDARD_NUMBER,
+  SSN,
+  WA_AMOUNT,
+  WC_AMOUNT,
+  MAX_WITHHOLD_PCT,
+  FIRST_NAME,
+  LAST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_DOL_UI_IWO
+where
+  IWO_CERT_DATE = @iwoCertDate
+</value>
+   </data>
+   <data name="ReadDolUiWithholding3">
+      <value>
+select top(1)
+  max(IWO_CERT_DATE)
+from
+  CKT_DOL_UI_IWO
+</value>
+   </data>
+   <data name="ReadDolUiWithholding4">
+      <value>
+select
+  CSP_NUMBER,
+  IWO_CERT_DATE,
+  STANDARD_NUMBER,
+  SSN,
+  WA_AMOUNT,
+  WC_AMOUNT,
+  MAX_WITHHOLD_PCT,
+  FIRST_NAME,
+  LAST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_DOL_UI_IWO
+where
+  IWO_CERT_DATE = @iwoCertDate
+order by
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadDolUiWithholding5">
+      <value>
+select
+  CSP_NUMBER,
+  IWO_CERT_DATE,
+  STANDARD_NUMBER,
+  SSN,
+  WA_AMOUNT,
+  WC_AMOUNT,
+  MAX_WITHHOLD_PCT,
+  FIRST_NAME,
+  LAST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_DOL_UI_IWO
+where
+  IWO_CERT_DATE = @iwoCertDate
+order by
+  SSN,
+  CSP_NUMBER
+</value>
+   </data>
+</root>

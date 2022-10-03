@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCode">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE
+where
+  (CODE_NAME = @codeName) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DESCRIPTION
+from
+  CKT_CODE_VALUE
+where
+  (@codId = COD_ID) and
+  (CDVALUE &gt;= @cdvalue) and
+  (
+    (cast(@flag as char(1)) = 'N') or
+    (
+      (EFFECTIVE_DATE &lt;= @effectiveDate) and
+      (EXPIRATION_DATE &gt;= @effectiveDate)
+    )
+  )
+order by
+  CDVALUE
+</value>
+   </data>
+   <data name="ReadCodeValueCode">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE,
+  T1.DESCRIPTION,
+  T2.CODE_NAME,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRATION_DATE
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T2.CODE_NAME = @codeName) and
+    (T2.COD_ID = T1.COD_ID) and
+    (T1.CDVALUE = @cdvalue) and
+    (
+      (cast(@flag as char(1)) = 'N') or
+      (
+        (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+        (T1.EXPIRATION_DATE &gt;= @effectiveDate) and
+        (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+        (T2.EXPIRATION_DATE &gt;= @effectiveDate)
+      )
+    )
+</value>
+   </data>
+   <data name="ReadCodeValueCombinationCodeValue">
+      <value>
+select
+  T1.CVC_ID,
+  T1.COV_ID,
+  T1.COV_S_ID,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE,
+  T2.COV_ID,
+  T2.COD_ID,
+  T2.CDVALUE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRATION_DATE,
+  T2.DESCRIPTION
+from
+  CKT_CODE_VAL_COMB T1,
+  CKT_CODE_VALUE T2
+where
+  (@codId = T2.COD_ID) and
+  (T2.CDVALUE &gt;= @cdvalue) and
+  (
+    (
+      (T2.COV_ID = T1.COV_ID) and
+      (@covSId = T1.COV_S_ID)
+    ) or
+    (
+      (@covSId = T1.COV_ID) and
+      (T2.COV_ID = T1.COV_S_ID)
+    )
+  ) and
+  (
+    (cast(@flag as char(1)) = 'N') or
+    (
+      (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+      (T2.EXPIRATION_DATE &gt;= @effectiveDate) and
+      (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+      (T1.EXPIRATION_DATE &gt;= @effectiveDate)
+    )
+  )
+order by
+  T2.CDVALUE
+</value>
+   </data>
+</root>

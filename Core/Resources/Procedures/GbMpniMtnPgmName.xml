@@ -1,0 +1,48 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="GbMpniMtnPgmName"
+           program-name="SWEMPNIP"
+           class="Gov.Kansas.DCF.Cse.Kessep.GbMpniMtnPgmName"
+           transaction="SRPI"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_SCREEN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="GbLpniLstPgmNameInfo"
+       send-command="DISPLAY">
+      <return-map from="Flow.PgmName" to="PgmNameTable.PgmName"/>
+      <return-map from="Flow.CreatedTimestamp" to="PgmNameTable.CreatedTimestamp"/>
+      <return-map from="Flow.PgmDescription" to="PgmNameTable.PgmDescription"/>
+      <return-map from="Flow.PgmActive" to="PgmNameTable.PgmActive"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MPCR"
+       action="link"
+       return-when="ECO_LNK_TO_MPNI ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="GbMpcrMtnPgmChkptRestart"
+       send-command="DISPLAY">
+      <map from="ProgramCheckpointRestart.ProgramName"
+           to="ProgramCheckpointRestart.ProgramName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MPPI"
+       action="link"
+       return-when="ECO_LNK_TO_MPNI ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="GbMppiMtnPgmProcessingInfo"
+       send-command="DISPLAY">
+      <map from="ProgramProcessingInfo.Name" to="ProgramProcessingInfo.Name"/>
+   </on>
+   <map from="Hidden" to="NextTranInfo"/>
+   <map from="PgmNameTable" to="PgmNameTable"/>
+   <map from="HiddenId" to="HiddenId"/>
+   <map from="DateTime" to="DateTime"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="ProgramCheckpointRestart" to="ProgramCheckpointRestart"/>
+   <map from="ProgramProcessingInfo.Name" to="ProgramProcessingInfo.Name"/>
+</procedure>

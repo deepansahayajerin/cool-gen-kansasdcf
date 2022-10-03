@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAlert1">
+      <value>
+select top(1)
+  CONTROL_NUMBER,
+  NAME,
+  MESSAGE,
+  DESCRIPTION
+from
+  CKT_ALERT with(readuncommitted)
+where
+  CONTROL_NUMBER = 396
+</value>
+   </data>
+   <data name="ReadAlert2">
+      <value>
+select top(1)
+  CONTROL_NUMBER,
+  NAME,
+  MESSAGE,
+  DESCRIPTION
+from
+  CKT_ALERT with(readuncommitted)
+where
+  CONTROL_NUMBER = 442
+</value>
+   </data>
+   <data name="ReadAlert3">
+      <value>
+select top(1)
+  CONTROL_NUMBER,
+  NAME,
+  MESSAGE,
+  DESCRIPTION
+from
+  CKT_ALERT with(readuncommitted)
+where
+  CONTROL_NUMBER = 447
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T1.STATUS = 'O') and
+    (T1.STATUS_DATE &lt;= @statusDate) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @statusDate) and
+    (T2.END_DATE &gt;= @statusDate) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCaseAssignment">
+      <value>
+select
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE with(readuncommitted)
+where
+  (@casNo = CAS_NO) and
+  (REASON_CODE = 'RSP') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCode">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE
+where
+  (CODE_NAME = 'EIWO CALL CENTER') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DESCRIPTION
+from
+  CKT_CODE_VALUE
+where
+  (@codId = COD_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadDocumentEventDetail">
+      <value>
+select top(1)
+  T1.NAME,
+  T1.BUSINESS_OBJECT,
+  T1.RQURED_RSPNSE_DAYS,
+  T1.EVE_NO,
+  T1.EVD_ID,
+  T1.EFFECTIVE_DATE,
+  T1.VERSION_NBR,
+  T2.EXCEPTION_ROUTINE
+from
+  CKT_EVENT_DETAIL T2
+  join
+  CKT_DOCUMENT T1
+  on
+    (T1.EFFECTIVE_DATE = @effectiveDate) and
+    (T1.NAME = @name) and
+    (T2.SYSTEM_GENERATED_I = T1.EVD_ID) and
+    (T2.EVE_NO = T1.EVE_NO)
+</value>
+   </data>
+   <data name="ReadDocumentField1">
+      <value>
+select
+  ORDER_POSITION,
+  REQUIRED_SWITCH,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE
+from
+  CKT_DOCUMENT_FIELD
+where
+  (@docEffectiveDte = DOC_EFFECTIVE_DTE) and
+  (@docName = DOC_NAME)
+</value>
+   </data>
+   <data name="ReadDocumentField2">
+      <value>
+select
+  ORDER_POSITION,
+  REQUIRED_SWITCH,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE
+from
+  CKT_DOCUMENT_FIELD with(readuncommitted)
+where
+  (@docEffectiveDte = DOC_EFFECTIVE_DTE) and
+  (@docName = DOC_NAME)
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select top(1)
+  NAME,
+  DEPENDANCY,
+  SUBROUTINE_NAME
+from
+  CKT_FIELD with(readuncommitted)
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="ReadFieldValue">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE with(readuncommitted)
+where
+  (@docEffectiveDte = DOC_EFFECTIVE_DTE) and
+  (@docName = DOC_NAME) and
+  (@fldName = FLD_NAME) and
+  (@infIdentifier = INF_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION,
+  T1.LOCATION_DESC
+from
+  CKT_FIPS T1
+  join
+  CKT_TRIBUNAL T2
+  on
+    (T1.LOCATION = T2.FIP_LOCATION) and
+    (T1.COUNTY = T2.FIP_COUNTY) and
+    (T1.[STATE] = T2.FIP_STATE) and
+    (T2.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadFipsTribAddressFips1">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.TYPE,
+  T1.STREET_1,
+  T1.STREET_2,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CD,
+  T1.ZIP4,
+  T1.FIP_STATE,
+  T1.FIP_COUNTY,
+  T1.FIP_LOCATION,
+  T2.LOCATION_DESC
+from
+  CKT_FIPS T2
+  join
+  CKT_FIPS_TRIB_ADDR T1
+  on
+    (T1.TYPE = 'M') and
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE) and
+    (T2.[STATE] = @state) and
+    (T2.COUNTY = 000) and
+    (T2.LOCATION = 00)
+</value>
+   </data>
+   <data name="ReadFipsTribAddressFips2">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.TYPE,
+  T1.STREET_1,
+  T1.STREET_2,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CD,
+  T1.ZIP4,
+  T1.FIP_STATE,
+  T1.FIP_COUNTY,
+  T1.FIP_LOCATION,
+  T2.LOCATION_DESC
+from
+  CKT_FIPS T2
+  join
+  CKT_FIPS_TRIB_ADDR T1
+  on
+    (T1.TYPE = 'M') and
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE) and
+    (T2.[STATE] = 20) and
+    (T2.COUNTY = 000) and
+    (T2.LOCATION = 03)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  SITUATION_NUMBER,
+  PROCESS_STATUS,
+  BUSINESS_OBJECT_CD,
+  DENORM_NUMERIC_12,
+  DENORM_TEXT_12,
+  DENORM_DATE,
+  DENORM_TIMESTAMP,
+  INITIATING_ST_CD,
+  CSENET_IN_OUT_CODE,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  CASE_UNIT_NUM,
+  USER_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REFERENCE_DATE,
+  [FUNCTION],
+  CASE_UNIT_STATE,
+  DETAIL
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadIwoAction">
+      <value>
+select top(1)
+  max(DOC_TRACKING_ID)
+from
+  CKT_IWO_ACTION
+</value>
+   </data>
+   <data name="ReadIwoActionOutgoingDocumentEmployerCsePerson">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.ACTION_TYPE,
+  T1.STATUS_CD,
+  T1.DOC_TRACKING_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.IWT_IDENTIFIER,
+  T1.INF_ID,
+  T2.PRNT_SUCESSFUL_IND,
+  T2.LAST_UPDATD_TSTAMP,
+  T2.DOC_NAME,
+  T2.DOC_EFFECTIVE_DTE,
+  T3.IDENTIFIER,
+  T3.EIN,
+  T4.NUMB,
+  T4.TYPE,
+  T5.CSP_I_NUMBER,
+  T5.ISR_IDENTIFIER
+from
+  CKT_EMPLOYER T3
+  join
+  CKT_INCOME_SOURCE T6
+  join
+  CKT_CSE_PERSON T4
+  join
+  CKT_IWO_TRANS T5
+  join
+  CKT_OUTGOING_DOC T2
+  join
+  CKT_IWO_ACTION T1
+  on
+    (T1.STATUS_CD = 'S') and
+    (T1.ACTION_TYPE in ('E-IWO', 'RESUB')) and
+    (T2.INF_ID = T1.INF_ID) and
+    (T2.PRNT_SUCESSFUL_IND = 'D')
+  on
+    (T5.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T5.LGA_IDENTIFIER = T1.LGA_IDENTIFIER) and
+    (T5.IDENTIFIER = T1.IWT_IDENTIFIER)
+  on
+    T4.NUMB = T5.CSP_NUMBER
+  on
+    (T6.CSP_I_NUMBER = T5.CSP_I_NUMBER) and
+    (T6.IDENTIFIER = T5.ISR_IDENTIFIER)
+  on
+    (T3.IDENTIFIER = T6.EMP_ID) and
+    (
+      (
+        (T3.EIN = @ein) and
+        (T4.NUMB &gt; @numb)
+      ) or
+      (T3.EIN &gt; @ein)
+    )
+order by
+  T3.EIN,
+  T4.NUMB
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalReferral">
+      <value>
+select
+  CAS_NUMBER,
+  IDENTIFIER,
+  STATUS_DATE,
+  STATUS,
+  REFERRAL_REASON_1,
+  REFERRAL_REASON_2,
+  REFERRAL_REASON_3,
+  REFERRAL_REASON_4,
+  REFERRAL_REASON_5
+from
+  CKT_LEGAL_REFERRAL with(readuncommitted)
+where
+  (@casNumber = CAS_NUMBER) and
+  (STATUS = 'O') and
+  (STATUS_DATE &lt;= @statusDate)
+</value>
+   </data>
+   <data name="ReadLegalReferralAssignment">
+      <value>
+select
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO,
+  LGR_ID
+from
+  CKT_ASSGN_LEG_REF with(readuncommitted)
+where
+  (@lgrId = LGR_ID) and
+  (@casNo = CAS_NO) and
+  (REASON_CODE = 'RSP') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderServiceProviderOffice1">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.USER_ID,
+  T2.EMAIL_ADDRESS,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.OFF_OFFICE
+from
+  CKT_OFFICE T3 with(readuncommitted)
+  join
+  CKT_SERVICE_PRVDER T2 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T1 with(readuncommitted)
+  on
+    (T1.EFFECTIVE_DATE = @effectiveDate) and
+    (T1.ROLE_CODE = @roleCode) and
+    (T1.OFF_GENERATED_ID = @offGeneratedId) and
+    (T1.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID)
+  on
+    T3.OFFICE_ID = T1.OFF_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderServiceProviderOffice2">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.USER_ID,
+  T2.EMAIL_ADDRESS,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.OFF_OFFICE
+from
+  CKT_OFFICE T3 with(readuncommitted)
+  join
+  CKT_SERVICE_PRVDER T2 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T1 with(readuncommitted)
+  on
+    (T1.EFFECTIVE_DATE = @effectiveDate) and
+    (T1.ROLE_CODE = @roleCode) and
+    (T1.OFF_GENERATED_ID = @offGeneratedId) and
+    (T1.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID)
+  on
+    T3.OFFICE_ID = T1.OFF_GENERATED_ID
+</value>
+   </data>
+</root>

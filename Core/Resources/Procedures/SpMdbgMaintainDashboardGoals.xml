@@ -1,0 +1,44 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpMdbgMaintainDashboardGoals"
+           program-name="SWEMDBGP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpMdbgMaintainDashboardGoals"
+           transaction="SRD7"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_ORGANIZATION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSOR"
+       to="SpCsorCseOrganizationMaint"
+       send-command="DISPLAY">
+      <map from="ToCsor.Type1" to="Search.Type1"/>
+      <return-map from="ReturnSelect" to="FromCsor"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPL"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected1" to="FromSvpl"/>
+   </on>
+   <map from="YearMonth" to="YearMonth"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Group.WorkArea" to="Group.WorkArea"/>
+   <map from="CseOrganization" to="CseOrganization"/>
+   <map from="Jd" to="Jd"/>
+   <map from="Group.NumberOfDecimals" to="Group.NumberOfDecimals"/>
+   <map from="HiddenCseOrganization" to="HiddenCseOrganization"/>
+   <map from="Group.Hidden" to="Group.Hidden"/>
+   <map from="YearMonthHidden" to="HiddenYearMonth"/>
+   <map from="HiddenServiceProvider" to="HiddenServiceProvider"/>
+   <map from="Worker" to="Worker"/>
+   <map from="WorkerName" to="WorkerName"/>
+   <map from="ServiceProvider.UserId" to="ServiceProvider.UserId"/>
+</procedure>

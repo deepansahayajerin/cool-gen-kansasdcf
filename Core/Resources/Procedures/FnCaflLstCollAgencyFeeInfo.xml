@@ -1,0 +1,56 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCaflLstCollAgencyFeeInfo"
+           program-name="SWECAFLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCaflLstCollAgencyFeeInfo"
+           transaction="SR17"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_MTN_COL_AGENCY_FEE_IN"
+       action="transfer"
+       to="FnCafmMtnCollAgncyFeeInfo"
+       send-command="RETCAFL">
+      <map from="SelectedOffice" to="Office"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="RetnLstCodeValue"/>
+      <return-map from="Code" to="RetnLstCode"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_OBLIGATION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOBTL"
+       to="FnObtlLstObligTypes"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="ObligationType"/>
+   </on>
+   <map from="ContractorFeeInformation" to="ContractorFeeInformation"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="ObligationType" to="ObligationType"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="JudicialDistrictPrompt" to="JudicialDistrictPrompt"/>
+   <map from="ProgramTypePrompt" to="ProgramTypePrompt"/>
+   <map from="ObligationTypePrompt" to="ObligationTypePrompt"/>
+   <map from="Code" to="Code"/>
+   <map from="HiddenObligationType" to="HiddenObligationType"/>
+   <map from="SelectedContractorFeeInformation"
+        to="SelectedContractorFeeInformation"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.DetailOffice" to="Import1.DetailOffice"/>
+   <map from="Export1.DetailObligationType" to="Import1.DetailObligationType"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailContractorFeeInformation"
+        to="Import1.DetailContractorFeeInformation"/>
+   <map from="SelectedOffice.TypeCode" to="SelectedOffice.TypeCode"/>
+   <map from="SelectedOffice.Name" to="SelectedOffice.Name"/>
+</procedure>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadProfile">
+      <value>
+select top(1)
+  T1.NAME,
+  T1.RESTRICTION_CD_1,
+  T1.RESTRICTION_CD_2,
+  T1.RESTRICTION_CD_3
+from
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_PROFILE T1
+  join
+  CKT_SERV_PROV_PRO T2
+  on
+    (T1.NAME = T2.PRO_NAME) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    (T3.SERVICE_PRVDER_ID = T2.SPD_GEN_ID) and
+    (T3.USER_ID = @userId)
+  join
+  CKT_PROF_AUTH T4
+  on
+    (T1.NAME = T4.FK_PRO_NAME) and
+    (T4.FK_CMD_VALUE = @fkCmdValue) and
+    (@fkTrnTrancode = T4.FK_TRN_TRANCODE) and
+    (@fkTrnScreenid = T4.FK_TRN_SCREENID)
+</value>
+   </data>
+   <data name="ReadTransaction">
+      <value>
+select top(1)
+  SCREEN_ID,
+  TRANCODE
+from
+  CKT_TRANSACTION
+where
+  TRANCODE = @trancode
+</value>
+   </data>
+</root>

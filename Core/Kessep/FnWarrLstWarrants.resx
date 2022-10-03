@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPaymentRequest1">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST
+where
+  (TYPE = 'WAR') and
+  (NUMBER = @number)
+</value>
+   </data>
+   <data name="ReadPaymentRequest2">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="ReadPaymentRequest3">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND
+from
+  CKT_PMNT_REQUEST with(readuncommitted)
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="ReadPaymentRequest4">
+      <value>
+select
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST with(readuncommitted)
+where
+  (TYPE = 'WAR') and
+  (NUMBER &gt;= @number)
+order by
+  NUMBER
+</value>
+   </data>
+   <data name="ReadPaymentRequest5">
+      <value>
+select distinct
+  T1.PAYMENT_REQUEST_ID,
+  T1.PROCESS_DATE,
+  T1.AMOUNT,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.DP_CSE_PER_NUM,
+  T1.CSE_PERSON_NUMBER,
+  T1.IMPREST_FUND_CODE,
+  T1.CLASSIFICATION,
+  T1.NUMBER,
+  T1.PRINT_DATE,
+  T1.TYPE,
+  T1.PRQ_R_GENERATED_ID,
+  T1.INTERSTATE_IND,
+  T1.RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST T1 with(readuncommitted)
+  join
+  CKT_PMNT_STAT_HIST T2 with(readuncommitted)
+  on
+    (T1.TYPE = 'WAR') and
+    (T1.PROCESS_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+    (T1.PAYMENT_REQUEST_ID = T2.PRQ_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE = @discontinueDate) and
+    (@pstGeneratedId = T2.PST_GENERATED_ID)
+order by
+  T1.PROCESS_DATE desc
+</value>
+   </data>
+   <data name="ReadPaymentRequest6">
+      <value>
+select
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST with(readuncommitted)
+where
+  (TYPE = 'WAR') and
+  (PROCESS_DATE between cast(@date1 as date) and cast(@date2 as date))
+order by
+  PROCESS_DATE desc
+</value>
+   </data>
+   <data name="ReadPaymentRequest7">
+      <value>
+select
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST with(readuncommitted)
+where
+  (TYPE = 'WAR') and
+  (CSE_PERSON_NUMBER = @csePersonNumber)
+order by
+  PROCESS_DATE desc,
+  NUMBER
+</value>
+   </data>
+   <data name="ReadPaymentRequest8">
+      <value>
+select
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST with(readuncommitted)
+where
+  (TYPE = 'WAR') and
+  (DP_CSE_PER_NUM = @dpCsePerNum)
+order by
+  PROCESS_DATE desc,
+  NUMBER
+</value>
+   </data>
+   <data name="ReadPaymentStatus1">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID,
+  CODE,
+  NAME,
+  DESCRIPTION
+from
+  CKT_PAYMENT_STATUS
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadPaymentStatus2">
+      <value>
+select top(1)
+  T1.PAYMENT_STATUS_ID,
+  T1.CODE
+from
+  CKT_PAYMENT_STATUS T1 with(readuncommitted)
+  join
+  CKT_PMNT_STAT_HIST T2 with(readuncommitted)
+  on
+    (T1.PAYMENT_STATUS_ID = T2.PST_GENERATED_ID) and
+    (@prqGeneratedId = T2.PRQ_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadPaymentStatus3">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID,
+  CODE
+from
+  CKT_PAYMENT_STATUS with(readuncommitted)
+where
+  PAYMENT_STATUS_ID = @paymentStatusId
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistory">
+      <value>
+select top(1)
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_PMNT_STAT_HIST with(readuncommitted)
+where
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (@prqGeneratedId = PRQ_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistoryPaymentStatus">
+      <value>
+select top(1)
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_PMNT_STAT_HIST with(readuncommitted)
+where
+  (@prqGeneratedId = PRQ_GENERATED_ID) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+</root>

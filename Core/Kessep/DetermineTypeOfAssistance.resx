@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadProgram1">
+      <value>
+select top(1)
+  min(T1.PROGRAM_ID)
+from
+  CKT_CASE T5
+  join
+  CKT_PROGRAM T1
+  join
+  CKT_PERSON_PROGRAM T2
+  on
+    (
+      T1.CODE in ('AF', 'AFI', 'FC',
+        'FCI')
+    ) and
+    (T1.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE &lt;&gt; @discontinueDate)
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.END_DATE = @discontinueDate)
+  on
+    (T5.NUMB = T4.CAS_NUMBER) and
+    (T5.NUMB = @numb) and
+    (T2.DISCONTINUE_DATE &gt;= T5.CSE_OPEN_DATE)
+</value>
+   </data>
+   <data name="ReadProgram2">
+      <value>
+select top(1)
+  min(T1.PROGRAM_ID)
+from
+  CKT_PROGRAM T1
+  join
+  CKT_PERSON_PROGRAM T2
+  on
+    (
+      T1.CODE in ('AF', 'AFI', 'FC',
+        'FCI')
+    ) and
+    (T1.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE = @discontinueDate)
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.END_DATE = @discontinueDate) and
+    (T4.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+</root>

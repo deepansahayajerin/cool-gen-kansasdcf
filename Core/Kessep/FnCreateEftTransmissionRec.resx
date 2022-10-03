@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateElectronicFundTransmission">
+      <value>
+insert into CKT_ELEC_FUND_TRAN
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PAY_DATE,
+  TRANSMITTAL_AMOUNT,
+  AP_SSN,
+  MEDICAL_SUPPORT_ID,
+  AP_NAME,
+  FIPS_CODE,
+  EMPLOYMENT_TERM_ID,
+  ZDEL_ADENDA_SQ_NUM,
+  SEQUENCE_NUMBER,
+  RECEIVING_DFI_IDEN,
+  DFI_ACCT_NUMBER,
+  TRANSACTION_CODE,
+  SETTLEMENT_DATE,
+  CASE_ID,
+  TRANS_STATUS_CODE,
+  COMPANY_NAME,
+  ORIG_DFI_IDENT,
+  RECV_ENTITY_NAME,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  TRANS_PROCESS_DATE,
+  PRQ_GENERATED_ID,
+  FILE_CREATION_DATE,
+  FILE_CREATION_TIME,
+  COMPANY_IDENT_ICD,
+  COMPANY_IDENT_NUM,
+  COMPANY_DESC_DATE,
+  EFFECTIVE_ENTRY_DT,
+  RECV_COMPANY_NAME,
+  TRACE_NUMBER,
+  APPLICATION_IDENT,
+  COLLECTION_AMOUNT,
+  VENDOR_NUMBER,
+  CHECK_DIGIT,
+  RECV_DFI_ACCT_NUM,
+  COMPANY_ENTRY_DESC
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @payDate,
+  @transmittalAmount,
+  @apSsn,
+  @medicalSupportId,
+  @apName,
+  @fipsCode,
+  @employmentTermId,
+  @zdelAdendaSqNum,
+  @sequenceNumber,
+  @receivingDfiIden,
+  @dfiAcctNumber,
+  @transactionCode,
+  @settlementDate,
+  @caseId,
+  @transStatusCode,
+  @companyName,
+  @origDfiIdent,
+  @recvEntityName,
+  @transmissionType,
+  @transmissionId,
+  @transProcessDate,
+  @prqGeneratedId,
+  @settlementDate,
+  @fileCreationTime,
+  @companyIdentIcd,
+  @companyIdentNum,
+  @companyDescDate,
+  @settlementDate,
+  @recvCompanyName,
+  @traceNumber,
+  @applicationIdent,
+  @collectionAmount,
+  @vendorNumber,
+  @checkDigit,
+  @recvDfiAcctNum,
+  @companyEntryDesc
+)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCollectionType">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T1.CRV_IDENTIFIER = @crvIdentifier) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T1.CRT_IDENTIFIER = @crtIdentifier) and
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType1">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  NAME,
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_CRSRC_TYPE
+where
+  [STATE] = @state
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType2">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  NAME,
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCollectionObligationTransaction">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.PGM_APPLD_TO,
+  T1.DISB_TO_AR_IND,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE
+from
+  CKT_OB_TRN T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T1.COLL_ID = @collId) and
+    (T1.OTY_ID = @otyId) and
+    (T1.OBG_ID = @obgId) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.CPA_TYPE = @cpaType) and
+    (T1.OTR_ID = @otrId) and
+    (T1.OTR_TYPE = @otrType) and
+    (T1.CRT_TYPE = @crtType) and
+    (T1.CST_ID = @cstId) and
+    (T1.CRV_ID = @crvId) and
+    (T1.CRD_ID = @crdId) and
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.OTY_ID,
+  T1.OTR_TYPE_DISB,
+  T1.OTR_ID,
+  T1.CPA_TYPE_DISB,
+  T1.CSP_NUMBER_DISB,
+  T1.OBG_ID,
+  T1.CRD_ID,
+  T1.CRV_ID,
+  T1.CST_ID,
+  T1.CRT_ID,
+  T1.COL_ID
+from
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_TRAN_RLN T2
+  on
+    (T1.DISB_TRAN_ID = T2.DTR_P_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_P_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_P_NUMBER) and
+    (T2.DTR_GENERATED_ID = @dtrGeneratedId) and
+    (T1.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  CSP_I_NUMBER,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (TYPE in ('E', 'M'))
+order by
+  END_DT desc
+</value>
+   </data>
+   <data name="ReadInterstatePaymentAddress">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  ADDRESS_START_DATE,
+  TYPE,
+  FIPS_STATE,
+  ROUTING_NUMBER_ABA,
+  ACCOUNT_NUMBER_DFI,
+  ACCOUNT_TYPE
+from
+  CKT_INT_PYMNT_ADDR
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (TYPE = 'PY')
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  T1.IDENTIFIER
+from
+  CKT_INTERSTAT_RQST T1
+  join
+  CKT_DISB_TRAN T2
+  on
+    (T1.IDENTIFIER = T2.INT_INTER_ID) and
+    (T2.DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select top(1)
+  HCV_ID,
+  CSP_NUMBER,
+  COVER_BEGIN_DATE,
+  COVER_END_DATE
+from
+  CKT_PERSONAL_HINS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (COVER_BEGIN_DATE &lt;= @coverBeginDate) and
+  (COVER_END_DATE &gt; @coverBeginDate)
+</value>
+   </data>
+</root>

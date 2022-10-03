@@ -1,0 +1,43 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCsjhCseJudicialDistHist"
+           program-name="SWECSJHP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCsjhCseJudicialDistHist"
+           transaction="SRJ0"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_ORGANIZATION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpCsorCseOrganizationMaint"
+       send-command="DISPLAY">
+      <map from="ToCsor" to="Search"/>
+      <return-map from="ReturnSelect" to="FromCsor"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <map from="ContractorHidden" to="ContractorHidden"/>
+   <map from="PromptJudicalDistrict" to="PromptJudicalDistrict"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Contractor" to="Contractor"/>
+   <map from="PromptContractorCd" to="PromptContractorCd"/>
+   <map from="HiddenCseOrganizationRelationship"
+        to="HiddenCseOrganizationRelationship"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Active" to="Active"/>
+   <map from="Group.Jd" to="Group.Jd"/>
+   <map from="Group.Contractor" to="Group.Contractor"/>
+   <map from="Group.EffDate" to="Group.EffDate"/>
+   <map from="Group.EndDate" to="Group.EndDate"/>
+   <map from="JudicalDistrictHidden" to="JudicalDistrictHidden"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Plus" to="Plus"/>
+   <map from="Page.JudicalDistrictPage" to="Page.JudicalDistrictPage"/>
+   <map from="Page.ContractorPage" to="Page.ContractorPage"/>
+   <map from="Page.Page1" to="Page.Page1"/>
+   <map from="JudicalDistrict.Code" to="JudicalDistrict.Code"/>
+   <map from="JudicalDistrict.Name" to="JudicalDistrict.Name"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

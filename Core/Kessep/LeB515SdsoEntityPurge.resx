@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteAdmActCertDebtDetail">
+      <value>
+delete from CKT_AA_CRT_DEBT_DT
+where
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTY_ID = @otyId) and
+  (OTR_TYPE = @otrType) and
+  (CPA_TYPE_DEBT = @cpaTypeDebt) and
+  (CSP_NUMBER_DEBT = @cspNumberDebt) and
+  (AAC_TYPE = @aacType) and
+  (AAC_TAKEN_DATE = @aacTakenDate) and
+  (AAC_TANF_CODE = @aacTanfCode)
+</value>
+   </data>
+   <data name="DeleteAdminActionCertObligation">
+      <value>
+delete from CKT_ADM_ACT_CRT_OB
+where
+  (AAC_TAKEN_DATE = @aacTakenDate) and
+  (AAC_TYPE = @aacType) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (TSTAMP = @tstamp) and
+  (AAC_TANF_CODE = @aacTanfCode)
+</value>
+   </data>
+   <data name="ReadAdmActCertDebtDetail">
+      <value>
+select
+  CREATED_TMST,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTY_ID,
+  OTR_TYPE,
+  CPA_TYPE_DEBT,
+  CSP_NUMBER_DEBT,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_AA_CRT_DEBT_DT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumberDebt = CSP_NUMBER_DEBT) and
+  (@cpaTypeDebt = CPA_TYPE_DEBT)
+</value>
+   </data>
+   <data name="ReadAdminActionCertObligation">
+      <value>
+select
+  AAC_TAKEN_DATE,
+  AAC_TYPE,
+  CSP_NUMBER,
+  CPA_TYPE,
+  TSTAMP,
+  AAC_TANF_CODE
+from
+  CKT_ADM_ACT_CRT_OB
+where
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@cpaType = CPA_TYPE) and
+  (@aacType = AAC_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePersonObligor">
+      <value>
+select
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  CSP_NUMBER &gt; cast(@restartInfo as char(250))
+order by
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadStateDebtSetoff1">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  TAKEN_DT desc
+</value>
+   </data>
+   <data name="ReadStateDebtSetoff2">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (TAKEN_DT &lt; dateadd(day, - 14, cast(@processDate as date)))
+order by
+  TAKEN_DT
+</value>
+   </data>
+   <data name="ReadStateDebtSetoff3">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  TAKEN_DT desc
+</value>
+   </data>
+</root>

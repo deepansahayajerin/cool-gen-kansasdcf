@@ -1,0 +1,34 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnLeftListElecFundTran"
+           program-name="SWELEFTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnLeftListElecFundTran"
+           transaction="SREK"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_CASH_MGMNT_MENU"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_DISB_MGMNT_MENU"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_EFT_TRANSMISSION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnLtrnListEftTransmissions"
+       send-command="DISPLAY">
+      <map from="Selection.TransmissionType" to="Search.TransmissionType"/>
+      <map from="Selection.FileCreationDate" to="Search.FileCreationDate"/>
+      <map from="Selection.FileCreationTime" to="Search.FileCreationTime"/>
+      <map from="Selection.TransmissionStatusCode"
+           to="Search.TransmissionStatusCode"/>
+      <return-map from="SearchEftTransmissionFileInfo" to="Search"/>
+      <return-map from="SearchEnding" to="SearchEnding"/>
+   </on>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.EftTransmissionFileInfo" to="Group.EftTransmissionFileInfo"/>
+   <map from="Search" to="Search"/>
+   <map from="SearchEnding" to="SearchEnding"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+</procedure>

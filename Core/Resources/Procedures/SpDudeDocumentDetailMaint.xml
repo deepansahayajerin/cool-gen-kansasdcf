@@ -1,0 +1,76 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpDudeDocumentDetailMaint"
+           program-name="SWEDUDEP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpDudeDocumentDetailMaint"
+           transaction="SRPY"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Pass" to="Code"/>
+      <return-map from="DlgflwSelected" to="PassCodeValue"/>
+      <return-map from="Code.CodeName" to="PassCode.CodeName"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpDmnuDocumentMaintMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_EDLM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpEdlmEventDetailsListMaint"
+       send-command="DISPLAY">
+      <map from="EventDetail.SystemGeneratedIdentifier"
+           to="Starting.SystemGeneratedIdentifier"/>
+      <map from="Event1" to="Event2"/>
+      <return-map from="ToTranEvent.ControlNumber" to="Event1.ControlNumber"/>
+      <return-map from="ToTranEventDetail.SystemGeneratedIdentifier"
+                  to="EventDetail.SystemGeneratedIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <return-map from="ReturnDoc" to="Return1"/>
+   </on>
+   <map from="EventDetail" to="EventDetail"/>
+   <map from="Event1" to="Event1"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="PromptDocument" to="PromptDocument"/>
+   <map from="PromptScreen" to="PromptScreen"/>
+   <map from="PromptEventDetail" to="PromptEventDetail"/>
+   <map from="PromptBusObj" to="PromptBusObj"/>
+   <map from="HiddenEventDetail" to="HiddenEventDetail"/>
+   <map from="HiddenEvent" to="HiddenEvent"/>
+   <map from="HiddenDocument.Name" to="HiddenDocument.Name"/>
+   <map from="HiddenDocument.Description" to="HiddenDocument.Description"/>
+   <map from="HiddenDocument.Type1" to="HiddenDocument.Type1"/>
+   <map from="Document.Name" to="Document.Name"/>
+   <map from="Document.Description" to="Document.Description"/>
+   <map from="Document.Type1" to="Document.Type1"/>
+   <map from="Document.BusinessObject" to="Document.BusinessObject"/>
+   <map from="Document.RequiredResponseDays" to="Document.RequiredResponseDays"/>
+   <map from="Document.DetailedDescription" to="Document.DetailedDescription"/>
+   <map from="HiddenDocument.BusinessObject" to="HiddenDocument.BusinessObject"/>
+   <map from="HiddenDocument.RequiredResponseDays"
+        to="HiddenDocument.RequiredResponseDays"/>
+   <map from="HiddenDocument.DetailedDescription"
+        to="HiddenDocument.DetailedDescription"/>
+   <map from="HiddenDocument.EffectiveDate" to="HiddenDocument.EffectiveDate"/>
+   <map from="HiddenDocument.ExpirationDate" to="HiddenDocument.ExpirationDate"/>
+   <map from="HiddenDocument.PrintPreviewSwitch"
+        to="HiddenDocument.PrintPreviewSwitch"/>
+   <map from="HiddenDocument.VersionNumber" to="HiddenDocument.VersionNumber"/>
+   <map from="Document.ExpirationDate" to="Document.ExpirationDate"/>
+   <map from="Document.PrintPreviewSwitch" to="Document.PrintPreviewSwitch"/>
+   <map from="Document.VersionNumber" to="Document.VersionNumber"/>
+   <map from="Document.EffectiveDate" to="Document.EffectiveDate"/>
+</procedure>

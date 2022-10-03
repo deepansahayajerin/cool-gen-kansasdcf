@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadIwoActionHistory">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER,
+  IWA_IDENTIFIER
+from
+  CKT_IWO_ACT_HIST with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@iwtIdentifier = IWT_IDENTIFIER) and
+  (@iwaIdentifier = IWA_IDENTIFIER)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadIwoActionIwoTransaction">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.ACTION_TYPE,
+  T1.STATUS_CD,
+  T1.STATUS_DATE,
+  T1.STATUS_REASON_CD,
+  T1.DOC_TRACKING_ID,
+  T1.SVRITY_CLEARED_IND,
+  T1.ERROR_RECORD_TYPE,
+  T1.ERROR_FIELD_1,
+  T1.ERROR_FIELD_2,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.IWT_IDENTIFIER,
+  T2.TRANSACTION_NUMBER
+from
+  CKT_IWO_TRANS T2 with(readuncommitted)
+  join
+  CKT_IWO_ACTION T1 with(readuncommitted)
+  on
+    (T1.ACTION_TYPE = 'E-IWO') and
+    (T1.STATUS_CD = 'E') and
+    (T1.SVRITY_CLEARED_IND = 'N') and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.LGA_IDENTIFIER = T1.LGA_IDENTIFIER) and
+    (T2.IDENTIFIER = T1.IWT_IDENTIFIER) and
+    (
+      (T1.STATUS_DATE &lt; @statusDate) or
+      (
+        (T1.STATUS_DATE = @statusDate) and
+        (T2.TRANSACTION_NUMBER &gt; @transactionNumber)
+      )
+    )
+order by
+  T1.STATUS_DATE desc,
+  T2.TRANSACTION_NUMBER
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  ACTION_TAKEN
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.OFF_OFFICE,
+  T2.SERVICE_PRVDER_ID,
+  T2.USER_ID
+from
+  CKT_SERVICE_PRVDER T2 with(readuncommitted)
+  join
+  CKT_OFFICE T1 with(readuncommitted)
+  join
+  CKT_LA_SERV_PROV T4 with(readuncommitted)
+  on
+    (T1.OFFICE_ID = T4.OFF_GENERATED_ID) and
+    (T4.OSP_ROLE_CODE is not null) and
+    (T4.OSP_EFFECTIVE_DATE is not null) and
+    (T4.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T4.END_DT &gt;= @effectiveDt) and
+    (T4.REASON_CODE = 'RSP') and
+    (@lgaIdentifier = T4.LGA_IDENTIFIER)
+  on
+    T2.SERVICE_PRVDER_ID = T4.SPD_GENERATED_ID
+</value>
+   </data>
+</root>

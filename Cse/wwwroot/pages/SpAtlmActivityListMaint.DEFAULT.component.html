@@ -1,0 +1,206 @@
+﻿<!--Name: SP_ATLM_ACTIVITY_LIST_MAINT, ID: 371745499, model: 746-->
+<div coolContent coolName="SP_ATLM_ACTIVITY_LIST_MAINT" coolType="SCREEN"
+  (coolInit)="scrollSize = 47; pageSize = 3">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 26.25%; top: 0; width: 47.5%; height: 4%;" coolCol="22"
+     coolRow="1" coolLength="38">CSE - Activity List Maintenance - ATLM</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">Next</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 12%; width: 30%; height: 4%;"
+     coolCol="2" coolRow="4" coolLength="24">Starting Activity Name :</div>
+   <input type="text" coolType="field" name="field_4_27"
+     [(ngModel)]="in.starting.name" [coolVideo]="out.starting.screenField?.name"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="40"
+     style="left: 32.5%; top: 12%; width: 50%; height: 4%;" coolCol="27"
+     coolRow="4" coolLength="40">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 20%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="6" coolLength="3">Sel</div>
+   
+   <div coolType="prompt"
+     style="left: 7.5%; top: 20%; width: 12.5%; height: 4%;" coolCol="7"
+     coolRow="6" coolLength="10">Activity #</div>
+   
+   <div coolType="prompt"
+     style="left: 25%; top: 20%; width: 16.25%; height: 4%;" coolCol="21"
+     coolRow="6" coolLength="13">Activity Name</div>
+   
+   <div coolType="prompt" style="left: 80%; top: 20%; width: 5%; height: 4%;"
+     coolCol="65" coolRow="6" coolLength="4">Type</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 24%; width: 13.75%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="11">Description</div>
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.group, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab #field_9_3 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= 47">
+   <input type="text" coolType="field" name="field_9_9"
+     [(ngModel)]="ref(in.group, pageOffset, 'activity.controlNumber').value"
+     [coolVideo]="out.group?.[pageOffset]?.activity.screenField?.controlNumber"
+     coolAutotab #field_9_9 coolReadonly coolAlign="right" coolColor="cyan"
+     coolNumber="00000;#" coolBlankWhenZero [attr.maxlength]="5"
+     style="left: 10%; top: 32%; width: 6.25%; height: 4%;" coolCol="9"
+     coolRow="9" coolLength="5" [hidden]="pageOffset >= 47">
+   <input type="text" coolType="field" name="field_9_19"
+     [(ngModel)]="ref(in.group, pageOffset, 'activity.name').value"
+     [coolVideo]="out.group?.[pageOffset]?.activity.screenField?.name"
+     coolAutotab #field_9_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="40"
+     style="left: 22.5%; top: 32%; width: 50%; height: 4%;" coolCol="19"
+     coolRow="9" coolLength="40" [hidden]="pageOffset >= 47">
+   <input type="text" coolType="field" name="field_9_66"
+     [(ngModel)]="ref(in.group, pageOffset, 'activity.typeCode').value"
+     [coolVideo]="out.group?.[pageOffset]?.activity.screenField?.typeCode"
+     coolAutotab #field_9_66 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="3"
+     style="left: 81.25%; top: 32%; width: 3.75%; height: 4%;" coolCol="66"
+     coolRow="9" coolLength="3" [hidden]="pageOffset >= 47">
+   <textarea coolType="field" name="field_10_1"
+     [(ngModel)]="ref(in.group, pageOffset, 'activity.description').value"
+     [coolVideo]="out.group?.[pageOffset]?.activity.screenField?.description"
+     coolAutotab #field_10_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="240"
+     style="left: 0; top: 36%; width: 100%; height: 12%;" coolCol="1"
+     coolRow="10" coolLength="80" coolHeight="3" [hidden]="pageOffset >= 47"></textarea>
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab #field_13_3 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 1 >= 47">
+   <input type="text" coolType="field" name="field_13_9"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'activity.controlNumber').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.activity.screenField?.controlNumber"
+     coolAutotab #field_13_9 coolReadonly coolAlign="right" coolColor="cyan"
+     coolNumber="00000;#" coolBlankWhenZero [attr.maxlength]="5"
+     style="left: 10%; top: 48%; width: 6.25%; height: 4%;" coolCol="9"
+     coolRow="13" coolLength="5" [hidden]="pageOffset + 1 >= 47">
+   <input type="text" coolType="field" name="field_13_19"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'activity.name').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.activity.screenField?.name"
+     coolAutotab #field_13_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="40"
+     style="left: 22.5%; top: 48%; width: 50%; height: 4%;" coolCol="19"
+     coolRow="13" coolLength="40" [hidden]="pageOffset + 1 >= 47">
+   <input type="text" coolType="field" name="field_13_66"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'activity.typeCode').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.activity.screenField?.typeCode"
+     coolAutotab #field_13_66 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="3"
+     style="left: 81.25%; top: 48%; width: 3.75%; height: 4%;" coolCol="66"
+     coolRow="13" coolLength="3" [hidden]="pageOffset + 1 >= 47">
+   <textarea coolType="field" name="field_14_1"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'activity.description').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.activity.screenField?.description"
+     coolAutotab #field_14_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="240"
+     style="left: 0; top: 52%; width: 100%; height: 12%;" coolCol="1"
+     coolRow="14" coolLength="80" coolHeight="3" [hidden]="pageOffset + 1 >= 47"></textarea>
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab #field_17_3 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 2 >= 47">
+   <input type="text" coolType="field" name="field_17_9"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'activity.controlNumber').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.activity.screenField?.controlNumber"
+     coolAutotab #field_17_9 coolReadonly coolAlign="right" coolColor="cyan"
+     coolNumber="00000;#" coolBlankWhenZero [attr.maxlength]="5"
+     style="left: 10%; top: 64%; width: 6.25%; height: 4%;" coolCol="9"
+     coolRow="17" coolLength="5" [hidden]="pageOffset + 2 >= 47">
+   <input type="text" coolType="field" name="field_17_19"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'activity.name').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.activity.screenField?.name"
+     coolAutotab #field_17_19 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="40"
+     style="left: 22.5%; top: 64%; width: 50%; height: 4%;" coolCol="19"
+     coolRow="17" coolLength="40" [hidden]="pageOffset + 2 >= 47">
+   <input type="text" coolType="field" name="field_17_66"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'activity.typeCode').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.activity.screenField?.typeCode"
+     coolAutotab #field_17_66 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="3"
+     style="left: 81.25%; top: 64%; width: 3.75%; height: 4%;" coolCol="66"
+     coolRow="17" coolLength="3" [hidden]="pageOffset + 2 >= 47">
+   <textarea coolType="field" name="field_18_1"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'activity.description').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.activity.screenField?.description"
+     coolAutotab #field_18_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="240"
+     style="left: 0; top: 68%; width: 100%; height: 12%;" coolCol="1"
+     coolRow="18" coolLength="80" coolHeight="3" [hidden]="pageOffset + 2 >= 47"></textarea>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="8"
+     style="left: 86.25%; top: 80%; width: 10%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 88%; width: 95%; height: 4%;" coolCol="2"
+     coolRow="23" coolLength="76">PFKEY : 1 Help  2 Display  3 Exit  5 Add  6 Update  7 Prev  8 Next  9 Return</div>
+   
+   <div coolType="literal" style="left: 10%; top: 92%; width: 50%; height: 4%;"
+     coolCol="9" coolRow="24" coolLength="40">10 Delete  11 Clear  12 Signoff  15 ADLM</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="ADD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=ADD</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="ADLM" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=ADLM</a>
+   </div>

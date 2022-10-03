@@ -1,0 +1,85 @@
+Feature: ENFManualEnforcementActions
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "LMNU" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Legal and Enforcement Menu - LMNU" window appears
+    When user enters "1" in "option"
+    And presses "Enter"
+    Then "CSE - Administrative Action Menu - ADMN" window appears
+    When user enters "1" in "option"
+    And presses "Enter"
+    Then "CSE - Identify Administrative Action - IADA" window appears
+
+    Then take snapshot "page1"
+    When user enters "<COURT_CASE_NUMBER>" in "Court Case Number"
+    And enters "<TRIB_STATE>" in "Trib State"
+    And enters "<COUNTY>" in "County"
+    And enters "<CSE_PERSON_NUMBER>" in "CSE Person #"
+    And enters "<ADMINISTRATIVE_ACTION_TYPE>" in "Administrative Action Type"
+    And enters "<ALL_ABLIGATIONS>" in "All Obligations"
+    And enters "<ACTION_TAKEN_DATE_Y>" in "Action Taken Date"
+    Then snapshot "Sc1_page1"
+    And user enters "" in the first field below "Oblig"
+    And user enters "S" in the next field
+    And user presses "F4"
+    Then snapshot "Sc1_page2"
+    Then "CSE - List Obligations by AP/Payor - OPAY" window appears
+
+    When user enters "S" in first field under text "Sel"
+    And user presses "F9"
+    Then "CSE - Identify Administrative Action - IADA" window appears
+
+    When user enters "<ACTION_TAKEN_DATE_T>" in "Action Taken Date"
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+
+    When user enters "<RESPONSE_DATE>" in "Response Date"
+    And user presses "F6"
+    Then snapshot "Sc1_page3"
+    Then message "ACO_NI0000: Administrative action response must be entered." is displayed
+
+    #     Then user presses "Shift+F12"
+    #     And user enters "S" in first field under text "Sel"
+    #     And presses "F9"
+
+    Examples:
+      | COURT_CASE_NUMBER | TRIB_STATE | COUNTY | CSE_PERSON_NUMBER | SSN_1 | SSN_2 | SSN_3 | ADMINISTRATIVE_ACTION_TYPE | ALL_ABLIGATIONS | ACTION_TAKEN_DATE_Y | ACTION_TAKEN_DATE_T | RESPONSE_DATE |
+      | 21DM566480        | KS         | JO     | 000021            | 676   | 78    | 2087  | BLTR                       | N               | Yesterday           | Today               | Today         |
+
+
+  Scenario Outline: Scenario4
+    When user enters "LMNU" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Legal and Enforcement Menu - LMNU" window appears
+    When user enters "1" in "option"
+    And presses "Enter"
+    Then "CSE - Administrative Action Menu - ADMN" window appears
+    When user enters "1" in "option"
+    And presses "Enter"
+    Then "CSE - Identify Administrative Action - IADA" window appears
+
+    Then take snapshot "page1"
+    When user enters "<CSE_PERSON_NUMBER>" in "CSE Person #"
+    And user presses "F2"
+    And user enters "" in the first field below "Oblig"
+    And user enters "S" in the next field
+
+    And user presses "F4"
+    Then snapshot "Sc1_page2"
+    Then "CSE - List Obligations by AP/Payor - OPAY" window appears
+
+    When user enters "S" in first field under text "Sel"
+    And user presses "F9"
+    Then "CSE - Identify Administrative Action - IADA" window appears
+
+
+
+    Examples:
+      | CSE_PERSON_NUMBER |
+      | 000021            |

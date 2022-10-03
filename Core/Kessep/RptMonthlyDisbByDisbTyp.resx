@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select top(1)
+  count(*),
+  sum(cast(@totalCurrency as decimal(15, 2)) + AMOUNT)
+from
+  CKT_DISB_TRAN
+where
+  (DBT_GENERATED_ID = @dbtGeneratedId) and
+  (TYPE = 'D') and
+  (DISBURSEMENT_DATE between cast(@date1 as date) and cast(@date2 as date))
+</value>
+   </data>
+   <data name="ReadDisbursementType">
+      <value>
+select
+  DISB_TYPE_ID,
+  CODE,
+  NAME
+from
+  CKT_DISB_TYPE
+order by
+  NAME
+</value>
+   </data>
+</root>

@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'AP') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCreditReporting">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  ORIGINAL_AMT,
+  CURRENT_AMT,
+  NOTIFICATION_DT,
+  NOTIFIED_BY,
+  AP_RESP_RECD_DATE,
+  DATE_STAYED,
+  DATE_STAY_RELEASED,
+  HIGHEST_AMOUNT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'CRED')
+order by
+  TAKEN_DT desc
+</value>
+   </data>
+   <data name="ReadCreditReportingAction">
+      <value>
+select
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CRA_TRANS_DATE &gt;= @craTransDate1) and
+  (CRA_TRANS_DATE &lt; @craTransDate2)
+order by
+  CRA_TRANS_DATE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadGoodCause">
+      <value>
+select
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_NUMBER1,
+  CSP_NUMBER1,
+  CRO_TYPE1,
+  CRO_IDENTIFIER1
+from
+  CKT_GOOD_CAUSE
+where
+  (@casNumber1 = CAS_NUMBER1) and
+  (@croIdentifier1 = CRO_IDENTIFIER1) and
+  (@croType1 = CRO_TYPE1) and
+  (@cspNumber1 = CSP_NUMBER1) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+order by
+  EFFECTIVE_DATE desc,
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemption">
+      <value>
+select top(1)
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  END_DT
+from
+  CKT_OADM_ACT_EXMP
+where
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt; @effectiveDt) and
+  (AAT_TYPE = 'CRED') and
+  (CPA_TYPE = 'R') and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

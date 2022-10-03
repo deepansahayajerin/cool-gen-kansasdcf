@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteHearingAddress#1">
+      <value>
+delete from CKT_HEARING_ADDR
+where
+  (HRG_GENERATED_ID = @hrgGeneratedId1) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="DeleteHearingAddress#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_HEARING_ADDR T1
+where
+  T1.HRG_GENERATED_ID = @hrgGeneratedId2
+</value>
+   </data>
+   <data name="DeleteHearingAddress#3">
+      <value>
+delete from CKT_HEARING
+where
+  HEARING_ID = @hrgGeneratedId2
+</value>
+   </data>
+   <data name="ReadHearingAddress">
+      <value>
+select top(1)
+  HRG_GENERATED_ID,
+  TYPE,
+  LOCATION,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  COUNTY,
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP
+from
+  CKT_HEARING_ADDR
+where
+  (TYPE = @type) and
+  (HRG_GENERATED_ID = @hrgGeneratedId)
+</value>
+   </data>
+</root>

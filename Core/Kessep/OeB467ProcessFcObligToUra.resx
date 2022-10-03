@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateImHousehold1">
+      <value>
+insert into CKT_IM_HOUSEHOLD
+(
+  AE_CASE_NO,
+  HOUSEHOLD_SIZE,
+  CASE_STATUS,
+  STATUS_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  FIRST_BEN_DATE,
+  TYPE,
+  CALCULATE_FLAG,
+  MULTI_CASE_IND
+)
+values
+(
+  @aeCaseNo,
+  @householdSize,
+  @caseStatus,
+  @statusDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTimes,
+  @firstBenDate,
+  @type,
+  @caseStatus,
+  @caseStatus
+)
+</value>
+   </data>
+   <data name="CreateImHousehold2">
+      <value>
+insert into CKT_IM_HOUSEHOLD
+(
+  AE_CASE_NO,
+  HOUSEHOLD_SIZE,
+  CASE_STATUS,
+  STATUS_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  FIRST_BEN_DATE,
+  TYPE,
+  CALCULATE_FLAG,
+  MULTI_CASE_IND
+)
+values
+(
+  @aeCaseNo,
+  @householdSize,
+  @caseStatus,
+  @statusDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTimes,
+  @firstBenDate,
+  @type,
+  @caseStatus,
+  @caseStatus
+)
+</value>
+   </data>
+   <data name="CreateImHouseholdMbrMnthlySum">
+      <value>
+insert into CKT_IM_HH_MBR_MSUM
+(
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+)
+values
+(
+  @year0,
+  @month0,
+  @relationship,
+  @grantAmt,
+  @grantMedAmt,
+  @uraAmount,
+  @uraMedicalAmount,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @imhAeCaseNo,
+  @cspNumber
+)
+</value>
+   </data>
+   <data name="ReadControlTable">
+      <value>
+select top(1)
+  CNTL_TBL_ID,
+  LAST_USED_NUMBER
+from
+  CKT_CONTROL_TABLE
+where
+  CNTL_TBL_ID = 'FC AE CASE NUMBER'
+</value>
+   </data>
+   <data name="ReadDebtAdjustment">
+      <value>
+select distinct
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.OB_TRN_AMT,
+  T1.DEBT_ADJ_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE
+from
+  CKT_OB_TRN T1
+  join
+  CKT_OB_TRN_RLN T2
+  on
+    (T1.OTY_TYPE = T2.OTY_TYPE_SECONDARY) and
+    (T1.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T1.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (@otyTypePrimary = T2.OTY_TYPE_PRIMARY) and
+    (@otrPType = T2.OTR_P_TYPE) and
+    (@otrPGeneratedId = T2.OTR_P_GENERATED_ID) and
+    (@cpaPType = T2.CPA_P_TYPE) and
+    (@cspPNumber = T2.CSP_P_NUMBER) and
+    (@obgPGeneratedId = T2.OBG_P_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadDebtDetailDebtObligationObligationTypeCsePerson">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.BAL_DUE_AMT,
+  T1.RETIRED_DT,
+  T1.CVRD_PRD_START_DT,
+  T1.CVD_PRD_END_DT,
+  T1.PRECNVRSN_PGM_CD,
+  T2.OB_TRN_AMT,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.DEBT_TYP,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE,
+  T2.URA_UPD_PROC_DATE,
+  T3.PRIM_SEC_CD,
+  T3.ORD_TYP_CD,
+  T4.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T4
+  join
+  CKT_OBLIGATION T3
+  join
+  CKT_OB_TRN T2
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T2.OTY_TYPE = T1.OTY_TYPE) and
+    (T2.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.URA_UPD_PROC_DATE = @uraUpdProcDate) and
+    (T2.CPA_SUP_TYPE is not null) and
+    (T2.CSP_SUP_NUMBER is not null) and
+    (T2.CSP_SUP_NUMBER between cast(@number1 as char(10)) and cast(@number2 as char(10)))
+  on
+    (T3.DTY_GENERATED_ID = T2.OTY_TYPE) and
+    (T3.OB_ID = T2.OBG_GENERATED_ID) and
+    (T3.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T3.CPA_TYPE = T2.CPA_TYPE)
+  on
+    T4.DEBT_TYP_ID = T3.DTY_GENERATED_ID
+order by
+  T2.CSP_SUP_NUMBER,
+  T1.DUE_DT
+</value>
+   </data>
+   <data name="ReadImHousehold1">
+      <value>
+select top(1)
+  T1.AE_CASE_NO,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.FIRST_BEN_DATE
+from
+  CKT_IM_HOUSEHOLD T1
+  join
+  CKT_IM_HH_MBR_MSUM T2
+  on
+    (T1.AE_CASE_NO &lt; '00000000') and
+    (T1.AE_CASE_NO = T2.IMH_AE_CASE_NO) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadImHousehold2">
+      <value>
+select top(1)
+  AE_CASE_NO,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  FIRST_BEN_DATE
+from
+  CKT_IM_HOUSEHOLD
+where
+  AE_CASE_NO = @aeCaseNo
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum">
+      <value>
+select top(1)
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@imhAeCaseNo = IMH_AE_CASE_NO) and
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0)
+</value>
+   </data>
+   <data name="UpdateControlTable">
+      <value>
+update CKT_CONTROL_TABLE
+set
+  LAST_USED_NUMBER = @lastUsedNumber
+where
+  CNTL_TBL_ID = @cntlTblId
+</value>
+   </data>
+   <data name="UpdateDebt">
+      <value>
+update CKT_OB_TRN
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  URA_UPD_PROC_DATE = @uraUpdProcDate
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OB_TRN_ID = @obTrnId) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+   <data name="UpdateImHouseholdMbrMnthlySum">
+      <value>
+update CKT_IM_HH_MBR_MSUM
+set
+  GRANT_AMT = @grantAmt,
+  URA_AMOUNT = @uraAmount
+where
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0) and
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

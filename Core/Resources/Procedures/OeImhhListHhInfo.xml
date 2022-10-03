@@ -1,0 +1,159 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeImhhListHhInfo"
+           program-name="SWEIMHHP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeImhhListHhInfo"
+           transaction="SRDD"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_COMN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiComnCaseCompositionByName"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectedCase" to="SearchCriteria.SearchCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NAME"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiNameNameList"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="SearchCriteria.SearchCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none">
+      <map from="DialogFlow.DialogFlowCase" to="StartCase"/>
+      <map from="DialogFlow.DialogFlowCsePerson" to="StartCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUracUraByCourtOrder"
+       send-command="DISPLAY">
+      <map from="DialogFlow.DialogFlowLegalAction" to="Search"/>
+      <map from="DialogFlow.DialogFlowFromDateWorkAttributes" to="SearchFrom"/>
+      <map from="DialogFlow.DialogFlowToDateWorkAttributes" to="SearchTo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUrahHouseholdUra"
+       send-command="DISPLAY">
+      <map from="DialogFlow.DialogFlowImHousehold" to="Search"/>
+      <map from="DialogFlow.DialogFlowFromDateWorkAttributes" to="SearchFrom"/>
+      <map from="DialogFlow.DialogFlowToDateWorkAttributes" to="SearchTo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UHMM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUhmmUraHouseholdMbrMaint"
+       send-command="DISPLAY">
+      <map from="DialogFlow.DialogFlowCsePersonsWorkSet.Number" to="Search.Number"/>
+      <map from="DialogFlow.DialogFlowCsePersonsWorkSet.FormattedName"
+           to="Search.FormattedName"/>
+      <map from="DialogFlow.DialogFlowImHousehold.AeCaseNo"
+           to="ImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UCOL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUcolListUraCollections"
+       send-command="DISPLAY">
+      <map from="DialogFlow.DialogFlowCase" to="SearchCase"/>
+      <map from="DialogFlow.DialogFlowCsePersonsWorkSet"
+           to="SearchMemberCsePersonsWorkSet"/>
+      <map from="DialogFlow.DialogFlowCsePerson" to="SearchMemberCsePerson"/>
+      <map from="DialogFlow.DialogFlowLegalAction" to="SearchLegalAction"/>
+      <map from="DialogFlow.DialogFlowImHousehold" to="SearchImHousehold"/>
+      <map from="DialogFlow.DialogFlowFromDateWorkArea" to="PassFromDateWorkArea"/>
+      <map from="DialogFlow.DialogFlowToDateWorkArea" to="PassToDateWorkArea"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CURA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeCuraMembersUra"
+       send-command="DISPLAY">
+      <map from="DialogFlow.DialogFlowCsePersonsWorkSet"
+           to="SearchCsePersonsWorkSet"/>
+      <map from="DialogFlow.DialogFlowFromDateWorkAttributes" to="SearchFrom"/>
+      <map from="DialogFlow.DialogFlowToDateWorkAttributes" to="SearchTo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LACS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACS"
+       to="LeLacsLstLglActnByCseCase"
+       send-command="DISPLAY">
+      <map from="SearchCriteria.SearchCase" to="Case1"/>
+      <return-map from="Case1" to="FromLacsCase"/>
+      <return-map from="DlgflwSelected" to="FromLacsLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PART"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiPartCaseParticipation"
+       send-command="DISPLAY">
+      <map from="DialogFlow.DialogFlowCsePersonsWorkSet.Number" to="Search.Number"/>
+      <map from="DialogFlow.DialogFlowCsePersonsWorkSet.FormattedName"
+           to="Search.FormattedName"/>
+      <return-map from="Selected" to="SearchCriteria.SearchCase"/>
+      <return-map from="Search" to="SearchCriteria.SearchCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUraaUraAdjustment"
+       send-command="DISPLAY">
+      <map from="DialogFlow.DialogFlowCsePerson" to="CsePerson"/>
+      <map from="DialogFlow.DialogFlowImHousehold" to="ImHousehold"/>
+      <map from="DialogFlow.DialogFlowToDateWorkArea" to="ForAdjustments"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUralListUraAdj"
+       send-command="DISPLAY">
+      <map from="DialogFlow.DialogFlowToDateWorkArea.Month"
+           to="ToYearNMonth.Month"/>
+      <map from="DialogFlow.DialogFlowToDateWorkArea.Year" to="ToYearNMonth.Year"/>
+      <map from="DialogFlow.DialogFlowFromDateWorkArea.Month"
+           to="FromYearNMonth.Month"/>
+      <map from="DialogFlow.DialogFlowFromDateWorkArea.Year"
+           to="FromYearNMonth.Year"/>
+      <map from="DialogFlow.DialogFlowCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="DialogFlow.DialogFlowImHousehold" to="ImHousehold"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Grp.DtlCommon" to="Grp.DtlCommon"/>
+   <map from="Grp.DtlImHousehold" to="Grp.DtlImHousehold"/>
+   <map from="Grp.DtlImHouseholdMbrMnthlySum"
+        to="Grp.DtlImHouseholdMbrMnthlySum"/>
+   <map from="Grp.DtlCsePerson" to="Grp.DtlCsePerson"/>
+   <map from="Grp.DtlCsePersonsWorkSet" to="Grp.DtlCsePersonsWorkSet"/>
+   <map from="Grp.DtlLegalAction" to="Grp.DtlLegalAction"/>
+   <map from="SearchCriteria.SearchCase" to="SearchCriteria.SearchCase"/>
+   <map from="Prompt.CseCase" to="Prompt.CseCaseNumber"/>
+   <map from="SearchCriteria.SearchImHousehold"
+        to="SearchCriteria.SearchImHousehold"/>
+   <map from="SearchCriteria.SearchLegalAction"
+        to="SearchCriteria.SearchLegalAction"/>
+   <map from="Prompt.CourtOrder" to="Prompt.CourtOrder"/>
+   <map from="Prompt.CsePerson" to="Prompt.CsePerson"/>
+   <map from="SearchCriteria.SearchCsePersonsWorkSet"
+        to="SearchCriteria.SearchCsePersonsWorkSet"/>
+   <map from="Grp.DtlMultCtOrdMsg" to="Grp.DtlMultCtOrdMsg"/>
+   <map from="Grp.DtlFrom" to="Grp.DtlFrom"/>
+   <map from="Grp.DtlTo" to="Grp.DtlTo"/>
+</procedure>

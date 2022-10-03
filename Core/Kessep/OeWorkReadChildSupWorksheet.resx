@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadChildSupportAdjustmentCsePersonSupportAdjustment1">
+      <value>
+select
+  T1.NUMB,
+  T1.ADJUSTMENT_TYPE,
+  T1.DESCRIPTION,
+  T2.CRO_IDENTIFIER,
+  T2.ADJUSTMENT_AMOUNT,
+  T2.CPS_IDENTIFIER,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CSW_IDENTIFIER,
+  T2.CSS_GUIDELINE_YR
+from
+  CKT_CHILD_SUPP_ADJ T1
+  join
+  CKT_PCH_SUPP_ADJ T2
+  on
+    (T1.NUMB = T2.CSD_NUMBER) and
+    (@cpsIdentifier = T2.CPS_IDENTIFIER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (@croType = T2.CRO_TYPE) and
+    (@croIdentifier = T2.CRO_IDENTIFIER) and
+    (@cswIdentifier = T2.CSW_IDENTIFIER) and
+    (@cssGuidelineYr = T2.CSS_GUIDELINE_YR)
+</value>
+   </data>
+   <data name="ReadChildSupportAdjustmentCsePersonSupportAdjustment2">
+      <value>
+select
+  T1.NUMB,
+  T1.ADJUSTMENT_TYPE,
+  T1.DESCRIPTION,
+  T2.CRO_IDENTIFIER,
+  T2.ADJUSTMENT_AMOUNT,
+  T2.CPS_IDENTIFIER,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CSW_IDENTIFIER,
+  T2.CSS_GUIDELINE_YR
+from
+  CKT_CHILD_SUPP_ADJ T1
+  join
+  CKT_PCH_SUPP_ADJ T2
+  on
+    (T1.NUMB = T2.CSD_NUMBER) and
+    (@cpsIdentifier = T2.CPS_IDENTIFIER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (@croType = T2.CRO_TYPE) and
+    (@croIdentifier = T2.CRO_IDENTIFIER) and
+    (@cswIdentifier = T2.CSW_IDENTIFIER) and
+    (@cssGuidelineYr = T2.CSS_GUIDELINE_YR)
+</value>
+   </data>
+   <data name="ReadChildSupportWorksheet">
+      <value>
+select top(1)
+  IDENTIFIER,
+  LGA_IDENTIFIER,
+  NO_OF_CH_GRP3,
+  NO_OF_CH_GRP2,
+  NO_OF_CH_GRP1,
+  ADDL_NO_CHILDREN,
+  STATUS,
+  COL_DIFF_ADJ_IND,
+  MULT_FAM_ADJ_IND,
+  AUTHORIZING_ATHRTY,
+  PARNT_TIME_ADJ_PCT,
+  CS_GUIDELINE_YEAR
+from
+  CKT_CH_SUPP_WSHEET
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole1">
+      <value>
+select top(1)
+  NUMB,
+  cast(@casNumber as char(10)),
+  cast(@cspNumber as char(10)),
+  cast(@croType as char(2)),
+  cast(@croIdentifier as smallint)
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @cspNumber
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole2">
+      <value>
+select top(1)
+  NUMB,
+  cast(@casNumber as char(10)),
+  cast(@cspNumber as char(10)),
+  cast(@croType as char(2)),
+  cast(@croIdentifier as smallint)
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @cspNumber
+</value>
+   </data>
+   <data name="ReadCsePersonSupportWorksheet1">
+      <value>
+select top(1)
+  CRO_IDENTIFIER,
+  IDENTIFER,
+  NO_CH_IN_DAY_CARE,
+  WRK_REL_CHCARECOST,
+  WAGE_EARNER_GR_INC,
+  SELF_EMP_GROSS_INC,
+  REASONABLE_BUSEXP,
+  CTORD_CHSUPP_PAID,
+  CS_PAID_CT_ORD_NO,
+  CTORD_MAINT_PAID,
+  MAINT_PD_CTORD_NO,
+  CTORD_MAINT_RCVD,
+  MAINT_RD_CTORD_NO,
+  HLTH_DNTL_INS_PREM,
+  ELIG_FED_TAX_CR,
+  ELIG_KS_TAX_CR,
+  NET_ADJ_PRTL_CSAMT,
+  ENFRCMT_FEE_TYP,
+  ENFRCMT_FEE_ALLWN,
+  CSW_IDENTIFIER,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  CRO_TYPE,
+  CSS_GUIDELINE_YR,
+  INS_WR_CC_CREDIT,
+  ABILITY_TO_PAY,
+  EQ_PARENT_TIME_OBG,
+  SS_DEPNDNT_BENEFIT
+from
+  CKT_PSUPP_WSHEET
+where
+  (@cswIdentifier = CSW_IDENTIFIER) and
+  (@cssGuidelineYr = CSS_GUIDELINE_YR) and
+  (IDENTIFER = 1)
+</value>
+   </data>
+   <data name="ReadCsePersonSupportWorksheet2">
+      <value>
+select top(1)
+  CRO_IDENTIFIER,
+  IDENTIFER,
+  NO_CH_IN_DAY_CARE,
+  WRK_REL_CHCARECOST,
+  WAGE_EARNER_GR_INC,
+  SELF_EMP_GROSS_INC,
+  REASONABLE_BUSEXP,
+  CTORD_CHSUPP_PAID,
+  CS_PAID_CT_ORD_NO,
+  CTORD_MAINT_PAID,
+  MAINT_PD_CTORD_NO,
+  CTORD_MAINT_RCVD,
+  MAINT_RD_CTORD_NO,
+  HLTH_DNTL_INS_PREM,
+  ELIG_FED_TAX_CR,
+  ELIG_KS_TAX_CR,
+  NET_ADJ_PRTL_CSAMT,
+  ENFRCMT_FEE_TYP,
+  ENFRCMT_FEE_ALLWN,
+  CSW_IDENTIFIER,
+  CSP_NUMBER,
+  CAS_NUMBER,
+  CRO_TYPE,
+  CSS_GUIDELINE_YR,
+  INS_WR_CC_CREDIT,
+  ABILITY_TO_PAY,
+  EQ_PARENT_TIME_OBG,
+  SS_DEPNDNT_BENEFIT
+from
+  CKT_PSUPP_WSHEET
+where
+  (@cswIdentifier = CSW_IDENTIFIER) and
+  (@cssGuidelineYr = CSS_GUIDELINE_YR) and
+  (IDENTIFER = 2)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+</root>

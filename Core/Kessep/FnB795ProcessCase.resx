@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadBankruptcy">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  FILING_DATE,
+  DISCHARGE_DATE,
+  BKRP_DIS_WTHDRW_DT
+from
+  CKT_BANKRUPTCY with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (FILING_DATE &gt; @filingDate) and
+  (BKRP_DIS_WTHDRW_DT = @filingDate) and
+  (DISCHARGE_DATE = @filingDate)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  CSE_OPEN_DATE,
+  CLOSURE_LETR_DATE
+from
+  CKT_CASE with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (TYPE = @type) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.HOME_PHONE,
+  T2.OTHER_NUMBER,
+  T2.RACE,
+  T2.OTHER_AREA_CODE,
+  T2.HOME_PHONE_AREA_CD,
+  T2.OTHER_PHONE_TYPE,
+  T2.FAMILY_VIOL_IND,
+  T2.OUT_OF_WEDLOCK
+from
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T1.CAS_NUMBER = @casNumber) and
+    (T1.TYPE = @type) and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE,
+  NAME
+from
+  CKT_CSE_ORGANIZATN with(readuncommitted)
+where
+  (TYPE_CODE = 'X') and
+  (ORGANZTN_ID = @organztnId)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.HOME_PHONE,
+  T1.OTHER_NUMBER,
+  T1.RACE,
+  T1.OTHER_AREA_CODE,
+  T1.HOME_PHONE_AREA_CD,
+  T1.OTHER_PHONE_TYPE,
+  T1.FAMILY_VIOL_IND,
+  T1.OUT_OF_WEDLOCK
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.FAMILY_VIOL_IND in (cast(@familyViolenceIndicator1 as char(1)), cast(@familyViolenceIndicator2 as char(1)), cast(@familyViolenceIndicator3 as char(1)))) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.HOME_PHONE,
+  T1.OTHER_NUMBER,
+  T1.RACE,
+  T1.OTHER_AREA_CODE,
+  T1.HOME_PHONE_AREA_CD,
+  T1.OTHER_PHONE_TYPE,
+  T1.FAMILY_VIOL_IND,
+  T1.OUT_OF_WEDLOCK
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.HOME_PHONE,
+  T1.OTHER_NUMBER,
+  T1.RACE,
+  T1.OTHER_AREA_CODE,
+  T1.HOME_PHONE_AREA_CD,
+  T1.OTHER_PHONE_TYPE,
+  T1.FAMILY_VIOL_IND,
+  T1.OUT_OF_WEDLOCK
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  VERIFIED_DATE,
+  END_DATE,
+  ZIP_CODE,
+  COUNTRY,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (LOCATION_TYPE = @locationType) and
+  (VERIFIED_DATE &gt; @verifiedDate) and
+  (END_DATE &gt; @endDate)
+order by
+  VERIFIED_DATE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  VERIFIED_DATE,
+  END_DATE,
+  ZIP_CODE,
+  COUNTRY,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (VERIFIED_DATE &gt; @verifiedDate) and
+  (END_DATE &gt; @endDate)
+order by
+  VERIFIED_DATE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadDashboardAuditData1">
+      <value>
+select top(1)
+  REPORT_MONTH,
+  DASHBOARD_PRIORITY,
+  RUN_NUMBER,
+  CREATED_TIMESTAMP,
+  CASE_NUMBER
+from
+  CKT_DB_AUDIT_DATA with(readuncommitted)
+where
+  (REPORT_MONTH = @reportMonth) and
+  (RUN_NUMBER = @runNumber) and
+  (DASHBOARD_PRIORITY like '1-3(D)%') and
+  (CASE_NUMBER = @caseNumber)
+</value>
+   </data>
+   <data name="ReadDashboardAuditData2">
+      <value>
+select top(1)
+  REPORT_MONTH,
+  DASHBOARD_PRIORITY,
+  RUN_NUMBER,
+  CREATED_TIMESTAMP,
+  CASE_NUMBER
+from
+  CKT_DB_AUDIT_DATA with(readuncommitted)
+where
+  (REPORT_MONTH = @reportMonth) and
+  (RUN_NUMBER = @runNumber) and
+  (DASHBOARD_PRIORITY like '1-3(N)%') and
+  (CASE_NUMBER = @caseNumber)
+</value>
+   </data>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_EMPLOYER with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum">
+      <value>
+select top(1)
+  sum(T1.URA_AMOUNT)
+from
+  CKT_IM_HH_MBR_MSUM T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.TYPE = @type) and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate) and
+    (T3.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  END_DATE,
+  START_DATE,
+  TYPE
+from
+  CKT_INCARCERATION with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in (cast(@type1 as char(1)), cast(@type2 as char(1))))
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadIncomeSource1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CSP_I_NUMBER,
+  EMP_ID,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (
+    (
+      (TYPE = @type1) and
+      (RETURN_CD = @returnCd1)
+    ) or
+    (
+      (TYPE = @type2) and
+      (RETURN_CD = @returnCd2)
+    ) or
+    (
+      (TYPE = @type3) and
+      (RETURN_CD = @returnCd3)
+    ) or
+    (
+      (TYPE = @type4) and
+      (RETURN_CD = @returnCd4)
+    )
+  ) and
+  (END_DT &gt; @endDt)
+order by
+  RETURN_DT desc
+</value>
+   </data>
+   <data name="ReadIncomeSource2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CSP_I_NUMBER,
+  EMP_ID,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (
+    (
+      (TYPE = @type1) and
+      (RETURN_CD = @returnCd1)
+    ) or
+    (
+      (TYPE = @type2) and
+      (RETURN_CD = @returnCd2)
+    )
+  ) and
+  (END_DT &gt; @endDt)
+order by
+  RETURN_DT desc
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (KS_CASE_IND &gt; ' ') and
+  (CAS_I_NUMBER = @casINumber) and
+  (OTH_ST_CASE_STATUS = @othStCaseStatus) and
+  (CRO_ID is not null) and
+  (CAS_I_NUMBER = CAS_NUMBER) and
+  (CRO_TYPE = @croType) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_INT_RQST_HIST with(readuncommitted)
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (FUNCTIONAL_TYPE_CO in (cast(@functionalTypeCode1 as char(3)), cast(@functionalTypeCode2 as char(3))))
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory2">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_INT_RQST_HIST with(readuncommitted)
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (FUNCTIONAL_TYPE_CO not in (cast(@functionalTypeCode1 as char(3)), cast(@functionalTypeCode2 as char(3))))
+</value>
+   </data>
+   <data name="ReadNonCooperation">
+      <value>
+select top(1)
+  CODE,
+  EFFECTIVE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER
+from
+  CKT_NON_COPERATION with(readuncommitted)
+where
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  DATE_RETAINED,
+  DATE_DISMISSED
+from
+  CKT_PRSN_PRIV_ATTR with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (DATE_RETAINED &gt; @dateRetained) and
+  (DATE_DISMISSED &gt; @dateDismissed)
+</value>
+   </data>
+   <data name="ReadPersonProgram">
+      <value>
+select top(1)
+  max(T1.DISCONTINUE_DATE)
+from
+  CKT_PERSON_PROGRAM T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T3.TYPE in (cast(@type1 as char(2)), cast(@type2 as char(2)))) and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate) and
+    (T1.PRG_GENERATED_ID in (cast(@systemGeneratedIdentifier1 as smallint), cast(@systemGeneratedIdentifier2 as smallint), cast(@systemGeneratedIdentifier3 as smallint)))
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME
+from
+  CKT_SERVICE_PRVDER with(readuncommitted)
+where
+  USER_ID = @userId
+</value>
+   </data>
+</root>

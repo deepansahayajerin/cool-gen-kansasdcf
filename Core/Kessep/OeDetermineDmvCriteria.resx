@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T4 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T2 with(readuncommitted)
+  on
+    (T4.STANDARD_NO = @standardNo) and
+    (T4.LEGAL_ACTION_ID = T2.LGA_ID)
+  on
+    T1.NUMB = T2.CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AP')
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadGoodCause">
+      <value>
+select top(1)
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_NUMBER1,
+  CSP_NUMBER1,
+  CRO_TYPE1,
+  CRO_IDENTIFIER1
+from
+  CKT_GOOD_CAUSE with(readuncommitted)
+where
+  (@casNumber1 = CAS_NUMBER1) and
+  (@croIdentifier1 = CRO_IDENTIFIER1) and
+  (@croType1 = CRO_TYPE1) and
+  (@cspNumber1 = CSP_NUMBER1) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  END_DATE,
+  TYPE,
+  CREATED_TIMESTAMP,
+  INCARCERATED
+from
+  CKT_INCARCERATION with(readuncommitted)
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE in ('P', 'J')) and
+  (INCARCERATED = 'Y') and
+  (VERIFIED_DATE &gt; @verifiedDate)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadKsDriversLicense">
+      <value>
+select top(1)
+  CSP_NUM,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  REC_CLOSURE_REASON,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV with(readuncommitted)
+where
+  (CSP_NUM = @cspNum) and
+  (COURTESY_LTR_DATE &lt; @courtesyLtrDate)
+order by
+  COURTESY_LTR_DATE desc
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemption">
+      <value>
+select top(1)
+  T1.OTY_TYPE,
+  T1.AAT_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.EFFECTIVE_DT,
+  T1.END_DT
+from
+  CKT_LEGAL_ACTION T6 with(readuncommitted)
+  join
+  CKT_OBLIGATION T5 with(readuncommitted)
+  on
+    (T5.CSP_NUMBER = @cspNumber) and
+    (T6.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T6.STANDARD_NO = @standardNo)
+  join
+  CKT_OADM_ACT_EXMP T1 with(readuncommitted)
+  on
+    (T1.AAT_TYPE in (cast(@type as char(4)), 'ALL')) and
+    (T5.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T5.OB_ID = T1.OBG_GENERATED_ID) and
+    (T5.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T5.CPA_TYPE = T1.CPA_TYPE) and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt; @effectiveDt)
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+</root>

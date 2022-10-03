@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDocument">
+      <value>
+select top(1)
+  NAME,
+  DESCRIPTION,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_DOCUMENT
+where
+  (NAME = @name) and
+  (EXPIRATION_DATE = @expirationDate)
+</value>
+   </data>
+   <data name="ReadDocumentFieldField">
+      <value>
+select
+  T1.ORDER_POSITION,
+  T1.REQUIRED_SWITCH,
+  T1.SCREEN_PROMPT,
+  T1.FLD_NAME,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T2.DEPENDANCY,
+  T2.DESCRIPTION
+from
+  CKT_FIELD T2
+  join
+  CKT_DOCUMENT_FIELD T1
+  on
+    (@docEffectiveDte = T1.DOC_EFFECTIVE_DTE) and
+    (@docName = T1.DOC_NAME) and
+    (T2.NAME = T1.FLD_NAME) and
+    (
+      (
+        (T1.ORDER_POSITION = @orderPosition) and
+        (T2.NAME &gt;= @name)
+      ) or
+      (T1.ORDER_POSITION &gt; @orderPosition)
+    )
+order by
+  T1.ORDER_POSITION,
+  T1.FLD_NAME
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select top(1)
+  NAME,
+  DEPENDANCY,
+  DESCRIPTION
+from
+  CKT_FIELD with(readuncommitted)
+where
+  NAME = @name
+</value>
+   </data>
+</root>

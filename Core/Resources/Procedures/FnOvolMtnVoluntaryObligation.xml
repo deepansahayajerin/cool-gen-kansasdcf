@@ -1,0 +1,93 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnOvolMtnVoluntaryObligation"
+           program-name="SWEOVOLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnOvolMtnVoluntaryObligation"
+           transaction="SR96"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_PERSON_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="PRMPTRET"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="Passed"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_OBLIG_BY_AP_PAYOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="CsePerson" to="FromList"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Passed" to="HiddenCsePerson"/>
+      <return-map from="SelectedObligation.SystemGeneratedIdentifier"
+                  to="Obligation.SystemGeneratedIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTN_MANUAL_DIST_INST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnMdisLstMtnManualDistInst"
+       send-command="DISPLAY">
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="Obligation" to="Obligation"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_OBLIGATION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnObtlLstObligTypes"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_TO_COLP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnColpMtnCollectionProtect"
+       send-command="DISPLAY">
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="Obligation" to="Obligation"/>
+   </on>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="ObligationActive" to="ObligationActive"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="Group.ObligationTransaction" to="Group.ObligationTransaction"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="Standard" to="Standard"/>
+   <map from="DebtDetail" to="DebtDetail"/>
+   <map from="Discontinued" to="Discontinued"/>
+   <map from="Effective" to="Effective"/>
+   <map from="HiddenEffDate" to="HiddenEffDate"/>
+   <map from="HiddenDiscontinueDate" to="HiddenDiscontinueDate"/>
+   <map from="ObligationCreated" to="ObligationCreated"/>
+   <map from="Group.SupportedCsePersonsWorkSet"
+        to="Group.SupportedCsePersonsWorkSet"/>
+   <map from="ManuallyDistribute" to="ManuallyDistribute"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.SupportedCsePerson" to="Group.SupportedCsePerson"/>
+   <map from="Group.Case1" to="Group.Case1"/>
+   <map from="Group.ServiceProvider" to="Group.ServiceProvider"/>
+   <map from="HsupportedPersons" to="HsupportedPersons"/>
+   <map from="ObCollProtAct" to="ObCollProtAct"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="Obligation.SystemGeneratedIdentifier"
+        to="Obligation.SystemGeneratedIdentifier"/>
+   <map from="Obligation.Description" to="Obligation.Description"/>
+   <map from="ObligorPrompt.SelectChar" to="ObligorPrompt.SelectChar"/>
+   <map from="Obligation.CreatedBy" to="Obligation.CreatedBy"/>
+   <map from="Group.SpNamePrompt.SelectChar" to="Group.SpNamePrompt.SelectChar"/>
+   <map from="ObligationType.SystemGeneratedIdentifier"
+        to="ObligationType.SystemGeneratedIdentifier"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

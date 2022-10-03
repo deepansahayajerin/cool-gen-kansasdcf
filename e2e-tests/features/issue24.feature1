@@ -1,0 +1,32 @@
+Feature: Issue24-ArgumentException
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "NAME" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "page1"
+    When user enters "REP-WILSON" in "Last"
+    And enters "SAMANTHA" in "First"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "page4"
+    When user presses "F3"
+    Then "CSE - Person Management Menu" window appears
+    When user presses "F3"
+    Then "CSE - Service Initiation Menu" window appears
+    When user presses "F3"
+    Then "CSE - Main Menu" window appears
+    When user enters "1" in "option"
+    And presses "Enter"
+    Then "CSE - Service Initiation Menu" window appears
+    When user enters "4" in "option"
+    And presses "Enter"
+    Then "CSE - Person Management Menu" window appears
+    When user enters "11" in "option"
+    And presses "Enter"
+    Then "CSE - Case Details" window appears

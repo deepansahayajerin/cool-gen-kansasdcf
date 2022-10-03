@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateObligationPaymentSchedule1">
+      <value>
+insert into CKT_OB_PYMNT_SCH
+(
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  OBLIG_PSCH_AMT,
+  END_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATE_BY,
+  LAST_UPDATE_TMST,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND,
+  REPYMT_LTR_PRT_DT
+)
+values
+(
+  @otyType,
+  @obgGeneratedId,
+  @obgCspNumber,
+  @obgCpaType,
+  @startDt,
+  @obligPschAmt,
+  @endDt,
+  @createdBy,
+  @createdTmst,
+  @lastUpdateBy,
+  @lastUpdateTmst,
+  @frqPrdCd,
+  @dayOfWeek,
+  @dayOfMonth1,
+  @dayOfMonth2,
+  @periodInd,
+  @repymtLtrPrtDt
+)
+</value>
+   </data>
+   <data name="CreateObligationPaymentSchedule2">
+      <value>
+insert into CKT_OB_PYMNT_SCH
+(
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  OBLIG_PSCH_AMT,
+  END_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATE_BY,
+  LAST_UPDATE_TMST,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND,
+  REPYMT_LTR_PRT_DT
+)
+values
+(
+  @otyType,
+  @obgGeneratedId,
+  @obgCspNumber,
+  @obgCpaType,
+  @startDt,
+  @obligPschAmt,
+  @endDt,
+  @createdBy,
+  @createdTmst,
+  @lastUpdateBy,
+  @lastUpdateTmst,
+  @frqPrdCd,
+  @dayOfWeek,
+  @dayOfMonth1,
+  @dayOfMonth2,
+  @periodInd,
+  @repymtLtrPrtDt
+)
+</value>
+   </data>
+   <data name="ReadObligation1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligation2">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  END_DT
+from
+  CKT_OB_PYMNT_SCH
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@obgCspNumber = OBG_CSP_NUMBER) and
+  (@obgCpaType = OBG_CPA_TYPE)
+order by
+  START_DT desc
+</value>
+   </data>
+   <data name="UpdateObligationPaymentSchedule">
+      <value>
+update CKT_OB_PYMNT_SCH
+set
+  END_DT = @endDt
+where
+  (OTY_TYPE = @otyType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OBG_CSP_NUMBER = @obgCspNumber) and
+  (OBG_CPA_TYPE = @obgCpaType) and
+  (START_DT = @startDt)
+</value>
+   </data>
+</root>

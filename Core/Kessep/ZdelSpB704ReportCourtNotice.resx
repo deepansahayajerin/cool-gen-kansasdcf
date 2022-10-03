@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID,
+  CHECK_NUMBER
+from
+  CKT_CASH_RECEIPT
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID
+from
+  CKT_CR_EVENT
+where
+  (CREVENT_ID = @creventId) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="ReadCollection1">
+      <value>
+select distinct top(1)
+  T1.COLL_ID,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.CRT_NOTICE_REQ_IND,
+  T1.CRT_NOTICE_PROC_DT,
+  T1.CRT_NTC_ADJ_PRC_DT
+from
+  CKT_OBLIGATION T3
+  join
+  CKT_COLLECTION T1
+  on
+    (@crdId = T1.CRD_ID) and
+    (@crvId = T1.CRV_ID) and
+    (@cstId = T1.CST_ID) and
+    (@crtType = T1.CRT_TYPE) and
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (@lgaId = T3.LGA_ID) and
+    (@cpaType = T3.CPA_TYPE) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T1.ADJ_IND = 'Y')
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select distinct
+  T1.COLL_ID,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.CRT_NOTICE_REQ_IND,
+  T1.CRT_NOTICE_PROC_DT,
+  T1.CRT_NTC_ADJ_PRC_DT
+from
+  CKT_OBLIGATION T3 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (@crdId = T1.CRD_ID) and
+    (@crvId = T1.CRV_ID) and
+    (@cstId = T1.CST_ID) and
+    (@crtType = T1.CRT_TYPE) and
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (@lgaId = T3.LGA_ID) and
+    (@cpaType = T3.CPA_TYPE) and
+    (@cspNumber = T3.CSP_NUMBER)
+order by
+  T1.CREATED_TMST
+</value>
+   </data>
+   <data name="ReadCsePersonAccountCsePersonCashReceiptDetail1">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T3.CRV_IDENTIFIER,
+  T3.CST_IDENTIFIER,
+  T3.CRT_IDENTIFIER,
+  T3.CRD_ID,
+  T3.COLLECTION_AMOUNT,
+  T3.COLLECTION_DATE,
+  T3.OBLGOR_PRSN_NBR,
+  T3.COLLAMT_APPL_IND,
+  T4.CR_SRCE_TYPE_ID,
+  T4.EFFECTIVE_DATE,
+  T4.DISCONTINUE_DATE,
+  T4.COURT_IND
+from
+  CKT_CRSRC_TYPE T4 with(readuncommitted)
+  join
+  CKT_CR_DETAIL T3 with(readuncommitted)
+  on
+    (T4.CR_SRCE_TYPE_ID = T3.CST_IDENTIFIER) and
+    (T4.COURT_IND &lt;&gt; 'C') and
+    (T3.COLLECTION_DATE between cast(@date1 as date) and cast(@date2 as date))
+  join
+  CKT_CSE_PERSON_ACC T1 with(readuncommitted)
+  on
+    (T1.TYPE = 'R') and
+    (T3.OBLGOR_PRSN_NBR = T1.CSP_NUMBER) and
+    (T1.CSP_NUMBER between cast(@number1 as char(10)) and cast(@number2 as char(10)))
+order by
+  T1.CSP_NUMBER,
+  T3.COLLECTION_DATE
+</value>
+   </data>
+   <data name="ReadCsePersonAccountCsePersonCashReceiptDetail2">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T3.CRV_IDENTIFIER,
+  T3.CST_IDENTIFIER,
+  T3.CRT_IDENTIFIER,
+  T3.CRD_ID,
+  T3.COLLECTION_AMOUNT,
+  T3.COLLECTION_DATE,
+  T3.OBLGOR_PRSN_NBR,
+  T3.COLLAMT_APPL_IND,
+  T4.CR_SRCE_TYPE_ID,
+  T4.EFFECTIVE_DATE,
+  T4.DISCONTINUE_DATE,
+  T4.COURT_IND
+from
+  CKT_CRSRC_TYPE T4 with(readuncommitted)
+  join
+  CKT_CR_DETAIL T3 with(readuncommitted)
+  on
+    (T4.CR_SRCE_TYPE_ID = T3.CST_IDENTIFIER) and
+    (T4.COURT_IND &lt;&gt; 'C')
+  join
+  CKT_CSE_PERSON_ACC T1 with(readuncommitted)
+  on
+    (T1.TYPE = 'R') and
+    (T3.OBLGOR_PRSN_NBR = T1.CSP_NUMBER)
+order by
+  T1.CSP_NUMBER,
+  T3.COLLECTION_DATE
+</value>
+   </data>
+   <data name="ReadFieldValue1">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (FLD_NAME = @fldName) and
+  (DOC_NAME = @docName)
+</value>
+   </data>
+   <data name="ReadFieldValue2">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (DOC_NAME = @docName) and
+  (VALU = @valu) and
+  (FLD_NAME = @fldName)
+</value>
+   </data>
+   <data name="ReadFieldValue3">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (DOC_NAME = @docName) and
+  (VALU = @valu) and
+  (cast(@name as char(10)) = cast(@name as char(10)))
+</value>
+   </data>
+   <data name="ReadFieldValue4">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (DOC_NAME = @docName) and
+  (VALU = @valu) and
+  (FLD_NAME = @fldName)
+</value>
+   </data>
+   <data name="ReadFieldValue5">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (DOC_NAME = @docName) and
+  (VALU = @valu) and
+  (FLD_NAME = @fldName)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION,
+  T1.STATE_ABBREVIATION
+from
+  CKT_FIPS T1
+  join
+  CKT_TRIBUNAL T2
+  on
+    (T1.LOCATION = T2.FIP_LOCATION) and
+    (T1.COUNTY = T2.FIP_COUNTY) and
+    (T1.[STATE] = T2.FIP_STATE) and
+    (T2.IDENTIFIER = @identifier) and
+    (T1.STATE_ABBREVIATION = 'KS')
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.STANDARD_NO,
+  T1.TRB_ID
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_OBLIGATION T2 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (@cpaType = T2.CPA_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER)
+  join
+  CKT_COLLECTION T4 with(readuncommitted)
+  on
+    (T2.DTY_GENERATED_ID = T4.OTY_ID) and
+    (T2.OB_ID = T4.OBG_ID) and
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T2.CPA_TYPE = T4.CPA_TYPE) and
+    (@crdId = T4.CRD_ID) and
+    (@crvId = T4.CRV_ID) and
+    (@cstId = T4.CST_ID) and
+    (@crtType = T4.CRT_TYPE) and
+    (T4.OTR_TYPE = 'DE')
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructure">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.FIELD_VAL_ARCH_DT,
+  T1.FIELD_VAL_ARCH_IND,
+  T1.INF_ID,
+  T2.DENORM_NUMERIC_12,
+  T2.CSE_PERSON_NUM,
+  T2.REFERENCE_DATE
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.PRNT_SUCESSFUL_IND = 'Y') and
+    (T1.DOC_NAME = @docName) and
+    (T2.CSE_PERSON_NUM = @csePersonNum) and
+    (T2.DENORM_NUMERIC_12 = @denormNumeric12)
+order by
+  T2.REFERENCE_DATE
+</value>
+   </data>
+</root>

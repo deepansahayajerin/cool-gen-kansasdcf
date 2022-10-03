@@ -1,0 +1,55 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeDmvlKsDeprtMotorVechList"
+           program-name="SWEDMVLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeDmvlKsDeprtMotorVechList"
+           transaction="SRPK"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_SELECT_PERSON"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DONE"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="CsePersonsWorkSet.Number" to="Selected.Number"/>
+      <map from="CsePersonsWorkSet.Ssn" to="Selected.Ssn"/>
+      <map from="CsePersonsWorkSet.FormattedName" to="Selected.FormattedName"/>
+      <return-map from="Selected" to="Flow"/>
+   </on>
+   <on exit-state="ECO_LNK_KDMV_MOTOR_VECHIL_DETAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DONE"
+       to="OeKdmvKsDepartMotorVehicle"
+       send-command="DISPLAY">
+      <map from="KsDriversLicense.CreatedTstamp"
+           to="KsDriversLicense.CreatedTstamp"/>
+      <map from="KsDriversLicense.SequenceCounter"
+           to="KsDriversLicense.SequenceCounter"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Flow" to="Flow"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Paging.PageKsDriversLicense" to="Paging.PageKsDriversLicense"/>
+   <map from="Paging.PageLegalAction" to="Paging.PageLegalAction"/>
+   <map from="Paging.PageCase" to="Paging.PageCase"/>
+   <map from="Group.SelectOption" to="Group.SelectOption"/>
+   <map from="Group.LegalAction" to="Group.LegalAction"/>
+   <map from="Group.Case1" to="Group.Case1"/>
+   <map from="Group.Office" to="Group.Office"/>
+   <map from="Group.Name" to="Group.Name"/>
+   <map from="Group.KsDriversLicense" to="Group.KsDriversLicense"/>
+   <map from="MoreLessScroll" to="MoreLessScroll"/>
+   <map from="PromptCsePersonNumber" to="PromptCsePersonNumber"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="PageCount" to="PageCount"/>
+   <map from="NumberOfCourtOrders" to="NumberOfCourtOrders"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="HiddenPrev.Number" to="HiddenPrev.Number"/>
+</procedure>

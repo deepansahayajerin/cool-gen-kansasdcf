@@ -1,0 +1,111 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiOrgzOrganizationMaintenance"
+           program-name="SWEORGZP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiOrgzOrganizationMaintenance"
+           transaction="SR2P"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Next" to="Case1"/>
+      <map from="HiddenSelected.Number" to="CsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DlgflwRequiredCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_DBT_DIST_MNGMNT_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_FIPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFIPL"
+       to="LeFiplListFips"
+       send-command="DISPLAY">
+      <map from="DlgflwRequiredFips" to="SearchFips"/>
+      <return-map from="HiddenSelected" to="DlgflwSelectedFips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_FIPS"
+       action="transfer"
+       to="LeFips"
+       send-command="DISPLAY">
+      <map from="DlgflwRequiredFips" to="Fips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_TRIB"
+       action="transfer"
+       to="LeTribTribunal"
+       send-command="DISPLAY">
+      <map from="DlgflwRequiredFips" to="Fips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NADR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnNadrMtnNonCaseAddr"
+       send-command="DISPLAY">
+      <map from="HiddenSelected.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="HiddenSelected.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NADS 1099_LOCATE_RESPONSE_PV"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnNadsNonCaseForeignAddr"
+       send-command="DISPLAY">
+      <map from="HiddenSelected" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="Export1.DisplayState" to="Import1.DisplayState"/>
+   <map from="Export1.DisplayCounty" to="Import1.DisplayCounty"/>
+   <map from="Export1.DisplayLocation" to="Import1.DisplayLocation"/>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Next" to="Next"/>
+   <map from="Export1.DetailCsePerson" to="Import1.DetailCsePerson"/>
+   <map from="FromDdmm" to="FromDdmm"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailFips" to="Import1.DetailFips"/>
+   <map from="Export1.DetailPromptFips" to="Import1.DetailPromptFips"/>
+   <map from="PromptStateCode" to="PromptStateCode"/>
+   <map from="Export1.DetailOrgzIsTrib" to="Import1.DetailOrgzIsTrib"/>
+   <map from="HiddenPageKeys.HiddenPageKey.Number"
+        to="HiddenPageKeys.HiddenPageKey.Number"/>
+   <map from="StartingSearchCsePerson.Number"
+        to="StartingSearchCsePerson.Number"/>
+   <map from="StartingSearchCsePerson.OrganizationName"
+        to="StartingSearchCsePerson.OrganizationName"/>
+   <map from="HiddenPageKeys.HiddenPageKey.OrganizationName"
+        to="HiddenPageKeys.HiddenPageKey.OrganizationName"/>
+   <map from="Export1.DetailCsePersonAddress.City"
+        to="Import1.DetailCsePersonAddress.City"/>
+   <map from="Export1.DetailCsePersonAddress.ZipCode"
+        to="Import1.DetailCsePersonAddress.ZipCode"/>
+   <map from="Export1.DetailCsePersonAddress.Zip4"
+        to="Import1.DetailCsePersonAddress.Zip4"/>
+   <map from="StartingSearchFips.StateAbbreviation"
+        to="StartingSearchFips.StateAbbreviation"/>
+   <map from="StartingSearchFips.CountyAbbreviation"
+        to="StartingSearchFips.CountyAbbreviation"/>
+   <map from="StartingSearchCity.City" to="StartingSearchCity.City"/>
+   <map from="StartingSearchCity.ZipCode" to="StartingSearchCity.ZipCode"/>
+   <map from="StartingSearchCity.Zip4" to="StartingSearchCity.Zip4"/>
+   <map from="StartingSearchCsePerson.TaxId" to="StartingSearchCsePerson.TaxId"/>
+   <map from="StartingSearchCsePerson.TaxIdSuffix"
+        to="StartingSearchCsePerson.TaxIdSuffix"/>
+   <map from="SearchNamesLike.OrganizationName"
+        to="SearchNamesLike.OrganizationName"/>
+   <map from="HiddenPageKeys.HiddenPageKey.TaxId"
+        to="HiddenPageKeys.HiddenPageKey.TaxId"/>
+</procedure>

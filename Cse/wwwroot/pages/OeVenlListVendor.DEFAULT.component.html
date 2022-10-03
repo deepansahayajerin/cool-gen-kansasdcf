@@ -1,0 +1,420 @@
+﻿<!--Name: OE_VENL_LIST_VENDOR, ID: 371796766, model: 746-->
+<div coolContent coolName="OE_VENL_LIST_VENDOR" coolType="SCREEN"
+  (coolInit)="scrollSize = 100; pageSize = 12">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 33.75%; top: 0; width: 30%; height: 4%;"
+     coolCol="28" coolRow="1" coolLength="24">CSE - List Vendor - VENL</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 17.5%; top: 12%; width: 21.25%; height: 4%;" coolCol="15"
+     coolRow="4" coolLength="17">Start Vendor Name</div>
+   <input type="text" coolType="field" name="field_4_33"
+     [(ngModel)]="in.startVendor.name"
+     [coolVideo]="out.startVendor.screenField?.name" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="30"
+     style="left: 40%; top: 12%; width: 37.5%; height: 4%;" coolCol="33"
+     coolRow="4" coolLength="30">
+   
+   <div coolType="prompt"
+     style="left: 26.25%; top: 16%; width: 12.5%; height: 4%;" coolCol="22"
+     coolRow="5" coolLength="10">Start City</div>
+   <input type="text" coolType="field" name="field_5_33"
+     [(ngModel)]="in.startVendorAddress.city"
+     [coolVideo]="out.startVendorAddress.screenField?.city" coolAutotab
+     coolFocus coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="15"
+     style="left: 40%; top: 16%; width: 18.75%; height: 4%;" coolCol="33"
+     coolRow="5" coolLength="15">
+   
+   <div coolType="prompt"
+     style="left: 60%; top: 16%; width: 13.75%; height: 4%;" coolCol="49"
+     coolRow="5" coolLength="11">Start State</div>
+   <input type="text" coolType="field" name="field_5_61"
+     [(ngModel)]="in.startVendorAddress.state"
+     [coolVideo]="out.startVendorAddress.screenField?.state" coolAutotab
+     coolFocus coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="2" style="left: 75%; top: 16%; width: 2.5%; height: 4%;"
+     coolCol="61" coolRow="5" coolLength="2">
+   
+   <div coolType="literal"
+     style="left: 12.5%; top: 24%; width: 3.75%; height: 4%;" coolCol="11"
+     coolRow="7" coolLength="3" coolColor="white">Sel</div>
+   
+   <div coolType="prompt" style="left: 17.5%; top: 24%; width: 5%; height: 4%;"
+     coolCol="15" coolRow="7" coolLength="4" coolColor="white">Type</div>
+   
+   <div coolType="prompt"
+     style="left: 23.75%; top: 24%; width: 13.75%; height: 4%;" coolCol="20"
+     coolRow="7" coolLength="11">Vendor Name</div>
+   
+   <div coolType="prompt"
+     style="left: 62.5%; top: 24%; width: 13.75%; height: 4%;" coolCol="51"
+     coolRow="7" coolLength="11">Vendor City</div>
+   
+   <div coolType="prompt"
+     style="left: 83.75%; top: 24%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="7" coolLength="2">ST</div>
+   <input type="text" coolType="field" name="field_8_12"
+     [(ngModel)]="ref(in.import1, pageOffset, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 28%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="8" coolLength="1" [hidden]="pageOffset >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 28%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="8" coolLength="4" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 28%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="8" coolLength="30" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 28%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="8" coolLength="15" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 28%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="8" coolLength="2" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_9_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 1]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 32%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 1 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 32%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="9" coolLength="4" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 32%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="9" coolLength="30" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 32%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="9" coolLength="15" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 32%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="9" coolLength="2" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_10_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 2]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 36%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 2 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 36%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="10" coolLength="4" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 36%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="10" coolLength="30"
+     [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 36%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="10" coolLength="15"
+     [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 36%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="10" coolLength="2" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_11_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 3]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 40%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 3 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 40%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="11" coolLength="4" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 40%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="11" coolLength="30"
+     [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 40%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="11" coolLength="15"
+     [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 40%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="11" coolLength="2" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_12_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 4]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 44%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 4 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 44%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="12" coolLength="4" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 44%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="12" coolLength="30"
+     [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 44%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="12" coolLength="15"
+     [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 44%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="12" coolLength="2" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_13_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 5]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 48%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 5 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 48%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="13" coolLength="4" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 48%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="13" coolLength="30"
+     [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 48%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="13" coolLength="15"
+     [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 48%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="13" coolLength="2" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_14_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 6]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 52%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 6 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 52%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="14" coolLength="4" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 52%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="14" coolLength="30"
+     [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 52%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="14" coolLength="15"
+     [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 52%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="14" coolLength="2" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_15_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 7]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 56%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 7 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 56%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="15" coolLength="4" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 56%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="15" coolLength="30"
+     [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 56%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="15" coolLength="15"
+     [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 56%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="15" coolLength="2" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_16_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 8]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 60%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 8 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 60%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="16" coolLength="4" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 60%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="16" coolLength="30"
+     [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 60%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="16" coolLength="15"
+     [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 60%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="16" coolLength="2" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_17_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 9, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 9]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 64%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 9 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 64%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="17" coolLength="4" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 64%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="17" coolLength="30"
+     [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 64%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="17" coolLength="15"
+     [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 64%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="17" coolLength="2" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_18_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 10, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 10]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 68%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="18" coolLength="1"
+     [hidden]="pageOffset + 10 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 68%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="18" coolLength="4"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 68%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="18" coolLength="30"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 68%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="18" coolLength="15"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 68%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="18" coolLength="2"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.vendorAddress.state}}</div>
+   <input type="text" coolType="field" name="field_19_12"
+     [(ngModel)]="ref(in.import1, pageOffset + 11, 'selection1.oneChar').value"
+     [coolVideo]="out.exp?.[pageOffset + 11]?.selection1.screenField?.oneChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 13.75%; top: 72%; width: 1.25%; height: 4%;" coolCol="12"
+     coolRow="19" coolLength="1"
+     [hidden]="pageOffset + 11 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 17.5%; top: 72%; width: 5%; height: 4%;" coolCol="15"
+     coolRow="19" coolLength="4"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.vendor.serviceTypeCode}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 72%; width: 37.5%; height: 4%;" coolCol="20"
+     coolRow="19" coolLength="30"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.vendor.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 62.5%; top: 72%; width: 18.75%; height: 4%;" coolCol="51"
+     coolRow="19" coolLength="15"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.vendorAddress.city}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 83.75%; top: 72%; width: 2.5%; height: 4%;" coolCol="68"
+     coolRow="19" coolLength="2"
+     [hidden]="pageOffset + 11 >= length(in.import1)">{{in.import1?.[pageOffset + 11]?.vendorAddress.state}}</div>
+   
+   <div coolType="prompt" style="left: 76.25%; top: 76%; width: 5%; height: 4%;"
+     coolCol="62" coolRow="20" coolLength="4">More</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="67" coolRow="20" coolLength="3"
+     style="left: 82.5%; top: 76%; width: 3.75%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 87.5%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="70" coolColor="white">PF KEY:  1 Help  2 Display  3 Exit  7 Prev  8 Next  9 Return  11 Clear</div>
+   
+   <div coolType="literal"
+     style="left: 10%; top: 92%; width: 23.75%; height: 4%;" coolCol="9"
+     coolRow="24" coolLength="19">12 SignOff  15 VEND</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="VEND" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=VEND</a>
+   </div>

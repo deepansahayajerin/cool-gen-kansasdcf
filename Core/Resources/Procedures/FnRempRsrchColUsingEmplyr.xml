@@ -1,0 +1,32 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnRempRsrchColUsingEmplyr"
+           program-name="SWEREMPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnRempRsrchColUsingEmplyr"
+           transaction="SROR">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_EMPLOYER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEMPL"
+       to="SiEmplEmployerMaintenance"
+       send-command="DISPLAY">
+      <map from="HiddenEmployerAddress.LocationType"
+           to="SearchEmployerAddress.LocationType"/>
+      <map from="HiddenEmployerAddress.State" to="SearchEmployerAddress.State"/>
+      <map from="Employer" to="SearchEmployer"/>
+      <return-map from="RtnEmployer" to="FromEmplEmployer"/>
+      <return-map from="RtnEmployerAddress" to="FromEmplEmployerAddress"/>
+   </on>
+   <map from="Employer" to="Employer"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptEmployer" to="PromptEmployer"/>
+   <map from="Group.Payor" to="Group.Payor"/>
+   <map from="HiddenEmployerAddress" to="HiddenEmployerAddress"/>
+   <map from="Starting" to="Starting"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.CsePersonsWorkSet" to="Group.CsePersonsWorkSet"/>
+</procedure>

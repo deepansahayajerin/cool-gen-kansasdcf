@@ -1,0 +1,52 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiDedeDeleteDuplicateEmployr"
+           program-name="SWEDEDEP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiDedeDeleteDuplicateEmployr"
+           transaction="SRDG"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="HiddenCsePerson" to="StartCsePerson"/>
+      <map from="HiddenCase" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_RAFE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiRafeRegisteredAgentForEmp"
+       send-command="DISPLAY">
+      <map from="ToRafeEmployer" to="Employer1"/>
+      <map from="ToRafeEmployerAddress" to="Employer2"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EMPLOYER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEMPL"
+       to="SiEmplEmployerMaintenance"
+       send-command-type="none">
+      <return-map from="RtnEmployer" to="FromEmpl"/>
+   </on>
+   <map from="CorrectCommon" to="CorrectCommon"/>
+   <map from="DuplicateCommon" to="DuplicateCommon"/>
+   <map from="DuplicateEmployer" to="DuplicateEmployer"/>
+   <map from="DuplicateEmploymentTies" to="DuplicateEmploymentTies"/>
+   <map from="DuplicateRegisteredAgnt" to="DuplicateRegisteredAgnt"/>
+   <map from="DuplicateWorksite" to="DuplicateWorksite"/>
+   <map from="DuplicateHeadquarters" to="DuplicateHeadquarters"/>
+   <map from="CorrectEmploymentTies" to="CorrectEmploymentTies"/>
+   <map from="CorrectRegisteredAgnt" to="CorrectRegisteredAgent"/>
+   <map from="CorrectWorksite" to="CorrectWorksite"/>
+   <map from="CorrectHeadquarters" to="CorrectHeadquarters"/>
+   <map from="CorrectEmployer" to="CorrectEmployer"/>
+   <map from="CorrectEmployerAddress" to="CorrectEmployerAddress"/>
+   <map from="HiddenCase" to="HiddenCase"/>
+   <map from="CorrectStandard" to="CorrectStandard"/>
+   <map from="DuplicateEmployerAddress" to="DuplicateEmployerAddress"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="DuplicateStandard" to="DuplicateStandard"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+</procedure>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select top(1)
+  OTR_TYPE,
+  OTY_ID,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  AS_OF_DT,
+  DISCONTINUE_DT,
+  LAST_ACCRUAL_DT
+from
+  CKT_ACCRUAL_INSTR
+where
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OTY_ID = @otyId) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateAccrualInstructions">
+      <value>
+update CKT_ACCRUAL_INSTR
+set
+  AS_OF_DT = @asOfDt,
+  DISCONTINUE_DT = @discontinueDt,
+  LAST_ACCRUAL_DT = @lastAccrualDt
+where
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_GENERATED_ID = @otrGeneratedId)
+</value>
+   </data>
+</root>

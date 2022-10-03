@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteUraCollectionApplication">
+      <value>
+delete from CKT_URA_COLL_APPL
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTY_IDENTIFIER = @otyIdentifier) and
+  (OBG_IDENTIFIER = @obgIdentifier) and
+  (OTR_IDENTIFIER = @otrIdentifier) and
+  (OTR_TYPE = @otrType) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CRD_IDENTIFIER = @crdIdentifier) and
+  (COL_IDENTIFIER = @colIdentifier) and
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER0 = @cspNumber0) and
+  (IMS_MONTH = @imsMonth) and
+  (IMS_YEAR = @imsYear) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  OB_TRN_AMT,
+  PGM_APPLD_TO
+from
+  CKT_COLLECTION
+where
+  (CSP_NUMBER = @cspNumber) and
+  (COLL_ID = @collId)
+</value>
+   </data>
+   <data name="ReadUraCollectionApplicationImHouseholdMbrMnthlySum">
+      <value>
+select
+  T1.COLL_AMT_APPLD,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTY_IDENTIFIER,
+  T1.OBG_IDENTIFIER,
+  T1.OTR_IDENTIFIER,
+  T1.OTR_TYPE,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.COL_IDENTIFIER,
+  T1.IMH_AE_CASE_NO,
+  T1.CSP_NUMBER0,
+  T1.IMS_MONTH,
+  T1.IMS_YEAR,
+  T1.CREATED_TSTAMP,
+  T1.TYPE,
+  T2.URA_AMOUNT,
+  T2.URA_MEDICAL_AMOUNT,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST
+from
+  CKT_IM_HH_MBR_MSUM T2
+  join
+  CKT_URA_COLL_APPL T1
+  on
+    (@obgIdentifier = T1.OBG_IDENTIFIER) and
+    (@cpaType = T1.CPA_TYPE) and
+    (@otyIdentifier = T1.OTY_IDENTIFIER) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (@otrIdentifier = T1.OTR_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (@colIdentifier = T1.COL_IDENTIFIER) and
+    (@crdIdentifier = T1.CRD_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (@otrType = T1.OTR_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER0) and
+    (T2.YEAR0 = T1.IMS_YEAR) and
+    (T2.MONTH0 = T1.IMS_MONTH) and
+    (T2.IMH_AE_CASE_NO = T1.IMH_AE_CASE_NO)
+</value>
+   </data>
+   <data name="UpdateImHouseholdMbrMnthlySum1">
+      <value>
+update CKT_IM_HH_MBR_MSUM
+set
+  URA_AMOUNT = @uraAmount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0) and
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateImHouseholdMbrMnthlySum2">
+      <value>
+update CKT_IM_HH_MBR_MSUM
+set
+  URA_MEDICAL_AMOUNT = @uraMedicalAmount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0) and
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  UNEMPLOYMENT_IND,
+  FEDERAL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonResource">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  RESOURCE_NO,
+  TYPE
+from
+  CKT_CSE_PERSON_RES
+where
+  (RESOURCE_NO = @resourceNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadEmployerEmployerAddress">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.NAME,
+  T1.PHONE_NO,
+  T1.AREA_CODE,
+  T1.EIWO_END_DATE,
+  T1.EIWO_START_DATE,
+  T1.FAX_AREA_CODE,
+  T1.FAX_PHONE_NO,
+  T1.EMAIL_ADDRESS,
+  T2.LOCATION_TYPE,
+  T2.STREET1,
+  T2.STREET2,
+  T2.CITY,
+  T2.IDENTIFIER,
+  T2.[STATE],
+  T2.ZIP_CODE,
+  T2.ZIP4,
+  T2.NOTE
+from
+  CKT_EMPLOYER T1
+  join
+  CKT_EMPLOYER_ADDR T2
+  on
+    (T1.IDENTIFIER = @identifier) and
+    (T1.IDENTIFIER = T2.EMP_ID)
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  LAST_QTR_INCOME,
+  LAST_QTR,
+  LAST_QTR_YR,
+  SECOND_QTR_INCOME,
+  SECOND_QTR,
+  SECOND_QTR_YR,
+  THIRD_QTR_INCOME,
+  THIRD_QTR,
+  THIRD_QTR_YR,
+  FOURTH_QTR_INCOME,
+  FOURTH_QTR,
+  FOURTH_QTR_YR,
+  SENT_DT,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CODE,
+  CSP_I_NUMBER,
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EMP_ID,
+  SEND_TO,
+  WORKER_ID,
+  START_DT,
+  END_DT,
+  NOTE
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadIncomeSourceContact1">
+      <value>
+select top(1)
+  ISR_IDENTIFIER,
+  IDENTIFIER,
+  TYPE,
+  NAME,
+  EXTENSION_NO,
+  NUMB,
+  AREA_CODE,
+  CSE_PERSON,
+  EMAIL_ADDRESS
+from
+  CKT_INC_SRCE_CONT
+where
+  (@csePerson = CSE_PERSON) and
+  (@isrIdentifier = ISR_IDENTIFIER) and
+  (TYPE = 'HF')
+</value>
+   </data>
+   <data name="ReadIncomeSourceContact2">
+      <value>
+select top(1)
+  ISR_IDENTIFIER,
+  IDENTIFIER,
+  TYPE,
+  NAME,
+  EXTENSION_NO,
+  NUMB,
+  AREA_CODE,
+  CSE_PERSON,
+  EMAIL_ADDRESS
+from
+  CKT_INC_SRCE_CONT
+where
+  (@csePerson = CSE_PERSON) and
+  (@isrIdentifier = ISR_IDENTIFIER) and
+  (TYPE = 'HP')
+</value>
+   </data>
+   <data name="ReadNonEmployIncomeSourceAddress">
+      <value>
+select top(1)
+  ISR_IDENTIFIER,
+  STREET1,
+  STREET2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE,
+  CSE_PERSON
+from
+  CKT_NONEMP_IS_ADDR
+where
+  (@csePerson = CSE_PERSON) and
+  (@isrIdentifier = ISR_IDENTIFIER)
+</value>
+   </data>
+</root>

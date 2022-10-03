@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select
+  NUMB,
+  CSE_OPEN_DATE,
+  PA_MEDICAL_SERVICE,
+  INTERSTATE_CASE_ID
+from
+  CKT_CASE with(readuncommitted)
+where
+  (NUMB &gt; @numb) and
+  (NUMB between cast(@caseNumber1 as char(10)) and cast(@caseNumber2 as char(10)))
+order by
+  NUMB
+</value>
+   </data>
+   <data name="ReadCaseAssignment">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE with(readuncommitted)
+where
+  (@casNo = CAS_NO) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePersonCaseRoleCsePerson">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.EMANCIPATION_DT,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE,
+  T3.AR_WAIVED_INS,
+  T3.EMANCIPATION_DT
+from
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T3.TYPE in ('AR', 'CH')) and
+    (T1.START_DATE &lt;= T3.END_DATE) and
+    (T1.END_DATE &gt;= T3.START_DATE) and
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE = 'AP') and
+    (@casNumber = T3.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCashReceiptTypeCashReceiptDetail">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  cast(@crvId as integer),
+  cast(@cstId as smallint),
+  cast(@crtType as smallint),
+  cast(@crdId as smallint)
+from
+  CKT_CR_TYPE with(readuncommitted)
+where
+  (CRTYPE_ID = @crtType) and
+  (CRTYPE_ID &lt;&gt; 2) and
+  (CRTYPE_ID &lt;&gt; 7)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  ADJ_IND,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_DT,
+  CREATED_TMST,
+  OB_TRN_AMT,
+  PGM_APPLD_TO
+from
+  CKT_COLLECTION with(readuncommitted)
+where
+  (CREATED_TMST &lt; @createdTmst) and
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (ADJ_IND = 'Y') and
+  (COLL_ADJ_DT between cast(@date1 as date) and cast(@date2 as date))
+</value>
+   </data>
+   <data name="ReadCollectionObligationType">
+      <value>
+select distinct
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T2.DEBT_TYP_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_OB_TRN T3 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (T1.PGM_APPLD_TO in ('AFI', 'FCI', 'NAI')) and
+    (T3.OTY_TYPE = T1.OTY_ID) and
+    (T3.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T3.OB_TRN_ID = T1.OTR_ID) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.OBG_GENERATED_ID = T1.OBG_ID) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T3.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T3.CSP_SUP_NUMBER) and
+    (T1.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+    (T1.CONCURRENT_IND = 'N')
+  on
+    (T2.DEBT_TYP_ID = T3.OTY_TYPE) and
+    (T2.DEBT_TYP_CLASS &lt;&gt; 'F') and
+    (T2.DEBT_TYP_CLASS &lt;&gt; 'R') and
+    (T2.DEBT_TYP_CD &lt;&gt; '718B')
+</value>
+   </data>
+   <data name="ReadCollectionObligationTypeDebt">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T2.DEBT_TYP_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_OB_TRN T3 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (T3.OTY_TYPE = T1.OTY_ID) and
+    (T3.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T3.OB_TRN_ID = T1.OTR_ID) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.OBG_GENERATED_ID = T1.OBG_ID) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T3.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T3.CSP_SUP_NUMBER) and
+    (T1.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+    (T1.CONCURRENT_IND = 'N')
+  on
+    (T2.DEBT_TYP_ID = T3.OTY_TYPE) and
+    (T2.DEBT_TYP_CLASS &lt;&gt; 'F') and
+    (T2.DEBT_TYP_CLASS &lt;&gt; 'R') and
+    (T2.DEBT_TYP_CD &lt;&gt; '718B')
+</value>
+   </data>
+</root>

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'FA') and
+  (CSP_NUMBER = @cspNumber) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'MO') and
+  (CSP_NUMBER = @cspNumber) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  ZDEL_START_DATE,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  ZDEL_VERIFIED_CODE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (END_DATE &gt;= @endDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonEmailAddress">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  END_DATE,
+  CREATED_TMST,
+  LAST_UPDATED_TMST,
+  EMAIL_ADDR
+from
+  CKT_CSP_EMAIL_ADDR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (END_DATE = @endDate)
+order by
+  END_DATE desc,
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadInvalidSsn">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  SSN
+from
+  CKT_INVALID_SSN
+where
+  (SSN = @ssn) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateCsePersonAddress">
+      <value>
+update CKT_CSE_PERS_ADDR
+set
+  END_DATE = @endDate,
+  END_CODE = @endCode
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

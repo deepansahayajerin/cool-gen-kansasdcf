@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateLegalActionAssigment">
+      <value>
+insert into CKT_LA_SERV_PROV
+(
+  LGA_IDENTIFIER,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID,
+  EFFECTIVE_DT,
+  END_DT,
+  REASON_CODE,
+  OVERRIDE_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @lgaIdentifier,
+  @ospEffectiveDate,
+  @ospRoleCode,
+  @offGeneratedId,
+  @spdGeneratedId,
+  @effectiveDt,
+  @endDt,
+  @reasonCode,
+  @overrideInd,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode)
+</value>
+   </data>
+</root>

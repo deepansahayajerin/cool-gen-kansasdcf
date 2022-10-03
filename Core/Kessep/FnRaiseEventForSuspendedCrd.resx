@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseUnit1">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.START_DATE,
+  T2.CLOSURE_DATE,
+  T2.CSP_NO_AP
+from
+  CKT_LEGAL_ACTION T6 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_UNIT T2 with(readuncommitted)
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NO) and
+    (T2.CSP_NO_AP = @cspNoAp)
+  join
+  CKT_LEG_ACT_CAS_RL T5 with(readuncommitted)
+  on
+    (T1.NUMB = T5.CAS_NUMBER) and
+    (T5.CRO_TYPE = 'AP')
+  on
+    (T6.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T6.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadCaseCaseUnit2">
+      <value>
+select
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.START_DATE,
+  T2.CLOSURE_DATE,
+  T2.CSP_NO_AP
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_UNIT T2 with(readuncommitted)
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NO) and
+    (T2.CSP_NO_AP = @cspNoAp)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  count(distinct T1.SERVICE_PRVDER_ID)
+from
+  CKT_LEGAL_ACTION T8 with(readuncommitted)
+  join
+  CKT_SERVICE_PRVDER T1 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T2 with(readuncommitted)
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE between cast(@date as date) and cast(@date as date))
+  join
+  CKT_ASSIGN_CASE T3 with(readuncommitted)
+  on
+    (T2.EFFECTIVE_DATE = T3.OSP_DATE) and
+    (T2.ROLE_CODE = T3.OSP_CODE) and
+    (T2.OFF_GENERATED_ID = T3.OFF_ID) and
+    (T2.SPD_GENERATED_ID = T3.SPD_ID) and
+    (T3.DISCONTINUE_DATE = @date)
+  join
+  CKT_LEG_ACT_CAS_RL T7 with(readuncommitted)
+  on
+    (T3.CAS_NO = T7.CAS_NUMBER) and
+    (T7.CRO_TYPE = 'AP') and
+    (T7.CSP_NUMBER = @cspNumber)
+  on
+    (T8.LEGAL_ACTION_ID = T7.LGA_ID) and
+    (T8.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  count(distinct T1.SERVICE_PRVDER_ID)
+from
+  CKT_CASE T4 with(readuncommitted)
+  join
+  CKT_SERVICE_PRVDER T1 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T2 with(readuncommitted)
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE = @discontinueDate)
+  join
+  CKT_ASSIGN_CASE T3 with(readuncommitted)
+  on
+    (T2.EFFECTIVE_DATE = T3.OSP_DATE) and
+    (T2.ROLE_CODE = T3.OSP_CODE) and
+    (T2.OFF_GENERATED_ID = T3.OFF_ID) and
+    (T2.SPD_GENERATED_ID = T3.SPD_ID) and
+    (T3.DISCONTINUE_DATE = @discontinueDate)
+  on
+    (T4.NUMB = T3.CAS_NO) and
+    (T4.STATUS = 'O')
+  join
+  CKT_CASE_ROLE T5 with(readuncommitted)
+  on
+    (T4.NUMB = T5.CAS_NUMBER) and
+    (T5.TYPE = 'AP') and
+    (T5.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

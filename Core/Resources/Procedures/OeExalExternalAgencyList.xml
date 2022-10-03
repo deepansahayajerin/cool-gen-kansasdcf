@@ -1,0 +1,35 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeExalExternalAgencyList"
+           program-name="SWEEXALP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeExalExternalAgencyList"
+           transaction="SRAI"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenToCodeTableList" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenFromList"/>
+   </on>
+   <map from="Prompt" to="Prompt"/>
+   <map from="AgencyTypeDesc" to="AgencyTypeDesc"/>
+   <map from="SortBy" to="SortBy"/>
+   <map from="StartingExternalAgencyAddress" to="StartingExternalAgencyAddress"/>
+   <map from="StartingExternalAgency" to="StartingExternalAgency"/>
+   <map from="Selected" to="HiddenExternalAgency"/>
+   <map from="Group.AgencyExternalAgency" to="Group.AgencyExternalAgency"/>
+   <map from="Group.AgencyExternalAgencyAddress"
+        to="Group.AgencyExternalAgencyAddress"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="NextTranInfo" to="NextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="HiddenNextTranInfo"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

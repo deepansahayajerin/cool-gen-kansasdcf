@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OBLIGATION T2
+  on
+    (T1.NUMB = T2.CSP_P_NUMBER) and
+    (T2.OB_ID = @obId) and
+    (@dtyGeneratedId = T2.DTY_GENERATED_ID) and
+    (T2.CPA_TYPE = @cpaType) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@ladRNumber = T2.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T2.LGA_R_IDENTIFIER) and
+    (T2.ACCOUNT_TYPE = @accountType)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.OTHER_STATE_CAS_ID,
+  T1.OTHR_STATE_FIPS_CD,
+  T1.OTH_ST_CASE_STATUS,
+  T1.CASE_TYPE,
+  T1.COUNTRY
+from
+  CKT_INTERSTAT_RQST T1
+  join
+  CKT_INT_RQST_OBG T2
+  on
+    (T1.IDENTIFIER = T2.INT_GENERATED_ID) and
+    (T2.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T2.OTY_TYPE = @otyType) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LEGAL_ACT_DTL T5
+  on
+    (T2.OTY_TYPE = T5.OTY_ID) and
+    (T5.LA_DETAIL_NO = @laDetailNo)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  TYPE,
+  FILED_DT,
+  COURT_CASE_NO,
+  STANDARD_NO,
+  FOREIGN_ORDER_NO,
+  CSP_NUMBER
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  DETAIL_TYPE,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND,
+  DESCRIPTION,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (LA_DETAIL_NO = @laDetailNo) and
+  (@lgaIdentifier = LGA_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadManualDistributionAudit">
+      <value>
+select top(1)
+  T1.OTY_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.EFFECTIVE_DT,
+  T1.DISCONTINUE_DT
+from
+  CKT_OB_TYPE T5
+  join
+  CKT_MNL_DIST_AUDIT T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T5.DEBT_TYP_ID = T1.OTY_TYPE) and
+    (T5.DEBT_TYP_CD = @debtTypCd) and
+    (T1.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.DISCONTINUE_DT &gt; @effectiveDt)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.CSP_P_NUMBER,
+  T1.OTHER_STATE_ABBR,
+  T1.OB_DSC,
+  T1.HISTORY_IND,
+  T1.PRIM_SEC_CD,
+  T1.AOD_REC_BAL,
+  T1.AOD_REC_INT_BAL,
+  T1.AOD_FEE_BAL,
+  T1.AOD_FEE_INT_BAL,
+  T1.AOD_BAL_CURR_ARR,
+  T1.CREATED_BY,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.ORD_TYP_CD,
+  T1.LGA_IDENTIFIER,
+  T1.LAD_NUMBER
+from
+  CKT_OBLIGATION T1
+  join
+  CKT_DEBT_DTL T3
+  on
+    (@ladNumber = T1.LAD_NUMBER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T1.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T1.OB_ID = T3.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T3.RETIRED_DT = @retiredDt)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  T1.DEBT_TYP_ID,
+  T1.DEBT_TYP_CD,
+  T1.DEBT_TYP_CLASS,
+  T1.EFFECTIVE_DT,
+  T1.DISCONTINUE_DT
+from
+  CKT_OB_TYPE T1
+  join
+  CKT_LEGAL_ACT_DTL T2
+  on
+    (T1.DEBT_TYP_CLASS = @debtTypClass) and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.DISCONTINUE_DT &gt; @effectiveDt) and
+    (T1.DEBT_TYP_ID = T2.OTY_ID) and
+    (T2.LA_DETAIL_NO = @laDetailNo) and
+    (@lgaIdentifier = T2.LGA_IDENTIFIER)
+</value>
+   </data>
+</root>

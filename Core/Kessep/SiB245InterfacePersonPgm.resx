@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterfacePersonProgram">
+      <value>
+select
+  RECORD_TYPE,
+  SOURCE_OF_FUNDS,
+  PROGRAM_CODE,
+  STATUS_IND,
+  CLOSURE_REASON,
+  REFERRED_FROM,
+  PROG_EFFECTIVE_DT,
+  PROGRAM_END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  PROCESS_DATE,
+  ASSIGNED_DATE,
+  PARTICIPATION_CODE,
+  AE_PROGRAM_SUBTYPE,
+  CSP_NUMBER,
+  PA_CASE_NUMBER,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_INTFC_PERS_PGM
+where
+  (
+    (
+      (CSP_NUMBER = @cspNumber) and
+      (PROGRAM_CODE = @programCode) and
+      (CREATED_TIMESTAMP &gt; @createdTimestamp)
+    ) or
+    (
+      (CSP_NUMBER = @cspNumber) and
+      (PROGRAM_CODE &gt; @programCode)
+    ) or
+    (CSP_NUMBER &gt; @cspNumber)
+  ) and
+  (PROCESS_DATE = @processDate) and
+  (STATUS_IND = ' ')
+order by
+  CSP_NUMBER,
+  PROGRAM_CODE,
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="UpdateInterfacePersonProgram">
+      <value>
+update CKT_INTFC_PERS_PGM
+set
+  STATUS_IND = @statusInd,
+  PROCESS_DATE = @processDate
+where
+  (PROGRAM_CODE = @programCode) and
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

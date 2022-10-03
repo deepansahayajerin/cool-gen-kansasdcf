@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDistributionPolicy">
+      <value>
+select top(1)
+  DIST_PLCY_ID,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  MAX_PRCD_DT,
+  CLT_IDENTIFIER
+from
+  CKT_DIST_PLCY
+where
+  (@cltIdentifier = CLT_IDENTIFIER) and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (DISCONTINUE_DT &gt; @effectiveDt)
+</value>
+   </data>
+   <data name="ReadDistributionPolicyRule">
+      <value>
+select
+  DBP_GENERATED_ID,
+  DIST_PLCY_RL_ID,
+  FIRST_LAST_IND,
+  DEBT_FUNC_TYP,
+  DEBT_STATE,
+  APPLY_TO,
+  DPR_NEXT_ID,
+  DIST_TO_ORD_TYP_CD
+from
+  CKT_DIST_PLCY_RL
+where
+  @dbpGeneratedId = DBP_GENERATED_ID
+order by
+  DIST_PLCY_RL_ID
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID
+from
+  CKT_OBLIGATION T1
+  join
+  CKT_OBG_RLN T3
+  on
+    (T1.DTY_GENERATED_ID = @dtyGeneratedId) and
+    (T1.OB_ID = @obId) and
+    (T1.DTY_GENERATED_ID = T3.OTY_FIRST_ID) and
+    (T1.OB_ID = T3.OBG_F_GENERATED_ID) and
+    (T1.CSP_NUMBER = T3.CSP_F_NUMBER) and
+    (T1.CPA_TYPE = T3.CPA_F_TYPE) and
+    (@otySecondId = T3.OTY_SECOND_ID) and
+    (@obgGeneratedId = T3.OBG_GENERATED_ID) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (@cpaType = T3.CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select
+  T1.DEBT_TYP_ID,
+  T1.DEBT_TYP_CD,
+  T1.DEBT_TYP_CLASS,
+  T1.SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE T1
+  join
+  CKT_DPR_OBLIG_TYPE T2
+  on
+    (T1.DEBT_TYP_ID = T2.OTY_GENERATED_ID) and
+    (@dprGeneratedId = T2.DPR_GENERATED_ID) and
+    (@dbpGeneratedId = T2.DBP_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadObligationTypeObligationDebtDebtDetail">
+      <value>
+select
+  T1.DEBT_TYP_ID,
+  T1.DEBT_TYP_CD,
+  T1.DEBT_TYP_CLASS,
+  T1.SUP_PRSN_REQ_IND,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.OB_ID,
+  T2.LGA_ID,
+  T2.PRIM_SEC_CD,
+  T2.ORD_TYP_CD,
+  T3.OB_TRN_ID,
+  T3.OB_TRN_TYP,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE,
+  T4.DUE_DT,
+  T4.BAL_DUE_AMT,
+  T4.INT_BAL_DUE_AMT,
+  T4.RETIRED_DT,
+  T4.CVRD_PRD_START_DT,
+  T4.CVD_PRD_END_DT,
+  T4.PRECNVRSN_PGM_CD
+from
+  CKT_OB_TYPE T1
+  join
+  CKT_OBLIGATION T2
+  join
+  CKT_OB_TRN T3
+  join
+  CKT_DEBT_DTL T4
+  on
+    (T3.OTY_TYPE = T4.OTY_TYPE) and
+    (T3.OBG_GENERATED_ID = T4.OBG_GENERATED_ID) and
+    (T3.OB_TRN_TYP = T4.OTR_TYPE) and
+    (T3.OB_TRN_ID = T4.OTR_GENERATED_ID) and
+    (T3.CPA_TYPE = T4.CPA_TYPE) and
+    (T3.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T4.RETIRED_DT = @retiredDt) and
+    (T4.DUE_DT between cast(@date1 as date) and cast(@date2 as date))
+  on
+    (T2.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T2.OB_ID = T3.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.CPA_TYPE = T3.CPA_TYPE) and
+    (T2.CSP_NUMBER = @cspNumber)
+  on
+    T1.DEBT_TYP_ID = T2.DTY_GENERATED_ID
+order by
+  T4.DUE_DT,
+  T4.BAL_DUE_AMT,
+  T4.INT_BAL_DUE_AMT,
+  T3.OB_TRN_ID
+</value>
+   </data>
+   <data name="ReadProgramDprProgram">
+      <value>
+select
+  T1.PROGRAM_ID,
+  T1.CODE,
+  T1.INTERSTATE_IND,
+  T1.DISTRBTN_PRGM_TYPE,
+  T2.DBP_GENERATED_ID,
+  T2.DPR_GENERATED_ID,
+  T2.PROGRAM_STATE,
+  T2.ASSISTANCE_IND
+from
+  CKT_PROGRAM T1
+  join
+  CKT_DPR_PROGRAM T2
+  on
+    (T1.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (@dprGeneratedId = T2.DPR_GENERATED_ID) and
+    (@dbpGeneratedId = T2.DBP_GENERATED_ID)
+</value>
+   </data>
+   <data name="UpdateDistributionPolicy">
+      <value>
+update CKT_DIST_PLCY
+set
+  MAX_PRCD_DT = @maxPrcdDt
+where
+  DIST_PLCY_ID = @distPlcyId
+</value>
+   </data>
+</root>

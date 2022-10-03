@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAppeal">
+      <value>
+select top(1)
+  APPEAL_ID,
+  DOCKET_NO,
+  FILED_BY_FIRST,
+  FILED_BY_MI,
+  FILED_BY_LAST_NAME,
+  APPEAL_DT,
+  DOCKET_FILED_DT,
+  ATTORNEY_LAST_NM,
+  ATTORNEY_FIRST_NM,
+  ATTORNEY_MI,
+  ATTORNEY_SUFFIX,
+  APPELLANT_BRIEF_DT,
+  REPLY_BRIEF_DT,
+  ORAL_ARGUMENT_DT,
+  DECISION_DT,
+  FURTHER_APPEAL_IND,
+  EXT_REQ_GRANTED_DT,
+  DT_EXT_GRANTED,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  TRB_ID,
+  DECISION_RESULT
+from
+  CKT_APPEAL
+where
+  APPEAL_ID = @appealId
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadTribunal1">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  JUDICIAL_DISTRICT,
+  IDENTIFIER
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadTribunal2">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateAppeal">
+      <value>
+update CKT_APPEAL
+set
+  DOCKET_NO = @docketNo,
+  FILED_BY_FIRST = @filedByFirst,
+  FILED_BY_MI = @filedByMi,
+  FILED_BY_LAST_NAME = @filedByLastName,
+  APPEAL_DT = @appealDt,
+  DOCKET_FILED_DT = @docketFiledDt,
+  ATTORNEY_LAST_NM = @attorneyLastNm,
+  ATTORNEY_FIRST_NM = @attorneyFirstNm,
+  ATTORNEY_MI = @attorneyMi,
+  ATTORNEY_SUFFIX = @attorneySuffix,
+  APPELLANT_BRIEF_DT = @appellantBriefDt,
+  REPLY_BRIEF_DT = @replyBriefDt,
+  ORAL_ARGUMENT_DT = @oralArgumentDt,
+  DECISION_DT = @decisionDt,
+  FURTHER_APPEAL_IND = @furtherAppealInd,
+  EXT_REQ_GRANTED_DT = @extReqGrantedDt,
+  DT_EXT_GRANTED = @dtExtGranted,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  TRB_ID = @trbId,
+  DECISION_RESULT = @decisionResult
+where
+  APPEAL_ID = @appealId
+</value>
+   </data>
+   <data name="UpdateTribunal">
+      <value>
+update CKT_TRIBUNAL
+set
+  JUDICIAL_DIVISION = @judicialDivision,
+  JUDICIAL_DISTRICT = @judicialDistrict
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

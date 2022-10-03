@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadBankruptcy">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  DISCHARGE_DATE,
+  BKRP_DIS_WTHDRW_DT
+from
+  CKT_BANKRUPTCY
+where
+  (@cspNumber = CSP_NUMBER) and
+  (
+    (DISCHARGE_DATE &gt; @dischargeDate1) or
+    (DISCHARGE_DATE = @dischargeDate2)
+  ) and
+  (
+    (BKRP_DIS_WTHDRW_DT &gt; @dischargeDate1) or
+    (BKRP_DIS_WTHDRW_DT = @dischargeDate2)
+  )
+</value>
+   </data>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (T1.NUMB = T4.CAS_NUMBER) and
+    (T4.CSP_NUMBER = @cspNumber) and
+    (@lgaId = T4.LGA_ID)
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  ON_SS_IND,
+  HEALTH_INS_IND,
+  MEDICAL_SUPP_IND,
+  MOTHERS_FIRST_NM,
+  MOTHERS_MID_INIT,
+  FATHERS_LAST_NAME,
+  FATHERS_MID_INIT,
+  FATHERS_FIRST_NAME,
+  MOTHER_MAIDEN_LAST,
+  PARENT_TYPE,
+  NOTIFIED_DATE,
+  NUMBER_OF_CHILDREN,
+  LIVING_WITH_AR_IND,
+  NONPAYMENT_CAT,
+  ABSENCE_REASON_CD,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  NOTE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseRoleCase1">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  ON_SS_IND,
+  HEALTH_INS_IND,
+  MEDICAL_SUPP_IND,
+  MOTHERS_FIRST_NM,
+  MOTHERS_MID_INIT,
+  FATHERS_LAST_NAME,
+  FATHERS_MID_INIT,
+  FATHERS_FIRST_NAME,
+  MOTHER_MAIDEN_LAST,
+  PARENT_TYPE,
+  NOTIFIED_DATE,
+  NUMBER_OF_CHILDREN,
+  LIVING_WITH_AR_IND,
+  NONPAYMENT_CAT,
+  ABSENCE_REASON_CD,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  NOTE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (TYPE = 'FA')
+</value>
+   </data>
+   <data name="ReadCaseRoleCase2">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  ON_SS_IND,
+  HEALTH_INS_IND,
+  MEDICAL_SUPP_IND,
+  MOTHERS_FIRST_NM,
+  MOTHERS_MID_INIT,
+  FATHERS_LAST_NAME,
+  FATHERS_MID_INIT,
+  FATHERS_FIRST_NAME,
+  MOTHER_MAIDEN_LAST,
+  PARENT_TYPE,
+  NOTIFIED_DATE,
+  NUMBER_OF_CHILDREN,
+  LIVING_WITH_AR_IND,
+  NONPAYMENT_CAT,
+  ABSENCE_REASON_CD,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  NOTE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (TYPE in ('AP', 'AR'))
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  AE_CASE_NUMBER,
+  UNEMPLOYMENT_IND,
+  FEDERAL_IND,
+  BIRTHPLACE_COUNTRY,
+  TRIBAL_CODE,
+  THREAT_ON_STAFF,
+  CUST_SERVICE_CD
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  AE_CASE_NUMBER,
+  TRIBAL_CODE,
+  THREAT_ON_STAFF
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonLicense">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  ISSUING_STATE,
+  ISSUING_AGENCY_NM,
+  NUMB,
+  EXPIRATION_DT,
+  START_DT,
+  TYPE,
+  DESCRIPTION,
+  NOTE
+from
+  CKT_CSE_PERS_LCNS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'D') and
+  (EXPIRATION_DT &gt; @expirationDt)
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  END_DATE,
+  START_DATE
+from
+  CKT_INCARCERATION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_DATE &gt; @endDate)
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  CSP_I_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  (TYPE = 'M') and
+  (@cspINumber = CSP_I_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_DTL T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.OTY_ID = 1)
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T2.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T2.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (T3.ACCOUNT_TYPE = 'R') and
+    (T3.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

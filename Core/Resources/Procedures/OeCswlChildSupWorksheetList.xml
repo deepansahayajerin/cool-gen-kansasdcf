@@ -1,0 +1,92 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeCswlChildSupWorksheetList"
+           program-name="SWECSWLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeCswlChildSupWorksheetList"
+           transaction="SR5O"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_PERSON_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="Name"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none">
+      <map from="Name" to="PersonName"/>
+      <map from="SearchCase" to="Current"/>
+      <map from="SearchCsePerson" to="StartCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="SearchCase" to="Case1"/>
+      <return-map from="Selected" to="Name"/>
+      <return-map from="Case1" to="SearchCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CS_WORKSHEET_1"
+       action="transfer"
+       to="OeWorkCsWorksheetPage1"
+       send-command="FROMCSWL">
+      <map from="SelectedDate" to="LastUpdtDate"/>
+      <map from="SelectedChildSupportWorksheet.Status"
+           to="ChildSupportWorksheet.Status"/>
+      <map from="SelectedChildSupportWorksheet.Identifier"
+           to="ChildSupportWorksheet.Identifier"/>
+      <map from="SelectedChildSupportWorksheet.CsGuidelineYear"
+           to="ChildSupportWorksheet.CsGuidelineYear"/>
+      <map from="SelectedCsePersonSupportWorksheet.NetAdjParentalChildSuppAmt"
+           to="ParentACsePersonSupportWorksheet.NetAdjParentalChildSuppAmt"/>
+      <map from="SelectedCsePersonSupportWorksheet.Identifer"
+           to="ParentACsePersonSupportWorksheet.Identifer"/>
+      <map from="SelectedCsePerson" to="ParentACsePerson"/>
+      <map from="SelectedCase" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WORKSHEET"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeWorkCsWorksheetPage1"
+       send-command="DISPLAY">
+      <map from="SelectedDate" to="LastUpdtDate"/>
+      <map from="SelectedChildSupportWorksheet.Status"
+           to="ChildSupportWorksheet.Status"/>
+      <map from="SelectedChildSupportWorksheet.Identifier"
+           to="ChildSupportWorksheet.Identifier"/>
+      <map from="SelectedChildSupportWorksheet.CsGuidelineYear"
+           to="ChildSupportWorksheet.CsGuidelineYear"/>
+      <map from="SelectedCsePersonSupportWorksheet.NetAdjParentalChildSuppAmt"
+           to="ParentACsePersonSupportWorksheet.NetAdjParentalChildSuppAmt"/>
+      <map from="SelectedCsePersonSupportWorksheet.Identifer"
+           to="ParentACsePersonSupportWorksheet.Identifer"/>
+      <map from="SelectedCsePerson" to="ParentACsePerson"/>
+      <map from="SelectedCase" to="Case1"/>
+      <return-map from="ParentACsePerson" to="SearchCsePerson"/>
+      <return-map from="Case1" to="SearchCase"/>
+   </on>
+   <map from="SearchCsePerson" to="SearchCsePerson"/>
+   <map from="SearchCase" to="SearchCase"/>
+   <map from="Export1.DetailCsePersonSupportWorksheet"
+        to="Import1.DetailCsePersonSupportWorksheet"/>
+   <map from="Export1.DetailChildSupportWorksheet"
+        to="Import1.DetailChildSupportWorksheet"/>
+   <map from="WorkLink" to="WorkLink"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="Export1.DetailLegalAction" to="Import1.DetailLegalAction"/>
+   <map from="Export1.Date" to="Import1.Date"/>
+   <map from="Export1.DetailScrollingAttributes"
+        to="Import1.DetailScrollingAttributes"/>
+   <map from="Export1.DetailCase" to="Import1.DetailCase"/>
+   <map from="FromGldv" to="FromGldv"/>
+   <map from="Name.FormattedName" to="Name.FormattedName"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

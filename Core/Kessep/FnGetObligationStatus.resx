@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select
+  OTR_TYPE,
+  OTY_ID,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  AS_OF_DT,
+  DISCONTINUE_DT,
+  LAST_ACCRUAL_DT
+from
+  CKT_ACCRUAL_INSTR
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OTY_ID = @otyId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DISCONTINUE_DT &gt;= @discontinueDt)
+</value>
+   </data>
+   <data name="ReadDebtDetail1">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  BAL_DUE_AMT,
+  INT_BAL_DUE_AMT,
+  RETIRED_DT,
+  CVD_PRD_END_DT
+from
+  CKT_DEBT_DTL
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (RETIRED_DT = @retiredDt)
+</value>
+   </data>
+   <data name="ReadDebtDetail2">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  BAL_DUE_AMT,
+  INT_BAL_DUE_AMT,
+  RETIRED_DT,
+  CVD_PRD_END_DT
+from
+  CKT_DEBT_DTL
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDebtDetailStatusHistory">
+      <value>
+select top(1)
+  OB_TRN_STAT_HST_ID,
+  DISCONTINUE_DT,
+  OTR_TYPE,
+  OTR_ID,
+  CPA_TYPE,
+  CSP_NUMBER,
+  OBG_ID,
+  OB_TRN_ST_CD,
+  OTY_TYPE
+from
+  CKT_DBT_DT_STS_HIS
+where
+  (@otyType = OTY_TYPE) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (@otrId = OTR_ID) and
+  (@otrType = OTR_TYPE) and
+  (DISCONTINUE_DT = @discontinueDt)
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  OBLIG_PSCH_AMT,
+  END_DT,
+  FRQ_PRD_CD
+from
+  CKT_OB_PYMNT_SCH with(readuncommitted)
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (OBG_CPA_TYPE = @obgCpaType) and
+  (OBG_CSP_NUMBER = @obgCspNumber)
+order by
+  END_DT desc
+</value>
+   </data>
+</root>

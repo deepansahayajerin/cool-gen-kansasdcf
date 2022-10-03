@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDistributionPolicy">
+      <value>
+select top(1)
+  DIST_PLCY_ID,
+  DIST_PLCY_NM,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  MAX_PRCD_DT
+from
+  CKT_DIST_PLCY
+where
+  DIST_PLCY_ID = @distPlcyId
+</value>
+   </data>
+   <data name="ReadDistributionPolicyRule">
+      <value>
+select
+  DBP_GENERATED_ID,
+  DIST_PLCY_RL_ID,
+  DEBT_FUNC_TYP,
+  DEBT_STATE,
+  APPLY_TO,
+  DPR_NEXT_ID,
+  DIST_TO_ORD_TYP_CD
+from
+  CKT_DIST_PLCY_RL
+where
+  @dbpGeneratedId = DBP_GENERATED_ID
+order by
+  DIST_PLCY_RL_ID
+</value>
+   </data>
+</root>

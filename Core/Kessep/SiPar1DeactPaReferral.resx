@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPaReferral">
+      <value>
+select top(1)
+  NUMB,
+  ASSIGN_DEACT_IND,
+  ASSIGN_DEACT_DATE,
+  CASE_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CREATED_TSTAMP
+from
+  CKT_PA_REFERRAL
+where
+  (NUMB = @numb) and
+  (TYPE = @type) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+   <data name="ReadPaReferralAssignment">
+      <value>
+select distinct
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  PAF_NO,
+  PAF_TYPE,
+  PAF_TSTAMP
+from
+  CKT_ASSGN_PA_REF
+where
+  (@pafTstamp = PAF_TSTAMP) and
+  (@pafType = PAF_TYPE) and
+  (@pafNo = PAF_NO) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="UpdatePaReferral">
+      <value>
+update CKT_PA_REFERRAL
+set
+  ASSIGN_DEACT_IND = @assignDeactInd,
+  ASSIGN_DEACT_DATE = @assignDeactDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (NUMB = @numb) and
+  (TYPE = @type) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+   <data name="UpdatePaReferralAssignment">
+      <value>
+update CKT_ASSGN_PA_REF
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (PAF_NO = @pafNo) and
+  (PAF_TYPE = @pafType) and
+  (PAF_TSTAMP = @pafTstamp)
+</value>
+   </data>
+</root>

@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeAction">
+      <value>
+select top(1)
+  T1.TYPE,
+  T1.DESCRIPTION
+from
+  CKT_ADMIN_ACTION T1
+  join
+  CKT_ADMIN_ACT_CERT T2
+  on
+    (T1.TYPE = T2.AAT_TYPE) and
+    (T2.TANF_CODE = @tanfCode) and
+    (T2.TAKEN_DT = @takenDt) and
+    (T2.CPA_TYPE = @cpaType) and
+    (T2.TYPE = @type) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID,
+  ADMIN_APPEAL_NO,
+  TYPE,
+  REQUEST_DT,
+  RECEIVED_DT,
+  RESPONDENT,
+  APPELLANT_LAST_NM,
+  APPELLANT_FIRST_NM,
+  APPELLANT_MI,
+  APPELLANT_SUFFIX,
+  APPELLANT_REL,
+  ADMIN_APPEAL_DT,
+  ADMIN_ORDER_DT,
+  WITHDRAW_DT,
+  REQ_FURTHER_REV_DT,
+  CSP_Q_NUMBER,
+  CPA_R_TYPE,
+  CSP_R_NUMBER,
+  AAC_R_TYPE,
+  AAC_R_TAKEN_DATE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OAA_TAKEN_DATE,
+  OTY_ID,
+  JUD_REVIEW_IND,
+  REASON,
+  OUTCOME,
+  REVIEW_OUTCOME,
+  WITHDRAW_REASON,
+  REQ_FURTHER_REVIEW,
+  AAC_TANF_CODE
+from
+  CKT_ADMIN_APPEAL
+where
+  ADMIN_APPEAL_ID = @adminAppealId
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.TYPE = 'AR')
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select distinct
+  T1.NAME,
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME
+from
+  CKT_FIELD T1
+  join
+  CKT_DOCUMENT_FIELD T2
+  on
+    (T1.NAME = T2.FLD_NAME) and
+    (T2.DOC_NAME = @docName) and
+    (T2.DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+    (T1.DEPENDANCY = @dependancy)
+order by
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME,
+  T1.NAME
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.COUNTY,
+  T1.COUNTRY,
+  T1.TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR T1
+  join
+  CKT_LEGAL_ACTION T3
+  on
+    (T1.TRB_ID = T3.TRB_ID) and
+    (T3.LEGAL_ACTION_ID = @legalActionId)
+</value>
+   </data>
+   <data name="ReadImHouseholdMember">
+      <value>
+select
+  IMH_AE_CASE_NO,
+  CSP_NUMBER,
+  START_DATE,
+  END_DATE,
+  RELATIONSHIP
+from
+  CKT_IM_HSHLD_MBR
+where
+  (@imhAeCaseNo = IMH_AE_CASE_NO) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (RELATIONSHIP &lt;&gt; 'PI')
+</value>
+   </data>
+   <data name="ReadImHouseholdMemberImHousehold">
+      <value>
+select top(1)
+  IMH_AE_CASE_NO,
+  CSP_NUMBER,
+  START_DATE,
+  END_DATE,
+  RELATIONSHIP
+from
+  CKT_IM_HSHLD_MBR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (RELATIONSHIP = 'PI') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.PAYMENT_LOCATION,
+  T1.TRB_ID
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_R_IDENTIFIER) and
+    (T3.LAD_R_NUMBER is not null) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T1.CLASSIFICATION = 'J') and
+    (T3.ACCOUNT_TYPE = 'R') and
+    (T3.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T3.END_DT &gt;= @effectiveDt) and
+    (cast(@cpaRType as char(1)) = 'R')
+order by
+  T1.COURT_CASE_NO,
+  T1.FILED_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  DETAIL_TYPE,
+  FRQ_PRD_CD
+from
+  CKT_LEGAL_ACT_DTL
+where
+  LGA_IDENTIFIER = @lgaIdentifier
+order by
+  FRQ_PRD_CD desc
+</value>
+   </data>
+   <data name="ReadPositionStatement">
+      <value>
+select
+  AAP_IDENTIFIER,
+  POSITION_STMT_NO,
+  CREATED_TSTAMP,
+  LAST_UPD_TSTAMP,
+  EXPLANATION
+from
+  CKT_POSITION_STMT
+where
+  @aapIdentifier = AAP_IDENTIFIER
+order by
+  LAST_UPD_TSTAMP desc,
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  T1.TRIBUNAL_NM,
+  T1.IDENTIFIER
+from
+  CKT_TRIBUNAL T1
+  join
+  CKT_LEGAL_ACTION T2
+  on
+    (T1.IDENTIFIER = T2.TRB_ID) and
+    (T2.LEGAL_ACTION_ID = @legalActionId)
+</value>
+   </data>
+</root>

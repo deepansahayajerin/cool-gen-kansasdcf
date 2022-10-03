@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePaymentStatusHistory">
+      <value>
+insert into CKT_PMNT_STAT_HIST
+(
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @pstGeneratedId,
+  @prqGeneratedId,
+  @pymntStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="DeleteDebtDetail">
+      <value>
+delete from CKT_DEBT_DTL
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (OTY_TYPE = @otyType) and
+  (OTR_TYPE = @otrType)
+</value>
+   </data>
+   <data name="DeleteObligationAssignment">
+      <value>
+delete from CKT_ASSGN_OBG
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (OTY_ID = @otyId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NO = @cspNo) and
+  (OBG_ID = @obgId)
+</value>
+   </data>
+   <data name="DeleteObligationTransaction#1">
+      <value>
+update CKT_ACT_STATEMENT
+set
+  OTR_TYPE = null,
+  OTR_GENERATED_ID = null,
+  OBG_GENERATED_ID = null,
+  OTY_TYPE = null,
+  CPA_R_TYPE = null,
+  CSP_R_NUMBER = null
+where
+  (OBG_GENERATED_ID = @obgGeneratedId1) and
+  (CSP_R_NUMBER = @cspRNumber) and
+  (CPA_R_TYPE = @cpaRType) and
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_TYPE = @otyType1)
+</value>
+   </data>
+   <data name="DeleteObligationTransaction#2">
+      <value>
+delete from CKT_OB_TRN
+where
+  (OBG_GENERATED_ID = @obgGeneratedId1) and
+  (CSP_NUMBER = @cspRNumber) and
+  (CPA_TYPE = @cpaRType) and
+  (OB_TRN_ID = @otrGeneratedId) and
+  (OB_TRN_TYP = @otrType) and
+  (OTY_TYPE = @otyType1)
+</value>
+   </data>
+   <data name="DeleteObligationTransaction#3">
+      <value>
+select top(1)
+  1
+from
+  CKT_OB_TRN T1
+where
+  (T1.CPA_SUP_TYPE = @cpaSupType) and
+  (T1.CSP_SUP_NUMBER = @cspSupNumber)
+</value>
+   </data>
+   <data name="DeleteObligationTransaction#4">
+      <value>
+delete from CKT_CSE_PERSON_ACC
+where
+  (TYPE = @cpaSupType) and
+  (CSP_NUMBER = @cspSupNumber)
+</value>
+   </data>
+   <data name="DeleteObligationTransaction#5">
+      <value>
+select top(1)
+  1
+from
+  CKT_OB_TRN T1
+where
+  (T1.OTY_TYPE = @otyType2) and
+  (T1.OBG_GENERATED_ID = @obgGeneratedId2) and
+  (T1.CSP_NUMBER = @cspNumber) and
+  (T1.CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="DeleteObligationTransaction#6">
+      <value>
+delete from CKT_OBLIGATION
+where
+  (DTY_GENERATED_ID = @otyType2) and
+  (OB_ID = @obgGeneratedId2) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="DeleteObligationTransaction#7">
+      <value>
+select top(1)
+  1
+from
+  CKT_OBLIGATION T1
+where
+  (T1.DTY_GENERATED_ID = @otyType2) and
+  (T1.OB_ID = @obgGeneratedId2) and
+  (T1.CSP_NUMBER = @cspNumber) and
+  (T1.CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="DeleteObligationTransaction#8">
+      <value>
+delete from CKT_CSE_PERSON_ACC
+where
+  (TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="DeleteRecaptureRule">
+      <value>
+delete from CKT_RECAPTURE_RULE
+where
+  RECAPTURE_RULE_ID = @recaptureRuleId
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  AOD_REC_BAL
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  BAL_DUE_AMT,
+  CVRD_PRD_START_DT,
+  CVD_PRD_END_DT
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadObligation1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  PRIM_SEC_CD,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST
+from
+  CKT_OBLIGATION
+where
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (OB_ID = @obId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="ReadObligation2">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  PRIM_SEC_CD,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST
+from
+  CKT_OBLIGATION
+where
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (OB_ID = @obId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="ReadObligation3">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  PRQ_ID,
+  PRIM_SEC_CD
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationAssignment">
+      <value>
+select
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  OTY_ID,
+  CPA_TYPE,
+  CSP_NO,
+  OBG_ID
+from
+  CKT_ASSGN_OBG
+where
+  (@obgId = OBG_ID) and
+  (@cspNo = CSP_NO) and
+  (@cpaType = CPA_TYPE) and
+  (@otyId = OTY_ID)
+</value>
+   </data>
+   <data name="ReadObligationDebtDetail">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.PRQ_ID,
+  T1.PRIM_SEC_CD,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OTR_GENERATED_ID,
+  T2.OTY_TYPE,
+  T2.OTR_TYPE,
+  T2.BAL_DUE_AMT,
+  T2.CVRD_PRD_START_DT,
+  T2.CVD_PRD_END_DT
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_OBLIGATION T1
+  on
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T3.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (T3.DEBT_TYP_CLASS = @debtTypClass)
+  join
+  CKT_OB_TRN T4
+  on
+    (T1.DTY_GENERATED_ID = T4.OTY_TYPE) and
+    (T1.OB_ID = T4.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T1.CPA_TYPE = T4.CPA_TYPE) and
+    (T4.DEBT_TYP = @debtTyp) and
+    (T4.OB_TRN_TYP = @obTrnTyp)
+  join
+  CKT_DEBT_DTL T2
+  on
+    (T4.OTY_TYPE = T2.OTY_TYPE) and
+    (T4.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T4.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T4.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T4.CPA_TYPE = T2.CPA_TYPE) and
+    (T4.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T2.CVD_PRD_END_DT = @cvdPrdEndDt) and
+    (T2.CVRD_PRD_START_DT &lt;= @cvrdPrdStartDt)
+</value>
+   </data>
+   <data name="ReadObligationRln1">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OBG_F_GENERATED_ID,
+  CSP_F_NUMBER,
+  CPA_F_TYPE,
+  ORR_GENERATED_ID,
+  CREATED_BY,
+  OTY_SECOND_ID,
+  OTY_FIRST_ID
+from
+  CKT_OBG_RLN
+where
+  (@otyFirstId = OTY_FIRST_ID) and
+  (@obgFGeneratedId = OBG_F_GENERATED_ID) and
+  (@cspFNumber = CSP_F_NUMBER) and
+  (@cpaFType = CPA_F_TYPE) and
+  (ORR_GENERATED_ID = @orrGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationRln2">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OBG_F_GENERATED_ID,
+  CSP_F_NUMBER,
+  CPA_F_TYPE,
+  ORR_GENERATED_ID,
+  CREATED_BY,
+  OTY_SECOND_ID,
+  OTY_FIRST_ID
+from
+  CKT_OBG_RLN
+where
+  (@otySecondId = OTY_SECOND_ID) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (ORR_GENERATED_ID = @orrGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationTransaction">
+      <value>
+select
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  DEBT_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  TYPE,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="ReadPaymentStatus">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID,
+  CODE
+from
+  CKT_PAYMENT_STATUS
+where
+  CODE = 'REQ'
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistory">
+      <value>
+select top(1)
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+from
+  CKT_PMNT_STAT_HIST
+where
+  (@prqGeneratedId = PRQ_GENERATED_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadRecaptureRule">
+      <value>
+select top(1)
+  RECAPTURE_RULE_ID,
+  CPA_D_TYPE,
+  CSP_D_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  TYPE
+from
+  CKT_RECAPTURE_RULE
+where
+  (@cpaDType = CPA_D_TYPE) and
+  (@cspDNumber = CSP_D_NUMBER) and
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate)
+</value>
+   </data>
+   <data name="UpdateObligation">
+      <value>
+update CKT_OBLIGATION
+set
+  PRIM_SEC_CD = @primSecCd,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="UpdatePaymentRequest#1">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  PROCESS_DATE = @processDate
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="UpdatePaymentRequest#2">
+      <value>
+update CKT_OBLIGATION
+set
+  PRQ_ID = null
+where
+  (CPA_TYPE = @cpaType1) and
+  (CSP_NUMBER = @cspNumber1) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="UpdatePaymentRequest#3">
+      <value>
+select top(1)
+  1
+from
+  CKT_OBLIGATION T1
+where
+  (T1.CPA_TYPE = @cpaType2) and
+  (T1.CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="UpdatePaymentRequest#4">
+      <value>
+delete from CKT_CSE_PERSON_ACC
+where
+  (TYPE = @cpaType2) and
+  (CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="UpdatePaymentStatusHistory">
+      <value>
+update CKT_PMNT_STAT_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (PST_GENERATED_ID = @pstGeneratedId) and
+  (PRQ_GENERATED_ID = @prqGeneratedId) and
+  (PYMNT_STAT_HIST_ID = @pymntStatHistId)
+</value>
+   </data>
+</root>

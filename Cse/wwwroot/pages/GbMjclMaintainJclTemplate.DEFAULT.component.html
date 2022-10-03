@@ -1,0 +1,213 @@
+﻿<!--Name: GB_MJCL_MAINTAIN_JCL_TEMPLATE, ID: 371142996, model: 746-->
+<div coolContent coolName="GB_MJCL_MAINTAIN_JCL_TEMPLATE" coolType="SCREEN"
+  (coolInit)="scrollSize = 200; pageSize = 15">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 33.75%; top: 0; width: 31.25%; height: 4%;" coolCol="28"
+     coolRow="1" coolLength="25">CSE - Maintain JCL - MJCL</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 12%; width: 10%; height: 4%;"
+     coolCol="2" coolRow="4" coolLength="8">Job Name</div>
+   <input type="text" coolType="field" name="field_4_15"
+     [(ngModel)]="in.job.name" [coolVideo]="out.job.screenField?.name"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 17.5%; top: 12%; width: 10%; height: 4%;" coolCol="15"
+     coolRow="4" coolLength="8">
+   <input type="text" coolType="field" name="field_4_24"
+     [(ngModel)]="in.promptToLjob.selectChar"
+     [coolVideo]="out.promptToLjob.screenField?.selectChar" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 28.75%; top: 12%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="4" coolLength="1">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 16%; width: 13.75%; height: 4%;" coolCol="2"
+     coolRow="5" coolLength="11">Output Type</div>
+   <input type="text" coolType="field" name="field_5_15"
+     [(ngModel)]="in.jclTemplate.outputType"
+     [coolVideo]="out.jclTemplate.screenField?.outputType" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="10"
+     style="left: 17.5%; top: 16%; width: 12.5%; height: 4%;" coolCol="15"
+     coolRow="5" coolLength="10">
+   <input type="text" coolType="field" name="field_5_26"
+     [(ngModel)]="in.promptToCdvl.selectChar"
+     [coolVideo]="out.promptToCdvl.screenField?.selectChar" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 31.25%; top: 16%; width: 1.25%; height: 4%;" coolCol="26"
+     coolRow="5" coolLength="1">
+   <input type="text" coolType="field" name="field_7_1"
+     [(ngModel)]="ref(in.group, pageOffset, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_7_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 24%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="7" coolLength="79" [hidden]="pageOffset >= 200">
+   <input type="text" coolType="field" name="field_8_1"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_8_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 28%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="8" coolLength="79" [hidden]="pageOffset + 1 >= 200">
+   <input type="text" coolType="field" name="field_9_1"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_9_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 32%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="9" coolLength="79" [hidden]="pageOffset + 2 >= 200">
+   <input type="text" coolType="field" name="field_10_1"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_10_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 36%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="10" coolLength="79" [hidden]="pageOffset + 3 >= 200">
+   <input type="text" coolType="field" name="field_11_1"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_11_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 40%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="11" coolLength="79" [hidden]="pageOffset + 4 >= 200">
+   <input type="text" coolType="field" name="field_12_1"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_12_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 44%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="12" coolLength="79" [hidden]="pageOffset + 5 >= 200">
+   <input type="text" coolType="field" name="field_13_1"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_13_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 48%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="13" coolLength="79" [hidden]="pageOffset + 6 >= 200">
+   <input type="text" coolType="field" name="field_14_1"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_14_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 52%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="14" coolLength="79" [hidden]="pageOffset + 7 >= 200">
+   <input type="text" coolType="field" name="field_15_1"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_15_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 56%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="15" coolLength="79" [hidden]="pageOffset + 8 >= 200">
+   <input type="text" coolType="field" name="field_16_1"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_16_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 60%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="16" coolLength="79" [hidden]="pageOffset + 9 >= 200">
+   <input type="text" coolType="field" name="field_17_1"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_17_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 64%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="17" coolLength="79" [hidden]="pageOffset + 10 >= 200">
+   <input type="text" coolType="field" name="field_18_1"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_18_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 68%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="18" coolLength="79" [hidden]="pageOffset + 11 >= 200">
+   <input type="text" coolType="field" name="field_19_1"
+     [(ngModel)]="ref(in.group, pageOffset + 12, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 12]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_19_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 72%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="19" coolLength="79" [hidden]="pageOffset + 12 >= 200">
+   <input type="text" coolType="field" name="field_20_1"
+     [(ngModel)]="ref(in.group, pageOffset + 13, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 13]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_20_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 76%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="20" coolLength="79" [hidden]="pageOffset + 13 >= 200">
+   <input type="text" coolType="field" name="field_21_1"
+     [(ngModel)]="ref(in.group, pageOffset + 14, 'jclTemplate.recordText').value"
+     [coolVideo]="out.group?.[pageOffset + 14]?.jclTemplate.screenField?.recordText"
+     coolAutotab #field_21_1 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="79"
+     style="left: 0; top: 80%; width: 98.75%; height: 4%;" coolCol="1"
+     coolRow="21" coolLength="79" [hidden]="pageOffset + 14 >= 200">
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 88%; width: 83.75%; height: 4%;" coolCol="2"
+     coolRow="23" coolLength="67">PFKEYS:  1 Help  2 Display  3 Exit  4 List  5 Add  6 Update  7 Prev</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="72" coolRow="23" coolLength="9"
+     style="left: 88.75%; top: 88%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="literal"
+     style="left: 12.5%; top: 92%; width: 58.75%; height: 4%;" coolCol="11"
+     coolRow="24" coolLength="47">8 Next  9 Return  11 Clear  12 Signoff  15 LJOB</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="ADD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=ADD</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="LJOB" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=LJOB</a>
+   <a coolType="action" coolCommand="LJRN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=LJRN</a>
+   </div>

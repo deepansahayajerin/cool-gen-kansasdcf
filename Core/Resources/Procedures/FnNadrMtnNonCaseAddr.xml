@@ -1,0 +1,125 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnNadrMtnNonCaseAddr"
+           program-name="SWENADRQ"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnNadrMtnNonCaseAddr"
+           transaction="SRF4"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="link"
+       return-command-type="none"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CODE_TABLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="PRMPTRET"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="PromptCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="PromptCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_FIPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="LeFips"
+       send-command="DISPLAY">
+      <map from="PassToFips.State" to="Fips.State"/>
+      <map from="PassToFips.County" to="Fips.County"/>
+      <map from="PassToFips.Location" to="Fips.Location"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NADS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnNadsNonCaseForeignAddr"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="Group.CntyPrmt" to="Group.CntyPrmt"/>
+   <map from="Group.Sel" to="Group.Common"/>
+   <map from="Group.TypePrmt" to="Group.TypePrmt"/>
+   <map from="Group.SrcePrmt" to="Group.SrcePrmt"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Group.Hidden" to="Group.Hidden"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="Plus" to="Plus"/>
+   <map from="Pagenum.Pagenum1" to="Pagenum.LastAddr"/>
+   <map from="Line1Sel" to="Line1Sel"/>
+   <map from="Line1Addr" to="Line1Addr"/>
+   <map from="Group.EnddtCdPrmt" to="Group.EnddtCdPrmt"/>
+   <map from="Group.StatePrmt" to="Group.StatePrmt"/>
+   <map from="Line1EnddtCdPrmt" to="Line1EnddtCdPrmt"/>
+   <map from="Line1TypePrmt" to="Line1TypePrmt"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Line1CntyPrmt" to="Line1CntyPrmt"/>
+   <map from="Line1StatePrmt" to="Line1StatePrmt"/>
+   <map from="Line1SrcePrmt" to="Line1SrcePrmt"/>
+   <map from="ForeignAddress" to="ForeignAddress"/>
+   <map from="ForeignAddr" to="ForeignAddr"/>
+   <map from="CsePersonPrompt" to="CsePersonPrompt"/>
+   <map from="ProtectFields" to="ProtectFields"/>
+   <map from="FipsMessage" to="FipsMessage"/>
+   <map from="Fips" to="Fips"/>
+   <map from="AeAddr.Street1" to="AeAddr.Street1"/>
+   <map from="AeAddr.Street2" to="AeAddr.Street2"/>
+   <map from="AeAddr.City" to="AeAddr.City"/>
+   <map from="AeAddr.Type1" to="AeAddr.Type1"/>
+   <map from="AeAddr.Source" to="AeAddr.Source"/>
+   <map from="AeAddr.VerifiedDate" to="AeAddr.VerifiedDate"/>
+   <map from="AeAddr.EndDate" to="LastAddr.EndDate"/>
+   <map from="AeAddr.EndCode" to="AeAddr.EndCode"/>
+   <map from="AeAddr.WorkerId" to="AeAddr.WorkerId"/>
+   <map from="AeAddr.ZipCode" to="AeAddr.ZipCode"/>
+   <map from="AeAddr.Zip4" to="AeAddr.Zip4"/>
+   <map from="AeAddr.County" to="AeAddr.County"/>
+   <map from="AeAddr.SendDate" to="AeAddr.SendDate"/>
+   <map from="AeAddr.LocationType" to="AeAddr.LocationType"/>
+   <map from="AeAddr.State" to="AeAddr.State"/>
+   <map from="AeAddr.LastUpdatedTimestamp" to="AeAddr.LastUpdatedTimestamp"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="CsePersonsWorkSet.FirstName" to="CsePersonsWorkSet.FirstName"/>
+   <map from="CsePersonsWorkSet.MiddleInitial"
+        to="CsePersonsWorkSet.MiddleInitial"/>
+   <map from="CsePersonsWorkSet.LastName" to="CsePersonsWorkSet.LastName"/>
+   <map from="Group.CsePersonAddress.EndDate"
+        to="Group.CsePersonAddress.EndDate"/>
+   <map from="Group.CsePersonAddress.Street1"
+        to="Group.CsePersonAddress.Street1"/>
+   <map from="Group.CsePersonAddress.Street2"
+        to="Group.CsePersonAddress.Street2"/>
+   <map from="Group.CsePersonAddress.City" to="Group.CsePersonAddress.City"/>
+   <map from="Group.CsePersonAddress.VerifiedDate"
+        to="Group.CsePersonAddress.VerifiedDate"/>
+   <map from="Group.CsePersonAddress.State" to="Group.CsePersonAddress.State"/>
+   <map from="Group.CsePersonAddress.Source" to="Group.CsePersonAddress.Source"/>
+   <map from="Group.CsePersonAddress.EndCode"
+        to="Group.CsePersonAddress.EndCode"/>
+   <map from="Group.CsePersonAddress.Type1" to="Group.CsePersonAddress.Type1"/>
+   <map from="Group.CsePersonAddress.ZipCode"
+        to="Group.CsePersonAddress.ZipCode"/>
+   <map from="LastAddr.Identifier" to="LastAddr.Identifier"/>
+   <map from="Group.CsePersonAddress.Identifier"
+        to="Group.CsePersonAddress.Identifier"/>
+   <map from="Group.CsePersonAddress.WorkerId"
+        to="Group.CsePersonAddress.WorkerId"/>
+   <map from="Group.CsePersonAddress.County" to="Group.CsePersonAddress.County"/>
+   <map from="Group.CsePersonAddress.LocationType"
+        to="Group.CsePersonAddress.LocationType"/>
+   <map from="Group.CsePersonAddress.Zip4" to="Group.CsePersonAddress.Zip4"/>
+   <map from="Group.CsePersonAddress.LastUpdatedTimestamp"
+        to="Group.CsePersonAddress.LastUpdatedTimestamp"/>
+   <map from="SaveSubscript.Subscript" to="SaveSubscript.Subscript"/>
+</procedure>

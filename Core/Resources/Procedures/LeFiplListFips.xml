@@ -1,0 +1,54 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeFiplListFips"
+           program-name="SWEFIPLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeFiplListFips"
+           transaction="SR9N"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DlgflwRequired" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ORGZ"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiOrgzOrganizationMaintenance"
+       send-command="DISPLAY">
+      <map from="HiddenSelected" to="StartingSearchFips"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="CoStbmSupportTablesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_FIPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeFips"
+       send-command="DISPLAY">
+      <map from="HiddenSelected" to="Fips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_TRIB"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeTribTribunal"
+       send-command="DISPLAY">
+      <map from="HiddenSelected" to="Fips"/>
+   </on>
+   <map from="SearchFips" to="SearchFips"/>
+   <map from="HiddenSelected" to="HiddenSelected"/>
+   <map from="Fips.DetailCommon" to="Fips.DetailCommon"/>
+   <map from="Fips.DetailFips" to="Fips.DetailFips"/>
+   <map from="Standard" to="Standard"/>
+   <map from="SearchFipsTribAddress" to="SearchFipsTribAddress"/>
+   <map from="PromptStateCodes" to="PromptStateCodes"/>
+   <map from="Fips.DetailFipsTribAddress" to="Fips.DetailFipsTribAddress"/>
+</procedure>

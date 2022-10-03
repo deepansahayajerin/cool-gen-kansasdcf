@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  CLOSURE_REASON,
+  NUMB,
+  STATUS,
+  STATUS_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseAssignment">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (@casNo = CAS_NO) and
+  (REASON_CODE = 'RSP')
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CAS_NO,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (CSP_NO_AP = @cspNoAp)
+order by
+  CU_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.OFF_OFFICE,
+  T3.USER_ID
+from
+  CKT_OFFICE T2
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    (T1.EFFECTIVE_DATE = @effectiveDate) and
+    (T1.ROLE_CODE = @roleCode) and
+    (T1.OFF_GENERATED_ID = @offGeneratedId) and
+    (T1.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T3.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID)
+  on
+    T2.OFFICE_ID = T1.OFF_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadServiceProviderOfficeServiceProvider1">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T2.OFF_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T2.ROLE_CODE = 'CO') and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (@offGeneratedId = T2.OFF_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadServiceProviderOfficeServiceProvider2">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T2.OFF_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T2.ROLE_CODE = 'OA') and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (@offGeneratedId = T2.OFF_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadServiceProviderOfficeServiceProvider3">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T2.OFF_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt; @effectiveDate)
+  join
+  CKT_OFC_SRCPRV_RLT T3
+  on
+    (T2.ROLE_CODE = T3.OSP_R_ROLE_CODE) and
+    (T2.EFFECTIVE_DATE = T3.OSP_R_EFFECTIVE_DT) and
+    (T2.OFF_GENERATED_ID = T3.OFF_R_GENERATED_ID) and
+    (T2.SPD_GENERATED_ID = T3.SPD_R_GENERATED_ID) and
+    (@ospRoleCode = T3.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T3.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T3.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T3.SPD_GENERATED_ID)
+</value>
+   </data>
+</root>

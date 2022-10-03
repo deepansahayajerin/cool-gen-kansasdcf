@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadOcse157Verification1">
+      <value>
+select distinct
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  CREATED_TIMESTAMP,
+  CASE_WORKER_NAME
+from
+  CKT_OCSE157_VERIFI with(readuncommitted)
+where
+  (CASE_WORKER_NAME between cast(@caseWorkerName1 as char(30)) and cast(@caseWorkerName2 as char(30))) and
+  (FISCAL_YEAR = @fiscalYear) and
+  (RUN_NUMBER = @runNumber)
+order by
+  CASE_WORKER_NAME
+</value>
+   </data>
+   <data name="ReadOcse157Verification2">
+      <value>
+select distinct
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  LINE_NUMBER,
+  CREATED_TIMESTAMP,
+  CASE_WORKER_NAME
+from
+  CKT_OCSE157_VERIFI with(readuncommitted)
+where
+  (FISCAL_YEAR = @fiscalYear) and
+  (RUN_NUMBER = @runNumber) and
+  (LINE_NUMBER = 'B13')
+order by
+  CASE_WORKER_NAME
+</value>
+   </data>
+   <data name="ReadOcse157Verification3">
+      <value>
+select
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  LINE_NUMBER,
+  COLUMN0,
+  CREATED_TIMESTAMP,
+  OBLIGOR_PERSON_NBR,
+  COLLECTION_AMOUNT,
+  COLLECTION_DTE,
+  CASE_WORKER_NAME,
+  COMMENT0
+from
+  CKT_OCSE157_VERIFI with(readuncommitted)
+where
+  (CASE_WORKER_NAME = @caseWorkerName) and
+  (RUN_NUMBER between 1 and 4)
+order by
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  LINE_NUMBER,
+  COLLECTION_DTE,
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadOcse157Verification4">
+      <value>
+select
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  LINE_NUMBER,
+  COLUMN0,
+  CREATED_TIMESTAMP,
+  OBLIGOR_PERSON_NBR,
+  COLLECTION_AMOUNT,
+  COLLECTION_DTE,
+  CASE_WORKER_NAME,
+  COMMENT0
+from
+  CKT_OCSE157_VERIFI with(readuncommitted)
+where
+  (CASE_WORKER_NAME = @caseWorkerName) and
+  (RUN_NUMBER between 1 and 4)
+order by
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  LINE_NUMBER,
+  COLLECTION_DTE,
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadOcse34">
+      <value>
+select top(1)
+  PERIOD,
+  CREATED_TIMESTAMP
+from
+  CKT_OCSE34
+where
+  PERIOD = @period
+</value>
+   </data>
+</root>

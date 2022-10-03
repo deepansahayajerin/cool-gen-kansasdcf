@@ -1,0 +1,142 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpLaalLegalActAsgnmtList"
+           program-name="SWELAALP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpLaalLegalActAsgnmtList"
+           transaction="SRSZ"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_COMP_CASE_COMPOSITION ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="SelectedCase" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IWGL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="LeIwglIwoGarnishmentLien"
+       send-command="FROMLACN">
+      <map from="IwglType" to="IwglType"/>
+      <map from="SelectedLegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="SelectedLegalAction.Classification"
+           to="LegalAction.Classification"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LTRB"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLTRB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="ToLtrb" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="FromLtrbFipsTribAddress"/>
+      <return-map from="DlgflwSelectedFips" to="FromLtrbFips"/>
+      <return-map from="DlgflwSelectedTribunal" to="FromLtrbTribunal"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToCdvlValidWithCode" to="CombinationCode"/>
+      <map from="ToCdvlValidWithCodeValue" to="CombinationCodeValue"/>
+      <map from="ToCdvlCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromCdvl"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LEGAL_ACTION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="LeLactLegalAction"
+       send-command="REDISP">
+      <map from="SelectedLegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="SelectedLegalAction.Classification"
+           to="LegalAction.Classification"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <map from="Office.SystemGeneratedId" to="Office.SystemGeneratedId"/>
+      <map from="Office.Name" to="Office.Name"/>
+      <return-map from="HiddenSelectionOffice" to="FromSvpoOffice"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="FromSvpoOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionServiceProvider" to="FromSvpoServiceProvider"/>
+   </on>
+   <on exit-state="CO_LINK_TO_POPT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPOPT"
+       to="CoPoptPrintOptionSelection"
+       send-command="DISPLAY">
+      <map from="DlgflwJob" to="Job"/>
+      <map from="DlgflwJobRun.ParmInfo" to="JobRun.ParmInfo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LEGAL_REQUEST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="OeLgrqLegalRequest"
+       send-command="DISPLAY">
+      <map from="SelectedCase" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ASIN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="SpAsinOspAssignment"
+       send-command="DISPLAY">
+      <map from="SelectedLegalAction.Identifier" to="HlegalAction.Identifier"/>
+      <map from="SelectedLegalAction.Classification"
+           to="HlegalAction.Classification"/>
+      <map from="DlgflwAsinHeaderObject" to="HeaderObject"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command-type="none"/>
+   <map from="Export660Page.Export770Case" to="Import660Page.Import660Case"/>
+   <map from="Export660Page.Export770LegalAction"
+        to="Import660Page.Import660LegalAction"/>
+   <map from="Group.SubscriptIn660" to="Group.SubscriptIn660"/>
+   <map from="ScreenNumber" to="ScreenNumber"/>
+   <map from="MaxScreenNumber" to="MaxScreenNumber"/>
+   <map from="PageKeys.PageKeyLegalAction" to="PageKeys.PageKeyLegalAction"/>
+   <map from="AsgnCount" to="AsgnCount"/>
+   <map from="CurrentPage" to="CurrentPage"/>
+   <map from="SearchCase" to="SearchCase"/>
+   <map from="SearchPromptSvpo" to="SearchPromptSvpo"/>
+   <map from="Office" to="Office"/>
+   <map from="PageKeys.PageKeyCase" to="PageKeys.PageKeyCase"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="SearchHiddenCase" to="SearchHiddenCase"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.LegalAction" to="Group.LegalAction"/>
+   <map from="Group.Case1" to="Group.Case1"/>
+   <map from="Group.LegalActionAssigment" to="Group.LegalActionAssigment"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="SearchLegalActionAssigment" to="SearchLegalActionAssigment"/>
+   <map from="SearchFipsTribAddress" to="SearchFipsTribAddress"/>
+   <map from="SearchLegalAction" to="SearchLegalAction"/>
+   <map from="SearchActionTaken" to="SearchActionTaken"/>
+   <map from="SearchActionTaknPrompt" to="SearchActionTaknPrompt"/>
+   <map from="SearchClassPrompt" to="SearchClassPrompt"/>
+   <map from="SearchTribunalPrompt" to="SearchTribunalPrompt"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="HiddenPreviousAction" to="HiddenPreviousAction"/>
+   <map from="HiddenSearch" to="HiddenSearch"/>
+   <map from="SearchHiddenActionTakn" to="SearchHiddenActionTakn"/>
+   <map from="SearchHiddenLegalActionAssigment"
+        to="SearchHiddenLegalActionAssigment"/>
+   <map from="SearchHiddenFipsTribAddress" to="SearchHiddenFipsTribAddress"/>
+   <map from="SearchHiddenLegalAction" to="SearchHiddenLegalAction"/>
+   <map from="ServiceProvider.SystemGeneratedId"
+        to="ServiceProvider.SystemGeneratedId"/>
+   <map from="ServiceProvider.LastName" to="ServiceProvider.LastName"/>
+</procedure>

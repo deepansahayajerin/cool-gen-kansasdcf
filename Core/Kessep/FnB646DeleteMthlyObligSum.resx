@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteMonthlyObligorSummary">
+      <value>
+delete from CKT_MNTHLY_OBR_SUM
+where
+  (FNCL_MSUM_TYP = @fnclMsumTyp) and
+  (FNCL_MSUM_YR_MTH = @fnclMsumYrMth) and
+  (MFS_GENERATED_ID = @mfsGeneratedId)
+</value>
+   </data>
+   <data name="ReadClientObligor">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.DATE_OF_DEATH,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CSE_PERSON_ACC T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadMonthlyObligorSummary">
+      <value>
+select
+  FNCL_MSUM_TYP,
+  FNCL_MSUM_YR_MTH,
+  MFS_GENERATED_ID,
+  CPA_S_TYPE,
+  CSP_S_NUMBER,
+  OBG_S_GENERATED_ID,
+  OTY_TYPE
+from
+  CKT_MNTHLY_OBR_SUM
+where
+  (@otyType = OTY_TYPE) and
+  (@obgSGeneratedId = OBG_S_GENERATED_ID) and
+  (@cspSNumber = CSP_S_NUMBER) and
+  (@cpaSType = CPA_S_TYPE)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  PRIM_SEC_CD,
+  ORD_TYP_CD,
+  DORMANT_IND
+from
+  CKT_OBLIGATION
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadObligorClient">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T2.DATE_OF_DEATH
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CSE_PERSON_ACC T1
+  on
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.NUMB &gt; @numb)
+order by
+  T1.CSP_NUMBER
+</value>
+   </data>
+</root>

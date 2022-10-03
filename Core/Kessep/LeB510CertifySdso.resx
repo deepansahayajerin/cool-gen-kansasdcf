@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeActCertification">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'SDSO') and
+  (TAKEN_DT = @takenDt)
+</value>
+   </data>
+   <data name="ReadCsePersonObligor">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CSE_PERSON_ACC T2
+  on
+    (T1.NUMB &gt; @numb) and
+    (T1.NUMB = T2.CSP_NUMBER)
+order by
+  T1.NUMB
+</value>
+   </data>
+</root>

@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCase1">
+      <value>
+update CKT_CASE
+set
+  OFF_GENERATED_ID = @offGeneratedId
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="AssociateCase2">
+      <value>
+update CKT_PA_REFERRAL
+set
+  CAS_NUMBER = @casNumber
+where
+  (NUMB = @numb) and
+  (TYPE = @type) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+   <data name="AssociateCase3">
+      <value>
+update CKT_INFO_REQ
+set
+  FK_CKT_CASENUMB = @fkCktCasenumb
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="CreateCase">
+      <value>
+insert into CKT_CASE
+(
+  OFF_GENERATED_ID,
+  FULL_SRV_WO_MED_IN,
+  MANAGEMENT_AREA,
+  MANAGEMENT_REGION,
+  FULL_SERV_W_MED_IN,
+  LOCATE_IND,
+  CLOSURE_REASON,
+  NUMB,
+  INFO_REQUEST_NO,
+  STATION_ID,
+  APPL_LAST_NM,
+  APPL_FIRST_NM,
+  APPL_MI,
+  APPL_SENT_DT,
+  APPL_REQUEST_DT,
+  APPL_RETURN_DT,
+  DENIED_REQUEST_DT,
+  DENIED_REQUEST_CD,
+  DENIED_REQUEST_RSN,
+  STATUS,
+  KS_FIPS_CODE,
+  VALID_APPL_RCVD_DT,
+  STATUS_DATE,
+  POTENTIAL,
+  CSE_OPEN_DATE,
+  OFFICE_IDENTIFIER,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  EXPEDIDED_PAT_IND,
+  PA_MEDICAL_SERVICE,
+  IC_TRANS_SER_NO,
+  IC_TRANS_DATE,
+  PA_REF_CRE_TSTAMP,
+  PA_REFER_NO,
+  PA_REFER_TYPE,
+  CLOSURE_LETR_DATE,
+  INTERSTATE_CASE_ID,
+  ADC_OPEN_DATE,
+  ADC_CLOSE_DATE,
+  DUP_CASE_INDICATOR,
+  NOTE,
+  LAST_CASE_EVENT,
+  NO_JURISDICTION_CD,
+  ENROLLMENT_TYPE
+)
+values
+(
+  null,
+  @fullSrvWoMedIn,
+  @managementArea,
+  @managementRegion,
+  @fullServWMedIn,
+  @locateInd,
+  @closureReason,
+  @numb,
+  @infoRequestNo,
+  @stationId,
+  @applLastNm,
+  @applFirstNm,
+  @applMi,
+  @applSentDt,
+  @applRequestDt,
+  @applReturnDt,
+  @deniedRequestDt,
+  @deniedRequestCd,
+  @deniedRequestRsn,
+  @status,
+  @ksFipsCode,
+  @validApplRcvdDt,
+  @statusDate,
+  @potential,
+  @cseOpenDate,
+  @officeIdentifier,
+  @lastUpdatedTmst,
+  @lastUpdatedBy,
+  @createdTimestamp,
+  @createdBy,
+  @expedidedPatInd,
+  @paMedicalService,
+  @icTransSerNo,
+  @icTransDate,
+  @paRefCreTstamp,
+  @paReferNo,
+  @paReferType,
+  @closureLetrDate,
+  @interstateCaseId,
+  @adcOpenDate,
+  @adcCloseDate,
+  @dupCaseIndicator,
+  @note,
+  @dupCaseIndicator,
+  @noJurisdictionCd,
+  @enrollmentType
+)
+</value>
+   </data>
+   <data name="ReadInformationRequest">
+      <value>
+select top(1)
+  NUMB,
+  NONPARENT_QST_SENT,
+  PARENT_QST_SENT,
+  PAT_QST_SENT,
+  APPL_SENT_IND,
+  QST_TYPE_IND,
+  DT_RCV_BY_CSE_COMP,
+  DT_RCV_CSE_INCOMP,
+  DT_APPL_REQUESTED,
+  CALLER_LAST_NM,
+  CALLER_FIRST_NAME,
+  CALLER_MI,
+  INQUIRER_NM_SFX,
+  APPL_LAST_NM,
+  APPL_FIRST_NM,
+  APPL_MI,
+  APPL_NM_SFX,
+  APPL_STREET_1,
+  APPL_STREET_2,
+  APPL_CITY,
+  APPL_STATE,
+  APPLICANT_ZIP5,
+  APPL_ZIP4,
+  APPL_ZIP3,
+  APPL_PHONE,
+  DT_APPL_SENT,
+  TYPE,
+  SERVICE_CODE,
+  REASON_INCOMPLETE,
+  NOTE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  REASON_DENIED,
+  DATE_DENIED,
+  APPLICANT_AREA_CD,
+  APPL_PROC_IND,
+  FK_CKT_CASENUMB
+from
+  CKT_INFO_REQ
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  LOCAL_FIPS_STATE,
+  LOCAL_FIPS_COUNTY,
+  LOCAL_FIPS_LOCATIO,
+  OTHER_FIPS_STATE,
+  OTHER_FIPS_COUNTY,
+  OTHER_FIPS_LOCATIO,
+  TRANS_SERIAL_NBR,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  KS_CASE_ID,
+  INTERSTATE_CASE_ID,
+  ACTION_REASON_CODE,
+  ACTION_RESOLUTION,
+  ATTACHMENTS_IND,
+  CASE_DATA_IND,
+  AP_IDENTIFICATION,
+  AP_LOCATE_DATA_IND,
+  PARTICIPANT_DATA_I,
+  ORDER_DATA_IND,
+  COLLECTION_DATA_IN,
+  INFORMATION_IND,
+  SENT_DATE,
+  SENT_TIME,
+  DUE_DATE,
+  OVERDUE_IND,
+  DATE_RECEIVED,
+  TIME_RECEIVED,
+  ATTACHMNTS_DUE_DTE,
+  INTERSTATE_FORMS_P,
+  CASE_TYPE,
+  CASE_STATUS,
+  PAYMENT_MAILING_AD,
+  PAYMENT_ADDRESS_LI,
+  PAYMENT_CITY,
+  PAYMENT_STATE,
+  PAYMENT_ZIP_CODE_5,
+  PAYMENT_ZIP_CODE_4,
+  CONTACT_NAME_LAST,
+  CONTACT_NAME_FIRST,
+  CONTACT_NAME_MIDDL,
+  CONTACT_NAME_SUFFI,
+  CONTACT_ADDR_LINE1,
+  CONTACT_ADDR_LINE2,
+  CONTACT_CITY,
+  CONTACT_STATE,
+  CONTACT_ZIP_CODE_5,
+  CONTACT_ZIP_CODE_4,
+  CONTACT_PHONE_NUM,
+  ASSN_DEACT_DT,
+  ASSN_DEACT_IND,
+  LAST_DEFER_DT,
+  MEMO
+from
+  CKT_INTERST_CASE
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadPaReferral">
+      <value>
+select top(1)
+  NUMB,
+  RECEIVED_DATE,
+  ASSIGN_DEACT_IND,
+  ASSIGN_DEACT_DATE,
+  CASE_NUMBER,
+  TYPE,
+  MED_PYMNT_DUE_DT,
+  MED_AMT,
+  MED_FREQ,
+  MEDICAL_LAST_PYMT,
+  MED_LAST_PYMT_DT,
+  MED_ORDER_EFF_DT,
+  MED_ORDER_STATE,
+  MED_ORDER_PLACE,
+  MED_ARREARAGE,
+  MED_PAID_TO,
+  MED_PAYMENT_TYPE,
+  MED_INSURANCE_CO,
+  MED_POLICY_NBR,
+  MED_ORDER_NBR,
+  MED_ORDER_IND,
+  ASSIGNMENT_DATE,
+  CSE_REGION,
+  CSE_REF_REC_DT,
+  AR_RETAINED_IND,
+  PGM_CODE,
+  CASE_WORKER,
+  PAYMENT_MADE_TO,
+  ARREARAGE_AMT,
+  LAST_PAY_AMT,
+  PAYMENT_AMOUNT,
+  LAST_PAYMENT_DATE,
+  GOOD_CAUSE_CODE,
+  GOOD_CAUSE_DATE,
+  ORDER_EFF_DATE,
+  PAYMENT_DUE_DATE,
+  SUPPORT_ORDER_ID,
+  LAST_AP_CTC_DATE,
+  VOL_SUPPORT_IND,
+  AP_EMPLOYER_NAME,
+  FC_NEXT_JV_CT_DT,
+  FC_ORDER_EST_BY,
+  FC_JV_COURT_ORDER,
+  FC_JV_OFFEND_IND,
+  FC_CINC_IND,
+  FC_PLACEMENT_DATE,
+  FC_SRS_PAYEE,
+  FC_CARE_COST_FREQ,
+  FC_COST_OF_CARE,
+  FC_ADOPT_DISRUPT,
+  FC_PLACEMENT_TYPE,
+  FC_PREVIOUS_PA,
+  FC_INIT_CUSTODY_DT,
+  FC_RIGHTS_SEVERED,
+  FC_IV_E_CASE_NO,
+  FC_PLACEMENT_NAME,
+  FC_SRCE_OF_FUNDING,
+  FC_OTH_BEN_IND,
+  FC_ZEB_IND,
+  FC_VA_IND,
+  FC_SSI,
+  FC_SSA,
+  FC_WARDS_ACCOUNT,
+  FC_CTY_CH_RMVD_FRM,
+  FC_AP_NOTIFIED,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  KS_COUNTY,
+  NOTE,
+  AP_EMPLOYER_PHONE,
+  SUPPORT_ORDER_FREQ,
+  CS_ORDER_PLACE,
+  CS_ORDER_STATE,
+  CS_FREQ,
+  REFERRAL_FROM,
+  AP_PHONE_NUMBER,
+  AP_AREA_CODE,
+  CC_START_DATE,
+  AR_EMPLOYER_NAME,
+  CAS_NUMBER,
+  CSE_INVLVMNT_IND
+from
+  CKT_PA_REFERRAL
+where
+  (CREATED_TSTAMP = @createdTstamp) and
+  (NUMB = @numb) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="UpdateInformationRequest">
+      <value>
+update CKT_INFO_REQ
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  APPL_PROC_IND = @applProcInd
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

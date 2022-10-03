@@ -1,0 +1,60 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeGtdsDisplayGenTestDetls"
+           program-name="SWEGTDSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeGtdsDisplayGenTestDetls"
+           transaction="SR5S"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="ChildCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none">
+      <map from="ChildCsePersonsWorkSet" to="PersonName"/>
+      <map from="Case1" to="StartCase"/>
+      <map from="ChildCsePerson" to="StartCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN ECO_XFR_TO_DISPLAY_GENETIC_TEST"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected" to="ChildCsePersonsWorkSet"/>
+      <return-map from="Case1" to="Case1"/>
+   </on>
+   <map from="Case1" to="Case1"/>
+   <map from="ChildCsePerson" to="ChildCsePerson"/>
+   <map from="PatTestDetails.DetailChild" to="PatTestDetails.DetailChild"/>
+   <map from="PatTestDetails.GrpupExportDetailMother"
+        to="PatTestDetails.DetailMotherCsePerson"/>
+   <map from="PatTestDetails.DetailMotherPersonGeneticTest"
+        to="PatTestDetails.DetailMotherPersonGeneticTest"/>
+   <map from="PatTestDetails.DetailFatherCsePerson"
+        to="PatTestDetails.DetailFatherCsePerson"/>
+   <map from="PatTestDetails.DetailFatherPersonGeneticTest"
+        to="PatTestDetails.DetailFatherPersonGeneticTest"/>
+   <map from="PatTestDetails.DetailFatherGeneticTest"
+        to="PatTestDetails.DetailFatherGeneticTest"/>
+   <map from="PatTestDetails.DetailFatherLegalAction"
+        to="PatTestDetails.DetailFatherLegalAction"/>
+   <map from="PatTestDetails.Detail" to="PatTestDetails.Detail"/>
+   <map from="PatTestDetails.DetailMotherCsePersonsWorkSet"
+        to="PatTestDetails.DetailMotherCsePersonsWorkSet"/>
+   <map from="PatTestDetails.DetailFatherCsePersonsWorkSet"
+        to="PatTestDetails.DetailFatherCsePersonsWorkSet"/>
+   <map from="ListChildCsePersons" to="ListChildCsePersons"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="ChildCsePersonsWorkSet.FormattedName"
+        to="ChildCsePersonsWorkSet.FormattedName"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

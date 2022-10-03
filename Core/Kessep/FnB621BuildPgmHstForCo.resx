@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  EMANCIPATION_DT
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (TYPE = 'CH') and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EMANCIPATION_DT
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_LEGAL_ACTION T5 with(readuncommitted)
+  join
+  CKT_OBLIGATION T4 with(readuncommitted)
+  join
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_OB_TRN T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CSP_SUP_NUMBER) and
+    (T3.CPA_SUP_TYPE is not null)
+  on
+    (T4.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T4.OB_ID = T3.OBG_GENERATED_ID) and
+    (T4.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T4.CPA_TYPE = T3.CPA_TYPE)
+  on
+    (T5.LEGAL_ACTION_ID = T4.LGA_ID) and
+    (T5.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadProgramPersonProgram">
+      <value>
+select
+  PRG_GENERATED_ID,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_PERSON_PROGRAM with(readuncommitted)
+where
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DATE &lt; @effectiveDate)
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+</root>

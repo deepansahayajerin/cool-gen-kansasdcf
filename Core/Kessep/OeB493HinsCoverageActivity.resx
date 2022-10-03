@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPersonalHealthInsuranceHealthInsuranceCoverage">
+      <value>
+select
+  T1.HCV_ID,
+  T1.CSP_NUMBER,
+  T1.COV_VERIFIED_DATE,
+  T1.COVER_BEGIN_DATE,
+  T1.COVER_END_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T2.PAID_BY_CSEP_IND,
+  T2.GROUP_NUMBER,
+  T2.POLICY_NUMBER,
+  T2.COVERAGE_CODE_1,
+  T2.COVERAGE_CODE_2,
+  T2.COVERAGE_CODE_3,
+  T2.COVERAGE_CODE_4,
+  T2.COVERAGE_CODE_5,
+  T2.COVERAGE_CODE_6,
+  T2.COVERAGE_CODE_7,
+  T2.LAST_UPDATED_TMST,
+  T2.HIC_IDENTIFIER,
+  T3.CARRIER_CODE
+from
+  CKT_HEALTH_INS_CO T3 with(readuncommitted)
+  join
+  CKT_HINS_COVERAGE T2 with(readuncommitted)
+  join
+  CKT_PERSONAL_HINS T1 with(readuncommitted)
+  on
+    (
+      (T1.LAST_UPDATED_TMST &gt;= @lastUpdatedTmst) or
+      (T2.LAST_UPDATED_TMST &gt;= @lastUpdatedTmst)
+    ) and
+    (T2.IDENTIFIER = T1.HCV_ID)
+  on
+    (T3.IDENTIFIER = T2.HIC_IDENTIFIER) and
+    (T3.CARRIER_CODE &gt; '0000000')
+order by
+  T1.CSP_NUMBER
+</value>
+   </data>
+</root>

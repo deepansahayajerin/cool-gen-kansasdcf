@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDocumentField">
+      <value>
+select distinct top(1)
+  T1.ORDER_POSITION,
+  T1.FLD_NAME,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE
+from
+  CKT_DOCUMENT_FIELD T1
+  join
+  CKT_FIELD_VALUE T2
+  on
+    (@fldName = T1.FLD_NAME) and
+    (T1.DOC_EFFECTIVE_DTE = T2.DOC_EFFECTIVE_DTE) and
+    (T1.DOC_NAME = T2.DOC_NAME) and
+    (T1.FLD_NAME = T2.FLD_NAME)
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select top(1)
+  NAME,
+  DEPENDANCY,
+  SUBROUTINE_NAME,
+  SCREEN_NAME,
+  DESCRIPTION,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_FIELD
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="UpdateField">
+      <value>
+update CKT_FIELD
+set
+  DEPENDANCY = @dependancy,
+  SUBROUTINE_NAME = @subroutineName,
+  SCREEN_NAME = @screenName,
+  DESCRIPTION = @description,
+  CREATED_BY = @createdBy,
+  CREATED_TIMESTAMP = @createdTimestamp,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  NAME = @name
+</value>
+   </data>
+</root>

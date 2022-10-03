@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCsePersonAccountLegalAction">
+      <value>
+select distinct
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COLLECTION_DATE,
+  T1.COLLAMT_APPL_IND,
+  T6.CSP_NUMBER,
+  T6.CPA_TYPE,
+  T3.LEGAL_ACTION_ID,
+  T3.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_OBLIGATION T6
+  join
+  CKT_CR_DETAIL T1
+  join
+  CKT_COLLECTION T4
+  on
+    (T1.CRD_ID = T4.CRD_ID) and
+    (T1.CRV_IDENTIFIER = T4.CRV_ID) and
+    (T1.CST_IDENTIFIER = T4.CST_ID) and
+    (T1.CRT_IDENTIFIER = T4.CRT_TYPE) and
+    (T1.COLLAMT_APPL_IND = 'Y') and
+    (T4.CRT_NOTICE_REQ_IND = 'Y') and
+    (T4.CRT_NTC_ADJ_PRC_DT &lt;= @crtNtcAdjPrcDt) and
+    (T4.OTR_TYPE = 'DE')
+  on
+    (T6.DTY_GENERATED_ID = T4.OTY_ID) and
+    (T6.OB_ID = T4.OBG_ID) and
+    (T6.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T6.CPA_TYPE = T4.CPA_TYPE) and
+    (T6.CPA_TYPE = @cpaType)
+  on
+    T3.LEGAL_ACTION_ID = T6.LGA_ID
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID
+from
+  CKT_CR_EVENT
+where
+  (CREVENT_ID = @creventId) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="ReadCollection1">
+      <value>
+select distinct
+  T1.COLL_ID,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.CRT_NOTICE_REQ_IND,
+  T1.CRT_NOTICE_PROC_DT,
+  T1.CRT_NTC_ADJ_PRC_DT
+from
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_OBLIGATION T3
+  join
+  CKT_COLLECTION T1
+  on
+    (@crdId = T1.CRD_ID) and
+    (@crvId = T1.CRV_ID) and
+    (@cstId = T1.CST_ID) and
+    (@crtType = T1.CRT_TYPE) and
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (@cpaType = T3.CPA_TYPE) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T1.CRT_NOTICE_REQ_IND = 'Y') and
+    (T1.CRT_NTC_ADJ_PRC_DT &lt;= @crtNtcAdjPrcDt)
+  on
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T4.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select
+  COLL_ID,
+  COLL_DT,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OB_TRN_AMT,
+  CRT_NOTICE_REQ_IND,
+  CRT_NOTICE_PROC_DT,
+  CRT_NTC_ADJ_PRC_DT
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (CRT_NOTICE_REQ_IND = 'Y') and
+  (ADJ_IND = 'Y') and
+  (CRT_NTC_ADJ_PRC_DT &lt;= @crtNtcAdjPrcDt)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  STANDARD_NO = @standardNo
+order by
+  LEGAL_ACTION_ID
+</value>
+   </data>
+   <data name="UpdateCollection1">
+      <value>
+update CKT_COLLECTION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  CRT_NOTICE_PROC_DT = @crtNoticeProcDt,
+  CRT_NTC_ADJ_PRC_DT = @crtNtcAdjPrcDt
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+   <data name="UpdateCollection2">
+      <value>
+update CKT_COLLECTION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  CRT_NOTICE_PROC_DT = @crtNoticeProcDt,
+  CRT_NTC_ADJ_PRC_DT = @crtNtcAdjPrcDt
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+</root>

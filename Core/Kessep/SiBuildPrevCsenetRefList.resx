@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateCaseAssignmentInterstateCase1">
+      <value>
+select
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.ICS_DATE,
+  T1.ICS_NO,
+  T2.LOCAL_FIPS_STATE,
+  T2.LOCAL_FIPS_COUNTY,
+  T2.LOCAL_FIPS_LOCATIO,
+  T2.OTHER_FIPS_STATE,
+  T2.OTHER_FIPS_COUNTY,
+  T2.OTHER_FIPS_LOCATIO,
+  T2.ACTION_CODE,
+  T2.FUNCTIONAL_TYPE_CO,
+  T2.KS_CASE_ID,
+  T2.INTERSTATE_CASE_ID,
+  T2.ACTION_REASON_CODE,
+  T2.ACTION_RESOLUTION,
+  T2.ATTACHMENTS_IND,
+  T2.CASE_DATA_IND,
+  T2.AP_IDENTIFICATION,
+  T2.AP_LOCATE_DATA_IND,
+  T2.PARTICIPANT_DATA_I,
+  T2.ORDER_DATA_IND,
+  T2.COLLECTION_DATA_IN,
+  T2.INFORMATION_IND,
+  T2.SENT_DATE,
+  T2.SENT_TIME,
+  T2.DUE_DATE,
+  T2.OVERDUE_IND,
+  T2.DATE_RECEIVED,
+  T2.TIME_RECEIVED,
+  T2.ATTACHMNTS_DUE_DTE,
+  T2.INTERSTATE_FORMS_P,
+  T2.CASE_TYPE,
+  T2.CASE_STATUS,
+  T2.PAYMENT_MAILING_AD,
+  T2.PAYMENT_ADDRESS_LI,
+  T2.PAYMENT_CITY,
+  T2.PAYMENT_STATE,
+  T2.PAYMENT_ZIP_CODE_5,
+  T2.PAYMENT_ZIP_CODE_4,
+  T2.CONTACT_NAME_LAST,
+  T2.CONTACT_NAME_FIRST,
+  T2.CONTACT_NAME_MIDDL,
+  T2.CONTACT_NAME_SUFFI,
+  T2.CONTACT_ADDR_LINE1,
+  T2.CONTACT_ADDR_LINE2,
+  T2.CONTACT_CITY,
+  T2.CONTACT_STATE,
+  T2.CONTACT_ZIP_CODE_5,
+  T2.CONTACT_ZIP_CODE_4,
+  T2.CONTACT_PHONE_NUM,
+  T2.ASSN_DEACT_DT,
+  T2.ASSN_DEACT_IND,
+  T2.LAST_DEFER_DT,
+  T2.MEMO
+from
+  CKT_INTERST_CASE T2
+  join
+  CKT_ASSGN_INT_CASE T1
+  on
+    (@ospDate = T1.OSP_DATE) and
+    (@ospCode = T1.OSP_CODE) and
+    (@offId = T1.OFF_ID) and
+    (@spdId = T1.SPD_ID) and
+    (T2.TRANS_SERIAL_NBR = T1.ICS_NO) and
+    (T2.TRANSACTION_DATE = T1.ICS_DATE) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.ASSN_DEACT_IND = ' ') and
+    (T2.TRANS_SERIAL_NBR &lt; @transSerialNbr) and
+    (T2.INTERSTATE_CASE_ID like cast(@interstateCaseId as char(15))) and
+    (
+      (cast(@otherFipsState as smallint) = 0) or
+      (
+        (T2.OTHER_FIPS_STATE = @otherFipsState) and
+        (cast(@otherFipsState as smallint) &gt; 0)
+      )
+    )
+order by
+  T1.ICS_NO
+</value>
+   </data>
+   <data name="ReadInterstateCaseAssignmentInterstateCase2">
+      <value>
+select
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.ICS_DATE,
+  T1.ICS_NO,
+  T2.LOCAL_FIPS_STATE,
+  T2.LOCAL_FIPS_COUNTY,
+  T2.LOCAL_FIPS_LOCATIO,
+  T2.OTHER_FIPS_STATE,
+  T2.OTHER_FIPS_COUNTY,
+  T2.OTHER_FIPS_LOCATIO,
+  T2.ACTION_CODE,
+  T2.FUNCTIONAL_TYPE_CO,
+  T2.KS_CASE_ID,
+  T2.INTERSTATE_CASE_ID,
+  T2.ACTION_REASON_CODE,
+  T2.ACTION_RESOLUTION,
+  T2.ATTACHMENTS_IND,
+  T2.CASE_DATA_IND,
+  T2.AP_IDENTIFICATION,
+  T2.AP_LOCATE_DATA_IND,
+  T2.PARTICIPANT_DATA_I,
+  T2.ORDER_DATA_IND,
+  T2.COLLECTION_DATA_IN,
+  T2.INFORMATION_IND,
+  T2.SENT_DATE,
+  T2.SENT_TIME,
+  T2.DUE_DATE,
+  T2.OVERDUE_IND,
+  T2.DATE_RECEIVED,
+  T2.TIME_RECEIVED,
+  T2.ATTACHMNTS_DUE_DTE,
+  T2.INTERSTATE_FORMS_P,
+  T2.CASE_TYPE,
+  T2.CASE_STATUS,
+  T2.PAYMENT_MAILING_AD,
+  T2.PAYMENT_ADDRESS_LI,
+  T2.PAYMENT_CITY,
+  T2.PAYMENT_STATE,
+  T2.PAYMENT_ZIP_CODE_5,
+  T2.PAYMENT_ZIP_CODE_4,
+  T2.CONTACT_NAME_LAST,
+  T2.CONTACT_NAME_FIRST,
+  T2.CONTACT_NAME_MIDDL,
+  T2.CONTACT_NAME_SUFFI,
+  T2.CONTACT_ADDR_LINE1,
+  T2.CONTACT_ADDR_LINE2,
+  T2.CONTACT_CITY,
+  T2.CONTACT_STATE,
+  T2.CONTACT_ZIP_CODE_5,
+  T2.CONTACT_ZIP_CODE_4,
+  T2.CONTACT_PHONE_NUM,
+  T2.ASSN_DEACT_DT,
+  T2.ASSN_DEACT_IND,
+  T2.LAST_DEFER_DT,
+  T2.MEMO
+from
+  CKT_INTERST_CASE T2
+  join
+  CKT_ASSGN_INT_CASE T1
+  on
+    (@ospDate = T1.OSP_DATE) and
+    (@ospCode = T1.OSP_CODE) and
+    (@offId = T1.OFF_ID) and
+    (@spdId = T1.SPD_ID) and
+    (T2.TRANS_SERIAL_NBR = T1.ICS_NO) and
+    (T2.TRANSACTION_DATE = T1.ICS_DATE) and
+    (
+      T2.ACTION_CODE in ('U', 'A', 'M',
+        'C')
+    ) and
+    (T2.ASSN_DEACT_IND = ' ') and
+    (T2.TRANS_SERIAL_NBR &lt; @transSerialNbr) and
+    (T1.DISCONTINUE_DATE = @discontinueDate)
+order by
+  T1.ICS_NO
+</value>
+   </data>
+   <data name="ReadInterstateCaseAssignmentInterstateCase3">
+      <value>
+select
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.ICS_DATE,
+  T1.ICS_NO,
+  T2.LOCAL_FIPS_STATE,
+  T2.LOCAL_FIPS_COUNTY,
+  T2.LOCAL_FIPS_LOCATIO,
+  T2.OTHER_FIPS_STATE,
+  T2.OTHER_FIPS_COUNTY,
+  T2.OTHER_FIPS_LOCATIO,
+  T2.ACTION_CODE,
+  T2.FUNCTIONAL_TYPE_CO,
+  T2.KS_CASE_ID,
+  T2.INTERSTATE_CASE_ID,
+  T2.ACTION_REASON_CODE,
+  T2.ACTION_RESOLUTION,
+  T2.ATTACHMENTS_IND,
+  T2.CASE_DATA_IND,
+  T2.AP_IDENTIFICATION,
+  T2.AP_LOCATE_DATA_IND,
+  T2.PARTICIPANT_DATA_I,
+  T2.ORDER_DATA_IND,
+  T2.COLLECTION_DATA_IN,
+  T2.INFORMATION_IND,
+  T2.SENT_DATE,
+  T2.SENT_TIME,
+  T2.DUE_DATE,
+  T2.OVERDUE_IND,
+  T2.DATE_RECEIVED,
+  T2.TIME_RECEIVED,
+  T2.ATTACHMNTS_DUE_DTE,
+  T2.INTERSTATE_FORMS_P,
+  T2.CASE_TYPE,
+  T2.CASE_STATUS,
+  T2.PAYMENT_MAILING_AD,
+  T2.PAYMENT_ADDRESS_LI,
+  T2.PAYMENT_CITY,
+  T2.PAYMENT_STATE,
+  T2.PAYMENT_ZIP_CODE_5,
+  T2.PAYMENT_ZIP_CODE_4,
+  T2.CONTACT_NAME_LAST,
+  T2.CONTACT_NAME_FIRST,
+  T2.CONTACT_NAME_MIDDL,
+  T2.CONTACT_NAME_SUFFI,
+  T2.CONTACT_ADDR_LINE1,
+  T2.CONTACT_ADDR_LINE2,
+  T2.CONTACT_CITY,
+  T2.CONTACT_STATE,
+  T2.CONTACT_ZIP_CODE_5,
+  T2.CONTACT_ZIP_CODE_4,
+  T2.CONTACT_PHONE_NUM,
+  T2.ASSN_DEACT_DT,
+  T2.ASSN_DEACT_IND,
+  T2.LAST_DEFER_DT,
+  T2.MEMO
+from
+  CKT_INTERST_CASE T2
+  join
+  CKT_ASSGN_INT_CASE T1
+  on
+    (@ospDate = T1.OSP_DATE) and
+    (@ospCode = T1.OSP_CODE) and
+    (@offId = T1.OFF_ID) and
+    (@spdId = T1.SPD_ID) and
+    (T2.TRANS_SERIAL_NBR = T1.ICS_NO) and
+    (T2.TRANSACTION_DATE = T1.ICS_DATE) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.ASSN_DEACT_IND = ' ') and
+    (T2.TRANS_SERIAL_NBR &lt; @transSerialNbr)
+order by
+  T1.ICS_NO
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (@offGeneratedId = OFF_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+</root>

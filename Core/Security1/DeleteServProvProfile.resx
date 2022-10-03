@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteServiceProviderProfile">
+      <value>
+delete from CKT_SERV_PROV_PRO
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (PRO_NAME = @proName) and
+  (SPD_GEN_ID = @spdGenId)
+</value>
+   </data>
+   <data name="ReadServiceProviderProfile">
+      <value>
+select top(1)
+  T1.CREATED_TIMESTAMP,
+  T1.PRO_NAME,
+  T1.SPD_GEN_ID
+from
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_SERV_PROV_PRO T1
+  on
+    (T1.CREATED_TIMESTAMP = @createdTimestamp) and
+    (T1.PRO_NAME = @proName) and
+    (T3.SERVICE_PRVDER_ID = T1.SPD_GEN_ID) and
+    (T3.USER_ID = @userId)
+</value>
+   </data>
+</root>

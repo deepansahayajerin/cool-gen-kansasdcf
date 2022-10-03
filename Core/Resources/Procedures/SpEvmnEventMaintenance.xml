@@ -1,0 +1,54 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpEvmnEventMaintenance"
+           program-name="SWEEVMNP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpEvmnEventMaintenance"
+           transaction="SRP3"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_EVENT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEVLS"
+       to="SpEvlsListEvents"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="PassEvent"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpInfmInfrastructureMgmtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Pass" to="Code"/>
+      <return-map from="DlgflwSelected" to="PassCodeValue"/>
+      <return-map from="Code.CodeName" to="PassCode.CodeName"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Event1" to="Event1"/>
+   <map from="Name" to="Name"/>
+   <map from="Type1" to="Type1"/>
+   <map from="BusObj" to="BusObj"/>
+   <map from="HiddenCheck" to="HiddenCheck"/>
+   <map from="Hidden.MiscNum2V2" to="Hidden.MiscNum2V2"/>
+   <map from="Hidden.MiscNum1V2" to="Hidden.MiscNum1V2"/>
+   <map from="Hidden.MiscNum2" to="Hidden.MiscNum2"/>
+   <map from="Hidden.MiscNum1" to="Hidden.MiscNum1"/>
+   <map from="Hidden.MiscText2" to="Hidden.MiscText2"/>
+   <map from="Hidden.MiscText1" to="Hidden.MiscText1"/>
+   <map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+   <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+   <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+   <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+   <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+   <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+   <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+</procedure>

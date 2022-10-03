@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonObligationDebtCsePerson">
+      <value>
+select
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OB_ID,
+  T2.DTY_GENERATED_ID,
+  T2.LGA_ID,
+  T3.OB_TRN_ID,
+  T3.OB_TRN_TYP,
+  T3.LAST_UPDATED_BY,
+  T3.LAST_UPDATED_TMST,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE,
+  T3.LAP_ID
+from
+  CKT_OBLIGATION T2
+  join
+  CKT_OB_TRN T3
+  on
+    (T2.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T2.OB_ID = T3.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.CPA_TYPE = T3.CPA_TYPE) and
+    (T3.CPA_SUP_TYPE is not null) and
+    (T3.CSP_SUP_NUMBER is not null) and
+    (T2.DTY_GENERATED_ID in (2, 17))
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionPerson1">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (LA_PERSON_ID = @laPersonId)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson2">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson3">
+      <value>
+select top(1)
+  LA_PERSON_ID
+from
+  CKT_LEGAL_ACT_PERS
+where
+  LA_PERSON_ID = @laPersonId
+</value>
+   </data>
+   <data name="UpdateDebt1">
+      <value>
+update CKT_OB_TRN
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAP_ID = @lapId
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OB_TRN_ID = @obTrnId) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+   <data name="UpdateDebt2#1">
+      <value>
+update CKT_OB_TRN
+set
+  LAP_ID = null
+where
+  (OBG_GENERATED_ID = @obgGeneratedId1) and
+  (CSP_NUMBER = @cspNumber1) and
+  (CPA_TYPE = @cpaType1) and
+  (OB_TRN_ID = @obTrnId) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OTY_TYPE = @otyType1)
+</value>
+   </data>
+   <data name="UpdateDebt2#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_OB_TRN T1
+where
+  (T1.CPA_SUP_TYPE = @cpaSupType) and
+  (T1.CSP_SUP_NUMBER = @cspSupNumber)
+</value>
+   </data>
+   <data name="UpdateDebt2#3">
+      <value>
+delete from CKT_CSE_PERSON_ACC
+where
+  (TYPE = @cpaSupType) and
+  (CSP_NUMBER = @cspSupNumber) and
+  (TYPE = @cpaSupType) and
+  (CSP_NUMBER = @cspSupNumber)
+</value>
+   </data>
+   <data name="UpdateDebt2#4">
+      <value>
+select top(1)
+  1
+from
+  CKT_OB_TRN T1
+where
+  (T1.CPA_SUP_TYPE = @cpaSupType) and
+  (T1.CSP_SUP_NUMBER = @cspSupNumber)
+</value>
+   </data>
+   <data name="UpdateDebt2#5">
+      <value>
+delete from CKT_CSE_PERSON_ACC
+where
+  (TYPE = @cpaSupType) and
+  (CSP_NUMBER = @cspSupNumber) and
+  (TYPE = @cpaSupType) and
+  (CSP_NUMBER = @cspSupNumber)
+</value>
+   </data>
+   <data name="UpdateDebt2#6">
+      <value>
+select top(1)
+  1
+from
+  CKT_OB_TRN T1
+where
+  (T1.OTY_TYPE = @otyType2) and
+  (T1.OBG_GENERATED_ID = @obgGeneratedId2) and
+  (T1.CSP_NUMBER = @cspNumber2) and
+  (T1.CPA_TYPE = @cpaType2)
+</value>
+   </data>
+   <data name="UpdateDebt2#7">
+      <value>
+delete from CKT_OBLIGATION
+where
+  (DTY_GENERATED_ID = @otyType2) and
+  (OB_ID = @obgGeneratedId2) and
+  (CSP_NUMBER = @cspNumber2) and
+  (CPA_TYPE = @cpaType2)
+</value>
+   </data>
+   <data name="UpdateDebt2#8">
+      <value>
+select top(1)
+  1
+from
+  CKT_OBLIGATION T1
+where
+  (T1.DTY_GENERATED_ID = @otyType2) and
+  (T1.OB_ID = @obgGeneratedId2) and
+  (T1.CSP_NUMBER = @cspNumber2) and
+  (T1.CPA_TYPE = @cpaType2)
+</value>
+   </data>
+   <data name="UpdateDebt2#9">
+      <value>
+delete from CKT_CSE_PERSON_ACC
+where
+  (TYPE = @cpaType2) and
+  (CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+</root>

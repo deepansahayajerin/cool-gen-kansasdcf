@@ -1,0 +1,132 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCslnListNarrative"
+           program-name="SWECSLNP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCslnListNarrative"
+           transaction="SRLN"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_EVLS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEVLS"
+       to="SpEvlsListEvents"
+       send-command="DISPLAY">
+      <map from="ToEvls" to="PassFilterEventType"/>
+      <return-map from="Selected" to="FromEvls"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NATE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSLN"
+       to="SpNateMaintNarrativeDetail"
+       send-command="DISPLAY">
+      <map from="Selected" to="HeaderInfrastructure"/>
+      <map from="HeaderCsePersonsWorkSet" to="HeaderCsePersonsWorkSet"/>
+      <return-map from="HeaderInfrastructure.Function" to="HeaderInfrastructure.Function"/>
+      <return-map from="HeaderInfrastructure.SystemGeneratedIdentifier"
+                  to="HeaderInfrastructure.SystemGeneratedIdentifier"/>
+      <return-map from="HeaderInfrastructure.ProcessStatus"
+                  to="HeaderInfrastructure.ProcessStatus"/>
+      <return-map from="HeaderInfrastructure.EventDetailName"
+                  to="HeaderInfrastructure.EventDetailName"/>
+      <return-map from="HeaderInfrastructure.ReasonCode"
+                  to="HeaderInfrastructure.ReasonCode"/>
+      <return-map from="HeaderInfrastructure.CaseNumber"
+                  to="HeaderInfrastructure.CaseNumber"/>
+      <return-map from="HeaderInfrastructure.CsePersonNumber"
+                  to="HeaderInfrastructure.CsePersonNumber"/>
+      <return-map from="HeaderInfrastructure.EventType"
+                  to="HeaderInfrastructure.EventType"/>
+      <return-map from="HeaderInfrastructure.CreatedTimestamp"
+                  to="HeaderInfrastructure.CreatedTimestamp"/>
+   </on>
+   <on exit-state="ECO_XFER_FROM_CSLN_TO_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RHST"
+       to="SpHistHistory"
+       send-command="DISPLAY">
+      <map from="HeaderStart" to="HeaderStartDate"/>
+      <map from="Selected" to="HeaderInfrastructure"/>
+      <map from="Hidden" to="HiddenNextTranInfo"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command="CLEAR"/>
+   <map from="ExtraPage" to="ExtraPage"/>
+   <map from="HistFilterCase" to="HistFilterCase"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Prev" to="Prev"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="CurrentPage" to="CurrentPage"/>
+   <map from="HistFilterLegalAction" to="HistFilterLegalAction"/>
+   <map from="ZdelExportHistFilter" to="HistFilterCsePerson"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Ap" to="Ap"/>
+   <map from="AbendData" to="AbendData"/>
+   <map from="Ar" to="Ar"/>
+   <map from="HeaderStart" to="HeaderStart"/>
+   <map from="CallingProcedureNameAs" to="CallingProcedureNameAs"/>
+   <map from="FromEvls" to="FromEvls"/>
+   <map from="ErrOnAdabasUnavailable" to="ErrOnAdabasUnavailable"/>
+   <map from="HeaderLast" to="HeaderLast"/>
+   <map from="ShowAll" to="ShowAll"/>
+   <map from="HeaderCase" to="HeaderCase"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Infrastructure" to="Group.Infrastructure"/>
+   <map from="Group.DateWorkArea" to="Group.DateWorkArea"/>
+   <map from="Group.Display" to="Group.Display"/>
+   <map from="Group.NarInd" to="Group.NarInd"/>
+   <map from="Group.NarrativeDetail" to="Group.NarrativeDetail"/>
+   <map from="Scroll" to="Scroll"/>
+   <map from="HiddenKeys.GkeyInfrastructure" to="HiddenKeys.Gkey"/>
+   <map from="HiddenKeys.GkeyNarrativeDetail" to="HiddenKeys.ImpoertGKey"/>
+   <map from="HeaderInfrastructure.EventDetailName"
+        to="HeaderInfrastructure.EventDetailName"/>
+   <map from="HeaderInfrastructure.CaseNumber"
+        to="HeaderInfrastructure.CaseNumber"/>
+   <map from="Selected.CaseNumber" to="Selected.CaseNumber"/>
+   <map from="Selected.SystemGeneratedIdentifier"
+        to="Selected.SystemGeneratedIdentifier"/>
+   <map from="Selected.DenormNumeric12" to="Selected.DenormNumeric12"/>
+   <map from="HeaderCsePersonsWorkSet.Number"
+        to="HeaderCsePersonsWorkSet.Number"/>
+   <map from="HeaderCsePersonsWorkSet.FirstName"
+        to="HeaderCsePersonsWorkSet.FirstName"/>
+   <map from="HeaderCsePersonsWorkSet.MiddleInitial"
+        to="HeaderCsePersonsWorkSet.MiddleInitial"/>
+   <map from="HeaderCsePersonsWorkSet.LastName"
+        to="HeaderCsePersonsWorkSet.LastName"/>
+   <map from="Selected.CreatedTimestamp" to="Selected.CreatedTimestamp"/>
+   <map from="HeaderServiceProvider.SystemGeneratedId"
+        to="HeaderServiceProvider.SystemGeneratedId"/>
+   <map from="HeaderServiceProvider.LastName"
+        to="HeaderServiceProvider.LastName"/>
+   <map from="HeaderServiceProvider.FirstName"
+        to="HeaderServiceProvider.FirstName"/>
+   <map from="HeaderServiceProvider.MiddleInitial"
+        to="HeaderServiceProvider.MiddleInitial"/>
+   <map from="Selected.ReasonCode" to="Selected.ReasonCode"/>
+   <map from="Selected.InitiatingStateCode" to="Selected.InitiatingStateCode"/>
+   <map from="Selected.UserId" to="Selected.UserId"/>
+   <map from="Selected.DenormText12" to="Selected.DenormText12"/>
+   <map from="Selected.DenormDate" to="Selected.DenormDate"/>
+   <map from="Selected.DenormTimestamp" to="Selected.DenormTimestamp"/>
+   <map from="Selected.LastUpdatedBy" to="Selected.LastUpdatedBy"/>
+   <map from="Selected.LastUpdatedTimestamp" to="Selected.LastUpdatedTimestamp"/>
+   <map from="Selected.BusinessObjectCd" to="Selected.BusinessObjectCd"/>
+   <map from="HeaderInfrastructure.Function" to="HeaderInfrastructure.Function"/>
+   <map from="HeaderInfrastructure.SystemGeneratedIdentifier"
+        to="HeaderInfrastructure.SystemGeneratedIdentifier"/>
+   <map from="HeaderInfrastructure.SituationNumber"
+        to="HeaderInfrastructure.SituationNumber"/>
+   <map from="HeaderInfrastructure.ProcessStatus"
+        to="HeaderInfrastructure.ProcessStatus"/>
+   <map from="HeaderInfrastructure.EventId" to="HeaderInfrastructure.EventId"/>
+   <map from="HeaderInfrastructure.EventType"
+        to="HeaderInfrastructure.EventType"/>
+   <map from="HeaderInfrastructure.CreatedTimestamp"
+        to="HeaderInfrastructure.CreatedTimestamp"/>
+   <map from="ExternalEvent.EventId" to="ExternalEvent.EventId"/>
+</procedure>

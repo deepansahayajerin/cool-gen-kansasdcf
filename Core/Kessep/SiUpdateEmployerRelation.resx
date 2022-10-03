@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateEmployerHistory">
+      <value>
+insert into CKT_EMPLOYER_HIST
+(
+  ACTION_TAKEN,
+  ACTION_DATE,
+  NOTE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  EMP_ID
+)
+values
+(
+  @actionTaken,
+  @actionDate,
+  @note,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @empId
+)
+</value>
+   </data>
+   <data name="CreateEmployerHistoryDetail">
+      <value>
+insert into CKT_EMP_HIST_DTL
+(
+  EMP_ID,
+  EHX_CREATED_TMST,
+  LINE_NUMBER,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CHANGE
+)
+values
+(
+  @empId,
+  @ehxCreatedTmst,
+  @lineNumber,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @change
+)
+</value>
+   </data>
+   <data name="ReadEmployer1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_EMPLOYER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadEmployer2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_EMPLOYER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadEmployerRelation1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  EMP_HQ_ID,
+  EMP_LOC_ID,
+  NOTE,
+  TYPE
+from
+  CKT_EMPL_RLN
+where
+  (IDENTIFIER = @identifier) and
+  (@empHqId = EMP_HQ_ID) and
+  (@empLocId = EMP_LOC_ID)
+</value>
+   </data>
+   <data name="ReadEmployerRelation2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  EMP_HQ_ID,
+  EMP_LOC_ID,
+  NOTE,
+  TYPE
+from
+  CKT_EMPL_RLN
+where
+  (IDENTIFIER = @identifier) and
+  (@empLocId = EMP_LOC_ID) and
+  (@empHqId = EMP_HQ_ID)
+</value>
+   </data>
+   <data name="UpdateEmployerRelation">
+      <value>
+update CKT_EMPL_RLN
+set
+  EFFECTIVE_DATE = @effectiveDate,
+  END_DATE = @endDate,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  NOTE = @note
+where
+  (IDENTIFIER = @identifier) and
+  (EMP_HQ_ID = @empHqId) and
+  (EMP_LOC_ID = @empLocId) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

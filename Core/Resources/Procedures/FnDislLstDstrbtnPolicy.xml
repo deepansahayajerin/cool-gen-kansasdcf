@@ -1,0 +1,52 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDislLstDstrbtnPolicy"
+           program-name="SWEDISLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDislLstDstrbtnPolicy"
+           transaction="SR7C"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDdamDebtDstrbtnSysadmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_MTN_DISTRIB_POLICY"
+       action="transfer"
+       to="FnDismMtnDistributionPolicy"
+       send-command-type="current">
+      <map from="SelectedCollectionType.SequentialIdentifier"
+           to="CollectionType.SequentialIdentifier"/>
+      <map from="SelectedCollectionType.Code" to="CollectionType.Code"/>
+      <map from="SelectedDistributionPolicy.SystemGeneratedIdentifier"
+           to="DistributionPolicy.SystemGeneratedIdentifier"/>
+      <map from="SelectedDistributionPolicy.Name" to="DistributionPolicy.Name"/>
+      <map from="SelectedDistributionPolicy.EffectiveDt"
+           to="DistributionPolicy.EffectiveDt"/>
+      <map from="SelectedDistributionPolicy.DiscontinueDt"
+           to="DistributionPolicy.DiscontinueDt"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_MTN_DIST_PLCY_RUL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnDisrLstMtnDistPlcyRule"
+       send-command="FIRSTIME">
+      <map from="SelectedDistributionPolicy" to="SearchDistributionPolicy"/>
+      <map from="Search" to="SearchCollectionType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_COLLECTION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnClctLstCollectionTypes"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="Search"/>
+   </on>
+   <map from="Export1.DistributionPolicy" to="Import1.DistributionPolicy"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="Search" to="Search"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.CollectionType" to="Import1.CollectionType"/>
+   <map from="CollectionTypePrompt" to="CollectionTypePrompt"/>
+   <map from="Standard" to="Standard"/>
+</procedure>

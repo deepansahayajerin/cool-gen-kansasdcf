@@ -1,0 +1,35 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDmtmMtnDisbMethodType"
+           program-name="SWEDMTMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDmtmMtnDisbMethodType"
+           transaction="SR51"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_DISB_METHOD_TYPES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDMTL"
+       to="FnDmtlLstDisbMethodTypes"
+       send-command="DISPLAY">
+      <return-map from="Flag" to="Flag"/>
+      <return-map from="FlowSelection" to="FlowSelected"/>
+   </on>
+   <map from="HiddenId" to="HiddenId"/>
+   <map from="TypeStatusAudit" to="TypeStatusAudit"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptTextWorkArea" to="PromptTextWorkArea"/>
+   <map from="PaymentMethodType.Code" to="PaymentMethodType.Code"/>
+   <map from="PaymentMethodType.Name" to="PaymentMethodType.Name"/>
+   <map from="PaymentMethodType.EffectiveDate"
+        to="PaymentMethodType.EffectiveDate"/>
+   <map from="PaymentMethodType.DiscontinueDate"
+        to="PaymentMethodType.DiscontinueDate"/>
+   <map from="PaymentMethodType.Description" to="PaymentMethodType.Description"/>
+   <map from="PaymentMethodType.SystemGeneratedIdentifier"
+        to="PaymentMethodType.SystemGeneratedIdentifier"/>
+</procedure>

@@ -1,0 +1,55 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDismMtnDistributionPolicy"
+           program-name="SWEDISMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDismMtnDistributionPolicy"
+           transaction="SR7B"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDdamDebtDstrbtnSysadmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_DIST_POLICY"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="PRMPTRET"
+       to="FnDislLstDstrbtnPolicy"
+       send-command="DISPLAY">
+      <map from="CollectionType" to="Search"/>
+      <return-map from="SelectedCollectionType.SequentialIdentifier"
+                  to="CollectionType.SequentialIdentifier"/>
+      <return-map from="SelectedCollectionType.Code" to="CollectionType.Code"/>
+      <return-map from="SelectedDistributionPolicy.SystemGeneratedIdentifier"
+                  to="DistributionPolicy.SystemGeneratedIdentifier"/>
+      <return-map from="SelectedDistributionPolicy.Name" to="DistributionPolicy.Name"/>
+      <return-map from="SelectedDistributionPolicy.EffectiveDt"
+                  to="DistributionPolicy.EffectiveDt"/>
+      <return-map from="SelectedDistributionPolicy.DiscontinueDt"
+                  to="DistributionPolicy.DiscontinueDt"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_MTN_DIST_PLCY_RUL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnDisrLstMtnDistPlcyRule"
+       send-command="FIRSTIME">
+      <map from="DistributionPolicy" to="SearchDistributionPolicy"/>
+      <map from="CollectionType" to="SearchCollectionType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_COLLECTION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="FnClctLstCollectionTypes"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="CollectionType"/>
+   </on>
+   <map from="DistributionPolicy" to="DistributionPolicy"/>
+   <map from="HiddenIdDistributionPolicy" to="HiddenIdDistributionPolicy"/>
+   <map from="Last" to="Last"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CollectionType" to="CollectionType"/>
+   <map from="HiddenIdCollectionType" to="HiddenIdCollectionType"/>
+   <map from="CollectionTypePrompt" to="CollectionTypePrompt"/>
+</procedure>

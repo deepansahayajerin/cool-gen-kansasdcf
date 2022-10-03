@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCashReceiptAudit">
+      <value>
+insert into CKT_CSH_RCPT_AUDIT
+(
+  RECEIPT_AMOUNT,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  PRIOR_TRANSN_AMT,
+  PRIOR_ADJ_AMT,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER
+)
+values
+(
+  @receiptAmount,
+  @lastUpdatedTmst,
+  @lastUpdatedBy,
+  @priorTransnAmt,
+  @priorAdjAmt,
+  @crvIdentifier,
+  @cstIdentifier,
+  @crtIdentifier
+)
+</value>
+   </data>
+   <data name="CreateCashReceiptStatusHistory">
+      <value>
+insert into CKT_CR_STATUS_HIST
+(
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DISCONTINUE_DATE,
+  REASON_TEXT,
+  CDR_IDENTIFIER
+)
+values
+(
+  @crtIdentifier,
+  @cstIdentifier,
+  @crvIdentifier,
+  @crsIdentifier,
+  @createdTimestamp,
+  @createdBy,
+  @discontinueDate,
+  @reasonText,
+  null
+)
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn">
+      <value>
+select top(1)
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRT_I_IDENTIFIER,
+  T1.CST_I_IDENTIFIER,
+  T1.CRV_I_IDENTIFIER,
+  T1.CRR_IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T2.CODE
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (
+      (
+        (@crtIIdentifier = T1.CRT_I_IDENTIFIER) and
+        (@cstIIdentifier = T1.CST_I_IDENTIFIER) and
+        (@crvIIdentifier = T1.CRV_I_IDENTIFIER)
+      ) or
+      (
+        (@crtIIdentifier = T1.CRT_IDENTIFIER) and
+        (@cstIIdentifier = T1.CST_IDENTIFIER) and
+        (@crvIIdentifier = T1.CRV_IDENTIFIER)
+      )
+    ) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptType">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.RECEIPT_AMOUNT,
+  T1.CASH_RECEIPT_ID,
+  T1.RECEIPT_DATE,
+  T1.CHECK_TYPE,
+  T1.CHECK_NUMBER,
+  T1.CHECK_DATE,
+  T1.RECEIVED_DATE,
+  T1.DEPOSIT_RLSE_DT,
+  T1.PAYOR_ORGANIZATION,
+  T1.PAYOR_FIRST_NAME,
+  T1.PAYOR_MIDDLE_NAME,
+  T1.PAYOR_LAST_NAME,
+  T1.BAL_TMST,
+  T1.TOTAL_CASH_TRANSAC,
+  T1.TOT_CASH_TRAN_CNT,
+  T1.TOT_DETAIL_ADJ_CNT,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.CASH_BAL_AMT,
+  T1.CASH_BAL_RSN,
+  T1.CASH_DUE,
+  T1.TOT_CASH_FEE_AMT,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.NOTE,
+  T2.CODE
+from
+  CKT_CR_TYPE T2
+  join
+  CKT_CASH_RECEIPT T1
+  on
+    (T1.CASH_RECEIPT_ID = @cashReceiptId) and
+    (T2.CRTYPE_ID = T1.CRT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus">
+      <value>
+select top(1)
+  CR_STATUS_ID
+from
+  CKT_CR_STATUS
+where
+  CR_STATUS_ID = @crStatusId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatusHistoryCashReceiptStatus">
+      <value>
+select top(1)
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  DISCONTINUE_DATE
+from
+  CKT_CR_STATUS_HIST
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="UpdateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  RECEIPT_AMOUNT = @receiptAmount,
+  RECEIPT_DATE = @receiptDate,
+  CHECK_NUMBER = @checkNumber,
+  CHECK_DATE = @checkDate,
+  RECEIVED_DATE = @receivedDate,
+  DEPOSIT_RLSE_DT = @depositRlseDt,
+  PAYOR_ORGANIZATION = @payorOrganization,
+  PAYOR_FIRST_NAME = @payorFirstName,
+  PAYOR_MIDDLE_NAME = @payorMiddleName,
+  PAYOR_LAST_NAME = @payorLastName,
+  BAL_TMST = @balTmst,
+  CASH_BAL_AMT = @cashBalAmt,
+  CASH_BAL_RSN = @cashBalRsn,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  NOTE = @note
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="UpdateCashReceiptStatusHistory">
+      <value>
+update CKT_CR_STATUS_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CRS_IDENTIFIER = @crsIdentifier) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+</root>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualSuspension">
+      <value>
+select top(1)
+  FRQ_SUSP_ID,
+  SUSPEND_DT,
+  RESUME_DT,
+  RED_PCT,
+  OTR_TYPE,
+  OTY_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  REDUCTION_AMOUNT
+from
+  CKT_ACCR_SUSP
+where
+  (@otrId = OTR_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgId = OBG_ID) and
+  (@otyId = OTY_ID) and
+  (@otrType = OTR_TYPE) and
+  (SUSPEND_DT &lt;= @suspendDt) and
+  (RESUME_DT &gt; @suspendDt)
+</value>
+   </data>
+</root>

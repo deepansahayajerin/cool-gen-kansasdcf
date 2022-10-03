@@ -1,0 +1,109 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiCpatChildPaternityMaint"
+           program-name="SWECPATP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiCpatChildPaternityMaint"
+           transaction="SRC7"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Next" to="Case1"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <return-map from="Selected.Number" to="Ap.Number"/>
+      <return-map from="Selected.FormattedName" to="Ap.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CHDS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiChdsChildDetails"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <map from="Ap.Number" to="Ap.Number"/>
+      <map from="Ap.FirstName" to="Ap.FirstName"/>
+      <map from="Ap.MiddleInitial" to="Ap.MiddleInitial"/>
+      <map from="Ap.FormattedName" to="Ap.FormattedName"/>
+      <map from="Ap.LastName" to="Ap.LastName"/>
+      <map from="Ar.Number" to="Ar.Number"/>
+      <map from="Ar.FormattedName" to="Ar.FormattedName"/>
+      <map from="Selected.Number" to="ChCsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+      <map from="Ap" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NATE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNATE"
+       to="SpNateMaintNarrativeDetail"
+       send-command="FROMCPAT">
+      <map from="ToNateInfrastructure" to="HeaderInfrastructure"/>
+      <map from="ToNateCsePersonsWorkSet.FormattedName"
+           to="HeaderCsePersonsWorkSet.FormattedName"/>
+      <map from="FlowToNate" to="CpatFlow"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="FromLops" to="FromLops"/>
+   <map from="FromCrpa" to="FromCrpa"/>
+   <map from="FirstDisplayFromCrpa" to="FirstDisplayFromCrpa"/>
+   <map from="LegalActionFlow" to="LegalActionFlow"/>
+   <map from="HiddenPageKeys.HiddenPageKeyCaseRole"
+        to="HiddenPageKeys.HiddenPageKeyCaseRole"/>
+   <map from="Next" to="Next"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="HiddenPageKeys.HiddenPageKeyCsePerson"
+        to="HiddenPageKeys.HiddenPageKeyCsePerson"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.DetailCsePersonsWorkSet"
+        to="Import1.DetailCsePersonsWorkSet"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="ApPrompt" to="ApPrompt"/>
+   <map from="FromLrol" to="FromLrol"/>
+   <map from="FromRole" to="FromRole"/>
+   <map from="FromRegi" to="FromRegi"/>
+   <map from="SuccessfulDisplay" to="SuccessfulDisplay"/>
+   <map from="Previous" to="Previous"/>
+   <map from="Ap.Sex" to="Ap.Sex"/>
+   <map from="Export1.DetailCsePerson.HospitalPatEstInd"
+        to="Import1.DetailCsePerson.HospitalPatEstInd"/>
+   <map from="Case1.Number" to="Case1.Number"/>
+   <map from="Case1.Status" to="Case1.Status"/>
+   <map from="Case1.CseOpenDate" to="Case1.CseOpenDate"/>
+   <map from="Export1.DetailCaseRole.Identifier"
+        to="Import1.DetailCaseRole.Identifier"/>
+   <map from="Ap.Number" to="Ap.Number"/>
+   <map from="Ap.FormattedName" to="Ap.FormattedName"/>
+   <map from="Ar.Number" to="Ar.Number"/>
+   <map from="Ar.FormattedName" to="Ar.FormattedName"/>
+   <map from="Export1.DetailCsePerson.Number"
+        to="Import1.DetailCsePerson.Number"/>
+   <map from="Export1.DetailCsePerson.BornOutOfWedlock"
+        to="Import1.DetailCsePerson.BornOutOfWedlock"/>
+   <map from="Export1.DetailCsePerson.CseToEstblPaternity"
+        to="Import1.DetailCsePerson.CseToEstblPaternity"/>
+   <map from="Export1.DetailCsePerson.PaternityEstablishedIndicator"
+        to="Import1.DetailCsePerson.PaternityEstablishedIndicator"/>
+   <map from="Export1.DetailCsePerson.BirthCertificateSignature"
+        to="Import1.DetailCsePerson.BirthCertificateSignature"/>
+   <map from="Export1.DetailCsePerson.BirthCertFathersLastName"
+        to="Import1.DetailCsePerson.BirthCertFathersLastName"/>
+   <map from="Export1.DetailCsePerson.BirthCertFathersFirstName"
+        to="Import1.DetailCsePerson.BirthCertFathersFirstName"/>
+   <map from="Export1.DetailCsePerson.BirthCertFathersMi"
+        to="Import1.DetailCsePerson.BirthCertFathersMi"/>
+   <map from="Export1.DetailCsePerson.PaternityLockInd"
+        to="Import1.DetailCsePerson.PaternityLockInd"/>
+   <map from="ToNateInfrastructure.SystemGeneratedIdentifier"
+        to="HiddenToNate.SystemGeneratedIdentifier"/>
+</procedure>

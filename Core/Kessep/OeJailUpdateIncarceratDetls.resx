@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateIncarcerationAddress">
+      <value>
+insert into CKT_INCARC_ADDR
+(
+  INC_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @incIdentifier,
+  @cspNumber,
+  @effectiveDate,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @province,
+  @postalCode,
+  @zipCode5,
+  @zipCode4,
+  @zip3,
+  @country,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadIncarceration1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_USER_ID,
+  VERIFIED_DATE,
+  INMATE_NUMBER,
+  PAROLE_ELIG_DATE,
+  WORK_RELEASE_IND,
+  COND_FOR_RELEASE,
+  POFFR_TITLE,
+  PHONE,
+  END_DATE,
+  START_DATE,
+  TYPE,
+  INSTITUTION_NAME,
+  POFFR_LAST_NAME,
+  POFFR_FIRST_NAME,
+  POFFR_MI,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PHONE_EXT,
+  PHONE_AREA,
+  INCARCERATED
+from
+  CKT_INCARCERATION
+where
+  (IDENTIFIER = @identifier) and
+  (TYPE = @type) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadIncarceration2">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_USER_ID,
+  VERIFIED_DATE,
+  INMATE_NUMBER,
+  PAROLE_ELIG_DATE,
+  WORK_RELEASE_IND,
+  COND_FOR_RELEASE,
+  POFFR_TITLE,
+  PHONE,
+  END_DATE,
+  START_DATE,
+  TYPE,
+  INSTITUTION_NAME,
+  POFFR_LAST_NAME,
+  POFFR_FIRST_NAME,
+  POFFR_MI,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PHONE_EXT,
+  PHONE_AREA,
+  INCARCERATED
+from
+  CKT_INCARCERATION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (IDENTIFIER &lt;&gt; @identifier)
+</value>
+   </data>
+   <data name="ReadIncarcerationAddress">
+      <value>
+select top(1)
+  INC_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_INCARC_ADDR
+where
+  (@incIdentifier = INC_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="UpdateIncarceration">
+      <value>
+update CKT_INCARCERATION
+set
+  VERIFIED_USER_ID = @verifiedUserId,
+  VERIFIED_DATE = @verifiedDate,
+  INMATE_NUMBER = @inmateNumber,
+  PAROLE_ELIG_DATE = @paroleEligDate,
+  WORK_RELEASE_IND = @workReleaseInd,
+  COND_FOR_RELEASE = @condForRelease,
+  POFFR_TITLE = @poffrTitle,
+  PHONE = @phone,
+  END_DATE = @endDate,
+  START_DATE = @startDate,
+  TYPE = @type,
+  INSTITUTION_NAME = @institutionName,
+  POFFR_LAST_NAME = @poffrLastName,
+  POFFR_FIRST_NAME = @poffrFirstName,
+  POFFR_MI = @poffrMi,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  PHONE_EXT = @phoneExt,
+  PHONE_AREA = @phoneArea,
+  INCARCERATED = @incarcerated
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="UpdateIncarcerationAddress">
+      <value>
+update CKT_INCARC_ADDR
+set
+  EFFECTIVE_DATE = @effectiveDate1,
+  STREET_1 = @street1,
+  STREET_2 = @street2,
+  CITY = @city,
+  [STATE] = @state,
+  PROVINCE = @province,
+  POSTAL_CODE = @postalCode,
+  ZIP_CODE5 = @zipCode5,
+  ZIP_CODE4 = @zipCode4,
+  ZIP3 = @zip3,
+  COUNTRY = @country,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (INC_IDENTIFIER = @incIdentifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate2)
+</value>
+   </data>
+</root>

@@ -1,0 +1,48 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLtrbListTribunals"
+           program-name="SWELTRBP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLtrbListTribunals"
+           transaction="SR9G"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_TRIBUNAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeTribTribunal"
+       send-command="DISPLAY">
+      <map from="DlgflwSelectedFips" to="Fips"/>
+      <map from="DlgflwSelectedTribunal.Identifier" to="Tribunal.Identifier"/>
+      <map from="DlgflwSelectedTribunal.Name" to="Tribunal.Name"/>
+      <map from="DlgflwSelectedTribunal.JudicialDistrict"
+           to="Tribunal.JudicialDistrict"/>
+      <map from="DlgflwSelectedTribunal.JudicialDivision"
+           to="Tribunal.JudicialDivision"/>
+      <map from="DlgflwSelectedTribunal.TaxIdSuffix" to="Tribunal.TaxIdSuffix"/>
+      <map from="DlgflwSelectedTribunal.TaxId" to="Tribunal.TaxId"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="SearchFips" to="SearchFips"/>
+   <map from="Tribunals.Fips" to="Tribunals.Fips"/>
+   <map from="PromptState" to="PromptState"/>
+   <map from="Tribunals.Common" to="Tribunals.Common"/>
+   <map from="Tribunals.Tribunal" to="Tribunals.Tribunal"/>
+   <map from="SearchTribunal" to="SearchTribunal"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="PromptCountry" to="PromptCountry"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

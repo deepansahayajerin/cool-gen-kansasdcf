@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadElectronicFundTransmissionPaymentRequestPaymentStatusHistory1">
+      <value>
+select
+  T1.TRANSMISSION_TYPE,
+  T1.TRANSMISSION_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.EFFECTIVE_ENTRY_DT,
+  T1.RECV_COMPANY_NAME,
+  T2.PROCESS_DATE,
+  T2.AMOUNT,
+  T2.DP_CSE_PER_NUM,
+  T2.CSE_PERSON_NUMBER,
+  T2.CLASSIFICATION,
+  T2.TYPE,
+  T2.PRQ_R_GENERATED_ID,
+  T2.INTERSTATE_IND,
+  T3.PST_GENERATED_ID,
+  T3.PYMNT_STAT_HIST_ID,
+  T3.DISCONTINUE_DATE
+from
+  CKT_PMNT_REQUEST T2
+  join
+  CKT_ELEC_FUND_TRAN T1
+  on
+    (T1.TRANSMISSION_TYPE = 'O') and
+    (T1.TRANSMISSION_ID &gt;= @transmissionId) and
+    (T2.PAYMENT_REQUEST_ID = T1.PRQ_GENERATED_ID) and
+    (T2.PROCESS_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+    (T2.CSE_PERSON_NUMBER = @csePersonNumber)
+  join
+  CKT_PMNT_STAT_HIST T3
+  on
+    (T2.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+    (T3.DISCONTINUE_DATE = @discontinueDate) and
+    (@pstGeneratedId = T3.PST_GENERATED_ID)
+order by
+  T1.TRANSMISSION_ID
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmissionPaymentRequestPaymentStatusHistory2">
+      <value>
+select
+  T1.TRANSMISSION_TYPE,
+  T1.TRANSMISSION_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.EFFECTIVE_ENTRY_DT,
+  T1.RECV_COMPANY_NAME,
+  T2.PROCESS_DATE,
+  T2.AMOUNT,
+  T2.DP_CSE_PER_NUM,
+  T2.CSE_PERSON_NUMBER,
+  T2.CLASSIFICATION,
+  T2.TYPE,
+  T2.PRQ_R_GENERATED_ID,
+  T2.INTERSTATE_IND,
+  T3.PST_GENERATED_ID,
+  T3.PYMNT_STAT_HIST_ID,
+  T3.DISCONTINUE_DATE
+from
+  CKT_PMNT_REQUEST T2
+  join
+  CKT_ELEC_FUND_TRAN T1
+  on
+    (T1.TRANSMISSION_TYPE = 'O') and
+    (T1.TRANSMISSION_ID &gt;= @transmissionId) and
+    (T2.PAYMENT_REQUEST_ID = T1.PRQ_GENERATED_ID) and
+    (T2.PROCESS_DATE between cast(@date1 as date) and cast(@date2 as date))
+  join
+  CKT_PMNT_STAT_HIST T3
+  on
+    (T2.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+    (T3.DISCONTINUE_DATE = @discontinueDate) and
+    (@pstGeneratedId = T3.PST_GENERATED_ID)
+order by
+  T1.TRANSMISSION_ID
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmissionPaymentRequestPaymentStatusHistory3">
+      <value>
+select
+  T1.TRANSMISSION_TYPE,
+  T1.TRANSMISSION_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.EFFECTIVE_ENTRY_DT,
+  T1.RECV_COMPANY_NAME,
+  T2.PROCESS_DATE,
+  T2.AMOUNT,
+  T2.DP_CSE_PER_NUM,
+  T2.CSE_PERSON_NUMBER,
+  T2.CLASSIFICATION,
+  T2.TYPE,
+  T2.PRQ_R_GENERATED_ID,
+  T2.INTERSTATE_IND,
+  T3.PST_GENERATED_ID,
+  T3.PYMNT_STAT_HIST_ID,
+  T3.DISCONTINUE_DATE,
+  T4.CODE
+from
+  CKT_PAYMENT_STATUS T4
+  join
+  CKT_PMNT_REQUEST T2
+  join
+  CKT_ELEC_FUND_TRAN T1
+  on
+    (T1.TRANSMISSION_TYPE = 'O') and
+    (T1.TRANSMISSION_ID &gt;= @transmissionId) and
+    (T2.PAYMENT_REQUEST_ID = T1.PRQ_GENERATED_ID) and
+    (T2.PROCESS_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+    (T2.CSE_PERSON_NUMBER = @csePersonNumber)
+  join
+  CKT_PMNT_STAT_HIST T3
+  on
+    (T2.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+    (T3.DISCONTINUE_DATE = @discontinueDate)
+  on
+    T4.PAYMENT_STATUS_ID = T3.PST_GENERATED_ID
+order by
+  T1.TRANSMISSION_ID
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmissionPaymentRequestPaymentStatusHistory4">
+      <value>
+select
+  T1.TRANSMISSION_TYPE,
+  T1.TRANSMISSION_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.EFFECTIVE_ENTRY_DT,
+  T1.RECV_COMPANY_NAME,
+  T2.PROCESS_DATE,
+  T2.AMOUNT,
+  T2.DP_CSE_PER_NUM,
+  T2.CSE_PERSON_NUMBER,
+  T2.CLASSIFICATION,
+  T2.TYPE,
+  T2.PRQ_R_GENERATED_ID,
+  T2.INTERSTATE_IND,
+  T3.PST_GENERATED_ID,
+  T3.PYMNT_STAT_HIST_ID,
+  T3.DISCONTINUE_DATE,
+  T4.CODE
+from
+  CKT_PAYMENT_STATUS T4
+  join
+  CKT_PMNT_REQUEST T2
+  join
+  CKT_ELEC_FUND_TRAN T1
+  on
+    (T1.TRANSMISSION_TYPE = 'O') and
+    (T1.TRANSMISSION_ID &gt;= @transmissionId) and
+    (T2.PAYMENT_REQUEST_ID = T1.PRQ_GENERATED_ID) and
+    (T2.PROCESS_DATE between cast(@date1 as date) and cast(@date2 as date))
+  join
+  CKT_PMNT_STAT_HIST T3
+  on
+    (T2.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+    (T3.DISCONTINUE_DATE = @discontinueDate)
+  on
+    T4.PAYMENT_STATUS_ID = T3.PST_GENERATED_ID
+order by
+  T1.TRANSMISSION_ID
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  PRQ_R_GENERATED_ID = @prqRGeneratedId
+</value>
+   </data>
+   <data name="ReadPaymentStatus">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID,
+  CODE
+from
+  CKT_PAYMENT_STATUS
+where
+  CODE = @code
+</value>
+   </data>
+</root>

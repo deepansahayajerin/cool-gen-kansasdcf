@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadIncarceration1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_USER_ID,
+  VERIFIED_DATE,
+  INMATE_NUMBER,
+  PAROLE_ELIG_DATE,
+  WORK_RELEASE_IND,
+  COND_FOR_RELEASE,
+  POFFR_TITLE,
+  PHONE,
+  END_DATE,
+  START_DATE,
+  TYPE,
+  INSTITUTION_NAME,
+  POFFR_LAST_NAME,
+  POFFR_FIRST_NAME,
+  POFFR_MI,
+  LAST_UPDATED_BY,
+  PHONE_EXT,
+  PHONE_AREA,
+  INCARCERATED
+from
+  CKT_INCARCERATION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('J', 'P'))
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadIncarceration2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_USER_ID,
+  VERIFIED_DATE,
+  INMATE_NUMBER,
+  PAROLE_ELIG_DATE,
+  WORK_RELEASE_IND,
+  COND_FOR_RELEASE,
+  POFFR_TITLE,
+  PHONE,
+  END_DATE,
+  START_DATE,
+  TYPE,
+  INSTITUTION_NAME,
+  POFFR_LAST_NAME,
+  POFFR_FIRST_NAME,
+  POFFR_MI,
+  LAST_UPDATED_BY,
+  PHONE_EXT,
+  PHONE_AREA,
+  INCARCERATED
+from
+  CKT_INCARCERATION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE in ('T', 'R'))
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadIncarcerationAddress1">
+      <value>
+select top(1)
+  INC_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY
+from
+  CKT_INCARC_ADDR
+where
+  (@incIdentifier = INC_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadIncarcerationAddress2">
+      <value>
+select top(1)
+  INC_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY
+from
+  CKT_INCARC_ADDR
+where
+  (@incIdentifier = INC_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

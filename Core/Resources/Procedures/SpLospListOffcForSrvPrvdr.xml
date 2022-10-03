@@ -1,0 +1,28 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpLospListOffcForSrvPrvdr"
+           program-name="SWELOSPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpLospListOffcForSrvPrvdr"
+           transaction="SR3Y"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected1" to="HiddenServiceProvider"/>
+   </on>
+   <map from="Search" to="Search"/>
+   <map from="Export1.OfficeAddress" to="Import1.OfficeAddress"/>
+   <map from="Export1.OfficeServiceProvider" to="Import1.OfficeServiceProvider"/>
+   <map from="Export1.Office" to="Import1.Office"/>
+   <map from="SrvprvdrPrompt" to="SrvprvdrPrompt"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

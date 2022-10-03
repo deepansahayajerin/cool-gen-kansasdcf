@@ -1,0 +1,133 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpHistHistory"
+           program-name="SWEHISTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpHistHistory"
+           transaction="SRPT"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFER_FROM_HIST_TO_CSLN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSLN"
+       to="SpCslnListNarrative"
+       send-command="RETHIST">
+      <map from="SelectedInfrastructure" to="HeaderInfrastructure"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NATE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNARR"
+       to="SpNateMaintNarrativeDetail"
+       send-command="DISPLAY">
+      <map from="SelectedCsePersonsWorkSet.FormattedName"
+           to="HeaderCsePersonsWorkSet.FormattedName"/>
+      <map from="SelectedCsePersonsWorkSet.Number"
+           to="HeaderCsePersonsWorkSet.Number"/>
+      <map from="SelectedLegalAction.CourtCaseNumber"
+           to="HeaderLegalAction.CourtCaseNumber"/>
+      <map from="SelectedInfrastructure" to="HeaderInfrastructure"/>
+      <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EVLS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEVLS"
+       to="SpEvlsListEvents"
+       send-command="DISPLAY">
+      <map from="Event1" to="PassFilterEventType"/>
+      <return-map from="Selected.ControlNumber" to="Event1.ControlNumber"/>
+      <return-map from="Selected.Name" to="Event1.Name"/>
+      <return-map from="Selected.Type1" to="Event1.Type1"/>
+      <return-map from="Selected.Description" to="Event1.Description"/>
+      <return-map from="Selected.BusinessObjectCode" to="Event1.BusinessObjectCode"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DMON"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="SpDmonDocumentMonitor"
+       send-command="LINK">
+      <map from="SelectedInfrastructure" to="FilterInfrastructure"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command="CLEAR"/>
+   <on exit-state="ECO_LNK_TO_DDOC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="SpDdocDeadDocument"
+       send-command="DISPLAY">
+      <map from="SelectedInfrastructure" to="Infrastructure"/>
+   </on>
+   <map from="HiddenExportHeaderFipsTribAddress"
+        to="HiddenImportHeaderFipsTribAddress"/>
+   <map from="HiddenExportHeaderStartDate" to="HiddenImportHeaderStartDate"/>
+   <map from="HiddenExportHeaderFips" to="HiddenImportHeaderFips"/>
+   <map from="HiddenExportHeaderLegalAction" to="HiddenImportHeaderLegalAction"/>
+   <map from="HiddenExportHeaderInfrastructure"
+        to="HiddenImportHeaderInfrastructure"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.LegalAction" to="Group.LegalAction"/>
+   <map from="Group.CsePersonsWorkSet" to="Group.CsePersonsWorkSet"/>
+   <map from="HeaderFips" to="HeaderFips"/>
+   <map from="HeaderFipsTribAddress" to="HeaderFipsTribAddress"/>
+   <map from="Group.SpTextWorkArea" to="Group.SpTextWorkArea"/>
+   <map from="Group.MonitoredDocument" to="Group.MonitoredDocument"/>
+   <map from="HeaderPromptType" to="HeaderPromptType"/>
+   <map from="CurrentPage" to="CurrentPage"/>
+   <map from="Scroll" to="Scroll"/>
+   <map from="Group.Narrative" to="Group.Narrative"/>
+   <map from="PageKeys.GexportPageKey" to="PageKeys.GimportPageKey"/>
+   <map from="Group.Infrastructure.EventType"
+        to="Group.Infrastructure.EventType"/>
+   <map from="Group.Infrastructure.CreatedTimestamp"
+        to="Group.Infrastructure.CreatedTimestamp"/>
+   <map from="Group.Infrastructure.ProcessStatus"
+        to="Group.Infrastructure.ProcessStatus"/>
+   <map from="Group.Infrastructure.CaseNumber"
+        to="Group.Infrastructure.CaseNumber"/>
+   <map from="Group.Infrastructure.CaseUnitNumber"
+        to="Group.Infrastructure.CaseUnitNumber"/>
+   <map from="Group.Infrastructure.CreatedBy"
+        to="Group.Infrastructure.CreatedBy"/>
+   <map from="Group.Infrastructure.EventDetailName"
+        to="Group.Infrastructure.EventDetailName"/>
+   <map from="Group.Infrastructure.CsePersonNumber"
+        to="Group.Infrastructure.CsePersonNumber"/>
+   <map from="HeaderInfrastructure.CaseNumber"
+        to="HeaderInfrastructure.CaseNumber"/>
+   <map from="HeaderInfrastructure.CsePersonNumber"
+        to="HeaderInfrastructure.CsePersonNumber"/>
+   <map from="HeaderLegalAction.CourtCaseNumber"
+        to="HeaderLegalAction.CourtCaseNumber"/>
+   <map from="HeaderInfrastructure.EventType"
+        to="HeaderInfrastructure.EventType"/>
+   <map from="HeaderInfrastructure.Function" to="HeaderInfrastructure.Function"/>
+   <map from="Group.Infrastructure.Function" to="Group.Infrastructure.Function"/>
+   <map from="Group.Infrastructure.SystemGeneratedIdentifier"
+        to="Group.Infrastructure.SystemGeneratedIdentifier"/>
+   <map from="EventDetail.SystemGeneratedIdentifier"
+        to="EventDetail.SystemGeneratedIdentifier"/>
+   <map from="EventDetail.DetailName" to="EventDetail.DetailName"/>
+   <map from="EventDetail.Description" to="EventDetail.Description"/>
+   <map from="Event1.ControlNumber" to="Event1.ControlNumber"/>
+   <map from="Event1.Name" to="Event1.Name"/>
+   <map from="Event1.Type1" to="Event1.Type1"/>
+   <map from="Event1.BusinessObjectCode" to="Event1.BusinessObjectCode"/>
+   <map from="HeaderStartDate.Timestamp" to="HeaderStartDate.Timestamp"/>
+   <map from="HiddenCode.CodeName" to="HiddenCode.CodeName"/>
+   <map from="HiddenCodeValue.Cdvalue" to="HiddenCodeValue.Cdvalue"/>
+   <map from="Group.Infrastructure.Detail" to="Group.Infrastructure.Detail"/>
+</procedure>

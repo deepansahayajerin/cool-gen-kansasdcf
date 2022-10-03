@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalActionLegalActionDetailLegalActionPerson1">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.TYPE,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T3.LGA_R_IDENTIFIER,
+  T3.LAD_R_NUMBER,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.ACCOUNT_TYPE,
+  T4.TYPE,
+  T6.CAS_NUMBER
+from
+  CKT_CSE_PERSON T4
+  join
+  CKT_CASE_ROLE T6
+  on
+    (T4.NUMB = T6.CSP_NUMBER) and
+    (T6.CAS_NUMBER = @casNumber)
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.CLASSIFICATION = 'J') and
+    (T1.STANDARD_NO = @standardNo) and
+    (T1.LEGAL_ACTION_ID = T3.LGA_R_IDENTIFIER) and
+    (T3.LAD_R_NUMBER is not null) and
+    (T1.FILED_DT &gt; @filedDt) and
+    (T3.ACCOUNT_TYPE in ('R', 'E'))
+  on
+    T4.NUMB = T3.CSP_NUMBER
+order by
+  T3.CSP_NUMBER,
+  T6.CAS_NUMBER,
+  T1.STANDARD_NO
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetailLegalActionPerson2">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.TYPE,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T3.LGA_R_IDENTIFIER,
+  T3.LAD_R_NUMBER,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.ACCOUNT_TYPE,
+  T4.TYPE,
+  T6.CAS_NUMBER
+from
+  CKT_CSE_PERSON T4
+  join
+  CKT_CASE_ROLE T6
+  on
+    T4.NUMB = T6.CSP_NUMBER
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.CLASSIFICATION = 'J') and
+    (T1.STANDARD_NO = @standardNo) and
+    (T1.LEGAL_ACTION_ID = T3.LGA_R_IDENTIFIER) and
+    (T3.LAD_R_NUMBER is not null) and
+    (T1.FILED_DT &gt; @filedDt) and
+    (T3.ACCOUNT_TYPE in ('R', 'E'))
+  on
+    T4.NUMB = T3.CSP_NUMBER
+order by
+  T3.CSP_NUMBER,
+  T6.CAS_NUMBER,
+  T1.STANDARD_NO
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetailLegalActionPerson3">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.TYPE,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T3.LGA_R_IDENTIFIER,
+  T3.LAD_R_NUMBER,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.ACCOUNT_TYPE,
+  T4.TYPE,
+  T6.CAS_NUMBER
+from
+  CKT_CSE_PERSON T4
+  join
+  CKT_CASE_ROLE T6
+  on
+    (T4.NUMB = T6.CSP_NUMBER) and
+    (T6.CAS_NUMBER = @casNumber)
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.CLASSIFICATION = 'J') and
+    (T1.LEGAL_ACTION_ID = T3.LGA_R_IDENTIFIER) and
+    (T3.LAD_R_NUMBER is not null) and
+    (T1.FILED_DT &gt; @filedDt) and
+    (T3.ACCOUNT_TYPE in ('R', 'E'))
+  on
+    T4.NUMB = T3.CSP_NUMBER
+order by
+  T3.CSP_NUMBER,
+  T6.CAS_NUMBER,
+  T1.STANDARD_NO
+</value>
+   </data>
+</root>

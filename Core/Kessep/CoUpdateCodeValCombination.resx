@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCodeValueCombination">
+      <value>
+insert into CKT_CODE_VAL_COMB
+(
+  CVC_ID,
+  COV_ID,
+  COV_S_ID,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @cvcId,
+  @covId,
+  @covSId,
+  @effectiveDate,
+  @expirationDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="DeleteCodeValueCombination">
+      <value>
+delete from CKT_CODE_VAL_COMB
+where
+  CVC_ID = @cvcId
+</value>
+   </data>
+   <data name="ReadCode1">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DISPLAY_TITLE
+from
+  CKT_CODE
+where
+  CODE_NAME = @codeName
+</value>
+   </data>
+   <data name="ReadCode2">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DISPLAY_TITLE
+from
+  CKT_CODE
+where
+  CODE_NAME = @codeName
+</value>
+   </data>
+   <data name="ReadCodeValue1">
+      <value>
+select top(1)
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DESCRIPTION
+from
+  CKT_CODE_VALUE
+where
+  (@codId = COD_ID) and
+  (COV_ID = @covId)
+</value>
+   </data>
+   <data name="ReadCodeValue2">
+      <value>
+select top(1)
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DESCRIPTION
+from
+  CKT_CODE_VALUE
+where
+  (@codId = COD_ID) and
+  (COV_ID = @covId)
+</value>
+   </data>
+   <data name="ReadCodeValue3">
+      <value>
+select
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DESCRIPTION
+from
+  CKT_CODE_VALUE
+where
+  (@codId = COD_ID) and
+  (CDVALUE = @cdvalue)
+</value>
+   </data>
+   <data name="ReadCodeValue4">
+      <value>
+select
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DESCRIPTION
+from
+  CKT_CODE_VALUE
+where
+  (@codId = COD_ID) and
+  (CDVALUE = @cdvalue)
+</value>
+   </data>
+   <data name="ReadCodeValueCombination1">
+      <value>
+select top(1)
+  CVC_ID,
+  COV_ID,
+  COV_S_ID
+from
+  CKT_CODE_VAL_COMB
+order by
+  CVC_ID desc
+</value>
+   </data>
+   <data name="ReadCodeValueCombination2">
+      <value>
+select top(1)
+  CVC_ID,
+  COV_ID,
+  COV_S_ID,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_CODE_VAL_COMB
+where
+  (
+    (@covId = COV_ID) and
+    (@covSId = COV_S_ID)
+  ) or
+  (
+    (@covSId = COV_ID) and
+    (@covId = COV_S_ID)
+  )
+</value>
+   </data>
+   <data name="UpdateCodeValueCombination">
+      <value>
+update CKT_CODE_VAL_COMB
+set
+  EFFECTIVE_DATE = @effectiveDate,
+  EXPIRATION_DATE = @expirationDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  CVC_ID = @cvcId
+</value>
+   </data>
+</root>

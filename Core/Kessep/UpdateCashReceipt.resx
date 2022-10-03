@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCashReceiptAudit">
+      <value>
+insert into CKT_CSH_RCPT_AUDIT
+(
+  RECEIPT_AMOUNT,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  PRIOR_TRANSN_AMT,
+  PRIOR_ADJ_AMT,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER
+)
+values
+(
+  @receiptAmount,
+  @lastUpdatedTmst,
+  @lastUpdatedBy,
+  @priorTransnAmt,
+  @priorAdjAmt,
+  @crvIdentifier,
+  @cstIdentifier,
+  @crtIdentifier
+)
+</value>
+   </data>
+   <data name="ReadCashReceipt1">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  RECEIPT_DATE,
+  CHECK_TYPE,
+  CHECK_NUMBER,
+  CHECK_DATE,
+  RECEIVED_DATE,
+  DEPOSIT_RLSE_DT,
+  REFERENCE_NUMBER,
+  PAYOR_ORGANIZATION,
+  PAYOR_FIRST_NAME,
+  PAYOR_MIDDLE_NAME,
+  PAYOR_LAST_NAME,
+  FRWRD_TO_NAME,
+  FRWRD_STREET_1,
+  FRWRD_STREET_2,
+  FRWRD_CITY,
+  FRWRD_STATE,
+  FRWRD_ZIP5,
+  FRWRD_ZIP4,
+  FRWRD_ZIP3,
+  BAL_TMST,
+  TOTAL_CASH_TRANSAC,
+  TOT_NONCSH_TRN_AMT,
+  TOT_CASH_TRAN_CNT,
+  TOT_NOCSH_TRAN_CNT,
+  TOT_DETAIL_ADJ_CNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  CASH_BAL_AMT,
+  CASH_BAL_RSN,
+  CASH_DUE,
+  TOTAL_NC_FEE_AMT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  NOTE,
+  PAYOR_SSN
+from
+  CKT_CASH_RECEIPT
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceipt2">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  RECEIPT_DATE,
+  CHECK_TYPE,
+  CHECK_NUMBER,
+  CHECK_DATE,
+  RECEIVED_DATE,
+  DEPOSIT_RLSE_DT,
+  REFERENCE_NUMBER,
+  PAYOR_ORGANIZATION,
+  PAYOR_FIRST_NAME,
+  PAYOR_MIDDLE_NAME,
+  PAYOR_LAST_NAME,
+  FRWRD_TO_NAME,
+  FRWRD_STREET_1,
+  FRWRD_STREET_2,
+  FRWRD_CITY,
+  FRWRD_STATE,
+  FRWRD_ZIP5,
+  FRWRD_ZIP4,
+  FRWRD_ZIP3,
+  BAL_TMST,
+  TOTAL_CASH_TRANSAC,
+  TOT_NONCSH_TRN_AMT,
+  TOT_CASH_TRAN_CNT,
+  TOT_NOCSH_TRAN_CNT,
+  TOT_DETAIL_ADJ_CNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  CASH_BAL_AMT,
+  CASH_BAL_RSN,
+  CASH_DUE,
+  TOTAL_NC_FEE_AMT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  NOTE,
+  PAYOR_SSN
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  RECEIVED_DATE
+from
+  CKT_CR_EVENT
+where
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (RECEIVED_DATE = @receivedDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptEventCashReceiptSourceType">
+      <value>
+select top(1)
+  T1.CST_IDENTIFIER,
+  T1.CREVENT_ID,
+  T1.RECEIVED_DATE,
+  T1.SOURCE_CREATION_DT,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T2.INTERFACE_IND
+from
+  CKT_CRSRC_TYPE T2
+  join
+  CKT_CR_EVENT T1
+  on
+    (T1.CREVENT_ID = @creventId) and
+    (T2.CR_SRCE_TYPE_ID = T1.CST_IDENTIFIER) and
+    (T2.CR_SRCE_TYPE_ID = @crSrceTypeId)
+</value>
+   </data>
+   <data name="UpdateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  RECEIPT_AMOUNT = @receiptAmount,
+  RECEIPT_DATE = @receiptDate,
+  CHECK_TYPE = @checkType,
+  CHECK_NUMBER = @checkNumber,
+  CHECK_DATE = @checkDate,
+  RECEIVED_DATE = @receivedDate,
+  DEPOSIT_RLSE_DT = @depositRlseDt,
+  REFERENCE_NUMBER = @referenceNumber,
+  PAYOR_ORGANIZATION = @payorOrganization,
+  PAYOR_FIRST_NAME = @payorFirstName,
+  PAYOR_MIDDLE_NAME = @payorMiddleName,
+  PAYOR_LAST_NAME = @payorLastName,
+  FRWRD_TO_NAME = @frwrdToName,
+  FRWRD_STREET_1 = @frwrdStreet1,
+  FRWRD_STREET_2 = @frwrdStreet2,
+  FRWRD_CITY = @frwrdCity,
+  FRWRD_STATE = @frwrdState,
+  FRWRD_ZIP5 = @frwrdZip5,
+  FRWRD_ZIP4 = @frwrdZip4,
+  FRWRD_ZIP3 = @frwrdZip3,
+  BAL_TMST = @balTmst,
+  TOTAL_CASH_TRANSAC = @totalCashTransac,
+  TOT_NONCSH_TRN_AMT = @totNoncshTrnAmt,
+  TOT_CASH_TRAN_CNT = @totCashTranCnt,
+  TOT_NOCSH_TRAN_CNT = @totNocshTranCnt,
+  TOT_DETAIL_ADJ_CNT = @totDetailAdjCnt,
+  CASH_BAL_AMT = @cashBalAmt,
+  CASH_BAL_RSN = @cashBalRsn,
+  CASH_DUE = @cashDue,
+  TOTAL_NC_FEE_AMT = @totalNcFeeAmt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  NOTE = @note,
+  PAYOR_SSN = @payorSsn
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="UpdateCashReceiptEvent">
+      <value>
+update CKT_CR_EVENT
+set
+  RECEIVED_DATE = @receivedDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CREVENT_ID = @creventId)
+</value>
+   </data>
+</root>

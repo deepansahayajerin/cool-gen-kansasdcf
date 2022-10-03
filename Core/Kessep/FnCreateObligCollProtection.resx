@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateObligCollProtectionHist">
+      <value>
+insert into CKT_OB_COLL_PHIST
+(
+  CVRD_COLL_STRT_DT,
+  CVRD_COLL_END_DT,
+  DEACTIVATION_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REASON_TEXT,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTY_IDENTIFIER,
+  OBG_IDENTIFIER,
+  PROTECTION_LEVEL
+)
+values
+(
+  @cvrdCollStrtDt,
+  @cvrdCollEndDt,
+  @deactivationDate,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @reasonText,
+  @cspNumber,
+  @cpaType,
+  @otyIdentifier,
+  @obgIdentifier,
+  @protectionLevel
+)
+</value>
+   </data>
+   <data name="ReadCollection1">
+      <value>
+select
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DIST_MTD
+from
+  CKT_COLLECTION
+where
+  (ADJ_IND = 'N') and
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (COLL_DT between cast(@cvrdCollStrtDt as date) and cast(@cvrdCollEndDt as date)) and
+  (DIST_MTD = 'A') and
+  (APPLIED_TO_CD = @appliedToCd)
+order by
+  COLL_DT desc
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DIST_MTD
+from
+  CKT_COLLECTION
+where
+  (ADJ_IND = 'N') and
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (COLL_DT between cast(@cvrdCollStrtDt as date) and cast(@cvrdCollEndDt as date)) and
+  (DIST_MTD = 'A')
+order by
+  COLL_DT desc
+</value>
+   </data>
+   <data name="ReadCollectionImHouseholdMbrMnthlySum1">
+      <value>
+select distinct top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.DIST_MTD,
+  T2.YEAR0,
+  T2.MONTH0,
+  T2.URA_AMOUNT,
+  T2.URA_MEDICAL_AMOUNT,
+  T2.IMH_AE_CASE_NO,
+  T2.CSP_NUMBER
+from
+  CKT_COLLECTION T1
+  join
+  CKT_IM_HH_MBR_MSUM T2
+  join
+  CKT_URA_COLL_APPL T4
+  on
+    (T2.CSP_NUMBER = T4.CSP_NUMBER0) and
+    (T2.YEAR0 = T4.IMS_YEAR) and
+    (T2.MONTH0 = T4.IMS_MONTH) and
+    (T2.IMH_AE_CASE_NO = T4.IMH_AE_CASE_NO) and
+    (T2.URA_AMOUNT &lt; 0)
+  on
+    (T1.ADJ_IND = 'N') and
+    (@otyId = T1.OTY_ID) and
+    (@obgId = T1.OBG_ID) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (@cpaType = T1.CPA_TYPE) and
+    (T1.COLL_DT between cast(@cvrdCollStrtDt as date) and cast(@cvrdCollEndDt as date)) and
+    (T1.DIST_MTD = 'A') and
+    (T1.OBG_ID = T4.OBG_IDENTIFIER) and
+    (T1.CPA_TYPE = T4.CPA_TYPE) and
+    (T1.OTY_ID = T4.OTY_IDENTIFIER) and
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T1.OTR_ID = T4.OTR_IDENTIFIER) and
+    (T1.CRV_ID = T4.CRV_IDENTIFIER) and
+    (T1.COLL_ID = T4.COL_IDENTIFIER) and
+    (T1.CRD_ID = T4.CRD_IDENTIFIER) and
+    (T1.CST_ID = T4.CST_IDENTIFIER) and
+    (T1.CRT_TYPE = T4.CRT_IDENTIFIER) and
+    (T1.OTR_TYPE = T4.OTR_TYPE)
+order by
+  T1.COLL_DT desc
+</value>
+   </data>
+   <data name="ReadCollectionImHouseholdMbrMnthlySum2">
+      <value>
+select distinct top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.DIST_MTD,
+  T2.YEAR0,
+  T2.MONTH0,
+  T2.URA_AMOUNT,
+  T2.URA_MEDICAL_AMOUNT,
+  T2.IMH_AE_CASE_NO,
+  T2.CSP_NUMBER
+from
+  CKT_COLLECTION T1
+  join
+  CKT_IM_HH_MBR_MSUM T2
+  join
+  CKT_URA_COLL_APPL T4
+  on
+    (T2.CSP_NUMBER = T4.CSP_NUMBER0) and
+    (T2.YEAR0 = T4.IMS_YEAR) and
+    (T2.MONTH0 = T4.IMS_MONTH) and
+    (T2.IMH_AE_CASE_NO = T4.IMH_AE_CASE_NO) and
+    (T2.URA_MEDICAL_AMOUNT &lt; 0)
+  on
+    (T1.ADJ_IND = 'N') and
+    (@otyId = T1.OTY_ID) and
+    (@obgId = T1.OBG_ID) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (@cpaType = T1.CPA_TYPE) and
+    (T1.COLL_DT between cast(@cvrdCollStrtDt as date) and cast(@cvrdCollEndDt as date)) and
+    (T1.DIST_MTD = 'A') and
+    (T1.OBG_ID = T4.OBG_IDENTIFIER) and
+    (T1.CPA_TYPE = T4.CPA_TYPE) and
+    (T1.OTY_ID = T4.OTY_IDENTIFIER) and
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T1.OTR_ID = T4.OTR_IDENTIFIER) and
+    (T1.CRV_ID = T4.CRV_IDENTIFIER) and
+    (T1.COLL_ID = T4.COL_IDENTIFIER) and
+    (T1.CRD_ID = T4.CRD_IDENTIFIER) and
+    (T1.CST_ID = T4.CST_IDENTIFIER) and
+    (T1.CRT_TYPE = T4.CRT_IDENTIFIER) and
+    (T1.OTR_TYPE = T4.OTR_TYPE)
+order by
+  T1.COLL_DT desc
+</value>
+   </data>
+   <data name="ReadObligCollProtectionHist1">
+      <value>
+select top(1)
+  CVRD_COLL_STRT_DT,
+  CVRD_COLL_END_DT,
+  DEACTIVATION_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REASON_TEXT,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTY_IDENTIFIER,
+  OBG_IDENTIFIER,
+  PROTECTION_LEVEL
+from
+  CKT_OB_COLL_PHIST
+where
+  (@cpaType = CPA_TYPE) and
+  (@obgIdentifier = OBG_IDENTIFIER) and
+  (@otyIdentifier = OTY_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER) and
+  (CVRD_COLL_STRT_DT &lt; @cvrdCollStrtDt) and
+  (CVRD_COLL_END_DT &gt; @cvrdCollEndDt) and
+  (DEACTIVATION_DATE = @deactivationDate)
+</value>
+   </data>
+   <data name="ReadObligCollProtectionHist2">
+      <value>
+select top(1)
+  CVRD_COLL_STRT_DT,
+  CVRD_COLL_END_DT,
+  DEACTIVATION_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REASON_TEXT,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTY_IDENTIFIER,
+  OBG_IDENTIFIER,
+  PROTECTION_LEVEL
+from
+  CKT_OB_COLL_PHIST
+where
+  (@cpaType = CPA_TYPE) and
+  (@obgIdentifier = OBG_IDENTIFIER) and
+  (@otyIdentifier = OTY_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER) and
+  (CVRD_COLL_STRT_DT &lt; @cvrdCollStrtDt) and
+  (CVRD_COLL_END_DT &gt; @cvrdCollEndDt) and
+  (PROTECTION_LEVEL in (cast(@protectionLevel as char(1)), ' ')) and
+  (DEACTIVATION_DATE = @deactivationDate)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  PRIM_SEC_CD,
+  ORD_TYP_CD
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="UpdateCollection">
+      <value>
+update CKT_COLLECTION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  DIST_MTD = @distMtd
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+</root>

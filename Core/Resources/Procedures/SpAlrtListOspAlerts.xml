@@ -1,0 +1,106 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpAlrtListOspAlerts"
+           program-name="SWEALRTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpAlrtListOspAlerts"
+           transaction="SRPQ"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CODE_VALUES ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Flow" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedFromCdvl"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionServiceProvider" to="FilterServiceProvider"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="FilterOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionOffice" to="FilterOffice"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_SPAD"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSPAD"
+       to="SpSpadSrvcPrvdrAlertDetails"
+       send-command="DISPLAY">
+      <map from="SelectedOfficeServiceProviderAlert.SystemGeneratedIdentifier"
+           to="OfficeServiceProviderAlert.SystemGeneratedIdentifier"/>
+      <map from="SelectedInfrastructure.SystemGeneratedIdentifier"
+           to="Infrastructure.SystemGeneratedIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETHIST"
+       to="SpHistHistory"
+       send-command="LINK">
+      <map from="SelectedInfrastructure.SystemGeneratedIdentifier"
+           to="HeaderInfrastructure.SystemGeneratedIdentifier"/>
+      <map from="SelectedInfrastructure.CreatedTimestamp"
+           to="HeaderInfrastructure.CreatedTimestamp"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_ALNA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETALNA"
+       to="SpAlnaAlertSearch"
+       send-command="DISPLAY">
+      <return-map from="Selected.Message" to="FilterOfficeServiceProviderAlert.Message"/>
+   </on>
+   <map from="FilterEventType" to="FilterEventType"/>
+   <map from="EventTypePrompt" to="EventTypePrompt"/>
+   <map from="HiddenFilterEventType" to="HiddenFilterEventType"/>
+   <map from="Export1.Gxnfrastructure" to="Import1.Ginfrastructure"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Export1.GxfficeServiceProviderAlert"
+        to="Import1.GifficeServiceProviderAlert"/>
+   <map from="Export1.GxegalAction" to="Import1.GiegalAction"/>
+   <map from="Export1.Gxommon" to="Import1.Giommon"/>
+   <map from="Export1.GxsePersonsWorkSet" to="Import1.GisePersonsWorkSet"/>
+   <map from="CurrentPage" to="CurrentPage"/>
+   <map from="Scroll" to="Scroll"/>
+   <map from="PageKeys.PageKeyOfficeServiceProviderAlert"
+        to="PageKeys.PageKeyOfficeServiceProviderAlert"/>
+   <map from="HiddenFilterFips" to="HiddenFilterFips"/>
+   <map from="HiddenFilterServiceProvider" to="HiddenFilterServiceProvider"/>
+   <map from="HiddenFilterFipsTribAddress" to="HiddenFilterFipsTribAddress"/>
+   <map from="HiddenFilterOfficeServiceProvider"
+        to="HiddenFilterOfficeServiceProvider"/>
+   <map from="HiddenFilterLegalAction" to="HiddenFilterLegalAction"/>
+   <map from="HiddenFilterInfrastructure" to="HiddenFilterInfrastructure"/>
+   <map from="HiddenFilterOfficeServiceProviderAlert"
+        to="HiddenFilterOfficeServiceProviderAlert"/>
+   <map from="HiddenFilterOffice" to="HiddenFilterOffice"/>
+   <map from="Standard" to="Standard"/>
+   <map from="FilterOffice" to="FilterOffice"/>
+   <map from="FilterOfficeServiceProvider" to="FilterOfficeServiceProvider"/>
+   <map from="FilterOfficeServiceProviderAlert"
+        to="FilterOfficeServiceProviderAlert"/>
+   <map from="FilterInfrastructure" to="FilterInfrastructure"/>
+   <map from="FilterLegalAction" to="FilterLegalAction"/>
+   <map from="FilterFipsTribAddress" to="FilterFipsTribAddress"/>
+   <map from="SvpoPrompt" to="SvpoPrompt"/>
+   <map from="FilterServiceProvider" to="FilterServiceProvider"/>
+   <map from="FilterFips" to="FilterFips"/>
+   <map from="Export1.GxanualFips" to="Import1.GianualFips"/>
+   <map from="Export1.GxanualFipsTribAddress"
+        to="Import1.GianualFipsTribAddress"/>
+   <map from="HiddenFilterSort" to="HiddenFilterSort"/>
+   <map from="AlertPrompt" to="AlertPrompt"/>
+   <map from="SortPrompt" to="SortPrompt"/>
+   <map from="FilterSort" to="FilterSort"/>
+   <map from="PageKeys.PageKeyInfrastructure"
+        to="PageKeys.PageKeyInfrastructure"/>
+</procedure>

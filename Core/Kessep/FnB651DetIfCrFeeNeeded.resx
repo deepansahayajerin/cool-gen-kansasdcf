@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseRoleCsePerson">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T1.NUMB = T4.CAS_NUMBER) and
+    (T4.TYPE = 'AR') and
+    (T4.CSP_NUMBER = @cspNumber) and
+    (T1.STATUS = 'O')
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram1">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram2">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram3">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (PRG_GENERATED_ID in (2, 6))
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram4">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (PRG_GENERATED_ID in (2, 6))
+</value>
+   </data>
+</root>

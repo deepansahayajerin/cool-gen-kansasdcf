@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCodeCodeValue">
+      <value>
+select top(1)
+  COD_ID,
+  COV_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DESCRIPTION
+from
+  CKT_CODE_VALUE
+where
+  (COD_ID = @codId) and
+  (CDVALUE = cast(@county as char(2)))
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  COUNTY_ABBR = @countyAbbr
+</value>
+   </data>
+</root>

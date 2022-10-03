@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAbsentParentCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.STATUS,
+  T2.CSE_OPEN_DATE
+from
+  CKT_CASE T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.END_DATE &gt;= @endDate) and
+    (T1.START_DATE &lt;= @endDate) and
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (T2.NUMB &gt;= @numb) and
+    (T2.STATUS = 'O')
+order by
+  T1.CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  END_DATE,
+  START_DATE
+from
+  CKT_INCARCERATION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  CSP_I_NUMBER,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (END_DT &gt;= @endDt) and
+  (START_DT &lt;= @endDt) and
+  (RETURN_DT &gt; @returnDt) and
+  (
+    (
+      (TYPE = 'E') and
+      (RETURN_CD = 'E')
+    ) or
+    (
+      (TYPE = 'M') and
+      (RETURN_CD = 'A')
+    )
+  )
+</value>
+   </data>
+   <data name="ReadProgramRun">
+      <value>
+select top(1)
+  PPI_CREATED_TSTAMP,
+  PPI_NAME,
+  START_TIMESTAMP
+from
+  CKT_PROGRAM_RUN
+where
+  (START_TIMESTAMP = @startTimestamp) and
+  (PPI_NAME = @ppiName) and
+  (PPI_CREATED_TSTAMP = @ppiCreatedTstamp)
+</value>
+   </data>
+</root>

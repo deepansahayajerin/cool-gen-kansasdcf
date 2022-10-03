@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFcrSvesAddress">
+      <value>
+select top(1)
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  [STATE],
+  ZIP_CODE5,
+  ZIP_CODE4,
+  CITY,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  ADDRESS_LINE_3,
+  ADDRESS_LINE_4
+from
+  CKT_FCR_SVES_ADDR
+where
+  (@fcgMemberId = FCG_MEMBER_ID) and
+  (@fcgLSRspAgy = FCG_L_S_RSP_AGY) and
+  (ADDRESS_TYPE = '05')
+</value>
+   </data>
+   <data name="ReadFcrSvesGenInfo">
+      <value>
+select top(1)
+  MEMBER_ID,
+  LOC_SRC_RSP_AGY_CD,
+  SEX_CODE,
+  RETURNED_DOB,
+  SSN,
+  FIPS_COUNTY_CODE,
+  LOCATE_RESPONSE_CD,
+  MULTIPLE_SSN,
+  PARTICIPANT_TYPE,
+  RETD_FIRST_NAME,
+  RETD_MIDDLE_NAME,
+  RETD_LAST_NAME,
+  USER_FIELD
+from
+  CKT_FCR_SVES_GEN
+where
+  (LOC_SRC_RSP_AGY_CD = 'E07') and
+  (MEMBER_ID = @memberId)
+</value>
+   </data>
+   <data name="ReadFcrSvesPrison">
+      <value>
+select top(1)
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  SEQ_NO,
+  FACILITY_TYPE,
+  FACILITY_PHONE,
+  FACILITY_FAX_NUM,
+  PRISONER_ID_NUMBER,
+  PRISON_RPTD_SSN,
+  PRISON_RPTD_SUFFIX,
+  CONFINEMENT_DATE,
+  RELEASE_DATE,
+  REPORT_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FACILITY_NAME,
+  FACILITY_CONTACT,
+  REPORTER_NAME
+from
+  CKT_FCR_SVES_PRISN
+where
+  (@fcgLSRspAgy = FCG_L_S_RSP_AGY) and
+  (@fcgMemberId = FCG_MEMBER_ID) and
+  (SEQ_NO = 01)
+</value>
+   </data>
+</root>

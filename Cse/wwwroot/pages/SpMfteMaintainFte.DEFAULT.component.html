@@ -1,0 +1,471 @@
+﻿<!--Name: SP_MFTE_MAINTAIN_FTE, ID: 945145058, model: 746-->
+<div coolContent coolName="SP_MFTE_MAINTAIN_FTE" coolType="SCREEN"
+  (coolInit)="scrollSize = 165; pageSize = 11">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 18.75%; top: 0; width: 62.5%; height: 4%;" coolCol="16"
+     coolRow="1" coolLength="50">CSE - Full Time Equivalent List Maintenance - MFTE</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">Next</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt" style="left: 10%; top: 16%; width: 5%; height: 4%;"
+     coolCol="9" coolRow="5" coolLength="4">YEAR</div>
+   <input type="text" coolType="field" name="field_5_14"
+     [(ngModel)]="in.yearMonth.text4"
+     [coolVideo]="out.yearMonth.screenField?.text4" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 16.25%; top: 16%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="5" coolLength="4">
+   
+   <div coolType="prompt"
+     style="left: 23.75%; top: 16%; width: 6.25%; height: 4%;" coolCol="20"
+     coolRow="5" coolLength="5">MONTH</div>
+   <input type="text" coolType="field" name="field_5_26"
+     [(ngModel)]="in.yearMonth.text2"
+     [coolVideo]="out.yearMonth.screenField?.text2" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="2"
+     style="left: 31.25%; top: 16%; width: 2.5%; height: 4%;" coolCol="26"
+     coolRow="5" coolLength="2">
+   
+   <div coolType="prompt" style="left: 10%; top: 24%; width: 3.75%; height: 4%;"
+     coolCol="9" coolRow="7" coolLength="3">Sel</div>
+   
+   <div coolType="prompt" style="left: 15%; top: 24%; width: 7.5%; height: 4%;"
+     coolCol="13" coolRow="7" coolLength="6">Office</div>
+   
+   <div coolType="prompt" style="left: 27.5%; top: 24%; width: 5%; height: 4%;"
+     coolCol="23" coolRow="7" coolLength="4">Name</div>
+   
+   <div coolType="prompt"
+     style="left: 71.25%; top: 24%; width: 3.75%; height: 4%;" coolCol="58"
+     coolRow="7" coolLength="3">FTE</div>
+   <input type="text" coolType="field" name="field_8_10"
+     [(ngModel)]="ref(in.group, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab #field_8_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 28%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="8" coolLength="1" [hidden]="pageOffset >= 165">
+   <input type="text" coolType="field" name="field_8_14"
+     [(ngModel)]="ref(in.group, pageOffset, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_8_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 28%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="8" coolLength="4" [hidden]="pageOffset >= 165">
+   <input type="text" coolType="field" name="field_8_19"
+     [(ngModel)]="ref(in.group, pageOffset, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.office2.screenField?.selectChar"
+     coolAutotab #field_8_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 28%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="8" coolLength="1" [hidden]="pageOffset >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 28%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="8" coolLength="30" [hidden]="pageOffset >= 165">{{in.group?.[pageOffset]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_8_56"
+     [(ngModel)]="ref(in.group, pageOffset, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_8_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 28%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="8" coolLength="7" [hidden]="pageOffset >= 165">
+   <input type="text" coolType="field" name="field_9_10"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab #field_9_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 32%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 1 >= 165">
+   <input type="text" coolType="field" name="field_9_14"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_9_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 32%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="9" coolLength="4" [hidden]="pageOffset + 1 >= 165">
+   <input type="text" coolType="field" name="field_9_19"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.office2.screenField?.selectChar"
+     coolAutotab #field_9_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 1 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 32%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="9" coolLength="30" [hidden]="pageOffset + 1 >= 165">{{in.group?.[pageOffset + 1]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_9_56"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_9_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 32%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="9" coolLength="7" [hidden]="pageOffset + 1 >= 165">
+   <input type="text" coolType="field" name="field_10_10"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab #field_10_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 36%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 2 >= 165">
+   <input type="text" coolType="field" name="field_10_14"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_10_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 36%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="10" coolLength="4" [hidden]="pageOffset + 2 >= 165">
+   <input type="text" coolType="field" name="field_10_19"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.office2.screenField?.selectChar"
+     coolAutotab #field_10_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 2 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 36%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="10" coolLength="30" [hidden]="pageOffset + 2 >= 165">{{in.group?.[pageOffset + 2]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_10_56"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_10_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 36%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="10" coolLength="7" [hidden]="pageOffset + 2 >= 165">
+   <input type="text" coolType="field" name="field_11_10"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab #field_11_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 40%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 3 >= 165">
+   <input type="text" coolType="field" name="field_11_14"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_11_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 40%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="11" coolLength="4" [hidden]="pageOffset + 3 >= 165">
+   <input type="text" coolType="field" name="field_11_19"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.office2.screenField?.selectChar"
+     coolAutotab #field_11_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 3 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 40%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="11" coolLength="30" [hidden]="pageOffset + 3 >= 165">{{in.group?.[pageOffset + 3]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_11_56"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_11_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 40%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="11" coolLength="7" [hidden]="pageOffset + 3 >= 165">
+   <input type="text" coolType="field" name="field_12_10"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab #field_12_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 44%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 4 >= 165">
+   <input type="text" coolType="field" name="field_12_14"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_12_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 44%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="12" coolLength="4" [hidden]="pageOffset + 4 >= 165">
+   <input type="text" coolType="field" name="field_12_19"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.office2.screenField?.selectChar"
+     coolAutotab #field_12_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 4 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 44%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="12" coolLength="30" [hidden]="pageOffset + 4 >= 165">{{in.group?.[pageOffset + 4]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_12_56"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_12_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 44%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="12" coolLength="7" [hidden]="pageOffset + 4 >= 165">
+   <input type="text" coolType="field" name="field_13_10"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab #field_13_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 48%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 5 >= 165">
+   <input type="text" coolType="field" name="field_13_14"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_13_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 48%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="13" coolLength="4" [hidden]="pageOffset + 5 >= 165">
+   <input type="text" coolType="field" name="field_13_19"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.office2.screenField?.selectChar"
+     coolAutotab #field_13_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 5 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 48%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="13" coolLength="30" [hidden]="pageOffset + 5 >= 165">{{in.group?.[pageOffset + 5]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_13_56"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_13_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 48%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="13" coolLength="7" [hidden]="pageOffset + 5 >= 165">
+   <input type="text" coolType="field" name="field_14_10"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab #field_14_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 52%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 6 >= 165">
+   <input type="text" coolType="field" name="field_14_14"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_14_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 52%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="14" coolLength="4" [hidden]="pageOffset + 6 >= 165">
+   <input type="text" coolType="field" name="field_14_19"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.office2.screenField?.selectChar"
+     coolAutotab #field_14_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 6 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 52%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="14" coolLength="30" [hidden]="pageOffset + 6 >= 165">{{in.group?.[pageOffset + 6]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_14_56"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_14_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 52%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="14" coolLength="7" [hidden]="pageOffset + 6 >= 165">
+   <input type="text" coolType="field" name="field_15_10"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab #field_15_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 56%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 7 >= 165">
+   <input type="text" coolType="field" name="field_15_14"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_15_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 56%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="15" coolLength="4" [hidden]="pageOffset + 7 >= 165">
+   <input type="text" coolType="field" name="field_15_19"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.office2.screenField?.selectChar"
+     coolAutotab #field_15_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 7 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 56%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="15" coolLength="30" [hidden]="pageOffset + 7 >= 165">{{in.group?.[pageOffset + 7]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_15_56"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_15_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 56%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="15" coolLength="7" [hidden]="pageOffset + 7 >= 165">
+   <input type="text" coolType="field" name="field_16_10"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab #field_16_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 60%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 8 >= 165">
+   <input type="text" coolType="field" name="field_16_14"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_16_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 60%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="16" coolLength="4" [hidden]="pageOffset + 8 >= 165">
+   <input type="text" coolType="field" name="field_16_19"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.office2.screenField?.selectChar"
+     coolAutotab #field_16_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 8 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 60%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="16" coolLength="30" [hidden]="pageOffset + 8 >= 165">{{in.group?.[pageOffset + 8]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_16_56"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_16_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 60%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="16" coolLength="7" [hidden]="pageOffset + 8 >= 165">
+   <input type="text" coolType="field" name="field_17_10"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab #field_17_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 64%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 9 >= 165">
+   <input type="text" coolType="field" name="field_17_14"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_17_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 64%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="17" coolLength="4" [hidden]="pageOffset + 9 >= 165">
+   <input type="text" coolType="field" name="field_17_19"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.office2.screenField?.selectChar"
+     coolAutotab #field_17_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 9 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 64%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="17" coolLength="30" [hidden]="pageOffset + 9 >= 165">{{in.group?.[pageOffset + 9]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_17_56"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_17_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 64%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="17" coolLength="7" [hidden]="pageOffset + 9 >= 165">
+   <input type="text" coolType="field" name="field_18_10"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab #field_18_10 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 11.25%; top: 68%; width: 1.25%; height: 4%;" coolCol="10"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 10 >= 165">
+   <input type="text" coolType="field" name="field_18_14"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'office1.systemGeneratedId').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.office1.screenField?.systemGeneratedId"
+     coolAutotab #field_18_14 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="0000;#" coolBlankWhenZero
+     [attr.maxlength]="4" style="left: 16.25%; top: 68%; width: 5%; height: 4%;"
+     coolCol="14" coolRow="18" coolLength="4" [hidden]="pageOffset + 10 >= 165">
+   <input type="text" coolType="field" name="field_18_19"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'office2.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.office2.screenField?.selectChar"
+     coolAutotab #field_18_19 coolColor="green" coolHighlight="underscore"
+     placeholder="+" coolUpper [attr.maxlength]="1"
+     style="left: 22.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="19"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 10 >= 165">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 27.5%; top: 68%; width: 37.5%; height: 4%;" coolCol="23"
+     coolRow="18" coolLength="30" [hidden]="pageOffset + 10 >= 165">{{in.group?.[pageOffset + 10]?.office1.name}}</div>
+   <input type="text" coolType="field" name="field_18_56"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'officeStaffing.fullTimeEquivalent').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.officeStaffing.screenField?.fullTimeEquivalent"
+     coolAutotab #field_18_56 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###0.00;#" coolBlankWhenZero
+     [attr.maxlength]="7"
+     style="left: 68.75%; top: 68%; width: 8.75%; height: 4%;" coolCol="56"
+     coolRow="18" coolLength="7" [hidden]="pageOffset + 10 >= 165">
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="20" coolLength="8"
+     style="left: 86.25%; top: 76%; width: 10%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 88%; width: 96.25%; height: 4%;" coolCol="2"
+     coolRow="23" coolLength="77">PFKEY : 1 Help     2 Display  3 Exit  4 List  5 Add  6 Update  7 Prev  8 Next</div>
+   
+   <div coolType="literal"
+     style="left: 10%; top: 92%; width: 73.75%; height: 4%;" coolCol="9"
+     coolRow="24" coolLength="59">10 Delete  11 Clear   12 Signoff  15 Offices  16 Select All</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="ADD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=ADD</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="OFFICES" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=OFFICES</a>
+   <a coolType="action" coolCommand="SELALL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=SELALL</a>
+   </div>

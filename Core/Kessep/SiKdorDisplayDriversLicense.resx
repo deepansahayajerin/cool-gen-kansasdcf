@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  EYE_COLOR,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  END_DATE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_DATE &gt; @endDate) and
+  (STREET_1 = @street1) and
+  (STREET_2 = @street2) and
+  (CITY = @city) and
+  ([STATE] = @state) and
+  (ZIP_CODE = @zipCode) and
+  (ZIP4 = @zip4)
+</value>
+   </data>
+   <data name="ReadCsePersonLicense">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  ISSUING_STATE,
+  NUMB,
+  EXPIRATION_DT,
+  TYPE
+from
+  CKT_CSE_PERS_LCNS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'D') and
+  (ISSUING_STATE = 'KS') and
+  (NUMB = @numb)
+</value>
+   </data>
+   <data name="ReadKdorDriversLicense">
+      <value>
+select top(1)
+  TYPE,
+  LAST_NAME,
+  FIRST_NAME,
+  SSN,
+  DATE_OF_BIRTH,
+  LICENSE_NUMBER,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAMP,
+  STATUS,
+  ERROR_REASON,
+  DL_CLASS_IND,
+  MOTORCYCLE_CLASS_IND,
+  CDL_CLASS_IND,
+  EXPIRATION_DT,
+  GENDER_CODE,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  HEIGHT_FEET,
+  HEIGHT_INCHES,
+  WEIGHT,
+  EYE_COLOR,
+  FK_CKT_CSE_PERSNUMB
+from
+  CKT_KDOR_DRVRS_LIC
+where
+  @fkCktCsePersnumb = FK_CKT_CSE_PERSNUMB
+</value>
+   </data>
+</root>

@@ -1,0 +1,69 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnAsusLstMtnAccrngOblgSusp"
+           program-name="SWEASUSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnAsusLstMtnAccrngOblgSusp"
+           transaction="SR36"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_COLP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnColpMtnCollectionProtect"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="ObligationType.Code" to="ObligationType.Code"/>
+      <map from="ObligationType.SystemGeneratedIdentifier"
+           to="ObligationType.SystemGeneratedIdentifier"/>
+      <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="Obligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="Obligation.PrimarySecondaryCode"
+           to="Obligation.PrimarySecondaryCode"/>
+   </on>
+   <map from="AccrualInstructions" to="AccrualInstructions"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="HiddenFirstTime" to="HiddenFirstTime"/>
+   <map from="ScreenOwedAmounts" to="ScreenOwedAmounts"/>
+   <map from="ObligationType" to="ObligationType"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="SupportedCsePerson" to="SupportedCsePerson"/>
+   <map from="SupportedCsePersonsWorkSet" to="SupportedCsePersonsWorkSet"/>
+   <map from="FrequencyWorkSet" to="FrequencyWorkSet"/>
+   <map from="Obligation" to="Obligation"/>
+   <map from="HiddenDisplay" to="HiddenDisplay"/>
+   <map from="JointAndSeveralCsePerson" to="ConcurrentCsePerson"/>
+   <map from="JointAndSeveralObligation" to="ConcurrentObligation"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ObligationAmt" to="ObligationAmt"/>
+   <map from="CountOfPages" to="CountOfPages"/>
+   <map from="CountOfRecords" to="CountOfRecords"/>
+   <map from="ProtectQuestionLiteral" to="ProtectQuestionLiteral"/>
+   <map from="CollProtAnswer" to="CollProtAnswer"/>
+   <map from="Group2.HiddenGrpDetail2AccrualSuspension"
+        to="Group2.HiddenGrpDetail2AccrualSuspension"/>
+   <map from="Group2.HiddenPrev2" to="Group2.HiddenPrev2"/>
+   <map from="Group2.CreateDate2" to="Group2.CreateDate2"/>
+   <map from="HidCurrentRecord" to="HidCurrentRecord"/>
+   <map from="Common" to="Common"/>
+   <map from="AccrualSuspension" to="AccrualSuspension"/>
+   <map from="HiddenShowHistory" to="HiddenShowHistory"/>
+   <map from="ScrollIndicator" to="ScrollIndicator"/>
+   <map from="CsePerson.Number" to="CsePerson.Number"/>
+   <map from="ObligationTransaction.Amount" to="ObligationTransaction.Amount"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="ObligationTransaction.SystemGeneratedIdentifier"
+        to="ObligationTransaction.SystemGeneratedIdentifier"/>
+   <map from="Redisplay.SuspendDt" to="Redisplay.SuspendDt"/>
+   <map from="Group2.HiddenGrpDetail2Common.SelectChar"
+        to="Group2.HiddenGrpDetail2Common.SelectChar"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

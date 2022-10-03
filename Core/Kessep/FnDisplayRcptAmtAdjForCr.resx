@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  CASH_BAL_AMT,
+  CASH_DUE
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn1">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) + T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIIdentifier = T1.CRT_I_IDENTIFIER) and
+    (@cstIIdentifier = T1.CST_I_IDENTIFIER) and
+    (@crvIIdentifier = T1.CRV_I_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn2">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) - T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn3">
+      <value>
+select
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRT_I_IDENTIFIER,
+  T1.CST_I_IDENTIFIER,
+  T1.CRV_I_IDENTIFIER,
+  T1.CRR_IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T1.ADJUSTMENT_AMOUNT,
+  T2.CODE
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (
+      (
+        (@crtIIdentifier = T1.CRT_I_IDENTIFIER) and
+        (@cstIIdentifier = T1.CST_I_IDENTIFIER) and
+        (@crvIIdentifier = T1.CRV_I_IDENTIFIER)
+      ) or
+      (
+        (@crtIIdentifier = T1.CRT_IDENTIFIER) and
+        (@cstIIdentifier = T1.CST_IDENTIFIER) and
+        (@crvIIdentifier = T1.CRV_IDENTIFIER)
+      )
+    ) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+order by
+  T1.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptEvent1">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.RECEIPT_AMOUNT,
+  T1.CASH_RECEIPT_ID,
+  T1.CHECK_DATE,
+  T2.SOURCE_CREATION_DT
+from
+  CKT_CR_EVENT T2
+  join
+  CKT_CASH_RECEIPT T1
+  on
+    (T1.CRT_IDENTIFIER = @crtIdentifier) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T1.CRV_IDENTIFIER = @crvIdentifier) and
+    (T2.CREVENT_ID = T1.CRV_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptEvent2">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.RECEIPT_AMOUNT,
+  T1.CASH_RECEIPT_ID,
+  T1.CHECK_DATE,
+  T2.SOURCE_CREATION_DT
+from
+  CKT_CR_EVENT T2
+  join
+  CKT_CASH_RECEIPT T1
+  on
+    (T1.CRT_IDENTIFIER = @crtIdentifier) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T1.CRV_IDENTIFIER = @crvIdentifier) and
+    (T2.CREVENT_ID = T1.CRV_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptEventCashReceiptSourceType">
+      <value>
+select top(1)
+  T1.CST_IDENTIFIER,
+  T1.CREVENT_ID,
+  T1.RECEIVED_DATE,
+  T1.SOURCE_CREATION_DT,
+  T2.INTERFACE_IND,
+  T2.CODE
+from
+  CKT_CRSRC_TYPE T2
+  join
+  CKT_CR_EVENT T1
+  on
+    (T1.CREVENT_ID = @creventId) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T2.CR_SRCE_TYPE_ID = T1.CST_IDENTIFIER)
+</value>
+   </data>
+</root>

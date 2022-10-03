@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteJobRun">
+      <value>
+delete from CKT_JOB_RUN
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+   <data name="DeleteReportData">
+      <value>
+delete from CKT_REPORT_DATA
+where
+  (TYPE = @type) and
+  (SEQUENCE_NUMBER = @sequenceNumber) and
+  (JOB_NAME = @jobName) and
+  (JRU_SYSTEM_GEN_ID = @jruSystemGenId)
+</value>
+   </data>
+   <data name="ReadJob">
+      <value>
+select top(1)
+  NAME
+from
+  CKT_JOB with(readuncommitted)
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="ReadJobRun">
+      <value>
+select top(1)
+  START_TIMESTAMP,
+  END_TIMESTAMP,
+  STATUS,
+  SPD_SRVC_PRVDER_ID,
+  OUTPUT_TYPE,
+  JOB_NAME,
+  SYSTEM_GEN_ID
+from
+  CKT_JOB_RUN
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+   <data name="ReadJobRunServiceProvider">
+      <value>
+select
+  T1.START_TIMESTAMP,
+  T1.END_TIMESTAMP,
+  T1.STATUS,
+  T1.SPD_SRVC_PRVDER_ID,
+  T1.OUTPUT_TYPE,
+  T1.JOB_NAME,
+  T1.SYSTEM_GEN_ID,
+  T2.USER_ID,
+  T2.LAST_NAME,
+  T2.FIRST_NAME,
+  T2.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T2 with(readuncommitted)
+  join
+  CKT_JOB_RUN T1 with(readuncommitted)
+  on
+    (@jobName = T1.JOB_NAME) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_SRVC_PRVDER_ID) and
+    (T1.START_TIMESTAMP &gt;= @startTimestamp)
+order by
+  T1.START_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadReportData">
+      <value>
+select
+  TYPE,
+  SEQUENCE_NUMBER,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+from
+  CKT_REPORT_DATA
+where
+  (@jobName = JOB_NAME) and
+  (@jruSystemGenId = JRU_SYSTEM_GEN_ID)
+</value>
+   </data>
+</root>

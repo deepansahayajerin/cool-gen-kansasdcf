@@ -1,0 +1,84 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnNadsNonCaseForeignAddr"
+           program-name="SWENADSQ"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnNadsNonCaseForeignAddr"
+           transaction="SRF5"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_PERSON_NAME_LIST ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="PRMPTRET"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="link"
+       return-command-type="none"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <map from="Export1.PromptSourceCode" to="Import1.PromptSourceCode"/>
+   <map from="Export1.Sel" to="Import1.Sel"/>
+   <map from="HiddenPageKeys.HiddenPageKey" to="HiddenPageKeys.HiddenPageKey"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="Export1.Hidden" to="Import1.Hidden"/>
+   <map from="Last" to="Last"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HpromptLineNo" to="HpromptLineNo"/>
+   <map from="Export1.PromptCountry" to="Import1.PromptCountry"/>
+   <map from="Export1.PromptEndCode" to="Import1.PromptEndCode"/>
+   <map from="Export1.PromptReturnCode" to="Import1.PromptReturnCode"/>
+   <map from="ScrollPlus" to="ScrollPlus"/>
+   <map from="ScrollMinus" to="ScrollMinus"/>
+   <map from="ProtectFields" to="ProtectFields"/>
+   <map from="CsePersonPrompt" to="CsePersonPrompt"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Export1.CsePersonAddress.LastUpdatedTimestamp"
+        to="Import1.CsePersonAddress.LastUpdatedTimestamp"/>
+   <map from="HiddenStandard.PageNumber" to="HiddenStandard.PageNumber"/>
+   <map from="Export1.CsePersonAddress.EndDate"
+        to="Import1.CsePersonAddress.EndDate"/>
+   <map from="Export1.CsePersonAddress.Street1"
+        to="Import1.CsePersonAddress.Street1"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="Export1.CsePersonAddress.Identifier"
+        to="Import1.CsePersonAddress.Identifier"/>
+   <map from="Export1.CsePersonAddress.EndCode"
+        to="Import1.CsePersonAddress.EndCode"/>
+   <map from="Export1.CsePersonAddress.VerifiedDate"
+        to="Import1.CsePersonAddress.VerifiedDate"/>
+   <map from="Export1.CsePersonAddress.Street2"
+        to="Import1.CsePersonAddress.Street2"/>
+   <map from="Export1.CsePersonAddress.City" to="Import1.CsePersonAddress.City"/>
+   <map from="Export1.CsePersonAddress.Country"
+        to="Import1.CsePersonAddress.Country"/>
+   <map from="Export1.CsePersonAddress.Source"
+        to="Import1.CsePersonAddress.Source"/>
+   <map from="Export1.CsePersonAddress.Type1"
+        to="Import1.CsePersonAddress.Type1"/>
+   <map from="Export1.CsePersonAddress.WorkerId"
+        to="Import1.CsePersonAddress.WorkerId"/>
+   <map from="Export1.CsePersonAddress.LocationType"
+        to="Import1.CsePersonAddress.LocationType"/>
+   <map from="Export1.CsePersonAddress.Street3"
+        to="Import1.CsePersonAddress.Street3"/>
+   <map from="Export1.CsePersonAddress.Street4"
+        to="Import1.CsePersonAddress.Street4"/>
+   <map from="Export1.CsePersonAddress.Province"
+        to="Import1.CsePersonAddress.Province"/>
+   <map from="Export1.CsePersonAddress.PostalCode"
+        to="Import1.CsePersonAddress.PostalCode"/>
+</procedure>

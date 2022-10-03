@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseUnit">
+      <value>
+select distinct
+  T2.CAS_NO,
+  T2.CU_NUMBER,
+  T2.START_DATE,
+  T2.CLOSURE_DATE,
+  T2.CSP_NO_AP
+from
+  CKT_CASE_UNIT T2
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T2.CSP_NO_AP = T4.CSP_NUMBER) and
+    (T2.CSP_NO_AP = @cspNoAp)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select top(1)
+  HCV_ID,
+  CSP_NUMBER,
+  COVER_BEGIN_DATE,
+  COVER_END_DATE
+from
+  CKT_PERSONAL_HINS
+where
+  (CSP_NUMBER = @cspNumber) and
+  (COVER_BEGIN_DATE &lt; @coverBeginDate) and
+  (COVER_END_DATE &gt; @coverBeginDate)
+</value>
+   </data>
+</root>

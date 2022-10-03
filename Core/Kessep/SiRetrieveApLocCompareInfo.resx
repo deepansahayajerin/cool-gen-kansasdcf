@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  OCCUPATION,
+  AE_CASE_NUMBER,
+  DATE_OF_DEATH,
+  ILLEGAL_ALIEN_IND,
+  CURRENT_SPOUSE_MI,
+  CURR_SPOUSE_1ST_NM,
+  BIRTH_PLACE_STATE,
+  EMERGENCY_PHONE,
+  NAME_MIDDLE,
+  NAME_MAIDEN,
+  HOME_PHONE,
+  OTHER_NUMBER,
+  BIRTH_PLACE_CITY,
+  CURR_MARITAL_STS,
+  CUR_SPOUSE_LAST_NM,
+  RACE,
+  HAIR_COLOR,
+  EYE_COLOR,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN,
+  KSCARES_NUMBER,
+  OTHER_AREA_CODE,
+  EMERGENCY_AREA_CD,
+  HOME_PHONE_AREA_CD,
+  WORK_PHONE_AREA_CD,
+  WORK_PHONE,
+  WORK_PHONE_EXT,
+  OTHER_PHONE_TYPE,
+  OTHER_ID_INFO,
+  TEXT_MESSAGE_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonLicense">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  ISSUING_STATE,
+  ISSUING_AGENCY_NM,
+  NUMB,
+  EXPIRATION_DT,
+  START_DT,
+  TYPE,
+  DESCRIPTION,
+  NOTE
+from
+  CKT_CSE_PERS_LCNS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (EXPIRATION_DT &gt; @expirationDt) and
+  (TYPE = 'D')
+</value>
+   </data>
+</root>

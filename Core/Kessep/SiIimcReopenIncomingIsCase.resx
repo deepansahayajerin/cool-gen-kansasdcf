@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAbsentParentCsePerson">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  CSE_OPEN_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  IC_TRANS_SER_NO,
+  IC_TRANS_DATE,
+  DUP_CASE_INDICATOR
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseInterstateRequest1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.CSE_OPEN_DATE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.IC_TRANS_SER_NO,
+  T1.IC_TRANS_DATE,
+  T1.DUP_CASE_INDICATOR,
+  T2.IDENTIFIER,
+  T2.OTHER_STATE_CAS_ID,
+  T2.OTHR_STATE_FIPS_CD,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.OTH_ST_CASE_STATUS,
+  T2.CASE_TYPE,
+  T2.KS_CASE_IND,
+  T2.OTH_STATE_CLS_RES,
+  T2.OTH_STATE_CLS_DTE,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_ID,
+  T2.COUNTRY,
+  T2.TRIBAL_AGENCY
+from
+  CKT_CASE T1
+  join
+  CKT_INTERSTAT_RQST T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CAS_I_NUMBER) and
+    (T2.KS_CASE_IND = 'N') and
+    (T2.OTH_ST_CASE_STATUS = 'O') and
+    (
+      (
+        (cast(@otherStateFips as smallint) &gt; 0) and
+        (T2.OTHR_STATE_FIPS_CD = @otherStateFips)
+      ) or
+      (
+        (cast(@country as char(2)) &lt;&gt; ' ') and
+        (T2.COUNTRY = @country)
+      ) or
+      (
+        (cast(@tribalAgency as char(4)) &lt;&gt; ' ') and
+        (T2.TRIBAL_AGENCY = @tribalAgency)
+      )
+    )
+</value>
+   </data>
+   <data name="ReadCaseInterstateRequest2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.CSE_OPEN_DATE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.IC_TRANS_SER_NO,
+  T1.IC_TRANS_DATE,
+  T1.DUP_CASE_INDICATOR,
+  T2.IDENTIFIER,
+  T2.OTHER_STATE_CAS_ID,
+  T2.OTHR_STATE_FIPS_CD,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.OTH_ST_CASE_STATUS,
+  T2.CASE_TYPE,
+  T2.KS_CASE_IND,
+  T2.OTH_STATE_CLS_RES,
+  T2.OTH_STATE_CLS_DTE,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_ID,
+  T2.COUNTRY,
+  T2.TRIBAL_AGENCY
+from
+  CKT_CASE T1
+  join
+  CKT_INTERSTAT_RQST T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CAS_I_NUMBER) and
+    (T2.KS_CASE_IND = 'Y') and
+    (T2.OTH_ST_CASE_STATUS = 'C') and
+    (
+      (
+        (cast(@otherStateFips as smallint) &gt; 0) and
+        (T2.OTHR_STATE_FIPS_CD = @otherStateFips)
+      ) or
+      (
+        (cast(@country as char(2)) &lt;&gt; ' ') and
+        (T2.COUNTRY = @country)
+      ) or
+      (
+        (cast(@tribalAgency as char(4)) &lt;&gt; ' ') and
+        (T2.TRIBAL_AGENCY = @tribalAgency)
+      )
+    )
+</value>
+   </data>
+   <data name="ReadCaseInterstateRequest3">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.CSE_OPEN_DATE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.IC_TRANS_SER_NO,
+  T1.IC_TRANS_DATE,
+  T1.DUP_CASE_INDICATOR,
+  T2.IDENTIFIER,
+  T2.OTHER_STATE_CAS_ID,
+  T2.OTHR_STATE_FIPS_CD,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.OTH_ST_CASE_STATUS,
+  T2.CASE_TYPE,
+  T2.KS_CASE_IND,
+  T2.OTH_STATE_CLS_RES,
+  T2.OTH_STATE_CLS_DTE,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_ID,
+  T2.COUNTRY,
+  T2.TRIBAL_AGENCY
+from
+  CKT_CASE T1
+  join
+  CKT_INTERSTAT_RQST T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CAS_I_NUMBER) and
+    (T2.KS_CASE_IND = 'Y') and
+    (T2.OTH_ST_CASE_STATUS = 'O') and
+    (
+      (
+        (cast(@otherStateFips as smallint) &gt; 0) and
+        (T2.OTHR_STATE_FIPS_CD = @otherStateFips)
+      ) or
+      (
+        (cast(@country as char(2)) &lt;&gt; ' ') and
+        (T2.COUNTRY = @country)
+      ) or
+      (
+        (cast(@tribalAgency as char(4)) &lt;&gt; ' ') and
+        (T2.TRIBAL_AGENCY = @tribalAgency)
+      )
+    )
+</value>
+   </data>
+   <data name="ReadCaseInterstateRequest4">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.CSE_OPEN_DATE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.IC_TRANS_SER_NO,
+  T1.IC_TRANS_DATE,
+  T1.DUP_CASE_INDICATOR,
+  T2.IDENTIFIER,
+  T2.OTHER_STATE_CAS_ID,
+  T2.OTHR_STATE_FIPS_CD,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.OTH_ST_CASE_STATUS,
+  T2.CASE_TYPE,
+  T2.KS_CASE_IND,
+  T2.OTH_STATE_CLS_RES,
+  T2.OTH_STATE_CLS_DTE,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_ID,
+  T2.COUNTRY,
+  T2.TRIBAL_AGENCY
+from
+  CKT_CASE T1
+  join
+  CKT_INTERSTAT_RQST T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CAS_I_NUMBER) and
+    (T2.KS_CASE_IND = ' ') and
+    (T2.OTH_ST_CASE_STATUS = ' ') and
+    (
+      (
+        (cast(@otherStateFips as smallint) &gt; 0) and
+        (T2.OTHR_STATE_FIPS_CD = @otherStateFips)
+      ) or
+      (
+        (cast(@country as char(2)) &lt;&gt; ' ') and
+        (T2.COUNTRY = @country)
+      ) or
+      (
+        (cast(@tribalAgency as char(4)) &lt;&gt; ' ') and
+        (T2.TRIBAL_AGENCY = @tribalAgency)
+      )
+    )
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (START_DATE &lt;= @startDate) and
+  (CLOSURE_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST
+where
+  (IDENTIFIER = @identifier) and
+  (@casINumber = CAS_I_NUMBER) and
+  (@croId = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  TRANSACTION_DIRECT,
+  TRANSACTION_SERIAL,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  ACTION_REASON_CODE,
+  ACTION_RES_DTE,
+  ATTACHMENT_INDICAT,
+  NOTE
+from
+  CKT_INT_RQST_HIST
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (ACTION_REASON_CODE = 'IICNV')
+</value>
+   </data>
+   <data name="UpdateInterstateRequest">
+      <value>
+update CKT_INTERSTAT_RQST
+set
+  OTHER_STATE_CAS_ID = @otherStateCasId,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  OTH_ST_CASE_STATUS = @othStCaseStatus,
+  CASE_TYPE = @caseType,
+  OTH_STATE_CLS_RES = @othStateClsRes,
+  OTH_STATE_CLS_DTE = @othStateClsDte
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateInterstateRequestHistory">
+      <value>
+update CKT_INT_RQST_HIST
+set
+  NOTE = @note
+where
+  (INT_GENERATED_ID = @intGeneratedId) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+</root>

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteOfficeServiceProviderAlert">
+      <value>
+delete from CKT_OSP_ALERT
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  CLOSURE_REASON,
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select distinct
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadEventDetail1">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  LOG_TO_DIARY_IND,
+  EVE_NO,
+  EXCEPTION_ROUTINE
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = @eveNo) and
+  (REASON_CODE = @reasonCode)
+</value>
+   </data>
+   <data name="ReadEventDetail2">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  LOG_TO_DIARY_IND,
+  EVE_NO,
+  EXCEPTION_ROUTINE
+from
+  CKT_EVENT_DETAIL with(readuncommitted)
+where
+  (EVE_NO = @eveNo) and
+  (REASON_CODE = @reasonCode)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderAlert">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I
+from
+  CKT_OSP_ALERT
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderAlertInfrastructure1">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.TYPE_CODE,
+  T1.SITUATION_IDENTIFI,
+  T1.PRIORITIZATION_COD,
+  T1.OPTIMIZATION_IND,
+  T1.OPTIMIZED_FLAG,
+  T1.USER_ID,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.INF_ID,
+  T2.PROCESS_STATUS,
+  T2.EVENT_ID,
+  T2.REASON_CODE,
+  T2.DENORM_TEXT_12,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.CREATED_BY
+from
+  CKT_INFRASTRUCTURE T2
+  join
+  CKT_OSP_ALERT T1
+  on
+    (T1.TYPE_CODE = 'AUT') and
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T2.PROCESS_STATUS = 'O') and
+    (T2.CREATED_BY = 'SWEPB305') and
+    (T2.REASON_CODE in ('AEADDRCHNG', 'KSCADDRCHNG'))
+order by
+  T1.USER_ID,
+  T2.CASE_NUMBER,
+  T2.REASON_CODE,
+  T2.DENORM_TEXT_12,
+  T1.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderAlertInfrastructure2">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.TYPE_CODE,
+  T1.SITUATION_IDENTIFI,
+  T1.PRIORITIZATION_COD,
+  T1.OPTIMIZATION_IND,
+  T1.OPTIMIZED_FLAG,
+  T1.USER_ID,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.INF_ID,
+  T2.PROCESS_STATUS,
+  T2.EVENT_ID,
+  T2.REASON_CODE,
+  T2.DENORM_TEXT_12,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.CREATED_BY
+from
+  CKT_INFRASTRUCTURE T2
+  join
+  CKT_OSP_ALERT T1
+  on
+    (T1.TYPE_CODE = 'AUT') and
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T2.PROCESS_STATUS = 'O')
+order by
+  T1.SITUATION_IDENTIFI,
+  T1.USER_ID,
+  T2.CASE_NUMBER,
+  T1.PRIORITIZATION_COD,
+  T1.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadProgramError">
+      <value>
+select top(1)
+  max(PGM_ERROR_ID)
+from
+  CKT_PROGRAM_ERROR
+where
+  (@prrStartTstamp = PRR_START_TSTAMP) and
+  (@ppiCreatedTstamp = PPI_CREATED_TSTAMP) and
+  (@ppiName = PPI_NAME)
+</value>
+   </data>
+   <data name="ReadProgramRun">
+      <value>
+select top(1)
+  PPI_CREATED_TSTAMP,
+  PPI_NAME,
+  START_TIMESTAMP
+from
+  CKT_PROGRAM_RUN
+where
+  (PPI_NAME = @ppiName) and
+  (PPI_CREATED_TSTAMP = @ppiCreatedTstamp) and
+  (cast(START_TIMESTAMP as date) = cast(@currentDate as date))
+</value>
+   </data>
+</root>

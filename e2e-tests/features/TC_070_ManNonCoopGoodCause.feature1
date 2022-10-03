@@ -1,0 +1,285 @@
+Feature: TC-070-MAN-NON-COOP-GOOD-CAUSE
+
+  Background: Navigation
+    #Given Go to the ksdcf website with current date "yesterday"
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+    When user enters "1" in a field next to the 'select an option'
+    And presses "Enter"
+    Then "CSE - Service Initiation Menu" window appears
+    Then take snapshot "Sc1_page1"
+    When user enters "4" in "option"
+    And presses "Enter"
+    Then "CSE - Person Management Menu" window appears
+    Then snapshot "Sc1_page2"
+    When user enters "11" in "option"
+    And presses "Enter"
+    Then "CSE - Case Details - CADS" window appears
+    #When user enters "<CASE_N>" in "Case #"
+    When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+    When user presses "F2"
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    When user enters "S" in first field under text "Sel"
+    And user enters "S" in second field to the right
+    Then snapshot "Sc1_1_page2"
+    When user presses "F4"
+    Then "CSE - Code Values List - CDVL" window appears
+    When user enters "S" in first field under text "Sel"
+    And user presses "F9"
+    Then "CSE - Case Details" window appears
+    And first field under text "Good" has value "GC"
+    #When enters "Today" in first field under text "Date"
+    When enters "Today" in first field to the right
+    Then snapshot "Sc1_page3"
+
+    And user presses "F5"
+    Then message "An AP is required for good cause on a case with AP(s)." is displayed
+    When enters "<PERSON>" in first field under text "Person #"
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    When user enters "S" in first field under text "Sel"
+    And user presses "F9"
+    Then "CSE - Case Details - CADS" window appears
+
+    Examples:
+      | CASE_N | PERSON  |
+      | 566485 | 3804975 |
+
+
+  # Scenario Outline: Scenario2
+  #   Given Go to the ksdcf website with current date "yesterday"
+  #   Then snapshot "landing_page"
+  #   Then "CSE - Main Menu" window appears
+  #   When user enters "CADS" in a field next to the 'NEXT'
+  #   And presses "Enter"
+  #   Then "CSE - Case Details - CADS" window appears
+  #   #When user enters "<CASE_N>" in "Case #"
+  #   When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+  #   When user presses "F2"
+  #   And "CSE - Case Composition - COMP" window appears
+  #   Then take snapshot "Sc2_page1"
+  #   When user enters "S" in first field under text "Sel"
+  #   When user presses "F9"
+  #   Then "CSE - Case Details - CADS" window appears
+  #   Then take snapshot "Sc2_page2"
+  #   # Then "Press assigned Clear key to" to bcackdate - I don't know how to do this
+  #   Then take snapshot "Sc2_page3"
+  #   When user enters "SRGO"
+  #   And presses "Enter"
+  #   # Date in the past
+  #   When user enters "<DATE>" in first field under "Set Current Date (Format YYYYMMDD)"
+  #   And presses "Enter"
+  #   Then take snapshot "Sc2_page4"
+  #   # Then "Press assigned Clear key to" to bcackdate - I don't know how to do this
+  #   Then take snapshot "Sc2_page5"
+  #   When user enters "SRBV"
+  #   And presses "Enter"
+  #   And "CSE - Main Manu - CSMM" window appears
+
+  #   When user enters "CADS" in a field next to the 'NEXT'
+  #   And presses "Enter"
+  #   Then "CSE - Case Details - CADS" window appears
+  #   #When user enters "<CASE_N>" in "Case #"
+  #   When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+  #   When user presses "F2"
+  #   And "CSE - Case Composition - COMP" window appears
+  #   Then take snapshot "Sc2_page6"
+  #   When user enters "S" in first field under text "Sel"
+  #   When user presses "F9"
+  #   Then "CSE - Case Details - CADS" window appears
+  #   Then take snapshot "Sc2_page7"
+  #   When user enters "S" in first field under text "Sel"
+  #   And user enters "PD" in first field under text "Good"
+  #   And user enters "<EARLIER_DATE>" in first field under text "Date"
+  #   And user enters "<PERSON>" in first field under text "Person #"
+  #   And user presses "F5"
+
+  #   Examples:
+  #     | CASE_N | PERSON  | EARLIER_DATE |
+  #     | 566477 | 3804949 | Yesterday    |
+  # #| 566490 | 3804987 | Yesterday    |
+
+
+  # Scenario Outline: Scenario3
+  #   Given Go to the ksdcf website
+  #   Then snapshot "landing_page"
+  #   Then "CSE - Main Menu" window appears
+  #   When user enters "CADS" in a field next to the 'NEXT'
+  #   And presses "Enter"
+  #   Then "CSE - Case Details - CADS" window appears
+  #   #When user enters "<CASE_N>" in "Case #"
+  #   When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+  #   When user presses "F2"
+  #   And "CSE - Case Composition - COMP" window appears
+  #   Then take snapshot "Sc4_page1"
+  #   When user enters "S" in first field under text "Sel"
+  #   When user presses "F9"
+  #   Then "CSE - Case Details - CADS" window appears
+  #   Then take snapshot "Sc4_page2"
+  #   # Then "Press assigned Clear key to" to bcackdate - I don't know how to do this
+  #   Then take snapshot "Sc4_page3"
+  #   When user enters "SRGO"
+  #   And presses "Enter"
+  #   # Date in the past
+  #   When user enters "Today" in first field under "Set Current Date (Format YYYYMMDD)"
+  #   And presses "Enter"
+  #   Then take snapshot "Sc4_page4"
+  #   # Then "Press assigned Clear key to" to bcackdate - I don't know how to do this
+  #   Then take snapshot "Sc4_page5"
+  #   When user enters "SRBV"
+  #   And presses "Enter"
+  #   And "CSE - Main Manu - CSMM" window appears
+
+  #   When user enters "CADS" in a field next to the 'NEXT'
+  #   And presses "Enter"
+  #   Then "CSE - Case Details - CADS" window appears
+  #   #When user enters "<CASE_N>" in "Case #"
+  #   When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+  #   When user presses "F2"
+  #   Then "CSE - Case Composition - COMP" window appears
+  #   Then take snapshot "Sc4_page6"
+  #   When user enters "S" in first field under text "Sel"
+  #   When user presses "F9"
+  #   Then "CSE - Case Details - CADS" window appears
+  #   Then take snapshot "Sc4_page7"
+  #   When user enters "S" in first field under text "Sel"
+  #   And user presses "F9"
+  #   Then "CSE - Case Details - CADS" window appears
+  #   Then take snapshot "Sc4_page8"
+  #   When user enters "S" in first field under text "Sel"
+  #   And user enters "NO" in first field under text "Good"
+  #   And user enters "Today" in first field under text "Date"
+  #   And user enters "<PERSON>" in first field under text "Person #"
+  #   And user presses "F5"
+
+  #   Examples:
+  #     | CASE_N | PERSON  |
+  #     # | 566477 | 3804978 |
+  #     | 566490 | 3804987 |
+
+
+  Scenario Outline: Scenario4
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+    When user enters "CADS" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Case Details - CADS" window appears
+    #When user enters "<CASE_N>" in "Case #"
+    When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+    When user presses "F2"
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then take snapshot "Sc4_page1"
+    And user enters "S" in first field under text "Sel"
+    And user enters "NO" in the next field
+    #And user enters "<EARLIER_DATE>" in first field under text "Date"
+    And user enters "<EARLIER_DATE>" in second field to the right
+    When user enters "<PERSON>" in first field under text "Person #"
+    Then take snapshot "Sc4_page2"
+    And user presses "F5"
+    Then message "ACO_NE0000: Date must be current day's date." is displayed
+    Then take snapshot "Sc4_page3"
+    #And user enters "Today" in first field under text "Date"
+    And user enters "Today" in 4th field to the left
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    Then take snapshot "Sc4_page4"
+
+    Examples:
+      | CASE_N | PERSON  | EARLIER_DATE |
+      | 566485 | 3804975 | Yesterday    |
+
+
+  Scenario Outline: Scenario5
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+    When user enters "CADS" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Case Details - CADS" window appears
+    #46When user enters "<CASE_N>" in "Case #"
+    When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+    When user presses "F2"
+    Then "CSE - Case Composition - COMP" window appears
+    Then take snapshot "Sc5_page1"
+    When user enters "S" in first field under text "Sel"
+    When user presses "F9"
+    Then "CSE - Case Details - CADS" window appears
+    Then take snapshot "Sc5_page2"
+    When user enters "S" in first field under text "Sel"
+    And user enters "NO" in the next field
+    #And user enters "Today" in first field under text "Date"
+    And user enters "Today" in second field to the right
+    And user enters "<PERSON>" in first field under text "Person #"
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    Then take snapshot "Sc5_page3"
+
+    Examples:
+      | CASE_N | PERSON  |
+      #  | 566477 | 3804949 |
+      | 566490 | 3804987 |
+
+
+  Scenario Outline: Scenario6
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+    When user enters "CADS" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Case Details - CADS" window appears
+    #When user enters "<CASE_N>" in "Case #"
+    When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+    When user presses "F2"
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then take snapshot "Sc6_page1"
+    When user enters "S" in first field under text "Sel" next to "NON COOP"
+    Then take snapshot "Sc6_page1_1"
+    And user enters "N" in the next field
+    And user enters "Today" in second field to the right
+    And user enters "FC" in first field under text "Reason"
+    And user enters "<PERSON>" in first field under text "More"
+    Then take snapshot "Sc6_page2"
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    Then take snapshot "Sc6_page3"
+
+    Examples:
+      | CASE_N | PERSON  |
+      | 566476 | 3804946 |
+
+
+  Scenario Outline: Scenario9
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+    When user enters "CADS" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Case Details - CADS" window appears
+    #When user enters "<CASE_N>" in "Case #"
+    When user enters "<CASE_N>" in first field under text "CSE - Case Details - CADS"
+    And user presses "F2"
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    Then take snapshot "Sc9_page1"
+    When user enters "S" in first field under text "Sel" next to "NON COOP" section
+    And user enters "C" in the next field
+    And user enters "Today" in second field to the right
+    And user enters "<PERSON>" in first field under text "More"
+    Then take snapshot "Sc9_page1_1"
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    Then take snapshot "Sc9_page2"
+
+    Examples:566476
+      | CASE_N | PERSON  |
+      | 566476 | 3804946 |
+
+
+
+

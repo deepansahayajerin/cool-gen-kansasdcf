@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadObligationDebtObligationTypeDebtDetail">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.PRIM_SEC_CD,
+  T1.ORD_TYP_CD,
+  T2.OB_TRN_ID,
+  T2.OB_TRN_TYP,
+  T2.VOL_PCT_AMT,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE,
+  T3.DEBT_TYP_CLASS,
+  T3.SUP_PRSN_REQ_IND,
+  T4.CVRD_PRD_START_DT,
+  T4.CVD_PRD_END_DT,
+  T4.PRECNVRSN_PGM_CD
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_OBLIGATION T1
+  join
+  CKT_OB_TRN T2
+  on
+    (T1.DTY_GENERATED_ID = T2.OTY_TYPE) and
+    (T1.OB_ID = T2.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = @cspNumber)
+  join
+  CKT_DEBT_DTL T4
+  on
+    (T2.OTY_TYPE = T4.OTY_TYPE) and
+    (T2.OBG_GENERATED_ID = T4.OBG_GENERATED_ID) and
+    (T2.OB_TRN_TYP = T4.OTR_TYPE) and
+    (T2.OB_TRN_ID = T4.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T4.CPA_TYPE) and
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T4.CVRD_PRD_START_DT &lt;= @cvrdPrdStartDt) and
+    (T4.CVD_PRD_END_DT &gt; @cvrdPrdStartDt)
+  on
+    (T3.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (T3.DEBT_TYP_CLASS = @debtTypClass)
+order by
+  T1.OB_ID
+</value>
+   </data>
+</root>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDebtDetailCsePersonDebt1">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.BAL_DUE_AMT,
+  T1.INT_BAL_DUE_AMT,
+  T1.ADC_DT,
+  T1.RETIRED_DT,
+  T1.CVRD_PRD_START_DT,
+  T1.CVD_PRD_END_DT,
+  T1.PRECNVRSN_PGM_CD,
+  T3.OB_TRN_AMT,
+  T3.LAST_UPDATED_BY,
+  T3.LAST_UPDATED_TMST,
+  T3.DEBT_TYP,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE,
+  T3.NEW_DEBT_PROC_DT
+from
+  CKT_OB_TRN T3
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T3.OTY_TYPE = T1.OTY_TYPE) and
+    (T3.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T3.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T3.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.DEBT_TYP = 'D') and
+    (
+      T3.NEW_DEBT_PROC_DT is null or
+      (T3.NEW_DEBT_PROC_DT = @newDebtProcDt)
+    )
+order by
+  T1.DUE_DT
+</value>
+   </data>
+   <data name="ReadDebtDetailCsePersonDebt2">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.BAL_DUE_AMT,
+  T1.INT_BAL_DUE_AMT,
+  T1.ADC_DT,
+  T1.RETIRED_DT,
+  T1.CVRD_PRD_START_DT,
+  T1.CVD_PRD_END_DT,
+  T1.PRECNVRSN_PGM_CD,
+  T3.OB_TRN_AMT,
+  T3.LAST_UPDATED_BY,
+  T3.LAST_UPDATED_TMST,
+  T3.DEBT_TYP,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE,
+  T3.NEW_DEBT_PROC_DT
+from
+  CKT_OB_TRN T3
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T3.OTY_TYPE = T1.OTY_TYPE) and
+    (T3.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T3.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T3.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.DEBT_TYP = 'D') and
+    (
+      T3.NEW_DEBT_PROC_DT is null or
+      (T3.NEW_DEBT_PROC_DT = @newDebtProcDt)
+    )
+order by
+  T1.CSP_NUMBER,
+  T1.DUE_DT
+</value>
+   </data>
+</root>

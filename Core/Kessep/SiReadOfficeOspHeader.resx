@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  OFFICE_IDENTIFIER
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseAssignment1">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (@casNo = CAS_NO) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (REASON_CODE = 'RSP')
+</value>
+   </data>
+   <data name="ReadCaseAssignment2">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (@casNo = CAS_NO) and
+  (REASON_CODE = 'RSP') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &lt;= @effectiveDate)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadServiceProviderOffice">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T2.OFFICE_ID,
+  T2.TYPE_CODE,
+  T2.NAME,
+  T2.OFF_OFFICE
+from
+  CKT_SERVICE_PRVDER T1,
+  CKT_OFFICE T2
+where
+  (T1.SERVICE_PRVDER_ID = @servicePrvderId) and
+  (T2.OFFICE_ID = @officeId)
+</value>
+   </data>
+</root>

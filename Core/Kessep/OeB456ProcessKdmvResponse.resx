@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateKsDriversLicense">
+      <value>
+insert into CKT_KDMV
+(
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  APPEAL_REC_DATE,
+  APPEAL_RESOLVED,
+  PAYMENT_AGRMNT_DT,
+  FIRST_PMNT_DUE_DT,
+  MANUAL_IND,
+  MANUAL_DATE,
+  APPEAL_RESLVD_DT,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  AMOUNT_OWED,
+  AMOUNT_DUE,
+  REC_CLOSURE_REASON,
+  RECORD_CLOSURE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  NOTE_1,
+  NOTE_2,
+  NOTE_3,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+)
+values
+(
+  @createdBy,
+  @createdTstamp,
+  @cspNum,
+  null,
+  @ksDvrLicense,
+  @validationDate,
+  @courtesyLtrDate,
+  @courtesyLtrDate,
+  @servCompleteInd,
+  @courtesyLtrDate,
+  @courtesyLtrDate,
+  @courtesyLtrDate,
+  @courtesyLtrDate,
+  @servCompleteInd,
+  @courtesyLtrDate,
+  @courtesyLtrDate,
+  @servCompleteInd,
+  @courtesyLtrDate,
+  @courtesyLtrDate,
+  @courtesyLtrDate,
+  @restrictionStatus,
+  @amountOwed,
+  @amountOwed,
+  @restrictionStatus,
+  @courtesyLtrDate,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  @note1,
+  @note1,
+  @note1,
+  @servCompleteInd,
+  @sequenceCounter
+)
+</value>
+   </data>
+   <data name="ReadCaseCaseRoleCaseUnit">
+      <value>
+select top(1)
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.CU_NUMBER,
+  T3.CAS_NO,
+  T3.CSP_NO_AP
+from
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T4 with(readuncommitted)
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.CASE_ROLE_ID = T4.CRO_IDENTIFIER) and
+    (T2.TYPE = T4.CRO_TYPE) and
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T4.CAS_NUMBER) and
+    (@lgaId = T4.LGA_ID)
+  join
+  CKT_CASE_UNIT T3 with(readuncommitted)
+  on
+    (@cspNumber = T3.CSP_NO_AP) and
+    (T2.CAS_NUMBER = T3.CAS_NO)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonLicense">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  ISSUING_STATE,
+  ISSUING_AGENCY_NM,
+  NUMB,
+  EXPIRATION_DT,
+  START_DT,
+  TYPE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DESCRIPTION,
+  NOTE
+from
+  CKT_CSE_PERS_LCNS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'D')
+</value>
+   </data>
+   <data name="ReadKsDriversLicense">
+      <value>
+select
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  @cspNum = CSP_NUM
+order by
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="UpdateKsDriversLicense">
+      <value>
+update CKT_KDMV
+set
+  KS_DVR_LICENSE = @ksDvrLicense,
+  VALIDATION_DATE = @validationDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (CSP_NUM = @cspNum) and
+  (SEQUENCE_COUNTER = @sequenceCounter)
+</value>
+   </data>
+</root>

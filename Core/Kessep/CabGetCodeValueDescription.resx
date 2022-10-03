@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCode1">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DISPLAY_TITLE
+from
+  CKT_CODE
+where
+  CODE_NAME = @codeName
+</value>
+   </data>
+   <data name="ReadCode2">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DISPLAY_TITLE
+from
+  CKT_CODE
+where
+  COD_ID = @codId
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select top(1)
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DESCRIPTION
+from
+  CKT_CODE_VALUE
+where
+  (@codId = COD_ID) and
+  (CDVALUE = @cdvalue) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+</root>

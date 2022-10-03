@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseUnit1">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (
+    (@cspNoAr = CSP_NO_AR) or
+    (@cspNoAr = CSP_NO_CHILD)
+  ) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT with(readuncommitted)
+where
+  (@cspNoAp = CSP_NO_AP) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  OCCUPATION,
+  AE_CASE_NUMBER,
+  DATE_OF_DEATH,
+  ILLEGAL_ALIEN_IND,
+  CURRENT_SPOUSE_MI,
+  CURR_SPOUSE_1ST_NM,
+  BIRTH_PLACE_STATE,
+  EMERGENCY_PHONE,
+  NAME_MIDDLE,
+  NAME_MAIDEN,
+  HOME_PHONE,
+  OTHER_NUMBER,
+  BIRTH_PLACE_CITY,
+  CURR_MARITAL_STS,
+  CUR_SPOUSE_LAST_NM,
+  RACE,
+  HAIR_COLOR,
+  EYE_COLOR,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  KSCARES_NUMBER,
+  OTHER_AREA_CODE,
+  EMERGENCY_AREA_CD,
+  HOME_PHONE_AREA_CD,
+  WORK_PHONE_AREA_CD,
+  WORK_PHONE,
+  WORK_PHONE_EXT,
+  OTHER_PHONE_TYPE,
+  UNEMPLOYMENT_IND,
+  FEDERAL_IND,
+  OTHER_ID_INFO,
+  FAMILY_VIOL_IND,
+  OUT_OF_WEDLOCK,
+  CSE_TO_EST_PATR,
+  PAT_ESTAB_IND,
+  DATE_PATERN_ESTAB,
+  BC_FATHER_LAST_NM,
+  BC_FATHER_FIRST_NM,
+  BC_FATHERS_MI,
+  BC_SIGNATURE,
+  FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCsePerson">
+      <value>
+update CKT_CSE_PERSON
+set
+  DATE_OF_DEATH = @dateOfDeath,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

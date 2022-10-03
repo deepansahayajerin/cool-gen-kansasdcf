@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadHealthInsuranceCoverageHealthInsuranceCompany">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.POLICY_NUMBER,
+  T1.POLICY_EXP_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.HIC_IDENTIFIER,
+  T2.CARRIER_CODE,
+  T2.POLICY_CARRIER
+from
+  CKT_HEALTH_INS_CO T2
+  join
+  CKT_HINS_COVERAGE T1
+  on
+    (T1.POLICY_NUMBER = @policyNumber) and
+    (T2.IDENTIFIER = T1.HIC_IDENTIFIER) and
+    (T2.CARRIER_CODE = @carrierCode)
+  join
+  CKT_PERSONAL_HINS T3
+  on
+    (T1.IDENTIFIER = T3.HCV_ID) and
+    (T3.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

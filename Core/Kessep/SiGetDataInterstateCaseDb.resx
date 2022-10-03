@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  STATUS_DATE
+from
+  CKT_CASE with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseAssignment">
+      <value>
+select
+  REASON_CODE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE with(readuncommitted)
+where
+  (@casNo = CAS_NO) and
+  (REASON_CODE = 'RSP')
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseCaseRole">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.CSP_NUMBER = @cspNumber)
+order by
+  T2.TYPE,
+  T2.END_DATE desc
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  PAYMENT_LOCATION,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (PAYMENT_LOCATION &gt; ' ')
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  PAYMENT_LOCATION,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRoleLegalActionPersonCsePerson1">
+      <value>
+select distinct top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.PAYMENT_LOCATION,
+  T1.TRB_ID,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.EFFECTIVE_DT,
+  T3.END_DT
+from
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T5 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T1.PAYMENT_LOCATION &gt; ' ')
+  on
+    (T2.CASE_ROLE_ID = T5.CRO_IDENTIFIER) and
+    (T2.TYPE = T5.CRO_TYPE) and
+    (T2.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T5.CAS_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LEGAL_ACT_PERS T3 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.EFFECTIVE_DT &lt;= @startDate) and
+    (T3.END_DT &gt;= @startDate)
+order by
+  T2.END_DATE desc
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRoleLegalActionPersonCsePerson2">
+      <value>
+select distinct top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.PAYMENT_LOCATION,
+  T1.TRB_ID,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.EFFECTIVE_DT,
+  T3.END_DT
+from
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T5 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T1.PAYMENT_LOCATION &gt; ' ')
+  on
+    (T2.CASE_ROLE_ID = T5.CRO_IDENTIFIER) and
+    (T2.TYPE = T5.CRO_TYPE) and
+    (T2.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T5.CAS_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate)
+  join
+  CKT_LEGAL_ACT_PERS T3 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.EFFECTIVE_DT &lt;= @startDate) and
+    (T3.END_DT &gt;= @startDate)
+order by
+  T2.END_DATE desc
+</value>
+   </data>
+   <data name="ReadOfficeAddress">
+      <value>
+select top(1)
+  OFF_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  ZIP,
+  ZIP4
+from
+  CKT_OFFICE_ADDRESS with(readuncommitted)
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (TYPE = 'M')
+</value>
+   </data>
+   <data name="ReadServiceProviderAddress">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  ZIP,
+  ZIP4
+from
+  CKT_SRVCE_PRVR_ADR with(readuncommitted)
+where
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (TYPE = 'M')
+</value>
+   </data>
+   <data name="ReadServiceProviderOfficeServiceProviderOffice">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL,
+  T1.EMAIL_ADDRESS,
+  T2.OFF_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.WORK_PHONE_NUMBER,
+  T2.WORK_FAX_NUMBER,
+  T2.WORK_FAX_AREA_CD,
+  T2.WORK_PHONE_EXT,
+  T2.WORK_PHONE_AREA_CD,
+  T3.MAIN_PHONE_NUMBER,
+  T3.MAIN_FAX_NUMBER,
+  T3.MAIN_PHONE_AREA_CD,
+  T3.FAX_AREA_CD,
+  T3.OFF_OFFICE
+from
+  CKT_OFFICE T3 with(readuncommitted)
+  join
+  CKT_SERVICE_PRVDER T1 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T2 with(readuncommitted)
+  on
+    (T2.EFFECTIVE_DATE = @effectiveDate) and
+    (T2.ROLE_CODE = @roleCode) and
+    (T2.OFF_GENERATED_ID = @offGeneratedId) and
+    (T2.SPD_GENERATED_ID = @spdGeneratedId) and
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID)
+  on
+    T3.OFFICE_ID = T2.OFF_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_TRIBUNAL with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

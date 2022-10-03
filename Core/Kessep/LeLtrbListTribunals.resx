@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  (@fipLocation = FIP_LOCATION) and
+  (@fipCounty = FIP_COUNTY) and
+  (@fipState = FIP_STATE)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadTribunal1">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  JUDICIAL_DISTRICT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  IDENTIFIER,
+  TAX_ID_SUFFIX,
+  TAX_ID,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadTribunal2">
+      <value>
+select distinct
+  T1.JUDICIAL_DIVISION,
+  T1.TRIBUNAL_NM,
+  T1.FIP_LOCATION,
+  T1.JUDICIAL_DISTRICT,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.IDENTIFIER,
+  T1.TAX_ID_SUFFIX,
+  T1.TAX_ID,
+  T1.FIP_COUNTY,
+  T1.FIP_STATE
+from
+  CKT_TRIBUNAL T1
+  join
+  CKT_FIPS_TRIB_ADDR T2
+  on
+    (T1.IDENTIFIER = T2.TRB_ID) and
+    (T2.COUNTRY = @country)
+order by
+  T1.IDENTIFIER
+</value>
+   </data>
+   <data name="ReadTribunalFips">
+      <value>
+select
+  T1.JUDICIAL_DIVISION,
+  T1.TRIBUNAL_NM,
+  T1.FIP_LOCATION,
+  T1.JUDICIAL_DISTRICT,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.IDENTIFIER,
+  T1.TAX_ID_SUFFIX,
+  T1.TAX_ID,
+  T1.FIP_COUNTY,
+  T1.FIP_STATE,
+  T2.STATE_DESC,
+  T2.COUNTY_DESC,
+  T2.LOCATION_DESC,
+  T2.STATE_ABBREVIATION,
+  T2.COUNTY_ABBR
+from
+  CKT_FIPS T2
+  join
+  CKT_TRIBUNAL T1
+  on
+    (T2.STATE_ABBREVIATION = @stateAbbreviation) and
+    (T2.COUNTY_DESC &gt;= @countyDesc) and
+    (T1.JUDICIAL_DISTRICT &gt;= @judicialDistrict) and
+    (T1.JUDICIAL_DIVISION &gt;= @judicialDivision) and
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE)
+order by
+  T2.STATE_ABBREVIATION,
+  T2.COUNTY_DESC,
+  T1.JUDICIAL_DISTRICT,
+  T1.JUDICIAL_DIVISION
+</value>
+   </data>
+</root>

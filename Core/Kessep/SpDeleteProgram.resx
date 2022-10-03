@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteProgram#1">
+      <value>
+select top(1)
+  1
+from
+  CKT_PERSON_PROGRAM
+where
+  PRG_GENERATED_ID = @prgGeneratedId
+</value>
+   </data>
+   <data name="DeleteProgram#2">
+      <value>
+delete from CKT_PROGRAM
+where
+  PROGRAM_ID = @prgGeneratedId
+</value>
+   </data>
+   <data name="ReadCountyService">
+      <value>
+select top(1)
+  SYSTEM_GENERATD_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  PRG_GENERATED_ID
+from
+  CKT_COUNTY_SERVICE
+where
+  PRG_GENERATED_ID = @prgGeneratedId
+</value>
+   </data>
+   <data name="ReadOfficeCaseloadAssignment">
+      <value>
+select top(1)
+  OFCE_CSLD_ASSGN_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  PRG_GENERATED_ID
+from
+  CKT_OFCE_CSLD_ASGT
+where
+  PRG_GENERATED_ID = @prgGeneratedId
+</value>
+   </data>
+   <data name="ReadPersonProgram">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  PRG_GENERATED_ID = @prgGeneratedId
+</value>
+   </data>
+   <data name="ReadProgram">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP
+from
+  CKT_PROGRAM
+where
+  PROGRAM_ID = @programId
+</value>
+   </data>
+   <data name="ReadProgramIndicator">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  PRG_GENERATED_ID
+from
+  CKT_PROGRAM_INDICA
+where
+  (@prgGeneratedId = PRG_GENERATED_ID) and
+  (EFFECTIVE_DATE &lt; @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="UpdateProgram">
+      <value>
+update CKT_PROGRAM
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATD_TSTAMP = @lastUpdatdTstamp
+where
+  PROGRAM_ID = @programId
+</value>
+   </data>
+   <data name="UpdateProgramIndicator">
+      <value>
+update CKT_PROGRAM_INDICA
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (PRG_GENERATED_ID = @prgGeneratedId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select distinct
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.DISCONTINUE_DT,
+  T1.LAST_ACCRUAL_DT
+from
+  CKT_ACCRUAL_INSTR T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T6 with(readuncommitted)
+  on
+    (T1.DISCONTINUE_DT &gt;= @discontinueDt) and
+    (T1.CSP_NUMBER = T6.CSP_NUMBER) and
+    (@casNumber = T6.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T1.CSE_OPEN_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (@cspNumber = T2.CSP_NUMBER)
+order by
+  T1.CSE_OPEN_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDebt1">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OTY_TYPE = @otyType) and
+  (OB_TRN_ID = @obTrnId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OBG_GENERATED_ID = @obgGeneratedId)
+</value>
+   </data>
+   <data name="ReadDebt2">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (OTY_TYPE = @otyType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OB_TRN_ID = @obTrnId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDebtDetail1">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT,
+  BAL_DUE_AMT,
+  CVRD_PRD_START_DT,
+  CVD_PRD_END_DT,
+  PRECNVRSN_PGM_CD
+from
+  CKT_DEBT_DTL with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  DUE_DT desc
+</value>
+   </data>
+   <data name="ReadDebtDetail2">
+      <value>
+select distinct
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.BAL_DUE_AMT,
+  T1.CVRD_PRD_START_DT,
+  T1.CVD_PRD_END_DT,
+  T1.PRECNVRSN_PGM_CD
+from
+  CKT_DEBT_DTL T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T6 with(readuncommitted)
+  on
+    (T1.BAL_DUE_AMT &gt; 0) and
+    (T1.CSP_NUMBER = T6.CSP_NUMBER) and
+    (@casNumber = T6.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  ORD_TYP_CD
+from
+  CKT_OBLIGATION with(readuncommitted)
+where
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (OB_ID = @obId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CLASS,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE with(readuncommitted)
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadOfficeOfficeAddress">
+      <value>
+select distinct top(1)
+  T1.OFFICE_ID,
+  T1.MAIN_PHONE_NUMBER,
+  T1.NAME,
+  T1.MAIN_PHONE_AREA_CD,
+  T1.OFF_OFFICE,
+  T2.TYPE,
+  T2.STREET_1,
+  T2.STREET_2,
+  T2.CITY,
+  T2.STATE_PROVINCE,
+  T2.ZIP,
+  T2.ZIP4,
+  T2.ZIP3
+from
+  CKT_OFFICE T1 with(readuncommitted)
+  join
+  CKT_OFFICE_ADDRESS T2 with(readuncommitted)
+  on
+    (T2.TYPE = 'M') and
+    (T1.OFFICE_ID = T2.OFF_GENERATED_ID)
+  join
+  CKT_OFFC_SRVC_PRVR T3 with(readuncommitted)
+  on
+    (T1.OFFICE_ID = T3.OFF_GENERATED_ID) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate)
+  join
+  CKT_ASSIGN_CASE T4 with(readuncommitted)
+  on
+    (T3.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T3.ROLE_CODE = T4.OSP_CODE) and
+    (T3.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T3.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T4.REASON_CODE = 'RSP') and
+    (@casNo = T4.CAS_NO)
+</value>
+   </data>
+</root>

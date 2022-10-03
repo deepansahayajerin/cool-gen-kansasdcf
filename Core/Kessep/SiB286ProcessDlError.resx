@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateKdorDriversLicense">
+      <value>
+insert into CKT_KDOR_DRVRS_LIC
+(
+  TYPE,
+  LAST_NAME,
+  FIRST_NAME,
+  SSN,
+  DATE_OF_BIRTH,
+  LICENSE_NUMBER,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAMP,
+  STATUS,
+  ERROR_REASON,
+  DL_CLASS_IND,
+  MOTORCYCLE_CLASS_IND,
+  CDL_CLASS_IND,
+  EXPIRATION_DT,
+  GENDER_CODE,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  HEIGHT_FEET,
+  HEIGHT_INCHES,
+  WEIGHT,
+  EYE_COLOR,
+  FK_CKT_CSE_PERSNUMB
+)
+values
+(
+  @type,
+  @lastName,
+  @firstName,
+  @ssn,
+  @dateOfBirth,
+  @licenseNumber,
+  @createdTstamp,
+  @createdBy,
+  @lastUpdatedBy,
+  @lastUpdatedTstamp,
+  @status,
+  @errorReason,
+  @dlClassInd,
+  @motorcycleClassInd,
+  @cdlClassInd,
+  @expirationDt,
+  @genderCode,
+  @addressLine1,
+  @addressLine2,
+  @city,
+  @state,
+  @zipCode,
+  @heightFeet,
+  @heightInches,
+  @weight,
+  @eyeColor,
+  @fkCktCsePersnumb
+)
+</value>
+   </data>
+   <data name="DeleteCsePersonLicense">
+      <value>
+delete from CKT_CSE_PERS_LCNS
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.TYPE = 'AP')
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonLicense">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  ISSUING_STATE,
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERS_LCNS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'D') and
+  (ISSUING_STATE = 'KS')
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="ReadKdorDriversLicense">
+      <value>
+select top(1)
+  TYPE,
+  LAST_NAME,
+  FIRST_NAME,
+  SSN,
+  DATE_OF_BIRTH,
+  LICENSE_NUMBER,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAMP,
+  STATUS,
+  ERROR_REASON,
+  DL_CLASS_IND,
+  MOTORCYCLE_CLASS_IND,
+  CDL_CLASS_IND,
+  EXPIRATION_DT,
+  GENDER_CODE,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  HEIGHT_FEET,
+  HEIGHT_INCHES,
+  WEIGHT,
+  EYE_COLOR,
+  FK_CKT_CSE_PERSNUMB
+from
+  CKT_KDOR_DRVRS_LIC
+where
+  @fkCktCsePersnumb = FK_CKT_CSE_PERSNUMB
+</value>
+   </data>
+   <data name="UpdateKdorDriversLicense">
+      <value>
+update CKT_KDOR_DRVRS_LIC
+set
+  TYPE = @type,
+  LAST_NAME = @lastName,
+  FIRST_NAME = @firstName,
+  SSN = @ssn,
+  DATE_OF_BIRTH = @dateOfBirth,
+  LICENSE_NUMBER = @licenseNumber,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TSTAMP = @lastUpdatedTstamp,
+  STATUS = @status,
+  ERROR_REASON = @errorReason,
+  DL_CLASS_IND = @dlClassInd,
+  MOTORCYCLE_CLASS_IND = @motorcycleClassInd,
+  CDL_CLASS_IND = @cdlClassInd,
+  EXPIRATION_DT = @expirationDt,
+  GENDER_CODE = @genderCode,
+  ADDRESS_LINE_1 = @addressLine1,
+  ADDRESS_LINE_2 = @addressLine2,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CODE = @zipCode,
+  HEIGHT_FEET = @heightFeet,
+  HEIGHT_INCHES = @heightInches,
+  WEIGHT = @weight,
+  EYE_COLOR = @eyeColor
+where
+  FK_CKT_CSE_PERSNUMB = @fkCktCsePersnumb
+</value>
+   </data>
+</root>

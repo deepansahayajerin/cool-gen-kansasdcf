@@ -1,0 +1,127 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiIreqInterstateReqHistory"
+           program-name="SWEIREQP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiIreqInterstateReqHistory"
+           transaction="SRBS"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_IIMC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIimcIsManualConversion"
+       send-command="RETIREQ">
+      <map from="SelectedInterstateRequest" to="SelectedInterstateRequest"/>
+      <map from="SelectedFips" to="SelectedFips"/>
+      <map from="NextCase" to="Next"/>
+      <map from="InterstateRequest.KsCaseInd" to="InterstateRequest.KsCaseInd"/>
+      <map from="InterstateRequest.Country" to="InterstateRequest.Country"/>
+      <map from="ApCsePersonsWorkSet" to="Ap"/>
+      <return-map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+      <return-map from="Next" to="NextCase"/>
+      <return-map from="DisplayOnly" to="DisplayOnly"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="NextCase" to="Case1"/>
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+      <return-map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenReturnMultRecs" to="HiddenReturnMultRecs"/>
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiItsmInterstateMenu"
+       send-command="XXFMMENU">
+      <map from="ApCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="DisplayOnly" to="Case1"/>
+      <map from="NextCase" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CSENET_REFERRAL_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIcasCsenetRefCase"
+       send-command="DISPLAY">
+      <map from="Icas.TransSerialNumber" to="InterstateCase.TransSerialNumber"/>
+      <map from="Icas.ActionCode" to="InterstateCase.ActionCode"/>
+      <map from="Icas.FunctionalTypeCode" to="InterstateCase.FunctionalTypeCode"/>
+      <map from="Icas.ActionReasonCode" to="InterstateCase.ActionReasonCode"/>
+      <map from="Icas.InterstateCaseId" to="InterstateCase.InterstateCaseId"/>
+      <map from="Icas.KsCaseId" to="InterstateCase.KsCaseId"/>
+      <map from="Icas.TransactionDate" to="InterstateCase.TransactionDate"/>
+      <map from="ApCsePersonsWorkSet" to="HiddenApId"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_IIOI"
+       action="transfer"
+       to="SiIioiIncomingIsOgInfo"
+       send-command="DISPLAY">
+      <map from="DisplayOnly" to="Previous"/>
+      <map from="NextCase" to="Case1"/>
+      <map from="ApCsePersonsWorkSet" to="Ap"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_OINR"
+       action="transfer"
+       to="SiOinrOutgoingInterstateInfo"
+       send-command="DISPLAY">
+      <map from="SelectedInterstateRequest" to="SelectedInterstateRequest"/>
+      <map from="DisplayOnly" to="PreviousCase"/>
+      <map from="NextCase" to="SelectedCase"/>
+      <map from="SelectedFips.StateAbbreviation"
+           to="SelectedFips.StateAbbreviation"/>
+      <map from="ApCsePersonsWorkSet" to="ApFromIreq"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="AutoFlow" to="AutoFlow"/>
+   <map from="SearchInterstateRequestHistory"
+        to="SearchInterstateRequestHistory"/>
+   <map from="NextCase" to="NextCase"/>
+   <map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+   <map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+   <map from="PromptActionCd" to="PromptActionCd"/>
+   <map from="PromptFunctionCd" to="PromptFunctionCd"/>
+   <map from="ApCsePerson" to="ApCsePerson"/>
+   <map from="ArCsePerson" to="ArCsePerson"/>
+   <map from="PromptPerson" to="PromptPerson"/>
+   <map from="OspOffice" to="OspOffice"/>
+   <map from="OspServiceProvider" to="OspServiceProvider"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="PrevCommon" to="PrevCommon"/>
+   <map from="Export1.Select" to="Import1.Select"/>
+   <map from="Export1.DetailInterstateRequestHistory"
+        to="Import1.DetailInterstateRequestHistory"/>
+   <map from="Export1.StatusCd" to="Import1.StatusCd"/>
+   <map from="Export1.IvdAgency" to="Import1.IvdAgency"/>
+   <map from="Export1.ActionReason" to="Import1.ActionReason"/>
+   <map from="Export1.DetailInterstateRequest"
+        to="Import1.DetailInterstateRequest"/>
+   <map from="HiddenNext" to="HiddenNext"/>
+   <map from="HiddenSearchInterstateRequestHistory"
+        to="HiddenSearchInterstateRequestHistory"/>
+   <map from="Export1.State" to="Import1.State"/>
+   <map from="PrevInterstateRequestHistory" to="PrevInterstateRequestHistory"/>
+   <map from="NextInterstateRequestHistory" to="NextInterstateRequestHistory"/>
+   <map from="More" to="More"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Plus" to="Plus"/>
+   <map from="SearchFips" to="SearchFips"/>
+   <map from="PromptState" to="PromptState"/>
+   <map from="HiddenSearchFips" to="HiddenSearchFips"/>
+   <map from="PromptReason" to="PromptReason"/>
+   <map from="InterstateRequest.Country" to="InterstateRequest.Country"/>
+   <map from="DisplayOnly.Number" to="DisplayOnly.Number"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

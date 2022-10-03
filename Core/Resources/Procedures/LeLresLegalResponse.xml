@@ -1,0 +1,90 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLresLegalResponse"
+           program-name="SWELRESP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLresLegalResponse"
+           transaction="SR9F"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Tribunal" to="SearchTribunal"/>
+      <map from="Fips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="FipsTribAddress"/>
+      <return-map from="DlgflwSelectedFips" to="DlgflwSelectedFips"/>
+      <return-map from="DlgflwSelectedTribunal" to="DlgflwSelectedTribunal"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLLGLACT"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="Tribunal" to="SearchTribunal"/>
+      <map from="Fips" to="SearchFips"/>
+      <map from="LegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="LegalAction.Classification" to="SearchLegalAction.Classification"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <map from="HiddenSecurity.LinkIndicator" to="HiddenSecurity.LinkIndicator"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedLegalAction"/>
+      <return-map from="HiddenSecurity" to="HiddenSecurity"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_LGL_ACT_BY_CP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLLGLACT"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <map from="HiddenSecurity.LinkIndicator" to="HiddenSecurity.LinkIndicator"/>
+      <return-map from="Selected.Identifier" to="DlgflwSelectedLegalAction.Identifier"/>
+      <return-map from="Selected.Classification"
+                  to="DlgflwSelectedLegalAction.Classification"/>
+      <return-map from="Selected.CourtCaseNumber"
+                  to="DlgflwSelectedLegalAction.CourtCaseNumber"/>
+      <return-map from="HiddenSecurity" to="HiddenSecurity"/>
+   </on>
+   <map from="DataExists" to="DataExists"/>
+   <map from="HiddenFips" to="HiddenFips"/>
+   <map from="HiddenLegalAction" to="HiddenLegalAction"/>
+   <map from="LegalActResponse.LegalActionResponse"
+        to="LegalActResponse.LegalActionResponse"/>
+   <map from="PromptClassification" to="PromptClassification"/>
+   <map from="LegalActResponse.Common" to="LegalActResponse.Common"/>
+   <map from="LegalActResponse.PromptType" to="LegalActResponse.PromptType"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="PromptTribunal" to="PromptTribunal"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenTribunal" to="HiddenTribunal"/>
+   <map from="CutOffDate" to="CutOffDate"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="ActionTaken" to="ActionTaken"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Fips.StateAbbreviation" to="Fips.StateAbbreviation"/>
+   <map from="Fips.CountyAbbreviation" to="Fips.CountyAbbreviation"/>
+   <map from="Fips.CountyDescription" to="Fips.CountyDescription"/>
+   <map from="HiddenSecurity.LinkIndicator" to="HiddenSecurity.LinkIndicator"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateActivityDetail">
+      <value>
+insert into CKT_ACTIVITY_DETAL
+(
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT,
+  CASE_UNIT_FUNCTION,
+  FED_NO_COMPLI_DAYS,
+  FED_NR_N_CMPL_DAYS,
+  OTH_NO_COMPLI_DAYS,
+  OTH_NR_N_COMPL_DAY,
+  REG_SOURCE_ID,
+  REG_SRC_DESC,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  ACT_NO
+)
+values
+(
+  @systemGeneratedI,
+  @businessObject,
+  @caseUnitFunction,
+  @fedNoCompliDays,
+  @fedNrNCmplDays,
+  @othNoCompliDays,
+  @othNrNComplDay,
+  @regSourceId,
+  @regSrcDesc,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @actNo
+)
+</value>
+   </data>
+   <data name="ReadActivity">
+      <value>
+select top(1)
+  CONTROL_NUMBER
+from
+  CKT_ACTIVITY
+where
+  CONTROL_NUMBER = @controlNumber
+</value>
+   </data>
+   <data name="ReadActivityDetail">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  ACT_NO
+from
+  CKT_ACTIVITY_DETAL
+where
+  ACT_NO = @actNo
+order by
+  SYSTEM_GENERATED_I desc
+</value>
+   </data>
+</root>

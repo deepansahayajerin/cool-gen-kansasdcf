@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateLaPersonLaCaseRole">
+      <value>
+insert into CKT_LA_PER_LA_CROL
+(
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+)
+values
+(
+  @identifier,
+  @croId,
+  @croType,
+  @cspNum,
+  @casNum,
+  @lgaId,
+  @lapId
+)
+</value>
+   </data>
+   <data name="CreateLegalActionCaseRole">
+      <value>
+insert into CKT_LEG_ACT_CAS_RL
+(
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  INIT_CR_IND
+)
+values
+(
+  @casNumber,
+  @cspNumber,
+  @croType,
+  @croIdentifier,
+  @lgaId,
+  @createdBy,
+  @createdTstamp,
+  @initCrInd
+)
+</value>
+   </data>
+   <data name="ReadCaseRoleCase">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = @type) and
+  (CASE_ROLE_ID = @caseRoleId)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRole">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+from
+  CKT_LA_PER_LA_CROL
+where
+  (@lgaId = LGA_ID) and
+  (@casNum = CAS_NUM) and
+  (@croId = CRO_ID) and
+  (@cspNum = CSP_NUM) and
+  (@croType = CRO_TYPE) and
+  (@lapId = LAP_ID)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  INIT_CR_IND
+from
+  CKT_LEG_ACT_CAS_RL
+where
+  (@lgaId = LGA_ID) and
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson1">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  END_REASON,
+  CREATED_TSTAMP,
+  CREATED_BY
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson2">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  END_REASON,
+  CREATED_TSTAMP,
+  CREATED_BY
+from
+  CKT_LEGAL_ACT_PERS
+where
+  LA_PERSON_ID = @laPersonId
+</value>
+   </data>
+   <data name="ReadLegalActionPerson3">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  END_REASON,
+  CREATED_TSTAMP,
+  CREATED_BY
+from
+  CKT_LEGAL_ACT_PERS
+where
+  LA_PERSON_ID = @laPersonId
+</value>
+   </data>
+</root>

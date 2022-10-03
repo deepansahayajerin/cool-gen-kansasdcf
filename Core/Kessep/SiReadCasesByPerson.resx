@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCase">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER &gt; @casNumber) and
+  (END_DATE &gt; @endDate) and
+  (START_DATE &lt;= @endDate) and
+  (TYPE in ('AP', 'AR')) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  END_DATE desc,
+  CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME,
+  UNEMPLOYMENT_IND,
+  FEDERAL_IND
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb) and
+  (TYPE = 'O')
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME,
+  UNEMPLOYMENT_IND,
+  FEDERAL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

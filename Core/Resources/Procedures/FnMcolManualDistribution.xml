@@ -1,0 +1,113 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnMcolManualDistribution"
+           program-name="SWEMCOLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnMcolManualDistribution"
+           transaction="SR97"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CSE_PERSN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLAPS"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <map from="ObligorCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="ObligorCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="Hidden" to="HiddenNextTranInfo"/>
+      <return-map from="Selected" to="FilterLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_DBT_ACT_BY_AP_PYR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDEBT"
+       to="FnDebtLstDbtActvtyByApPyr"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson.Number" to="SearchCsePerson.Number"/>
+      <map from="ObligorCsePersonsWorkSet" to="FromList"/>
+      <map from="ScreenOwedAmounts" to="ScreenOwedAmounts"/>
+      <map from="Hidden" to="Hidden"/>
+      <map from="DlgflwRequiredLegalAction.StandardNumber"
+           to="SearchLegalAction.StandardNumber"/>
+      <map from="DlgflwRequiredLegalAction.Identifier"
+           to="SearchLegalAction.Identifier"/>
+      <map from="DlgflwRequiredObligation" to="Obligation"/>
+      <map from="DlgflwRequiredObligationType" to="ObligationType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MDIS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETMDIS"
+       to="FnMdisLstMtnManualDistInst"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="CsePerson"/>
+      <map from="DlgflwRequiredLegalAction" to="LegalAction"/>
+      <map from="DlgflwRequiredObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="DlgflwRequiredObligationType.Code" to="ObligationType.Code"/>
+      <map from="DlgflwRequiredObligationType.SystemGeneratedIdentifier"
+           to="ObligationType.SystemGeneratedIdentifier"/>
+      <map from="ZdelExportObligor.Number" to="CsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_OBLIGATION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOBTL"
+       to="FnObtlLstObligTypes"
+       send-command="DISPLAY">
+      <map from="Hidden" to="Hidden"/>
+      <return-map from="Selected" to="FilterObligationType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToCdvl" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromCdvl"/>
+   </on>
+   <map from="ObligorCsePerson" to="ObligorCsePerson"/>
+   <map from="FilterObligationType" to="FilterObligationType"/>
+   <map from="FromDateFilter" to="FromDateFilter"/>
+   <map from="TotalCollToDist" to="TotalCollToDist"/>
+   <map from="CashReceiptSourceType" to="CashReceiptSourceType"/>
+   <map from="CashReceiptEvent" to="CashReceiptEvent"/>
+   <map from="CashReceiptType" to="CashReceiptType"/>
+   <map from="CashReceipt" to="CashReceipt"/>
+   <map from="CashReceiptDetail" to="CashReceiptDetail"/>
+   <map from="FilterLegalAction" to="FilterLegalAction"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CashReceiptDetailStatus" to="CashReceiptDetailStatus"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="ToDateFilter" to="ToDateFilter"/>
+   <map from="PromptLegalAction" to="PromptLegalAction"/>
+   <map from="CrRefNumber" to="CrRefNumber"/>
+   <map from="PromptObligationType" to="PromptObligationType"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.ObligationType" to="Group.ObligationType"/>
+   <map from="Group.Obligation" to="Group.Obligation"/>
+   <map from="Group.Debt" to="Group.Debt"/>
+   <map from="Group.DebtDetail" to="Group.DebtDetail"/>
+   <map from="Group.LegalAction" to="Group.LegalAction"/>
+   <map from="Group.Collection" to="Group.Collection"/>
+   <map from="Group.ApplyToCode" to="Group.ApplyToCode"/>
+   <map from="Group.SuppPrsnCsePerson" to="Group.SuppPrsnCsePerson"/>
+   <map from="Group.SuppPrsnCsePersonsWorkSet"
+        to="Group.SuppPrsnCsePersonsWorkSet"/>
+   <map from="ObligorCsePersonsWorkSet" to="ObligorCsePersonsWorkSet"/>
+   <map from="CollectionType" to="CollectionType"/>
+   <map from="Collection" to="Collection"/>
+   <map from="DisplayAllObligInd" to="DisplayAllObligInd"/>
+   <map from="TraceInd" to="TraceInd"/>
+   <map from="PromptPgm" to="PromptPgm"/>
+   <map from="Pgm" to="Pgm"/>
+   <map from="Group.Pgm" to="Group.Pgm"/>
+   <map from="ScreenOwedAmounts.ErrorInformationLine"
+        to="ScreenOwedAmounts.ErrorInformationLine"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

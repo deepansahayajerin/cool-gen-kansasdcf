@@ -1,0 +1,73 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeHinmHealthInsuranceMenu"
+           program-name="SWEHINMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeHinmHealthInsuranceMenu"
+           transaction="SROY"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_HIPH"
+       action="transfer"
+       to="OeHiphInsuranceCovByHolder"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Starting"/>
+      <map from="PersonName.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeOblmObligationEstbMenu"
+       send-command="XXFMMENU">
+      <map from="PersonName" to="PersonNameH"/>
+      <map from="StartCsePerson" to="CurrentHCsePerson"/>
+      <map from="StartCase" to="CurrentHCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HICP"
+       action="transfer"
+       to="OeHicpInsuranceCovByPerson"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+      <map from="PersonName.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HICV1"
+       action="transfer"
+       to="OeHicvHinsCoverageViability"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HIPL"
+       action="transfer"
+       to="OeHiplInsurCovByPersonList"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+      <map from="PersonName.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_HIAV ECO_XFR_MENU_TO_APRE"
+       action="transfer"
+       to="OeHiavAvailableInsByPerson"
+       send-command="DISPLAY">
+      <map from="StartCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HICL"
+       action="transfer"
+       to="OeHiclHealthInsuCompanyList"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="HiddenCase"/>
+      <map from="StartCsePerson" to="HiddenCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HICO"
+       action="transfer"
+       to="OeHicoHealthInsuranceCompany"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="HiddenCase"/>
+      <map from="StartCsePerson" to="HiddenCsePerson"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Current" to="Current"/>
+   <map from="StartCsePerson" to="StartCsePerson"/>
+   <map from="PersonName" to="PersonName"/>
+   <map from="StartCase" to="StartCase"/>
+   <map from="Hidden" to="Hidden"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  EMANCIPATION_DT
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (TYPE = 'CH') and
+  (CSP_NUMBER = @cspNumber)
+order by
+  EMANCIPATION_DT
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (EFFECTIVE_DATE &lt; @effectiveDate) and
+  (PRG_GENERATED_ID = @prgGeneratedId)
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate1) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate1) and
+  (EFFECTIVE_DATE &lt; @effectiveDate2)
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram3">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate1) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate1) and
+  (EFFECTIVE_DATE &lt; @effectiveDate2) and
+  (
+    PRG_GENERATED_ID in (cast(@systemGeneratedIdentifier1 as smallint), cast(@systemGeneratedIdentifier2 as smallint), cast(@systemGeneratedIdentifier3 as smallint),
+      cast(@systemGeneratedIdentifier4 as smallint), cast(@systemGeneratedIdentifier5 as smallint), cast(@systemGeneratedIdentifier6 as smallint),
+      cast(@systemGeneratedIdentifier7 as smallint), cast(@systemGeneratedIdentifier8 as smallint))
+  )
+</value>
+   </data>
+   <data name="ReadProgram1">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  INTERSTATE_IND
+from
+  CKT_PROGRAM
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadProgram2">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  INTERSTATE_IND
+from
+  CKT_PROGRAM
+where
+  PROGRAM_ID = @programId
+</value>
+   </data>
+</root>

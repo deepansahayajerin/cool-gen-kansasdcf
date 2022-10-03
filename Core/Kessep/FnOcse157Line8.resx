@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCsePersonCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.BIRTH_PLACE_STATE,
+  T2.CREATED_TIMESTAMP,
+  T2.OUT_OF_WEDLOCK,
+  T2.PAT_ESTAB_IND,
+  T2.DATE_PATERN_ESTAB,
+  T2.BC_FATHER_LAST_NM,
+  T2.BC_FATHER_FIRST_NM,
+  T2.BC_SIGNATURE,
+  T2.HOSPITAL_PAT_EST,
+  T3.INTERSTATE_CASE_ID
+from
+  CKT_CASE T3 with(readuncommitted)
+  join
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'CH') and
+    (T2.NUMB between cast(@suppPersonNumber1 as char(10)) and cast(@suppPersonNumber2 as char(10))) and
+    (T2.NUMB &gt; @numb)
+  on
+    T3.NUMB = T1.CAS_NUMBER
+order by
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CREATED_TIMESTAMP,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (CREATED_TIMESTAMP &lt;= @createdTimestamp) and
+  (KS_CASE_IND = 'N') and
+  (
+    (OTH_ST_CASE_STATUS &lt;&gt; 'C') or
+    (
+      (OTH_ST_CASE_STATUS = 'C') and
+      (OTH_STATE_CLS_DTE &gt;= @othStateClsDte)
+    )
+  )
+</value>
+   </data>
+   <data name="ReadLegalActionDetailLegalAction">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE,
+  T2.CLASSIFICATION,
+  T2.STANDARD_NO,
+  T2.ESTABLISHMENT_CD
+from
+  CKT_LEGAL_ACTION T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T3 with(readuncommitted)
+  on
+    (T1.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (T3.ACCOUNT_TYPE = 'R') and
+    (T1.NON_FIN_OBLG_TYPE = 'EP') and
+    (T1.DETAIL_TYPE = 'N')
+  join
+  CKT_CASE_ROLE T5 with(readuncommitted)
+  on
+    (T3.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T5.TYPE = 'AP') and
+    (@casNumber = T5.CAS_NUMBER)
+  join
+  CKT_LEGAL_ACT_PERS T6 with(readuncommitted)
+  on
+    (T1.LA_DETAIL_NO = T6.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T6.LGA_R_IDENTIFIER) and
+    (T6.ACCOUNT_TYPE = 'S') and
+    (@cspNumber = T6.CSP_NUMBER)
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T2.CLASSIFICATION = 'J')
+</value>
+   </data>
+   <data name="ReadOcse157Data">
+      <value>
+select top(1)
+  max(RUN_NUMBER)
+from
+  CKT_OCSE157_DATA with(readuncommitted)
+where
+  (FISCAL_YEAR = @fiscalYear) and
+  (LINE_NUMBER = '08 ')
+</value>
+   </data>
+   <data name="ReadOcse157Verification">
+      <value>
+select
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  LINE_NUMBER,
+  COLUMN0,
+  CREATED_TIMESTAMP,
+  CASE_NUMBER,
+  SUPP_PERSON_NUMBER,
+  DATE_OF_BIRTH,
+  PLACE_OF_BIRTH,
+  SOCIAL_SECURITY_NB,
+  CHILD_NAME
+from
+  CKT_OCSE157_VERIFI
+where
+  (COLUMN0 &lt;&gt; ' ') and
+  (FISCAL_YEAR = @fiscalYear) and
+  (RUN_NUMBER = @runNumber) and
+  (LINE_NUMBER = '08 ') and
+  (SUPP_PERSON_NUMBER &gt; @suppPersonNumber1) and
+  (SUPP_PERSON_NUMBER between cast(@suppPersonNumber2 as char(10)) and cast(@suppPersonNumber3 as char(10)))
+order by
+  SUPP_PERSON_NUMBER
+</value>
+   </data>
+   <data name="ReadPersonProgram">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID
+from
+  CKT_PROGRAM T2 with(readuncommitted)
+  join
+  CKT_PERSON_PROGRAM T1 with(readuncommitted)
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (
+      T2.CODE in ('AFI', 'FCI', 'MAI',
+        'NAI')
+    )
+</value>
+   </data>
+</root>

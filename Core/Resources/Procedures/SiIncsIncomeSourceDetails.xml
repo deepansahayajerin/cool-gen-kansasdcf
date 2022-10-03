@@ -1,0 +1,133 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiIncsIncomeSourceDetails"
+           program-name="SWEINCSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiIncsIncomeSourceDetails"
+           transaction="SR1P"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+      <map from="ToMenu" to="StartCsePerson"/>
+      <map from="Next" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_RESO_PERSON_RESOURCE"
+       action="transfer"
+       to="OeResoPersonResource"
+       send-command="RETINCS">
+      <map from="IncomeSource" to="FromIncomeSource"/>
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePersonResource.ResourceNo" to="CsePersonResource.ResourceNo"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MILI_MILITARY_HIST"
+       action="transfer"
+       to="OeMiliPersonMilitaryHistory"
+       send-command="RETINCS">
+      <map from="IncomeSource" to="HincomeSource"/>
+      <map from="CsePersonsWorkSet.Number" to="Name.Number"/>
+      <map from="CsePersonsWorkSet.Ssn" to="Name.Ssn"/>
+      <map from="CsePersonsWorkSet.FormattedName" to="Name.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="Filter" to="FilterDocument"/>
+      <map from="DocmProtectFilter" to="ProtectFilter"/>
+      <return-map from="ReturnDoc" to="Document"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCOME_SOURCE_LIST"
+       action="transfer"
+       to="SiInclIncomeSourceList"
+       send-command="DISPLAY">
+      <map from="Incl" to="Incs"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_INCOME_HISTORY"
+       action="transfer"
+       to="SiInchIncomeSourceHistory"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="IncomeSource" to="IncomeSource"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSLN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSLN"
+       to="SpCslnListNarrative"
+       send-command="DISPLAY">
+      <map from="Selected" to="HeaderCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EMPLOYER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEMPL"
+       to="SiEmplEmployerMaintenance"
+       send-command="DISPLAY">
+      <return-map from="RtnEmployer" to="SelectedEmployer"/>
+      <return-map from="RtnEmployerAddress" to="SelectedEmployerAddress"/>
+   </on>
+   <map from="Incl" to="Incl"/>
+   <map from="HiddenIncomeSource" to="HiddenIncomeSource"/>
+   <map from="PrintSelectedFor" to="PrintSelectedFor"/>
+   <map from="Next" to="Next"/>
+   <map from="IncomeSource" to="IncomeSource"/>
+   <map from="NonEmployIncomeSourceAddress" to="NonEmployIncomeSourceAddress"/>
+   <map from="Fax" to="Fax"/>
+   <map from="Phone" to="Phone"/>
+   <map from="Export1.Detail" to="Import1.Detail"/>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="HiddenPageKeys.HiddenPageKey" to="HiddenPageKeys.HiddenPageKey"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="PersonPrompt" to="PersonPrompt"/>
+   <map from="IncSrcTypePrompt" to="IncSrcTypePrompt"/>
+   <map from="ReturnCdPrompt" to="ReturnCdPrompt"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="StatePrompt" to="StatePrompt"/>
+   <map from="OtherCodePrompt" to="OtherCodePrompt"/>
+   <map from="ScreenPrevCommand" to="ScreenPrevCommand"/>
+   <map from="SendToPrompt" to="SendToPrompt"/>
+   <map from="HiddenEmployer" to="HiddenEmployer"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="LastReadHidden" to="LastReadHidden"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="StartDateConfirmation" to="StartDateConfirmation"/>
+   <map from="EmployerAddress" to="EmployerAddress"/>
+   <map from="Standard.ScrollingMessage" to="Standard.ScrollingMessage"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Employer.Identifier" to="Employer.Identifier"/>
+   <map from="CsePersonResource.ResourceNo" to="CsePersonResource.ResourceNo"/>
+   <map from="Employer.EiwoStartDate" to="Employer.EiwoStartDate"/>
+   <map from="Employer.EiwoEndDate" to="Employer.EiwoEndDate"/>
+   <map from="Employer.EmailAddress" to="Employer.EmailAddress"/>
+   <map from="Employer.AreaCode" to="Employer.AreaCode"/>
+   <map from="Employer.PhoneNo" to="Employer.PhoneNo"/>
+   <map from="Employer.FaxAreaCode" to="Employer.FaxAreaCode"/>
+   <map from="Employer.FaxPhoneNo" to="Employer.FaxPhoneNo"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

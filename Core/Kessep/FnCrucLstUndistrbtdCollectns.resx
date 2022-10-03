@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'AP')
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.OBLGOR_FIRST_NM,
+  T1.OBLGOR_LAST_NM,
+  T1.OBLGOR_MID_NM,
+  T1.OBLGOR_PHONE_NBR,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST
+from
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID = @cashReceiptId)
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  T1.CST_IDENTIFIER,
+  T1.CREVENT_ID
+from
+  CKT_CR_EVENT T1
+  join
+  CKT_CASH_RECEIPT T2
+  on
+    (T1.CREVENT_ID = T2.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID = @cashReceiptId)
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  T1.CRTYPE_ID
+from
+  CKT_CR_TYPE T1
+  join
+  CKT_CASH_RECEIPT T2
+  on
+    (T1.CRTYPE_ID = T2.CRT_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID = @cashReceiptId)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  HOME_PHONE,
+  ORGANIZATION_NAME,
+  HOME_PHONE_AREA_CD
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.LAD_R_NUMBER is not null) and
+    (T3.LEGAL_ACTION_ID = T1.LGA_R_IDENTIFIER) and
+    (T3.STANDARD_NO = @standardNo) and
+    (T1.ACCOUNT_TYPE = 'R')
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetail">
+      <value>
+update CKT_CR_DETAIL
+set
+  COURT_ORDER_NUMBER = @courtOrderNumber,
+  OBLGOR_PRSN_NBR = @oblgorPrsnNbr,
+  OBLGOR_SSN = @oblgorSsn,
+  OBLGOR_FIRST_NM = @oblgorFirstNm,
+  OBLGOR_LAST_NM = @oblgorLastNm,
+  OBLGOR_MID_NM = @oblgorMidNm,
+  OBLGOR_PHONE_NBR = @oblgorPhoneNbr,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+</root>

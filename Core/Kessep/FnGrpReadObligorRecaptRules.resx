@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadObligor">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadObligorRule">
+      <value>
+select
+  RECAPTURE_RULE_ID,
+  CPA_D_TYPE,
+  CSP_D_NUMBER,
+  EFFECTIVE_DATE,
+  NEGOTIATED_DATE,
+  DISCONTINUE_DATE,
+  NA_ARREARS_MAX_AMT,
+  NA_ARREARS_AMOUNT,
+  NA_ARREARS_PCT,
+  NA_CURR_MAX_AMOUNT,
+  NA_CURR_AMOUNT,
+  NA_CURR_PERCENTAGE,
+  PASSTHRU_PERCENTAG,
+  PASSTHRU_AMOUNT,
+  PASSTHRU_MAX_AMT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  TYPE
+from
+  CKT_RECAPTURE_RULE
+where
+  (@cpaDType = CPA_D_TYPE) and
+  (@cspDNumber = CSP_D_NUMBER)
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+</root>

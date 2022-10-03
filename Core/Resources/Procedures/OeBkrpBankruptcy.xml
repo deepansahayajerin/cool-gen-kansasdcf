@@ -1,0 +1,70 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeBkrpBankruptcy"
+           program-name="SWEBKRPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeBkrpBankruptcy"
+           transaction="SR5E"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ZD_LIST_DOCS_DEFINED_FOR_SCREEN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPF24"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Required" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected.Number" to="CsePersonsWorkSet.Number"/>
+      <return-map from="Selected.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <map from="HiddenCase" to="HiddenCase"/>
+   <map from="Bankruptcy" to="Bankruptcy"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HiddenPrevBankruptcy" to="HiddenPrevBankruptcy"/>
+   <map from="HiddenPrevCsePerson" to="HiddenPrevCsePerson"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ListCsePersons" to="ListCsePersons"/>
+   <map from="ListBkrpDistCtStates" to="ListBkrpDistCtStates"/>
+   <map from="ListTrusteeOffrStates" to="ListTrusteeOffrStates"/>
+   <map from="ListAttorneyStates" to="ListAttorneyStates"/>
+   <map from="ListBkrpTypes" to="ListBkrpTypes"/>
+   <map from="UpdateStamp" to="UpdateStamp"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplaySuccessful"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenLastRead.BankruptcyFilingDate"
+        to="HiddenLastRead.BankruptcyFilingDate"/>
+   <map from="HiddenLastRead.BankruptcyDischargeDate"
+        to="HiddenLastRead.BankruptcyDischargeDate"/>
+   <map from="HiddenLastRead.BankruptcyConfirmationDate"
+        to="HiddenLastRead.BankruptcyConfirmationDate"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

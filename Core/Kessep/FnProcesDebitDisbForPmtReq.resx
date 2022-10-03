@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateDisbursementTransaction">
+      <value>
+update CKT_DISB_TRAN
+set
+  PRQ_GENERATED_ID = @prqGeneratedId
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+   <data name="CreateDisbursementStatusHistory">
+      <value>
+insert into CKT_DISB_STAT_HIST
+(
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT,
+  SUPPRESSION_REASON
+)
+values
+(
+  @dbsGeneratedId,
+  @dtrGeneratedId,
+  @cspNumber,
+  @cpaType,
+  @disbStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText,
+  @suppressionReason
+)
+</value>
+   </data>
+   <data name="UpdateDisbursementStatusHistory">
+      <value>
+update CKT_DISB_STAT_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  REASON_TEXT = @reasonText
+where
+  (DBS_GENERATED_ID = @dbsGeneratedId) and
+  (DTR_GENERATED_ID = @dtrGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (DISB_STAT_HIST_ID = @disbStatHistId)
+</value>
+   </data>
+   <data name="UpdateDisbursementTransaction">
+      <value>
+update CKT_DISB_TRAN
+set
+  PROCESS_DATE = @processDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+</root>

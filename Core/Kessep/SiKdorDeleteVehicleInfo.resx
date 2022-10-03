@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteKdorVehicle">
+      <value>
+delete from CKT_KDOR_VEHICLE
+where
+  (IDENTIFIER = @identifier) and
+  (FK_CKT_CSE_PERSNUMB = @fkCktCsePersnumb)
+</value>
+   </data>
+   <data name="DeleteKdorVehicleOwner">
+      <value>
+delete from CKT_KDOR_VEHICLE_OWNER
+where
+  (IDENTIFIER = @identifier) and
+  (FK_CKT_KDOR_VEHFK_CKT_CSE_PERS = @fkCktKdorVehfkCktCsePers) and
+  (FK_CKT_KDOR_VEHIDENTIFIER = @fkCktKdorVehidentifier)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadKdorVehicle">
+      <value>
+select top(1)
+  IDENTIFIER,
+  FK_CKT_CSE_PERSNUMB
+from
+  CKT_KDOR_VEHICLE
+where
+  (@fkCktCsePersnumb = FK_CKT_CSE_PERSNUMB) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadKdorVehicleOwner">
+      <value>
+select
+  IDENTIFIER,
+  FK_CKT_KDOR_VEHFK_CKT_CSE_PERS,
+  FK_CKT_KDOR_VEHIDENTIFIER
+from
+  CKT_KDOR_VEHICLE_OWNER
+where
+  (@fkCktKdorVehfkCktCsePers = FK_CKT_KDOR_VEHFK_CKT_CSE_PERS) and
+  (@fkCktKdorVehidentifier = FK_CKT_KDOR_VEHIDENTIFIER)
+</value>
+   </data>
+</root>

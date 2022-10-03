@@ -1,0 +1,35 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDdamDebtDstrbtnSysadmMenu"
+           program-name="SWEDDAMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDdamDebtDstrbtnSysadmMenu"
+           transaction="SR4L"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_LST_OBLIG_RLN_RSN"
+       action="transfer"
+       to="FnOrrlLstObligRlnRsn"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnFmenFnclMgmtMainMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_LST_DIST_POLICY"
+       action="transfer"
+       to="FnDislLstDstrbtnPolicy"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_TO_MTN_DISTRIB_POLICY"
+       action="transfer"
+       to="FnDismMtnDistributionPolicy"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_LST_OBLIG_TYPE"
+       action="transfer"
+       to="FnObtlLstObligTypes"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_XFR_TO_LST_OBLG_TRN_RLN_RSN"
+       action="transfer"
+       to="FnOtrlLstObligTransRlnRsn"
+       send-command="DISPLAY"/>
+   <map from="Standard" to="Standard"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

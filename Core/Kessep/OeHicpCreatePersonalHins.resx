@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePersonalHealthInsurance">
+      <value>
+insert into CKT_PERSONAL_HINS
+(
+  HCV_ID,
+  CSP_NUMBER,
+  VERIFIED_USER_ID,
+  COV_VERIFIED_DATE,
+  INS_EXISTS_IND,
+  COVER_COST_AMT,
+  COVER_BEGIN_DATE,
+  COVER_END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PREM_VERIFIED_DATE
+)
+values
+(
+  @hcvId,
+  @cspNumber,
+  @verifiedUserId,
+  @covVerifiedDate,
+  @insExistsInd,
+  @coverCostAmt,
+  @coverBeginDate,
+  @coverEndDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @premVerifiedDate
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.END_DATE = @endDate) and
+    (T2.TYPE in ('AP', 'AR'))
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (@casNumber = CAS_NUMBER) and
+  (TYPE in ('CH', 'AR')) and
+  (END_DATE &gt;= @endDate)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage">
+      <value>
+select top(1)
+  IDENTIFIER,
+  PAID_BY_CSEP_IND,
+  GROUP_NUMBER,
+  VERIFIED_DATE,
+  VERIFIED_USER_ID,
+  POLICY_NUMBER,
+  POLICY_EXP_DATE,
+  COVERAGE_CODE_1,
+  COVERAGE_CODE_2,
+  COVERAGE_CODE_3,
+  COVERAGE_CODE_4,
+  COVERAGE_CODE_5,
+  COVERAGE_CODE_6,
+  COVERAGE_CODE_7,
+  POLICY_EFF_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER,
+  OTH_COV_PERSONS
+from
+  CKT_HINS_COVERAGE
+where
+  (IDENTIFIER = @identifier) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

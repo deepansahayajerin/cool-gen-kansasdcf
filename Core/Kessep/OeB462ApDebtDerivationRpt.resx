@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select top(1)
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.AS_OF_DT,
+  T1.DISCONTINUE_DT,
+  T1.LAST_ACCRUAL_DT
+from
+  CKT_LEGAL_ACTION T7
+  join
+  CKT_OBLIGATION T3
+  join
+  CKT_ACCRUAL_INSTR T1
+  on
+    (T1.AS_OF_DT &lt;= @asOfDt) and
+    (T1.DISCONTINUE_DT &gt; @asOfDt) and
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_GENERATED_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.PRIM_SEC_CD &lt;&gt; 'S') and
+    (
+      T3.DTY_GENERATED_ID in (1, 2, 3,
+        19)
+    ) and
+    (T3.CSP_NUMBER = @cspNumber)
+  on
+    (T7.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T7.STANDARD_NO = @standardNo) and
+    (T7.CLASSIFICATION = 'J')
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_LEGAL_ACTION T4 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T3 with(readuncommitted)
+  on
+    T1.NUMB = T3.CAS_NUMBER
+  on
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T4.STANDARD_NO = @standardNo)
+  join
+  CKT_OBLIGATION T5 with(readuncommitted)
+  on
+    (T4.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (@cspNumber = T5.CSP_NUMBER)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadObligationCsePersonLegalAction">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T1.PRIM_SEC_CD,
+  T1.CREATED_TMST,
+  T1.ORD_TYP_CD,
+  T2.NUMB,
+  T2.TYPE,
+  T2.DATE_OF_DEATH,
+  T3.CLASSIFICATION,
+  T3.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_CSE_PERSON T2
+  join
+  CKT_OBLIGATION T1
+  on
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.DTY_GENERATED_ID &lt;&gt; 15) and
+    (T1.DTY_GENERATED_ID &lt;&gt; 4) and
+    (T1.DTY_GENERATED_ID &lt;&gt; 5) and
+    (T1.DTY_GENERATED_ID &lt;&gt; 6) and
+    (T1.DTY_GENERATED_ID &lt;&gt; 7) and
+    (T1.DTY_GENERATED_ID &lt;&gt; 8) and
+    (T1.DTY_GENERATED_ID &lt;&gt; 9) and
+    (T1.PRIM_SEC_CD &lt;&gt; 'S')
+  on
+    (T3.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T3.CLASSIFICATION = 'J')
+order by
+  T2.NUMB desc,
+  T3.STANDARD_NO
+</value>
+   </data>
+</root>

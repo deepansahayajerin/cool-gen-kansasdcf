@@ -1,0 +1,50 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="ScAsrvAssignServProvToProf"
+           program-name="SWEASRVP"
+           class="Gov.Kansas.DCF.Cse.Security1.ScAsrvAssignServProvToProf"
+           transaction="SRGX">
+   <on exit-state="ECO_XFR_TO_ASSGN_USR_2_PROF_USR"
+       action="transfer"
+       to="ScAsruAsgnServprvProfByUsr"
+       send-command="RETFMSP">
+      <map from="HiddenCommon" to="ActiveOnly"/>
+      <map from="HiddenSelected" to="HiddenSelectedServiceProvider"/>
+      <map from="Profile" to="HiddenSelectedProfile"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PROFILES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFMPRO"
+       to="ScProfMaintainProfiles"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="HiddenSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="ScSecmSecurityMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFMSP"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <map from="HiddenFromSecurity" to="HiddenFromSecurity"/>
+      <return-map from="HiddenSelected.HiddenSelected1"
+                  to="HiddenSelectedSp.HiddenSelected"/>
+   </on>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="Profile" to="Profile"/>
+   <map from="PromptProfile" to="PromptProfile"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.ServiceProvider" to="Group.ServiceProvider"/>
+   <map from="Group.ServiceProviderProfile" to="Group.ServiceProviderProfile"/>
+   <map from="Group.Error" to="Group.Error"/>
+   <map from="SortBy" to="SortBy"/>
+   <map from="StartingWith" to="StartingWith"/>
+   <map from="Group.HiddenPrev" to="Group.HiddenPrev"/>
+   <map from="ActiveOnly" to="ActiveOnly"/>
+   <map from="Standard" to="Standard"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

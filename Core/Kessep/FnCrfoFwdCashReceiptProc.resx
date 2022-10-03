@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt1">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  RECEIPT_DATE,
+  CHECK_TYPE,
+  CHECK_NUMBER,
+  PAYOR_ORGANIZATION,
+  PAYOR_FIRST_NAME,
+  PAYOR_MIDDLE_NAME,
+  PAYOR_LAST_NAME,
+  FRWRD_TO_NAME,
+  FRWRD_STREET_1,
+  FRWRD_STREET_2,
+  FRWRD_CITY,
+  FRWRD_STATE,
+  FRWRD_ZIP5,
+  FRWRD_ZIP4,
+  FRWRD_ZIP3,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_CASH_RECEIPT
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceipt2">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  RECEIPT_DATE,
+  CHECK_TYPE,
+  CHECK_NUMBER,
+  PAYOR_ORGANIZATION,
+  PAYOR_FIRST_NAME,
+  PAYOR_MIDDLE_NAME,
+  PAYOR_LAST_NAME,
+  FRWRD_TO_NAME,
+  FRWRD_STREET_1,
+  FRWRD_STREET_2,
+  FRWRD_CITY,
+  FRWRD_STATE,
+  FRWRD_ZIP5,
+  FRWRD_ZIP4,
+  FRWRD_ZIP3,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID
+from
+  CKT_CR_EVENT
+where
+  (CREVENT_ID = @creventId) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus1">
+      <value>
+select top(1)
+  CR_STATUS_ID,
+  CODE
+from
+  CKT_CR_STATUS
+where
+  CR_STATUS_ID = @crStatusId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus2">
+      <value>
+select top(1)
+  CR_STATUS_ID,
+  CODE
+from
+  CKT_CR_STATUS
+where
+  CR_STATUS_ID = @crStatusId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatusHistory1">
+      <value>
+select top(1)
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DISCONTINUE_DATE,
+  REASON_TEXT
+from
+  CKT_CR_STATUS_HIST
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptStatusHistory2">
+      <value>
+select
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  DISCONTINUE_DATE,
+  REASON_TEXT
+from
+  CKT_CR_STATUS_HIST
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CODE
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="UpdateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  FRWRD_TO_NAME = @frwrdToName,
+  FRWRD_STREET_1 = @frwrdStreet1,
+  FRWRD_STREET_2 = @frwrdStreet2,
+  FRWRD_CITY = @frwrdCity,
+  FRWRD_STATE = @frwrdState,
+  FRWRD_ZIP5 = @frwrdZip5,
+  FRWRD_ZIP4 = @frwrdZip4,
+  FRWRD_ZIP3 = @frwrdZip3,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+</root>

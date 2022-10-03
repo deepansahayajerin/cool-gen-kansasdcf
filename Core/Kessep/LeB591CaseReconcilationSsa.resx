@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE in ('AP', 'AR')) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_OBLIGATION T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.END_DT &gt; @endDt)
+order by
+  T1.STANDARD_NO
+</value>
+   </data>
+</root>

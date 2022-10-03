@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateMonitoredActivityAssignment">
+      <value>
+insert into CKT_ASSGN_MNT_ACT
+(
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  RESPONSIBILITY_COD,
+  EFFECTIVE_DATE,
+  OVERRIDE_IND,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  MAC_ID
+)
+values
+(
+  @systemGeneratedI,
+  @reasonCode,
+  @responsibilityCod,
+  @effectiveDate,
+  @overrideInd,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @macId
+)
+</value>
+   </data>
+   <data name="ReadMonitoredActivityAssignmentMonitoredActivity">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.REASON_CODE,
+  T1.RESPONSIBILITY_COD,
+  T1.EFFECTIVE_DATE,
+  T1.OVERRIDE_IND,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.MAC_ID,
+  T2.NAME,
+  T2.ACTIVITY_CTRL_NUM,
+  T2.TYPE_CODE,
+  T2.FED_NCOMP_DTE,
+  T2.FED_NEAR_NCOMP_DTE,
+  T2.OTHER_NCOMP_DTE,
+  T2.OTHR_NEAR_NCOM_DTE,
+  T2.START_DATE,
+  T2.CLOSURE_DATE,
+  T2.CLOSURE_REASON_COD,
+  T2.CASE_UNIT_CLOSED_I,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.INF_SYS_GEN_ID,
+  T3.BUSINESS_OBJECT_CD,
+  T3.CASE_NUMBER,
+  T3.CSE_PERSON_NUM,
+  T3.CASE_UNIT_NUM
+from
+  CKT_INFRASTRUCTURE T3
+  join
+  CKT_MONITORED_ACT T2
+  join
+  CKT_ASSGN_MNT_ACT T1
+  on
+    (@spdId = T1.SPD_ID) and
+    (T2.SYSTEM_GENERATED_I = T1.MAC_ID) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE = @discontinueDate)
+  on
+    (T3.SYSTEM_GENERATED_I = T2.INF_SYS_GEN_ID) and
+    (T3.CASE_NUMBER = @caseNumber)
+</value>
+   </data>
+   <data name="UpdateMonitoredActivityAssignment">
+      <value>
+update CKT_ASSGN_MNT_ACT
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (MAC_ID = @macId)
+</value>
+   </data>
+</root>

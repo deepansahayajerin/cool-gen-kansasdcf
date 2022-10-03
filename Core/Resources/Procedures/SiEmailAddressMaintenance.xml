@@ -1,0 +1,81 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiEmailAddressMaintenance"
+           program-name="SWEEMALP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiEmailAddressMaintenance"
+           transaction="SSAD"
+           primary-window="SI_EMAIL_ADDRESS_MAINTENANCE"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CODE_TABLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="PromptCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="PromptCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_ROLE_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiRoleCaseRoleMaintenance"
+       send-command="DISPLAY">
+      <map from="Case1.Number" to="Case1.Number"/>
+      <return-map from="Selected.Number" to="ArFromCaseRole.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected.Number" to="ApCsePersonsWorkSet.Number"/>
+      <return-map from="Selected.FormattedName" to="ApCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="HiddenCsePerson" to="StartCsePerson"/>
+      <map from="Case1" to="StartCase"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="Next" to="Next"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Alrt" to="Alrt"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="ApCommon" to="ApCommon"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="ApActive" to="ApActive"/>
+   <map from="ArCommon" to="ArCommon"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+   <map from="ApList" to="ApList"/>
+   <map from="ArList" to="ArList"/>
+   <map from="Plus" to="Plus"/>
+   <map from="Save" to="Save"/>
+   <map from="HiddenNext" to="HiddenNext"/>
+   <map from="ArFromCaseRole" to="ArFromCaseRole"/>
+   <map from="HiddenAp" to="HiddenAp"/>
+   <map from="Minus" to="Minus"/>
+   <map from="SaveSubscript" to="SaveSubscript"/>
+   <map from="EmptyAddrSelect" to="EmptyAddrSelect"/>
+   <map from="EmptySourcePrmt" to="EmptySourcePrmt"/>
+   <map from="Email.Select" to="Email.Select"/>
+   <map from="Email.CsePersonEmailAddress" to="Email.CsePersonEmailAddress"/>
+   <map from="Email.Hidden1" to="Email.Hidden1"/>
+   <map from="Email.SourcePrompt" to="Email.Source"/>
+   <map from="Email.LastUpdated" to="Email.LastUpdated"/>
+   <map from="Pagenum.Pagenum1" to="Pagenum.Pagenum1"/>
+   <map from="Hidden.HsendDate" to="Hidden.HsendDate"/>
+   <map from="Empty.EmailAddress" to="Empty.EmailAddress"/>
+   <map from="Empty.EmailSource" to="Empty.EmailSource"/>
+   <map from="Empty.EffectiveDate" to="Empty.EffectiveDate"/>
+   <map from="Empty.EndDate" to="Empty.EndDate"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

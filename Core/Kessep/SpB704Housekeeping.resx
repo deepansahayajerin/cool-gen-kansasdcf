@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCode">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME
+from
+  CKT_CODE with(readuncommitted)
+where
+  CODE_NAME = 'COMPLIANCE PROGRAMS'
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE_VALUE with(readuncommitted)
+where
+  (@codId = COD_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadProgram1">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE
+from
+  CKT_PROGRAM with(readuncommitted)
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadProgram2">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE
+from
+  CKT_PROGRAM with(readuncommitted)
+where
+  CODE = 'AF'
+</value>
+   </data>
+</root>

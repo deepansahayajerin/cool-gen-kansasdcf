@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteObligationPaymentSchedule">
+      <value>
+delete from CKT_OB_PYMNT_SCH
+where
+  (OTY_TYPE = @otyType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OBG_CSP_NUMBER = @obgCspNumber) and
+  (OBG_CPA_TYPE = @obgCpaType) and
+  (START_DT = @startDt)
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  OBLIG_PSCH_AMT,
+  END_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATE_BY,
+  LAST_UPDATE_TMST
+from
+  CKT_OB_PYMNT_SCH
+where
+  (START_DT = @startDt) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OBG_CPA_TYPE = @obgCpaType) and
+  (OBG_CSP_NUMBER = @obgCspNumber) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+</root>

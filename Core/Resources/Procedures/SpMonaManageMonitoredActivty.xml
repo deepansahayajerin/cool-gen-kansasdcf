@@ -1,0 +1,192 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpMonaManageMonitoredActivty"
+           program-name="SWEMONAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpMonaManageMonitoredActivty"
+           transaction="SRPU"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_NATE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNATE"
+       to="SpNateMaintNarrativeDetail"
+       send-command="DISPLAY">
+      <map from="SelectedLegalAction" to="HeaderLegalAction"/>
+      <map from="SelectedCsePersonsWorkSet.FormattedName"
+           to="HeaderCsePersonsWorkSet.FormattedName"/>
+      <map from="SelectedCsePersonsWorkSet.Number"
+           to="HeaderCsePersonsWorkSet.Number"/>
+      <map from="SelectedDateWorkArea" to="HeaderDateWorkArea"/>
+      <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+      <map from="SelectedInfrastructure.SystemGeneratedIdentifier"
+           to="HeaderInfrastructure.SystemGeneratedIdentifier"/>
+      <map from="SelectedInfrastructure.Function"
+           to="HeaderInfrastructure.Function"/>
+      <map from="SelectedInfrastructure.ProcessStatus"
+           to="HeaderInfrastructure.ProcessStatus"/>
+      <map from="SelectedInfrastructure.EventType"
+           to="HeaderInfrastructure.EventType"/>
+      <map from="SelectedInfrastructure.EventDetailName"
+           to="HeaderInfrastructure.EventDetailName"/>
+      <map from="SelectedInfrastructure.CaseNumber"
+           to="HeaderInfrastructure.CaseNumber"/>
+      <map from="SelectedInfrastructure.CsePersonNumber"
+           to="HeaderInfrastructure.CsePersonNumber"/>
+      <map from="SelectedInfrastructure.CaseUnitNumber"
+           to="HeaderInfrastructure.CaseUnitNumber"/>
+      <map from="SelectedInfrastructure.CreatedBy"
+           to="HeaderInfrastructure.CreatedBy"/>
+      <map from="SelectedInfrastructure.CreatedTimestamp"
+           to="HeaderInfrastructure.CreatedTimestamp"/>
+      <map from="UseNate" to="CallingProcedureNameAs"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ATLM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETATLM"
+       to="SpAtlmActivityListMaint"
+       send-command="DISPLAY">
+      <map from="AtlmManualList" to="HiddenImportManualList"/>
+      <return-map from="ToTran" to="HiddenActivity"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="Office" to="HeaderOffice"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="HeaderOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionServiceProvider" to="HeaderServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command="CLEAR"/>
+   <on exit-state="ECO_LNK_TO_ASIN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETASIN"
+       to="SpAsinOspAssignment"
+       send-command="DISPLAY">
+      <map from="HiddenMonitoredActivity" to="HmonitoredActivity"/>
+      <map from="SelectedLegalAction.Identifier" to="HlegalAction.Identifier"/>
+      <map from="SelectedLegalAction.CourtCaseNumber"
+           to="HlegalAction.CourtCaseNumber"/>
+      <map from="HeaderOffice" to="HiddenOffice"/>
+      <map from="HeaderServiceProvider" to="HiddenServiceProvider"/>
+      <map from="HeaderOfficeServiceProvider" to="HiddenOfficeServiceProvider"/>
+      <map from="HiddenObject" to="HeaderObject"/>
+      <return-map from="HmonitoredActivity.SystemGeneratedIdentifier"
+                  to="HiddenMonitoredActivity.SystemGeneratedIdentifier"/>
+      <return-map from="HmonitoredActivity.TypeCode"
+                  to="HiddenMonitoredActivity.TypeCode"/>
+   </on>
+   <map from="PageKeys.GexportPageKeyMonitoredActivityAssignment"
+        to="PageKeys.GimportPageKeyMonitoredActivityAssignment"/>
+   <map from="HideHdrServiceProvider" to="HideHdrServiceProvider"/>
+   <map from="HideHdrPrmptSvpo" to="HideHdrPrmptSvpo"/>
+   <map from="HideHdrOffice" to="HideHdrOffice"/>
+   <map from="HideHdrOfficeServiceProvider" to="HideHdrOfficeServiceProvider"/>
+   <map from="HideHdrFltrStrtRange" to="HideHdrFltrStrtRange"/>
+   <map from="HideHdrFltrDteTyp" to="HideHdrFltrDteTyp"/>
+   <map from="HideHdrPrmptDteTyp" to="HideHdrPrmptDteTyp"/>
+   <map from="HideHdrShowAll" to="HideHdrShowAll"/>
+   <map from="HideHdrMonitoredActivityAssignment"
+        to="HideHdrMonitoredActivityAssignment"/>
+   <map from="HideHdrPrmptMonActAsgmt" to="HideHdrPrmptMonActAsgmt"/>
+   <map from="HideHdrInfrastructure" to="HideHdrInfrastructure"/>
+   <map from="HideHdrLegalAction" to="HideHdrLegalAction"/>
+   <map from="HideHdrFips" to="HideHdrFips"/>
+   <map from="HideHdrFipsTribAddress" to="HideHdrFipsTribAddress"/>
+   <map from="UseNate" to="UseNate"/>
+   <map from="HeaderShowAll" to="HeaderShowAll"/>
+   <map from="HeaderOfficeServiceProvider" to="HeaderOfficeServiceProvider"/>
+   <map from="HeaderServiceProvider" to="HeaderServiceProvider"/>
+   <map from="HeaderPromptSvpo" to="HeaderPromptSvpo"/>
+   <map from="HeaderFilterDateType" to="HeaderFilterDateType"/>
+   <map from="HeaderPrompDateFilter" to="HeaderPromptDateFilter"/>
+   <map from="HeaderMonitoredActivityAssignment"
+        to="HeaderMonitoredActivityAssignment"/>
+   <map from="HeaderPromptMonActAsn" to="HeaderPromptMonActAsn"/>
+   <map from="HeaderFips" to="HeaderFips"/>
+   <map from="HeaderFipsTribAddress" to="HeaderFipsTribAddress"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.MonitoredActivity" to="Group.MonitoredActivity"/>
+   <map from="Group.PromptReason" to="Group.PromptReason"/>
+   <map from="Group.SpTextWorkArea" to="Group.SpTextWorkArea"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenObject" to="HiddenObject"/>
+   <map from="HiddenActivity" to="HiddenActivity"/>
+   <map from="HiddenCodeValue" to="HiddenCodeValue"/>
+   <map from="HiddenCode" to="HiddenCode"/>
+   <map from="Group.LegalAction" to="Group.LegalAction"/>
+   <map from="HeaderFilterStartRange" to="HeaderFilterStartRange"/>
+   <map from="Group.HighliteOldAsgnmt" to="Group.HighliteOldAsgnmt"/>
+   <map from="PageKeys.GexportPageKeyMonitoredActivity"
+        to="PageKeys.GimportPageKeyMonitoredActivity"/>
+   <map from="CurrentPage" to="CurrentPage"/>
+   <map from="Scroll" to="Scroll"/>
+   <map from="PageKeys.GexportPageKeyDateWorkArea"
+        to="PageKeys.GimportPageKeyDateWorkArea"/>
+   <map from="Group.Infrastructure.CreatedTimestamp"
+        to="Group.Infrastructure.CreatedTimestamp"/>
+   <map from="HiddenMonitoredActivityAssignment.ReasonCode"
+        to="HiddenMonitoredActivityAssignment.ReasonCode"/>
+   <map from="HiddenNextTranInfo.LastTran" to="HiddenNextTranInfo.LastTran"/>
+   <map from="HiddenNextTranInfo.InfrastructureId"
+        to="HiddenNextTranInfo.InfrastructureId"/>
+   <map from="HeaderOffice.SystemGeneratedId"
+        to="HeaderOffice.SystemGeneratedId"/>
+   <map from="HeaderInfrastructure.CaseNumber"
+        to="HeaderInfrastructure.CaseNumber"/>
+   <map from="HeaderInfrastructure.CsePersonNumber"
+        to="HeaderInfrastructure.CsePersonNumber"/>
+   <map from="HeaderLegalAction.CourtCaseNumber"
+        to="HeaderLegalAction.CourtCaseNumber"/>
+   <map from="Group.Infrastructure.CaseNumber"
+        to="Group.Infrastructure.CaseNumber"/>
+   <map from="Group.Infrastructure.CaseUnitNumber"
+        to="Group.Infrastructure.CaseUnitNumber"/>
+   <map from="Group.Infrastructure.CsePersonNumber"
+        to="Group.Infrastructure.CsePersonNumber"/>
+   <map from="Group.CsePersonsWorkSet.FormattedName"
+        to="Group.CsePersonsWorkSet.FormattedName"/>
+   <map from="Group.Infrastructure.Detail" to="Group.Infrastructure.Detail"/>
+   <map from="HiddenMonitoredActivity.Name" to="HiddenMonitoredActivity.Name"/>
+   <map from="HiddenMonitoredActivity.TypeCode"
+        to="HiddenMonitoredActivity.TypeCode"/>
+   <map from="HiddenMonitoredActivity.CreatedBy"
+        to="HiddenMonitoredActivity.CreatedBy"/>
+   <map from="HiddenMonitoredActivity.ClosureReasonCode"
+        to="HiddenMonitoredActivity.ClosureReasonCode"/>
+   <map from="HiddenMonitoredActivity.SystemGeneratedIdentifier"
+        to="HiddenMonitoredActivity.SystemGeneratedIdentifier"/>
+   <map from="Group.Infrastructure.SystemGeneratedIdentifier"
+        to="Group.Infrastructure.SystemGeneratedIdentifier"/>
+   <map from="Group.Infrastructure.EventType"
+        to="Group.Infrastructure.EventType"/>
+   <map from="Group.Infrastructure.UserId" to="Group.Infrastructure.UserId"/>
+   <map from="Group.Infrastructure.CreatedBy"
+        to="Group.Infrastructure.CreatedBy"/>
+   <map from="Group.Infrastructure.DenormNumeric12"
+        to="Group.Infrastructure.DenormNumeric12"/>
+   <map from="Group.Infrastructure.Function" to="Group.Infrastructure.Function"/>
+   <map from="Group.Infrastructure.SituationNumber"
+        to="Group.Infrastructure.SituationNumber"/>
+   <map from="Group.Infrastructure.ProcessStatus"
+        to="Group.Infrastructure.ProcessStatus"/>
+   <map from="Group.Infrastructure.EventId" to="Group.Infrastructure.EventId"/>
+   <map from="Group.Infrastructure.EventDetailName"
+        to="Group.Infrastructure.EventDetailName"/>
+</procedure>

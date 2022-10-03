@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteFipsTribAddress">
+      <value>
+delete from CKT_FIPS_TRIB_ADDR
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="DeleteTribunal#1">
+      <value>
+select top(1)
+  1
+from
+  CKT_APPEAL
+where
+  TRB_ID = @trbId
+</value>
+   </data>
+   <data name="DeleteTribunal#2">
+      <value>
+update CKT_FIPS_TRIB_ADDR
+set
+  TRB_ID = null
+where
+  TRB_ID = @trbId
+</value>
+   </data>
+   <data name="DeleteTribunal#3">
+      <value>
+delete from CKT_TRIBUNAL
+where
+  IDENTIFIER = @trbId
+</value>
+   </data>
+   <data name="DisassociateFipsTribAddress">
+      <value>
+update CKT_FIPS_TRIB_ADDR
+set
+  TRB_ID = null
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadAppeal">
+      <value>
+select top(1)
+  APPEAL_ID,
+  TRB_ID
+from
+  CKT_APPEAL
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  TRB_ID,
+  KPC_TRIBUNAL_ID
+from
+  CKT_LEGAL_ACTION
+where
+  KPC_TRIBUNAL_ID = @kpcTribunalId
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  TRB_ID,
+  KPC_TRIBUNAL_ID
+from
+  CKT_LEGAL_ACTION
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  TRIBUNAL_NM,
+  IDENTIFIER
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadTribunalFeeInformation">
+      <value>
+select top(1)
+  TRB_ID,
+  TRIBUNAL_FEE_ID,
+  EFFECTIVE_DATE
+from
+  CKT_TRIB_FEE_INFO
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+</root>

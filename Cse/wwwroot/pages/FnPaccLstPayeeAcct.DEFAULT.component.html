@@ -1,0 +1,706 @@
+﻿<!--Name: FN_PACC_LST_PAYEE_ACCT, ID: 372519785, model: 746-->
+<div coolContent coolName="FN_PACC_LST_PAYEE_ACCT" coolType="SCREEN"
+  (coolInit)="scrollSize = 120; pageSize = 12">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 28.75%; top: 0; width: 38.75%; height: 4%;" coolCol="24"
+     coolRow="1" coolLength="31">CSE - List Payee Account - PACC</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 6.25%; top: 12%; width: 6.25%; height: 4%;" coolCol="6"
+     coolRow="4" coolLength="5">Payee</div>
+   <input type="text" coolType="field" name="field_4_12"
+     [(ngModel)]="in.csePerson.number"
+     [coolVideo]="out.csePerson.screenField?.number" coolAutotab coolFocus
+     coolAlign="right" coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="10"
+     style="left: 13.75%; top: 12%; width: 12.5%; height: 4%;" coolCol="12"
+     coolRow="4" coolLength="10">
+   <input type="text" coolType="field" name="field_4_24"
+     [(ngModel)]="in.prompt.selectChar"
+     [coolVideo]="out.prompt.screenField?.selectChar" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 28.75%; top: 12%; width: 1.25%; height: 4%;" coolCol="24"
+     coolRow="4" coolLength="1">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 12%; width: 41.25%; height: 4%;" coolCol="26"
+     coolRow="4" coolLength="33">{{in.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="prompt"
+     style="left: 6.25%; top: 16%; width: 12.5%; height: 4%;" coolCol="6"
+     coolRow="5" coolLength="10">Start Date</div>
+   <input type="text" coolType="field" name="field_5_18"
+     [(ngModel)]="in.startingDate.date"
+     [coolVideo]="out.startingDate.screenField?.date" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolDate="MMddyyyy"
+     [attr.maxlength]="8"
+     style="left: 21.25%; top: 16%; width: 10%; height: 4%;" coolCol="18"
+     coolRow="5" coolLength="8">
+   
+   <div coolType="literal"
+     style="left: 38.75%; top: 16%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="5" coolLength="8">End Date</div>
+   <input type="text" coolType="field" name="field_5_42"
+     [(ngModel)]="in.endingDate.date"
+     [coolVideo]="out.endingDate.screenField?.date" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolDate="MMddyyyy"
+     [attr.maxlength]="8"
+     style="left: 51.25%; top: 16%; width: 10%; height: 4%;" coolCol="42"
+     coolRow="5" coolLength="8">
+   
+   <div coolType="prompt"
+     style="left: 67.5%; top: 16%; width: 27.5%; height: 4%;" coolCol="55"
+     coolRow="5" coolLength="22">Show Adjustments (Y/N)</div>
+   <input type="text" coolType="field" name="field_5_79"
+     [(ngModel)]="in.showAdj.flag" [coolVideo]="out.showAdj.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 97.5%; top: 16%; width: 1.25%; height: 4%;" coolCol="79"
+     coolRow="5" coolLength="1">
+   
+   <div coolType="literal" style="left: 5%; top: 24%; width: 5%; height: 4%;"
+     coolCol="5" coolRow="7" coolLength="4">Proc</div>
+   
+   <div coolType="literal" style="left: 12.5%; top: 24%; width: 5%; height: 4%;"
+     coolCol="11" coolRow="7" coolLength="4">Tran</div>
+   
+   <div coolType="literal"
+     style="left: 21.25%; top: 24%; width: 5%; height: 4%;" coolCol="18"
+     coolRow="7" coolLength="4">Disb</div>
+   
+   <div coolType="literal" style="left: 32.5%; top: 24%; width: 5%; height: 4%;"
+     coolCol="27" coolRow="7" coolLength="4">Disb</div>
+   
+   <div coolType="literal"
+     style="left: 61.25%; top: 24%; width: 10%; height: 4%;" coolCol="50"
+     coolRow="7" coolLength="8">Original</div>
+   
+   <div coolType="literal" style="left: 0; top: 28%; width: 3.75%; height: 4%;"
+     coolCol="1" coolRow="8" coolLength="3">Sel</div>
+   
+   <div coolType="literal" style="left: 5%; top: 28%; width: 5%; height: 4%;"
+     coolCol="5" coolRow="8" coolLength="4">Date</div>
+   
+   <div coolType="literal" style="left: 12.5%; top: 28%; width: 5%; height: 4%;"
+     coolCol="11" coolRow="8" coolLength="4">Type</div>
+   
+   <div coolType="literal"
+     style="left: 21.25%; top: 28%; width: 5%; height: 4%;" coolCol="18"
+     coolRow="8" coolLength="4">Code</div>
+   
+   <div coolType="literal" style="left: 32.5%; top: 28%; width: 5%; height: 4%;"
+     coolCol="27" coolRow="8" coolLength="4">Meth</div>
+   
+   <div coolType="literal"
+     style="left: 41.25%; top: 28%; width: 6.25%; height: 4%;" coolCol="34"
+     coolRow="8" coolLength="5">Debit</div>
+   
+   <div coolType="literal"
+     style="left: 52.5%; top: 28%; width: 7.5%; height: 4%;" coolCol="43"
+     coolRow="8" coolLength="6">Credit</div>
+   
+   <div coolType="literal"
+     style="left: 61.25%; top: 28%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="8" coolLength="9">Warr/EFT#</div>
+   
+   <div coolType="literal"
+     style="left: 73.75%; top: 28%; width: 11.25%; height: 4%;" coolCol="60"
+     coolRow="8" coolLength="9">Reference</div>
+   
+   <div coolType="literal"
+     style="left: 86.25%; top: 28%; width: 7.5%; height: 4%;" coolCol="70"
+     coolRow="8" coolLength="6">Number</div>
+   <input type="text" coolType="field" name="field_9_2"
+     [(ngModel)]="ref(in.group, pageOffset, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset]?.common.screenField?.flag" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 32%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 32%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="9" coolLength="6" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 32%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="9" coolLength="4" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 32%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="9" coolLength="10" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 32%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="9" coolLength="3" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 32%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 32%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="9" coolLength="9" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 32%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="9" coolLength="9" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 32%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="9" coolLength="6" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 32%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="9" coolLength="14" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_10_2"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 36%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 36%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="10" coolLength="6" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 36%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="10" coolLength="4" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 36%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="10" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 36%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="10" coolLength="3" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 36%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 36%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="10" coolLength="9" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 36%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="10" coolLength="9" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 36%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="10" coolLength="6" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 36%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="10" coolLength="14" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_11_2"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 40%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 40%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="11" coolLength="6" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 40%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="11" coolLength="4" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 40%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="11" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 40%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="11" coolLength="3" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 40%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 40%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="11" coolLength="9" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 40%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="11" coolLength="9" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 40%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="11" coolLength="6" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 40%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="11" coolLength="14" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_12_2"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 44%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 44%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="12" coolLength="6" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 44%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="12" coolLength="4" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 44%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 44%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="12" coolLength="3" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 44%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 44%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="12" coolLength="9" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 44%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="12" coolLength="9" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 44%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="12" coolLength="6" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 44%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="12" coolLength="14" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_13_2"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 48%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 48%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="13" coolLength="6" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 48%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="13" coolLength="4" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 48%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 48%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="13" coolLength="3" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 48%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 48%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="13" coolLength="9" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 48%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="13" coolLength="9" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 48%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="13" coolLength="6" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 48%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="13" coolLength="14" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_14_2"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 52%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 52%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="14" coolLength="6" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 52%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="14" coolLength="4" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 52%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 52%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="14" coolLength="3" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 52%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 52%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="14" coolLength="9" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 52%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="14" coolLength="9" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 52%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="14" coolLength="6" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 52%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="14" coolLength="14" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_15_2"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 56%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 56%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="15" coolLength="6" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 56%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="15" coolLength="4" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 56%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 56%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="15" coolLength="3" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 56%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 56%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="15" coolLength="9" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 56%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="15" coolLength="9" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 56%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="15" coolLength="6" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 56%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="15" coolLength="14" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_16_2"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 60%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 60%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="16" coolLength="6" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 60%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="16" coolLength="4" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 60%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 60%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="16" coolLength="3" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 60%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 60%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="16" coolLength="9" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 60%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="16" coolLength="9" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 60%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="16" coolLength="6" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 60%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="16" coolLength="14" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_17_2"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 64%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 8 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 64%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="17" coolLength="6" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 64%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="17" coolLength="4" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 64%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 64%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="17" coolLength="3" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 64%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 64%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 64%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 64%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="17" coolLength="6" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 64%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="17" coolLength="14" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_18_2"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 68%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 9 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 68%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="18" coolLength="6" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 68%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="18" coolLength="4" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 68%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 68%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="18" coolLength="3" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 68%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 68%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 68%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 68%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="18" coolLength="6" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 68%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="18" coolLength="14" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_19_2"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 72%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 10 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 72%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="19" coolLength="6" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 72%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="19" coolLength="4" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 72%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 72%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="19" coolLength="3" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 72%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 72%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="19" coolLength="9" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 72%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="19" coolLength="9" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 72%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="19" coolLength="6" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 72%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="19" coolLength="14" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.refNo.crdCrCombo}}</div>
+   <input type="text" coolType="field" name="field_20_2"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'common.flag').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.common.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 1.25%; top: 76%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 11 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 3.75%; top: 76%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="20" coolLength="6" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.localFinanceWorkArea.disbDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 76%; width: 5%; height: 4%;" coolCol="11"
+     coolRow="20" coolLength="4" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.disbursementTransactionType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 76%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="20" coolLength="10" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 76%; width: 3.75%; height: 4%;" coolCol="27"
+     coolRow="20" coolLength="3" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.paymentRequest.type1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 37.5%; top: 76%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.db.amount|coolNumber:'---0.00;-#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 48.75%; top: 76%; width: 11.25%; height: 4%;" coolCol="40"
+     coolRow="20" coolLength="9" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.cr.amount|coolNumber:'----0.00;-#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 76%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="20" coolLength="9" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.paymentRequest.number}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 76%; width: 7.5%; height: 4%;" coolCol="60"
+     coolRow="20" coolLength="6" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.cashReceipt.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 82.5%; top: 76%; width: 17.5%; height: 4%;" coolCol="67"
+     coolRow="20" coolLength="14" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.refNo.crdCrCombo}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="79"
+     style="left: 0; top: 84%; width: 98.75%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 96.25%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="77">PF KEY: 1 Help  2 Display  3 Exit  4 List  7 Prev  8 Next  9 Return  11 Clear</div>
+   
+   <div coolType="literal"
+     style="left: 2.5%; top: 92%; width: 93.75%; height: 4%;" coolCol="3"
+     coolRow="24" coolLength="75">15 PrevMo 16 NextMo 17 WDTL 18 DHST 19 CRRC 20 PAYR 21 PSUM 22 EDTL 23 OREL</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="PREV_MTH" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=PREV_MTH</a>
+   <a coolType="action" coolCommand="NEXT_MTH" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=NEXT_MTH</a>
+   <a coolType="action" coolCommand="WDTL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F5">F17=WDTL</a>
+   <a coolType="action" coolCommand="DHST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F6">F18=DHST</a>
+   <a coolType="action" coolCommand="CRRC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F7">F19=CRRC</a>
+   <a coolType="action" coolCommand="PAYR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F8">F20=PAYR</a>
+   <a coolType="action" coolCommand="PSUM" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F9">F21=PSUM</a>
+   <a coolType="action" coolCommand="EDTL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F10">F22=EDTL</a>
+   <a coolType="action" coolCommand="OREL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F11">F23=OREL</a>
+   </div>

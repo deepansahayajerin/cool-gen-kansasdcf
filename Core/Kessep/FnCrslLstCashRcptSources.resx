@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptSourceType1">
+      <value>
+select
+  CR_SRCE_TYPE_ID,
+  INTERFACE_IND,
+  CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  COURT_IND,
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_CRSRC_TYPE
+where
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (CODE &gt;= @code)
+order by
+  CODE
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType2">
+      <value>
+select
+  CR_SRCE_TYPE_ID,
+  INTERFACE_IND,
+  CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  COURT_IND,
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_CRSRC_TYPE
+where
+  CODE &gt;= @code
+order by
+  CODE
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceTypeReceiptResearchAssignment1">
+      <value>
+select
+  T1.CR_SRCE_TYPE_ID,
+  T1.INTERFACE_IND,
+  T1.CODE,
+  T1.NAME,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.COURT_IND,
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION,
+  T2.SPD_IDENTIFIER,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_CRSRC_TYPE T1
+  join
+  CKT_RECEIPT_ASSIGN T2
+  on
+    (@spdIdentifier = T2.SPD_IDENTIFIER) and
+    (T1.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER) and
+    (T2.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T1.CODE &gt;= @code)
+order by
+  T1.CODE
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceTypeReceiptResearchAssignment2">
+      <value>
+select
+  T1.CR_SRCE_TYPE_ID,
+  T1.INTERFACE_IND,
+  T1.CODE,
+  T1.NAME,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.COURT_IND,
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION,
+  T2.SPD_IDENTIFIER,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_CRSRC_TYPE T1
+  join
+  CKT_RECEIPT_ASSIGN T2
+  on
+    (@spdIdentifier = T2.SPD_IDENTIFIER) and
+    (T1.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER) and
+    (T1.CODE &gt;= @code)
+order by
+  T1.CODE
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+</root>

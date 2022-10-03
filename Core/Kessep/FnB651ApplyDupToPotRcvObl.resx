@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateDisbursementTransaction">
+      <value>
+update CKT_DISB_TRAN
+set
+  PRQ_GENERATED_ID = @prqGeneratedId
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+   <data name="CreateDisbSuppressionStatusHistory">
+      <value>
+insert into CKT_DISB_SUPPR_STS
+(
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  CLT_SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PERSON_DISB_FILLER,
+  COLLECTION_FILLER,
+  TYPE,
+  REASON_TEXT,
+  AUTOMATIC_FILLER,
+  EXCESS_URA_FILLER,
+  XURA_FILLER,
+  DUPLICATE_FILLER,
+  COURT_ORDER_SUPPR,
+  LGA_IDENTIFIER,
+  DECEASED_FILLER,
+  NO_ADDRESS_FILLER
+)
+values
+(
+  @cpaType,
+  @cspNumber,
+  @dssGeneratedId,
+  null,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @personDisbFiller,
+  @personDisbFiller,
+  @type,
+  @reasonText,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  null,
+  @personDisbFiller,
+  @personDisbFiller
+)
+</value>
+   </data>
+   <data name="CreatePaymentStatusHistory">
+      <value>
+insert into CKT_PMNT_STAT_HIST
+(
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @pstGeneratedId,
+  @prqGeneratedId,
+  @pymntStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  TYPE,
+  REASON_TEXT
+from
+  CKT_DISB_SUPPR_STS
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'D') and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory2">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID
+from
+  CKT_DISB_SUPPR_STS
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  DSS_GENERATED_ID desc
+</value>
+   </data>
+   <data name="ReadDisbursement">
+      <value>
+select top(1)
+  sum(AMOUNT)
+from
+  CKT_DISB_TRAN
+where
+  (@prqGeneratedId = PRQ_GENERATED_ID) and
+  (REFERENCE_NUMBER = @referenceNumber)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PRQ_GENERATED_ID
+from
+  CKT_DISB_TRAN
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'D') and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+   <data name="ReadDisbursementType">
+      <value>
+select top(1)
+  DISB_TYPE_ID,
+  PROGRAM_CODE
+from
+  CKT_DISB_TYPE
+where
+  DISB_TYPE_ID = @disbTypeId
+</value>
+   </data>
+   <data name="ReadPaymentRequestPaymentStatusHistory">
+      <value>
+select
+  T1.PAYMENT_REQUEST_ID,
+  T1.AMOUNT,
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER,
+  T1.RECOVERY_FILLER,
+  T1.TYPE,
+  T1.PRQ_R_GENERATED_ID,
+  T2.PST_GENERATED_ID,
+  T2.PYMNT_STAT_HIST_ID,
+  T2.DISCONTINUE_DATE
+from
+  CKT_PMNT_REQUEST T1
+  join
+  CKT_PMNT_STAT_HIST T2
+  on
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+    (T1.TYPE = 'RCV') and
+    (T1.PAYMENT_REQUEST_ID = T2.PRQ_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.PST_GENERATED_ID = 27)
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="UpdatePaymentRequest">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  AMOUNT = @amount,
+  RECOVERY_FILLER = @recoveryFiller
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="UpdatePaymentStatusHistory">
+      <value>
+update CKT_PMNT_STAT_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (PST_GENERATED_ID = @pstGeneratedId) and
+  (PRQ_GENERATED_ID = @prqGeneratedId) and
+  (PYMNT_STAT_HIST_ID = @pymntStatHistId)
+</value>
+   </data>
+</root>

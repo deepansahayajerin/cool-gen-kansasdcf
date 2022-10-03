@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadObligee">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  TOT_NON_ADC_DISB_A,
+  TOT_ADC_DISB_AMT,
+  TOT_MED_DISB_AMT,
+  TOT_PASSTHRU_DISB,
+  TOT_NON_ADC_UNDISB,
+  TOT_ADC_UNDISB_AMT,
+  LAST_DISB_AMT,
+  LAST_DISB_DT
+from
+  CKT_CSE_PERSON_ACC
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="UpdateObligee">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  TOT_NON_ADC_DISB_A = @totNonAdcDisbA,
+  TOT_ADC_DISB_AMT = @totAdcDisbAmt,
+  TOT_MED_DISB_AMT = @totMedDisbAmt,
+  TOT_PASSTHRU_DISB = @totPassthruDisb,
+  TOT_NON_ADC_UNDISB = @totNonAdcUndisb,
+  TOT_ADC_UNDISB_AMT = @totAdcUndisbAmt,
+  LAST_DISB_AMT = @lastDisbAmt,
+  LAST_DISB_DT = @lastDisbDt
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

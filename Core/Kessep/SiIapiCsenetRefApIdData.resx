@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadEventEventDetail">
+      <value>
+select top(1)
+  T1.CONTROL_NUMBER,
+  T1.NAME,
+  T1.TYPE,
+  T1.DESCRIPTION,
+  T1.BUSINESS_OBJECT_CD,
+  T2.SYSTEM_GENERATED_I,
+  T2.DETAIL_NAME,
+  T2.DESCRIPTION,
+  T2.INITIATING_ST_CD,
+  T2.CSENET_IN_OUT_CODE,
+  T2.REASON_CODE,
+  T2.PROCEDURE_NAME,
+  T2.LIFECYCL_IMPACT_CD,
+  T2.LOG_TO_DIARY_IND,
+  T2.DATE_MONITOR_DAYS,
+  T2.NEXT_EVENT_ID,
+  T2.NEXT_EVENT_DETAIL,
+  T2.NEXT_INIT_ST,
+  T2.NEXT_CSENET_IO,
+  T2.NEXT_REASON,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.[FUNCTION],
+  T2.EXCEPTION_ROUTINE
+from
+  CKT_EVENT T1
+  join
+  CKT_EVENT_DETAIL T2
+  on
+    (T1.CONTROL_NUMBER = T2.EVE_NO) and
+    (T1.CONTROL_NUMBER = 777) and
+    (T2.SYSTEM_GENERATED_I = 1)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  EVENT_ID,
+  REASON_CODE,
+  DENORM_NUMERIC_12
+from
+  CKT_INFRASTRUCTURE
+where
+  (EVENT_ID = 777) and
+  (REASON_CODE = 'CSENETREFRECD') and
+  (DENORM_NUMERIC_12 = @denormNumeric12)
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  TRANS_SERIAL_NBR,
+  ACTION_CODE,
+  TRANSACTION_DATE,
+  ASSN_DEACT_IND
+from
+  CKT_INTERST_CASE
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+</root>

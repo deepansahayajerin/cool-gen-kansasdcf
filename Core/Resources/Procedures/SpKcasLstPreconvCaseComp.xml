@@ -1,0 +1,53 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpKcasLstPreconvCaseComp"
+           program-name="SWEKCASP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpKcasLstPreconvCaseComp"
+           transaction="SRG1"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NARR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNARR"
+       to="SpNarrListPreconvNarrative"
+       send-command="DISPLAY">
+      <map from="FlowCsePersonsWorkSet" to="KcasSearchPerson"/>
+      <map from="FlowPreconvCaseHist" to="Flow"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_SI_COMP_CASE_COMP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command-type="none">
+      <return-map from="Selected" to="Selected"/>
+   </on>
+   <map from="Export1.CsePersonsWorkSet" to="Import1.CsePersonsWorkSet"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Standard" to="Standard"/>
+   <map from="SearchCsePersonsWorkSet" to="SearchCsePersonsWorkSet"/>
+   <map from="SearchPreconvCaseHist.KaecsesCaseNumber"
+        to="SearchPreconvCaseHist.KaecsesCaseNumber"/>
+   <map from="Export1.PreconvCaseHist.CsePersonNumber"
+        to="Import1.PreconvCaseHist.CsePersonNumber"/>
+   <map from="Export1.PreconvCaseHist.KaecsesCaseNumber"
+        to="Import1.PreconvCaseHist.KaecsesCaseNumber"/>
+   <map from="Export1.PreconvCaseHist.KaecsesRelationship"
+        to="Import1.PreconvCaseHist.KaecsesRelationship"/>
+   <map from="Export1.PreconvCaseHist.KaecsesStartDate"
+        to="Import1.PreconvCaseHist.KaecsesStartDate"/>
+   <map from="Export1.PreconvCaseHist.KaecsesEndDate"
+        to="Import1.PreconvCaseHist.KaecsesEndDate"/>
+</procedure>

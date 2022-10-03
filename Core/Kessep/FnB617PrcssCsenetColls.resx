@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  FTT_IDENTIFIER = @fttIdentifier,
+  PCA_CODE = @pcaCode,
+  PCA_EFFECTIVE_DATE = @pcaEffectiveDate,
+  FUN_IDENTIFIER = @funIdentifier,
+  FTR_IDENTIFIER = @ftrIdentifier
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePersonCsePersonAccount">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T3.CSP_NUMBER,
+  T3.TYPE
+from
+  CKT_CASE_ROLE T1
+  join
+  CKT_CSE_PERSON_ACC T3
+  on
+    (T1.TYPE = 'AP') and
+    (@casNumber = T1.CAS_NUMBER) and
+    (T3.TYPE = 'R') and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptEvent1">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.RECEIPT_AMOUNT,
+  T1.CASH_RECEIPT_ID,
+  T1.RECEIPT_DATE,
+  T1.CHECK_TYPE,
+  T1.RECEIVED_DATE,
+  T1.DEPOSIT_RLSE_DT,
+  T1.BAL_TMST,
+  T1.TOT_NONCSH_TRN_AMT,
+  T1.TOT_NOCSH_TRAN_CNT,
+  T1.CREATED_BY,
+  T1.FTT_IDENTIFIER,
+  T1.PCA_CODE,
+  T1.PCA_EFFECTIVE_DATE,
+  T1.FUN_IDENTIFIER,
+  T1.FTR_IDENTIFIER,
+  T1.TOTAL_NC_FEE_AMT,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T2.CREATED_BY,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.TOT_NON_CSHTRN_CNT,
+  T2.TOT_NONCSH_FEE_AMT,
+  T2.TOT_NON_CASH_AMT
+from
+  CKT_CRSRC_TYPE T4
+  join
+  CKT_CR_EVENT T2
+  join
+  CKT_CASH_RECEIPT T1
+  on
+    (T1.RECEIVED_DATE = @receivedDate) and
+    (T1.CRT_IDENTIFIER = @crtIdentifier) and
+    (T2.CREVENT_ID = T1.CRV_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER)
+  on
+    (T4.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER) and
+    (T4.CODE = @code)
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptEvent2">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.RECEIPT_AMOUNT,
+  T1.CASH_RECEIPT_ID,
+  T1.RECEIPT_DATE,
+  T1.CHECK_TYPE,
+  T1.RECEIVED_DATE,
+  T1.DEPOSIT_RLSE_DT,
+  T1.BAL_TMST,
+  T1.TOT_NONCSH_TRN_AMT,
+  T1.TOT_NOCSH_TRAN_CNT,
+  T1.CREATED_BY,
+  T1.FTT_IDENTIFIER,
+  T1.PCA_CODE,
+  T1.PCA_EFFECTIVE_DATE,
+  T1.FUN_IDENTIFIER,
+  T1.FTR_IDENTIFIER,
+  T1.TOTAL_NC_FEE_AMT,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T2.CREATED_BY,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.TOT_NON_CSHTRN_CNT,
+  T2.TOT_NONCSH_FEE_AMT,
+  T2.TOT_NON_CASH_AMT
+from
+  CKT_CR_EVENT T2
+  join
+  CKT_CASH_RECEIPT T1
+  on
+    (T1.RECEIVED_DATE = @receivedDate) and
+    (T1.CRT_IDENTIFIER = @crtIdentifier) and
+    (T2.CREATED_BY = @createdBy) and
+    (T2.CREVENT_ID = T1.CRV_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptEvent3">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.RECEIPT_AMOUNT,
+  T1.CASH_RECEIPT_ID,
+  T1.RECEIPT_DATE,
+  T1.CHECK_TYPE,
+  T1.RECEIVED_DATE,
+  T1.DEPOSIT_RLSE_DT,
+  T1.BAL_TMST,
+  T1.TOT_NONCSH_TRN_AMT,
+  T1.TOT_NOCSH_TRAN_CNT,
+  T1.CREATED_BY,
+  T1.FTT_IDENTIFIER,
+  T1.PCA_CODE,
+  T1.PCA_EFFECTIVE_DATE,
+  T1.FUN_IDENTIFIER,
+  T1.FTR_IDENTIFIER,
+  T1.TOTAL_NC_FEE_AMT,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T2.CREATED_BY,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.TOT_NON_CSHTRN_CNT,
+  T2.TOT_NONCSH_FEE_AMT,
+  T2.TOT_NON_CASH_AMT
+from
+  CKT_CR_EVENT T2
+  join
+  CKT_CASH_RECEIPT T1
+  on
+    (T1.CASH_RECEIPT_ID = @cashReceiptId) and
+    (T2.CREVENT_ID = T1.CRV_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CREVENT_ID = @creventId)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCsenetTransactionEnvelop">
+      <value>
+select top(1)
+  CCA_TRANSACTION_DT,
+  CCA_TRANS_SER_NUM,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  DIRECTION_IND,
+  PROCESSING_STATUS
+from
+  CKT_CSENET_TRN_ENV
+where
+  (DIRECTION_IND = 'I') and
+  (PROCESSING_STATUS in ('C', 'P')) and
+  (@ccaTransactionDt = CCA_TRANSACTION_DT) and
+  (@ccaTransSerNum = CCA_TRANS_SER_NUM)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  [STATE] = @state
+</value>
+   </data>
+   <data name="ReadFundTransaction1">
+      <value>
+select top(1)
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FUND_TRANS_ID,
+  AMOUNT,
+  BUSINESS_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_FUND_TRANS
+where
+  (FUND_TRANS_ID = @fundTransId) and
+  (FUN_IDENTIFIER = @funIdentifier) and
+  (FTT_IDENTIFIER = @fttIdentifier) and
+  (PCA_EFFECTIVE_DATE = @pcaEffectiveDate) and
+  (PCA_CODE = @pcaCode)
+</value>
+   </data>
+   <data name="ReadFundTransaction2">
+      <value>
+select top(1)
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FUND_TRANS_ID,
+  AMOUNT,
+  BUSINESS_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_FUND_TRANS
+where
+  FTT_IDENTIFIER = 1
+order by
+  BUSINESS_DATE desc
+</value>
+   </data>
+   <data name="ReadInterstateApIdentification">
+      <value>
+select top(1)
+  CCA_TRANSACTION_DT,
+  CCA_TRANS_SER_NUM,
+  SSN,
+  SUFFIX,
+  NAME_FIRST,
+  NAME_LAST,
+  MIDDLE_NAME
+from
+  CKT_INTERST_AP_ID
+where
+  (@ccaTransactionDt = CCA_TRANSACTION_DT) and
+  (@ccaTransSerNum = CCA_TRANS_SER_NUM)
+</value>
+   </data>
+   <data name="ReadInterstateCollectionInterstateCase">
+      <value>
+select
+  T1.CCA_TRANSACTION_DT,
+  T1.CCA_TRANS_SER_NUM,
+  T1.SYS_GENERATED_ID,
+  T1.DATE_OF_COLLECTION,
+  T1.DATE_OF_POSTING,
+  T1.PAYMENT_AMOUNT,
+  T1.PAYMENT_SOURCE,
+  T2.OTHER_FIPS_STATE,
+  T2.FUNCTIONAL_TYPE_CO,
+  T2.KS_CASE_ID,
+  T2.INTERSTATE_CASE_ID,
+  T2.ACTION_REASON_CODE,
+  T2.AP_IDENTIFICATION
+from
+  CKT_INTERST_CASE T2
+  join
+  CKT_INTERST_COLLCT T1
+  on
+    (T2.TRANSACTION_DATE = T1.CCA_TRANSACTION_DT) and
+    (T2.TRANS_SERIAL_NBR = T1.CCA_TRANS_SER_NUM) and
+    (T1.DATE_OF_POSTING = @dateOfPosting) and
+    (T1.PAYMENT_AMOUNT &lt;&gt; @paymentAmount) and
+    (T2.ACTION_REASON_CODE = @actionReasonCode) and
+    (T2.FUNCTIONAL_TYPE_CO = @functionalTypeCo)
+order by
+  T1.PAYMENT_SOURCE,
+  T2.OTHER_FIPS_STATE
+</value>
+   </data>
+   <data name="UpdateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  RECEIPT_AMOUNT = @receiptAmount,
+  RECEIPT_DATE = @receiptDate,
+  DEPOSIT_RLSE_DT = @depositRlseDt,
+  BAL_TMST = @balTmst,
+  TOT_NONCSH_TRN_AMT = @totNoncshTrnAmt,
+  TOT_NOCSH_TRAN_CNT = @totNocshTranCnt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="UpdateCashReceiptEvent">
+      <value>
+update CKT_CR_EVENT
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  TOT_NON_CSHTRN_CNT = @totNonCshtrnCnt,
+  TOT_NON_CASH_AMT = @totNonCashAmt
+where
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CREVENT_ID = @creventId)
+</value>
+   </data>
+   <data name="UpdateCsenetTransactionEnvelop">
+      <value>
+update CKT_CSENET_TRN_ENV
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  PROCESSING_STATUS = @processingStatus
+where
+  (CCA_TRANSACTION_DT = @ccaTransactionDt) and
+  (CCA_TRANS_SER_NUM = @ccaTransSerNum)
+</value>
+   </data>
+   <data name="UpdateFundTransaction">
+      <value>
+update CKT_FUND_TRANS
+set
+  AMOUNT = @amount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (FTT_IDENTIFIER = @fttIdentifier) and
+  (PCA_CODE = @pcaCode) and
+  (PCA_EFFECTIVE_DATE = @pcaEffectiveDate) and
+  (FUN_IDENTIFIER = @funIdentifier) and
+  (FUND_TRANS_ID = @fundTransId)
+</value>
+   </data>
+   <data name="UpdateInterstateCollection">
+      <value>
+update CKT_INTERST_COLLCT
+set
+  DATE_OF_POSTING = @dateOfPosting
+where
+  (CCA_TRANSACTION_DT = @ccaTransactionDt) and
+  (CCA_TRANS_SER_NUM = @ccaTransSerNum) and
+  (SYS_GENERATED_ID = @sysGeneratedId)
+</value>
+   </data>
+</root>

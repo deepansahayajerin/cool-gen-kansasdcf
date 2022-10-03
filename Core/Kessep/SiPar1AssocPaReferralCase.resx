@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPaReferral">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CREATED_TSTAMP,
+  CAS_NUMBER
+from
+  CKT_PA_REFERRAL
+where
+  (NUMB = @numb) and
+  (CREATED_TSTAMP = @createdTstamp) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="ReadPaReferralParticipant">
+      <value>
+select top(1)
+  IDENTIFIER,
+  PERSON_NUM,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PRE_NUMBER,
+  PAF_TYPE,
+  PAF_TSTAMP,
+  [ROLE]
+from
+  CKT_PA_REFER_PART
+where
+  (@pafTstamp = PAF_TSTAMP) and
+  (@preNumber = PRE_NUMBER) and
+  (@pafType = PAF_TYPE) and
+  ([ROLE] = 'AP')
+</value>
+   </data>
+   <data name="UpdatePaReferral">
+      <value>
+update CKT_PA_REFERRAL
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  CAS_NUMBER = @casNumber
+where
+  (NUMB = @numb) and
+  (TYPE = @type) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+   <data name="UpdatePaReferralParticipant">
+      <value>
+update CKT_PA_REFER_PART
+set
+  PERSON_NUM = @personNum,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (IDENTIFIER = @identifier) and
+  (PRE_NUMBER = @preNumber) and
+  (PAF_TYPE = @pafType) and
+  (PAF_TSTAMP = @pafTstamp)
+</value>
+   </data>
+</root>

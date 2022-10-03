@@ -1,0 +1,43 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiEmphEmployerChangeHist"
+           program-name="SWEEMPHP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiEmphEmployerChangeHist"
+           transaction="SSAH"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_EMPLOYER_MAINTENANCE"
+       action="transfer"
+       to="SiEmplEmployerMaintenance"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_EMPLOYER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiEmplEmployerMaintenance"
+       send-command-type="none">
+      <return-map from="RtnEmployer" to="Employer1"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Employer1" to="Employer1"/>
+   <map from="PromptEmployer" to="PromptEmployer"/>
+   <map from="Employer.EmployerHistory" to="Employer.EmployerHistory"/>
+   <map from="Employer.EmployerHistoryDetail"
+        to="Employer.EmployerHistoryDetail"/>
+   <map from="Employer.StartStop" to="Employer.StartAndStop"/>
+   <map from="Paging.PagingEmployerHistoryDetail"
+        to="Paging.PagingEmployerHistoryDetail"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Plus" to="Plus"/>
+   <map from="Employer.Sel" to="Employer.Sel"/>
+   <map from="Employer.Change" to="Employer.Change"/>
+   <map from="Paging.PagingEmployerHistory" to="Paging.PagingEmployerHistory"/>
+   <map from="EmployerAddress.City" to="EmployerAddress.City"/>
+   <map from="EmployerAddress.ZipCode" to="EmployerAddress.ZipCode"/>
+   <map from="EmployerAddress.Street1" to="EmployerAddress.Street1"/>
+   <map from="EmployerAddress.Street2" to="EmployerAddress.Street2"/>
+   <map from="EmployerAddress.State" to="EmployerAddress.State"/>
+</procedure>

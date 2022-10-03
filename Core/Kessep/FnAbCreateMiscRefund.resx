@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCashReceiptSourceType">
+      <value>
+update CKT_RECEIPT_REFUND
+set
+  CST_A_IDENTIFIER = @cstAIdentifier
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="AssociateCsePerson">
+      <value>
+update CKT_RECEIPT_REFUND
+set
+  CSP_NUMBER = @cspNumber
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="CreateCashReceiptDetailAddress#1">
+      <value>
+insert into CKT_CRDETAIL_ADDRS
+(
+  CRDETAIL_ADDRESS_I,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER
+)
+values
+(
+  @crdetailAddressI,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @zipCode5,
+  @zipCode4,
+  @zipCode3,
+  null,
+  null,
+  null,
+  null
+)
+</value>
+   </data>
+   <data name="CreateCashReceiptDetailAddress#3">
+      <value>
+update CKT_RECEIPT_REFUND
+set
+  CDA_IDENTIFIER = @cdaIdentifier
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="CreatePaymentRequest">
+      <value>
+insert into CKT_PMNT_REQUEST
+(
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  RECOVERY_FILLER,
+  RECAPTURE_FILLER,
+  ACH_FORMAT_CODE,
+  INTERFUND_VOUCHER,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  RCT_R_TSTAMP,
+  PTP_PROCESS_DATE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND,
+  RECOUPMENT_IND_KPC
+)
+values
+(
+  @paymentRequestId,
+  @processDate,
+  @amount,
+  @createdBy,
+  @createdTimestamp,
+  @dpCsePerNum,
+  @csePersonNumber,
+  @imprestFundCode,
+  @classification,
+  @imprestFundCode,
+  @imprestFundCode,
+  @achFormatCode,
+  @imprestFundCode,
+  @number,
+  @printDate,
+  @type,
+  @rctRTstamp,
+  null,
+  null,
+  @imprestFundCode,
+  @imprestFundCode
+)
+</value>
+   </data>
+   <data name="CreatePaymentStatusHistory">
+      <value>
+insert into CKT_PMNT_STAT_HIST
+(
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @pstGeneratedId,
+  @prqGeneratedId,
+  @pymntStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="CreateReceiptRefund">
+      <value>
+insert into CKT_RECEIPT_REFUND
+(
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DT,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CDA_IDENTIFIER,
+  OFFSET_CLOSED,
+  DATE_TRANSMITTED,
+  TAX_ID_SUFFIX,
+  REASON_TEXT,
+  CLT_IDENTIFIER,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FUN_IDENTIFIER,
+  FTR_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  KPC_NOTICE_REQ_IND,
+  KPC_NOTICE_PROC_DT
+)
+values
+(
+  @createdTimestamp,
+  @reasonCode,
+  @taxid,
+  @payeeName,
+  @amount,
+  @offsetTaxYear,
+  @requestDate,
+  @createdBy,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  @offsetClosed,
+  @dateTransmitted,
+  @taxIdSuffix,
+  @reasonText,
+  null,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  null,
+  null,
+  null,
+  null,
+  @offsetClosed,
+  @dateTransmitted
+)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_CRSRC_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_FIPS T2
+  on
+    (T1.TYPE = 'O') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.[STATE] = @state) and
+    (T2.COUNTY = @county) and
+    (T2.LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadPaymentStatus">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID
+from
+  CKT_PAYMENT_STATUS
+where
+  PAYMENT_STATUS_ID = 1
+</value>
+   </data>
+</root>

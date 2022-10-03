@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateIwoActionHistory">
+      <value>
+insert into CKT_IWO_ACT_HIST
+(
+  IDENTIFIER,
+  ACTION_TAKEN,
+  ACTION_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER,
+  IWA_IDENTIFIER
+)
+values
+(
+  @identifier,
+  @actionTaken,
+  @actionDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @cspNumber,
+  @lgaIdentifier,
+  @iwtIdentifier,
+  @iwaIdentifier
+)
+</value>
+   </data>
+   <data name="ReadIwoAction1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  STATUS_CD,
+  STATUS_DATE,
+  STATUS_REASON_CD,
+  DOC_TRACKING_ID,
+  FILE_CONTROL_ID,
+  BATCH_CONTROL_ID,
+  SVRITY_CLEARED_IND,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER
+from
+  CKT_IWO_ACTION
+where
+  (IDENTIFIER = @identifier) and
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@iwtIdentifier = IWT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadIwoAction2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER
+from
+  CKT_IWO_ACTION
+where
+  (IDENTIFIER &gt; @identifier) and
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@iwtIdentifier = IWT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadIwoActionHistory">
+      <value>
+select top(1)
+  max(IDENTIFIER)
+from
+  CKT_IWO_ACT_HIST
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@iwtIdentifier = IWT_IDENTIFIER) and
+  (@iwaIdentifier = IWA_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadIwoTransaction">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CURRENT_STATUS,
+  STATUS_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  LGA_IDENTIFIER,
+  CSP_NUMBER
+from
+  CKT_IWO_TRANS
+where
+  (IDENTIFIER = @identifier) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateIwoAction">
+      <value>
+update CKT_IWO_ACTION
+set
+  STATUS_CD = @statusCd,
+  STATUS_DATE = @statusDate,
+  STATUS_REASON_CD = @statusReasonCd,
+  DOC_TRACKING_ID = @docTrackingId,
+  FILE_CONTROL_ID = @fileControlId,
+  BATCH_CONTROL_ID = @batchControlId,
+  SVRITY_CLEARED_IND = @svrityClearedInd,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IWT_IDENTIFIER = @iwtIdentifier)
+</value>
+   </data>
+   <data name="UpdateIwoTransaction">
+      <value>
+update CKT_IWO_TRANS
+set
+  CURRENT_STATUS = @currentStatus,
+  STATUS_DATE = @statusDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (IDENTIFIER = @identifier) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

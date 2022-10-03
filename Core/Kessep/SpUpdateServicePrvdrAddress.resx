@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadServiceProviderAddress">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  POSTAL_CODE,
+  ZIP,
+  ZIP4,
+  COUNTRY,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP
+from
+  CKT_SRVCE_PRVR_ADR
+where
+  (TYPE = @type) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="UpdateServiceProviderAddress">
+      <value>
+update CKT_SRVCE_PRVR_ADR
+set
+  STREET_1 = @street1,
+  STREET_2 = @street2,
+  CITY = @city,
+  STATE_PROVINCE = @stateProvince,
+  POSTAL_CODE = @postalCode,
+  ZIP = @zip,
+  ZIP4 = @zip4,
+  COUNTRY = @country,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATD_TSTAMP = @lastUpdatdTstamp
+where
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

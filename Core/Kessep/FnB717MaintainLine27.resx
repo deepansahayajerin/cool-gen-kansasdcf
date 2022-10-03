@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignmentOfficeOfficeServiceProviderServiceProvider">
+      <value>
+select top(1)
+  T1.REASON_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T2.OFFICE_ID,
+  T2.OFF_OFFICE
+from
+  CKT_OFFICE T2
+  join
+  CKT_ASSIGN_CASE T1
+  on
+    (@casNo = T1.CAS_NO) and
+    (T1.REASON_CODE = 'RSP') and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @discontinueDate) and
+    (T2.OFFICE_ID = T1.OFF_ID)
+</value>
+   </data>
+</root>

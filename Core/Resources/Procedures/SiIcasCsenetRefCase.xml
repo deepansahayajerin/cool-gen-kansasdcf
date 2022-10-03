@@ -1,0 +1,395 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiIcasCsenetRefCase"
+           program-name="SWEICASP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiIcasCsenetRefCase"
+           transaction="SR1M"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_ASIN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETASIN"
+       to="SpAsinOspAssignment"
+       send-command="DISPLAY">
+      <map from="HeaderObjTitle1" to="HeaderObjTitle1"/>
+      <map from="HeaderObjTitle2" to="HeaderObjTitle2"/>
+      <map from="HeaderObject" to="HeaderObject"/>
+      <map from="InterstateTransaction.EffectiveDate"
+           to="HiddenOfficeServiceProvider.EffectiveDate"/>
+      <return-map from="HeaderObjTitle1" to="HeaderObjTitle1"/>
+      <return-map from="HeaderObjTitle2" to="HeaderObjTitle2"/>
+      <return-map from="HeaderObject" to="HeaderObject"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_AP_CURRENT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIapcCsenetRefApLocateCur"
+       send-command="DISPLAY">
+      <map from="InterstateCase" to="InterstateCase"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="Office" to="Office"/>
+      <return-map from="InterstateCase.TransSerialNumber"
+                  to="InterstateCase.TransSerialNumber"/>
+      <return-map from="InterstateCase.KsCaseId" to="InterstateCase.KsCaseId"/>
+      <return-map from="InterstateCase.InterstateCaseId"
+                  to="InterstateCase.InterstateCaseId"/>
+      <return-map from="InterstateCase.ApIdentificationInd"
+                  to="InterstateCase.ApIdentificationInd"/>
+      <return-map from="InterstateCase.ApLocateDataInd"
+                  to="InterstateCase.ApLocateDataInd"/>
+      <return-map from="InterstateCase.ParticipantDataInd"
+                  to="InterstateCase.ParticipantDataInd"/>
+      <return-map from="InterstateCase.CaseDataInd" to="InterstateCase.CaseDataInd"/>
+      <return-map from="InterstateCase.OrderDataInd" to="InterstateCase.OrderDataInd"/>
+      <return-map from="InterstateCase.CollectionDataInd"
+                  to="InterstateCase.CollectionDataInd"/>
+      <return-map from="InterstateCase.InformationInd" to="InterstateCase.InformationInd"/>
+      <return-map from="InterstateCase.TransactionDate"
+                  to="InterstateCase.TransactionDate"/>
+      <return-map from="Hidden.LegalActionIdentifier"
+                  to="HiddenNextTranInfo.LegalActionIdentifier"/>
+      <return-map from="Hidden.CourtCaseNumber" to="HiddenNextTranInfo.CourtCaseNumber"/>
+      <return-map from="Hidden.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+      <return-map from="Hidden.CsePersonNumber" to="HiddenNextTranInfo.CsePersonNumber"/>
+      <return-map from="Hidden.CsePersonNumberAp"
+                  to="HiddenNextTranInfo.CsePersonNumberAp"/>
+      <return-map from="Hidden.CsePersonNumberObligee"
+                  to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+      <return-map from="Hidden.CsePersonNumberObligor"
+                  to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+      <return-map from="Hidden.CourtOrderNumber" to="HiddenNextTranInfo.CourtOrderNumber"/>
+      <return-map from="Hidden.ObligationId" to="HiddenNextTranInfo.ObligationId"/>
+      <return-map from="Hidden.StandardCrtOrdNumber"
+                  to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+      <return-map from="Hidden.InfrastructureId" to="HiddenNextTranInfo.InfrastructureId"/>
+      <return-map from="Hidden.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+      <return-map from="Hidden.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+      <return-map from="Hidden.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+      <return-map from="Hidden.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+      <return-map from="Hidden.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+      <return-map from="Hidden.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+      <return-map from="ServiceProvider" to="ServiceProvider"/>
+      <return-map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <return-map from="Office" to="Office"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_AP_HISTORY"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIaphCsenetRefApLocateHis"
+       send-command="DISPLAY">
+      <map from="InterstateCase" to="InterstateCase"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="Office" to="Office"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <return-map from="InterstateCase.TransSerialNumber"
+                  to="InterstateCase.TransSerialNumber"/>
+      <return-map from="InterstateCase.KsCaseId" to="InterstateCase.KsCaseId"/>
+      <return-map from="InterstateCase.InterstateCaseId"
+                  to="InterstateCase.InterstateCaseId"/>
+      <return-map from="InterstateCase.ApIdentificationInd"
+                  to="InterstateCase.ApIdentificationInd"/>
+      <return-map from="InterstateCase.ApLocateDataInd"
+                  to="InterstateCase.ApLocateDataInd"/>
+      <return-map from="InterstateCase.ParticipantDataInd"
+                  to="InterstateCase.ParticipantDataInd"/>
+      <return-map from="InterstateCase.CaseDataInd" to="InterstateCase.CaseDataInd"/>
+      <return-map from="InterstateCase.OrderDataInd" to="InterstateCase.OrderDataInd"/>
+      <return-map from="InterstateCase.CollectionDataInd"
+                  to="InterstateCase.CollectionDataInd"/>
+      <return-map from="InterstateCase.InformationInd" to="InterstateCase.InformationInd"/>
+      <return-map from="InterstateCase.TransactionDate"
+                  to="InterstateCase.TransactionDate"/>
+      <return-map from="Hidden.LegalActionIdentifier"
+                  to="HiddenNextTranInfo.LegalActionIdentifier"/>
+      <return-map from="Hidden.CourtCaseNumber" to="HiddenNextTranInfo.CourtCaseNumber"/>
+      <return-map from="Hidden.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+      <return-map from="Hidden.CsePersonNumber" to="HiddenNextTranInfo.CsePersonNumber"/>
+      <return-map from="Hidden.CsePersonNumberAp"
+                  to="HiddenNextTranInfo.CsePersonNumberAp"/>
+      <return-map from="Hidden.CsePersonNumberObligee"
+                  to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+      <return-map from="Hidden.CsePersonNumberObligor"
+                  to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+      <return-map from="Hidden.CourtOrderNumber" to="HiddenNextTranInfo.CourtOrderNumber"/>
+      <return-map from="Hidden.ObligationId" to="HiddenNextTranInfo.ObligationId"/>
+      <return-map from="Hidden.StandardCrtOrdNumber"
+                  to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+      <return-map from="Hidden.InfrastructureId" to="HiddenNextTranInfo.InfrastructureId"/>
+      <return-map from="Hidden.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+      <return-map from="Hidden.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+      <return-map from="Hidden.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+      <return-map from="Hidden.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+      <return-map from="Hidden.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+      <return-map from="Hidden.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+      <return-map from="ServiceProvider" to="ServiceProvider"/>
+      <return-map from="Office" to="Office"/>
+      <return-map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_REF_PARTICIPANT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIparCsenetRefParticipant"
+       send-command="DISPLAY">
+      <map from="InterstateCase" to="InterstateCase"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="Office" to="Office"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+      <return-map from="Regi" to="Regi"/>
+      <return-map from="RegiNewCase" to="RegiNewCase"/>
+      <return-map from="InterstateCase.TransSerialNumber"
+                  to="InterstateCase.TransSerialNumber"/>
+      <return-map from="InterstateCase.InterstateCaseId"
+                  to="InterstateCase.InterstateCaseId"/>
+      <return-map from="InterstateCase.KsCaseId" to="InterstateCase.KsCaseId"/>
+      <return-map from="InterstateCase.ActionCode" to="InterstateCase.ActionCode"/>
+      <return-map from="InterstateCase.ApIdentificationInd"
+                  to="InterstateCase.ApIdentificationInd"/>
+      <return-map from="InterstateCase.ApLocateDataInd"
+                  to="InterstateCase.ApLocateDataInd"/>
+      <return-map from="InterstateCase.ParticipantDataInd"
+                  to="InterstateCase.ParticipantDataInd"/>
+      <return-map from="InterstateCase.CaseDataInd" to="InterstateCase.CaseDataInd"/>
+      <return-map from="InterstateCase.OrderDataInd" to="InterstateCase.OrderDataInd"/>
+      <return-map from="InterstateCase.CollectionDataInd"
+                  to="InterstateCase.CollectionDataInd"/>
+      <return-map from="InterstateCase.InformationInd" to="InterstateCase.InformationInd"/>
+      <return-map from="InterstateCase.TransactionDate"
+                  to="InterstateCase.TransactionDate"/>
+      <return-map from="InterstateCase.AssnDeactInd" to="InterstateCase.AssnDeactInd"/>
+      <return-map from="ServiceProvider" to="ServiceProvider"/>
+      <return-map from="Office" to="Office"/>
+      <return-map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <return-map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_MISC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiImisCsenetRefInfo"
+       send-command="DISPLAY">
+      <map from="InterstateCase" to="InterstateCase"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <map from="Office" to="Office"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <return-map from="InterstateCase.TransSerialNumber"
+                  to="InterstateCase.TransSerialNumber"/>
+      <return-map from="InterstateCase.InterstateCaseId"
+                  to="InterstateCase.InterstateCaseId"/>
+      <return-map from="InterstateCase.KsCaseId" to="InterstateCase.KsCaseId"/>
+      <return-map from="InterstateCase.ApIdentificationInd"
+                  to="InterstateCase.ApIdentificationInd"/>
+      <return-map from="InterstateCase.ApLocateDataInd"
+                  to="InterstateCase.ApLocateDataInd"/>
+      <return-map from="InterstateCase.ParticipantDataInd"
+                  to="InterstateCase.ParticipantDataInd"/>
+      <return-map from="InterstateCase.CaseDataInd" to="InterstateCase.CaseDataInd"/>
+      <return-map from="InterstateCase.OrderDataInd" to="InterstateCase.OrderDataInd"/>
+      <return-map from="InterstateCase.CollectionDataInd"
+                  to="InterstateCase.CollectionDataInd"/>
+      <return-map from="InterstateCase.InformationInd" to="InterstateCase.InformationInd"/>
+      <return-map from="InterstateCase.AttachmentsInd" to="InterstateCase.AttachmentsInd"/>
+      <return-map from="InterstateCase.TransactionDate"
+                  to="InterstateCase.TransactionDate"/>
+      <return-map from="Hidden.LegalActionIdentifier"
+                  to="HiddenNextTranInfo.LegalActionIdentifier"/>
+      <return-map from="Hidden.CourtCaseNumber" to="HiddenNextTranInfo.CourtCaseNumber"/>
+      <return-map from="Hidden.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+      <return-map from="Hidden.CsePersonNumber" to="HiddenNextTranInfo.CsePersonNumber"/>
+      <return-map from="Hidden.CsePersonNumberAp"
+                  to="HiddenNextTranInfo.CsePersonNumberAp"/>
+      <return-map from="Hidden.CsePersonNumberObligee"
+                  to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+      <return-map from="Hidden.CsePersonNumberObligor"
+                  to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+      <return-map from="Hidden.CourtOrderNumber" to="HiddenNextTranInfo.CourtOrderNumber"/>
+      <return-map from="Hidden.ObligationId" to="HiddenNextTranInfo.ObligationId"/>
+      <return-map from="Hidden.StandardCrtOrdNumber"
+                  to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+      <return-map from="Hidden.InfrastructureId" to="HiddenNextTranInfo.InfrastructureId"/>
+      <return-map from="Hidden.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+      <return-map from="Hidden.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+      <return-map from="Hidden.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+      <return-map from="Hidden.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+      <return-map from="Hidden.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+      <return-map from="Hidden.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+      <return-map from="Office" to="Office"/>
+      <return-map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <return-map from="ServiceProvider" to="ServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_SUPPORT_ORDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIsupCsenetRefSupportOrder"
+       send-command="DISPLAY">
+      <map from="InterstateCase" to="InterstateCase"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <map from="Office" to="Office"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <return-map from="InterstateCase.TransSerialNumber"
+                  to="InterstateCase.TransSerialNumber"/>
+      <return-map from="InterstateCase.KsCaseId" to="InterstateCase.KsCaseId"/>
+      <return-map from="InterstateCase.InterstateCaseId"
+                  to="InterstateCase.InterstateCaseId"/>
+      <return-map from="InterstateCase.ApIdentificationInd"
+                  to="InterstateCase.ApIdentificationInd"/>
+      <return-map from="InterstateCase.ApLocateDataInd"
+                  to="InterstateCase.ApLocateDataInd"/>
+      <return-map from="InterstateCase.ParticipantDataInd"
+                  to="InterstateCase.ParticipantDataInd"/>
+      <return-map from="InterstateCase.CaseDataInd" to="InterstateCase.CaseDataInd"/>
+      <return-map from="InterstateCase.OrderDataInd" to="InterstateCase.OrderDataInd"/>
+      <return-map from="InterstateCase.InformationInd" to="InterstateCase.InformationInd"/>
+      <return-map from="InterstateCase.ActionCode" to="InterstateCase.ActionCode"/>
+      <return-map from="InterstateCase.CollectionDataInd"
+                  to="InterstateCase.CollectionDataInd"/>
+      <return-map from="InterstateCase.TransactionDate"
+                  to="InterstateCase.TransactionDate"/>
+      <return-map from="Hidden.LegalActionIdentifier"
+                  to="HiddenNextTranInfo.LegalActionIdentifier"/>
+      <return-map from="Hidden.CourtCaseNumber" to="HiddenNextTranInfo.CourtCaseNumber"/>
+      <return-map from="Hidden.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+      <return-map from="Hidden.CsePersonNumber" to="HiddenNextTranInfo.CsePersonNumber"/>
+      <return-map from="Hidden.CsePersonNumberAp"
+                  to="HiddenNextTranInfo.CsePersonNumberAp"/>
+      <return-map from="Hidden.CsePersonNumberObligee"
+                  to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+      <return-map from="Hidden.CsePersonNumberObligor"
+                  to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+      <return-map from="Hidden.CourtOrderNumber" to="HiddenNextTranInfo.CourtOrderNumber"/>
+      <return-map from="Hidden.ObligationId" to="HiddenNextTranInfo.ObligationId"/>
+      <return-map from="Hidden.StandardCrtOrdNumber"
+                  to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+      <return-map from="Hidden.InfrastructureId" to="HiddenNextTranInfo.InfrastructureId"/>
+      <return-map from="Hidden.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+      <return-map from="Hidden.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+      <return-map from="Hidden.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+      <return-map from="Hidden.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+      <return-map from="Hidden.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+      <return-map from="Hidden.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+      <return-map from="Office" to="Office"/>
+      <return-map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <return-map from="ServiceProvider" to="ServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IIOI"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETIIOI"
+       to="SiIioiIncomingIsOgInfo"
+       send-command="FRMICAS">
+      <map from="ToIioi" to="LinkFromIcas"/>
+      <map from="InterstateCase" to="FromIcas"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_AP_ID"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIapiCsenetRefApIdData"
+       send-command="DISPLAY">
+      <map from="HiddenApId.Number" to="HiddenApid.Number"/>
+      <map from="InterstateCase" to="InterstateCase"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="Office" to="Office"/>
+      <return-map from="RegiNewCase" to="RegiNewCase"/>
+      <return-map from="Regi" to="Regi"/>
+      <return-map from="InterstateCase.InterstateCaseId"
+                  to="InterstateCase.InterstateCaseId"/>
+      <return-map from="InterstateCase.TransSerialNumber"
+                  to="InterstateCase.TransSerialNumber"/>
+      <return-map from="InterstateCase.KsCaseId" to="InterstateCase.KsCaseId"/>
+      <return-map from="InterstateCase.ActionCode" to="InterstateCase.ActionCode"/>
+      <return-map from="InterstateCase.ApIdentificationInd"
+                  to="InterstateCase.ApIdentificationInd"/>
+      <return-map from="InterstateCase.ApLocateDataInd"
+                  to="InterstateCase.ApLocateDataInd"/>
+      <return-map from="InterstateCase.ParticipantDataInd"
+                  to="InterstateCase.ParticipantDataInd"/>
+      <return-map from="InterstateCase.CaseDataInd" to="InterstateCase.CaseDataInd"/>
+      <return-map from="InterstateCase.OrderDataInd" to="InterstateCase.OrderDataInd"/>
+      <return-map from="InterstateCase.CollectionDataInd"
+                  to="InterstateCase.CollectionDataInd"/>
+      <return-map from="InterstateCase.InformationInd" to="InterstateCase.InformationInd"/>
+      <return-map from="InterstateCase.TransactionDate"
+                  to="InterstateCase.TransactionDate"/>
+      <return-map from="InterstateCase.ActionReasonCode"
+                  to="InterstateCase.ActionReasonCode"/>
+      <return-map from="InterstateCase.AssnDeactInd" to="InterstateCase.AssnDeactInd"/>
+      <return-map from="Hidden.LegalActionIdentifier"
+                  to="HiddenNextTranInfo.LegalActionIdentifier"/>
+      <return-map from="Hidden.CourtCaseNumber" to="HiddenNextTranInfo.CourtCaseNumber"/>
+      <return-map from="Hidden.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+      <return-map from="Hidden.CsePersonNumber" to="HiddenNextTranInfo.CsePersonNumber"/>
+      <return-map from="Hidden.CsePersonNumberAp"
+                  to="HiddenNextTranInfo.CsePersonNumberAp"/>
+      <return-map from="Hidden.CsePersonNumberObligee"
+                  to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+      <return-map from="Hidden.CsePersonNumberObligor"
+                  to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+      <return-map from="Hidden.CourtOrderNumber" to="HiddenNextTranInfo.CourtOrderNumber"/>
+      <return-map from="Hidden.ObligationId" to="HiddenNextTranInfo.ObligationId"/>
+      <return-map from="Hidden.StandardCrtOrdNumber"
+                  to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+      <return-map from="Hidden.InfrastructureId" to="HiddenNextTranInfo.InfrastructureId"/>
+      <return-map from="Hidden.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+      <return-map from="Hidden.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+      <return-map from="Hidden.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+      <return-map from="Hidden.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+      <return-map from="Hidden.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+      <return-map from="Hidden.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+      <return-map from="ServiceProvider" to="ServiceProvider"/>
+      <return-map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <return-map from="Office" to="Office"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiIstmInterstateReferralMenu"
+       send-command-type="none">
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="Office" to="Office"/>
+      <map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+   </on>
+   <map from="InterstateCase" to="InterstateCase"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="Office" to="Office"/>
+   <map from="RefList.Gkey" to="RefList.Gkey"/>
+   <map from="HiddenApId" to="HiddenApId"/>
+   <map from="SaveSubscript" to="SaveSubscript"/>
+   <map from="Save" to="Save"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Plus" to="Plus"/>
+   <map from="Ctc" to="Ctc"/>
+   <map from="BuildList" to="BuildList"/>
+   <map from="MiscInd" to="MiscInd"/>
+   <map from="ApidInd" to="ApidInd"/>
+   <map from="AplocInd" to="AplocInd"/>
+   <map from="SupordInd" to="SupordInd"/>
+   <map from="PartInd" to="PartInd"/>
+   <map from="Cp" to="Cp"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ToIioi" to="ToIioi"/>
+   <map from="RegiNewCase" to="RegiNewCase"/>
+   <map from="Regi" to="Regi"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="FromComn" to="FromComn"/>
+   <map from="HeaderObjTitle1" to="HeaderObjTitle1"/>
+   <map from="HeaderObjTitle2" to="HeaderObjTitle2"/>
+   <map from="HeaderObject" to="HeaderObject"/>
+   <map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+   <map from="CodeValue.Description" to="CodeValue.Description"/>
+   <map from="HiddenInterstateCase.OtherFipsState"
+        to="HiddenInterstateCase.OtherFipsState"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

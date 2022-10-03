@@ -1,0 +1,64 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="GbMjclMaintainJclTemplate"
+           program-name="SWEMJCLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.GbMjclMaintainJclTemplate"
+           transaction="SRJ2"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CODE_VALUES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="FormatCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="OutputType"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LJOB"
+       action="link"
+       return-when="OE0000_RETURN_LNK_BLANK"
+       return-command="RETLJOB"
+       to="GbLjobListJobs"
+       send-command="DISPLAY">
+      <return-map from="Dlgflw.Name" to="Job.Name"/>
+   </on>
+   <map from="HiddenJob" to="HiddenJob"/>
+   <map from="HiddenJclTemplate" to="HiddenJclTemplate"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptToLjob" to="PromptToLjob"/>
+   <map from="JclTemplate" to="JclTemplate"/>
+   <map from="Group.JclTemplate" to="Group.JclTemplate"/>
+   <map from="PromptToCdvl" to="PromptToCdvl"/>
+   <map from="HiddenNextTranInfo.LegalActionIdentifier"
+        to="HiddenNextTranInfo.LegalActionIdentifier"/>
+   <map from="HiddenNextTranInfo.CourtCaseNumber"
+        to="HiddenNextTranInfo.CourtCaseNumber"/>
+   <map from="HiddenNextTranInfo.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumber"
+        to="HiddenNextTranInfo.CsePersonNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberAp"
+        to="HiddenNextTranInfo.CsePersonNumberAp"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligee"
+        to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligor"
+        to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+   <map from="HiddenNextTranInfo.CourtOrderNumber"
+        to="HiddenNextTranInfo.CourtOrderNumber"/>
+   <map from="HiddenNextTranInfo.ObligationId"
+        to="HiddenNextTranInfo.ObligationId"/>
+   <map from="HiddenNextTranInfo.StandardCrtOrdNumber"
+        to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+   <map from="HiddenNextTranInfo.InfrastructureId"
+        to="HiddenNextTranInfo.InfrastructureId"/>
+   <map from="HiddenNextTranInfo.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+   <map from="HiddenNextTranInfo.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+   <map from="HiddenNextTranInfo.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+   <map from="HiddenNextTranInfo.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+   <map from="HiddenNextTranInfo.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+   <map from="HiddenNextTranInfo.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+   <map from="Job.Name" to="Job.Name"/>
+</procedure>

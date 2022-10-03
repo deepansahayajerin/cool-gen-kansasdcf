@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCashReceiptDetailStatus">
+      <value>
+select
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.ADJUSTMENT_IND,
+  T1.OBLGOR_PRSN_NBR,
+  T1.COLLAMT_APPL_IND,
+  T3.CDS_IDENTIFIER
+from
+  CKT_CR_DETAIL T1
+  join
+  CKT_CRDTL_STATHIST T3
+  on
+    (T1.CRD_ID = T3.CRD_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T3.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T3.CST_IDENTIFIER) and
+    (T1.CRT_IDENTIFIER = T3.CRT_IDENTIFIER) and
+    (T1.COLLAMT_APPL_IND = ' ') and
+    (T1.OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+    (T1.ADJUSTMENT_IND in ('N', ' '))
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_PROC_DATE
+from
+  CKT_COLLECTION
+where
+  (ADJ_IND = 'Y') and
+  (COLL_ADJ_PROC_DATE = @collAdjProcDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDebt">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  DEBT_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE,
+  NEW_DEBT_PROC_DT
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (DEBT_TYP in ('D', 'V')) and
+  (NEW_DEBT_PROC_DT = @newDebtProcDt) and
+  (CSP_NUMBER = @cspNumber) and
+  (OTY_TYPE between cast(@systemGeneratedIdentifier1 as smallint) and cast(@systemGeneratedIdentifier2 as smallint)) and
+  (OBG_GENERATED_ID between cast(@systemGeneratedIdentifier3 as smallint) and cast(@systemGeneratedIdentifier4 as smallint))
+</value>
+   </data>
+   <data name="ReadDebtAdjustment">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE,
+  DEBT_ADJ_PROC_DATE
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (DEBT_ADJ_PROC_DATE = @debtAdjProcDate) and
+  (CSP_NUMBER = @cspNumber) and
+  (OTY_TYPE between cast(@systemGeneratedIdentifier1 as smallint) and cast(@systemGeneratedIdentifier2 as smallint)) and
+  (OBG_GENERATED_ID between cast(@systemGeneratedIdentifier3 as smallint) and cast(@systemGeneratedIdentifier4 as smallint))
+</value>
+   </data>
+</root>

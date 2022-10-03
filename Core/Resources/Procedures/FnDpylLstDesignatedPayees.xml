@@ -1,0 +1,74 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDpylLstDesignatedPayees"
+           program-name="SWEDPYLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDpylLstDesignatedPayees"
+           transaction="SR77"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_SELECT_PERSON"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="FlowPayee"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_MTN_DESIGNATED_PAYEE"
+       action="transfer"
+       to="FnDpayMtnDesignatedPayee"
+       send-command="DISPLAY">
+      <map from="StartingDate" to="ThruFlowStartingFrom"/>
+      <map from="PassedSupported" to="Supported"/>
+      <map from="PassBothType.SequentialIdentifier"
+           to="BothTypeOfDpIn1View.SequentialIdentifier"/>
+      <map from="PassBothType.EffectiveDate"
+           to="BothTypeOfDpIn1View.EffectiveDate"/>
+      <map from="PassBothType.DiscontinueDate"
+           to="BothTypeOfDpIn1View.DiscontinueDate"/>
+      <map from="PassedObligor" to="ThruFlowObligor"/>
+      <map from="PassedObligationType.SystemGeneratedIdentifier"
+           to="ThruFlowObligationType.SystemGeneratedIdentifier"/>
+      <map from="PassedObligationTransaction" to="ThruFlowObligationTransaction"/>
+      <map from="PassedObligation.SystemGeneratedIdentifier"
+           to="ThruFlowObligation.SystemGeneratedIdentifier"/>
+      <map from="FlowDesigPayee.Number" to="DesignatedPayee.Number"/>
+      <map from="FlowDesigPayee.FormattedName" to="DesignatedPayee.FormattedName"/>
+      <map from="PayeeCsePersonsWorkSet.Number" to="Payee.Number"/>
+      <map from="PayeeCsePersonsWorkSet.FormattedName" to="Payee.FormattedName"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_PAYEE_ACCT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="PayeeCsePerson" to="CsePerson"/>
+   </on>
+   <map from="StartingDate" to="StartingDate"/>
+   <map from="PayeeCsePerson" to="PayeeCsePerson"/>
+   <map from="PayeeWorkArea" to="PayeeWorkArea"/>
+   <map from="PayeePrompt" to="PayeePrompt"/>
+   <map from="HiddenPayee" to="HiddenPayee"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PayeeCsePersonsWorkSet" to="PayeeCsePersonsWorkSet"/>
+   <map from="Export1.HiddenObligor" to="Import1.HiddenObligor"/>
+   <map from="Export1.HiddenObligationType" to="Import1.HiddenObligationType"/>
+   <map from="Export1.HiddenObligation" to="Import1.HiddenObligation"/>
+   <map from="Export1.HiddenObligationTransaction"
+        to="Import1.HiddenObligationTransaction"/>
+   <map from="PassedObligation" to="PassedObligation"/>
+   <map from="PassedObligationType" to="PassedObligationType"/>
+   <map from="PassedObligor" to="PassedObligor"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.DesignatedPayee" to="Import1.DesignatedPayee"/>
+   <map from="Export1.DesignatedPayeeName" to="Import1.DesignatedPayeeName"/>
+   <map from="Export1.DesigPayee" to="Import1.DesigPayee"/>
+   <map from="Export1.Supported" to="Import1.Supported"/>
+   <map from="PassedObligationTransaction.SystemGeneratedIdentifier"
+        to="PassedObligationTransaction.SystemGeneratedIdentifier"/>
+</procedure>

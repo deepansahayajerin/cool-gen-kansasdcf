@@ -1,0 +1,161 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiPermPersonManagementMenu"
+           program-name="SWEPERMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiPermPersonManagementMenu"
+           transaction="SR2C"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_LIST_CASES_BY_PERSON"
+       action="transfer"
+       to="SiComnCaseCompositionByName"
+       send-command="XXFMMENU">
+      <map from="CsePersonsWorkSet.FirstName" to="Search.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial" to="Search.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="Search.LastName"/>
+      <map from="CsePersonsWorkSet.Number" to="Search.Number"/>
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_NAME_LIST"
+       action="transfer"
+       to="SiNameNameList"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+      <map from="CsePersonsWorkSet.FirstName"
+           to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial"
+           to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="SearchCsePersonsWorkSet.LastName"/>
+      <map from="CsePersonsWorkSet.Number" to="SearchCsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CASE_REGISTRATION"
+       action="transfer"
+       to="SiRegiCaseRegistration"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiSinmServiceInitiationMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_CASE_PARTICIPATION"
+       action="transfer"
+       to="SiPartCaseParticipation"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+      <map from="CsePersonsWorkSet.FirstName" to="Search.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial" to="Search.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="Search.LastName"/>
+      <map from="CsePersonsWorkSet.Number" to="Search.Number"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_OTHER_PEOPLE"
+       action="transfer"
+       to="SiPadsParentalDetails"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ORGANIZATIONS"
+       action="transfer"
+       to="SiOrgzOrganizationMaintenance"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_AP_DETAILS"
+       action="transfer"
+       to="SiApdsApDetails"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_FOSTER_CARE_CHILD"
+       action="transfer"
+       to="SiFcdsFosterCareChildDetail"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CHILD_DETAILS"
+       action="transfer"
+       to="SiChdsChildDetails"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_AR_DETAILS"
+       action="transfer"
+       to="SiArdsArDetails"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CASE_ROLE"
+       action="transfer"
+       to="SiRoleCaseRoleMaintenance"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CASE_COMPOSITION"
+       action="transfer"
+       to="SiCompCaseComposition"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CASE_DETAILS"
+       action="transfer"
+       to="SiCadsCaseDetails"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+      <map from="CsePersonsWorkSet.FirstName" to="Ap.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial" to="Ap.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="Ap.LastName"/>
+      <map from="CsePersonsWorkSet.Number" to="Ap.Number"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CASU"
+       action="transfer"
+       to="SpCasuCaseUnitList"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ZD_XFER_TO_QUICK_LOCATE_HISTORY"
+       action="transfer"
+       to="SiQlrqQuickLocateRequests"
+       send-command-type="none">
+      <map from="Case1" to="DisplayOnly"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ALT_SSN_AND_ALIAS"
+       action="transfer"
+       to="SiAltsAlternateSsnAndAlias"
+       send-command="XXFMMENU">
+      <map from="CsePersonsWorkSet.FirstName" to="ApCsePersonsWorkSet.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial"
+           to="ApCsePersonsWorkSet.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="ApCsePersonsWorkSet.LastName"/>
+      <map from="CsePersonsWorkSet.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_PERSON_PROGRAM_MAINT"
+       action="transfer"
+       to="SiPeprPersonProgramMaint"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+      <map from="CsePersonsWorkSet.FirstName" to="Ap.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial" to="Ap.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="Ap.LastName"/>
+      <map from="CsePersonsWorkSet.Number" to="Ap.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CHDS ECO_LNK_TO_CPAT"
+       action="transfer"
+       to="SiCpatChildPaternityMaint"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NCOP"
+       action="transfer"
+       to="SiNcopNcpNonCooperation"
+       send-command-type="none">
+      <map from="Case1" to="Next"/>
+      <map from="CsePersonsWorkSet.FirstName" to="Ap.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial" to="Ap.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="Ap.LastName"/>
+      <map from="CsePersonsWorkSet.Number" to="Ap.Number"/>
+   </on>
+   <map from="Case1" to="Case1"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Next" to="Next"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Hidden" to="Hidden"/>
+</procedure>

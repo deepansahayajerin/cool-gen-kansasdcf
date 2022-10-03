@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadObligCollProtectionHist1">
+      <value>
+select
+  CVRD_COLL_STRT_DT,
+  CVRD_COLL_END_DT,
+  DEACTIVATION_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  REASON_TEXT,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTY_IDENTIFIER,
+  OBG_IDENTIFIER,
+  PROTECTION_LEVEL
+from
+  CKT_OB_COLL_PHIST
+where
+  (@cpaType = CPA_TYPE) and
+  (@obgIdentifier = OBG_IDENTIFIER) and
+  (@otyIdentifier = OTY_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER) and
+  (DEACTIVATION_DATE = @deactivationDate)
+order by
+  CVRD_COLL_STRT_DT desc
+</value>
+   </data>
+   <data name="ReadObligCollProtectionHist2">
+      <value>
+select
+  CVRD_COLL_STRT_DT,
+  CVRD_COLL_END_DT,
+  DEACTIVATION_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  REASON_TEXT,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTY_IDENTIFIER,
+  OBG_IDENTIFIER,
+  PROTECTION_LEVEL
+from
+  CKT_OB_COLL_PHIST
+where
+  (@cpaType = CPA_TYPE) and
+  (@obgIdentifier = OBG_IDENTIFIER) and
+  (@otyIdentifier = OTY_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  CVRD_COLL_STRT_DT desc
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (CPA_TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+</root>

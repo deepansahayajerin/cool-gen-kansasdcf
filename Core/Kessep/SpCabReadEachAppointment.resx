@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAppointmentOfficeServiceProviderCsePersonCase1">
+      <value>
+select
+  T1.REASON_CODE,
+  T1.TYPE,
+  T1.[RESULT],
+  T1.APPOINTMENT_DATE,
+  T1.APPOINTMENT_TIME,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_ROLE_CODE,
+  T1.OSP_DATE,
+  T1.APP_TSTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_ID,
+  T5.OFFICE_ID,
+  T5.OFF_OFFICE
+from
+  CKT_OFFICE T5
+  join
+  CKT_APPOINTMENT T1
+  on
+    (T1.CRO_ID is not null) and
+    (T1.CRO_TYPE is not null) and
+    (T1.CSP_NUMBER is not null) and
+    (T1.CAS_NUMBER is not null) and
+    (
+      (cast(@number1 as char(10)) = ' ') or
+      (T1.CAS_NUMBER = @casNumber)
+    ) and
+    (
+      (cast(@number2 as char(10)) = ' ') or
+      (T1.CSP_NUMBER = @cspNumber)
+    ) and
+    (T1.OSP_DATE is not null) and
+    (T1.OSP_ROLE_CODE is not null) and
+    (T1.SPD_ID is not null) and
+    (
+      (cast(@userId as char(8)) = ' ') or
+      (T1.SPD_ID = @spdId)
+    ) and
+    (
+      (cast(@roleCode as char(2)) = ' ') or
+      (T1.OSP_ROLE_CODE = @roleCode)
+    ) and
+    (T5.OFFICE_ID = T1.OFF_ID) and
+    (
+      (cast(@systemGeneratedId as smallint) = 0) or
+      (T5.OFFICE_ID = @systemGeneratedId)
+    ) and
+    (T1.APPOINTMENT_DATE &lt;= @appointmentDate1) and
+    (
+      (cast(@flag as char(1)) = 'Y') or
+      (T1.[RESULT] = ' ')
+    ) and
+    (
+      (
+        (T1.APPOINTMENT_DATE = @appointmentDate2) and
+        (T1.APPOINTMENT_TIME = @appointmentTime) and
+        (T1.CREATED_TIMESTAMP &gt;= @createdTimestamp)
+      ) or
+      (
+        (T1.APPOINTMENT_DATE = @appointmentDate2) and
+        (T1.APPOINTMENT_TIME &gt; @appointmentTime)
+      ) or
+      (T1.APPOINTMENT_DATE &lt; @appointmentDate2)
+    )
+order by
+  T1.APPOINTMENT_DATE desc,
+  T1.APPOINTMENT_TIME
+</value>
+   </data>
+   <data name="ReadAppointmentOfficeServiceProviderCsePersonCase2">
+      <value>
+select
+  T1.REASON_CODE,
+  T1.TYPE,
+  T1.[RESULT],
+  T1.APPOINTMENT_DATE,
+  T1.APPOINTMENT_TIME,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_ROLE_CODE,
+  T1.OSP_DATE,
+  T1.APP_TSTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_ID,
+  T5.OFFICE_ID,
+  T5.OFF_OFFICE
+from
+  CKT_OFFICE T5
+  join
+  CKT_APPOINTMENT T1
+  on
+    (T1.CRO_ID is not null) and
+    (T1.CRO_TYPE is not null) and
+    (T1.CSP_NUMBER is not null) and
+    (T1.CAS_NUMBER is not null) and
+    (
+      (cast(@number1 as char(10)) = ' ') or
+      (T1.CAS_NUMBER = @casNumber)
+    ) and
+    (
+      (cast(@number2 as char(10)) = ' ') or
+      (T1.CSP_NUMBER = @cspNumber)
+    ) and
+    (T1.OSP_DATE is not null) and
+    (T1.OSP_ROLE_CODE is not null) and
+    (T1.SPD_ID is not null) and
+    (
+      (cast(@userId as char(8)) = ' ') or
+      (T1.SPD_ID = @spdId)
+    ) and
+    (
+      (cast(@roleCode as char(2)) = ' ') or
+      (T1.OSP_ROLE_CODE = @roleCode)
+    ) and
+    (T5.OFFICE_ID = T1.OFF_ID) and
+    (
+      (cast(@systemGeneratedId as smallint) = 0) or
+      (T5.OFFICE_ID = @systemGeneratedId)
+    ) and
+    (T1.APPOINTMENT_DATE &lt;= @appointmentDate) and
+    (
+      (cast(@flag as char(1)) = 'Y') or
+      (T1.[RESULT] = ' ')
+    )
+order by
+  T1.APPOINTMENT_DATE desc,
+  T1.APPOINTMENT_TIME
+</value>
+   </data>
+   <data name="ReadCaseCaseRoleCsePerson">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  TYPE desc,
+  TYPE
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+</root>

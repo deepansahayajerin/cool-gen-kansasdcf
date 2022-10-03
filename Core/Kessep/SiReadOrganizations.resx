@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select
+  NUMB,
+  TYPE,
+  TAX_ID,
+  ORGANIZATION_NAME,
+  TAX_ID_SUFFIX
+from
+  CKT_CSE_PERSON
+where
+  (TYPE = 'O') and
+  (NUMB &gt; @numb1) and
+  (NUMB &gt;= @numb2)
+order by
+  NUMB
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select
+  NUMB,
+  TYPE,
+  TAX_ID,
+  ORGANIZATION_NAME,
+  TAX_ID_SUFFIX
+from
+  CKT_CSE_PERSON
+where
+  (TYPE = 'O') and
+  (
+    (
+      (ORGANIZATION_NAME = @organizationName1) and
+      (NUMB &gt; @numb1)
+    ) or
+    (ORGANIZATION_NAME &gt; @organizationName1)
+  ) and
+  (
+    (
+      (ORGANIZATION_NAME = @organizationName2) and
+      (NUMB &gt; @numb2)
+    ) or
+    (ORGANIZATION_NAME &gt; @organizationName2)
+  )
+order by
+  ORGANIZATION_NAME,
+  NUMB
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select
+  NUMB,
+  TYPE,
+  TAX_ID,
+  ORGANIZATION_NAME,
+  TAX_ID_SUFFIX
+from
+  CKT_CSE_PERSON
+where
+  (TYPE = 'O') and
+  (TAX_ID &gt; @taxId1) and
+  (TAX_ID &gt;= @taxId2)
+order by
+  TAX_ID,
+  TAX_ID_SUFFIX,
+  ORGANIZATION_NAME
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  CITY,
+  END_DATE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR
+where
+  @cspNumber = CSP_NUMBER
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  LOCATION_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR,
+  CSP_NUMBER
+from
+  CKT_FIPS
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  LOCATION_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR,
+  CSP_NUMBER
+from
+  CKT_FIPS
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  COUNTY,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  (@fipLocation = FIP_LOCATION) and
+  (@fipCounty = FIP_COUNTY) and
+  (@fipState = FIP_STATE)
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  JUDICIAL_DISTRICT,
+  IDENTIFIER,
+  TAX_ID_SUFFIX,
+  TAX_ID,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  (@fipLocation = FIP_LOCATION) and
+  (@fipCounty = FIP_COUNTY) and
+  (@fipState = FIP_STATE)
+</value>
+   </data>
+</root>

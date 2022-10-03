@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T2.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T2.TYPE = T3.CRO_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T3.CAS_NUMBER)
+  on
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T4.COURT_CASE_NO = @courtCaseNo) and
+    (@trbId = T4.TRB_ID)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFieldValue">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE with(readuncommitted)
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (VALU = @valu) and
+  (FLD_NAME = @fldName)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  TYPE,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (CLASSIFICATION = 'I')
+order by
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_CASE_ROLE T4
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.TRB_ID is not null) and
+    (T1.LEGAL_ACTION_ID = T3.LGA_ID)
+  on
+    (T4.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T4.TYPE = T3.CRO_TYPE) and
+    (T4.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T4.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T4.START_DATE &lt;= @startDate) and
+    (T4.END_DATE &gt; @startDate) and
+    (@cspNumber = T4.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select distinct
+  T1.PRNT_SUCESSFUL_IND,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID
+from
+  CKT_OUTGOING_DOC T1
+  join
+  CKT_FIELD_VALUE T3
+  on
+    (T1.PRNT_SUCESSFUL_IND = @prntSucessfulInd) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME = @docName) and
+    (T1.INF_ID = T3.INF_IDENTIFIER) and
+    (T3.VALU = @valu) and
+    (T3.FLD_NAME = @fldName)
+</value>
+   </data>
+</root>

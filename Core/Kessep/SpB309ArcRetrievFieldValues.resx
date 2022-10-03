@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFieldValue">
+      <value>
+insert into CKT_FIELD_VALUE
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @valu,
+  @fldName,
+  @docName,
+  @docEffectiveDte,
+  @infIdentifier
+)
+</value>
+   </data>
+   <data name="DeleteRetrieveFieldValueTrigger">
+      <value>
+delete from CKT_RET_FLD_VAL_TR
+where
+  (ARCHIVE_DATE = @archiveDate) and
+  (INF_ID = @infId)
+</value>
+   </data>
+   <data name="ReadDocument">
+      <value>
+select top(1)
+  T1.NAME,
+  T1.EFFECTIVE_DATE
+from
+  CKT_DOCUMENT T1
+  join
+  CKT_OUTGOING_DOC T2
+  on
+    (T1.EFFECTIVE_DATE = T2.DOC_EFFECTIVE_DTE) and
+    (T1.NAME = T2.DOC_NAME) and
+    (T2.INF_ID = @infId)
+</value>
+   </data>
+   <data name="ReadDocumentField">
+      <value>
+select top(1)
+  CREATED_BY,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE
+from
+  CKT_DOCUMENT_FIELD
+where
+  (DOC_NAME = @docName) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (FLD_NAME = @fldName)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderAlert">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  TYPE_CODE,
+  MESSAGE,
+  DESCRIPTION,
+  DISTRIBUTION_DATE,
+  SITUATION_IDENTIFI,
+  PRIORITIZATION_COD,
+  OPTIMIZATION_IND,
+  OPTIMIZED_FLAG,
+  USER_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_OSP_ALERT
+where
+  (TYPE_CODE = 'AUT') and
+  (DISTRIBUTION_DATE = @distributionDate) and
+  (SITUATION_IDENTIFI = @situationIdentifi) and
+  (USER_ID = @userId) and
+  (CREATED_BY = @createdBy)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderOffice">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.OFF_OFFICE
+from
+  CKT_OFFICE T2
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    (@spdGeneratedId = T1.SPD_GENERATED_ID) and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T2.OFFICE_ID = T1.OFF_GENERATED_ID)
+order by
+  T1.EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadOutgoingDocument1">
+      <value>
+select top(1)
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  FIELD_VAL_ARCH_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="ReadOutgoingDocument2">
+      <value>
+select top(1)
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  FIELD_VAL_ARCH_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="ReadRetrieveFieldValueTrigger">
+      <value>
+select distinct
+  ARCHIVE_DATE,
+  INF_ID,
+  SRV_PRVD_LOGON_ID
+from
+  CKT_RET_FLD_VAL_TR
+order by
+  ARCHIVE_DATE desc,
+  INF_ID desc
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+   <data name="UpdateOfficeServiceProviderAlert">
+      <value>
+update CKT_OSP_ALERT
+set
+  DESCRIPTION = @description
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="UpdateOutgoingDocument">
+      <value>
+update CKT_OUTGOING_DOC
+set
+  FIELD_VAL_ARCH_IND = @fieldValArchInd
+where
+  INF_ID = @infId
+</value>
+   </data>
+</root>

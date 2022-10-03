@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole">
+      <value>
+select distinct top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.END_DATE
+from
+  CKT_CASE_ROLE T1
+  join
+  CKT_LEG_ACT_CAS_RL T2
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.CASE_ROLE_ID = T2.CRO_IDENTIFIER) and
+    (T1.TYPE = T2.CRO_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CAS_NUMBER = T2.CAS_NUMBER) and
+    (@lgaId = T2.LGA_ID) and
+    (T1.TYPE = 'CH')
+</value>
+   </data>
+   <data name="ReadCaseRoleCase">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'AR') and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseRoleLegalAction">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.END_DATE,
+  T2.LEGAL_ACTION_ID,
+  T2.CLASSIFICATION,
+  T2.END_DT,
+  T2.STANDARD_NO,
+  T2.KPC_DATE
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_CASE_ROLE T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T1.TYPE = T3.CRO_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T1.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T1.TYPE = 'AP') and
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.END_DATE &gt; @endDate)
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T2.KPC_DATE &gt; @kpcDate1) and
+    (T2.KPC_DATE &lt; @kpcDate2)
+</value>
+   </data>
+   <data name="ReadCsePersonCsePersonAddress">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T1.FAMILY_VIOL_IND,
+  T2.IDENTIFIER,
+  T2.STREET_1,
+  T2.STREET_2,
+  T2.CITY,
+  T2.TYPE,
+  T2.VERIFIED_DATE,
+  T2.END_DATE,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.[STATE],
+  T2.ZIP_CODE,
+  T2.ZIP4,
+  T2.PROVINCE,
+  T2.POSTAL_CODE,
+  T2.COUNTRY,
+  T2.LOCATION_TYPE,
+  T2.COUNTY
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CSE_PERS_ADDR T2
+  on
+    (T2.END_DATE &gt; @endDate) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.VERIFIED_DATE &gt; @verifiedDate) and
+    (T1.TYPE = 'C') and
+    (
+      (cast(T2.LAST_UPDATED_TMST as date) &gt; cast(@endDate as date)) or
+      (cast(T2.CREATED_TIMESTAMP as date) &gt; cast(@endDate as date))
+    )
+order by
+  T1.NUMB,
+  T2.VERIFIED_DATE desc,
+  T2.TYPE,
+  T2.LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionPerson">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.KPC_DATE,
+  T2.LA_PERSON_ID,
+  T2.CSP_NUMBER,
+  T2.[ROLE],
+  T2.LGA_R_IDENTIFIER,
+  T2.LAD_R_NUMBER,
+  T2.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.KPC_DATE &lt; @kpcDate1) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.[ROLE] in ('P', 'R')) and
+    (T1.KPC_DATE &gt; @kpcDate2)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.[ROLE],
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACTION T5
+  join
+  CKT_LEGAL_ACT_DTL T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.ACCOUNT_TYPE = 'R') and
+    (T2.LA_DETAIL_NO = T1.LAD_R_NUMBER) and
+    (T2.LGA_IDENTIFIER = T1.LGA_R_IDENTIFIER) and
+    (T2.KPC_DATE &gt; @kpcDate1) and
+    (T2.KPC_DATE &lt; @kpcDate2)
+  join
+  CKT_OBLIGATION T3
+  on
+    (T2.LA_DETAIL_NO = T3.LAD_NUMBER) and
+    (T2.LGA_IDENTIFIER = T3.LGA_IDENTIFIER) and
+    (@cspNumber = T3.CSP_NUMBER)
+  on
+    (T5.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T5.CLASSIFICATION = 'J')
+</value>
+   </data>
+</root>

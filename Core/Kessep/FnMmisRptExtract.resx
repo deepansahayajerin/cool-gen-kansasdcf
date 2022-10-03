@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  OBLGOR_PRSN_NBR,
+  OBLGOR_FIRST_NM,
+  OBLGOR_LAST_NM,
+  OBLGOR_MID_NM
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCollectionObligationTransactionObligationObligationType1">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.DISB_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.COLL_ADJ_PROC_DATE,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.APPLIED_TO_FUT_IND,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE
+from
+  CKT_OB_TRN T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T2.OTY_TYPE in (cast(@systemGeneratedIdentifier1 as smallint), cast(@systemGeneratedIdentifier2 as smallint), cast(@systemGeneratedIdentifier3 as smallint))) and
+    (T1.ADJ_IND = 'N') and
+    (T1.CONCURRENT_IND = 'N') and
+    (T1.PGM_APPLD_TO in ('AF', 'FC', 'NF')) and
+    (T1.CREATED_TMST &gt;= @createdTmst1) and
+    (T1.CREATED_TMST &lt; @createdTmst2)
+</value>
+   </data>
+   <data name="ReadCollectionObligationTransactionObligationObligationType2">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.DISB_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.COLL_ADJ_PROC_DATE,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.APPLIED_TO_FUT_IND,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE
+from
+  CKT_OB_TRN T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T2.OTY_TYPE in (cast(@systemGeneratedIdentifier1 as smallint), cast(@systemGeneratedIdentifier2 as smallint), cast(@systemGeneratedIdentifier3 as smallint))) and
+    (T1.ADJ_IND = 'Y') and
+    (T1.CONCURRENT_IND = 'N') and
+    (T1.PGM_APPLD_TO in ('AF', 'FC', 'NF')) and
+    (T1.COLL_ADJ_DT &gt;= @collAdjDt1) and
+    (T1.COLL_ADJ_DT &lt; @collAdjDt2)
+</value>
+   </data>
+   <data name="ReadCsePersonCsePersonAccount">
+      <value>
+select top(1)
+  NUMB,
+  cast(@cspSupNumber as char(10)),
+  cast(@cpaSupType as char(1))
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @cspSupNumber
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select
+  DEBT_TYP_ID,
+  DEBT_TYP_CD
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_CD in ('MC', 'MJ', 'MS')
+</value>
+   </data>
+</root>

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateMilitaryService#1">
+      <value>
+insert into CKT_MILITARY_SRV
+(
+  EFFECTIVE_DATE,
+  CSP_NUMBER,
+  START_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  APO,
+  EXP_RETURN_DATE,
+  OVERSEAS_DUTY_STN,
+  EXP_DISCH_DATE,
+  PHONE,
+  BRANCH_CODE,
+  CO_LAST_NAME,
+  CO_FIRST_NAME,
+  CO_MI,
+  CURR_US_DUTY_STN,
+  DUTY_STATUS_CODE,
+  RANK,
+  END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PHONE_COUNTRY_CODE,
+  PHONE_EXT,
+  PHONE_AREA_CODE
+)
+values
+(
+  @effectiveDate,
+  @cspNumber,
+  @startDate,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @province,
+  @postalCode,
+  @zipCode5,
+  @zipCode4,
+  @zip3,
+  @country,
+  @apo,
+  @expReturnDate,
+  @overseasDutyStn,
+  @expDischDate,
+  @phone,
+  @branchCode,
+  @coLastName,
+  @coFirstName,
+  @coMi,
+  @currUsDutyStn,
+  @dutyStatusCode,
+  @rank,
+  @endDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @phoneCountryCode,
+  @phoneExt,
+  @phoneAreaCode
+)
+</value>
+   </data>
+   <data name="CreateMilitaryService#3">
+      <value>
+update CKT_INCOME_SOURCE
+set
+  MSE_EFFECTIVE_DATE = @mseEffectiveDate,
+  CSP_S_NUMBER = @cspSNumber
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  CSP_I_NUMBER,
+  MSE_EFFECTIVE_DATE,
+  CSP_S_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (IDENTIFIER = @identifier) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="ReadPersonIncomeHistory">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  ISR_IDENTIFIER,
+  IDENTIFIER,
+  INCOME_AMT,
+  CHECK_MONTHLY_AMT,
+  CSP_I_NUMBER,
+  BAQ_ALLOTMENT
+from
+  CKT_PERS_INC_HIST
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@cspINumber = CSP_I_NUMBER) and
+  (@isrIdentifier = ISR_IDENTIFIER)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+</root>

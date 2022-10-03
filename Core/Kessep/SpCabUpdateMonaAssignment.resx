@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadMonitoredActivityAssignment">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  RESPONSIBILITY_COD,
+  EFFECTIVE_DATE,
+  OVERRIDE_IND,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  MAC_ID
+from
+  CKT_ASSGN_MNT_ACT
+where
+  (MAC_ID = @macId) and
+  (OSP_DATE = @ospDate) and
+  (OSP_CODE = @ospCode) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+   <data name="UpdateMonitoredActivityAssignment">
+      <value>
+update CKT_ASSGN_MNT_ACT
+set
+  REASON_CODE = @reasonCode,
+  OVERRIDE_IND = @overrideInd,
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (MAC_ID = @macId)
+</value>
+   </data>
+</root>

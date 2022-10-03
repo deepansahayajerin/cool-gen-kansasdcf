@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDebtDebtDetailObligationObligationType1">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.DUE_DT,
+  T2.BAL_DUE_AMT,
+  T2.INT_BAL_DUE_AMT,
+  T2.RETIRED_DT,
+  T3.PRIM_SEC_CD,
+  T4.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T4
+  join
+  CKT_OBLIGATION T3
+  join
+  CKT_OB_TRN T1
+  join
+  CKT_DEBT_DTL T2
+  on
+    (T1.CPA_SUP_TYPE is not null) and
+    (T1.CSP_SUP_NUMBER = @cspSupNumber) and
+    (T1.OTY_TYPE = T2.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T1.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T2.RETIRED_DT = @retiredDt)
+  on
+    (T3.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T3.OB_ID = T1.OBG_GENERATED_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.PRIM_SEC_CD &lt;&gt; 'S') and
+    (T3.PRIM_SEC_CD &lt;&gt; 'J')
+  on
+    T4.DEBT_TYP_ID = T3.DTY_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadDebtDebtDetailObligationObligationType2">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.DUE_DT,
+  T2.BAL_DUE_AMT,
+  T2.INT_BAL_DUE_AMT,
+  T2.RETIRED_DT,
+  T3.PRIM_SEC_CD,
+  T4.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T4
+  join
+  CKT_OBLIGATION T3
+  join
+  CKT_OB_TRN T1
+  join
+  CKT_DEBT_DTL T2
+  on
+    (T1.CPA_SUP_TYPE is not null) and
+    (T1.CSP_SUP_NUMBER = @cspSupNumber) and
+    (T1.OTY_TYPE = T2.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T1.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T2.RETIRED_DT = @retiredDt)
+  on
+    (T3.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T3.OB_ID = T1.OBG_GENERATED_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.PRIM_SEC_CD = 'J')
+  on
+    T4.DEBT_TYP_ID = T3.DTY_GENERATED_ID
+</value>
+   </data>
+</root>

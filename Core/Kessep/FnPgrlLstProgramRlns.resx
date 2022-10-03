@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDprProgram">
+      <value>
+insert into CKT_DPR_PROGRAM
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DBP_GENERATED_ID,
+  DPR_GENERATED_ID,
+  PRG_GENERATED_ID,
+  PROGRAM_STATE,
+  ASSISTANCE_IND
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @dbpGeneratedId,
+  @dprGeneratedId,
+  @prgGeneratedId,
+  @programState,
+  @assistanceInd
+)
+</value>
+   </data>
+   <data name="DeleteDprProgram">
+      <value>
+delete from CKT_DPR_PROGRAM
+where
+  (DBP_GENERATED_ID = @dbpGeneratedId) and
+  (DPR_GENERATED_ID = @dprGeneratedId) and
+  (PRG_GENERATED_ID = @prgGeneratedId) and
+  (PROGRAM_STATE = @programState)
+</value>
+   </data>
+   <data name="ReadDistributionPolicy">
+      <value>
+select top(1)
+  DIST_PLCY_ID,
+  DIST_PLCY_NM,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  MAX_PRCD_DT,
+  DIST_PLCY_DSC
+from
+  CKT_DIST_PLCY with(readuncommitted)
+where
+  DIST_PLCY_ID = @distPlcyId
+</value>
+   </data>
+   <data name="ReadDistributionPolicyRule1">
+      <value>
+select top(1)
+  DBP_GENERATED_ID,
+  DIST_PLCY_RL_ID,
+  DEBT_FUNC_TYP,
+  DEBT_STATE,
+  APPLY_TO,
+  CREATED_BY,
+  CREATED_TMST,
+  DPR_NEXT_ID
+from
+  CKT_DIST_PLCY_RL with(readuncommitted)
+where
+  (@dbpGeneratedId = DBP_GENERATED_ID) and
+  (DIST_PLCY_RL_ID = @distPlcyRlId)
+</value>
+   </data>
+   <data name="ReadDistributionPolicyRule2">
+      <value>
+select top(1)
+  DBP_GENERATED_ID,
+  DIST_PLCY_RL_ID,
+  DEBT_FUNC_TYP,
+  DEBT_STATE,
+  APPLY_TO,
+  CREATED_BY,
+  CREATED_TMST,
+  DPR_NEXT_ID
+from
+  CKT_DIST_PLCY_RL
+where
+  (DIST_PLCY_RL_ID = @distPlcyRlId) and
+  (DBP_GENERATED_ID = @dbpGeneratedId)
+</value>
+   </data>
+   <data name="ReadDprProgram1">
+      <value>
+select top(1)
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DBP_GENERATED_ID,
+  DPR_GENERATED_ID,
+  PRG_GENERATED_ID,
+  PROGRAM_STATE,
+  ASSISTANCE_IND
+from
+  CKT_DPR_PROGRAM
+where
+  (@dprGeneratedId = DPR_GENERATED_ID) and
+  (@dbpGeneratedId = DBP_GENERATED_ID) and
+  (PRG_GENERATED_ID = @prgGeneratedId) and
+  (PROGRAM_STATE = @programState)
+</value>
+   </data>
+   <data name="ReadDprProgram2">
+      <value>
+select top(1)
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DBP_GENERATED_ID,
+  DPR_GENERATED_ID,
+  PRG_GENERATED_ID,
+  PROGRAM_STATE,
+  ASSISTANCE_IND
+from
+  CKT_DPR_PROGRAM
+where
+  (@dprGeneratedId = DPR_GENERATED_ID) and
+  (@dbpGeneratedId = DBP_GENERATED_ID) and
+  (PRG_GENERATED_ID = @prgGeneratedId) and
+  (PROGRAM_STATE = @programState)
+</value>
+   </data>
+   <data name="ReadProgram1">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  TITLE,
+  INTERSTATE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+where
+  PROGRAM_ID = @programId
+</value>
+   </data>
+   <data name="ReadProgram2">
+      <value>
+select
+  PROGRAM_ID,
+  CODE,
+  TITLE,
+  INTERSTATE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  CODE
+</value>
+   </data>
+   <data name="ReadProgramDprProgram">
+      <value>
+select
+  T1.PROGRAM_ID,
+  T1.CODE,
+  T1.TITLE,
+  T1.INTERSTATE_IND,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.DISTRBTN_PRGM_TYPE,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.DBP_GENERATED_ID,
+  T2.DPR_GENERATED_ID,
+  T2.PROGRAM_STATE,
+  T2.ASSISTANCE_IND
+from
+  CKT_PROGRAM T1
+  join
+  CKT_DPR_PROGRAM T2
+  on
+    (T1.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (@dprGeneratedId = T2.DPR_GENERATED_ID) and
+    (@dbpGeneratedId = T2.DBP_GENERATED_ID)
+order by
+  T1.CODE
+</value>
+   </data>
+   <data name="UpdateDprProgram">
+      <value>
+update CKT_DPR_PROGRAM
+set
+  ASSISTANCE_IND = @assistanceInd
+where
+  (DBP_GENERATED_ID = @dbpGeneratedId) and
+  (DPR_GENERATED_ID = @dprGeneratedId) and
+  (PRG_GENERATED_ID = @prgGeneratedId) and
+  (PROGRAM_STATE = @programState)
+</value>
+   </data>
+</root>

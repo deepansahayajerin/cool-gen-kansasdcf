@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteCashReceipt#1">
+      <value>
+delete from CKT_CASH_RECEIPT
+where
+  (CRV_IDENTIFIER = @crvIdentifier1) and
+  (CST_IDENTIFIER = @cstIdentifier1) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="DeleteCashReceipt#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_CASH_RECEIPT T1
+where
+  (T1.CRV_IDENTIFIER = @crvIdentifier2) and
+  (T1.CST_IDENTIFIER = @cstIdentifier2)
+</value>
+   </data>
+   <data name="DeleteCashReceipt#3">
+      <value>
+delete from CKT_CR_EVENT
+where
+  (CREVENT_ID = @crvIdentifier2) and
+  (CST_IDENTIFIER = @cstIdentifier2)
+</value>
+   </data>
+   <data name="DeleteCashReceiptEvent#1">
+      <value>
+select top(1)
+  1
+from
+  CKT_CASH_RECEIPT
+where
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier)
+</value>
+   </data>
+   <data name="DeleteCashReceiptEvent#2">
+      <value>
+delete from CKT_CR_EVENT
+where
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CREVENT_ID = @crvIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptEvent">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  TOTAL_CASH_TRANSAC,
+  TOT_NONCSH_TRN_AMT,
+  TOT_CASH_TRAN_CNT,
+  TOT_NOCSH_TRAN_CNT,
+  TOT_DETAIL_ADJ_CNT,
+  CASH_BAL_AMT,
+  CASH_BAL_RSN,
+  CASH_DUE,
+  TOTAL_NC_FEE_AMT
+from
+  CKT_CASH_RECEIPT
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER)
+</value>
+   </data>
+   <data name="UpdateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  TOTAL_CASH_TRANSAC = @totalCashTransac,
+  TOT_NONCSH_TRN_AMT = @totNoncshTrnAmt,
+  TOT_CASH_TRAN_CNT = @totCashTranCnt,
+  TOT_NOCSH_TRAN_CNT = @totNocshTranCnt,
+  TOT_DETAIL_ADJ_CNT = @totDetailAdjCnt,
+  CASH_BAL_AMT = @cashBalAmt,
+  CASH_BAL_RSN = @cashBalRsn,
+  CASH_DUE = @cashDue,
+  TOTAL_NC_FEE_AMT = @totalNcFeeAmt
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+</root>

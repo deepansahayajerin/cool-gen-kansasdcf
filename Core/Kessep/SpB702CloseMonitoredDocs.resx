@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  VERIFIED_DATE,
+  END_DATE
+from
+  CKT_CSE_PERS_ADDR with(readuncommitted)
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  SENT_DT,
+  RETURN_DT,
+  RETURN_CD,
+  CSP_I_NUMBER,
+  END_DT
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  DENORM_TIMESTAMP,
+  CSE_PERSON_NUM,
+  USER_ID,
+  REFERENCE_DATE
+from
+  CKT_INFRASTRUCTURE with(readuncommitted)
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadMonitoredDocumentInfrastructure">
+      <value>
+select
+  CLOSURE_REASON_COD,
+  INF_ID
+from
+  CKT_MONITORED_DOC
+where
+  (CLOSURE_REASON_COD &lt;= ' ') and
+  (INF_ID &gt;= @infId)
+order by
+  INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentDocument">
+      <value>
+select top(1)
+  PRNT_SUCESSFUL_IND,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  FIELD_VAL_ARCH_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC with(readuncommitted)
+where
+  (INF_ID = @infId) and
+  (DOC_EFFECTIVE_DTE is not null) and
+  (DOC_NAME is not null)
+</value>
+   </data>
+   <data name="ReadOverpaymentHistory">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  EFFECTIVE_DT,
+  OVERPAYMENT_IND,
+  CREATED_TMST
+from
+  CKT_OVRPYMNT_HIST with(readuncommitted)
+where
+  (CPA_TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber)
+order by
+  CREATED_TMST desc
+</value>
+   </data>
+</root>

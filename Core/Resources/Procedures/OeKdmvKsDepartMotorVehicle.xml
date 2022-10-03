@@ -1,0 +1,117 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeKdmvKsDepartMotorVehicle"
+           program-name="SWEKDMVP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeKdmvKsDepartMotorVehicle"
+           transaction="SRPJ"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_DMVL_MOTOR_VECHICLE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DONE"
+       to="OeDmvlKsDeprtMotorVechList"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="KsDriversLicense.CreatedTstamp"
+                  to="KsDriversLicense.CreatedTstamp"/>
+      <return-map from="KsDriversLicense.SequenceCounter"
+                  to="KsDriversLicense.SequenceCounter"/>
+      <return-map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="FlowToKdmv" to="FlowCsePersonsWorkSet"/>
+      <return-map from="Flow" to="FlowKsDriversLicense"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DlgflwRequired" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SELECT_PERSON"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DONE"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="CsePersonsWorkSet.Number" to="Selected.Number"/>
+      <map from="CsePersonsWorkSet.Ssn" to="Selected.Ssn"/>
+      <map from="CsePersonsWorkSet.FormattedName" to="Selected.FormattedName"/>
+      <return-map from="Selected" to="FlowCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_OPAY_OBLG_BY_AP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DONE"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="FlowToKdmv" to="FlowCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_PAYR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DONE"
+       to="FnPayrLstCollsByApPyr"
+       send-command="DISPLAY">
+      <map from="CashReceiptDetail" to="SelCourtOrderNo"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="FlowToKdmv" to="FlowCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_2_EXMP_ADM_ACT_EXEMPTION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DONE"
+       to="LeExmpAdminActionExemption"
+       send-command="DISPLAY">
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="Obligation" to="Obligation"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="FlowKdmv" to="FlowCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_OBL_ADM_ACT_BY_OBLGR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DONE"
+       to="LeObloAdminActionsByObligor"
+       send-command="DISPLAY">
+      <map from="AdministrativeAction" to="Required"/>
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <return-map from="FlowKdmv" to="FlowCsePersonsWorkSet"/>
+   </on>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="KsDriversLicense" to="KsDriversLicense"/>
+   <map from="LastUpdate" to="LastUpdate"/>
+   <map from="UpdateConfirm" to="UpdateConfirm"/>
+   <map from="MoreLessScroll" to="MoreLessScroll"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HistoricRecord" to="HistoricRecord"/>
+   <map from="PromptAppealDecsionCod" to="PromptAppealDecisionCd"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptCsePersonNumber" to="PromptCsePersonNumber"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="HiddenKsDriversLicense" to="HiddenKsDriversLicense"/>
+   <map from="AmountDue" to="AmountDue"/>
+   <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   <map from="HiddenPrevCsePersonsWorkSet.Number"
+        to="HiddenPrevCsePersonsWorkSet.Number"/>
+   <map from="HiddenPrevLegalAction.Identifier"
+        to="HiddenPrevLegalAction.Identifier"/>
+   <map from="HiddenPrevLegalAction.CourtCaseNumber"
+        to="LegalAction.CourtCaseNumber"/>
+   <map from="HiddenPrevLegalAction.StandardNumber"
+        to="HiddenPrevLegalAction.StandardNumber"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.CourtCaseNumber"
+        to="HiddenPrevLegalAction.CourtCaseNumber"/>
+   <map from="HiddenSecurity.Command" to="HiddenSecurity.Command"/>
+</procedure>

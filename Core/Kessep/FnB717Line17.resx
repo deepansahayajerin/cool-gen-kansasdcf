@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignmentOfficeOfficeServiceProviderServiceProvider1">
+      <value>
+select top(1)
+  T1.REASON_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T2.OFFICE_ID,
+  T2.OFF_OFFICE
+from
+  CKT_OFFICE T2
+  join
+  CKT_ASSIGN_CASE T1
+  on
+    (@casNo = T1.CAS_NO) and
+    (T1.REASON_CODE = 'RSP') and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.OFFICE_ID = T1.OFF_ID)
+</value>
+   </data>
+   <data name="ReadCaseAssignmentOfficeOfficeServiceProviderServiceProvider2">
+      <value>
+select top(1)
+  T1.REASON_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T2.OFFICE_ID,
+  T2.OFF_OFFICE
+from
+  CKT_OFFICE T2
+  join
+  CKT_ASSIGN_CASE T1
+  on
+    (@casNo = T1.CAS_NO) and
+    (T1.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.OFFICE_ID = T1.OFF_ID)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  OBLGOR_PRSN_NBR
+from
+  CKT_CR_DETAIL with(readuncommitted)
+where
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptTypeCashReceiptEventCashReceiptSourceType">
+      <value>
+select
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CDS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  DISCONTINUE_DATE
+from
+  CKT_CRDTL_STATHIST with(readuncommitted)
+where
+  (CDS_IDENTIFIER = 3) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (CREATED_TIMESTAMP &lt; @createdTimestamp) and
+  (CST_IDENTIFIER &gt;= @cstIdentifier)
+order by
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadCsePersonCase">
+      <value>
+select
+  T3.CSP_NUMBER,
+  T2.NUMB,
+  T2.STATUS
+from
+  CKT_CASE T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T2.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.END_DATE &gt;= @endDate) and
+    (T3.START_DATE &lt;= @endDate)
+order by
+  T2.NUMB
+</value>
+   </data>
+   <data name="ReadLegalActionCsePersonCsePersonCase">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.STANDARD_NO,
+  T6.CSP_NUMBER,
+  T8.CSP_NUMBER,
+  T4.NUMB,
+  T4.STATUS
+from
+  CKT_CASE_ROLE T8 with(readuncommitted)
+  join
+  CKT_CASE T4 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T6 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T5 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T1.CLASSIFICATION = 'J') and
+    (T1.STANDARD_NO = @standardNo)
+  on
+    (T6.CASE_ROLE_ID = T5.CRO_IDENTIFIER) and
+    (T6.TYPE = T5.CRO_TYPE) and
+    (T6.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T6.CAS_NUMBER = T5.CAS_NUMBER) and
+    (T6.TYPE = 'AP') and
+    (T6.END_DATE &gt;= @endDate) and
+    (T6.START_DATE &lt;= @endDate)
+  on
+    T4.NUMB = T6.CAS_NUMBER
+  join
+  CKT_LEG_ACT_CAS_RL T7 with(readuncommitted)
+  on
+    T1.LEGAL_ACTION_ID = T7.LGA_ID
+  on
+    (T8.CASE_ROLE_ID = T7.CRO_IDENTIFIER) and
+    (T8.TYPE = T7.CRO_TYPE) and
+    (T8.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T8.CAS_NUMBER = T7.CAS_NUMBER) and
+    (T4.NUMB = T8.CAS_NUMBER) and
+    (T8.TYPE in ('CH', 'AR')) and
+    (T8.END_DATE &gt;= T6.START_DATE) and
+    (T8.START_DATE &lt;= T6.END_DATE)
+order by
+  T4.NUMB
+</value>
+   </data>
+</root>

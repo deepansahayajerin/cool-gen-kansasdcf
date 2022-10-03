@@ -1,0 +1,39 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnRefiMtnCostRcvryFeeInfo"
+           program-name="SWEREFIP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnRefiMtnCostRcvryFeeInfo"
+           transaction="SR84"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command="XFERMENU"/>
+   <on exit-state="ECO_LNK_TO_COST_RECOVERY_FEE_INF"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETRECF"
+       to="FnRecfLstCostRcvryFeeInfo"
+       send-command="DISPLAY">
+      <map from="Tribunal" to="Tribunal"/>
+      <return-map from="Tribunal" to="Tribunal"/>
+      <return-map from="Flow.EffectiveDate" to="TribunalFeeInformation.EffectiveDate"/>
+      <return-map from="Flow.DiscontinueDate" to="TribunalFeeInformation.DiscontinueDate"/>
+      <return-map from="Refi" to="Recf"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLTRB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <return-map from="DlgflwSelectedTribunal" to="Tribunal"/>
+   </on>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="TribunalFeeInformation" to="TribunalFeeInformation"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenTribunal" to="HiddenTribunal"/>
+   <map from="PromptTextWorkArea" to="PromptTextWorkArea"/>
+   <map from="HiddenTribunalFeeInformation" to="HiddenTribunalFeeInformation"/>
+</procedure>

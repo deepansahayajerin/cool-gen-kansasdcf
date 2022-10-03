@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseRoleCsePerson1">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  AR_CHG_PRC_REQ_IND,
+  AR_CHG_PROC_DT,
+  AR_INVALID_IND
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'AR') and
+  (
+    (AR_CHG_PRC_REQ_IND = 'Y') or
+    (AR_INVALID_IND = 'Y')
+  ) and
+  (AR_CHG_PROC_DT &lt;= @arChgProcDt)
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseCaseRoleCsePerson2">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  AR_CHG_PRC_REQ_IND,
+  AR_CHG_PROC_DT,
+  AR_INVALID_IND
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'AR') and
+  (
+    (AR_CHG_PRC_REQ_IND = 'Y') or
+    (AR_INVALID_IND = 'Y')
+  ) and
+  (AR_CHG_PROC_DT &lt;= @arChgProcDt)
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate)
+  join
+  CKT_CSE_PERSON_ACC T3
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T3.TYPE = 'S')
+order by
+  T1.NUMB
+</value>
+   </data>
+</root>

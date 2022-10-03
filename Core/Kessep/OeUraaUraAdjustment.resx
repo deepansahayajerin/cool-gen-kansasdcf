@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.DIST_MTD
+from
+  CKT_COLLECTION T1
+  join
+  CKT_URA_COLL_APPL T2
+  on
+    (T1.OBG_ID = T2.OBG_IDENTIFIER) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.OTY_ID = T2.OTY_IDENTIFIER) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.OTR_ID = T2.OTR_IDENTIFIER) and
+    (T1.CRV_ID = T2.CRV_IDENTIFIER) and
+    (T1.COLL_ID = T2.COL_IDENTIFIER) and
+    (T1.CRD_ID = T2.CRD_IDENTIFIER) and
+    (T1.CST_ID = T2.CST_IDENTIFIER) and
+    (T1.CRT_TYPE = T2.CRT_IDENTIFIER) and
+    (T1.OTR_TYPE = T2.OTR_TYPE) and
+    (T1.ADJ_IND = 'N') and
+    (T1.DIST_MTD = 'P') and
+    (T2.IMH_AE_CASE_NO = @imhAeCaseNo) and
+    (T2.IMS_YEAR = @imsYear) and
+    (T2.IMS_MONTH = @imsMonth)
+</value>
+   </data>
+</root>

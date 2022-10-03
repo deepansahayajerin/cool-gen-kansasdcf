@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFcrCaseMaster">
+      <value>
+select top(1)
+  CASE_ID,
+  APPL_SENT_DT,
+  FCR_RESPONSE_DT
+from
+  CKT_FCR_CASE_MASTR
+where
+  CASE_ID = @caseId
+</value>
+   </data>
+   <data name="ReadFcrCaseMembers">
+      <value>
+select
+  FCM_CASE_ID,
+  MEMBER_ID,
+  ACTION_TYPE_CD,
+  LOCATE_REQST_TYPE,
+  PARTICIPANT_TYPE,
+  SEX_CODE,
+  DATE_OF_BIRTH,
+  SSN,
+  FIRST_NAME,
+  MIDDLE_NAME,
+  LAST_NAME,
+  PREVIOUS_SSN,
+  ADDITIONAL_SSN_1,
+  ADDITIONAL_SSN_2,
+  SSN_VALIDITY_CD,
+  MULTIPLE_SSN_1,
+  MULTIPLE_SSN_2,
+  MULTIPLE_SSN_3,
+  BATCH_NUMBER,
+  ACKMNT_CD,
+  ERROR_CODE_1,
+  ERROR_CODE_2,
+  ERROR_CODE_3,
+  ERROR_CODE_4,
+  ERROR_CODE_5,
+  ADDL_SSN1_VAL_CD,
+  ADDL_SSN2_VAL_CD
+from
+  CKT_FCR_CASE_MEMBR
+where
+  @fcmCaseId = FCM_CASE_ID
+order by
+  PARTICIPANT_TYPE,
+  MEMBER_ID,
+  ACTION_TYPE_CD
+</value>
+   </data>
+</root>

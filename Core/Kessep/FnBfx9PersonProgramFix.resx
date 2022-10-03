@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeletePersonProgram">
+      <value>
+delete from CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (PRG_GENERATED_ID = @prgGeneratedId)
+</value>
+   </data>
+   <data name="ReadCaseCaseRole1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (dateadd(month, - 1, T2.START_DATE) &lt;= cast(@date as date)) and
+    (T1.STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadCaseCaseRole2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T1.STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadPersonProgramCsePerson">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  ASSIGNED_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  PRG_GENERATED_ID = 2
+</value>
+   </data>
+</root>

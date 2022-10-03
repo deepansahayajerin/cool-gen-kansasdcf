@@ -1,0 +1,74 @@
+Feature: InternalServerError
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "PAYR" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - LIST COLLECTIONS BY AP/PAYOR - PAYR" window appears
+
+    When user enters "<AP_PAYOR>" in "AP/Payor"
+    When user enters "<LIST_COLLECTIONS_FROM>" in "List Collections From/To"
+    And user presses "F2"
+
+    When user enters "OPAY" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - List Obligations by AP/Payor - OPAY" window appears
+
+    When user enters "S" in first field under text "Sel"
+    And user presses "Shift+F8"
+    Then "CSE - Maintain Collection Protection - COLP" window appears
+    When user enters "S" in first field under text "Sel"
+    And enters "<FIRST_COLL_DT>" in the next field
+    And enters "<LAST_COLL_DT>" in the next field
+    And enters "S" in the second field to the right
+    And presses "F4"
+    Then "CSE - Code Values List - CDVL" window appears
+
+    When user enters "S" in first field under text "Sel"
+    And presses "F9"
+    Then "CSE - Maintain Collection Protection - COLP" window appears
+
+    When user enters "<NOTE>" in third field under text "Show Active Only"
+
+    Then "CSE - Case Role Maintenance - ROLE1" window appears
+
+    And presses "F5"
+
+    When user enters "ROLE" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Case Role Maintenance - ROLE" window appears
+
+    #When user enters "<CASE_NUMBER>" in "Case"
+    When user enters "<CASE_NUMBER>" in first field under text "CSE - Case Role Maintenance - ROLE"
+    And presses "F2"
+    And presses "Shift+F3"
+    Then "CSE - Name List - NAME" window appears
+
+    When user enters "<LAST_NAME>" in "Last"
+    And enters "<FIRST_NAME>" in "First"
+    And presses "F2"
+
+    When user enters "ROLE" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Case Role Maintenance - ROLE" window appears
+
+    When user enters "<LAST_NAME>" in "Name" next to "Add Person" section
+    And enters "<FIRST_NAME>" in the next field
+    And enters "<SEX>" in "Sex"
+    And enters "<ROLE>" in "Role" next to "Add Person" section
+    And enters "<START_DT>" in "Start Dt" next to "Add Person" section
+    And presses "F5"
+
+
+
+
+
+    Examples:
+      | AP_PAYOR | LIST_COLLECTIONS_FROM | FIRST_COLL_DT | LAST_COLL_DT | NOTE      | CASE_NUMBER | LAST_NAME  | FIRST_NAME | SEX | ROLE | START_DT |
+      | 139      | 012022                | 03092022      | 03152022     | Some note | 566526      | SMITHAPPLE | GRANNY     | F   | AR   | 03102022 |
+
+

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE
+from
+  CKT_CSE_ORGANIZATN
+where
+  (ORGANZTN_ID = @organztnId) and
+  (TYPE_CODE = 'C')
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  (NAME = @name) and
+  (TYPE_CODE = @typeCode)
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select top(1)
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOffice3">
+      <value>
+select top(1)
+  OFFICE_ID,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @discontinueDate)
+</value>
+   </data>
+</root>

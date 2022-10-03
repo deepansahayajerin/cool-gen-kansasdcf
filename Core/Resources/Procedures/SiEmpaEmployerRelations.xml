@@ -1,0 +1,74 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiEmpaEmployerRelations"
+           program-name="SWEEMPAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiEmpaEmployerRelations"
+           transaction="SR2S"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="Next" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CODE_TABLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EMPLOYER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SiEmplEmployerMaintenance"
+       send-command-type="none">
+      <map from="ScreenSelect" to="ScreenSelector"/>
+      <return-map from="ScreenSelector" to="ScreenSelect"/>
+      <return-map from="RtnEmployer" to="RtnEmployer"/>
+      <return-map from="RtnEmployerAddress" to="RtnEmployerAddress"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_EMPLOYER_MAINTENANCE"
+       action="transfer"
+       to="SiEmplEmployerMaintenance"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="WsEmployer" to="WsEmployer"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="TypePrompt" to="TypePrompt"/>
+   <map from="ScreenTitle" to="ScreenTitle"/>
+   <map from="Empa.SelectEmpa" to="Empa.SelectEmpa"/>
+   <map from="Empa.EmpaEmployer" to="Empa.EmpaEmployer"/>
+   <map from="Empa.PrmtEmplEmpa" to="Empa.PrmtEmplEmpa"/>
+   <map from="Empa.PrmtTypeEmpa" to="Empa.PrmtTypeEmpa"/>
+   <map from="Empa.EmpaEmployerRelation" to="Empa.EmpaEmployerRelation"/>
+   <map from="Empa.EmpaEmployerAddress" to="Empa.EmpaEmployerAddress"/>
+   <map from="Empa.EmpEff" to="Empa.EmpaEff"/>
+   <map from="Empa.EmpaEnd" to="Empa.EmpaEnd"/>
+   <map from="Empa.OrginalEmployerRelation" to="Empa.OrginalEmployerRelation"/>
+   <map from="ConfirmCreateRelationsh" to="ConfirmCreateRelationsh"/>
+   <map from="ScreenSelect" to="ScreenSelect"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Plus" to="Plus"/>
+   <map from="WsEmployerRelation" to="WsEmployerRelation"/>
+   <map from="Empa.OrginalEmployer" to="Empa.OrginalEmployer"/>
+   <map from="Paging.Scroll" to="Paging.Scroll"/>
+   <map from="ServiceProviderEmployer.Identifier"
+        to="ServiceProviderEmployer.Identifier"/>
+   <map from="ServiceProviderEmployerAddress.LocationType"
+        to="ServiceProviderEmployerAddress.LocationType"/>
+   <map from="WsEmployerAddress.LocationType"
+        to="WsEmployerAddress.LocationType"/>
+   <map from="EmployerRelation.Identifier" to="EmployerRelation.Identifier"/>
+   <map from="WsEmployerAddress.Street1" to="WsEmployerAddress.Street1"/>
+   <map from="WsEmployerAddress.Street2" to="WsEmployerAddress.Street2"/>
+   <map from="WsEmployerAddress.City" to="WsEmployerAddress.City"/>
+   <map from="WsEmployerAddress.State" to="WsEmployerAddress.State"/>
+   <map from="WsEmployerAddress.ZipCode" to="WsEmployerAddress.ZipCode"/>
+   <map from="SelectEmployerAddress.LocationType"
+        to="SelectEmployerAddress.LocationType"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

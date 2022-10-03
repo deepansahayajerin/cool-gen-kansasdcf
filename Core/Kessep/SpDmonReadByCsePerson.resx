@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDocument">
+      <value>
+select top(1)
+  T1.NAME,
+  T1.DESCRIPTION,
+  T1.EFFECTIVE_DATE
+from
+  CKT_DOCUMENT T1 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T2 with(readuncommitted)
+  on
+    (T1.EFFECTIVE_DATE = T2.DOC_EFFECTIVE_DTE) and
+    (T1.NAME = T2.DOC_NAME) and
+    (@infId = T2.INF_ID)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  PROCESS_STATUS,
+  EVENT_TYPE,
+  EVENT_DETAIL_NAME,
+  DENORM_NUMERIC_12,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  CASE_UNIT_NUM,
+  USER_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  [FUNCTION]
+from
+  CKT_INFRASTRUCTURE with(readuncommitted)
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_FIPS T3 with(readuncommitted)
+  join
+  CKT_TRIBUNAL T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = @legalActionId) and
+    (T2.IDENTIFIER = T1.TRB_ID) and
+    (T1.COURT_CASE_NO = @courtCaseNo)
+  on
+    (T3.LOCATION = T2.FIP_LOCATION) and
+    (T3.COUNTY = T2.FIP_COUNTY) and
+    (T3.[STATE] = T2.FIP_STATE) and
+    (T3.STATE_ABBREVIATION = @stateAbbreviation) and
+    (T3.COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_FIPS_TRIB_ADDR T3 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = @legalActionId) and
+    (T1.TRB_ID = T3.TRB_ID) and
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T3.COUNTRY = @country)
+</value>
+   </data>
+   <data name="ReadLegalAction3">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadMonitoredDocumentInfrastructure1">
+      <value>
+select distinct
+  T1.REQUIRED_RESPONSE,
+  T1.ACT_RESP_DT,
+  T1.CLOSURE_REASON_COD,
+  T1.CREATED_TIMESTAMP,
+  T1.INF_ID,
+  T2.SYSTEM_GENERATED_I,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_PRN_OUTPT_DEST T4 with(readuncommitted)
+  join
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T3 with(readuncommitted)
+  join
+  CKT_MONITORED_DOC T1 with(readuncommitted)
+  on
+    (T3.INF_ID = T1.INF_ID) and
+    (T1.REQUIRED_RESPONSE &gt;= @requiredResponse) and
+    (T1.ACT_RESP_DT = @actRespDt)
+  on
+    (T2.SYSTEM_GENERATED_I = T3.INF_ID) and
+    (T2.USER_ID = @userId) and
+    (T2.CSE_PERSON_NUM = @csePersonNum) and
+    (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+  on
+    (T4.PRINTER_ID = T3.POD_PRINTER_ID) and
+    (T4.OFF_GENERATED = @offGenerated)
+order by
+  T1.REQUIRED_RESPONSE,
+  T1.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadMonitoredDocumentInfrastructure2">
+      <value>
+select distinct
+  T1.REQUIRED_RESPONSE,
+  T1.ACT_RESP_DT,
+  T1.CLOSURE_REASON_COD,
+  T1.CREATED_TIMESTAMP,
+  T1.INF_ID,
+  T2.SYSTEM_GENERATED_I,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_PRN_OUTPT_DEST T4 with(readuncommitted)
+  join
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T3 with(readuncommitted)
+  join
+  CKT_MONITORED_DOC T1 with(readuncommitted)
+  on
+    (T3.INF_ID = T1.INF_ID) and
+    (T1.REQUIRED_RESPONSE &gt;= @requiredResponse)
+  on
+    (T2.SYSTEM_GENERATED_I = T3.INF_ID) and
+    (T2.USER_ID = @userId) and
+    (T2.CSE_PERSON_NUM = @csePersonNum) and
+    (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+  on
+    (T4.PRINTER_ID = T3.POD_PRINTER_ID) and
+    (T4.OFF_GENERATED = @offGenerated)
+order by
+  T1.REQUIRED_RESPONSE,
+  T1.CREATED_TIMESTAMP
+</value>
+   </data>
+</root>

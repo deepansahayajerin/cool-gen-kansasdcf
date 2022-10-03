@@ -1,0 +1,86 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeTribTribunal"
+           program-name="SWETRIBP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeTribTribunal"
+           transaction="SR9S"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="CoStbmSupportTablesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_ORGZ"
+       action="transfer"
+       to="SiOrgzOrganizationMaintenance"
+       send-command="DISPLAY">
+      <map from="DlgflwRequiredCsePerson" to="StartingSearchCsePerson"/>
+      <map from="DlgflwRequiredCsePersonAddress.LocationType"
+           to="StartingSearchCity.LocationType"/>
+      <map from="DlgflwRequiredCsePersonAddress.City" to="StartingSearchCity.City"/>
+      <map from="Fips" to="StartingSearchFips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips.StateAbbreviation" to="SearchFips.StateAbbreviation"/>
+      <return-map from="DlgflwSelectedFips" to="Fips"/>
+      <return-map from="DlgflwSelectedTribunal.Identifier" to="Tribunal.Identifier"/>
+      <return-map from="DlgflwSelectedTribunal.Name" to="Tribunal.Name"/>
+      <return-map from="DlgflwSelectedTribunal.JudicialDistrict"
+                  to="Tribunal.JudicialDistrict"/>
+      <return-map from="DlgflwSelectedTribunal.JudicialDivision"
+                  to="Tribunal.JudicialDivision"/>
+      <return-map from="DlgflwSelectedTribunal.TaxIdSuffix" to="Tribunal.TaxIdSuffix"/>
+      <return-map from="DlgflwSelectedTribunal.TaxId" to="Tribunal.TaxId"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_FIPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFIPL"
+       to="LeFiplListFips"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="SelectedFips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Required" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_FIPS1"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFIPS"
+       to="LeFips"
+       send-command="DISPLAY">
+      <map from="Fips.State" to="Fips.State"/>
+      <map from="Fips.County" to="Fips.County"/>
+      <map from="Fips.Location" to="Fips.Location"/>
+      <map from="Fips.StateAbbreviation" to="Fips.StateAbbreviation"/>
+      <map from="Fips.CountyAbbreviation" to="Fips.CountyAbbreviation"/>
+      <return-map from="Fips" to="SelectedFips"/>
+   </on>
+   <map from="Export1.DetailSelAddr" to="Import1.DetailSelAddr"/>
+   <map from="Export1.DetailListAddrTp" to="Import1.DetailListAddrTp"/>
+   <map from="Export1.Detail" to="Import1.Detail"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Export1.DetailListStates" to="Import1.DetailListStates"/>
+   <map from="ListFipsCodes" to="ListFipsCodes"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="ListTribunal" to="ListTribunal"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="PromptCountry" to="PromptCountry"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

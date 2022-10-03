@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest">
+      <value>
+select top(1)
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SPECIMEN_ID,
+  SAMPLE_COLL_IND,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  VEN_IDENTIFIER,
+  PGT_IDENTIFIER,
+  CSP_R_NUMBER,
+  GTE_R_TEST_NUMBER
+from
+  CKT_PERSON_GEN_TST
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (GTE_TEST_NUMBER = @gteTestNumber)
+</value>
+   </data>
+   <data name="ReadPersonGeneticTestGeneticTest">
+      <value>
+select
+  T1.GTE_TEST_NUMBER,
+  T1.CSP_NUMBER,
+  T1.IDENTIFIER,
+  T1.SPECIMEN_ID,
+  T1.SAMPLE_COLL_IND,
+  T1.SCHED_TEST_TIME,
+  T1.SCHED_TEST_DATE,
+  T1.VEN_IDENTIFIER,
+  T1.PGT_IDENTIFIER,
+  T1.CSP_R_NUMBER,
+  T1.GTE_R_TEST_NUMBER,
+  T2.LAB_CASE_NO,
+  T2.TEST_TYPE
+from
+  CKT_GENETIC_TEST T2
+  join
+  CKT_PERSON_GEN_TST T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.TEST_NUMBER = T1.GTE_TEST_NUMBER) and
+    (T1.SAMPLE_COLL_IND = 'Y') and
+    (T1.SCHED_TEST_DATE &lt;= @schedTestDate) and
+    (
+      (cast(@scheduledTestDate1 as date) &lt;= cast(@scheduledTestDate2 as date)) or
+      (T1.SCHED_TEST_DATE &lt;= @scheduledTestDate1)
+    )
+order by
+  T1.SCHED_TEST_DATE desc
+</value>
+   </data>
+   <data name="ReadVendor1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_VENDOR
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadVendor2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_VENDOR
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

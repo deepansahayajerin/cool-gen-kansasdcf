@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.LAST_UPDATED_BY,
+  T1.FAMILY_VIOL_IND,
+  T1.FVI_SET_DATE,
+  T1.FVI_UPDATED_BY
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.FVI_SET_DATE &gt;= @fviSetDate1) and
+    (T1.FVI_SET_DATE &lt; @fviSetDate2) and
+    (T1.NUMB = T2.CSP_NUMBER)
+  on
+    (T3.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T3.KPC_FLAG = 'Y')
+  join
+  CKT_LEG_ACT_CAS_RL T5
+  on
+    (T1.NUMB = T5.CSP_NUMBER) and
+    (T5.CRO_TYPE in ('AP', 'AR')) and
+    (T3.LEGAL_ACTION_ID = T5.LGA_ID)
+order by
+  T1.NUMB
+</value>
+   </data>
+</root>

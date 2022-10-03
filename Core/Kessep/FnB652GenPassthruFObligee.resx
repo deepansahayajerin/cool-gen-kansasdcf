@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDisbursementStatusHistory">
+      <value>
+insert into CKT_DISB_STAT_HIST
+(
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT,
+  SUPPRESSION_REASON
+)
+values
+(
+  @dbsGeneratedId,
+  @dtrGeneratedId,
+  @cspNumber,
+  @cpaType,
+  @disbStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText,
+  @suppressionReason
+)
+</value>
+   </data>
+   <data name="DeletePaymentRequest#1">
+      <value>
+update CKT_DISB_TRAN
+set
+  PRQ_GENERATED_ID = null
+where
+  PRQ_GENERATED_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_ELEC_FUND_TRAN
+where
+  PRQ_GENERATED_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#3">
+      <value>
+update CKT_OBLIGATION
+set
+  PRQ_ID = null
+where
+  PRQ_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#4">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  PRQ_R_GENERATED_ID = null
+where
+  PRQ_R_GENERATED_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#5">
+      <value>
+select top(1)
+  1
+from
+  CKT_POT_RECOVERY
+where
+  PRQ_IDENTIFIER = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#6">
+      <value>
+delete from CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentStatusHistory">
+      <value>
+delete from CKT_PMNT_STAT_HIST
+where
+  (PST_GENERATED_ID = @pstGeneratedId) and
+  (PRQ_GENERATED_ID = @prqGeneratedId) and
+  (PYMNT_STAT_HIST_ID = @pymntStatHistId)
+</value>
+   </data>
+   <data name="DisassociateDisbursementTransaction">
+      <value>
+update CKT_DISB_TRAN
+set
+  PRQ_GENERATED_ID = null
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.NUMB = T2.CAS_NO) and
+    (@cspNoAr = T2.CSP_NO_AR)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadControlTable1">
+      <value>
+select top(1)
+  CNTL_TBL_ID,
+  LAST_USED_NUMBER
+from
+  CKT_CONTROL_TABLE
+where
+  CNTL_TBL_ID = 'OUTBOUND EFT NUMBER'
+</value>
+   </data>
+   <data name="ReadControlTable2">
+      <value>
+select top(1)
+  CNTL_TBL_ID,
+  LAST_USED_NUMBER
+from
+  CKT_CONTROL_TABLE
+where
+  CNTL_TBL_ID = 'OUTBOUND EFT TRACE NUMBER'
+</value>
+   </data>
+   <data name="ReadCsePersonObligee">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadDisbursementStatus">
+      <value>
+select top(1)
+  DISB_STATUS_ID
+from
+  CKT_DISB_STATUS
+where
+  DISB_STATUS_ID = @disbStatusId
+</value>
+   </data>
+   <data name="ReadDisbursementStatusHistory">
+      <value>
+select top(1)
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_DISB_STAT_HIST
+where
+  (@dtrGeneratedId = DTR_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+order by
+  EFFECTIVE_DATE desc,
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction1">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.PROCESS_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.DISBURSEMENT_DATE,
+  T1.CASH_NON_CASH_IND,
+  T1.RECAPTURED_IND,
+  T1.COLLECTION_DATE,
+  T1.DBT_GENERATED_ID,
+  T1.PRQ_GENERATED_ID
+from
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_STAT_HIST T3
+  on
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.RECAPTURED_IND = 'N') and
+    (T1.PROCESS_DATE = @processDate) and
+    (T1.DBT_GENERATED_ID = @dbtGeneratedId) and
+    (T1.DISB_TRAN_ID = T3.DTR_GENERATED_ID) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T3.DBS_GENERATED_ID &lt;&gt; @dbsGeneratedId)
+order by
+  T1.COLLECTION_DATE
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction2">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PROCESS_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST,
+  DISBURSEMENT_DATE,
+  CASH_NON_CASH_IND,
+  RECAPTURED_IND,
+  COLLECTION_DATE,
+  DBT_GENERATED_ID,
+  PRQ_GENERATED_ID
+from
+  CKT_DISB_TRAN
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (RECAPTURED_IND = 'N') and
+  (PROCESS_DATE = @processDate) and
+  (DBT_GENERATED_ID = @dbtGeneratedId)
+order by
+  COLLECTION_DATE
+</value>
+   </data>
+   <data name="ReadElectronicFundTransmission">
+      <value>
+select top(1)
+  TRANSMITTAL_AMOUNT,
+  TRANSMISSION_TYPE,
+  TRANSMISSION_ID,
+  TRACE_NUMBER,
+  RECV_DFI_ACCT_NUM
+from
+  CKT_ELEC_FUND_TRAN
+where
+  TRANSMISSION_TYPE = 'O'
+order by
+  TRANSMISSION_ID desc
+</value>
+   </data>
+   <data name="ReadPaymentRequest1">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  TYPE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="ReadPaymentRequest2">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  IMPREST_FUND_CODE,
+  CLASSIFICATION,
+  TYPE,
+  PRQ_R_GENERATED_ID,
+  INTERSTATE_IND
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="ReadPaymentStatus">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID,
+  CODE
+from
+  CKT_PAYMENT_STATUS
+where
+  PAYMENT_STATUS_ID = @paymentStatusId
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistory">
+      <value>
+select
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_PMNT_STAT_HIST
+where
+  (@prqGeneratedId = PRQ_GENERATED_ID) and
+  (@pstGeneratedId = PST_GENERATED_ID)
+</value>
+   </data>
+   <data name="UpdateControlTable1">
+      <value>
+update CKT_CONTROL_TABLE
+set
+  LAST_USED_NUMBER = @lastUsedNumber
+where
+  CNTL_TBL_ID = @cntlTblId
+</value>
+   </data>
+   <data name="UpdateControlTable2">
+      <value>
+update CKT_CONTROL_TABLE
+set
+  LAST_USED_NUMBER = @lastUsedNumber
+where
+  CNTL_TBL_ID = @cntlTblId
+</value>
+   </data>
+   <data name="UpdateDisbursementStatusHistory">
+      <value>
+update CKT_DISB_STAT_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (DBS_GENERATED_ID = @dbsGeneratedId) and
+  (DTR_GENERATED_ID = @dtrGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (DISB_STAT_HIST_ID = @disbStatHistId)
+</value>
+   </data>
+   <data name="UpdatePaymentRequest1">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  AMOUNT = @amount
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="UpdatePaymentRequest2">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  AMOUNT = @amount
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+</root>

@@ -1,0 +1,107 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnLpspLstPyeesWthDisbSupp"
+           program-name="SWELPSPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnLpspLstPyeesWthDisbSupp"
+           transaction="SR52"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="SearchPayee"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_MTN_DISB_SUPP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnLdspLstMtnDisbSuppr"
+       send-command="DISPLAY">
+      <map from="SelectedCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_COLLECTION_TYPES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnClctLstCollectionTypes"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="FilterCollectionType"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MTN_PERSON_DISB_SUPP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnPsupMtnPrsnDisbSupprssn"
+       send-command="DISPLAY">
+      <map from="SelectedLegalAction" to="LegalAction"/>
+      <map from="SelectedDisbSuppressionStatusHistory.SystemGeneratedIdentifier"
+           to="DisbSuppressionStatusHistory.SystemGeneratedIdentifier"/>
+      <map from="SelectedDisbSuppressionStatusHistory.EffectiveDate"
+           to="DisbSuppressionStatusHistory.EffectiveDate"/>
+      <map from="SelectedDisbSuppressionStatusHistory.DiscontinueDate"
+           to="DisbSuppressionStatusHistory.DiscontinueDate"/>
+      <map from="SelectedDisbSuppressionStatusHistory.CreatedBy"
+           to="DisbSuppressionStatusHistory.CreatedBy"/>
+      <map from="SelectedPayee" to="CsePersonsWorkSet"/>
+      <map from="SelectedCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MTN_COLL_DISB_SUPPR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCsupMtnCollDisbSupprssion"
+       send-command="DISPLAY">
+      <map from="SelectedLegalAction" to="LegalAction"/>
+      <map from="SelectedDisbSuppressionStatusHistory.SystemGeneratedIdentifier"
+           to="DisbSuppressionStatusHistory.SystemGeneratedIdentifier"/>
+      <map from="SelectedDisbSuppressionStatusHistory.EffectiveDate"
+           to="DisbSuppressionStatusHistory.EffectiveDate"/>
+      <map from="SelectedDisbSuppressionStatusHistory.DiscontinueDate"
+           to="DisbSuppressionStatusHistory.DiscontinueDate"/>
+      <map from="SelectedDisbSuppressionStatusHistory.CreatedBy"
+           to="DisbSuppressionStatusHistory.CreatedBy"/>
+      <map from="SelectedCollectionType.Code" to="CollectionType.Code"/>
+      <map from="SelectedPayee.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="SelectedPayee.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+      <map from="SelectedCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToCdvl" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromCdvl"/>
+   </on>
+   <map from="Export1.DetailDisbSuppressionStatusHistory"
+        to="Import1.DetailDisbSuppressionStatusHistory"/>
+   <map from="Export1.DetailLegalAction" to="Import1.DetailLegalAction"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="WorkerServiceProvider" to="WorkerServiceProvider"/>
+   <map from="SearchPayee" to="SearchPayee"/>
+   <map from="WorkerCsePersonsWorkSet" to="WorkerCsePersonsWorkSet"/>
+   <map from="Export1.DetailPayee" to="Import1.DetailPayee"/>
+   <map from="Export1.DetailCollectionType" to="Import1.DetailCollectionType"/>
+   <map from="SuppressingDisbSuppressionStatusHistory"
+        to="SuppressingDisbSuppressionStatusHistory"/>
+   <map from="SuppressingCsePersonsWorkSet" to="SuppressingCsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="FilterCollectionType" to="FilterCollectionType"/>
+   <map from="PayeeNumberPrompt" to="PayeeNumberPrompt"/>
+   <map from="CollectionTypePrompt" to="CollectionTypePrompt"/>
+   <map from="FromDate" to="FromDate"/>
+   <map from="ToDate" to="ToDate"/>
+   <map from="FilterDisbSuppressionStatusHistory"
+        to="FilterDisbSuppressionStatusHistory"/>
+   <map from="SuppressionTypePrompt" to="SuppressionTypePrompt"/>
+   <map from="SuppressionType" to="SuppressionType"/>
+</procedure>

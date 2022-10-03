@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCaseCaseRole1">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.STATUS,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE
+from
+  CKT_CASE T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@cspNumber1 = T1.CSP_NUMBER) and
+    (T1.TYPE = 'AR') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (T2.STATUS = 'O')
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T2.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.CSP_NUMBER = @cspNumber2) and
+    (T3.START_DATE &lt;= @startDate)
+order by
+  T1.START_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCaseCaseRole2">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.STATUS,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE
+from
+  CKT_CASE T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@cspNumber1 = T1.CSP_NUMBER) and
+    (T1.TYPE = 'CH') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (T2.STATUS = 'O')
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T2.NUMB = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.CSP_NUMBER = @cspNumber2) and
+    (T3.START_DATE &lt;= @startDate)
+order by
+  T1.START_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb) and
+  (cast(@cpaSupType as char(1)) = 'S')
+</value>
+   </data>
+   <data name="ReadDebt">
+      <value>
+select
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  DEBT_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (OB_TRN_TYP = 'DE') and
+  (DEBT_TYP = @debtTyp)
+order by
+  OB_TRN_ID
+</value>
+   </data>
+   <data name="ReadGoodCause1">
+      <value>
+select top(1)
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_NUMBER1,
+  CSP_NUMBER1,
+  CRO_TYPE1,
+  CRO_IDENTIFIER1
+from
+  CKT_GOOD_CAUSE
+where
+  (@casNumber1 = CAS_NUMBER1) and
+  (@croIdentifier1 = CRO_IDENTIFIER1) and
+  (@croType1 = CRO_TYPE1) and
+  (@cspNumber1 = CSP_NUMBER1)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadGoodCause2">
+      <value>
+select
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_NUMBER1,
+  CSP_NUMBER1,
+  CRO_TYPE1,
+  CRO_IDENTIFIER1
+from
+  CKT_GOOD_CAUSE
+where
+  (@casNumber1 = CAS_NUMBER1) and
+  (@croIdentifier1 = CRO_IDENTIFIER1) and
+  (@croType1 = CRO_TYPE1) and
+  (@cspNumber1 = CSP_NUMBER1)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (CPA_TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+</root>

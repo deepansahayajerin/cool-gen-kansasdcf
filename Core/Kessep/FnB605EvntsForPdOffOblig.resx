@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonObligationObligationType">
+      <value>
+select distinct
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OB_ID,
+  T2.DTY_GENERATED_ID,
+  T2.PRIM_SEC_CD,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATE_TMST,
+  T2.LAST_OBLIG_EVENT,
+  T3.DEBT_TYP_CD,
+  T3.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_OBLIGATION T2
+  on
+    (T3.DEBT_TYP_ID = T2.DTY_GENERATED_ID) and
+    (T2.CSP_NUMBER &gt;= @cspNumber)
+  join
+  CKT_DBT_DT_STS_HIS T7
+  on
+    (T2.DTY_GENERATED_ID = T7.OTY_TYPE) and
+    (T2.OB_ID = T7.OBG_ID) and
+    (T2.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T2.CPA_TYPE = T7.CPA_TYPE) and
+    (T7.EFFECTIVE_DT &gt; @effectiveDt)
+</value>
+   </data>
+   <data name="ReadObligationAssignment">
+      <value>
+select
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  OTY_ID,
+  CPA_TYPE,
+  CSP_NO,
+  OBG_ID
+from
+  CKT_ASSGN_OBG
+where
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (@obgId = OBG_ID) and
+  (@cspNo = CSP_NO) and
+  (@cpaType = CPA_TYPE) and
+  (@otyId = OTY_ID)
+</value>
+   </data>
+   <data name="ReadProgramProcessingInfo">
+      <value>
+select top(1)
+  NAME,
+  CREATED_TIMESTAMP,
+  PROCESS_DATE,
+  PARAMETER_LIST
+from
+  CKT_PGM_PRCSS_INFO
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="UpdateObligation">
+      <value>
+update CKT_OBLIGATION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst,
+  LAST_OBLIG_EVENT = @lastObligEvent
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="UpdateObligationAssignment">
+      <value>
+update CKT_ASSGN_OBG
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (OTY_ID = @otyId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NO = @cspNo) and
+  (OBG_ID = @obgId)
+</value>
+   </data>
+   <data name="UpdateProgramProcessingInfo">
+      <value>
+update CKT_PGM_PRCSS_INFO
+set
+  PARAMETER_LIST = @parameterList
+where
+  (NAME = @name) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+</root>

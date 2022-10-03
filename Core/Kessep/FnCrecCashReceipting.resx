@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  sum(T1.COLLECTION_AMOUNT)
+from
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID = @cashReceiptId)
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  T1.CST_IDENTIFIER,
+  T1.CREVENT_ID,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.ANTIC_CHECK_AMT,
+  T1.TOTAL_CASH_AMT
+from
+  CKT_CR_EVENT T1
+  join
+  CKT_CASH_RECEIPT T2
+  on
+    (T1.CREVENT_ID = T2.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID = @cashReceiptId)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  INTERFACE_IND,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  COURT_IND
+from
+  CKT_CRSRC_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCashReceiptType1">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CODE,
+  CATEGORY_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_CR_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCashReceiptType2">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CODE,
+  CATEGORY_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="UpdateCashReceiptEvent">
+      <value>
+update CKT_CR_EVENT
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  ANTIC_CHECK_AMT = @anticCheckAmt,
+  TOTAL_CASH_AMT = @totalCashAmt
+where
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CREVENT_ID = @creventId)
+</value>
+   </data>
+</root>

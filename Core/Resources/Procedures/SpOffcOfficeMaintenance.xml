@@ -1,0 +1,71 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpOffcOfficeMaintenance"
+           program-name="SWEOFFCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpOffcOfficeMaintenance"
+           transaction="SR3G"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenToCodeTableList.CodeName" to="Selected.CodeName"/>
+      <map from="HiddenToCodeTableList" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenFromListCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_FIPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="LeFiplListFips"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="HiddenSelectionFips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_OFFICE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="HiddenFromListOffice"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_ORGANIZATION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="SpCsorCseOrganizationMaint"
+       send-command="DISPLAY">
+      <map from="CseOrganization" to="Search"/>
+      <return-map from="ReturnSelect" to="HiddenSelectionCseOrganization"/>
+   </on>
+   <map from="CustomerServiceCenter" to="CustomerServiceCenter"/>
+   <map from="PromptCustomerServiceC" to="PromptCustomerServiceC"/>
+   <map from="Office2" to="Office2"/>
+   <map from="PromptOffice" to="PromptOffice"/>
+   <map from="Group.Hidden" to="Group.Hidden"/>
+   <map from="Group.OfficeAddress" to="Group.OfficeAddress"/>
+   <map from="HiddenOffice" to="HiddenOffice"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.PromptAddressType" to="Group.PromptAddressType"/>
+   <map from="Group.PromptState" to="Group.PromptState"/>
+   <map from="PromptOfficeType" to="PromptOfficeType"/>
+   <map from="OfficeTypeDesc" to="OfficeTypeDesc"/>
+   <map from="Group.AddTypeDesc" to="Group.AddTypeDesc"/>
+   <map from="HiddenFips" to="HiddenFips"/>
+   <map from="HiddenCseOrganization" to="HiddenCseOrganization"/>
+   <map from="Fips" to="Fips"/>
+   <map from="ListCounty" to="ListCounty"/>
+   <map from="ListFips" to="ListFips"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="Office1" to="Office1"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="CseOrganization.Code" to="CseOrganization.Code"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

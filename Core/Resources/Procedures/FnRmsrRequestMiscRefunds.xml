@@ -1,0 +1,115 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnRmsrRequestMiscRefunds"
+           program-name="SWERMSRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnRmsrRequestMiscRefunds"
+           transaction="SRIO"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="PRMPTRET"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="PassToName" to="Phonetic"/>
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_SEL_REFUNDS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCRRL"
+       to="FnCrrlListRefunds"
+       send-command="FROMRMSR">
+      <map from="PassToCrrl.Taxid" to="Selection.Taxid"/>
+      <map from="PassToCrrl.PayeeName" to="Selection.PayeeName"/>
+      <map from="Pass" to="HiddenFlowedFrom"/>
+      <map from="DisplayAll" to="DisplayAll"/>
+      <return-map from="PassReceiptRefund" to="FromFlowReceiptRefund"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_ORGZ"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiOrgzOrganizationMaintenance"
+       send-command="DISPLAY">
+      <map from="PassToOrgz.Number" to="StartingSearchCsePerson.Number"/>
+      <return-map from="HiddenSelected" to="FromFlowCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_TRIBUNAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="PassToLtrb" to="SearchFips"/>
+      <return-map from="DlgflwSelectedTribunal" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_CASH_SOURCES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCRSL"
+       to="FnCrslLstCashRcptSources"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="FromFlowCashReceiptSourceType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDISP"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="CodeName" to="Code"/>
+      <return-map from="DlgflwSelected" to="Return1"/>
+   </on>
+   <map from="PreviousCashReceiptSourceType" to="PreviousCashReceiptSourceType"/>
+   <map from="PreviousCsePersonsWorkSet" to="PreviousCsePersonsWorkSet"/>
+   <map from="Current" to="Current"/>
+   <map from="SendTo" to="SendTo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="DisplayComplete" to="DisplayComplete"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="CashReceiptSourceType" to="CashReceiptSourceType"/>
+   <map from="RefundReason" to="RefundReason"/>
+   <map from="Source" to="Source"/>
+   <map from="Selected" to="Selected"/>
+   <map from="PaymentStatus" to="PaymentStatus"/>
+   <map from="ReceiptRefund.Amount" to="ReceiptRefund.Amount"/>
+   <map from="ReceiptRefund.ReasonCode" to="ReceiptRefund.ReasonCode"/>
+   <map from="ReceiptRefund.Taxid" to="ReceiptRefund.Taxid"/>
+   <map from="ReceiptRefund.RequestDate" to="ReceiptRefund.RequestDate"/>
+   <map from="ReceiptRefund.ReasonText" to="ReceiptRefund.ReasonText"/>
+   <map from="ReceiptRefund.CreatedBy" to="ReceiptRefund.CreatedBy"/>
+   <map from="ReceiptRefund.CreatedTimestamp"
+        to="ReceiptRefund.CreatedTimestamp"/>
+   <map from="ReceiptRefund.PayeeName" to="ReceiptRefund.PayeeName"/>
+   <map from="PreviousReceiptRefund.ReasonCode"
+        to="PreviousReceiptRefund.ReasonCode"/>
+   <map from="PreviousReceiptRefund.Taxid" to="PreviousReceiptRefund.Taxid"/>
+   <map from="PreviousReceiptRefund.Amount" to="PreviousReceiptRefund.Amount"/>
+   <map from="PreviousReceiptRefund.OffsetTaxYear"
+        to="ReceiptRefund.OffsetTaxYear"/>
+   <map from="PreviousReceiptRefund.RequestDate"
+        to="PreviousReceiptRefund.RequestDate"/>
+   <map from="PreviousReceiptRefund.ReasonText"
+        to="PreviousReceiptRefund.ReasonText"/>
+   <map from="PreviousReceiptRefund.CreatedBy"
+        to="PreviousReceiptRefund.CreatedBy"/>
+   <map from="PreviousReceiptRefund.CreatedTimestamp"
+        to="PreviousReceiptRefund.CreatedTimestamp"/>
+   <map from="PreviousReceiptRefund.PayeeName"
+        to="PreviousReceiptRefund.PayeeName"/>
+   <map from="ReceiptRefund.OffsetTaxYear"
+        to="PreviousReceiptRefund.OffsetTaxYear"/>
+   <map from="Set.Number" to="Set.Number"/>
+   <map from="Set.PrintDate" to="Set.PrintDate"/>
+   <map from="ReceiptRefund.TaxIdSuffix" to="ReceiptRefund.TaxIdSuffix"/>
+   <map from="Set.RecoupmentIndKpc" to="Set.RecoupmentIndKpc"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

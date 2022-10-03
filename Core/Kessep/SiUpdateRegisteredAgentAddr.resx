@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadRegisteredAgentAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  STREET1,
+  STREET2,
+  CITY,
+  [STATE],
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  UPDATED_TIMESTAMP,
+  UPDATED_BY,
+  RAG_ID
+from
+  CKT_REG_AGENT_ADDR
+where
+  (IDENTIFIER = @identifier) and
+  (RAG_ID = @ragId)
+</value>
+   </data>
+   <data name="UpdateRegisteredAgentAddress">
+      <value>
+update CKT_REG_AGENT_ADDR
+set
+  STREET1 = @street1,
+  STREET2 = @street2,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CODE5 = @zipCode5,
+  ZIP_CODE4 = @zipCode4,
+  ZIP3 = @zip3,
+  UPDATED_TIMESTAMP = @updatedTimestamp,
+  UPDATED_BY = @updatedBy
+where
+  (IDENTIFIER = @identifier) and
+  (RAG_ID = @ragId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeActCertification">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (TANF_CODE = @tanfCode) and
+  (TAKEN_DT = @takenDt) and
+  (CPA_TYPE = @cpaType) and
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadAdministrativeActionObligationAdministrativeAction">
+      <value>
+select top(1)
+  TYPE,
+  cast(@otyId as smallint),
+  cast(@aatType as char(4)),
+  cast(@obgGeneratedId as smallint),
+  cast(@cspNumber as char(10)),
+  cast(@cpaType as char(1)),
+  cast(@oaaTakenDate as date)
+from
+  CKT_ADMIN_ACTION
+where
+  TYPE = @aatType
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal">
+      <value>
+select
+  ADMIN_APPEAL_ID,
+  ADMIN_APPEAL_NO,
+  TYPE,
+  REQUEST_DT,
+  RECEIVED_DT,
+  CREATED_TSTAMP,
+  CSP_Q_NUMBER,
+  CPA_R_TYPE,
+  CSP_R_NUMBER,
+  AAC_R_TYPE,
+  AAC_R_TAKEN_DATE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OAA_TAKEN_DATE,
+  OTY_ID,
+  AAC_TANF_CODE
+from
+  CKT_ADMIN_APPEAL
+where
+  (@cspQNumber = CSP_Q_NUMBER) and
+  (
+    (cast(@receivedDate1 as date) &lt;= cast(@receivedDate2 as date)) or
+    (RECEIVED_DT &lt; @receivedDate1)
+  )
+order by
+  RECEIVED_DT desc,
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

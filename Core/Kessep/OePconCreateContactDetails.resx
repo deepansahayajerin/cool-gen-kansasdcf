@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateContact">
+      <value>
+insert into CKT_CONTACT
+(
+  CSP_NUMBER,
+  CONTACT_NUMBER,
+  FAX,
+  NAME_TITLE,
+  COMPANY_NAME,
+  REL_TO_CSE_PERSON,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  HOME_PHONE,
+  WORK_PHONE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  WORK_PHONE_EXT,
+  FAX_EXT,
+  WORK_PHONE_AREA,
+  HOME_PHONE_AREA,
+  FAX_AREA,
+  VERIFIED_DATE,
+  VERIFIED_USER_ID
+)
+values
+(
+  @cspNumber,
+  @contactNumber,
+  @fax,
+  @nameTitle,
+  @companyName,
+  @relToCsePerson,
+  @lastName,
+  @firstName,
+  @middleInitial,
+  @homePhone,
+  @workPhone,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @workPhoneExt,
+  @faxExt,
+  @workPhoneArea,
+  @homePhoneArea,
+  @faxArea,
+  @verifiedDate,
+  @verifiedUserId
+)
+</value>
+   </data>
+   <data name="CreateContactAddress">
+      <value>
+insert into CKT_CONTACT_ADDR
+(
+  CON_NUMBER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @conNumber,
+  @cspNumber,
+  @effectiveDate,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @province,
+  @postalCode,
+  @zipCode5,
+  @zipCode4,
+  @zip3,
+  @country,
+  @addressType,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="CreateContactDetail">
+      <value>
+insert into CKT_CONTACT_DETAIL
+(
+  CON_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  CONTACT_TIME,
+  CONTACT_DATE,
+  CONTACTED_USERID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  NOTE
+)
+values
+(
+  @conNumber,
+  @cspNumber,
+  @identifier,
+  @contactTime,
+  @contactDate,
+  @contactedUserid,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @note
+)
+</value>
+   </data>
+   <data name="ReadContact1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CONTACT_NUMBER
+from
+  CKT_CONTACT
+where
+  @cspNumber = CSP_NUMBER
+order by
+  CONTACT_NUMBER desc
+</value>
+   </data>
+   <data name="ReadContact2">
+      <value>
+select
+  CSP_NUMBER,
+  CONTACT_NUMBER,
+  COMPANY_NAME,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_CONTACT
+where
+  @cspNumber = CSP_NUMBER
+order by
+  CONTACT_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

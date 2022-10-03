@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadOverpaymentHistory1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  EFFECTIVE_DT,
+  OVERPAYMENT_IND
+from
+  CKT_OVRPYMNT_HIST
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DT &lt;= @effectiveDt)
+order by
+  EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadOverpaymentHistory2">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  EFFECTIVE_DT,
+  OVERPAYMENT_IND
+from
+  CKT_OVRPYMNT_HIST
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DT &gt; @effectiveDt)
+order by
+  EFFECTIVE_DT
+</value>
+   </data>
+</root>

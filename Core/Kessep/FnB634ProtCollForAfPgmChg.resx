@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection">
+      <value>
+select
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  DIST_MTD,
+  PGM_APPLD_TO
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (COLL_DT &gt;= @collDt) and
+  (ADJ_IND = 'N') and
+  (APPLIED_TO_CD = 'C') and
+  (DIST_MTD = 'A') and
+  (
+    PGM_APPLD_TO in ('NA', 'NAI', 'AFI',
+      'FCI')
+  )
+order by
+  COLL_DT
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.PRIM_SEC_CD,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.LAST_OBLIG_EVENT
+from
+  CKT_OBLIGATION T1
+  join
+  CKT_OB_TRN T2
+  on
+    (T1.DTY_GENERATED_ID = T2.OTY_TYPE) and
+    (T1.OB_ID = T2.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (@cpaSupType = T2.CPA_SUP_TYPE) and
+    (@cspSupNumber = T2.CSP_SUP_NUMBER)
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.STATUS,
+  T1.CLOSURE_REASON,
+  T1.ASSIGNED_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.CHANGED_IND,
+  T1.CHANGE_DATE,
+  T1.PRG_GENERATED_ID,
+  T1.MED_TYPE_DISC_DATE,
+  T1.MED_TYPE,
+  T2.CODE
+from
+  CKT_PROGRAM T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.EFFECTIVE_DATE in (cast(@pgmChgEffectiveDate1 as date), cast(@pgmChgEffectiveDate2 as date))) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID)
+</value>
+   </data>
+</root>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteMonitoredActivityAssignment">
+      <value>
+delete from CKT_ASSGN_MNT_ACT
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (MAC_ID = @macId)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  CLOSURE_DATE
+from
+  CKT_MONITORED_ACT
+where
+  (SYSTEM_GENERATED_I = @systemGeneratedI) and
+  (CLOSURE_DATE &lt; @closureDate)
+</value>
+   </data>
+   <data name="ReadMonitoredActivityMonitoredActivityAssignment">
+      <value>
+select
+  MAC_ID,
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE
+from
+  CKT_ASSGN_MNT_ACT
+where
+  (DISCONTINUE_DATE &lt; @discontinueDate) and
+  (REASON_CODE = 'INF')
+order by
+  MAC_ID
+</value>
+   </data>
+</root>

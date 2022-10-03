@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseUnit1">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (
+    (@cspNoAr = CSP_NO_AR) or
+    (@cspNoAr = CSP_NO_CHILD)
+  ) and
+  (CLOSURE_DATE = @closureDate) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT with(readuncommitted)
+where
+  (@cspNoAp = CSP_NO_AP) and
+  (CLOSURE_DATE = @closureDate) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_DATE &gt;= @endDate)
+</value>
+   </data>
+   <data name="UpdateCsePerson">
+      <value>
+update CKT_CSE_PERSON
+set
+  DATE_OF_DEATH = @dateOfDeath,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCsePersonAddress">
+      <value>
+update CKT_CSE_PERS_ADDR
+set
+  END_DATE = @endDate,
+  END_CODE = @endCode
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

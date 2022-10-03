@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'CH')
+</value>
+   </data>
+   <data name="ReadContact">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CONTACT_NUMBER,
+  REL_TO_CSE_PERSON,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  CREATED_TIMESTAMP
+from
+  CKT_CONTACT
+where
+  (CONTACT_NUMBER = @contactNumber) and
+  (CSP_NUMBER = @cspNumber1) and
+  (@cspNumber2 = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompany">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CARRIER_CODE,
+  POLICY_CARRIER,
+  INSURER_PHONE,
+  INSURER_FAX
+from
+  CKT_HEALTH_INS_CO
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage">
+      <value>
+select top(1)
+  IDENTIFIER,
+  PAID_BY_CSEP_IND,
+  GROUP_NUMBER,
+  POLICY_NUMBER,
+  POLICY_EXP_DATE,
+  COVERAGE_CODE_1,
+  COVERAGE_CODE_2,
+  COVERAGE_CODE_3,
+  COVERAGE_CODE_4,
+  COVERAGE_CODE_5,
+  COVERAGE_CODE_6,
+  COVERAGE_CODE_7,
+  POLICY_EFF_DATE,
+  CSP_H_NUMBER,
+  CON_H_NUMBER,
+  CSP_NUMBER,
+  HIC_IDENTIFIER,
+  OTH_COV_PERSONS
+from
+  CKT_HINS_COVERAGE
+where
+  (IDENTIFIER = @identifier) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsuranceCsePerson">
+      <value>
+select
+  HCV_ID,
+  CSP_NUMBER,
+  COV_VERIFIED_DATE,
+  INS_EXISTS_IND,
+  COVER_COST_AMT,
+  COVER_BEGIN_DATE,
+  COVER_END_DATE,
+  PREM_VERIFIED_DATE
+from
+  CKT_PERSONAL_HINS
+where
+  @hcvId = HCV_ID
+order by
+  CSP_NUMBER
+</value>
+   </data>
+</root>

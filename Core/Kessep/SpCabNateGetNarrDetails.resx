@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadNarrativeDetail">
+      <value>
+select
+  INFRASTRUCTURE_ID,
+  CREATED_TIMESTAMP,
+  CASE_NUMBER,
+  NARRATIVE_TEXT,
+  LINE_NUMBER
+from
+  CKT_NARR_DETAIL with(readuncommitted)
+where
+  (INFRASTRUCTURE_ID = @infrastructureId1) and
+  (cast(CREATED_TIMESTAMP as date) &gt;= cast(@date as date)) and
+  (
+    (
+      (CREATED_TIMESTAMP = @createdTimestamp) and
+      (INFRASTRUCTURE_ID = @infrastructureId2) and
+      (LINE_NUMBER &gt;= @lineNumber)
+    ) or
+    (
+      (CREATED_TIMESTAMP = @createdTimestamp) and
+      (INFRASTRUCTURE_ID &gt; @infrastructureId2)
+    ) or
+    (CREATED_TIMESTAMP &gt; @createdTimestamp)
+  )
+order by
+  CREATED_TIMESTAMP,
+  INFRASTRUCTURE_ID,
+  LINE_NUMBER
+</value>
+   </data>
+</root>

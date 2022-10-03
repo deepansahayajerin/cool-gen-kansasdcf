@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_EMPLOYER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadEmployerRegisteredAgent">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  RAA_ID,
+  EMP_ID
+from
+  CKT_EMPL_REG_AGENT
+where
+  (@empId = EMP_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (END_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadRegisteredAgentAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  STREET1,
+  STREET2,
+  CITY,
+  [STATE],
+  ZIP_CODE5,
+  ZIP_CODE4,
+  RAG_ID
+from
+  CKT_REG_AGENT_ADDR
+where
+  @ragId = RAG_ID
+</value>
+   </data>
+   <data name="ReadRegisteredAgentEmployerRegisteredAgent">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.NAME,
+  T2.IDENTIFIER,
+  T2.EFFECTIVE_DATE,
+  T2.END_DATE,
+  T2.EMP_ID
+from
+  CKT_REG_AGENT T1
+  join
+  CKT_EMPL_REG_AGENT T2
+  on
+    (T1.IDENTIFIER = T2.RAA_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.END_DATE &gt;= @effectiveDate) and
+    (@empId = T2.EMP_ID)
+</value>
+   </data>
+</root>

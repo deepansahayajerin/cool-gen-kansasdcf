@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignment1">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate) and
+  (REASON_CODE = 'RSP') and
+  (@casNo = CAS_NO)
+</value>
+   </data>
+   <data name="ReadCaseAssignment2">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE with(readuncommitted)
+where
+  (EFFECTIVE_DATE &lt; @effectiveDate) and
+  (REASON_CODE = 'RSP') and
+  (@casNo = CAS_NO)
+</value>
+   </data>
+   <data name="ReadCaseAssignmentServiceProvider">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (@casNo = CAS_NO) and
+  (REASON_CODE = 'RSP') and
+  (SPD_ID &lt;&gt; @spdId) and
+  (EFFECTIVE_DATE &gt; @effectiveDate1) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate2)
+</value>
+   </data>
+   <data name="ReadCaseCaseAssignmentOfficeOfficeServiceProvider">
+      <value>
+select
+  T1.NUMB,
+  T1.STATUS,
+  T2.REASON_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_TIMESTAMP,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE,
+  T3.OFFICE_ID,
+  T3.OFF_OFFICE
+from
+  CKT_OFFICE T3 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_ASSIGN_CASE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NO) and
+    (T2.REASON_CODE = 'RSP') and
+    (T2.DISCONTINUE_DATE between cast(@date1 as date) and cast(@date2 as date))
+  on
+    (T3.OFFICE_ID &gt;= @officeId1) and
+    (
+      (T3.OFFICE_ID &gt; @officeId1) or
+      (
+        (T3.OFFICE_ID = @officeId1) and
+        (T2.SPD_ID &gt;= @spdId) and
+        (
+          (T2.SPD_ID &gt; @spdId) or
+          (
+            (T2.SPD_ID = @spdId) and
+            (T1.NUMB &gt; @numb)
+          )
+        )
+      )
+    ) and
+    (T3.OFFICE_ID = T2.OFF_ID) and
+    (T3.OFFICE_ID between cast(@officeId2 as smallint) and cast(@officeId3 as smallint))
+order by
+  T3.OFFICE_ID,
+  T2.SPD_ID,
+  T1.NUMB
+</value>
+   </data>
+</root>

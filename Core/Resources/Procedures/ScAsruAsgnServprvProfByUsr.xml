@@ -1,0 +1,50 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="ScAsruAsgnServprvProfByUsr"
+           program-name="SWEASRUP"
+           class="Gov.Kansas.DCF.Cse.Security1.ScAsruAsgnServprvProfByUsr"
+           transaction="SRBW">
+   <on exit-state="ECO_XFR_2_SC_ASGN_SRV_PRV_2_PRO"
+       action="transfer"
+       to="ScAsrvAssignServProvToProf"
+       send-command="RETFMPRO">
+      <map from="HiddenSelected.Name" to="HiddenSelected.Name"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PROFILES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFMPRO"
+       to="ScProfMaintainProfiles"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="HiddenSelectedProfile"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="ScSecmSecurityMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFMSP"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <map from="HiddenFromSecurity" to="HiddenFromSecurity"/>
+      <return-map from="HiddenSelected1" to="HiddenSelectedServiceProvider"/>
+   </on>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="SortBy" to="SortBy"/>
+   <map from="Group.ServiceProviderProfile" to="Group.ServiceProviderProfile"/>
+   <map from="Group.HiddenPrev" to="Group.HiddenPrev"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="PromptServProvider" to="PromptServProvider"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Profile" to="Group.Profile"/>
+   <map from="ActiveOnly" to="ActiveOnly"/>
+   <map from="HiddenHistory.HiddenHistoryProfile"
+        to="HiddenHistory.HiddenHistoryProfile"/>
+   <map from="HiddenHistory.HiddenHistoryServiceProviderProfile"
+        to="HiddenHistory.HiddenHistoryServiceProviderProfile"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenSelected.Name" to="HiddenSelectedProfile.Name"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

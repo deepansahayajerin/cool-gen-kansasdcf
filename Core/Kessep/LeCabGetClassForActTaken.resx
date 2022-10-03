@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCode1">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE
+where
+  (CODE_NAME = 'ACTION TAKEN') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCode2">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE
+where
+  (CODE_NAME = 'LEGAL ACTION CLASSIFICATION') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select top(1)
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE_VALUE
+where
+  (@codId = COD_ID) and
+  (CDVALUE = cast(@actionTaken as char(30))) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCodeValueCombinationCodeValue">
+      <value>
+select top(1)
+  T1.CVC_ID,
+  T1.COV_ID,
+  T1.COV_S_ID,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE,
+  T2.CDVALUE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRATION_DATE
+from
+  CKT_CODE_VALUE T2
+  join
+  CKT_CODE_VAL_COMB T1
+  on
+    (@covId = T1.COV_ID) and
+    (T2.COV_ID = T1.COV_S_ID) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.EXPIRATION_DATE &gt;= @effectiveDate) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.EXPIRATION_DATE &gt;= @effectiveDate)
+order by
+  T1.EFFECTIVE_DATE desc,
+  T2.EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

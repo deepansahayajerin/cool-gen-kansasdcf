@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.TYPE
+from
+  CKT_LEGAL_ACTION T4 with(readuncommitted)
+  join
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.ACCOUNT_TYPE = 'R') and
+    (T2.LAD_R_NUMBER is not null) and
+    (T1.NUMB &lt;&gt; @numb)
+  on
+    (T4.LEGAL_ACTION_ID = T2.LGA_R_IDENTIFIER) and
+    (T4.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION = 'I')
+order by
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalActionPerson1">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (ACCOUNT_TYPE = 'R') and
+  (LAD_R_NUMBER is not null) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson2">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS with(readuncommitted)
+where
+  (ACCOUNT_TYPE = 'R') and
+  (LAD_R_NUMBER is not null) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

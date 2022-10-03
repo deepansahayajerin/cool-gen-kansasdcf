@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCollectionType1">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2 with(readuncommitted)
+  join
+  CKT_CR_DETAIL T1 with(readuncommitted)
+  on
+    (T1.OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+    (T1.COURT_ORDER_NUMBER = @courtOrderNumber) and
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.COLLECTION_TYPE_ID not in (cast(@sequentialIdentifier1 as smallint), cast(@sequentialIdentifier2 as smallint)))
+order by
+  T1.COLLECTION_DATE desc
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCollectionType2">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.CLT_IDENTIFIER,
+  T2.CODE
+from
+  CKT_COLLTN_TYPE T2 with(readuncommitted)
+  join
+  CKT_CR_DETAIL T1 with(readuncommitted)
+  on
+    (T1.OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.COLLECTION_TYPE_ID in (cast(@sequentialIdentifier1 as smallint), cast(@sequentialIdentifier2 as smallint)))
+order by
+  T1.COLLECTION_DATE desc
+</value>
+   </data>
+   <data name="ReadDashboardAuditData1">
+      <value>
+select top(1)
+  sum(COLLECTION_AMT + DEBT_BALANCE_DUE)
+from
+  CKT_DB_AUDIT_DATA with(readuncommitted)
+where
+  (REPORT_MONTH = @reportMonth) and
+  (RUN_NUMBER = @runNumber) and
+  (DASHBOARD_PRIORITY = @dashboardPriority) and
+  (PAYOR_CSP_NUMBER = @payorCspNumber) and
+  (STANDARD_NUMBER = @standardNumber)
+</value>
+   </data>
+   <data name="ReadDashboardAuditData2">
+      <value>
+select top(1)
+  sum(COLLECTION_AMT + DEBT_BALANCE_DUE)
+from
+  CKT_DB_AUDIT_DATA with(readuncommitted)
+where
+  (REPORT_MONTH = @reportMonth) and
+  (RUN_NUMBER = @runNumber) and
+  (DASHBOARD_PRIORITY like '1-8(%') and
+  (PAYOR_CSP_NUMBER = @payorCspNumber) and
+  (STANDARD_NUMBER = @standardNumber)
+</value>
+   </data>
+   <data name="ReadDashboardAuditData3">
+      <value>
+select top(1)
+  sum(COLLECTION_AMT)
+from
+  CKT_DB_AUDIT_DATA with(readuncommitted)
+where
+  (REPORT_MONTH = @reportMonth) and
+  (RUN_NUMBER = @runNumber) and
+  (DASHBOARD_PRIORITY = @dashboardPriority) and
+  (PAYOR_CSP_NUMBER = @payorCspNumber) and
+  (STANDARD_NUMBER = @standardNumber)
+</value>
+   </data>
+   <data name="ReadHearing">
+      <value>
+select top(1)
+  HEARING_ID,
+  LGA_IDENTIFIER,
+  HEARING_DT
+from
+  CKT_HEARING with(readuncommitted)
+where
+  @lgaIdentifier = LGA_IDENTIFIER
+order by
+  HEARING_DT desc
+</value>
+   </data>
+   <data name="ReadInfrastructureLegalAction">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.EVENT_ID,
+  T1.REASON_CODE,
+  T1.DENORM_NUMERIC_12,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUM,
+  T1.CREATED_TIMESTAMP,
+  T2.CLASSIFICATION,
+  T2.ACTION_TAKEN,
+  T2.FILED_DT,
+  T2.END_DT,
+  T2.STANDARD_NO,
+  T2.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T2 with(readuncommitted)
+  join
+  CKT_INFRASTRUCTURE T1 with(readuncommitted)
+  on
+    (T1.CSE_PERSON_NUM = @csePersonNum) and
+    (T1.EVENT_ID in (cast(@eventId1 as integer), cast(@eventId2 as integer))) and
+    (
+      T1.REASON_CODE in (cast(@reasonCode1 as char(15)), cast(@reasonCode2 as char(15)), cast(@reasonCode3 as char(15)),
+        cast(@reasonCode4 as char(15)))
+    ) and
+    (T2.LEGAL_ACTION_ID = T1.DENORM_NUMERIC_12)
+order by
+  T2.STANDARD_NO,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  END_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION = @classification) and
+  (ACTION_TAKEN in (cast(@actionTaken1 as char(30)), cast(@actionTaken2 as char(30)))) and
+  (CREATED_TSTAMP &gt; @createdTstamp)
+</value>
+   </data>
+   <data name="ReadLegalAction10">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.CLASSIFICATION = @classification) and
+    (T1.ACTION_TAKEN = @actionTaken) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.[ROLE] &gt; ' ') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LA_PER_LA_CROL T4 with(readuncommitted)
+  on
+    (T2.LA_PERSON_ID = T4.LAP_ID) and
+    (T4.CRO_TYPE = @croType) and
+    (T4.CAS_NUM = @casNum)
+order by
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalAction11">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.CLASSIFICATION = @classification) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.[ROLE] &gt; ' ') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LA_PER_LA_CROL T4 with(readuncommitted)
+  on
+    (T2.LA_PERSON_ID = T4.LAP_ID) and
+    (T4.CRO_TYPE = @croType) and
+    (T4.CAS_NUM = @casNum)
+order by
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalAction12">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.CLASSIFICATION = @classification) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.[ROLE] &gt; ' ') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LA_PER_LA_CROL T4 with(readuncommitted)
+  on
+    (T2.LA_PERSON_ID = T4.LAP_ID) and
+    (T4.CRO_TYPE = @croType) and
+    (T4.CAS_NUM = @casNum)
+order by
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalAction13">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.CLASSIFICATION = @classification) and
+    (
+      T1.ACTION_TAKEN in (cast(@actionTaken1 as char(30)), cast(@actionTaken2 as char(30)), cast(@actionTaken3 as char(30)),
+        cast(@actionTaken4 as char(30)))
+    ) and
+    (T1.FILED_DT &gt; @filedDt) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.[ROLE] &gt; ' ') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LA_PER_LA_CROL T4 with(readuncommitted)
+  on
+    (T2.LA_PERSON_ID = T4.LAP_ID) and
+    (T4.CRO_TYPE = @croType) and
+    (T4.CAS_NUM = @casNum)
+order by
+  T1.STANDARD_NO,
+  T1.FILED_DT desc
+</value>
+   </data>
+   <data name="ReadLegalAction14">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.CLASSIFICATION = @classification) and
+    (T1.FILED_DT &gt; @filedDt) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.[ROLE] &gt; ' ') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LA_PER_LA_CROL T4 with(readuncommitted)
+  on
+    (T2.LA_PERSON_ID = T4.LAP_ID) and
+    (T4.CRO_TYPE = @croType) and
+    (T4.CAS_NUM = @casNum)
+order by
+  T1.STANDARD_NO,
+  T1.FILED_DT desc
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION = @classification) and
+  (
+    ACTION_TAKEN in (cast(@actionTaken1 as char(30)), cast(@actionTaken2 as char(30)), cast(@actionTaken3 as char(30)),
+      cast(@actionTaken4 as char(30)))
+  ) and
+  (FILED_DT &gt; @filedDt)
+</value>
+   </data>
+   <data name="ReadLegalAction3">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION = @classification) and
+  (ACTION_TAKEN = @actionTaken) and
+  (CREATED_TSTAMP &gt; @createdTstamp)
+</value>
+   </data>
+   <data name="ReadLegalAction4">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION = @classification) and
+  (CREATED_TSTAMP &gt; @createdTstamp)
+</value>
+   </data>
+   <data name="ReadLegalAction5">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION = @classification) and
+  (CREATED_TSTAMP &gt; @createdTstamp)
+</value>
+   </data>
+   <data name="ReadLegalAction6">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION = @classification) and
+  (
+    (FILED_DT &gt; @filedDt) or
+    (
+      (FILED_DT = @filedDt) and
+      (CREATED_TSTAMP &gt; @createdTstamp)
+    )
+  )
+</value>
+   </data>
+   <data name="ReadLegalAction7">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION in (cast(@classification1 as char(1)), cast(@classification2 as char(1)))) and
+  (CREATED_TSTAMP &gt; @createdTstamp)
+</value>
+   </data>
+   <data name="ReadLegalAction8">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION in (cast(@classification1 as char(1)), cast(@classification2 as char(1)))) and
+  (CREATED_TSTAMP &gt; @createdTstamp)
+</value>
+   </data>
+   <data name="ReadLegalAction9">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.CLASSIFICATION in (cast(@classification1 as char(1)), cast(@classification2 as char(1)))) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.[ROLE] &gt; ' ') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LA_PER_LA_CROL T4 with(readuncommitted)
+  on
+    (T2.LA_PERSON_ID = T4.LAP_ID) and
+    (T4.CRO_TYPE = @croType) and
+    (T4.CAS_NUM = @casNum)
+order by
+  T1.STANDARD_NO
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.ARREARS_AMOUNT,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.OTY_ID
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T1 with(readuncommitted)
+  on
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (T2.DEBT_TYP_CD = @debtTypCd)
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSource">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  ISR_IDENTIFIER,
+  WITHHOLDING_TYPE,
+  IDENTIFIER
+from
+  CKT_LEGAL_ACT_ISRC with(readuncommitted)
+where
+  @lgaIdentifier = LGA_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionCaseRole1">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_IDENTIFIER,
+  T2.INIT_CR_IND
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T2 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T2.CRO_TYPE = @croType) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T1.CREATED_TSTAMP &gt; @createdTstamp)
+order by
+  T1.STANDARD_NO,
+  T1.CLASSIFICATION
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionCaseRole2">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_IDENTIFIER,
+  T2.INIT_CR_IND
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T2 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T2.CRO_TYPE = @croType) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (
+      (T1.FILED_DT &gt; @filedDt) or
+      (
+        (T1.FILED_DT = @filedDt) and
+        (T1.CREATED_TSTAMP &gt; @createdTstamp)
+      )
+    )
+order by
+  T1.STANDARD_NO,
+  T1.CLASSIFICATION
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.[ROLE],
+  T1.END_DT
+from
+  CKT_LEGAL_ACT_PERS T1 with(readuncommitted)
+  join
+  CKT_LA_PER_LA_CROL T2 with(readuncommitted)
+  on
+    (T1.LA_PERSON_ID = T2.LAP_ID) and
+    (@lgaId = T2.LGA_ID) and
+    (@casNum = T2.CAS_NUM) and
+    (@croId = T2.CRO_ID) and
+    (@cspNum = T2.CSP_NUM) and
+    (@croType = T2.CRO_TYPE) and
+    (T1.[ROLE] &gt; ' ') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadServiceProcess">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  SERVICE_DATE,
+  IDENTIFIER
+from
+  CKT_SERVICE_PROCSS with(readuncommitted)
+where
+  @lgaIdentifier = LGA_IDENTIFIER
+order by
+  SERVICE_DATE desc
+</value>
+   </data>
+</root>

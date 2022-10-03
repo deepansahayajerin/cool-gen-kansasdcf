@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptCashReceiptDetailReceiptRefund">
+      <value>
+select distinct
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CASH_RECEIPT_ID,
+  T1.RECEIVED_DATE,
+  T2.CRD_ID,
+  T2.CASE_NUMBER,
+  T2.OFFSET_TAXID,
+  T2.OFFSET_TAX_YEAR,
+  T2.JOINT_RETURN_NAME,
+  T2.OBLGOR_PRSN_NBR,
+  T2.OBLGOR_SSN,
+  T2.OBLGOR_FIRST_NM,
+  T2.OBLGOR_LAST_NM,
+  T3.CREATED_TIMESTAMP,
+  T3.REASON_CODE,
+  T3.TAXID,
+  T3.PAYEE_NAME,
+  T3.AMOUNT,
+  T3.OFFSET_TAX_YEAR,
+  T3.REQUEST_DATE,
+  T3.CREATED_BY,
+  T3.CDA_IDENTIFIER,
+  T3.OFFSET_CLOSED,
+  T3.DATE_TRANSMITTED,
+  T3.REASON_TEXT,
+  T3.LAST_UPDATED_BY,
+  T3.LAST_UPDATED_TMST
+from
+  CKT_CRSRC_TYPE T5
+  join
+  CKT_CASH_RECEIPT T1
+  join
+  CKT_CR_DETAIL T2
+  on
+    (T1.CRT_IDENTIFIER = T2.CRT_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T2.CRV_IDENTIFIER)
+  join
+  CKT_RECEIPT_REFUND T3
+  on
+    (T2.CRD_ID = T3.CRD_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T3.CRV_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T3.CST_IDENTIFIER) and
+    (T2.CRT_IDENTIFIER = T3.CRT_IDENTIFIER)
+  on
+    (T5.CR_SRCE_TYPE_ID = T1.CST_IDENTIFIER) and
+    (T5.CODE = 'FDSO')
+order by
+  T1.RECEIVED_DATE,
+  T2.OBLGOR_PRSN_NBR
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailAddress1">
+      <value>
+select top(1)
+  CRDETAIL_ADDRESS_I,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER
+from
+  CKT_CRDETAIL_ADDRS
+where
+  CRDETAIL_ADDRESS_I = @crdetailAddressI
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailAddress2">
+      <value>
+select top(1)
+  CRDETAIL_ADDRESS_I,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER
+from
+  CKT_CRDETAIL_ADDRS
+where
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  RCT_R_TSTAMP,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  @rctRTstamp = RCT_R_TSTAMP
+</value>
+   </data>
+   <data name="UpdateReceiptRefund">
+      <value>
+update CKT_RECEIPT_REFUND
+set
+  DATE_TRANSMITTED = @dateTransmitted,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

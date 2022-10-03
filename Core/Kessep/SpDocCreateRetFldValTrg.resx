@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateRetrieveFieldValueTrigger">
+      <value>
+insert into CKT_RET_FLD_VAL_TR
+(
+  ARCHIVE_DATE,
+  INF_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  SRV_PRVD_LOGON_ID
+)
+values
+(
+  @archiveDate,
+  @infId,
+  @createdBy,
+  @createdTimestamp,
+  @srvPrvdLogonId
+)
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select top(1)
+  PRNT_SUCESSFUL_IND,
+  FIELD_VAL_ARCH_DT,
+  FIELD_VAL_ARCH_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC with(readuncommitted)
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="ReadRetrieveFieldValueTrigger">
+      <value>
+select top(1)
+  ARCHIVE_DATE,
+  INF_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  SRV_PRVD_LOGON_ID
+from
+  CKT_RET_FLD_VAL_TR with(readuncommitted)
+where
+  INF_ID = @infId
+</value>
+   </data>
+</root>

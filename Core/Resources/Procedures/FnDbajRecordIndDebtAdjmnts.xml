@@ -1,0 +1,83 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDbajRecordIndDebtAdjmnts"
+           program-name="SWEDBAJP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDbajRecordIndDebtAdjmnts"
+           transaction="SR57"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_OBLIG_TRNS_RLN_RS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOtrlLstObligTransRlnRsn"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="ObligationTransactionRlnRsn"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COLP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnColpMtnCollectionProtect"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="PassedInObligationType" to="ObligationType"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="PassedInObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="PassedInObligation.PrimarySecondaryCode"
+           to="Obligation.PrimarySecondaryCode"/>
+   </on>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="Debt" to="Debt"/>
+   <map from="PassedInObligation" to="PassedObligation"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="ObligationTransactionRln" to="ObligationTransactionRln"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="EditedDebtAdjustType" to="EditedDebtAdjustType"/>
+   <map from="ObligationTransactionRlnRsn" to="ObligationTransactionRlnRsn"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="PassedInObligationType" to="PassedObligationType"/>
+   <map from="PassedInObligationTransaction" to="PassedObligationTransaction"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenLegalActionPerson" to="HiddenLegalActionPerson"/>
+   <map from="Previous" to="Previous"/>
+   <map from="ScreenOwedAmounts" to="ScreenOwedAmounts"/>
+   <map from="Group.Type1" to="Group.Type1"/>
+   <map from="Group.ObligationTransactionRlnRsn"
+        to="Group.ObligationTransactionRlnRsn"/>
+   <map from="Group.ObligationTransactionRln"
+        to="Group.ObligationTransactionRln"/>
+   <map from="CollProtectionExists" to="CollProtectionExists"/>
+   <map from="ConfirmWriteoff" to="ConfirmWriteoff"/>
+   <map from="AdjDebt.DueDt" to="AdjDebt.DueDt"/>
+   <map from="AdjDebt.BalanceDueAmt" to="AdjDebt.BalanceDueAmt"/>
+   <map from="DebtAdjustment.Amount" to="DebtAdjustment.Amount"/>
+   <map from="DebtAdjustment.DebtAdjustmentType"
+        to="DebtAdjustment.DebtAdjustmentType"/>
+   <map from="DebtAdjustment.Type1" to="DebtAdjustment.Type1"/>
+   <map from="AdjDebt.AdcDt" to="AdjDebt.AdcDt"/>
+   <map from="DebtAdjustment.DebtAdjustmentDt"
+        to="DebtAdjustment.DebtAdjustmentDt"/>
+   <map from="DebtAdjustment.SystemGeneratedIdentifier"
+        to="DebtAdjustment.SystemGeneratedIdentifier"/>
+   <map from="Group.ObligationTransaction.Type1"
+        to="Group.ObligationTransaction.Type1"/>
+   <map from="Supported.Number" to="Supported.Number"/>
+   <map from="Supported.FormattedName" to="Supported.FormattedName"/>
+   <map from="DebtAdjustment.ReverseCollectionsInd"
+        to="DebtAdjustment.ReverseCollectionsInd"/>
+   <map from="Group.ObligationTransaction.Amount"
+        to="Group.ObligationTransaction.Amount"/>
+   <map from="Group.ObligationTransaction.CreatedBy"
+        to="Group.ObligationTransaction.CreatedBy"/>
+   <map from="Group.ObligationTransaction.DebtAdjustmentDt"
+        to="Group.ObligationTransaction.DebtAdjustmentDt"/>
+   <map from="Group.ObligationTransaction.ReverseCollectionsInd"
+        to="Group.ObligationTransaction.ReverseCollectionsInd"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

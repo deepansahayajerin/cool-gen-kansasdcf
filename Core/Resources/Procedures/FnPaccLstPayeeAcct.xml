@@ -1,0 +1,136 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnPaccLstPayeeAcct"
+           program-name="SWEPACCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnPaccLstPayeeAcct"
+           transaction="SR46"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_PERSON_NAME_LIST"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="Phonetic" to="Phonetic"/>
+      <return-map from="Selected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_LST_DISB_STAT_HST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnDhstLstDisbStatHistory"
+       send-command="DISPLAY">
+      <map from="SendToDhst" to="Starting"/>
+      <map from="FlowDisbursementTransaction.SystemGeneratedIdentifier"
+           to="DisbursementTransaction.SystemGeneratedIdentifier"/>
+      <map from="FlowDisbursementTransaction.Amount"
+           to="DisbursementTransaction.Amount"/>
+      <map from="FlowCsePersonAccount" to="PayeeCsePersonAccount"/>
+      <map from="StartingDate" to="Pacc"/>
+      <map from="CsePerson" to="PayeeCsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_WARRANT_DETAIL"
+       action="link"
+       return-when="BXP_RETURN ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnWdtlLstWarrantDtl"
+       send-command="DISPLAY">
+      <map from="FlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <map from="FlowPaymentRequest.Number" to="PaymentRequest.Number"/>
+      <map from="FlowPaymentRequest.CsePersonNumber"
+           to="PaymentRequest.CsePersonNumber"/>
+      <map from="FlowPaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="CsePersonsWorkSet" to="ReceivedPayee"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COLLECTION_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnPayrLstCollsByApPyr"
+       send-command="DISPLAY">
+      <map from="Payor" to="CsePerson"/>
+      <map from="EndingDate" to="SearchTo"/>
+      <map from="StartingDate" to="SearchFrom"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_REC_CRRC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnCrrcRecCollctnDetailsPri"
+       send-command="DISPLAY">
+      <map from="FlowCollectionType.SequentialIdentifier"
+           to="CollectionType2.SequentialIdentifier"/>
+      <map from="FlowCashReceiptType" to="HiddenCashReceiptType"/>
+      <map from="FlowCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="FlowCashReceiptEvent" to="HiddenCashReceiptEvent"/>
+      <map from="FlowCashReceiptDetail.SequentialIdentifier"
+           to="CashReceiptDetail.SequentialIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_EFT_DETAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnEdtlLstEftDetail"
+       send-command="DISPLAY">
+      <map from="ElectronicFundTransmission.TransmissionIdentifier"
+           to="ElectronicFundTransmission.TransmissionIdentifier"/>
+      <map from="ElectronicFundTransmission.TransmissionType"
+           to="ElectronicFundTransmission.TransmissionType"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_MNTHLY_PAYEE_SUM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnPsumLstMnthlyPyeeSummry"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_POTNTL_RCVRY_OBLG"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnOrelLstPotentialRecovOblg"
+       send-command="DISPLAY">
+      <map from="CsePerson" to="SearchObligeeCsePerson"/>
+      <map from="OrelToDate" to="SearchTo"/>
+      <map from="OrelSearchStatus.SelectChar" to="SearchStatusCommon.SelectChar"/>
+      <map from="OrelFromDate" to="SearchFrom"/>
+   </on>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="EndingDate" to="EndingDate"/>
+   <map from="HiddenEndingDate" to="HiddenEndingDate"/>
+   <map from="Group.DisbursementTransaction" to="Group.DisbursementTransaction"/>
+   <map from="ZdelExportHidden" to="ZdelImportHidden"/>
+   <map from="Group.RefNo" to="Group.RefNo"/>
+   <map from="Group.DisbursementTransactionType"
+        to="Group.DisbursementTransactionType"/>
+   <map from="Group.DisbursementType" to="Group.DisbursementType"/>
+   <map from="Group.Cr" to="Group.Cr"/>
+   <map from="Group.Db" to="Group.Db"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="HiddenStartingDateIn" to="HiddenStartingDate"/>
+   <map from="StartingDate" to="StartingDate"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.LocalFinanceWorkArea" to="Group.LocalFinanceWorkArea"/>
+   <map from="ShowAdj" to="ShowAdj"/>
+   <map from="HiddenShowAdj" to="HiddenShowAdj"/>
+   <map from="Group.CashReceipt" to="Group.CashReceipt"/>
+   <map from="Group.DisbType" to="Group.DisbType"/>
+   <map from="Group.PaymentRequest.Number" to="Group.PaymentRequest.Number"/>
+   <map from="Group.PaymentRequest.SystemGeneratedIdentifier"
+        to="Group.PaymentRequest.SystemGeneratedIdentifier"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="CsePerson.Number" to="CsePerson.Number"/>
+   <map from="Group.PaymentRequest.Type1" to="Group.PaymentRequest.Type1"/>
+</procedure>

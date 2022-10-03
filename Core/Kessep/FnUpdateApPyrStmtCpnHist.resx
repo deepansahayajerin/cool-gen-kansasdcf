@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadStmtCouponSuppStatusHist">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  COLL_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  REASON_TEXT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DOC_TYPE_TO_SUPP
+from
+  CKT_STMT_SUP_ST_HS
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (COLL_ID = @collId)
+</value>
+   </data>
+   <data name="UpdateStmtCouponSuppStatusHist">
+      <value>
+update CKT_STMT_SUP_ST_HS
+set
+  EFFECTIVE_DATE = @effectiveDate,
+  DISCONTINUE_DATE = @discontinueDate,
+  REASON_TEXT = @reasonText,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  DOC_TYPE_TO_SUPP = @docTypeToSupp
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (COLL_ID = @collId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER &gt; @cspNumber) and
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = @type) and
+  (START_DATE &lt; @startDate) and
+  (END_DATE &gt; @endDate)
+order by
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRoleCase">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.STATUS
+from
+  CKT_CASE T3
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB &gt; @numb) and
+    (T1.DATE_OF_DEATH = @dateOfDeath) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.END_DATE &gt; @endDate) and
+    (T2.START_DATE &lt; @startDate)
+  on
+    (T3.NUMB = T2.CAS_NUMBER) and
+    (T3.STATUS &lt;&gt; @status)
+order by
+  T1.NUMB,
+  T2.CAS_NUMBER
+</value>
+   </data>
+</root>

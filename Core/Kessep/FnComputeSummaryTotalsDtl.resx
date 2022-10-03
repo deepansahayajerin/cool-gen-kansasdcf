@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  COLLECTION_AMOUNT,
+  MULTI_PAYOR,
+  OBLGOR_PRSN_NBR,
+  OBLGOR_SSN,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  COLLAMT_APPL_IND
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (OBLGOR_PRSN_NBR = @oblgorPrsnNbr)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailBalanceAdjCashReceiptDetail">
+      <value>
+select
+  T1.CRD_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_S_IDENTIFIER,
+  T1.CRV_S_IDENTIFIER,
+  T1.CST_S_IDENTIFIER,
+  T1.CRT_S_IDENTIFIER,
+  T1.CRN_IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T1.DESCRIPTION,
+  T2.ADJUSTMENT_IND,
+  T2.COLLECTION_AMOUNT
+from
+  CKT_CR_DETAIL T2 with(readuncommitted)
+  join
+  CKT_CRDTL_BAL_ADJ T1 with(readuncommitted)
+  on
+    (@crdIdentifier = T1.CRD_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (T2.CRD_ID = T1.CRD_S_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_S_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_S_IDENTIFIER) and
+    (T2.CRT_IDENTIFIER = T1.CRT_S_IDENTIFIER) and
+    (T2.ADJUSTMENT_IND = 'Y')
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCashReceiptDetailStatus">
+      <value>
+select
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.ADJUSTMENT_IND,
+  T1.COURT_ORDER_NUMBER,
+  T1.COLLECTION_AMOUNT,
+  T1.MULTI_PAYOR,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.REFUNDED_AMT,
+  T1.DISTRIBUTED_AMT,
+  T1.COLLAMT_APPL_IND,
+  T3.CDS_IDENTIFIER
+from
+  CKT_CR_DETAIL T1 with(readuncommitted)
+  join
+  CKT_CRDTL_STATHIST T3 with(readuncommitted)
+  on
+    (T1.CRD_ID = T3.CRD_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T3.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T3.CST_IDENTIFIER) and
+    (T1.CRT_IDENTIFIER = T3.CRT_IDENTIFIER) and
+    (T1.OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+    (T3.DISCONTINUE_DATE = @discontinueDate) and
+    (T1.COLLAMT_APPL_IND = ' ') and
+    (T1.ADJUSTMENT_IND in ('N', ' '))
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  sum(OB_TRN_AMT)
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (COLL_DT between cast(@date1 as date) and cast(@date2 as date))
+</value>
+   </data>
+   <data name="ReadCollectionObligationTypeObligation">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T1.CT_ORD_APPLIED_TO,
+  T1.APPLIED_TO_FUT_IND,
+  T1.PGM_ST_APPLD_TO,
+  T2.DEBT_TYP_ID,
+  T2.DEBT_TYP_CLASS,
+  T2.SUP_PRSN_REQ_IND,
+  T3.CPA_TYPE,
+  T3.CSP_NUMBER,
+  T3.OB_ID,
+  T3.LGA_ID,
+  T3.PRIM_SEC_CD,
+  T3.ORD_TYP_CD
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_OBLIGATION T3 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T3.OB_ID between cast(@systemGeneratedIdentifier1 as smallint) and cast(@systemGeneratedIdentifier2 as smallint)) and
+    (T1.ADJ_IND = 'N')
+  on
+    T2.DEBT_TYP_ID = T3.DTY_GENERATED_ID
+order by
+  T1.COLL_DT
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  (LEGAL_ACTION_ID = @legalActionId1) and
+  (LEGAL_ACTION_ID = @legalActionId2)
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  (LEGAL_ACTION_ID = @legalActionId) and
+  (STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  OBLIG_PSCH_AMT,
+  END_DT,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND
+from
+  CKT_OB_PYMNT_SCH
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@obgCspNumber = OBG_CSP_NUMBER) and
+  (@obgCpaType = OBG_CPA_TYPE) and
+  (START_DT &lt;= @startDt) and
+  (END_DT &gt; @startDt)
+</value>
+   </data>
+   <data name="ReadObligationTypeObligationDebtDebtDetail">
+      <value>
+select
+  T1.DEBT_TYP_ID,
+  T1.DEBT_TYP_CLASS,
+  T1.SUP_PRSN_REQ_IND,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.OB_ID,
+  T2.LGA_ID,
+  T2.PRIM_SEC_CD,
+  T2.ORD_TYP_CD,
+  T3.OB_TRN_ID,
+  T3.OB_TRN_TYP,
+  T3.OB_TRN_AMT,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE,
+  T4.DUE_DT,
+  T4.BAL_DUE_AMT,
+  T4.INT_BAL_DUE_AMT,
+  T4.RETIRED_DT,
+  T4.CVRD_PRD_START_DT,
+  T4.CVD_PRD_END_DT,
+  T4.PRECNVRSN_PGM_CD
+from
+  CKT_OB_TYPE T1 with(readuncommitted)
+  join
+  CKT_OBLIGATION T2 with(readuncommitted)
+  on
+    (T1.DEBT_TYP_ID = T2.DTY_GENERATED_ID) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.OB_ID between cast(@systemGeneratedIdentifier1 as smallint) and cast(@systemGeneratedIdentifier2 as smallint))
+  join
+  CKT_OB_TRN T3 with(readuncommitted)
+  on
+    (T2.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T2.OB_ID = T3.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.CPA_TYPE = T3.CPA_TYPE)
+  join
+  CKT_DEBT_DTL T4 with(readuncommitted)
+  on
+    (T3.OTY_TYPE = T4.OTY_TYPE) and
+    (T3.OBG_GENERATED_ID = T4.OBG_GENERATED_ID) and
+    (T3.OB_TRN_TYP = T4.OTR_TYPE) and
+    (T3.OB_TRN_ID = T4.OTR_GENERATED_ID) and
+    (T3.CPA_TYPE = T4.CPA_TYPE) and
+    (T3.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T4.DUE_DT &lt;= @dueDt) and
+    (T4.RETIRED_DT = @retiredDt)
+order by
+  T1.DEBT_TYP_ID,
+  T2.OB_ID
+</value>
+   </data>
+</root>

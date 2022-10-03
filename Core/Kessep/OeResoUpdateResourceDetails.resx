@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCsePersonResource1">
+      <value>
+update CKT_INCOME_SOURCE
+set
+  CPR_RESOURCE_NO = @cprResourceNo,
+  CSP_NUMBER = @cspNumber
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="AssociateCsePersonResource2">
+      <value>
+update CKT_CSE_PERSON_VEH
+set
+  CPR_C_RESOURCE_NO = @cprCResourceNo,
+  CSP_C_NUMBER = @cspCNumber
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="AssociateCsePersonResource3">
+      <value>
+update CKT_CSE_PERSON_RES
+set
+  EXA_ID = @exaId
+where
+  (CSP_NUMBER = @cspNumber) and
+  (RESOURCE_NO = @resourceNo)
+</value>
+   </data>
+   <data name="CreateResourceLienHolderAddress1">
+      <value>
+insert into CKT_RSRC_LIEN_ADDR
+(
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @cprResourceNo,
+  @cspNumber,
+  @effectiveDate,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @province,
+  @postalCode,
+  @zipCode5,
+  @zipCode4,
+  @zip3,
+  @country,
+  @addressType,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="CreateResourceLienHolderAddress2">
+      <value>
+insert into CKT_RSRC_LIEN_ADDR
+(
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @cprResourceNo,
+  @cspNumber,
+  @effectiveDate,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @province,
+  @postalCode,
+  @zipCode5,
+  @zipCode4,
+  @zip3,
+  @country,
+  @addressType,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="CreateResourceLocationAddress">
+      <value>
+insert into CKT_RSRC_LOC_ADDR
+(
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @cprResourceNo,
+  @cspNumber,
+  @effectiveDate,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @province,
+  @postalCode,
+  @zipCode5,
+  @zipCode4,
+  @zip3,
+  @country,
+  @addressType,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="DeleteResourceLienHolderAddress">
+      <value>
+delete from CKT_RSRC_LIEN_ADDR
+where
+  (CPR_RESOURCE_NO = @cprResourceNo) and
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="DeleteResourceLocationAddress">
+      <value>
+delete from CKT_RSRC_LOC_ADDR
+where
+  (CPR_RESOURCE_NO = @cprResourceNo) and
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="DisassociateCsePersonVehicle#1">
+      <value>
+update CKT_CSE_PERSON_VEH
+set
+  CPR_C_RESOURCE_NO = null,
+  CSP_C_NUMBER = null
+where
+  (CSP_NUMBER = @cspNumber1) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="DisassociateCsePersonVehicle#2">
+      <value>
+delete from CKT_CSE_PERSON_RES
+where
+  (RESOURCE_NO = @resourceNo) and
+  (CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="DisassociateExternalAgency">
+      <value>
+update CKT_CSE_PERSON_RES
+set
+  EXA_ID = null
+where
+  (CSP_NUMBER = @cspNumber) and
+  (RESOURCE_NO = @resourceNo)
+</value>
+   </data>
+   <data name="ReadCsePersonResource1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  RESOURCE_NO,
+  LOCATION_COUNTY,
+  LIEN_HOLDER_KS_IND,
+  OTHER_LIEN_HLDR_NM,
+  CO_OWNER_NAME,
+  VERIFIED_USER_ID,
+  RESOURCE_DISP_DATE,
+  VERIFIED_DATE,
+  LIEN_INDICATOR,
+  TYPE,
+  AC_HOLDER_NAME,
+  ACCOUNT_BALANCE,
+  ACCOUNT_NUMBER,
+  RESOURCE_DESC,
+  LOCATION,
+  VALU,
+  EQUITY,
+  CSE_ACTION_CODE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  EXA_ID,
+  OTHER_LIEN_PLCD_DT,
+  OTHER_LIEN_RMVD_DT
+from
+  CKT_CSE_PERSON_RES
+where
+  (RESOURCE_NO = @resourceNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonResource2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  RESOURCE_NO
+from
+  CKT_CSE_PERSON_RES
+where
+  (RESOURCE_NO = @resourceNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonVehicle1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  CPR_C_RESOURCE_NO,
+  CSP_C_NUMBER
+from
+  CKT_CSE_PERSON_VEH
+where
+  (CSP_NUMBER = @cspNumber) and
+  (@cprCResourceNo = CPR_C_RESOURCE_NO) and
+  (@cspCNumber = CSP_C_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePersonVehicle2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  CPR_C_RESOURCE_NO,
+  CSP_C_NUMBER
+from
+  CKT_CSE_PERSON_VEH
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadExternalAgency1">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_EXT_AGENCY
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadExternalAgency2">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_EXT_AGENCY
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_I_NUMBER,
+  CPR_RESOURCE_NO,
+  CSP_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadLegalActionPersonResource">
+      <value>
+select
+  CSP_NUMBER,
+  CPR_RESOURCE_NO,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  LIEN_TYPE,
+  END_DATE,
+  IDENTIFIER
+from
+  CKT_LEGL_ACT_PRSRC
+where
+  (@cprResourceNo = CPR_RESOURCE_NO) and
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DT &gt;= @effectiveDt) and
+  (END_DATE &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadResourceLienHolderAddress1">
+      <value>
+select top(1)
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_RSRC_LIEN_ADDR
+where
+  (@cprResourceNo = CPR_RESOURCE_NO) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadResourceLienHolderAddress2">
+      <value>
+select
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_RSRC_LIEN_ADDR
+where
+  (@cprResourceNo = CPR_RESOURCE_NO) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadResourceLocationAddress1">
+      <value>
+select top(1)
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_RSRC_LOC_ADDR
+where
+  (@cprResourceNo = CPR_RESOURCE_NO) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadResourceLocationAddress2">
+      <value>
+select
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_RSRC_LOC_ADDR
+where
+  (@cprResourceNo = CPR_RESOURCE_NO) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="UpdateCsePersonResource">
+      <value>
+update CKT_CSE_PERSON_RES
+set
+  LOCATION_COUNTY = @locationCounty,
+  LIEN_HOLDER_KS_IND = @lienHolderKsInd,
+  OTHER_LIEN_HLDR_NM = @otherLienHldrNm,
+  CO_OWNER_NAME = @coOwnerName,
+  VERIFIED_USER_ID = @verifiedUserId,
+  RESOURCE_DISP_DATE = @resourceDispDate,
+  VERIFIED_DATE = @verifiedDate,
+  LIEN_INDICATOR = @lienIndicator,
+  TYPE = @type,
+  AC_HOLDER_NAME = @acHolderName,
+  ACCOUNT_BALANCE = @accountBalance,
+  ACCOUNT_NUMBER = @accountNumber,
+  RESOURCE_DESC = @resourceDesc,
+  LOCATION = @location,
+  VALU = @valu,
+  EQUITY = @equity,
+  CSE_ACTION_CODE = @cseActionCode,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  OTHER_LIEN_PLCD_DT = @otherLienPlcdDt,
+  OTHER_LIEN_RMVD_DT = @otherLienRmvdDt
+where
+  (CSP_NUMBER = @cspNumber) and
+  (RESOURCE_NO = @resourceNo)
+</value>
+   </data>
+</root>

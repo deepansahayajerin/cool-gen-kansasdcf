@@ -1,0 +1,111 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpSvpoOffcServProviderMaint"
+           program-name="SWESVPOP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpSvpoOffcServProviderMaint"
+           transaction="SR3L"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenCodeValue" to="Starting"/>
+      <map from="HiddenCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenSelectionCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_OFFICE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="HiddenSelectionOffice"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <map from="SortBy" to="SortBy"/>
+      <return-map from="HiddenSelected1.SystemGeneratedId"
+                  to="HiddenSelectionServiceProvider.SystemGeneratedId"/>
+      <return-map from="HiddenSelected1.UserId"
+                  to="HiddenSelectionServiceProvider.UserId"/>
+      <return-map from="HiddenSelected1.LastName"
+                  to="HiddenSelectionServiceProvider.LastName"/>
+      <return-map from="HiddenSelected1.FirstName"
+                  to="HiddenSelectionServiceProvider.FirstName"/>
+      <return-map from="HiddenSelected1.MiddleInitial"
+                  to="HiddenSelectionServiceProvider.MiddleInitial"/>
+   </on>
+   <map from="Export1.ServiceProvider" to="Import1.ServiceProvider"/>
+   <map from="Office" to="Office"/>
+   <map from="Search" to="Search"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.ListServiceProvider" to="Import1.ListServiceProvider"/>
+   <map from="Export1.ListRole" to="Import1.ListRole"/>
+   <map from="HiddenOffice" to="HiddenOffice"/>
+   <map from="Export1.GeneticTestAccount" to="Import1.GeneticTestAccount"/>
+   <map from="Export1.HiddenGeneticTestAccount"
+        to="Import1.HiddenGeneticTestAccount"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenSelectionOffice" to="HiddenSelectionOffice"/>
+   <map from="OfficeType" to="OfficeType"/>
+   <map from="OfficeAddress.City" to="OfficeAddress.City"/>
+   <map from="Export1.OfficeServiceProvider.RoleCode"
+        to="Import1.OfficeServiceProvider.RoleCode"/>
+   <map from="Export1.OfficeServiceProvider.EffectiveDate"
+        to="Import1.OfficeServiceProvider.EffectiveDate"/>
+   <map from="Export1.OfficeServiceProvider.DiscontinueDate"
+        to="Import1.OfficeServiceProvider.DiscontinueDate"/>
+   <map from="Export1.OfficeServiceProvider.WorkPhoneNumber"
+        to="Import1.OfficeServiceProvider.WorkPhoneNumber"/>
+   <map from="ListOffice.SelectChar" to="ListOffice.SelectChar"/>
+   <map from="Export1.HiddenServiceProvider.SystemGeneratedId"
+        to="Import1.HiddenServiceProvider.SystemGeneratedId"/>
+   <map from="Export1.HiddenOfficeServiceProvider.RoleCode"
+        to="Import1.HiddenOfficeServiceProvider.RoleCode"/>
+   <map from="Export1.HiddenOfficeServiceProvider.EffectiveDate"
+        to="Import1.HiddenOfficeServiceProvider.EffectiveDate"/>
+   <map from="Export1.HiddenServiceProvider.UserId"
+        to="Import1.HiddenServiceProvider.UserId"/>
+   <map from="Export1.HiddenServiceProvider.FirstName"
+        to="Import1.HiddenServiceProvider.FirstName"/>
+   <map from="Export1.HiddenServiceProvider.LastName"
+        to="Import1.HiddenServiceProvider.LastName"/>
+   <map from="Export1.HiddenOfficeServiceProvider.DiscontinueDate"
+        to="Import1.HiddenOfficeServiceProvider.DiscontinueDate"/>
+   <map from="Export1.HiddenOfficeServiceProvider.WorkPhoneNumber"
+        to="Import1.HiddenOfficeServiceProvider.WorkPhoneNumber"/>
+   <map from="Export1.OfficeServiceProvider.LocalContactCodeForIrs"
+        to="Import1.OfficeServiceProvider.LocalContactCodeForIrs"/>
+   <map from="Export1.OfficeServiceProvider.WorkPhoneAreaCode"
+        to="Import1.OfficeServiceProvider.WorkPhoneAreaCode"/>
+   <map from="Export1.OfficeServiceProvider.WorkPhoneExtension"
+        to="Import1.OfficeServiceProvider.WorkPhoneExtension"/>
+   <map from="HiddenSelectionServiceProvider.SystemGeneratedId"
+        to="HiddenSelectionServiceProvider.SystemGeneratedId"/>
+   <map from="HiddenSelectionServiceProvider.UserId"
+        to="HiddenSelectionServiceProvider.UserId"/>
+   <map from="HiddenSelectionServiceProvider.LastName"
+        to="HiddenSelectionServiceProvider.LastName"/>
+   <map from="HiddenSelectionServiceProvider.FirstName"
+        to="HiddenSelectionServiceProvider.FirstName"/>
+   <map from="HiddenSelectionServiceProvider.MiddleInitial"
+        to="HiddenSelectionServiceProvider.MiddleInitial"/>
+   <map from="Export1.HiddenOfficeServiceProvider.WorkFaxNumber"
+        to="Import1.HiddenOfficeServiceProvider.WorkFaxNumber"/>
+   <map from="Export1.HiddenServiceProvider.MiddleInitial"
+        to="Import1.HiddenServiceProvider.MiddleInitial"/>
+   <map from="Export1.HiddenServiceProvider.RoleCode"
+        to="Import1.HiddenServiceProvider.RoleCode"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,67 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="CoPreqPrintRequestStatus"
+           program-name="SWEPREQP"
+           class="Gov.Kansas.DCF.Cse.Kessep.CoPreqPrintRequestStatus"
+           transaction="SRG5"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPL"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected1.SystemGeneratedId"
+                  to="SelectedServiceProvider.SystemGeneratedId"/>
+      <return-map from="HiddenSelected1.UserId" to="SelectedServiceProvider.UserId"/>
+      <return-map from="HiddenSelected1.LastName" to="SelectedServiceProvider.LastName"/>
+      <return-map from="HiddenSelected1.FirstName" to="SelectedServiceProvider.FirstName"/>
+      <return-map from="HiddenSelected1.MiddleInitial"
+                  to="SelectedServiceProvider.MiddleInitial"/>
+   </on>
+   <on exit-state="CO_LNK_TO_DRPT"
+       action="link"
+       return-when="ACO_NI0000_DELETE_SUCCESSFUL OE0000_RETURN_LNK_BLANK"
+       return-command-type="none"
+       display-first-on-return="true"
+       to="CoDrptDisplayReport"
+       send-command="DISPLAY">
+      <map from="DlgflwJob" to="Job"/>
+      <map from="DlgflwJobRun" to="JobRun"/>
+   </on>
+   <on exit-state="LNK_TO_RPRT"
+       action="link"
+       return-when="OE0000_RETURN_LNK_BLANK"
+       return-command="DISPLAY"
+       to="CoRprtReprintOptionSelection"
+       send-command="DISPLAY">
+      <map from="DlgflwJob.Name" to="Job.Name"/>
+      <map from="DlgflwJob.Description" to="Job.Description"/>
+      <map from="DlgflwJobRun" to="JobRun"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LJOB"
+       action="link"
+       return-when="OE0000_RETURN_LNK_BLANK"
+       return-command="RETLJOB"
+       to="GbLjobListJobs"
+       send-command="DISPLAY">
+      <return-map from="Dlgflw.Name" to="SelectedJob.Name"/>
+   </on>
+   <map from="Group.JobRun" to="Group.JobRun"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="SelectedServiceProvider" to="SelectedServiceProvider"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Job" to="Group.Job"/>
+   <map from="Group.RptDest" to="Group.RptDest"/>
+   <map from="Group.ParmInfo" to="Group.ParmInfo"/>
+   <map from="PromptToSpvl" to="PromptToSpvl"/>
+   <map from="SelectedJob" to="SelectedJob"/>
+   <map from="PromptToLjob" to="PromptToLjob"/>
+</procedure>

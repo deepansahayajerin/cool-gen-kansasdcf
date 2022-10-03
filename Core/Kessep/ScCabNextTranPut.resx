@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateNextTranInfo">
+      <value>
+insert into CKT_NEXT_TRAN_INFO
+(
+  LAST_TRAN,
+  LEGAL_ACTION_IDENT,
+  COURT_CASE_NUMBER,
+  CASE_NUMBER,
+  CSE_PERSON_NUMBER,
+  CSE_PERSON_NUMBER0,
+  CSE_PERSON_NUMBER1,
+  CSE_PERSON_NUMBER2,
+  COURT_ORDER_NUMBER,
+  OBLIGATION_ID,
+  STD_CRT_ORD_NBR,
+  PLAN_TASK_ID,
+  MISC_TEXT_1,
+  MISC_TEXT_2,
+  MISC_NUM_1,
+  MISC_NUM_2,
+  MISC_NUM_1_V2,
+  MISC_NUM_2_V2,
+  OSP_ID
+)
+values
+(
+  @lastTran,
+  @legalActionIdent,
+  @courtCaseNumber,
+  @caseNumber,
+  @csePersonNumber,
+  @csePersonNumber0,
+  @csePersonNumber1,
+  @csePersonNumber2,
+  @courtOrderNumber,
+  @obligationId,
+  @stdCrtOrdNbr,
+  @planTaskId,
+  @miscText1,
+  @miscText2,
+  @miscNum1,
+  @miscNum2,
+  @miscNum1V2,
+  @miscNum2V2,
+  @ospId
+)
+</value>
+   </data>
+   <data name="ReadNextTranInfo">
+      <value>
+select top(1)
+  T1.LAST_TRAN,
+  T1.LEGAL_ACTION_IDENT,
+  T1.COURT_CASE_NUMBER,
+  T1.CASE_NUMBER,
+  T1.CSE_PERSON_NUMBER,
+  T1.CSE_PERSON_NUMBER0,
+  T1.CSE_PERSON_NUMBER1,
+  T1.CSE_PERSON_NUMBER2,
+  T1.COURT_ORDER_NUMBER,
+  T1.OBLIGATION_ID,
+  T1.STD_CRT_ORD_NBR,
+  T1.PLAN_TASK_ID,
+  T1.MISC_TEXT_1,
+  T1.MISC_TEXT_2,
+  T1.MISC_NUM_1,
+  T1.MISC_NUM_2,
+  T1.MISC_NUM_1_V2,
+  T1.MISC_NUM_2_V2,
+  T1.OSP_ID
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_NEXT_TRAN_INFO T1
+  on
+    (T2.SERVICE_PRVDER_ID = T1.OSP_ID) and
+    (T2.USER_ID = @userId)
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+   <data name="ReadTransaction">
+      <value>
+select top(1)
+  SCREEN_ID,
+  TRANCODE,
+  NEXT_TRAN_AUTH
+from
+  CKT_TRANSACTION
+where
+  SCREEN_ID = @screenId
+</value>
+   </data>
+   <data name="UpdateNextTranInfo">
+      <value>
+update CKT_NEXT_TRAN_INFO
+set
+  LAST_TRAN = @lastTran,
+  LEGAL_ACTION_IDENT = @legalActionIdent,
+  COURT_CASE_NUMBER = @courtCaseNumber,
+  CASE_NUMBER = @caseNumber,
+  CSE_PERSON_NUMBER = @csePersonNumber,
+  CSE_PERSON_NUMBER0 = @csePersonNumber0,
+  CSE_PERSON_NUMBER1 = @csePersonNumber1,
+  CSE_PERSON_NUMBER2 = @csePersonNumber2,
+  COURT_ORDER_NUMBER = @courtOrderNumber,
+  OBLIGATION_ID = @obligationId,
+  STD_CRT_ORD_NBR = @stdCrtOrdNbr,
+  PLAN_TASK_ID = @planTaskId,
+  MISC_TEXT_1 = @miscText1,
+  MISC_TEXT_2 = @miscText2,
+  MISC_NUM_1 = @miscNum1,
+  MISC_NUM_2 = @miscNum2,
+  MISC_NUM_1_V2 = @miscNum1V2,
+  MISC_NUM_2_V2 = @miscNum2V2
+where
+  OSP_ID = @ospId
+</value>
+   </data>
+</root>

@@ -1,0 +1,79 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDisrLstMtnDistPlcyRule"
+           program-name="SWEDISRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDisrLstMtnDistPlcyRule"
+           transaction="SR7D"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdamDebtDstrbtnSysadmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_DIST_POLICY"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnDislLstDstrbtnPolicy"
+       send-command="DISPLAY">
+      <map from="SearchCollectionType" to="Search"/>
+      <return-map from="SelectedDistributionPolicy" to="SearchDistributionPolicy"/>
+      <return-map from="SelectedCollectionType.SequentialIdentifier"
+                  to="SearchCollectionType.SequentialIdentifier"/>
+      <return-map from="SelectedCollectionType.Code" to="SearchCollectionType.Code"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_PROGRAM_RLNS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="FnPgrlLstProgramRlns"
+       send-command="DISPLAY">
+      <map from="HiddenSelection" to="DistributionPolicyRule"/>
+      <map from="SearchDistributionPolicy.SystemGeneratedIdentifier"
+           to="DistributionPolicy.SystemGeneratedIdentifier"/>
+      <map from="SearchDistributionPolicy.Name" to="DistributionPolicy.Name"/>
+      <map from="SearchDistributionPolicy.EffectiveDt"
+           to="DistributionPolicy.EffectiveDt"/>
+      <map from="SearchDistributionPolicy.DiscontinueDt"
+           to="DistributionPolicy.DiscontinueDt"/>
+      <return-map from="DelMe.DelMe1" to="ReturnedPgm.Returned"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_MTN_OBLG_TYPE_RLN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="FnObrlLstMtnObligTypeRlns"
+       send-command="DISPLAY">
+      <map from="SearchDistributionPolicy" to="PassedDistributionPolicy"/>
+      <map from="HiddenSelection" to="PassedDistributionPolicyRule"/>
+      <return-map from="ObligationType" to="Returned"/>
+      <return-map from="Selected.Selected1" to="ReturnedOt.Returned"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_COLLECTION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="FnClctLstCollectionTypes"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="SearchCollectionType"/>
+   </on>
+   <map from="SearchDistributionPolicy" to="SearchDistributionPolicy"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.DistributionPolicyRule"
+        to="Import1.DistributionPolicyRule"/>
+   <map from="Export1.DebtState" to="Import1.DebtState"/>
+   <map from="Export1.Apply" to="Import1.ApplyTo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="SearchCollectionType" to="SearchCollectionType"/>
+   <map from="Export1.FunctionType" to="Import1.FunctionType"/>
+   <map from="HiddenSelection" to="HiddenSelection"/>
+   <map from="Previous" to="Previous"/>
+   <map from="BeforeFlow" to="BeforeFlow"/>
+   <map from="ReturnedOt.Returned" to="ReturnedOt.Returned"/>
+   <map from="ReturnedPgm.Returned" to="ReturnedPgm.Returned"/>
+   <map from="HiddenPreviousDistributionPolicy"
+        to="HiddenPreviousDistributionPolicy"/>
+   <map from="HiddenPreviousCollectionType" to="HiddenPreviousCollectionType"/>
+   <map from="Returned" to="Returned"/>
+   <map from="SourceTypePrompt" to="SourceTypePrompt"/>
+   <map from="DistPlcyPrompt" to="DistPlcyPrompt"/>
+</procedure>

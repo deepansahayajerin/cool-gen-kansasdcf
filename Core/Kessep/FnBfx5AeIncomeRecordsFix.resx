@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteInterfaceIncomeNotification">
+      <value>
+delete from CKT_INTRFC_INC_NTF
+where
+  INTRFC_INC_NTF_ID = @intrfcIncNtfId
+</value>
+   </data>
+   <data name="ReadCollectionDisbursementTransactionDisbursementTransactionRln">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.OB_TRN_AMT,
+  T1.PGM_APPLD_TO,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.DISB_TRAN_ID,
+  T2.TYPE,
+  T2.AMOUNT,
+  T2.PROCESS_DATE,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATE_TMST,
+  T2.COLLECTION_DATE,
+  T2.COLLCTN_PROCESS_DT,
+  T2.INTERSTATE_IND,
+  T2.PASSTHRU_PROC_DATE,
+  T2.DESIGNATED_PAYEE,
+  T2.REFERENCE_NUMBER,
+  T3.DISB_TRAN_RLN_ID,
+  T3.DNR_GENERATED_ID,
+  T3.CSP_NUMBER,
+  T3.CPA_TYPE,
+  T3.DTR_GENERATED_ID
+from
+  CKT_COLLECTION T1
+  join
+  CKT_DISB_TRAN T2
+  on
+    (T1.COLL_ID = T2.COL_ID) and
+    (T1.OTY_ID = T2.OTY_ID) and
+    (T1.OBG_ID = T2.OBG_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER_DISB) and
+    (T1.CPA_TYPE = T2.CPA_TYPE_DISB) and
+    (T1.OTR_ID = T2.OTR_ID) and
+    (T1.OTR_TYPE = T2.OTR_TYPE_DISB) and
+    (T1.CRT_TYPE = T2.CRT_ID) and
+    (T1.CST_ID = T2.CST_ID) and
+    (T1.CRV_ID = T2.CRV_ID) and
+    (T1.CRD_ID = T2.CRD_ID) and
+    (T1.APPLIED_TO_CD = 'C')
+  join
+  CKT_DISB_TRAN_RLN T3
+  on
+    (T2.DISB_TRAN_ID = T3.DTR_P_GENERATED_ID) and
+    (T2.CPA_TYPE = T3.CPA_P_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_P_NUMBER) and
+    (@dtrGeneratedId = T3.DTR_GENERATED_ID) and
+    (@cpaType = T3.CPA_TYPE) and
+    (@cspNumber = T3.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePersonObligeeDisbursementTransaction">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T2.TYPE,
+  T2.CREATED_BY,
+  T2.CREATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.RECOMP_BAL_FROM_DT,
+  T3.DISB_TRAN_ID,
+  T3.TYPE,
+  T3.AMOUNT,
+  T3.PROCESS_DATE,
+  T3.CREATED_BY,
+  T3.CREATED_TIMESTAMP,
+  T3.LAST_UPDATED_BY,
+  T3.LAST_UPDATE_TMST,
+  T3.COLLECTION_DATE,
+  T3.DBT_GENERATED_ID,
+  T3.INTERSTATE_IND,
+  T3.PASSTHRU_PROC_DATE,
+  T3.DESIGNATED_PAYEE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CSE_PERSON_ACC T2
+  join
+  CKT_DISB_TRAN T3
+  on
+    (T2.TYPE = T3.CPA_TYPE) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.TYPE = 'D') and
+    (T3.DBT_GENERATED_ID = 71) and
+    (T3.COLLECTION_DATE = @collectionDate)
+  on
+    T1.NUMB = T2.CSP_NUMBER
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadDisbursementStatus">
+      <value>
+select top(1)
+  DISB_STATUS_ID
+from
+  CKT_DISB_STATUS
+where
+  DISB_STATUS_ID = @disbStatusId
+</value>
+   </data>
+   <data name="ReadDisbursementStatusHistory">
+      <value>
+select top(1)
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP
+from
+  CKT_DISB_STAT_HIST
+where
+  (@dtrGeneratedId = DTR_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+order by
+  CREATED_TIMESTAMP desc,
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  AMOUNT,
+  PROCESS_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATE_TMST,
+  COLLECTION_DATE,
+  DBT_GENERATED_ID,
+  PASSTHRU_PROC_DATE,
+  DESIGNATED_PAYEE,
+  REFERENCE_NUMBER
+from
+  CKT_DISB_TRAN
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (COLLECTION_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+  (DBT_GENERATED_ID is not null) and
+  (
+    DBT_GENERATED_ID in (1, 19, 28,
+      64)
+  )
+order by
+  COLLECTION_DATE
+</value>
+   </data>
+   <data name="ReadInterfaceIncomeNotification">
+      <value>
+select top(1)
+  INTRFC_INC_NTF_ID,
+  SUPP_CSP_NUMBER,
+  OBLIGOR_CSP_NUMBER,
+  CASE_NUMB,
+  COLLECTION_DATE,
+  COLLECTION_AMOUNT,
+  PERSON_PROGRAM,
+  PROGRAM_APPLIED_TO,
+  APPLIED_TO_CODE,
+  DISTRIBUTION_DATE,
+  CREATED_TMST,
+  CREATED_BY,
+  PROCESS_DT
+from
+  CKT_INTRFC_INC_NTF
+where
+  (CREATED_BY = 'SWEFB652') and
+  (APPLIED_TO_CODE = 'P') and
+  (SUPP_CSP_NUMBER = @suppCspNumber) and
+  (PROCESS_DT = @processDt)
+order by
+  CREATED_TMST desc
+</value>
+   </data>
+</root>

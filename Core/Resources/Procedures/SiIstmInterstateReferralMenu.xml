@@ -1,0 +1,71 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiIstmInterstateReferralMenu"
+           program-name="SWEISTMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiIstmInterstateReferralMenu"
+           transaction="SR2L"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_OFFICE_SERVICE_PROVDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionServiceProvider" to="SelectedServiceProvider"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="SelectedOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionOffice" to="SelectedOffice"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiItsmInterstateMenu"
+       send-command="XXFMMENU">
+      <map from="Next" to="Case1"/>
+      <map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command-type="none">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CSENET_REFERRAL_CASE"
+       action="transfer"
+       to="SiIcasCsenetRefCase"
+       send-command="XXFMMENU">
+      <map from="InterstateCase.TransSerialNumber"
+           to="InterstateCase.TransSerialNumber"/>
+      <map from="InterstateCase.ActionCode" to="InterstateCase.ActionCode"/>
+      <map from="InterstateCase.TransactionDate"
+           to="InterstateCase.TransactionDate"/>
+      <map from="InterstateCase.OtherFipsState" to="InterstateCase.OtherFipsState"/>
+      <map from="InterstateCase.InterstateCaseId"
+           to="InterstateCase.InterstateCaseId"/>
+      <map from="Standard" to="Standard"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="Office" to="Office"/>
+      <map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+   </on>
+   <map from="Hidden" to="Hidden"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Next" to="Next"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Office" to="Office"/>
+   <map from="OfficeAddress" to="OfficeAddress"/>
+   <map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+   <map from="StatePrompt" to="StatePrompt"/>
+   <map from="InterstateCase.TransactionDate"
+        to="InterstateCase.TransactionDate"/>
+   <map from="InterstateCase.TransSerialNumber"
+        to="InterstateCase.TransSerialNumber"/>
+   <map from="InterstateCase.ActionCode" to="InterstateCase.ActionCode"/>
+   <map from="InterstateCase.InterstateCaseId"
+        to="InterstateCase.InterstateCaseId"/>
+   <map from="Fips.StateAbbreviation" to="Fips.StateAbbreviation"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

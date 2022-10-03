@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CASH_RECEIPT
+where
+  (@ftrIdentifier = FTR_IDENTIFIER) and
+  (@funIdentifier = FUN_IDENTIFIER) and
+  (@fttIdentifier = FTT_IDENTIFIER) and
+  (@pcaEffectiveDate = PCA_EFFECTIVE_DATE) and
+  (@pcaCode = PCA_CODE)
+</value>
+   </data>
+   <data name="ReadCashReceipt2">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CASH_RECEIPT
+where
+  (@ftrIdentifier = FTR_IDENTIFIER) and
+  (@funIdentifier = FUN_IDENTIFIER) and
+  (@fttIdentifier = FTT_IDENTIFIER) and
+  (@pcaEffectiveDate = PCA_EFFECTIVE_DATE) and
+  (@pcaCode = PCA_CODE) and
+  (CHECK_TYPE = @checkType)
+</value>
+   </data>
+   <data name="ReadCashReceipt3">
+      <value>
+select top(1)
+  sum(RECEIPT_AMOUNT)
+from
+  CKT_CASH_RECEIPT
+where
+  (@ftrIdentifier = FTR_IDENTIFIER) and
+  (@funIdentifier = FUN_IDENTIFIER) and
+  (@fttIdentifier = FTT_IDENTIFIER) and
+  (@pcaEffectiveDate = PCA_EFFECTIVE_DATE) and
+  (@pcaCode = PCA_CODE) and
+  (CHECK_TYPE = @checkType)
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptType1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_CR_TYPE T2
+  join
+  CKT_CASH_RECEIPT T1
+  on
+    (@ftrIdentifier = T1.FTR_IDENTIFIER) and
+    (@funIdentifier = T1.FUN_IDENTIFIER) and
+    (@fttIdentifier = T1.FTT_IDENTIFIER) and
+    (@pcaEffectiveDate = T1.PCA_EFFECTIVE_DATE) and
+    (@pcaCode = T1.PCA_CODE) and
+    (T2.CRTYPE_ID = T1.CRT_IDENTIFIER) and
+    (T1.CHECK_TYPE = @checkType) and
+    (T2.CODE = @code)
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptType2">
+      <value>
+select top(1)
+  sum(T1.RECEIPT_AMOUNT)
+from
+  CKT_CR_TYPE T2
+  join
+  CKT_CASH_RECEIPT T1
+  on
+    (@ftrIdentifier = T1.FTR_IDENTIFIER) and
+    (@funIdentifier = T1.FUN_IDENTIFIER) and
+    (@fttIdentifier = T1.FTT_IDENTIFIER) and
+    (@pcaEffectiveDate = T1.PCA_EFFECTIVE_DATE) and
+    (@pcaCode = T1.PCA_CODE) and
+    (T2.CRTYPE_ID = T1.CRT_IDENTIFIER) and
+    (T1.CHECK_TYPE = @checkType) and
+    (T2.CODE = @code)
+</value>
+   </data>
+   <data name="ReadCashReceiptEventCashReceipt1">
+      <value>
+select
+  T1.CST_IDENTIFIER,
+  T1.CREVENT_ID,
+  T1.RECEIVED_DATE,
+  T2.CRT_IDENTIFIER,
+  T2.RECEIPT_AMOUNT,
+  T2.CASH_RECEIPT_ID,
+  T2.RECEIPT_DATE,
+  T2.CHECK_TYPE,
+  T2.FTT_IDENTIFIER,
+  T2.PCA_CODE,
+  T2.PCA_EFFECTIVE_DATE,
+  T2.FUN_IDENTIFIER,
+  T2.FTR_IDENTIFIER
+from
+  CKT_CR_EVENT T1
+  join
+  CKT_CASH_RECEIPT T2
+  on
+    (T2.FUN_IDENTIFIER is not null) and
+    (T2.FTT_IDENTIFIER is not null) and
+    (T2.PCA_EFFECTIVE_DATE is not null) and
+    (T2.PCA_CODE is not null) and
+    (T2.FTR_IDENTIFIER = @ftrIdentifier) and
+    (T2.CASH_RECEIPT_ID &gt;= @cashReceiptId) and
+    (T1.CREVENT_ID = T2.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_IDENTIFIER)
+order by
+  T2.CASH_RECEIPT_ID
+</value>
+   </data>
+   <data name="ReadCashReceiptEventCashReceipt2">
+      <value>
+select
+  T1.CST_IDENTIFIER,
+  T1.CREVENT_ID,
+  T1.RECEIVED_DATE,
+  T2.CRT_IDENTIFIER,
+  T2.RECEIPT_AMOUNT,
+  T2.CASH_RECEIPT_ID,
+  T2.RECEIPT_DATE,
+  T2.CHECK_TYPE,
+  T2.FTT_IDENTIFIER,
+  T2.PCA_CODE,
+  T2.PCA_EFFECTIVE_DATE,
+  T2.FUN_IDENTIFIER,
+  T2.FTR_IDENTIFIER
+from
+  CKT_CR_EVENT T1
+  join
+  CKT_CASH_RECEIPT T2
+  on
+    (T2.FUN_IDENTIFIER is not null) and
+    (T2.FTT_IDENTIFIER is not null) and
+    (T2.PCA_EFFECTIVE_DATE is not null) and
+    (T2.PCA_CODE is not null) and
+    (T2.FTR_IDENTIFIER = @ftrIdentifier) and
+    (T1.CREVENT_ID = T2.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID &gt;= @cashReceiptId)
+order by
+  T2.CASH_RECEIPT_ID
+</value>
+   </data>
+   <data name="ReadCashReceiptEventCashReceipt3">
+      <value>
+select
+  T1.CST_IDENTIFIER,
+  T1.CREVENT_ID,
+  T1.RECEIVED_DATE,
+  T2.CRT_IDENTIFIER,
+  T2.RECEIPT_AMOUNT,
+  T2.CASH_RECEIPT_ID,
+  T2.RECEIPT_DATE,
+  T2.CHECK_TYPE,
+  T2.FTT_IDENTIFIER,
+  T2.PCA_CODE,
+  T2.PCA_EFFECTIVE_DATE,
+  T2.FUN_IDENTIFIER,
+  T2.FTR_IDENTIFIER
+from
+  CKT_CR_EVENT T1
+  join
+  CKT_CASH_RECEIPT T2
+  on
+    (@ftrIdentifier = T2.FTR_IDENTIFIER) and
+    (@funIdentifier = T2.FUN_IDENTIFIER) and
+    (@fttIdentifier = T2.FTT_IDENTIFIER) and
+    (@pcaEffectiveDate = T2.PCA_EFFECTIVE_DATE) and
+    (@pcaCode = T2.PCA_CODE) and
+    (T1.CREVENT_ID = T2.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID &gt;= @cashReceiptId)
+order by
+  T2.CASH_RECEIPT_ID
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCashReceiptType1">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CODE
+from
+  CKT_CR_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCashReceiptType2">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CODE
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="ReadFund">
+      <value>
+select top(1)
+  FUND_ID,
+  NUMB,
+  BALANCE_AMOUNT
+from
+  CKT_FUND
+where
+  FUND_ID = @fundId
+</value>
+   </data>
+   <data name="ReadFundTransaction">
+      <value>
+select top(1)
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FUND_TRANS_ID,
+  DEPOSIT_NUMBER,
+  AMOUNT,
+  BUSINESS_DATE,
+  CREATED_BY
+from
+  CKT_FUND_TRANS
+where
+  DEPOSIT_NUMBER = @depositNumber
+</value>
+   </data>
+   <data name="ReadFundTransactionStatusFundTransactionStatusHistory">
+      <value>
+select top(1)
+  T1.FUND_TRANS_STAT_ID,
+  T1.CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T2.FTR_IDENTIFIER,
+  T2.FUN_IDENTIFIER,
+  T2.PCA_EFFECTIVE_DATE,
+  T2.PCA_CODE,
+  T2.FTT_IDENTIFIER,
+  T2.EFFECTIVE_TMST,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.REASON_TEXT
+from
+  CKT_FUND_TRANSTAT T1
+  join
+  CKT_FUND_TRNSTATHS T2
+  on
+    (@ftrIdentifier = T2.FTR_IDENTIFIER) and
+    (@funIdentifier = T2.FUN_IDENTIFIER) and
+    (@fttIdentifier = T2.FTT_IDENTIFIER) and
+    (@pcaEffectiveDate = T2.PCA_EFFECTIVE_DATE) and
+    (@pcaCode = T2.PCA_CODE) and
+    (T1.FUND_TRANS_STAT_ID = T2.FTS_IDENTIFIER)
+order by
+  T2.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadProgramCostAccount">
+      <value>
+select top(1)
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_PROG_COST_ACCT
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (CODE = @code)
+</value>
+   </data>
+</root>

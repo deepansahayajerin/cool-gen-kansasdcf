@@ -1,0 +1,35 @@
+Feature: IncomeSource
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "INCS" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Income Source Detail - INCS" window appears
+
+    When user enters "<PERSON_NUMBER>" in "Person #"
+    And user presses "F2"
+    And user presses "Shift+F5"
+    Then "CSE - Employer Maintenance - EMPL" window appears
+
+    # When user enters "<NAME>" in "Name"
+    When user enters "<NAME>" in first field under text "CSE - Employer Maintenance - EMPL"
+    And user presses "F2"
+
+    And user enters "S" in first field under text "Sel"
+    And user presses "F9"
+    Then "CSE - Income Source Detail - INCS" window appears
+
+    When user enters "<TYPE>" in "Type"
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+
+
+    Examples:
+      | PERSON_NUMBER | NAME    | TYPE |
+      | 209           | WALMART | E    |
+
+

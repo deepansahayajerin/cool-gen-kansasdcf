@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateIncomeSource">
+      <value>
+insert into CKT_INCOME_SOURCE
+(
+  IDENTIFIER,
+  TYPE,
+  LAST_QTR_INCOME,
+  LAST_QTR,
+  LAST_QTR_YR,
+  SECOND_QTR_INCOME,
+  SECOND_QTR,
+  SECOND_QTR_YR,
+  THIRD_QTR_INCOME,
+  THIRD_QTR,
+  THIRD_QTR_YR,
+  FOURTH_QTR_INCOME,
+  FOURTH_QTR,
+  FOURTH_QTR_YR,
+  SENT_DT,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CODE,
+  CSP_I_NUMBER,
+  MSE_EFFECTIVE_DATE,
+  CSP_S_NUMBER,
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  SELF_EMPLOYED_IND,
+  EMP_ID,
+  MILITARY_CODE,
+  SEND_TO,
+  WORKER_ID,
+  START_DT,
+  END_DT,
+  ORA_TSTAMP,
+  ORA_CREATED_BY,
+  NOTE,
+  NOTE_2
+)
+values
+(
+  @identifier,
+  @type,
+  @lastQtrIncome,
+  @lastQtr,
+  @lastQtrYr,
+  @lastQtrIncome,
+  @lastQtr,
+  @lastQtrYr,
+  @lastQtrIncome,
+  @lastQtr,
+  @lastQtrYr,
+  @lastQtrIncome,
+  @lastQtr,
+  @lastQtrYr,
+  @sentDt,
+  @returnDt,
+  @returnCd,
+  @name,
+  @lastUpdatedTmst,
+  @lastUpdatedBy,
+  @createdTimestamp,
+  @createdBy,
+  @code,
+  @cspINumber,
+  null,
+  null,
+  null,
+  null,
+  @lastQtr,
+  @empId,
+  @lastQtr,
+  @sendTo,
+  @workerId,
+  @startDt,
+  @endDt,
+  null,
+  null,
+  @note,
+  @note2
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EIN,
+  NAME,
+  PHONE_NO,
+  AREA_CODE
+from
+  CKT_EMPLOYER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadIncomeSource1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  SENT_DT,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CODE,
+  CSP_I_NUMBER,
+  EMP_ID,
+  SEND_TO,
+  WORKER_ID,
+  START_DT,
+  END_DT,
+  NOTE
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (@empId = EMP_ID) and
+  (TYPE = 'E')
+order by
+  START_DT desc
+</value>
+   </data>
+   <data name="ReadIncomeSource2">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  SENT_DT,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CODE,
+  CSP_I_NUMBER,
+  EMP_ID,
+  SEND_TO,
+  WORKER_ID,
+  START_DT,
+  END_DT,
+  NOTE
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (@empId = EMP_ID) and
+  (TYPE = 'E') and
+  (END_DT &gt; @endDt)
+order by
+  START_DT desc
+</value>
+   </data>
+   <data name="UpdateIncomeSource">
+      <value>
+update CKT_INCOME_SOURCE
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  END_DT = @endDt
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+</root>

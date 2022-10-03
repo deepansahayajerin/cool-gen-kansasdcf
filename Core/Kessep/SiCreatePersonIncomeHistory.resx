@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePersonIncomeHistory">
+      <value>
+insert into CKT_PERS_INC_HIST
+(
+  CSP_NUMBER,
+  ISR_IDENTIFIER,
+  IDENTIFIER,
+  INCOME_EFF_DT,
+  INCOME_AMT,
+  FREQ,
+  WORKER_ID,
+  VERIFIED_DT,
+  CHECK_EARNED,
+  CHECK_EARNED_FREQ,
+  CHECK_UNEARNED,
+  CHECK_UNEARN_FREQ,
+  CHECK_PAY_DATE,
+  CHK_DEFERRED_COMP,
+  CHK_LAST_UPDATE_DT,
+  PAYMENT_TYPE,
+  CHECK_MONTHLY_AMT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_I_NUMBER,
+  BAQ_ALLOTMENT
+)
+values
+(
+  @cspNumber,
+  @isrIdentifier,
+  @identifier,
+  @incomeEffDt,
+  @incomeAmt,
+  @freq,
+  @workerId,
+  @verifiedDt,
+  @checkEarned,
+  @checkEarnedFreq,
+  @checkUnearned,
+  @checkUnearnFreq,
+  @checkPayDate,
+  @chkDeferredComp,
+  @checkPayDate,
+  @paymentType,
+  @checkMonthlyAmt,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @cspINumber,
+  @baqAllotment
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_I_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  @casNo = CAS_NO
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  COLLECTION_DATE,
+  OBLGOR_PRSN_NBR
+from
+  CKT_CR_DETAIL
+where
+  (OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+  (COLLECTION_DATE &gt;= @collectionDate)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  VERIFIED_DATE,
+  END_DATE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (VERIFIED_DATE &gt; @verifiedDate) and
+  (END_DATE &gt; @endDate)
+order by
+  VERIFIED_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonObligor">
+      <value>
+select distinct
+  T1.NUMB,
+  T4.CSP_NUMBER,
+  T4.CPA_TYPE
+from
+  CKT_CSE_PERSON T6
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_OB_TRN T4
+  on
+    (T1.NUMB = T4.CSP_NUMBER) and
+    (T4.CPA_TYPE = 'R') and
+    (T4.CPA_SUP_TYPE = 'S') and
+    (T1.NUMB &gt; @numb)
+  on
+    (T6.NUMB = T4.CSP_SUP_NUMBER) and
+    (T6.DATE_OF_DEATH = @dateOfDeath)
+  join
+  CKT_DEBT_DTL T7
+  on
+    (T4.OTY_TYPE = T7.OTY_TYPE) and
+    (T4.OBG_GENERATED_ID = T7.OBG_GENERATED_ID) and
+    (T4.OB_TRN_TYP = T7.OTR_TYPE) and
+    (T4.OB_TRN_ID = T7.OTR_GENERATED_ID) and
+    (T4.CPA_TYPE = T7.CPA_TYPE) and
+    (T4.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T7.BAL_DUE_AMT &gt; 0) and
+    (T7.DUE_DT &lt; @dueDt)
+order by
+  T1.NUMB
+</value>
+   </data>
+</root>

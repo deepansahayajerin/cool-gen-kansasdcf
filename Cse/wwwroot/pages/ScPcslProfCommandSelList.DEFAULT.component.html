@@ -1,0 +1,486 @@
+﻿<!--Name: SC_PCSL_PROF_COMMAND_SEL_LIST, ID: 371721312, model: 746-->
+<div coolContent coolName="SC_PCSL_PROF_COMMAND_SEL_LIST" coolType="SCREEN"
+  (coolInit)="scrollSize = 50; pageSize = 12">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 2.5%; top: 0; width: 10%; height: 4%;" coolCol="3" coolRow="1"
+     coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 30%; top: 0; width: 40%; height: 4%;"
+     coolCol="25" coolRow="1" coolLength="32">CSE  -  KESSEP Security  -  PCSL</div>
+   
+   <div coolType="field" coolColor="green"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 4%; width: 5%; height: 4%;"
+     coolCol="3" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_8"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 8.75%; top: 4%; width: 5%; height: 4%;" coolCol="8"
+     coolRow="2" coolLength="4">
+   
+   <div coolType="literal"
+     style="left: 36.25%; top: 4%; width: 27.5%; height: 4%;" coolCol="30"
+     coolRow="2" coolLength="22">Command Selection List</div>
+   
+   <div coolType="field" coolColor="green"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 12%; width: 8.75%; height: 4%;" coolCol="3"
+     coolRow="4" coolLength="7">Profile</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 12%; width: 12.5%; height: 4%;" coolCol="14"
+     coolRow="4" coolLength="10">{{in.profile.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 30%; top: 12%; width: 31.25%; height: 4%;" coolCol="25"
+     coolRow="4" coolLength="25">{{in.profile.desc}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 16%; width: 11.25%; height: 4%;" coolCol="3"
+     coolRow="5" coolLength="9">Screen Id</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 16%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="5" coolLength="4">{{in.transaction.screenId}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 16%; width: 31.25%; height: 4%;" coolCol="20"
+     coolRow="5" coolLength="25">{{in.transaction.desc}}</div>
+   
+   <div coolType="prompt" style="left: 2.5%; top: 20%; width: 10%; height: 4%;"
+     coolCol="3" coolRow="6" coolLength="8">Trancode</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 20%; width: 5%; height: 4%;" coolCol="14"
+     coolRow="6" coolLength="4">{{in.transaction.trancode}}</div>
+   
+   <div coolType="prompt"
+     style="left: 23.75%; top: 20%; width: 10%; height: 4%;" coolCol="20"
+     coolRow="6" coolLength="8">Menu Ind</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 35%; top: 20%; width: 1.25%; height: 4%;" coolCol="29"
+     coolRow="6" coolLength="1">{{in.transaction.menuInd}}</div>
+   
+   <div coolType="literal"
+     style="left: 56.25%; top: 24%; width: 26.25%; height: 4%;" coolCol="46"
+     coolRow="7" coolLength="21">Command Limitation To</div>
+   
+   <div coolType="prompt"
+     style="left: 6.25%; top: 28%; width: 3.75%; height: 4%;" coolCol="6"
+     coolRow="8" coolLength="3">Sel</div>
+   
+   <div coolType="prompt"
+     style="left: 12.5%; top: 28%; width: 8.75%; height: 4%;" coolCol="11"
+     coolRow="8" coolLength="7">Command</div>
+   
+   <div coolType="prompt"
+     style="left: 25%; top: 28%; width: 13.75%; height: 4%;" coolCol="21"
+     coolRow="8" coolLength="11">Description</div>
+   
+   <div coolType="prompt" style="left: 58.75%; top: 28%; width: 5%; height: 4%;"
+     coolCol="48" coolRow="8" coolLength="4">Case</div>
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 28%; width: 11.25%; height: 4%;" coolCol="54"
+     coolRow="8" coolLength="9">Legal Act</div>
+   <input type="text" coolType="field" name="field_9_7"
+     [(ngModel)]="ref(in.group, pageOffset, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 32%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 32%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="9" coolLength="25" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_9_49"
+     [(ngModel)]="ref(in.group, pageOffset, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 32%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="9" coolLength="1"
+     [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_9_57"
+     [(ngModel)]="ref(in.group, pageOffset, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 32%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="9" coolLength="1"
+     [hidden]="pageOffset >= length(in.group)">
+   <input type="text" coolType="field" name="field_10_7"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 36%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 36%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="10" coolLength="25" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_10_49"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 36%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="10" coolLength="1"
+     [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_10_57"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 36%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="10" coolLength="1"
+     [hidden]="pageOffset + 1 >= length(in.group)">
+   <input type="text" coolType="field" name="field_11_7"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 40%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 40%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="11" coolLength="25" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_11_49"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 40%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="11" coolLength="1"
+     [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_11_57"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 40%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="11" coolLength="1"
+     [hidden]="pageOffset + 2 >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_7"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 44%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 44%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="12" coolLength="25" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_12_49"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 44%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="12" coolLength="1"
+     [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_12_57"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 44%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="12" coolLength="1"
+     [hidden]="pageOffset + 3 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_7"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 48%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 48%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="13" coolLength="25" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_13_49"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 48%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="13" coolLength="1"
+     [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_13_57"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 48%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="13" coolLength="1"
+     [hidden]="pageOffset + 4 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_7"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 52%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 52%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="14" coolLength="25" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_14_49"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 52%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="14" coolLength="1"
+     [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_14_57"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 52%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="14" coolLength="1"
+     [hidden]="pageOffset + 5 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_7"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 56%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 56%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="15" coolLength="25" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_15_49"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 56%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="15" coolLength="1"
+     [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_15_57"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 56%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="15" coolLength="1"
+     [hidden]="pageOffset + 6 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_7"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 60%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 60%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="16" coolLength="25" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_16_49"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 60%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="16" coolLength="1"
+     [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_16_57"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 60%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="16" coolLength="1"
+     [hidden]="pageOffset + 7 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_7"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 8 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 64%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 64%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="17" coolLength="25" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_17_49"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 64%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="17" coolLength="1"
+     [hidden]="pageOffset + 8 >= length(in.group)">
+   <input type="text" coolType="field" name="field_17_57"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 64%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="17" coolLength="1"
+     [hidden]="pageOffset + 8 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_7"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 9 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 68%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 68%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="18" coolLength="25" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_18_49"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 68%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="18" coolLength="1"
+     [hidden]="pageOffset + 9 >= length(in.group)">
+   <input type="text" coolType="field" name="field_18_57"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 68%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="18" coolLength="1"
+     [hidden]="pageOffset + 9 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_7"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 10 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 72%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 72%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="19" coolLength="25" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_19_49"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 72%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="19" coolLength="1"
+     [hidden]="pageOffset + 10 >= length(in.group)">
+   <input type="text" coolType="field" name="field_19_57"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 72%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="19" coolLength="1"
+     [hidden]="pageOffset + 10 >= length(in.group)">
+   <input type="text" coolType="field" name="field_20_7"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'detCommon.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.detCommon.screenField?.selectChar"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 7.5%; top: 76%; width: 1.25%; height: 4%;" coolCol="7"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 11 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 12.5%; top: 76%; width: 10%; height: 4%;" coolCol="11"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.detCommand.value}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 76%; width: 31.25%; height: 4%;" coolCol="21"
+     coolRow="20" coolLength="25" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.detCommand.desc}}</div>
+   <input type="text" coolType="field" name="field_20_49"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'detProfileAuthorization.caseAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.detProfileAuthorization.screenField?.caseAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 60%; top: 76%; width: 1.25%; height: 4%;"
+     coolCol="49" coolRow="20" coolLength="1"
+     [hidden]="pageOffset + 11 >= length(in.group)">
+   <input type="text" coolType="field" name="field_20_57"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'detProfileAuthorization.legalActionAuth').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.detProfileAuthorization.screenField?.legalActionAuth"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" style="left: 70%; top: 76%; width: 1.25%; height: 4%;"
+     coolCol="57" coolRow="20" coolLength="1"
+     [hidden]="pageOffset + 11 >= length(in.group)">
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="20" coolLength="9"
+     style="left: 86.25%; top: 76%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="literal"
+     style="left: 6.25%; top: 80%; width: 51.25%; height: 4%;" coolCol="6"
+     coolRow="21" coolLength="41">'*' -  Currently assigned to the profile.</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 93.75%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="75">PF Keys:  1 Help  2 Disp  3 Exit  5 Add  6 Update  7 Prev  8 Next  9 Return</div>
+   
+   <div coolType="literal"
+     style="left: 11.25%; top: 92%; width: 25%; height: 4%;" coolCol="10"
+     coolRow="24" coolLength="20">10 Delete 12 Signoff</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="ADD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F5">F05=ADD</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   </div>

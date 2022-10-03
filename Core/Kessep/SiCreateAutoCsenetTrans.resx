@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteCsenetTransactionEnvelop#1">
+      <value>
+delete from CKT_CSENET_TRN_ENV
+where
+  (CCA_TRANSACTION_DT = @ccaTransactionDt) and
+  (CCA_TRANS_SER_NUM = @ccaTransSerNum)
+</value>
+   </data>
+   <data name="DeleteCsenetTransactionEnvelop#2">
+      <value>
+delete from CKT_INTERST_CASE
+where
+  (TRANSACTION_DATE = @transactionDate) and
+  (TRANS_SERIAL_NBR = @transSerialNbr)
+</value>
+   </data>
+   <data name="DeleteInterstateCase#1">
+      <value>
+delete from CKT_ASSGN_INT_CASE
+where
+  (ICS_NO = @icsNo) and
+  (ICS_DATE = @icsDate)
+</value>
+   </data>
+   <data name="DeleteInterstateCase#2">
+      <value>
+delete from CKT_INTERST_CASE
+where
+  (TRANS_SERIAL_NBR = @icsNo) and
+  (TRANSACTION_DATE = @icsDate)
+</value>
+   </data>
+   <data name="DeleteInterstateRequestHistory">
+      <value>
+delete from CKT_INT_RQST_HIST
+where
+  (INT_GENERATED_ID = @intGeneratedId) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE
+from
+  CKT_LEGAL_ACT_PERS T4 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  join
+  CKT_LA_PER_LA_CROL T3 with(readuncommitted)
+  on
+    (T1.CASE_ROLE_ID = T3.CRO_ID) and
+    (T1.TYPE = T3.CRO_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUM) and
+    (T1.CAS_NUMBER = T3.CAS_NUM) and
+    (T1.TYPE = 'AP') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate)
+  on
+    (T4.LA_PERSON_ID = T3.LAP_ID) and
+    (T4.EFFECTIVE_DT &lt;= @startDate) and
+    (T4.END_DT &gt;= @startDate) and
+    (T4.LGA_IDENTIFIER = @lgaIdentifier)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_INTERSTAT_RQST T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T3.CRO_ID is not null) and
+    (T3.CRO_TYPE is not null) and
+    (T3.CAS_NUMBER is not null) and
+    (T3.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadCsenetTransactionEnvelop">
+      <value>
+select top(1)
+  CCA_TRANSACTION_DT,
+  CCA_TRANS_SER_NUM,
+  DIRECTION_IND,
+  PROCESSING_STATUS
+from
+  CKT_CSENET_TRN_ENV
+where
+  (@ccaTransactionDt = CCA_TRANSACTION_DT) and
+  (@ccaTransSerNum = CCA_TRANS_SER_NUM) and
+  (DIRECTION_IND = 'O') and
+  (PROCESSING_STATUS = 'S')
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS with(readuncommitted)
+where
+  ([STATE] = @state) and
+  (COUNTY = 0) and
+  (LOCATION = 0)
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  TRANS_SERIAL_NBR,
+  TRANSACTION_DATE
+from
+  CKT_INTERST_CASE
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="ReadInterstateRequest1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadInterstateRequest2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadInterstateRequest3">
+      <value>
+select distinct
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (OTH_ST_CASE_STATUS = 'O') and
+  (CAS_I_NUMBER = @casINumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequestCase1">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.OTHER_STATE_CAS_ID,
+  T1.OTHR_STATE_FIPS_CD,
+  T1.OTH_ST_CASE_STATUS,
+  T1.KS_CASE_IND,
+  T1.CAS_I_NUMBER,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_ID
+from
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  join
+  CKT_INTERSTAT_RQST T1 with(readuncommitted)
+  on
+    (T3.CASE_ROLE_ID = T1.CRO_ID) and
+    (T3.TYPE = T1.CRO_TYPE) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T1.CAS_I_NUMBER = T3.CAS_NUMBER) and
+    (T1.OTH_ST_CASE_STATUS = 'O') and
+    (T3.TYPE = 'AP') and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate) and
+    (T3.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequestCase2">
+      <value>
+select distinct
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (CAS_I_NUMBER = @casINumber) and
+  (CRO_ID is not null) and
+  (CRO_TYPE is not null) and
+  (CAS_I_NUMBER = CAS_NUMBER) and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequestCase3">
+      <value>
+select distinct
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (@croId = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (CAS_I_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory">
+      <value>
+select
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  TRANSACTION_SERIAL,
+  TRANSACTION_DATE,
+  ACTION_REASON_CODE
+from
+  CKT_INT_RQST_HIST
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (TRANSACTION_DATE = @transactionDate) and
+  (TRANSACTION_SERIAL &gt; 0) and
+  (ACTION_REASON_CODE = @actionReasonCode)
+</value>
+   </data>
+</root>

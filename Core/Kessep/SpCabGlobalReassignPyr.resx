@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePotentialRecoveryAssignment">
+      <value>
+insert into CKT_POT_RECOVERY
+(
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  UPDATED_TMST,
+  PRQ_IDENTIFIER,
+  SPD_ID,
+  OFF_ID,
+  OSP_ROLE_CODE,
+  OSP_EFFECTIVE_DATE,
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+)
+values
+(
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @updatedTmst,
+  @prqIdentifier,
+  @spdId,
+  @offId,
+  @ospRoleCode,
+  @ospEffectiveDate,
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate
+)
+</value>
+   </data>
+   <data name="ReadGlobalReassignment">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PROCESS_DATE,
+  STATUS_FLAG,
+  OVERRIDE_FLAG,
+  BUSINESS_OBJ_CODE,
+  ASSIGN_REASON_CODE,
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  OSP_ROLE_CODE,
+  OSP_EFFECTIVE_DATE,
+  SPD_GENERATED_ID1,
+  OFF_GENERATED_ID1,
+  OSP_ROLE_COD,
+  OSP_EFFECTIVE_DAT,
+  BO_COUNT,
+  MON_COUNT
+from
+  CKT_GLOBAL_REASSGN
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider1">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider2">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="ReadPotentialRecoveryAssignment">
+      <value>
+select
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  UPDATED_TMST,
+  PRQ_IDENTIFIER,
+  SPD_ID,
+  OFF_ID,
+  OSP_ROLE_CODE,
+  OSP_EFFECTIVE_DATE,
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_POT_RECOVERY
+where
+  (@ospEffectiveDate = OSP_EFFECTIVE_DATE) and
+  (@ospRoleCode = OSP_ROLE_CODE) and
+  (@offId = OFF_ID) and
+  (@spdId = SPD_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (REASON_CODE = @reasonCode)
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="UpdatePotentialRecoveryAssignment">
+      <value>
+update CKT_POT_RECOVERY
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  UPDATED_TMST = @updatedTmst,
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (CREATED_TMST = @createdTmst) and
+  (PRQ_IDENTIFIER = @prqIdentifier) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_ROLE_CODE = @ospRoleCode) and
+  (OSP_EFFECTIVE_DATE = @ospEffectiveDate)
+</value>
+   </data>
+</root>

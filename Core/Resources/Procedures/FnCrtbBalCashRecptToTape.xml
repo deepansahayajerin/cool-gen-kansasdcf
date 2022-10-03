@@ -1,0 +1,56 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCrtbBalCashRecptToTape"
+           program-name="SWECRTBP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCrtbBalCashRecptToTape"
+           transaction="SR10"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_DEL_CASH_RECEIPT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrdeDeleteCashReceipt"
+       send-command="DISPLAY">
+      <map from="FlowCashReceipt" to="CashReceipt"/>
+      <map from="FlowCashReceiptEvent" to="CashReceiptEvent"/>
+      <map from="FlowCashReceiptSourceType" to="CashReceiptSourceType"/>
+      <map from="FlowCashReceiptType" to="CashReceiptType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CRFO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrfoFwdCashReceiptProc"
+       send-command="DISPLAY">
+      <map from="FlowCashReceipt.SequentialNumber"
+           to="CashReceipt.SequentialNumber"/>
+      <map from="FlowCashReceipt.ReceiptAmount" to="CashReceipt.ReceiptAmount"/>
+      <map from="FlowCashReceipt.CheckNumber" to="CashReceipt.CheckNumber"/>
+      <map from="FlowCashReceipt.ReceiptDate" to="CashReceipt.ReceiptDate"/>
+      <map from="FlowCashReceiptEvent" to="CashReceiptEvent"/>
+      <map from="FlowCashReceiptSourceType" to="CashReceiptSourceType"/>
+      <map from="FlowCashReceiptType" to="CashReceiptType"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <map from="WorkerId" to="WorkerId"/>
+   <map from="Difference" to="Difference"/>
+   <map from="MachTapeAmt" to="MachTapeAmt"/>
+   <map from="SysCalc" to="SysCalc"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.HiddenDetail" to="Import1.HiddenDetail"/>
+   <map from="Export1.DetailCashReceiptType" to="Import1.DetailCashReceiptType"/>
+   <map from="Export1.DetailCashReceipt" to="Import1.DetailCashReceipt"/>
+   <map from="Export1.DetailCashReceiptSourceType"
+        to="Import1.DetailCashReceiptSourceType"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Status" to="Import1.Status"/>
+   <map from="HiddenDisplayOk" to="HiddenDisplayOk"/>
+   <map from="HiddenBalanceFlag" to="HiddenBalanceFlag"/>
+   <map from="FundTransaction" to="FundTransaction"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

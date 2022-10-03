@@ -1,0 +1,148 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeUcolListUraCollections"
+           program-name="SWEUCOLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeUcolListUraCollections"
+           transaction="SRDF"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_COMN"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMN"
+       to="SiComnCaseCompositionByName"
+       send-command-type="none">
+      <return-map from="HiddenSelectedCase" to="SearchCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="PassedFromName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_PARTICIPATION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiPartCaseParticipation"
+       send-command-type="none">
+      <map from="PassObligor.Number" to="Search.Number"/>
+      <map from="PassObligor.FormattedName" to="Search.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeUrahHouseholdUra"
+       send-command="DISPLAY">
+      <map from="SearchImHousehold" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeUracUraByCourtOrder"
+       send-command="DISPLAY">
+      <map from="SearchLegalAction" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeUraaUraAdjustment"
+       send-command="DISPLAY">
+      <map from="SearchImHousehold" to="ImHousehold"/>
+      <map from="SearchMember" to="CsePersonsWorkSet"/>
+      <map from="PassFromDateWorkArea" to="ForAdjustments"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE ECO_LNK_LST_LEG_ACT_BY_CSE_PERSN"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACS"
+       to="LeLacsLstLglActnByCseCase"
+       send-command-type="none">
+      <return-map from="DlgflwSelected" to="SearchLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CURA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeCuraMembersUra"
+       send-command="DISPLAY">
+      <map from="SearchMember" to="SearchCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UMHH ECO_LNK_TO_UHMM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeUhmmUraHouseholdMbrMaint"
+       send-command="DISPLAY">
+      <map from="SearchImHousehold.AeCaseNo" to="ImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IMHH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeImhhListHhInfo"
+       send-command="DISPLAY">
+      <map from="SearchCase" to="SearchCriteria.SearchCase"/>
+      <map from="SearchMember" to="SearchCriteria.SearchCsePersonsWorkSet"/>
+      <map from="SearchLegalAction" to="SearchCriteria.SearchLegalAction"/>
+      <map from="SearchImHousehold.AeCaseNo"
+           to="SearchCriteria.SearchImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeUralListUraAdj"
+       send-command="DISPLAY">
+      <map from="PassMember.Number" to="CsePerson1.Number"/>
+      <map from="PassToDateWorkArea.Month" to="ToYearNMonth.Month"/>
+      <map from="PassToDateWorkArea.Year" to="ToYearNMonth.Year"/>
+      <map from="PassFromDateWorkArea.Month" to="FromYearNMonth.Month"/>
+      <map from="PassFromDateWorkArea.Year" to="FromYearNMonth.Year"/>
+      <map from="SearchImHousehold" to="ImHousehold"/>
+   </on>
+   <map from="SearchCollFrom" to="SearchCollFrom"/>
+   <map from="SearchCollTo" to="SearchCollTo"/>
+   <map from="Export1.Collection" to="Import1.Collection"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.CollectionType" to="Import1.CollectionType"/>
+   <map from="Export1.ImHousehold" to="Import1.ImHousehold"/>
+   <map from="Export1.Case1" to="Import1.Case1"/>
+   <map from="Export1.Obligor" to="Import1.Obligor"/>
+   <map from="Export1.Member" to="Import1.Member"/>
+   <map from="Standard" to="Standard"/>
+   <map from="SearchCase" to="SearchCase"/>
+   <map from="SearchImHousehold" to="SearchImHousehold"/>
+   <map from="MemberPrompt" to="MemberPrompt"/>
+   <map from="SearchMember" to="SearchMemberCsePersonsWorkSet"/>
+   <map from="SearchLegalAction" to="SearchLegalAction"/>
+   <map from="CourtOrderPrompt" to="CourtOrderPrompt"/>
+   <map from="FromMonthyear" to="FromMonthyear"/>
+   <map from="ToMonthyear" to="ToMonthyear"/>
+   <map from="PassMember" to="SearchMemberCsePerson"/>
+   <map from="ObligorPrompt" to="ObligorPrompt"/>
+   <map from="SearchObligor" to="SearchObligor"/>
+   <map from="Export1.Supported" to="Import1.Supported"/>
+   <map from="Export1.UraCollectionApplication"
+        to="Import1.UraCollectionApplication"/>
+   <map from="CasePrompt" to="CasePrompt"/>
+   <map from="Export1.ImHouseholdMbrMnthlySum"
+        to="Import1.ImHouseholdMbrMnthlySum"/>
+   <map from="PreviousMember" to="PreviousMember"/>
+   <map from="SaveLegalAction" to="SaveLegalAction"/>
+   <map from="SaveObligor" to="SaveObligor"/>
+   <map from="SaveCase" to="SaveCase"/>
+   <map from="SaveImHousehold" to="SaveImHousehold"/>
+   <map from="SaveMember" to="SaveMember"/>
+</procedure>

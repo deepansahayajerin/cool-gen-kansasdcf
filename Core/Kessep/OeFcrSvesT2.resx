@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFcrSvesAddress">
+      <value>
+select top(1)
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  ADDRESS_TYPE,
+  ADDR_SCRUB_IND_1,
+  ADDR_SCRUB_IND_2,
+  ADDR_SCRUB_IND_3,
+  CREATED_TIMESTAMP,
+  [STATE],
+  ZIP_CODE5,
+  ZIP_CODE4,
+  CITY,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  ADDRESS_LINE_3,
+  ADDRESS_LINE_4
+from
+  CKT_FCR_SVES_ADDR
+where
+  (@fcgMemberId = FCG_MEMBER_ID) and
+  (@fcgLSRspAgy = FCG_L_S_RSP_AGY) and
+  (ADDRESS_TYPE = '03')
+</value>
+   </data>
+   <data name="ReadFcrSvesGenInfo">
+      <value>
+select top(1)
+  MEMBER_ID,
+  LOC_SRC_RSP_AGY_CD,
+  TRNSMTR_ST_TERR_CD
+from
+  CKT_FCR_SVES_GEN
+where
+  (LOC_SRC_RSP_AGY_CD = 'E05') and
+  (MEMBER_ID = @memberId)
+</value>
+   </data>
+   <data name="ReadFcrSvesTitleIi">
+      <value>
+select top(1)
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  SEQ_NO,
+  CAN_AND_BIC,
+  STATE_CODE,
+  COUNTY_CODE,
+  DIRECT_DEPOSIT_IND,
+  LAF_CODE,
+  DEFERRED_PMT_DT,
+  INITIAL_T2_ENTL_DT,
+  CUR_TII_ENTL_DT,
+  T2_SUSP_TRMNT_DT,
+  NET_MO_T2_BENEFIT,
+  HI_OPTION_CODE,
+  HI_START_DT,
+  HI_STOP_DT,
+  SMI_OPTION_CODE,
+  SMI_START_DT,
+  SMI_STOP_DT,
+  ASST_CATEGORY,
+  BLK_LNG_ENTL_CD,
+  BLK_LNG_PMT_AMT,
+  RAILROAD_INDICATOR,
+  MBC_NO_ENTRIES,
+  MBC_1_DT,
+  MBC_AMT_1,
+  MBC_TYPE_1,
+  MBC_2_DT,
+  MBC_2_AMT,
+  MBC_TYPE_2,
+  MBC_3_DT,
+  MBC_3_AMT,
+  MBC_TYPE_3,
+  MBC_4_DT,
+  MBC_4_AMT,
+  MBC_TYPE_4,
+  MBC_5_DT,
+  MBC_5_AMT,
+  MBC_TYPE_5,
+  MBC_6_DT,
+  MBC_6_AMT,
+  MBC_TYPE_6,
+  MBC_7_DT,
+  MBC_7_AMT,
+  MBC_TYPE_7,
+  MBC_8_DT,
+  MBC_8_AMT,
+  MBC_TYPE_8,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_FCR_SVES_T2
+where
+  (@fcgLSRspAgy = FCG_L_S_RSP_AGY) and
+  (@fcgMemberId = FCG_MEMBER_ID) and
+  (SEQ_NO = 01)
+</value>
+   </data>
+</root>

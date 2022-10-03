@@ -1,0 +1,32 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDtypLstDisbTypes"
+           program-name="SWEDTYPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDtypLstDisbTypes"
+           transaction="SR88"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command="XFERMENU"/>
+   <on exit-state="ECO_XFR_TO_MTN_DISB_TYPE"
+       action="transfer"
+       to="FnDtpmMtnDisbType"
+       send-command="RETDTYP">
+      <map from="Flag" to="Flag"/>
+      <map from="Flow.SystemGeneratedIdentifier"
+           to="DisbursementType.SystemGeneratedIdentifier"/>
+      <map from="Flow.Code" to="DisbursementType.Code"/>
+      <map from="Flow.Name" to="DisbursementType.Name"/>
+      <map from="Flow.ProgramCode" to="DisbursementType.ProgramCode"/>
+      <map from="Flow.EffectiveDate" to="DisbursementType.EffectiveDate"/>
+      <map from="Flow.DiscontinueDate" to="DisbursementType.DiscontinueDate"/>
+      <map from="Flow.Description" to="DisbursementType.Description"/>
+   </on>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailDisbursementType"
+        to="Import1.DetailDisbursementType"/>
+   <map from="StartingCode" to="StartingCode"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+</procedure>

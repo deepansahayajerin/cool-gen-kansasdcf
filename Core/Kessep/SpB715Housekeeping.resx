@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAlert1">
+      <value>
+select top(1)
+  CONTROL_NUMBER,
+  NAME,
+  MESSAGE,
+  DESCRIPTION
+from
+  CKT_ALERT with(readuncommitted)
+where
+  CONTROL_NUMBER = 396
+</value>
+   </data>
+   <data name="ReadAlert2">
+      <value>
+select top(1)
+  CONTROL_NUMBER,
+  NAME,
+  MESSAGE,
+  DESCRIPTION
+from
+  CKT_ALERT with(readuncommitted)
+where
+  CONTROL_NUMBER = 442
+</value>
+   </data>
+   <data name="ReadAlert3">
+      <value>
+select top(1)
+  CONTROL_NUMBER,
+  NAME,
+  MESSAGE,
+  DESCRIPTION
+from
+  CKT_ALERT with(readuncommitted)
+where
+  CONTROL_NUMBER = 447
+</value>
+   </data>
+   <data name="ReadDocumentEventDetail">
+      <value>
+select
+  T1.NAME,
+  T1.TYPE,
+  T1.BUSINESS_OBJECT,
+  T1.RQURED_RSPNSE_DAYS,
+  T1.EVE_NO,
+  T1.EVD_ID,
+  T1.EFFECTIVE_DATE,
+  T1.VERSION_NBR,
+  T2.EXCEPTION_ROUTINE
+from
+  CKT_EVENT_DETAIL T2 with(readuncommitted)
+  join
+  CKT_DOCUMENT T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.EVD_ID) and
+    (T2.EVE_NO = T1.EVE_NO) and
+    (T1.TYPE = 'MAIL')
+order by
+  T1.NAME,
+  T1.EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select
+  NUMB,
+  STATUS_DATE,
+  CSE_OPEN_DATE,
+  INTERSTATE_CASE_ID
+from
+  CKT_CASE with(readuncommitted)
+where
+  (NUMB &gt; @numb) and
+  (NUMB between cast(@caseNumber1 as char(10)) and cast(@caseNumber2 as char(10)))
+order by
+  NUMB
+</value>
+   </data>
+   <data name="ReadCaseAssignmentOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.REASON_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T2.OFFICE_ID,
+  T2.OFF_OFFICE,
+  T3.SERVICE_PRVDER_ID,
+  T3.USER_ID,
+  T3.LAST_NAME,
+  T3.FIRST_NAME,
+  T3.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T3 with(readuncommitted)
+  join
+  CKT_OFFICE T2 with(readuncommitted)
+  join
+  CKT_ASSIGN_CASE T1 with(readuncommitted)
+  on
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.OFFICE_ID = T1.OFF_ID) and
+    (T1.REASON_CODE = 'RSP') and
+    (@casNo = T1.CAS_NO)
+  on
+    T3.SERVICE_PRVDER_ID = T1.SPD_ID
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.CREATED_TIMESTAMP,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T1.START_DATE &lt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE = 'AP')
+order by
+  T1.TYPE,
+  T1.END_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.CREATED_TIMESTAMP,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T1.START_DATE &lt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE = 'AR')
+order by
+  T1.TYPE,
+  T1.END_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

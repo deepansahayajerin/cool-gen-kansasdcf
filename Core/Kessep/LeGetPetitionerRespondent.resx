@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  NON_CSE_PETITIONER
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionPersonCsePerson1">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.[ROLE],
+  T1.END_DT,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (T1.LGA_IDENTIFIER = @lgaIdentifier) and
+    (T1.[ROLE] = 'P') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (
+      (T1.END_DT &gt; @effectiveDt) or
+      (T1.END_DT = @endDt)
+    ) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionPersonCsePerson2">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.[ROLE],
+  T1.END_DT,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (T1.LGA_IDENTIFIER = @lgaIdentifier) and
+    (T1.[ROLE] = 'R') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (
+      (T1.END_DT &gt; @effectiveDt) or
+      (T1.END_DT = @endDt)
+    ) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+</root>

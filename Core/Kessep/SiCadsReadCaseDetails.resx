@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  FULL_SRV_WO_MED_IN,
+  FULL_SERV_W_MED_IN,
+  LOCATE_IND,
+  CLOSURE_REASON,
+  NUMB,
+  INFO_REQUEST_NO,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  EXPEDIDED_PAT_IND,
+  PA_MEDICAL_SERVICE,
+  CLOSURE_LETR_DATE,
+  DUP_CASE_INDICATOR,
+  NOTE,
+  NO_JURISDICTION_CD
+from
+  CKT_CASE with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE,
+  ASSIGNMENT_DATE,
+  ASSIGNMENT_TERM_CD,
+  ASSIGN_OF_RIGHTS,
+  ASSIGNMENT_TERM_DT,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (@casNumber = CAS_NUMBER) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'AR')
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonDesigPayee">
+      <value>
+select top(1)
+  SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CSE_PERSO_NUM
+from
+  CKT_CSE_P_DSIG_PYE with(readuncommitted)
+where
+  (CSE_PERSO_NUM = @csePersoNum) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = 000) and
+  (LOCATION = 00)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select
+  IDENTIFIER,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (CRO_ID is not null) and
+  (@casINumber = CAS_NUMBER) and
+  (CRO_TYPE = @croType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_INT_RQST_HIST with(readuncommitted)
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (FUNCTIONAL_TYPE_CO in (cast(@functionalTypeCode1 as char(3)), cast(@functionalTypeCode2 as char(3))))
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory2">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_INT_RQST_HIST with(readuncommitted)
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (FUNCTIONAL_TYPE_CO &lt;&gt; @functionalTypeCo1) and
+  (FUNCTIONAL_TYPE_CO &lt;&gt; @functionalTypeCo2)
+</value>
+   </data>
+</root>

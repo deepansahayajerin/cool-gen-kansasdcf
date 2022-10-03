@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteJobRun">
+      <value>
+delete from CKT_JOB_RUN
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+   <data name="DeleteReportData">
+      <value>
+delete from CKT_REPORT_DATA
+where
+  (TYPE = @type) and
+  (SEQUENCE_NUMBER = @sequenceNumber) and
+  (JOB_NAME = @jobName) and
+  (JRU_SYSTEM_GEN_ID = @jruSystemGenId)
+</value>
+   </data>
+   <data name="ReadJobRun">
+      <value>
+select
+  START_TIMESTAMP,
+  END_TIMESTAMP,
+  STATUS,
+  SPD_SRVC_PRVDER_ID,
+  PRINTER_ID,
+  OUTPUT_TYPE,
+  ERROR_MSG,
+  EMAIL_ADDRESS,
+  PARM_INFO,
+  JOB_NAME,
+  SYSTEM_GEN_ID
+from
+  CKT_JOB_RUN
+where
+  cast(START_TIMESTAMP as date) &lt;= cast(@date as date)
+</value>
+   </data>
+   <data name="ReadReportData">
+      <value>
+select
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+from
+  CKT_REPORT_DATA
+where
+  (@jobName = JOB_NAME) and
+  (@jruSystemGenId = JRU_SYSTEM_GEN_ID)
+</value>
+   </data>
+   <data name="ReadServiceProviderJobRun">
+      <value>
+select
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL,
+  T2.START_TIMESTAMP,
+  T2.END_TIMESTAMP,
+  T2.STATUS,
+  T2.PRINTER_ID,
+  T2.OUTPUT_TYPE,
+  T2.ERROR_MSG,
+  T2.EMAIL_ADDRESS,
+  T2.PARM_INFO,
+  T2.JOB_NAME,
+  T2.SYSTEM_GEN_ID
+from
+  CKT_SERVICE_PRVDER T1 with(readuncommitted)
+  join
+  CKT_JOB_RUN T2 with(readuncommitted)
+  on
+    T1.SERVICE_PRVDER_ID = T2.SPD_SRVC_PRVDER_ID
+order by
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL
+</value>
+   </data>
+</root>

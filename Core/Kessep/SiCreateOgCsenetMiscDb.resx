@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInterstateMiscellaneous">
+      <value>
+insert into CKT_INTERST_MISC
+(
+  STATUS_CHANGE_CODE,
+  NEW_CASE_ID,
+  INFO_TEXT_1,
+  INFO_TEXT_2,
+  INFO_TEXT_3,
+  CCA_TRANS_SER_NUM,
+  CCA_TRANSACTION_DT,
+  INFO_TEXT_LINE_4,
+  INFO_TEXT_LINE_5
+)
+values
+(
+  @statusChangeCode,
+  @newCaseId,
+  @infoText1,
+  @infoText2,
+  @infoText3,
+  @ccaTransSerNum,
+  @ccaTransactionDt,
+  @infoTextLine4,
+  @infoTextLine5
+)
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  TRANS_SERIAL_NBR,
+  TRANSACTION_DATE
+from
+  CKT_INTERST_CASE
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  TRANSACTION_SERIAL,
+  NOTE
+from
+  CKT_INT_RQST_HIST
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+</root>

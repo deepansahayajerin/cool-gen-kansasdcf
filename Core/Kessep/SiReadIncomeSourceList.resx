@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME,
+  EIWO_END_DATE,
+  EIWO_START_DATE
+from
+  CKT_EMPLOYER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadIncomeSource1">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CSP_I_NUMBER,
+  EMP_ID,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (END_DT &lt;= @endDt)
+order by
+  END_DT desc,
+  TYPE,
+  RETURN_DT desc,
+  IDENTIFIER
+</value>
+   </data>
+   <data name="ReadIncomeSource2">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CSP_I_NUMBER,
+  EMP_ID,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (END_DT &lt;= @endDt) and
+  (TYPE = @type)
+order by
+  END_DT desc,
+  RETURN_DT desc,
+  IDENTIFIER
+</value>
+   </data>
+   <data name="ReadPersonIncomeHistory">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  ISR_IDENTIFIER,
+  IDENTIFIER,
+  INCOME_EFF_DT,
+  INCOME_AMT,
+  FREQ,
+  CSP_I_NUMBER,
+  BAQ_ALLOTMENT
+from
+  CKT_PERS_INC_HIST
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (@isrIdentifier = ISR_IDENTIFIER)
+order by
+  INCOME_EFF_DT desc
+</value>
+   </data>
+</root>

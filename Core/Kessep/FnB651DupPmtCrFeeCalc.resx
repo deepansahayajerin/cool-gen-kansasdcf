@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDisbCollectionCollection">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.AMOUNT,
+  T1.PROCESS_DATE,
+  T1.OTY_ID,
+  T1.OTR_TYPE_DISB,
+  T1.OTR_ID,
+  T1.CPA_TYPE_DISB,
+  T1.CSP_NUMBER_DISB,
+  T1.OBG_ID,
+  T1.CRD_ID,
+  T1.CRV_ID,
+  T1.CST_ID,
+  T1.CRT_ID,
+  T1.COL_ID,
+  T1.REFERENCE_NUMBER,
+  T2.COLL_DT,
+  T2.PGM_APPLD_TO
+from
+  CKT_COLLECTION T2
+  join
+  CKT_DISB_TRAN T1
+  on
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.PROCESS_DATE = @processDate) and
+    (T1.REFERENCE_NUMBER = @referenceNumber) and
+    (T2.COLL_ID = T1.COL_ID) and
+    (T2.OTY_ID = T1.OTY_ID) and
+    (T2.OBG_ID = T1.OBG_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER_DISB) and
+    (T2.CPA_TYPE = T1.CPA_TYPE_DISB) and
+    (T2.OTR_ID = T1.OTR_ID) and
+    (T2.OTR_TYPE = T1.OTR_TYPE_DISB) and
+    (T2.CRT_TYPE = T1.CRT_ID) and
+    (T2.CST_ID = T1.CST_ID) and
+    (T2.CRV_ID = T1.CRV_ID) and
+    (T2.CRD_ID = T1.CRD_ID) and
+    (
+      T2.PGM_APPLD_TO in ('NA', 'NAI', 'AFI',
+        'FCI')
+    )
+order by
+  T1.AMOUNT
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  TYPE,
+  OTY_ID,
+  OTR_TYPE_DISB,
+  OTR_ID,
+  CPA_TYPE_DISB,
+  CSP_NUMBER_DISB,
+  OBG_ID,
+  CRD_ID,
+  CRV_ID,
+  CST_ID,
+  CRT_ID,
+  COL_ID
+from
+  CKT_DISB_TRAN
+where
+  (@colId = COL_ID) and
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumberDisb = CSP_NUMBER_DISB) and
+  (@cpaTypeDisb = CPA_TYPE_DISB) and
+  (@otrId = OTR_ID) and
+  (@otrTypeDisb = OTR_TYPE_DISB) and
+  (@crtId = CRT_ID) and
+  (@cstId = CST_ID) and
+  (@crvId = CRV_ID) and
+  (@crdId = CRD_ID) and
+  (DISB_TRAN_ID &lt;&gt; @disbTranId)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction2">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.DBT_GENERATED_ID
+from
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_TRAN_RLN T3
+  on
+    (T1.DBT_GENERATED_ID = 73) and
+    (T1.DISB_TRAN_ID = T3.DTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (@dtrPGeneratedId = T3.DTR_P_GENERATED_ID) and
+    (@cpaPType = T3.CPA_P_TYPE) and
+    (@cspPNumber = T3.CSP_P_NUMBER)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.TRB_ID
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_OBLIGATION T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T2.DTY_GENERATED_ID = @dtyGeneratedId) and
+    (T2.OB_ID = @obId) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.CPA_TYPE = @cpaType)
+</value>
+   </data>
+   <data name="ReadMonthlyCourtOrderFee">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  COURT_ORDER_NUMBER,
+  YEAR_MONTH,
+  AMOUNT
+from
+  CKT_MO_CT_ORDR_FEE
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (YEAR_MONTH = @yearMonth) and
+  (COURT_ORDER_NUMBER = @courtOrderNumber)
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  FIP_LOCATION,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadTribunalFeeInformation">
+      <value>
+select top(1)
+  TRB_ID,
+  TRIBUNAL_FEE_ID,
+  EFFECTIVE_DATE,
+  RATE,
+  CAP,
+  DISCONTINUE_DATE
+from
+  CKT_TRIB_FEE_INFO
+where
+  (@trbId = TRB_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+</root>

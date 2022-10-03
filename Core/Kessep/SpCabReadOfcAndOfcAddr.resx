@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE
+from
+  CKT_CSE_ORGANIZATN
+where
+  (TYPE_CODE = @typeCode) and
+  (ORGANZTN_ID = @organztnId)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  OFF_IDENTIFIER
+from
+  CKT_FIPS
+where
+  @offIdentifier = OFF_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  OFFICE_ID,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  (OFFICE_ID = @officeId) and
+  (cast(@systemGeneratedId as smallint) &gt; 0)
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select top(1)
+  OFFICE_ID,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOffice3">
+      <value>
+select top(1)
+  OFFICE_ID,
+  MAIN_PHONE_NUMBER,
+  MAIN_FAX_NUMBER,
+  TYPE_CODE,
+  NAME,
+  COG_TYPE_CODE,
+  COG_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  MAIN_PHONE_AREA_CD,
+  FAX_AREA_CD,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeAddress">
+      <value>
+select
+  OFF_GENERATED_ID,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  POSTAL_CODE,
+  ZIP,
+  ZIP4,
+  COUNTRY,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP
+from
+  CKT_OFFICE_ADDRESS
+where
+  @offGeneratedId = OFF_GENERATED_ID
+order by
+  TYPE
+</value>
+   </data>
+</root>

@@ -1,0 +1,550 @@
+﻿<!--Name: OE_URAH_HOUSEHOLD_URA, ID: 372632164, model: 746-->
+<div coolContent coolName="OE_URAH_HOUSEHOLD_URA" coolType="SCREEN"
+  (coolInit)="scrollSize = 150; pageSize = 6">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 33.75%; top: 0; width: 32.5%; height: 4%;" coolCol="28"
+     coolRow="1" coolLength="26">CSE - Household URA - URAH</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 18.75%; top: 8%; width: 11.25%; height: 4%;" coolCol="16"
+     coolRow="3" coolLength="9">AE Case #</div>
+   <input type="text" coolType="field" name="field_3_26"
+     [(ngModel)]="in.search.aeCaseNo"
+     [coolVideo]="out.search.screenField?.aeCaseNo" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="8"
+     style="left: 31.25%; top: 8%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="3" coolLength="8">
+   
+   <div coolType="literal"
+     style="left: 92.5%; top: 8%; width: 6.25%; height: 4%;" coolCol="75"
+     coolRow="3" coolLength="5">Total</div>
+   
+   <div coolType="prompt"
+     style="left: 13.75%; top: 12%; width: 16.25%; height: 4%;" coolCol="12"
+     coolRow="4" coolLength="13">List From/To:</div>
+   <input type="text" coolType="field" name="field_4_26"
+     [(ngModel)]="in.searchFrom.textMonthYear"
+     [coolVideo]="out.searchFrom.screenField?.textMonthYear" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="6"
+     style="left: 31.25%; top: 12%; width: 7.5%; height: 4%;" coolCol="26"
+     coolRow="4" coolLength="6">
+   
+   <div coolType="literal"
+     style="left: 40%; top: 12%; width: 1.25%; height: 4%;" coolCol="33"
+     coolRow="4" coolLength="1">/</div>
+   <input type="text" coolType="field" name="field_4_35"
+     [(ngModel)]="in.searchTo.textMonthYear"
+     [coolVideo]="out.searchTo.screenField?.textMonthYear" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="6"
+     style="left: 42.5%; top: 12%; width: 7.5%; height: 4%;" coolCol="35"
+     coolRow="4" coolLength="6">
+   
+   <div coolType="literal"
+     style="left: 52.5%; top: 12%; width: 20%; height: 4%;" coolCol="43"
+     coolRow="4" coolLength="16">(Format: MMYYYY)</div>
+   
+   <div coolType="literal"
+     style="left: 91.25%; top: 12%; width: 8.75%; height: 4%;" coolCol="74"
+     coolRow="4" coolLength="7">Support</div>
+   
+   <div coolType="literal"
+     style="left: 91.25%; top: 16%; width: 8.75%; height: 4%;" coolCol="74"
+     coolRow="5" coolLength="7">for all</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 20%; width: 12.5%; height: 4%;" coolCol="2"
+     coolRow="6" coolLength="10">Sel Mth/Yr</div>
+   
+   <div coolType="literal"
+     style="left: 31.25%; top: 20%; width: 6.25%; height: 4%;" coolCol="26"
+     coolRow="6" coolLength="5">Grant</div>
+   
+   <div coolType="literal"
+     style="left: 43.75%; top: 20%; width: 5%; height: 4%;" coolCol="36"
+     coolRow="6" coolLength="4">Coll</div>
+   
+   <div coolType="literal"
+     style="left: 51.25%; top: 20%; width: 8.75%; height: 4%;" coolCol="42"
+     coolRow="6" coolLength="7">SS-Coll</div>
+   
+   <div coolType="literal"
+     style="left: 67.5%; top: 20%; width: 3.75%; height: 4%;" coolCol="55"
+     coolRow="6" coolLength="3">Adj</div>
+   
+   <div coolType="literal"
+     style="left: 81.25%; top: 20%; width: 3.75%; height: 4%;" coolCol="66"
+     coolRow="6" coolLength="3">URA</div>
+   
+   <div coolType="literal"
+     style="left: 91.25%; top: 20%; width: 8.75%; height: 4%;" coolCol="74"
+     coolRow="6" coolLength="7">HH mbrs</div>
+   <input type="text" coolType="field" name="field_7_3"
+     [(ngModel)]="ref(in.detail, pageOffset, 'dtlCommon.selectChar').value"
+     [coolVideo]="out.detail?.[pageOffset]?.dtlCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 24%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="1" [hidden]="pageOffset >= length(in.detail)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 24%; width: 7.5%; height: 4%;" coolCol="6"
+     coolRow="7" coolLength="6" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlDateWorkAttributes.textMonthYear}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 24%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlGrpLabel1.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 24%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlImHouseholdMbrMnthlySum.grantAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 24%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlGrpAfFcColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 24%; width: 10%; height: 4%;" coolCol="41"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlGrpSsColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 24%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="7" coolLength="9" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlGrpAfFc.adjustmentAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 24%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="7" coolLength="9" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlImHouseholdMbrMnthlySum.uraAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 88.75%; top: 24%; width: 11.25%; height: 4%;" coolCol="72"
+     coolRow="7" coolLength="9">{{in.totGrpAfFcOwed.totalCurrency|coolNumber:'##,##0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 28%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="8" coolLength="8" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlGrpLabel2.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 28%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="8" coolLength="8" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlImHouseholdMbrMnthlySum.grantMedicalAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 28%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="8" coolLength="8" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlGrpMedicalColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 28%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="8" coolLength="9" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlGrpMedical.adjustmentAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 28%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="8" coolLength="9" [hidden]="pageOffset >= length(in.detail)">{{in.detail?.[pageOffset]?.dtlImHouseholdMbrMnthlySum.uraMedicalAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 88.75%; top: 28%; width: 11.25%; height: 4%;" coolCol="72"
+     coolRow="8" coolLength="9">{{in.totGrpMedicalOwed.totalCurrency|coolNumber:'##,##0.00;#':1}}</div>
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.detail, pageOffset + 1, 'dtlCommon.selectChar').value"
+     [coolVideo]="out.detail?.[pageOffset + 1]?.dtlCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 1 >= length(in.detail)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 32%; width: 7.5%; height: 4%;" coolCol="6"
+     coolRow="9" coolLength="6" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlDateWorkAttributes.textMonthYear}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 32%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlGrpLabel1.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 32%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlImHouseholdMbrMnthlySum.grantAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 32%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlGrpAfFcColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 32%; width: 10%; height: 4%;" coolCol="41"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlGrpSsColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 32%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="9" coolLength="9" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlGrpAfFc.adjustmentAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 32%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="9" coolLength="9" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlImHouseholdMbrMnthlySum.uraAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 36%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlGrpLabel2.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 36%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlImHouseholdMbrMnthlySum.grantMedicalAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 36%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlGrpMedicalColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 36%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="10" coolLength="9" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlGrpMedical.adjustmentAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 36%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="10" coolLength="9" [hidden]="pageOffset + 1 >= length(in.detail)">{{in.detail?.[pageOffset + 1]?.dtlImHouseholdMbrMnthlySum.uraMedicalAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_11_3"
+     [(ngModel)]="ref(in.detail, pageOffset + 2, 'dtlCommon.selectChar').value"
+     [coolVideo]="out.detail?.[pageOffset + 2]?.dtlCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 2 >= length(in.detail)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 40%; width: 7.5%; height: 4%;" coolCol="6"
+     coolRow="11" coolLength="6" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlDateWorkAttributes.textMonthYear}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 40%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlGrpLabel1.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 40%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlImHouseholdMbrMnthlySum.grantAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 40%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlGrpAfFcColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 40%; width: 10%; height: 4%;" coolCol="41"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlGrpSsColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 40%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="11" coolLength="9" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlGrpAfFc.adjustmentAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 40%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="11" coolLength="9" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlImHouseholdMbrMnthlySum.uraAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 44%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlGrpLabel2.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 44%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlImHouseholdMbrMnthlySum.grantMedicalAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 44%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlGrpMedicalColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 44%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="12" coolLength="9" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlGrpMedical.adjustmentAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 44%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="12" coolLength="9" [hidden]="pageOffset + 2 >= length(in.detail)">{{in.detail?.[pageOffset + 2]?.dtlImHouseholdMbrMnthlySum.uraMedicalAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.detail, pageOffset + 3, 'dtlCommon.selectChar').value"
+     [coolVideo]="out.detail?.[pageOffset + 3]?.dtlCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 3 >= length(in.detail)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 48%; width: 7.5%; height: 4%;" coolCol="6"
+     coolRow="13" coolLength="6" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlDateWorkAttributes.textMonthYear}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 48%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlGrpLabel1.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 48%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlImHouseholdMbrMnthlySum.grantAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 48%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlGrpAfFcColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 48%; width: 10%; height: 4%;" coolCol="41"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlGrpSsColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 48%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="13" coolLength="9" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlGrpAfFc.adjustmentAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 48%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="13" coolLength="9" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlImHouseholdMbrMnthlySum.uraAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 52%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlGrpLabel2.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 52%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlImHouseholdMbrMnthlySum.grantMedicalAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 52%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlGrpMedicalColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 52%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="14" coolLength="9" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlGrpMedical.adjustmentAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 52%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="14" coolLength="9" [hidden]="pageOffset + 3 >= length(in.detail)">{{in.detail?.[pageOffset + 3]?.dtlImHouseholdMbrMnthlySum.uraMedicalAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_15_3"
+     [(ngModel)]="ref(in.detail, pageOffset + 4, 'dtlCommon.selectChar').value"
+     [coolVideo]="out.detail?.[pageOffset + 4]?.dtlCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 4 >= length(in.detail)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 56%; width: 7.5%; height: 4%;" coolCol="6"
+     coolRow="15" coolLength="6" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlDateWorkAttributes.textMonthYear}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 56%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlGrpLabel1.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 56%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlImHouseholdMbrMnthlySum.grantAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 56%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlGrpAfFcColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 56%; width: 10%; height: 4%;" coolCol="41"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlGrpSsColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 56%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="15" coolLength="9" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlGrpAfFc.adjustmentAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 56%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="15" coolLength="9" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlImHouseholdMbrMnthlySum.uraAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 60%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlGrpLabel2.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 60%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlImHouseholdMbrMnthlySum.grantMedicalAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 60%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlGrpMedicalColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 60%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="16" coolLength="9" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlGrpMedical.adjustmentAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 60%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="16" coolLength="9" [hidden]="pageOffset + 4 >= length(in.detail)">{{in.detail?.[pageOffset + 4]?.dtlImHouseholdMbrMnthlySum.uraMedicalAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.detail, pageOffset + 5, 'dtlCommon.selectChar').value"
+     [coolVideo]="out.detail?.[pageOffset + 5]?.dtlCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 5 >= length(in.detail)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 64%; width: 7.5%; height: 4%;" coolCol="6"
+     coolRow="17" coolLength="6" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlDateWorkAttributes.textMonthYear}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 64%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlGrpLabel1.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 64%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlImHouseholdMbrMnthlySum.grantAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 64%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlGrpAfFcColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 64%; width: 10%; height: 4%;" coolCol="41"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlGrpSsColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 64%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlGrpAfFc.adjustmentAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 64%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlImHouseholdMbrMnthlySum.uraAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 16.25%; top: 68%; width: 10%; height: 4%;" coolCol="14"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlGrpLabel2.text8}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 68%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlImHouseholdMbrMnthlySum.grantMedicalAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 68%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlGrpMedicalColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 68%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlGrpMedical.adjustmentAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 68%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 5 >= length(in.detail)">{{in.detail?.[pageOffset + 5]?.dtlImHouseholdMbrMnthlySum.uraMedicalAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="61" coolRow="19" coolLength="9"
+     style="left: 75%; top: 72%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="literal"
+     style="left: 11.25%; top: 76%; width: 15%; height: 4%;" coolCol="10"
+     coolRow="20" coolLength="12">AF/FC-Total:</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 76%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="20" coolLength="8">{{in.totGrp.grantAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 76%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="20" coolLength="8">{{in.totGrpAfFcColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 76%; width: 10%; height: 4%;" coolCol="41"
+     coolRow="20" coolLength="8">{{in.totGrpSsColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 76%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="20" coolLength="9">{{in.totGrpAfFc.adjustmentAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 76%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="20" coolLength="9">{{in.totGrp.uraAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="literal"
+     style="left: 8.75%; top: 80%; width: 17.5%; height: 4%;" coolCol="8"
+     coolRow="21" coolLength="14">Medical-Total:</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 27.5%; top: 80%; width: 10%; height: 4%;" coolCol="23"
+     coolRow="21" coolLength="8">{{in.totGrp.grantMedicalAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 38.75%; top: 80%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="21" coolLength="8">{{in.totGrpMedicalColl.collectionAmountApplied|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 61.25%; top: 80%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="21" coolLength="9">{{in.totGrpMedical.adjustmentAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 80%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="21" coolLength="9">{{in.totGrp.uraMedicalAmount|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 98.75%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="79">PF Keys : 1 Help  2 Display  3 Exit  4 List  7 Prev  8 Next  9 Return  11 Clear</div>
+   
+   <div coolType="literal"
+     style="left: 11.25%; top: 92%; width: 80%; height: 4%;" coolCol="10"
+     coolRow="24" coolLength="64">12 Signoff  15 IMHH  17 URAC  18 CURA  20 URAL  21 UCOL  22 UHMM</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="IMHH" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=IMHH</a>
+   <a coolType="action" coolCommand="URAC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F5">F17=URAC</a>
+   <a coolType="action" coolCommand="CURA" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F6">F18=CURA</a>
+   <a coolType="action" coolCommand="URAL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F8">F20=URAL</a>
+   <a coolType="action" coolCommand="UCOL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F9">F21=UCOL</a>
+   <a coolType="action" coolCommand="UHMM" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F10">F22=UHMM</a>
+   </div>

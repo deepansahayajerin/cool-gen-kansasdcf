@@ -1,0 +1,76 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCafmMtnCollAgncyFeeInfo"
+           program-name="SWECAFMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCafmMtnCollAgncyFeeInfo"
+           transaction="SR53"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="Code.CodeName" to="RetnLstCode.CodeName"/>
+      <return-map from="DlgflwSelected" to="RetnLstCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST2"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOFCL"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <map from="ToFlow.TypeCode" to="StartingOffice.TypeCode"/>
+      <return-map from="HiddenSelected" to="Office"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_COLL_AGENCY_FEES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCAFL"
+       to="FnCaflLstCollAgencyFeeInfo"
+       send-command="DISPLAY">
+      <map from="SelectedObligationType" to="ObligationType"/>
+      <map from="SelectedContractorFeeInformation" to="ContractorFeeInformation"/>
+      <return-map from="SelectedOffice" to="Office"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_OBLIGATION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOBTL"
+       to="FnObtlLstObligTypes"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="ObligationType"/>
+   </on>
+   <map from="Export1.DetailContractorFeeInformation"
+        to="Import1.DetailContractorFeeInformation"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.HiddenContractorFeeInformation"
+        to="Import1.HiddenContractorFeeInformation"/>
+   <map from="Export1.HiddenObligationType" to="Import1.HiddenObligationType"/>
+   <map from="DisbMenu" to="DisbMenu"/>
+   <map from="Code" to="RetnLstCode"/>
+   <map from="ObligationType" to="ObligationType"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="Export1.DetailObligationType.Code"
+        to="Import1.DetailObligationType.Code"/>
+   <map from="ContractorFeeInformation.Rate" to="ContractorFeeInformation.Rate"/>
+   <map from="ContractorFeeInformation.EffectiveDate"
+        to="ContractorFeeInformation.EffectiveDate"/>
+   <map from="ContractorFeeInformation.DiscontinueDate"
+        to="ContractorFeeInformation.DiscontinueDate"/>
+   <map from="ContractorFeeInformation.DistributionProgramType"
+        to="ContractorFeeInformation.DistributionProgramType"/>
+   <map from="ContractorFeeInformation.JudicialDistrict"
+        to="ContractorFeeInformation.JudicialDistrict"/>
+   <map from="Office.SystemGeneratedId" to="Office.SystemGeneratedId"/>
+   <map from="Office.Name" to="Office.Name"/>
+   <map from="HiddenId.SystemGeneratedId" to="HiddenId.SystemGeneratedId"/>
+</procedure>

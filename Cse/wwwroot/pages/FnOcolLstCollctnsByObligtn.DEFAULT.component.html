@@ -1,0 +1,673 @@
+﻿<!--Name: FN_OCOL_LST_COLLCTNS_BY_OBLIGTN, ID: 371738588, model: 746-->
+<div coolContent coolName="FN_OCOL_LST_COLLCTNS_BY_OBLIGTN" coolType="SCREEN"
+  (coolInit)="scrollSize = 90; pageSize = 9">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 23.75%; top: 0; width: 53.75%; height: 4%;" coolCol="20"
+     coolRow="1" coolLength="43">CSE - LIST COLLECTIONS BY OBLIGATION - OCOL</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="literal"
+     style="left: 33.75%; top: 4%; width: 31.25%; height: 4%;" coolCol="28"
+     coolRow="2" coolLength="25" coolColor="red">POTENTIAL FTI INFORMATION</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 12%; width: 10%; height: 4%;"
+     coolCol="2" coolRow="4" coolLength="8" coolColor="white">AP/Payor</div>
+   <input type="text" coolType="field" name="field_4_21"
+     [(ngModel)]="in.searchCsePerson.number"
+     [coolVideo]="out.searchCsePerson.screenField?.number" coolAutotab
+     coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 25%; top: 12%; width: 12.5%; height: 4%;" coolCol="21"
+     coolRow="4" coolLength="10">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 38.75%; top: 12%; width: 27.5%; height: 4%;" coolCol="32"
+     coolRow="4" coolLength="22">{{in.searchCsePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="literal"
+     style="left: 71.25%; top: 12%; width: 15%; height: 4%;" coolCol="58"
+     coolRow="4" coolLength="12" coolColor="white">Current Owed</div>
+   <input type="text" coolType="field" name="field_4_72"
+     [(ngModel)]="in.screenOwedAmounts.currentAmountOwed"
+     [coolVideo]="out.screenOwedAmounts.screenField?.currentAmountOwed"
+     coolAutotab coolReadonly coolAlign="right" coolColor="cyan"
+     coolNumber="####0.00 ;####0.00-" [attr.maxlength]="9"
+     style="left: 88.75%; top: 12%; width: 11.25%; height: 4%;" coolCol="72"
+     coolRow="4" coolLength="9">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 16%; width: 13.75%; height: 4%;" coolCol="2"
+     coolRow="5" coolLength="11">Court Order</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 16%; width: 15%; height: 4%;" coolCol="21"
+     coolRow="5" coolLength="12">{{in.searchLegalAction.standardNumber}}</div>
+   
+   <div coolType="prompt"
+     style="left: 41.25%; top: 16%; width: 17.5%; height: 4%;" coolCol="34"
+     coolRow="5" coolLength="14">Interstate Ind</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 61.25%; top: 16%; width: 1.25%; height: 4%;" coolCol="50"
+     coolRow="5" coolLength="1">{{in.searchObligation.orderTypeCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 71.25%; top: 16%; width: 15%; height: 4%;" coolCol="58"
+     coolRow="5" coolLength="12" coolColor="white">Arrears Owed</div>
+   <input type="text" coolType="field" name="field_5_72"
+     [(ngModel)]="in.screenOwedAmounts.arrearsAmountOwed"
+     [coolVideo]="out.screenOwedAmounts.screenField?.arrearsAmountOwed"
+     coolAutotab coolReadonly coolAlign="right" coolColor="cyan"
+     coolNumber="####0.00 ;####0.00-" [attr.maxlength]="9"
+     style="left: 88.75%; top: 16%; width: 11.25%; height: 4%;" coolCol="72"
+     coolRow="5" coolLength="9">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 20%; width: 18.75%; height: 4%;" coolCol="2"
+     coolRow="6" coolLength="15">Obligation Type</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 20%; width: 12.5%; height: 4%;" coolCol="21"
+     coolRow="6" coolLength="10">{{in.searchObligationType.code}}</div>
+   
+   <div coolType="prompt"
+     style="left: 41.25%; top: 20%; width: 10%; height: 4%;" coolCol="34"
+     coolRow="6" coolLength="8" coolColor="white">Oblig Id</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 52.5%; top: 20%; width: 3.75%; height: 4%;" coolCol="43"
+     coolRow="6" coolLength="3">{{in.searchObligation.systemGeneratedIdentifier|coolNumber:'##0;#':1}}</div>
+   
+   <div coolType="literal"
+     style="left: 70%; top: 20%; width: 16.25%; height: 4%;" coolCol="57"
+     coolRow="6" coolLength="13" coolColor="white">Interest Owed</div>
+   <input type="text" coolType="field" name="field_6_72"
+     [(ngModel)]="in.screenOwedAmounts.interestAmountOwed"
+     [coolVideo]="out.screenOwedAmounts.screenField?.interestAmountOwed"
+     coolAutotab coolReadonly coolAlign="right" coolColor="cyan"
+     coolNumber="####0.00 ;####0.00-" [attr.maxlength]="9"
+     style="left: 88.75%; top: 20%; width: 11.25%; height: 4%;" coolCol="72"
+     coolRow="6" coolLength="9">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 24%; width: 21.25%; height: 4%;" coolCol="2"
+     coolRow="7" coolLength="17">Obligation Amount</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 25%; top: 24%; width: 15%; height: 4%;" coolCol="21"
+     coolRow="7" coolLength="12">{{in.totalAmountDue.totalCurrency|coolNumber:'#######0.00 ;#######0.00-':0}}</div>
+   
+   <div coolType="prompt"
+     style="left: 41.25%; top: 24%; width: 11.25%; height: 4%;" coolCol="34"
+     coolRow="7" coolLength="9">Frequency</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 55%; top: 24%; width: 2.5%; height: 4%;" coolCol="45"
+     coolRow="7" coolLength="2">{{in.obligationPaymentSchedule.frequencyCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 73.75%; top: 24%; width: 12.5%; height: 4%;" coolCol="60"
+     coolRow="7" coolLength="10" coolColor="white">Total Owed</div>
+   <input type="text" coolType="field" name="field_7_72"
+     [(ngModel)]="in.screenOwedAmounts.totalAmountOwed"
+     [coolVideo]="out.screenOwedAmounts.screenField?.totalAmountOwed"
+     coolAutotab coolReadonly coolAlign="right" coolColor="cyan"
+     coolNumber="####0.00 ;####0.00-" [attr.maxlength]="9"
+     style="left: 88.75%; top: 24%; width: 11.25%; height: 4%;" coolCol="72"
+     coolRow="7" coolLength="9">
+   
+   <div coolType="prompt" style="left: 1.25%; top: 28%; width: 20%; height: 4%;"
+     coolCol="2" coolRow="8" coolLength="16">Accrual/due date</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 28%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="8" coolLength="8">{{in.accrualOrDue.date|coolDate:'MMddyyyy':0}}</div>
+   <input type="text" coolType="field" name="field_8_41"
+     [(ngModel)]="in.mthOblSummaryNfMsg.msg40"
+     [coolVideo]="out.mthOblSummaryNfMsg.screenField?.msg40" coolAutotab
+     coolReadonly coolColor="red" coolIntensity="dark"
+     coolHighlight="reverseVideo" coolUpper [attr.maxlength]="40"
+     style="left: 50%; top: 28%; width: 50%; height: 4%;" coolCol="41"
+     coolRow="8" coolLength="40">
+   
+   <div coolType="prompt" style="left: 1.25%; top: 32%; width: 30%; height: 4%;"
+     coolCol="2" coolRow="9" coolLength="24">List Collections From/To</div>
+   <input type="text" coolType="field" name="field_9_28"
+     [(ngModel)]="in.searchFrom.date"
+     [coolVideo]="out.searchFrom.screenField?.date" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" coolDate="MMyyyy"
+     [attr.maxlength]="6"
+     style="left: 33.75%; top: 32%; width: 7.5%; height: 4%;" coolCol="28"
+     coolRow="9" coolLength="6">
+   
+   <div coolType="literal"
+     style="left: 42.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="35"
+     coolRow="9" coolLength="1">/</div>
+   <input type="text" coolType="field" name="field_9_37"
+     [(ngModel)]="in.searchTo.date" [coolVideo]="out.searchTo.screenField?.date"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolDate="MMyyyy" [attr.maxlength]="6"
+     style="left: 45%; top: 32%; width: 7.5%; height: 4%;" coolCol="37"
+     coolRow="9" coolLength="6">
+   
+   <div coolType="prompt"
+     style="left: 57.5%; top: 32%; width: 21.25%; height: 4%;" coolCol="47"
+     coolRow="9" coolLength="17" coolColor="white">Undistributed Amt</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 81.25%; top: 32%; width: 15%; height: 4%;" coolCol="66"
+     coolRow="9" coolLength="12">{{in.totalUndistAmt.totalCurrency|coolNumber:'#######0.00 ;#######0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_9_79"
+     [(ngModel)]="in.amtPrompt.text1"
+     [coolVideo]="out.amtPrompt.screenField?.text1" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 97.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="79"
+     coolRow="9" coolLength="1">
+   
+   <div coolType="literal"
+     style="left: 77.5%; top: 36%; width: 6.25%; height: 4%;" coolCol="63"
+     coolRow="10" coolLength="5">Total</div>
+   
+   <div coolType="literal"
+     style="left: 88.75%; top: 36%; width: 8.75%; height: 4%;" coolCol="72"
+     coolRow="10" coolLength="7">Dist to</div>
+   
+   <div coolType="literal" style="left: 0; top: 40%; width: 3.75%; height: 4%;"
+     coolCol="1" coolRow="11" coolLength="3">Sel</div>
+   
+   <div coolType="literal"
+     style="left: 6.25%; top: 40%; width: 7.5%; height: 4%;" coolCol="6"
+     coolRow="11" coolLength="6">Source</div>
+   
+   <div coolType="literal"
+     style="left: 17.5%; top: 40%; width: 8.75%; height: 4%;" coolCol="15"
+     coolRow="11" coolLength="7">Rcvd Dt</div>
+   
+   <div coolType="literal"
+     style="left: 27.5%; top: 40%; width: 8.75%; height: 4%;" coolCol="23"
+     coolRow="11" coolLength="7">Coll Dt</div>
+   
+   <div coolType="literal"
+     style="left: 38.75%; top: 40%; width: 7.5%; height: 4%;" coolCol="32"
+     coolRow="11" coolLength="6">Status</div>
+   
+   <div coolType="literal"
+     style="left: 52.5%; top: 40%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="11" coolLength="8">Coll Amt</div>
+   
+   <div coolType="literal"
+     style="left: 63.75%; top: 40%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="11" coolLength="8">Rfnd Amt</div>
+   
+   <div coolType="literal" style="left: 75%; top: 40%; width: 10%; height: 4%;"
+     coolCol="61" coolRow="11" coolLength="8">Dist Amt</div>
+   
+   <div coolType="literal"
+     style="left: 90%; top: 40%; width: 6.25%; height: 4%;" coolCol="73"
+     coolRow="11" coolLength="5">Oblig</div>
+   <input type="text" coolType="field" name="field_12_2"
+     [(ngModel)]="ref(in.import1, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 44%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="12" coolLength="1" [hidden]="pageOffset >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 44%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="12" coolLength="10" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.cashReceiptSourceType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 44%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="12" coolLength="6" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.detailCashReceiptEvent.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 44%; width: 7.5%; height: 4%;" coolCol="23"
+     coolRow="12" coolLength="6" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.cashReceiptDetail.collectionDate|coolDate:'MMddyy':0}}</div>
+   <input type="text" coolType="field" name="field_12_30"
+     [(ngModel)]="ref(in.import1, pageOffset, 'status.code').value"
+     [coolVideo]="out.export1?.[pageOffset]?.status.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 36.25%; top: 44%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="12" coolLength="10" [hidden]="pageOffset >= length(in.import1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 44%; width: 11.25%; height: 4%;" coolCol="42"
+     coolRow="12" coolLength="9" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.cashReceiptDetail.collectionAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 63.75%; top: 44%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="12" coolLength="8" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.cashReceiptDetail.refundedAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 44%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="12" coolLength="9" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.cashReceiptDetail.distributedAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 44%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="12" coolLength="9" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.distToOblig.totalCurrency|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_13_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 48%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 1 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 48%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="13" coolLength="10"
+     [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.cashReceiptSourceType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 48%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="13" coolLength="6" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.detailCashReceiptEvent.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 48%; width: 7.5%; height: 4%;" coolCol="23"
+     coolRow="13" coolLength="6" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.cashReceiptDetail.collectionDate|coolDate:'MMddyy':0}}</div>
+   <input type="text" coolType="field" name="field_13_30"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'status.code').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.status.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 36.25%; top: 48%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="13" coolLength="10"
+     [hidden]="pageOffset + 1 >= length(in.import1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 48%; width: 11.25%; height: 4%;" coolCol="42"
+     coolRow="13" coolLength="9" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.cashReceiptDetail.collectionAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 63.75%; top: 48%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.cashReceiptDetail.refundedAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 48%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="13" coolLength="9" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.cashReceiptDetail.distributedAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 48%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="13" coolLength="9" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.distToOblig.totalCurrency|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_14_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 52%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 2 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 52%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="14" coolLength="10"
+     [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.cashReceiptSourceType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 52%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="14" coolLength="6" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.detailCashReceiptEvent.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 52%; width: 7.5%; height: 4%;" coolCol="23"
+     coolRow="14" coolLength="6" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.cashReceiptDetail.collectionDate|coolDate:'MMddyy':0}}</div>
+   <input type="text" coolType="field" name="field_14_30"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'status.code').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.status.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 36.25%; top: 52%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="14" coolLength="10"
+     [hidden]="pageOffset + 2 >= length(in.import1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 52%; width: 11.25%; height: 4%;" coolCol="42"
+     coolRow="14" coolLength="9" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.cashReceiptDetail.collectionAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 63.75%; top: 52%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.cashReceiptDetail.refundedAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 52%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="14" coolLength="9" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.cashReceiptDetail.distributedAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 52%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="14" coolLength="9" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.distToOblig.totalCurrency|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_15_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 56%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 3 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 56%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="15" coolLength="10"
+     [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.cashReceiptSourceType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 56%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="15" coolLength="6" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.detailCashReceiptEvent.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 56%; width: 7.5%; height: 4%;" coolCol="23"
+     coolRow="15" coolLength="6" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.cashReceiptDetail.collectionDate|coolDate:'MMddyy':0}}</div>
+   <input type="text" coolType="field" name="field_15_30"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'status.code').value"
+     [coolVideo]="out.export1?.[pageOffset + 3]?.status.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 36.25%; top: 56%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="15" coolLength="10"
+     [hidden]="pageOffset + 3 >= length(in.import1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 56%; width: 11.25%; height: 4%;" coolCol="42"
+     coolRow="15" coolLength="9" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.cashReceiptDetail.collectionAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 63.75%; top: 56%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.cashReceiptDetail.refundedAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 56%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="15" coolLength="9" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.cashReceiptDetail.distributedAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 56%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="15" coolLength="9" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.distToOblig.totalCurrency|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_16_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 60%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 4 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 60%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="16" coolLength="10"
+     [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.cashReceiptSourceType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 60%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="16" coolLength="6" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.detailCashReceiptEvent.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 60%; width: 7.5%; height: 4%;" coolCol="23"
+     coolRow="16" coolLength="6" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.cashReceiptDetail.collectionDate|coolDate:'MMddyy':0}}</div>
+   <input type="text" coolType="field" name="field_16_30"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'status.code').value"
+     [coolVideo]="out.export1?.[pageOffset + 4]?.status.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 36.25%; top: 60%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="16" coolLength="10"
+     [hidden]="pageOffset + 4 >= length(in.import1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 60%; width: 11.25%; height: 4%;" coolCol="42"
+     coolRow="16" coolLength="9" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.cashReceiptDetail.collectionAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 63.75%; top: 60%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.cashReceiptDetail.refundedAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 60%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="16" coolLength="9" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.cashReceiptDetail.distributedAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 60%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="16" coolLength="9" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.distToOblig.totalCurrency|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_17_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 64%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 5 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 64%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="17" coolLength="10"
+     [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.cashReceiptSourceType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 64%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="17" coolLength="6" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.detailCashReceiptEvent.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 64%; width: 7.5%; height: 4%;" coolCol="23"
+     coolRow="17" coolLength="6" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.cashReceiptDetail.collectionDate|coolDate:'MMddyy':0}}</div>
+   <input type="text" coolType="field" name="field_17_30"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'status.code').value"
+     [coolVideo]="out.export1?.[pageOffset + 5]?.status.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 36.25%; top: 64%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="17" coolLength="10"
+     [hidden]="pageOffset + 5 >= length(in.import1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 64%; width: 11.25%; height: 4%;" coolCol="42"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.cashReceiptDetail.collectionAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 63.75%; top: 64%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.cashReceiptDetail.refundedAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 64%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.cashReceiptDetail.distributedAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 64%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.distToOblig.totalCurrency|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_18_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 68%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 6 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 68%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="18" coolLength="10"
+     [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.cashReceiptSourceType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 68%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="18" coolLength="6" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.detailCashReceiptEvent.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 68%; width: 7.5%; height: 4%;" coolCol="23"
+     coolRow="18" coolLength="6" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.cashReceiptDetail.collectionDate|coolDate:'MMddyy':0}}</div>
+   <input type="text" coolType="field" name="field_18_30"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'status.code').value"
+     [coolVideo]="out.export1?.[pageOffset + 6]?.status.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 36.25%; top: 68%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="18" coolLength="10"
+     [hidden]="pageOffset + 6 >= length(in.import1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 68%; width: 11.25%; height: 4%;" coolCol="42"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.cashReceiptDetail.collectionAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 63.75%; top: 68%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.cashReceiptDetail.refundedAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 68%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.cashReceiptDetail.distributedAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 68%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.distToOblig.totalCurrency|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_19_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 72%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 7 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 72%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="19" coolLength="10"
+     [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.cashReceiptSourceType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 72%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="19" coolLength="6" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.detailCashReceiptEvent.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 72%; width: 7.5%; height: 4%;" coolCol="23"
+     coolRow="19" coolLength="6" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.cashReceiptDetail.collectionDate|coolDate:'MMddyy':0}}</div>
+   <input type="text" coolType="field" name="field_19_30"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'status.code').value"
+     [coolVideo]="out.export1?.[pageOffset + 7]?.status.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 36.25%; top: 72%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="19" coolLength="10"
+     [hidden]="pageOffset + 7 >= length(in.import1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 72%; width: 11.25%; height: 4%;" coolCol="42"
+     coolRow="19" coolLength="9" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.cashReceiptDetail.collectionAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 63.75%; top: 72%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.cashReceiptDetail.refundedAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 72%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="19" coolLength="9" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.cashReceiptDetail.distributedAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 72%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="19" coolLength="9" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.distToOblig.totalCurrency|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   <input type="text" coolType="field" name="field_20_2"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 1.25%; top: 76%; width: 1.25%; height: 4%;" coolCol="2"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 8 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 5%; top: 76%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="20" coolLength="10"
+     [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.cashReceiptSourceType.code}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 18.75%; top: 76%; width: 7.5%; height: 4%;" coolCol="16"
+     coolRow="20" coolLength="6" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.detailCashReceiptEvent.receivedDate|coolDate:'MMddyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 27.5%; top: 76%; width: 7.5%; height: 4%;" coolCol="23"
+     coolRow="20" coolLength="6" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.cashReceiptDetail.collectionDate|coolDate:'MMddyy':0}}</div>
+   <input type="text" coolType="field" name="field_20_30"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'status.code').value"
+     [coolVideo]="out.export1?.[pageOffset + 8]?.status.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 36.25%; top: 76%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="20" coolLength="10"
+     [hidden]="pageOffset + 8 >= length(in.import1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 51.25%; top: 76%; width: 11.25%; height: 4%;" coolCol="42"
+     coolRow="20" coolLength="9" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.cashReceiptDetail.collectionAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 63.75%; top: 76%; width: 10%; height: 4%;" coolCol="52"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.cashReceiptDetail.refundedAmount|coolNumber:'####0.00;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 75%; top: 76%; width: 11.25%; height: 4%;" coolCol="61"
+     coolRow="20" coolLength="9" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.cashReceiptDetail.distributedAmount|coolNumber:'####0.00
+      ;####0.00-':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 87.5%; top: 76%; width: 11.25%; height: 4%;" coolCol="71"
+     coolRow="20" coolLength="9" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.distToOblig.totalCurrency|coolNumber:'####0.00 ;####0.00-':1}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="71" coolRow="21" coolLength="9"
+     style="left: 87.5%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 97.5%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="78">PF KEY:  1 Help  2 Display  3 Exit  4 List  7 Prev  8 Next  9 Return  11 Clear</div>
+   
+   <div coolType="literal" style="left: 10%; top: 92%; width: 45%; height: 4%;"
+     coolCol="9" coolRow="24" coolLength="36">12 Signoff  16 COLL  18 COLA 19 CRRC</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="COLL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=COLL</a>
+   <a coolType="action" coolCommand="COLA" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F6">F18=COLA</a>
+   <a coolType="action" coolCommand="CRRC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F7">F19=CRRC</a>
+   </div>

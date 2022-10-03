@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualSuspension">
+      <value>
+select top(1)
+  FRQ_SUSP_ID,
+  SUSPEND_DT,
+  RESUME_DT,
+  RED_PCT,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTR_TYPE,
+  OTY_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  REDUCTION_AMOUNT,
+  FRQ_SUSP_RSN_TXT
+from
+  CKT_ACCR_SUSP
+where
+  (@otrType = OTR_TYPE) and
+  (@otyId = OTY_ID) and
+  (@otrId = OTR_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgId = OBG_ID) and
+  (
+    (
+      (SUSPEND_DT &lt;= @suspendDt1) and
+      (RESUME_DT &gt; @suspendDt1)
+    ) or
+    (
+      (SUSPEND_DT &lt; @suspendDt2) and
+      (RESUME_DT &gt;= @suspendDt2)
+    ) or
+    (
+      (SUSPEND_DT &gt; @suspendDt1) and
+      (RESUME_DT &gt;= @suspendDt2)
+    )
+  ) and
+  (FRQ_SUSP_ID &lt;&gt; @frqSuspId)
+</value>
+   </data>
+   <data name="ReadAccrualSuspensionAccrualInstructions">
+      <value>
+select top(1)
+  T1.FRQ_SUSP_ID,
+  T1.SUSPEND_DT,
+  T1.RESUME_DT,
+  T1.RED_PCT,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.REDUCTION_AMOUNT,
+  T1.FRQ_SUSP_RSN_TXT,
+  T2.AS_OF_DT,
+  T2.DISCONTINUE_DT,
+  T2.LAST_ACCRUAL_DT
+from
+  CKT_ACCRUAL_INSTR T2
+  join
+  CKT_ACCR_SUSP T1
+  on
+    (T1.FRQ_SUSP_ID = @frqSuspId) and
+    (T2.OTR_GENERATED_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T2.OTY_ID = T1.OTY_ID) and
+    (T2.OTR_TYPE = T1.OTR_TYPE) and
+    (@otrType = T2.OTR_TYPE) and
+    (@otyId = T2.OTY_ID) and
+    (@otrGeneratedId = T2.OTR_GENERATED_ID) and
+    (@cpaType = T2.CPA_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (@obgGeneratedId = T2.OBG_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.DIST_MTD,
+  T1.PGM_APPLD_TO
+from
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_OBLIGATION T3
+  join
+  CKT_COLLECTION T1
+  on
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T1.ADJ_IND = 'N') and
+    (T1.CONCURRENT_IND = 'N') and
+    (T1.DIST_MTD = 'A') and
+    (
+      T1.PGM_APPLD_TO in ('AF', 'FC', 'NC',
+        'NF')
+    ) and
+    (T1.COLL_DT between cast(@suspendDt as date) and cast(@resumeDt as date))
+  on
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T4.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T1.PRIM_SEC_CD,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.LAST_OBLIG_EVENT
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_OBLIGATION T1
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T2.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadObligationTransactionObligation">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.LGA_ID
+from
+  CKT_OBLIGATION T2
+  join
+  CKT_OB_TRN T1
+  on
+    (T1.OB_TRN_ID = @obTrnId) and
+    (T2.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T2.OB_ID = T1.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.OB_ID = @obId) and
+    (T2.CPA_TYPE = @cpaType) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateAccrualSuspension">
+      <value>
+update CKT_ACCR_SUSP
+set
+  SUSPEND_DT = @suspendDt,
+  RESUME_DT = @resumeDt,
+  RED_PCT = @redPct,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  REDUCTION_AMOUNT = @reductionAmount,
+  FRQ_SUSP_RSN_TXT = @frqSuspRsnTxt
+where
+  (FRQ_SUSP_ID = @frqSuspId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId)
+</value>
+   </data>
+</root>

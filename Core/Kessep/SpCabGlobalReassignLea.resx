@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateLegalActionAssigment">
+      <value>
+insert into CKT_LA_SERV_PROV
+(
+  LGA_IDENTIFIER,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID,
+  EFFECTIVE_DT,
+  END_DT,
+  REASON_CODE,
+  OVERRIDE_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @lgaIdentifier,
+  @ospEffectiveDate,
+  @ospRoleCode,
+  @offGeneratedId,
+  @spdGeneratedId,
+  @effectiveDt,
+  @endDt,
+  @reasonCode,
+  @overrideInd,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="CreateMonitoredActivityAssignment">
+      <value>
+insert into CKT_ASSGN_MNT_ACT
+(
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  RESPONSIBILITY_COD,
+  EFFECTIVE_DATE,
+  OVERRIDE_IND,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  MAC_ID
+)
+values
+(
+  @systemGeneratedI,
+  @reasonCode,
+  @responsibilityCod,
+  @effectiveDate,
+  @overrideInd,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @macId
+)
+</value>
+   </data>
+   <data name="ReadGlobalReassignment">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  OVERRIDE_FLAG,
+  BUSINESS_OBJ_CODE,
+  ASSIGN_REASON_CODE,
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  OSP_ROLE_CODE,
+  OSP_EFFECTIVE_DATE,
+  SPD_GENERATED_ID1,
+  OFF_GENERATED_ID1,
+  OSP_ROLE_COD,
+  OSP_EFFECTIVE_DAT
+from
+  CKT_GLOBAL_REASSGN
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT_CD,
+  DENORM_NUMERIC_12
+from
+  CKT_INFRASTRUCTURE
+where
+  (DENORM_NUMERIC_12 = @denormNumeric12) and
+  (BUSINESS_OBJECT_CD = @businessObjectCd)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  END_DT
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionAssigment">
+      <value>
+select
+  LGA_IDENTIFIER,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID,
+  EFFECTIVE_DT,
+  END_DT,
+  REASON_CODE,
+  OVERRIDE_IND,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_LA_SERV_PROV
+where
+  (@ospRoleCode = OSP_ROLE_CODE) and
+  (@ospEffectiveDate = OSP_EFFECTIVE_DATE) and
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT = @endDt) and
+  (REASON_CODE = @reasonCode)
+</value>
+   </data>
+   <data name="ReadMonitoredActivity">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  CLOSURE_REASON_COD,
+  INF_SYS_GEN_ID
+from
+  CKT_MONITORED_ACT
+where
+  (@infSysGenId = INF_SYS_GEN_ID) and
+  (CLOSURE_REASON_COD = ' ')
+</value>
+   </data>
+   <data name="ReadMonitoredActivityAssignment">
+      <value>
+select
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  OVERRIDE_IND,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  MAC_ID
+from
+  CKT_ASSGN_MNT_ACT
+where
+  (@macId = MAC_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider1">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider2">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider3">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="UpdateLegalActionAssigment">
+      <value>
+update CKT_LA_SERV_PROV
+set
+  END_DT = @endDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="UpdateMonitoredActivityAssignment">
+      <value>
+update CKT_ASSGN_MNT_ACT
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (MAC_ID = @macId)
+</value>
+   </data>
+</root>

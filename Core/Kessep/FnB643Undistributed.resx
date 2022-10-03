@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail1">
+      <value>
+select
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  INTERFACE_TRAN_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  CASE_NUMBER,
+  RECEIVED_AMOUNT,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  MULTI_PAYOR,
+  OBLGOR_PRSN_NBR,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  COLLAMT_APPL_IND
+from
+  CKT_CR_DETAIL
+where
+  (OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+  (COLLAMT_APPL_IND = ' ') and
+  (COLLECTION_DATE &lt;= @collectionDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail2">
+      <value>
+select
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  INTERFACE_TRAN_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  CASE_NUMBER,
+  RECEIVED_AMOUNT,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  MULTI_PAYOR,
+  OBLGOR_PRSN_NBR,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  COLLAMT_APPL_IND
+from
+  CKT_CR_DETAIL
+where
+  (OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+  (REFUNDED_AMT &gt; 0) and
+  (COLLECTION_DATE &lt;= @collectionDate)
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  CREATED_TIMESTAMP,
+  CLASSIFICATION,
+  NUMBER,
+  TYPE,
+  RCT_R_TSTAMP,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  (@rctRTstamp = RCT_R_TSTAMP) and
+  (TYPE = 'WAR') and
+  (NUMBER &lt;&gt; ' ')
+</value>
+   </data>
+   <data name="ReadReceiptRefund">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  AMOUNT,
+  REQUEST_DATE,
+  CSP_NUMBER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (CREATED_TIMESTAMP between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+</value>
+   </data>
+</root>

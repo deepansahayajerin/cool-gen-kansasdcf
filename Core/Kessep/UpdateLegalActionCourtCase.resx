@@ -1,0 +1,655 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateLegalAction">
+      <value>
+update CKT_LEGAL_ACTION
+set
+  TRB_ID = @trbId
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="CreateMonthlyCourtOrderFee">
+      <value>
+insert into CKT_MO_CT_ORDR_FEE
+(
+  CPA_TYPE,
+  CSP_NUMBER,
+  COURT_ORDER_NUMBER,
+  YEAR_MONTH,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @cpaType,
+  @cspNumber,
+  @courtOrderNumber,
+  @yearMonth,
+  @amount,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="DeleteMonthlyCourtOrderFee">
+      <value>
+delete from CKT_MO_CT_ORDR_FEE
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (COURT_ORDER_NUMBER = @courtOrderNumber) and
+  (YEAR_MONTH = @yearMonth)
+</value>
+   </data>
+   <data name="DisassociateLegalAction">
+      <value>
+update CKT_LEGAL_ACTION
+set
+  TRB_ID = null
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadAbsentParentCase">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.STATUS
+from
+  CKT_CASE T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate)
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.CASE_ROLE_ID = T3.CRO_IDENTIFIER) and
+    (T1.TYPE = T3.CRO_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T1.CAS_NUMBER = T3.CAS_NUMBER) and
+    (@lgaId = T3.LGA_ID)
+order by
+  T1.CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  CU_NUMBER,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  @casNo = CAS_NO
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptEventCashReceiptType">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID
+from
+  CKT_CASH_RECEIPT
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  INTERFACE_TRAN_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  CASE_NUMBER,
+  OFFSET_TAXID,
+  RECEIVED_AMOUNT,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  MULTI_PAYOR,
+  OFFSET_TAX_YEAR,
+  JOINT_RETURN_IND,
+  JOINT_RETURN_NAME,
+  DFLTD_COLL_DAT_IND,
+  OBLGOR_PRSN_NBR,
+  OBLGOR_SSN,
+  OBLGOR_FIRST_NM,
+  OBLGOR_LAST_NM,
+  OBLGOR_MID_NM,
+  OBLGOR_PHONE_NBR,
+  PAYEE_FIRST_NAME,
+  PAYEE_MIDDLE_NAME,
+  PAYEE_LAST_NAME,
+  SUP_PRSN_FRST_NM1,
+  SUP_PRSN_MID_NM1,
+  SUP_PRSN_LST_NM1,
+  SUP_PRSN_FRST_NM2,
+  SUP_PRSN_LST_NM2,
+  SUP_PRSN_MID_NM2,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  COLLAMT_APPL_IND,
+  CLT_IDENTIFIER,
+  REFERENC,
+  NOTES
+from
+  CKT_CR_DETAIL
+where
+  COURT_ORDER_NUMBER = @courtOrderNumber
+</value>
+   </data>
+   <data name="ReadCollection1">
+      <value>
+select top(1)
+  min(COLL_DT),
+  count(*)
+from
+  CKT_COLLECTION
+where
+  (CT_ORD_APPLIED_TO = @ctOrdAppliedTo) and
+  (ADJ_IND = 'N')
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select top(1)
+  min(COLL_DT),
+  count(*)
+from
+  CKT_COLLECTION
+where
+  (CT_ORD_APPLIED_TO = @ctOrdAppliedTo) and
+  (ADJ_IND = 'N')
+</value>
+   </data>
+   <data name="ReadCollection3">
+      <value>
+select
+  COLL_ID,
+  COLL_DT,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CT_ORD_APPLIED_TO
+from
+  CKT_COLLECTION
+where
+  (CT_ORD_APPLIED_TO = @ctOrdAppliedTo) and
+  (ADJ_IND = 'N')
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = 0) and
+  (LOCATION = 0)
+</value>
+   </data>
+   <data name="ReadFips3">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadFipsTribAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND &lt;&gt; ' ')
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  TRANSACTION_DIRECT,
+  TRANSACTION_SERIAL,
+  TRANSACTION_DATE,
+  ACTION_REASON_CODE,
+  ATTACHMENT_INDICAT,
+  NOTE
+from
+  CKT_INT_RQST_HIST
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (TRANSACTION_DATE = @transactionDate) and
+  (TRANSACTION_DIRECT = 'O') and
+  (ACTION_REASON_CODE = 'GSUPD') and
+  (NOTE = @note)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  FILED_DT,
+  INITIATING_STATE,
+  COURT_CASE_NO,
+  STANDARD_NO,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  TRB_ID,
+  KPC_DATE,
+  KPC_STD_NO_CHG_FLG,
+  KEY_CHANGE_DATE
+from
+  CKT_LEGAL_ACTION
+where
+  (COURT_CASE_NO = @courtCaseNo) and
+  (@trbId = TRB_ID)
+</value>
+   </data>
+   <data name="ReadLegalReferral">
+      <value>
+select
+  CAS_NUMBER,
+  IDENTIFIER,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_REFERRAL
+where
+  (COURT_CASE_NO = @courtCaseNo) and
+  (TRB_ID = @trbId)
+</value>
+   </data>
+   <data name="ReadMarriageHistory1">
+      <value>
+select
+  CSP_R_NUMBER,
+  DIV_CTORD_NO,
+  DIVORCE_COUNTY,
+  DIVORCE_STATE,
+  DIVORCE_COUNTRY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IDENTIFIER
+from
+  CKT_MARRIAGE_HIST
+where
+  (DIV_CTORD_NO = cast(@courtCaseNumber as char(17))) and
+  (DIVORCE_STATE = @divorceState) and
+  (DIVORCE_COUNTY = @divorceCounty)
+</value>
+   </data>
+   <data name="ReadMarriageHistory2">
+      <value>
+select
+  CSP_R_NUMBER,
+  DIV_CTORD_NO,
+  DIVORCE_COUNTY,
+  DIVORCE_STATE,
+  DIVORCE_COUNTRY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IDENTIFIER
+from
+  CKT_MARRIAGE_HIST
+where
+  (DIV_CTORD_NO = cast(@courtCaseNumber as char(17))) and
+  (DIVORCE_COUNTRY = @divorceCountry)
+</value>
+   </data>
+   <data name="ReadMonthlyCourtOrderFee">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  COURT_ORDER_NUMBER,
+  YEAR_MONTH,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_MO_CT_ORDR_FEE
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (COURT_ORDER_NUMBER = @courtOrderNumber) and
+  (YEAR_MONTH = @yearMonth)
+</value>
+   </data>
+   <data name="ReadMonthlyCourtOrderFeeObligee">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  COURT_ORDER_NUMBER,
+  YEAR_MONTH,
+  AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_MO_CT_ORDR_FEE
+where
+  COURT_ORDER_NUMBER = @courtOrderNumber
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney1">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  (COURT_CASE_NUMBER = @courtCaseNumber) and
+  (FIPS_STATE_ABBREV = @fipsStateAbbrev) and
+  (FIPS_COUNTY_ABBREV = @fipsCountyAbbrev)
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney2">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  (COURT_CASE_NUMBER = @courtCaseNumber) and
+  (TRIB_COUNTRY = @tribCountry)
+</value>
+   </data>
+   <data name="ReadTribunal1">
+      <value>
+select top(1)
+  FIP_LOCATION,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadTribunal2">
+      <value>
+select top(1)
+  FIP_LOCATION,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetail">
+      <value>
+update CKT_CR_DETAIL
+set
+  COURT_ORDER_NUMBER = @courtOrderNumber,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+   <data name="UpdateCollection">
+      <value>
+update CKT_COLLECTION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  CT_ORD_APPLIED_TO = @ctOrdAppliedTo
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+   <data name="UpdateLegalAction">
+      <value>
+update CKT_LEGAL_ACTION
+set
+  COURT_CASE_NO = @courtCaseNo,
+  STANDARD_NO = @standardNo,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  KPC_STD_NO_CHG_FLG = @kpcStdNoChgFlg,
+  KEY_CHANGE_DATE = @keyChangeDate
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="UpdateLegalReferral">
+      <value>
+update CKT_LEGAL_REFERRAL
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  COURT_CASE_NO = @courtCaseNo,
+  TRB_ID = @trbId
+where
+  (CAS_NUMBER = @casNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="UpdateMarriageHistory">
+      <value>
+update CKT_MARRIAGE_HIST
+set
+  DIV_CTORD_NO = @divCtordNo,
+  DIVORCE_COUNTY = @divorceCounty,
+  DIVORCE_STATE = @divorceState,
+  DIVORCE_COUNTRY = @divorceCountry,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CSP_R_NUMBER = @cspRNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="UpdateMonthlyCourtOrderFee1">
+      <value>
+update CKT_MO_CT_ORDR_FEE
+set
+  AMOUNT = @amount,
+  CREATED_BY = @createdBy,
+  CREATED_TIMESTAMP = @createdTimestamp,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (COURT_ORDER_NUMBER = @courtOrderNumber) and
+  (YEAR_MONTH = @yearMonth)
+</value>
+   </data>
+   <data name="UpdateMonthlyCourtOrderFee2">
+      <value>
+update CKT_MO_CT_ORDR_FEE
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (COURT_ORDER_NUMBER = @courtOrderNumber) and
+  (YEAR_MONTH = @yearMonth)
+</value>
+   </data>
+   <data name="UpdatePersonPrivateAttorney">
+      <value>
+update CKT_PRSN_PRIV_ATTR
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  COURT_CASE_NUMBER = @courtCaseNumber,
+  FIPS_STATE_ABBREV = @fipsStateAbbrev,
+  FIPS_COUNTY_ABBREV = @fipsCountyAbbrev,
+  TRIB_COUNTRY = @tribCountry
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

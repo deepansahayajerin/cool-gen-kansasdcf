@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPaymentRequest1">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  NUMBER = @number
+</value>
+   </data>
+   <data name="ReadPaymentRequest2">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  AMOUNT,
+  DP_CSE_PER_NUM,
+  CSE_PERSON_NUMBER,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="ReadPaymentRequest3">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_PMNT_REQUEST
+where
+  NUMBER = @number
+</value>
+   </data>
+   <data name="ReadPaymentStatus">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID,
+  CODE
+from
+  CKT_PAYMENT_STATUS
+where
+  PAYMENT_STATUS_ID = @paymentStatusId
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistory">
+      <value>
+select
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+from
+  CKT_PMNT_STAT_HIST
+where
+  @prqGeneratedId = PRQ_GENERATED_ID
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadWarrantRemailAddress">
+      <value>
+select top(1)
+  WARRANT_REMAIL_ID,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_4,
+  ZIP_CODE_5,
+  ZIP_CODE_3,
+  NAME,
+  REMAIL_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  PRQ_ID
+from
+  CKT_WRNT_RML_ADDR
+where
+  @prqId = PRQ_ID
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

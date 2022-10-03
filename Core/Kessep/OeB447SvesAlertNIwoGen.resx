@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCaseCsePerson">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.STATUS,
+  T3.TYPE,
+  T3.FEDERAL_IND
+from
+  CKT_CASE T2
+  join
+  CKT_CSE_PERSON T3
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T3.NUMB = T1.CSP_NUMBER) and
+    (T3.NUMB = @numb) and
+    (T1.TYPE in ('AP', 'AR', 'CH'))
+  on
+    T2.NUMB = T1.CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'AR') and
+    (T2.TYPE = 'C') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.EMANCIPATION_DT,
+  T2.TYPE,
+  T2.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'CH') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  VERIFIED_DATE,
+  END_DATE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (VERIFIED_DATE &lt;= @verifiedDate) and
+  (END_DATE &gt;= @verifiedDate)
+</value>
+   </data>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EIN,
+  NAME
+from
+  CKT_EMPLOYER
+where
+  EIN = '070000000'
+</value>
+   </data>
+   <data name="ReadGoodCause">
+      <value>
+select top(1)
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER
+from
+  CKT_GOOD_CAUSE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  NAME,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CODE,
+  CSP_I_NUMBER,
+  START_DT,
+  END_DT,
+  NOTE
+from
+  CKT_INCOME_SOURCE
+where
+  (CODE in ('SA', 'SS')) and
+  (TYPE = 'O') and
+  (START_DT &lt;= @startDt) and
+  (END_DT = @endDt) and
+  (@cspINumber = CSP_I_NUMBER)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  DETAIL
+from
+  CKT_INFRASTRUCTURE
+where
+  (CASE_NUMBER = @caseNumber) and
+  (CSE_PERSON_NUM = @csePersonNum) and
+  (REASON_CODE = @reasonCode) and
+  (DETAIL = @detail)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (KS_CASE_IND &lt;&gt; 'Y')
+</value>
+   </data>
+</root>

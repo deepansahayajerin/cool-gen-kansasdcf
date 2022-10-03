@@ -1,0 +1,215 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiChdsChildDetails"
+           program-name="SWECHDSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiChdsChildDetails"
+           transaction="SR1E"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+      <map from="Ap" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden" to="Hidden"/>
+      <return-map from="Selected" to="HiddenApSelected"/>
+      <return-map from="SelectedChildCsePersonsWorkSet" to="HiddenChSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_2_FOSTER_CARE_CHILD_DETL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiFcdsFosterCareChildDetail"
+       send-command="DISPLAY">
+      <map from="HiddenPreviousCase" to="HiddenPreviousCase"/>
+      <map from="Next" to="Next"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Ap" to="Ap"/>
+      <map from="Ar" to="Ar"/>
+      <map from="ChCsePersonsWorkSet" to="FcChildCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ALT_SSN_AND_ALIAS"
+       action="transfer"
+       to="SiAltsAlternateSsnAndAlias"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Ap" to="ApCsePersonsWorkSet"/>
+      <map from="Ar" to="ArCsePersonsWorkSet"/>
+      <map from="ChCsePersonsWorkSet" to="ChCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CPAT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCpatChildPaternityMaint"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <map from="Ap" to="Ap"/>
+      <map from="Ar" to="Ar"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="ChPrev" to="ChPrev"/>
+   <map from="ChCsePersonsWorkSet" to="ChCsePersonsWorkSet"/>
+   <map from="DisplacedPerson" to="DisplacedPerson"/>
+   <map from="Alt" to="Alt"/>
+   <map from="Next" to="Next"/>
+   <map from="HiddenPreviousCase" to="HiddenPreviousCase"/>
+   <map from="Child.Detail" to="Child.Detail"/>
+   <map from="HiddenPreviousCsePersonsWorkSet"
+        to="HiddenPreviousCsePersonsWorkSet"/>
+   <map from="HiddenAe" to="HiddenAe"/>
+   <map from="HiddenChSelected" to="HiddenChSelected"/>
+   <map from="ApPrompt" to="ApPrompt"/>
+   <map from="ChPrompt" to="ChPrompt"/>
+   <map from="RacePrompt" to="RacePrompt"/>
+   <map from="PobStPrompt" to="PobStPrompt"/>
+   <map from="ArRelPrompt" to="ArRelPrompt"/>
+   <map from="AbsencePrompt" to="AbsencePrompt"/>
+   <map from="RightsPrompt" to="RightsPrompt"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="ActiveChild" to="ActiveChild"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ChSsnWorkArea" to="ChSsnWorkArea"/>
+   <map from="LastReadHiddenCh" to="LastReadHiddenCh"/>
+   <map from="PobFcPrompt" to="PobFcPrompt"/>
+   <map from="TribalPrompt" to="TribalPrompt"/>
+   <map from="TribalFlag" to="TribalFlag"/>
+   <map from="HiddenCh" to="HiddenCh"/>
+   <map from="Over18InSchoolChgFl" to="Over18InSchoolChgFl"/>
+   <map from="Ap.ReplicationIndicator" to="Ap.ReplicationIndicator"/>
+   <map from="Ar.ReplicationIndicator" to="Ar.ReplicationIndicator"/>
+   <map from="Case1.Number" to="Case1.Number"/>
+   <map from="Ap.Number" to="Ap.Number"/>
+   <map from="Ar.Number" to="Ar.Number"/>
+   <map from="ChCsePerson.Type1" to="ChCsePerson.Type1"/>
+   <map from="ChCsePerson.BirthPlaceCity" to="ChCsePerson.BirthPlaceCity"/>
+   <map from="ChCsePerson.BirthPlaceState" to="ChCsePerson.BirthPlaceState"/>
+   <map from="ChCsePerson.Race" to="ChCsePerson.Race"/>
+   <map from="ChCaseRole.DateOfEmancipation" to="ChCaseRole.DateOfEmancipation"/>
+   <map from="ChCaseRole.HealthInsuranceIndicator"
+        to="ChCaseRole.HealthInsuranceIndicator"/>
+   <map from="ChCaseRole.AbsenceReasonCode" to="ChCaseRole.AbsenceReasonCode"/>
+   <map from="ChCaseRole.ArWaivedInsurance" to="ChCaseRole.ArWaivedInsurance"/>
+   <map from="ChCaseRole.Over18AndInSchool" to="ChCaseRole.Over18AndInSchool"/>
+   <map from="ChCaseRole.MedicalSupportIndicator"
+        to="ChCaseRole.MedicalSupportIndicator"/>
+   <map from="ChCaseRole.Note" to="ChCaseRole.Note"/>
+   <map from="ChCaseRole.Type1" to="ChCaseRole.Type1"/>
+   <map from="Ap.FormattedName" to="Ap.FormattedName"/>
+   <map from="Ar.FormattedName" to="Ar.FormattedName"/>
+   <map from="ChCsePerson.Number" to="ChCsePerson.Number"/>
+   <map from="ChCsePerson.Occupation" to="ChCsePerson.Occupation"/>
+   <map from="ChCsePerson.AeCaseNumber" to="ChCsePerson.AeCaseNumber"/>
+   <map from="ChCsePerson.DateOfDeath" to="ChCsePerson.DateOfDeath"/>
+   <map from="ChCsePerson.IllegalAlienIndicator"
+        to="ChCsePerson.IllegalAlienIndicator"/>
+   <map from="ChCsePerson.CurrentSpouseMi" to="ChCsePerson.CurrentSpouseMi"/>
+   <map from="ChCsePerson.CurrentSpouseFirstName"
+        to="ChCsePerson.CurrentSpouseFirstName"/>
+   <map from="ChCsePerson.EmergencyPhone" to="ChCsePerson.EmergencyPhone"/>
+   <map from="ChCsePerson.OtherIdInfo" to="ChCsePerson.OtherIdInfo"/>
+   <map from="ChCsePerson.Weight" to="ChCsePerson.Weight"/>
+   <map from="ChCsePerson.CurrentMaritalStatus"
+        to="ChCsePerson.CurrentMaritalStatus"/>
+   <map from="ChCsePerson.NameMiddle" to="ChCsePerson.NameMiddle"/>
+   <map from="ChCsePerson.OtherNumber" to="ChCsePerson.OtherNumber"/>
+   <map from="ChCsePerson.HomePhone" to="ChCsePerson.HomePhone"/>
+   <map from="ChCsePerson.NameMaiden" to="ChCsePerson.NameMaiden"/>
+   <map from="ChCsePerson.CurrentSpouseLastName"
+        to="ChCsePerson.CurrentSpouseLastName"/>
+   <map from="ChCsePerson.EyeColor" to="ChCsePerson.EyeColor"/>
+   <map from="ChCsePerson.HeightFt" to="ChCsePerson.HeightFt"/>
+   <map from="ChCsePerson.HeightIn" to="ChCsePerson.HeightIn"/>
+   <map from="ChCsePerson.HairColor" to="ChCsePerson.HairColor"/>
+   <map from="ChCaseRole.EndDate" to="ChCaseRole.EndDate"/>
+   <map from="ChCaseRole.OnSsInd" to="ChCaseRole.OnSsInd"/>
+   <map from="ChCaseRole.StartDate" to="ChCaseRole.StartDate"/>
+   <map from="ChCaseRole.FcAdoptionDisruptionInd"
+        to="ChCaseRole.FcAdoptionDisruptionInd"/>
+   <map from="ChCaseRole.FcCincInd" to="ChCaseRole.FcCincInd"/>
+   <map from="ChCaseRole.FcApNotified" to="ChCaseRole.FcApNotified"/>
+   <map from="ChCaseRole.FcCostOfCare" to="ChCaseRole.FcCostOfCare"/>
+   <map from="ChCaseRole.FcCostOfCareFreq" to="ChCaseRole.FcCostOfCareFreq"/>
+   <map from="ChCaseRole.FcCountyChildRemovedFrom"
+        to="ChCaseRole.FcCountyChildRemovedFrom"/>
+   <map from="ChCaseRole.FcDateOfInitialCustody"
+        to="ChCaseRole.FcDateOfInitialCustody"/>
+   <map from="ChCaseRole.FcIvECaseNumber" to="ChCaseRole.FcIvECaseNumber"/>
+   <map from="ChCaseRole.FcJuvenileOffenderInd"
+        to="ChCaseRole.FcJuvenileOffenderInd"/>
+   <map from="ChCaseRole.FcJuvenileCourtOrder"
+        to="ChCaseRole.FcJuvenileCourtOrder"/>
+   <map from="ChCaseRole.FcNextJuvenileCtDt" to="ChCaseRole.FcNextJuvenileCtDt"/>
+   <map from="ChCaseRole.FcPreviousPa" to="ChCaseRole.FcPreviousPa"/>
+   <map from="ChCaseRole.FcPlacementDate" to="ChCaseRole.FcPlacementDate"/>
+   <map from="ChCaseRole.FcOrderEstBy" to="ChCaseRole.FcOrderEstBy"/>
+   <map from="ChCaseRole.FcOtherBenefitInd" to="ChCaseRole.FcOtherBenefitInd"/>
+   <map from="ChCaseRole.FcParentalRights" to="ChCaseRole.FcParentalRights"/>
+   <map from="ChCaseRole.FcPrevPayeeMiddleInitial"
+        to="ChCaseRole.FcPrevPayeeMiddleInitial"/>
+   <map from="ChCaseRole.FcPrevPayeeFirstName"
+        to="ChCaseRole.FcPrevPayeeFirstName"/>
+   <map from="ChCaseRole.FcPlacementName" to="ChCaseRole.FcPlacementName"/>
+   <map from="ChCaseRole.FcPlacementReason" to="ChCaseRole.FcPlacementReason"/>
+   <map from="ChCaseRole.FcPreviousPayeeLastName"
+        to="ChCaseRole.FcPreviousPayeeLastName"/>
+   <map from="ChCaseRole.FcSourceOfFunding" to="ChCaseRole.FcSourceOfFunding"/>
+   <map from="ChCaseRole.FcSsa" to="ChCaseRole.FcSsa"/>
+   <map from="ChCaseRole.FcSrsPayee" to="ChCaseRole.FcSrsPayee"/>
+   <map from="ChCaseRole.FcVaInd" to="ChCaseRole.FcVaInd"/>
+   <map from="ChCaseRole.FcSsi" to="ChCaseRole.FcSsi"/>
+   <map from="ChCaseRole.FcWardsAccount" to="ChCaseRole.FcWardsAccount"/>
+   <map from="ChCaseRole.FcZebInd" to="ChCaseRole.FcZebInd"/>
+   <map from="ChCaseRole.ResidesWithArIndicator"
+        to="ChCaseRole.ResidesWithArIndicator"/>
+   <map from="ChCaseRole.Identifier" to="ChCaseRole.Identifier"/>
+   <map from="HiddenApSelected.Number" to="HiddenApSelected.Number"/>
+   <map from="ChCaseRole.RelToAr" to="ChCaseRole.RelToAr"/>
+   <map from="ChCaseRole.PriorMedicalSupport"
+        to="ChCaseRole.PriorMedicalSupport"/>
+   <map from="ChCaseRole.SpecialtyArea" to="ChCaseRole.SpecialtyArea"/>
+   <map from="ChCaseRole.FcInHomeServiceInd" to="ChCaseRole.FcInHomeServiceInd"/>
+   <map from="ChCaseRole.FcLevelOfCare" to="ChCaseRole.FcLevelOfCare"/>
+   <map from="Ap.FirstName" to="Ap.FirstName"/>
+   <map from="Ap.MiddleInitial" to="Ap.MiddleInitial"/>
+   <map from="Ap.LastName" to="Ap.LastName"/>
+   <map from="ChCsePerson.BirthplaceCountry" to="ChCsePerson.BirthplaceCountry"/>
+   <map from="ChCsePerson.PaternityEstablishedIndicator"
+        to="ChCsePerson.PaternityEstablishedIndicator"/>
+   <map from="ChCsePerson.BornOutOfWedlock" to="ChCsePerson.BornOutOfWedlock"/>
+   <map from="ChCsePerson.CseToEstblPaternity"
+        to="ChCsePerson.CseToEstblPaternity"/>
+   <map from="ChCsePerson.BirthCertificateSignature"
+        to="ChCsePerson.BirthCertificateSignature"/>
+   <map from="ChCsePerson.BirthCertFathersFirstName"
+        to="ChCsePerson.BirthCertFathersFirstName"/>
+   <map from="ChCsePerson.BirthCertFathersLastName"
+        to="ChCsePerson.BirthCertFathersLastName"/>
+   <map from="ChCsePerson.BirthCertFathersMi"
+        to="ChCsePerson.BirthCertFathersMi"/>
+   <map from="ChCsePerson.TribalCode" to="ChCsePerson.TribalCode"/>
+   <map from="ChCsePerson.TextMessageIndicator"
+        to="ChCsePerson.TextMessageIndicator"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

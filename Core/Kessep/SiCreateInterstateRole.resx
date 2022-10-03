@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInterstateRole">
+      <value>
+insert into CKT_INTERST_ROLE
+(
+  IDENTIFIER,
+  TYPE,
+  START_DATE,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  END_DATE,
+  CSP_NUMBER,
+  INT_ID
+)
+values
+(
+  @identifier,
+  @type,
+  @startDate,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @endDate,
+  @cspNumber,
+  @intId
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  OTH_STATE_CLS_RES,
+  OTH_STATE_CLS_DTE
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadInterstateRole">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  START_DATE,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  END_DATE,
+  CSP_NUMBER,
+  INT_ID
+from
+  CKT_INTERST_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@intId = INT_ID)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+</root>

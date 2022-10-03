@@ -1,0 +1,100 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeUralListUraAdj"
+           program-name="SWEURALP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeUralListUraAdj"
+           transaction="SRDE"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_NAME"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAC"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUracUraByCourtOrder"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_URAH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUrahHouseholdUra"
+       send-command="DISPLAY">
+      <map from="SelectedImHousehold" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IMHH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeImhhListHhInfo"
+       send-command="DISPLAY">
+      <map from="SelectedCsePersonsWorkSet"
+           to="SearchCriteria.SearchCsePersonsWorkSet"/>
+      <map from="SelectedImHousehold.AeCaseNo"
+           to="SearchCriteria.SearchImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UCOL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUcolListUraCollections"
+       send-command="DISPLAY">
+      <map from="SelectedCsePerson" to="SearchMemberCsePerson"/>
+      <map from="SelectedImHousehold" to="SearchImHousehold"/>
+      <map from="ToYearNMonth" to="PassToDateWorkArea"/>
+      <map from="FromYearNMonth" to="PassFromDateWorkArea"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUraaUraAdjustment"
+       send-command="DISPLAY">
+      <map from="SelectedImHouseholdMbrMnthlySum" to="Selected"/>
+      <map from="SelectedCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="SelectedImHousehold" to="ImHousehold"/>
+      <map from="ToYearNMonth" to="ForAdjustments"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_UHMM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUhmmUraHouseholdMbrMaint"
+       send-command="DISPLAY">
+      <map from="SelectedImHousehold.AeCaseNo" to="ImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CURA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeCuraMembersUra"
+       send-command="DISPLAY">
+      <map from="SelectedCsePersonsWorkSet" to="SearchCsePersonsWorkSet"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="ImHousehold" to="ImHousehold"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="ListAdjsForAllMbrs" to="ListAdjsForAllMbrs"/>
+   <map from="FromYearNMonth" to="FromYearNMonth"/>
+   <map from="ToYearNMonth" to="ToYearNMonth"/>
+   <map from="Group.Gcommon" to="Group.Gcommon"/>
+   <map from="Group.GimHouseholdMbrMnthlySum"
+        to="Group.GimHouseholdMbrMnthlySum"/>
+   <map from="Group.GimHouseholdMbrMnthlyAdj"
+        to="Group.GimHouseholdMbrMnthlyAdj"/>
+   <map from="Group.GcsePersonsWorkSet" to="Group.GcsePersonsWorkSet"/>
+   <map from="Group.GadjustmentYrMnth" to="Group.GadjustmentYrMnth"/>
+   <map from="ImHouseholdMbrMnthlySum" to="ImHouseholdMbrMnthlySum"/>
+   <map from="CsePersonStandard" to="CsePerson2"/>
+</procedure>

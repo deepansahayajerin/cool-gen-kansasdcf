@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadEvent">
+      <value>
+select top(1)
+  CONTROL_NUMBER,
+  BUSINESS_OBJECT_CD
+from
+  CKT_EVENT
+where
+  CONTROL_NUMBER = 34
+</value>
+   </data>
+   <data name="ReadEventDetail">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  INITIATING_ST_CD,
+  CSENET_IN_OUT_CODE,
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  EVE_NO
+from
+  CKT_EVENT_DETAIL
+where
+  (@eveNo = EVE_NO) and
+  (REASON_CODE = 'KPCNOTICESENT') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+</root>

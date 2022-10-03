@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  CSE_OPEN_DATE
+from
+  CKT_CASE with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (
+      (T1.END_DATE &lt; @endDate) or
+      (
+        (T1.END_DATE = @endDate) and
+        (T1.START_DATE &gt; @startDate)
+      ) or
+      (
+        (T1.END_DATE = @endDate) and
+        (T1.START_DATE = @startDate) and
+        (T2.NUMB &gt; @numb)
+      ) or
+      (
+        (T1.END_DATE = @endDate) and
+        (T1.START_DATE = @startDate) and
+        (T2.NUMB = @numb)
+      )
+    )
+order by
+  T1.END_DATE desc,
+  T1.START_DATE,
+  T1.CSP_NUMBER
+</value>
+   </data>
+</root>

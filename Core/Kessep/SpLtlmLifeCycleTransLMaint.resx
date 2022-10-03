@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadEventDetail1">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  EVE_NO
+from
+  CKT_EVENT_DETAIL
+where
+  (SYSTEM_GENERATED_I = @systemGeneratedI) and
+  (EVE_NO = @eveNo)
+</value>
+   </data>
+   <data name="ReadEventDetail2">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  EVE_NO
+from
+  CKT_EVENT_DETAIL
+where
+  (SYSTEM_GENERATED_I = @systemGeneratedI) and
+  (EVE_NO = @eveNo)
+</value>
+   </data>
+   <data name="ReadLifecycleState1">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_LIFECYCL_STATE
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadLifecycleState2">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_LIFECYCL_STATE
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadLifecycleTransformation">
+      <value>
+select top(1)
+  DESCRIPTION,
+  LCS_ID_PRI,
+  EVE_CTRL_NO_PRI,
+  EVD_ID_PRI,
+  LCS_LCT_ID_SEC,
+  EVE_NO_SEC,
+  EVD_LCT_ID_SEC
+from
+  CKT_LIFECYCLE_TRAN
+where
+  (EVD_ID_PRI = @evdIdPri) and
+  (EVE_CTRL_NO_PRI = @eveCtrlNoPri) and
+  (@lcsLctIdSec = LCS_LCT_ID_SEC) and
+  (@lcsIdPri = LCS_ID_PRI)
+</value>
+   </data>
+   <data name="ReadLifecycleTransformationLifecycleStateLifecycleState">
+      <value>
+select
+  T1.DESCRIPTION,
+  T1.LCS_ID_PRI,
+  T1.EVE_CTRL_NO_PRI,
+  T1.EVD_ID_PRI,
+  T1.LCS_LCT_ID_SEC,
+  T1.EVE_NO_SEC,
+  T1.EVD_LCT_ID_SEC,
+  T4.DETAIL_NAME
+from
+  CKT_EVENT_DETAIL T4
+  join
+  CKT_LIFECYCLE_TRAN T1
+  on
+    (@evdIdPri = T1.EVD_ID_PRI) and
+    (@eveCtrlNoPri = T1.EVE_CTRL_NO_PRI) and
+    (T4.SYSTEM_GENERATED_I = T1.EVD_LCT_ID_SEC) and
+    (T4.EVE_NO = T1.EVE_NO_SEC) and
+    (T1.LCS_ID_PRI &gt;= @lcsIdPri)
+order by
+  T1.LCS_ID_PRI
+</value>
+   </data>
+</root>

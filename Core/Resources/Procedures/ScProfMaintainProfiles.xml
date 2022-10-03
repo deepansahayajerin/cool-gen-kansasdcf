@@ -1,0 +1,27 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="ScProfMaintainProfiles"
+           program-name="SWEPROFP"
+           class="Gov.Kansas.DCF.Cse.Security1.ScProfMaintainProfiles"
+           transaction="SRGT">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="ScSecmSecurityMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToCdvl" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromCdvl"/>
+   </on>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Profile" to="Group.Profile"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.Restriction1Prompt" to="Group.Restriction1Prompt"/>
+   <map from="Group.Restriction2Prompt" to="Group.Restriction2Prompt"/>
+   <map from="Group.Restriction3Prompt" to="Group.Restriction3Prompt"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

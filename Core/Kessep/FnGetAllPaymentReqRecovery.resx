@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPaymentRequestPaymentStatusPaymentStatusHistory1">
+      <value>
+select
+  T1.PAYMENT_REQUEST_ID,
+  T1.PROCESS_DATE,
+  T1.AMOUNT,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER,
+  T1.TYPE,
+  T1.PRQ_R_GENERATED_ID,
+  T2.PAYMENT_STATUS_ID,
+  T2.CODE,
+  T3.PYMNT_STAT_HIST_ID,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.CREATED_BY,
+  T3.CREATED_TIMESTAMP,
+  T3.REASON_TEXT
+from
+  CKT_PAYMENT_STATUS T2
+  join
+  CKT_PMNT_REQUEST T1
+  join
+  CKT_PMNT_STAT_HIST T3
+  on
+    (T1.TYPE = 'RCV') and
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T1.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+    (T1.CREATED_TIMESTAMP between cast(@createdTimestamp1 as datetime2) and cast(@createdTimestamp2 as datetime2))
+  on
+    T2.PAYMENT_STATUS_ID = T3.PST_GENERATED_ID
+order by
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER desc,
+  T1.CREATED_BY desc
+</value>
+   </data>
+   <data name="ReadPaymentRequestPaymentStatusPaymentStatusHistory2">
+      <value>
+select
+  T1.PAYMENT_REQUEST_ID,
+  T1.PROCESS_DATE,
+  T1.AMOUNT,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER,
+  T1.TYPE,
+  T1.PRQ_R_GENERATED_ID,
+  T2.PAYMENT_STATUS_ID,
+  T2.CODE,
+  T3.PYMNT_STAT_HIST_ID,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.CREATED_BY,
+  T3.CREATED_TIMESTAMP,
+  T3.REASON_TEXT
+from
+  CKT_PAYMENT_STATUS T2
+  join
+  CKT_PMNT_REQUEST T1
+  join
+  CKT_PMNT_STAT_HIST T3
+  on
+    (T1.TYPE = 'RCV') and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T1.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+    (T1.CREATED_TIMESTAMP between cast(@createdTimestamp1 as datetime2) and cast(@createdTimestamp2 as datetime2))
+  on
+    T2.PAYMENT_STATUS_ID = T3.PST_GENERATED_ID
+order by
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER desc,
+  T1.CREATED_BY desc
+</value>
+   </data>
+   <data name="ReadPaymentRequestPaymentStatusPaymentStatusHistory3">
+      <value>
+select
+  T1.PAYMENT_REQUEST_ID,
+  T1.PROCESS_DATE,
+  T1.AMOUNT,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER,
+  T1.TYPE,
+  T1.PRQ_R_GENERATED_ID,
+  T2.PAYMENT_STATUS_ID,
+  T2.CODE,
+  T3.PYMNT_STAT_HIST_ID,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.CREATED_BY,
+  T3.CREATED_TIMESTAMP,
+  T3.REASON_TEXT
+from
+  CKT_PAYMENT_STATUS T2
+  join
+  CKT_PMNT_REQUEST T1
+  join
+  CKT_PMNT_STAT_HIST T3
+  on
+    (T1.TYPE = 'RCV') and
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+    (T1.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+    (T1.CREATED_TIMESTAMP between cast(@createdTimestamp1 as datetime2) and cast(@createdTimestamp2 as datetime2))
+  on
+    T2.PAYMENT_STATUS_ID = T3.PST_GENERATED_ID
+order by
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER desc,
+  T3.DISCONTINUE_DATE desc,
+  T3.CREATED_TIMESTAMP desc,
+  T1.CREATED_BY desc
+</value>
+   </data>
+   <data name="ReadPaymentRequestPaymentStatusPaymentStatusHistory4">
+      <value>
+select
+  T1.PAYMENT_REQUEST_ID,
+  T1.PROCESS_DATE,
+  T1.AMOUNT,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER,
+  T1.TYPE,
+  T1.PRQ_R_GENERATED_ID,
+  T2.PAYMENT_STATUS_ID,
+  T2.CODE,
+  T3.PYMNT_STAT_HIST_ID,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.CREATED_BY,
+  T3.CREATED_TIMESTAMP,
+  T3.REASON_TEXT
+from
+  CKT_PAYMENT_STATUS T2
+  join
+  CKT_PMNT_REQUEST T1
+  join
+  CKT_PMNT_STAT_HIST T3
+  on
+    (T1.TYPE = 'RCV') and
+    (T1.PAYMENT_REQUEST_ID = T3.PRQ_GENERATED_ID) and
+    (T1.CREATED_TIMESTAMP between cast(@createdTimestamp1 as datetime2) and cast(@createdTimestamp2 as datetime2))
+  on
+    T2.PAYMENT_STATUS_ID = T3.PST_GENERATED_ID
+order by
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER desc,
+  T3.DISCONTINUE_DATE desc,
+  T3.CREATED_TIMESTAMP desc,
+  T1.CREATED_BY desc
+</value>
+   </data>
+</root>

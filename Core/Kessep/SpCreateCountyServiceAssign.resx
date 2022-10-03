@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCountyService1">
+      <value>
+insert into CKT_COUNTY_SERVICE
+(
+  SYSTEM_GENERATD_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OFF_GENERATED_ID,
+  COG_TYPE_CODE,
+  COG_CODE,
+  [FUNCTION],
+  PRG_GENERATED_ID
+)
+values
+(
+  @systemGeneratdId,
+  @type,
+  @effectiveDate,
+  @discontinueDate,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @createdBy,
+  @createdTimestamp,
+  @offGeneratedId,
+  @cogTypeCode,
+  @cogCode,
+  @function,
+  @prgGeneratedId
+)
+</value>
+   </data>
+   <data name="CreateCountyService2">
+      <value>
+insert into CKT_COUNTY_SERVICE
+(
+  SYSTEM_GENERATD_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OFF_GENERATED_ID,
+  COG_TYPE_CODE,
+  COG_CODE,
+  [FUNCTION],
+  PRG_GENERATED_ID
+)
+values
+(
+  @systemGeneratdId,
+  @type,
+  @effectiveDate,
+  @discontinueDate,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @createdBy,
+  @createdTimestamp,
+  @offGeneratedId,
+  @cogTypeCode,
+  @cogCode,
+  @function,
+  null
+)
+</value>
+   </data>
+   <data name="CreateCountyService3">
+      <value>
+insert into CKT_COUNTY_SERVICE
+(
+  SYSTEM_GENERATD_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OFF_GENERATED_ID,
+  COG_TYPE_CODE,
+  COG_CODE,
+  [FUNCTION],
+  PRG_GENERATED_ID
+)
+values
+(
+  @systemGeneratdId,
+  @type,
+  @effectiveDate,
+  @discontinueDate,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @createdBy,
+  @createdTimestamp,
+  @offGeneratedId,
+  @cogTypeCode,
+  @cogCode,
+  @function,
+  null
+)
+</value>
+   </data>
+   <data name="CreateCountyService4">
+      <value>
+insert into CKT_COUNTY_SERVICE
+(
+  SYSTEM_GENERATD_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OFF_GENERATED_ID,
+  COG_TYPE_CODE,
+  COG_CODE,
+  [FUNCTION],
+  PRG_GENERATED_ID
+)
+values
+(
+  @systemGeneratdId,
+  @type,
+  @effectiveDate,
+  @discontinueDate,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @createdBy,
+  @createdTimestamp,
+  @offGeneratedId,
+  @cogTypeCode,
+  @cogCode,
+  @function,
+  @prgGeneratedId
+)
+</value>
+   </data>
+   <data name="ReadCode">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME
+from
+  CKT_CODE
+where
+  CODE_NAME = 'FUNCTION'
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE_VALUE
+where
+  @codId = COD_ID
+</value>
+   </data>
+   <data name="ReadControlTable">
+      <value>
+select top(1)
+  CNTL_TBL_ID,
+  LAST_USED_NUMBER
+from
+  CKT_CONTROL_TABLE
+where
+  CNTL_TBL_ID = @cntlTblId
+</value>
+   </data>
+   <data name="ReadCountyService1">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATD_ID,
+  T1.TYPE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.OFF_GENERATED_ID,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.[FUNCTION],
+  T1.PRG_GENERATED_ID
+from
+  CKT_PROGRAM T2
+  join
+  CKT_COUNTY_SERVICE T1
+  on
+    (@offGeneratedId = T1.OFF_GENERATED_ID) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (T2.CODE = @code) and
+    (@cogTypeCode = T1.COG_TYPE_CODE) and
+    (@cogCode = T1.COG_CODE) and
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCountyService2">
+      <value>
+select top(1)
+  SYSTEM_GENERATD_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OFF_GENERATED_ID,
+  COG_TYPE_CODE,
+  COG_CODE,
+  [FUNCTION],
+  PRG_GENERATED_ID
+from
+  CKT_COUNTY_SERVICE
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (@cogTypeCode = COG_TYPE_CODE) and
+  (@cogCode = COG_CODE) and
+  ([FUNCTION] = cast(@cdvalue as char(10))) and
+  (DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCountyService3">
+      <value>
+select top(1)
+  SYSTEM_GENERATD_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OFF_GENERATED_ID,
+  COG_TYPE_CODE,
+  COG_CODE,
+  [FUNCTION],
+  PRG_GENERATED_ID
+from
+  CKT_COUNTY_SERVICE
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (@cogTypeCode = COG_TYPE_CODE) and
+  (@cogCode = COG_CODE) and
+  ([FUNCTION] = @function) and
+  (DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCountyService4">
+      <value>
+select top(1)
+  SYSTEM_GENERATD_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  OFF_GENERATED_ID,
+  COG_TYPE_CODE,
+  COG_CODE,
+  [FUNCTION],
+  PRG_GENERATED_ID
+from
+  CKT_COUNTY_SERVICE
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (@cogTypeCode = COG_TYPE_CODE) and
+  (@cogCode = COG_CODE) and
+  (@prgGeneratedId = PRG_GENERATED_ID) and
+  (DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE
+from
+  CKT_CSE_ORGANIZATN
+where
+  (TYPE_CODE = @typeCode) and
+  (ORGANZTN_ID = @organztnId)
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadProgram1">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadProgram2">
+      <value>
+select
+  PROGRAM_ID,
+  CODE,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+order by
+  CODE
+</value>
+   </data>
+   <data name="UpdateControlTable">
+      <value>
+update CKT_CONTROL_TABLE
+set
+  LAST_USED_NUMBER = @lastUsedNumber
+where
+  CNTL_TBL_ID = @cntlTblId
+</value>
+   </data>
+</root>

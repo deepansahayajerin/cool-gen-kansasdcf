@@ -1,0 +1,57 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnLtrnListEftTransmissions"
+           program-name="SWELTRNP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnLtrnListEftTransmissions"
+           transaction="SRIV"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToList" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromList"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_DISB_MGMNT_MENU"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_EFT_TRAN_INFO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnLeftListElecFundTran"
+       send-command="DISPLAY">
+      <map from="SearchEftTransmissionFileInfo" to="Search"/>
+      <map from="SearchEnding" to="SearchEnding"/>
+      <return-map from="Selection.TransmissionType" to="Search.TransmissionType"/>
+      <return-map from="Selection.FileCreationDate" to="Search.FileCreationDate"/>
+      <return-map from="Selection.FileCreationTime" to="Search.FileCreationTime"/>
+      <return-map from="Selection.TransmissionStatusCode"
+                  to="Search.TransmissionStatusCode"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CASH_MGMNT_MENU"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_MTN_EFT_TRANSMISSION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnMtrnMaintainEftTrnsmission"
+       send-command="DISPLAY">
+      <map from="Selection.TransmissionIdentifier"
+           to="ElectronicFundTransmission.TransmissionIdentifier"/>
+      <map from="Selection.TransmissionType"
+           to="ElectronicFundTransmission.TransmissionType"/>
+      <map from="Selection.FileCreationDate"
+           to="ElectronicFundTransmission.FileCreationDate"/>
+      <map from="SearchElectronicFundTransmission" to="NextRead"/>
+   </on>
+   <map from="Group.ElectronicFundTransmission"
+        to="Group.ElectronicFundTransmission"/>
+   <map from="SearchElectronicFundTransmission" to="Search"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.Common" to="Group.Common"/>
+</procedure>

@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateApIdentification">
+      <value>
+select top(1)
+  CCA_TRANSACTION_DT,
+  CCA_TRANS_SER_NUM,
+  NAME_LAST
+from
+  CKT_INTERST_AP_ID with(readuncommitted)
+where
+  (CCA_TRANS_SER_NUM = @ccaTransSerNum) and
+  (CCA_TRANSACTION_DT = @ccaTransactionDt)
+</value>
+   </data>
+   <data name="ReadInterstateApLocate">
+      <value>
+select top(1)
+  CNC_TRANSACTION_DT,
+  CNC_TRANS_SERL_NBR,
+  EMPLOYER_EIN,
+  EMPLOYER_NAME,
+  EMPLOYER_PHONE_NUM,
+  EMPLOYER_EFF_DATE,
+  EMPLOYER_END_DATE,
+  EMPLOYER_CFMD_IND,
+  RES_ADDR_LINE_1,
+  RES_ADDR_LINE_2,
+  RESIDENTIAL_CITY,
+  RESIDENTIAL_STATE,
+  RESIDENTIAL_ZIP5,
+  RESIDENTIAL_ZIP4,
+  MAILING_ADDR_LINE1,
+  MAILING_ADDR_LINE2,
+  MAILING_CITY,
+  MAILING_STATE,
+  MAILING_ZIP5,
+  MAILING_ZIP4,
+  RES_ADDR_EFF_DATE,
+  RES_ADDR_END_DATE,
+  RES_ADDR_CON_IND,
+  MAIL_ADDR_EFF_DTE,
+  MAIL_ADDR_END_DTE,
+  MAIL_ADDR_CONF_IND,
+  HOME_PHONE_NUMBER,
+  WORK_PHONE_NUMBER,
+  DRIVERS_LIC_STATE,
+  DRIVER_LICENSE_NBR,
+  ALIAS_1_FIRST_NAME,
+  ALIAS_1_MIDDLE_NAM,
+  ALIAS_1_LAST_NAME,
+  ALIAS_1_SUFFIX,
+  ALIAS_2_FIRST_NAME,
+  ALIAS_2_MIDDLE_NAM,
+  ALIAS_2_LAST_NAME,
+  ALIAS_2_SUFFIX,
+  ALIAS_3_FIRST_NAME,
+  ALIAS_3_MIDDLE_NAM,
+  ALIAS_3_LAST_NAME,
+  ALIAS_3_SUFFIX,
+  CURRENT_SPOUSE_FIR,
+  CURRENT_SPOUSE_MID,
+  CURRENT_SPOUSE_LAS,
+  CURRENT_SPOUSE_SUF,
+  OCCUPATION,
+  EMPL_ADDR_LINE_1,
+  EMPL_ADDR_LINE_2,
+  EMPLOYER_CITY,
+  EMPLOYER_STATE,
+  EMPL_ZIP_CODE_5,
+  EMPL_ZIP_CODE_4,
+  WAGE_QTR,
+  WAGE_YEAR,
+  WAGE_AMOUNT,
+  INS_CARRIER_NAME,
+  INS_POLICY_NBR,
+  LST_RES_ADDR_LINE1,
+  LST_RES_ADDR_LINE2,
+  LAST_RES_CITY,
+  LAST_RES_STATE,
+  LST_RES_ZIP_CODE5,
+  LST_RES_ZIP_CODE4,
+  LAST_RES_ADDR_DTE,
+  LST_MAIL_ADDR_LIN1,
+  LST_MAIL_ADDR_LIN2,
+  LAST_MAIL_CITY,
+  LAST_MAIL_STATE,
+  LST_MAIL_ZIP_CODE5,
+  LST_MAIL_ZIP_CODE4,
+  LAST_MAIL_ADDR_DTE,
+  LAST_EMPLOYER_NAME,
+  LAST_EMPLOYER_DATE,
+  LST_EMPL_ADDR_LIN1,
+  LST_EMPL_ADDR_LIN2,
+  LAST_EMPLOYER_CITY,
+  LAST_EMPLOYER_STAT,
+  LST_EMPL_ZIP_CODE5,
+  LST_EMPL_ZIP_CODE4,
+  PROFESSIONAL_LICS,
+  WORK_AREA_CODE,
+  HOME_AREA_CODE,
+  LAST_EMP_END_DATE,
+  EMPLOYER_AREA_CODE,
+  EMPLOYER2_NAME,
+  EMPLOYER2_EIN,
+  EMP2_PHONE_NUMBER,
+  EMPL2_AREA_CODE,
+  EMP2_ADDR_LINE_1,
+  EMP2_ADDR_LINE_2,
+  EMPLOYER2_CITY,
+  EMPLOYER2_STATE,
+  EMP2_ZIP_CODE_5,
+  EMP2_ZIP_CODE_4,
+  EMP2_CONFIRMED_IND,
+  EMP2_EFFECTIVE_DT,
+  EMPLOYER2_END_DATE,
+  EMP2_WAGE_AMOUNT,
+  EMP2_WAGE_QUARTER,
+  EMP2_WAGE_YEAR,
+  EMPLOYER3_NAME,
+  EMPLOYER3_EIN,
+  EMP3_PHONE_NUMBER,
+  EMP3_AREA_CODE,
+  EMP3_ADDR_LINE_1,
+  EMP3_ADDR_LINE_2,
+  EMPLOYER3_CITY,
+  EMPLOYER3_STATE,
+  EMP3_ZIP_CODE_5,
+  EMP3_ZIP_CODE_4,
+  EMP3_CONFIRMED_IND,
+  EMP3_EFFECTIVE_DT,
+  EMPLOYER3_END_DATE,
+  EMP3_WAGE_AMOUNT,
+  EMP3_WAGE_QUARTER,
+  EMP3_WAGE_YEAR
+from
+  CKT_INTERST_LOC_AP
+where
+  (CNC_TRANS_SERL_NBR = @cncTransSerlNbr) and
+  (CNC_TRANSACTION_DT = @cncTransactionDt)
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  TRANS_SERIAL_NBR,
+  TRANSACTION_DATE
+from
+  CKT_INTERST_CASE with(readuncommitted)
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="UpdateInterstateApLocate">
+      <value>
+update CKT_INTERST_LOC_AP
+set
+  EMPLOYER_EIN = @employerEin,
+  EMPLOYER_NAME = @employerName,
+  EMPLOYER_PHONE_NUM = @employerPhoneNum,
+  EMPLOYER_EFF_DATE = @employerEffDate,
+  EMPLOYER_END_DATE = @employerEndDate,
+  EMPLOYER_CFMD_IND = @employerCfmdInd,
+  RES_ADDR_LINE_1 = @resAddrLine1,
+  RES_ADDR_LINE_2 = @resAddrLine2,
+  RESIDENTIAL_CITY = @residentialCity,
+  RESIDENTIAL_STATE = @residentialState,
+  RESIDENTIAL_ZIP5 = @residentialZip5,
+  RESIDENTIAL_ZIP4 = @residentialZip4,
+  MAILING_ADDR_LINE1 = @mailingAddrLine1,
+  MAILING_ADDR_LINE2 = @mailingAddrLine2,
+  MAILING_CITY = @mailingCity,
+  MAILING_STATE = @mailingState,
+  MAILING_ZIP5 = @mailingZip5,
+  MAILING_ZIP4 = @mailingZip4,
+  RES_ADDR_EFF_DATE = @resAddrEffDate,
+  RES_ADDR_END_DATE = @resAddrEndDate,
+  RES_ADDR_CON_IND = @resAddrConInd,
+  MAIL_ADDR_EFF_DTE = @mailAddrEffDte,
+  MAIL_ADDR_END_DTE = @mailAddrEndDte,
+  MAIL_ADDR_CONF_IND = @mailAddrConfInd,
+  HOME_PHONE_NUMBER = @homePhoneNumber,
+  WORK_PHONE_NUMBER = @workPhoneNumber,
+  DRIVERS_LIC_STATE = @driversLicState,
+  DRIVER_LICENSE_NBR = @driverLicenseNbr,
+  ALIAS_1_FIRST_NAME = @alias1FirstName,
+  ALIAS_1_MIDDLE_NAM = @alias1MiddleNam,
+  ALIAS_1_LAST_NAME = @alias1LastName,
+  ALIAS_1_SUFFIX = @alias1Suffix,
+  ALIAS_2_FIRST_NAME = @alias2FirstName,
+  ALIAS_2_MIDDLE_NAM = @alias2MiddleNam,
+  ALIAS_2_LAST_NAME = @alias2LastName,
+  ALIAS_2_SUFFIX = @alias2Suffix,
+  ALIAS_3_FIRST_NAME = @alias3FirstName,
+  ALIAS_3_MIDDLE_NAM = @alias3MiddleNam,
+  ALIAS_3_LAST_NAME = @alias3LastName,
+  ALIAS_3_SUFFIX = @alias3Suffix,
+  CURRENT_SPOUSE_FIR = @currentSpouseFir,
+  CURRENT_SPOUSE_MID = @currentSpouseMid,
+  CURRENT_SPOUSE_LAS = @currentSpouseLas,
+  CURRENT_SPOUSE_SUF = @currentSpouseSuf,
+  OCCUPATION = @occupation,
+  EMPL_ADDR_LINE_1 = @emplAddrLine1,
+  EMPL_ADDR_LINE_2 = @emplAddrLine2,
+  EMPLOYER_CITY = @employerCity,
+  EMPLOYER_STATE = @employerState,
+  EMPL_ZIP_CODE_5 = @emplZipCode5,
+  EMPL_ZIP_CODE_4 = @emplZipCode4,
+  WAGE_QTR = @wageQtr,
+  WAGE_YEAR = @wageYear,
+  WAGE_AMOUNT = @wageAmount,
+  INS_CARRIER_NAME = @insCarrierName,
+  INS_POLICY_NBR = @insPolicyNbr,
+  LST_RES_ADDR_LINE1 = @lstResAddrLine1,
+  LST_RES_ADDR_LINE2 = @lstResAddrLine2,
+  LAST_RES_CITY = @lastResCity,
+  LAST_RES_STATE = @lastResState,
+  LST_RES_ZIP_CODE5 = @lstResZipCode5,
+  LST_RES_ZIP_CODE4 = @lstResZipCode4,
+  LAST_RES_ADDR_DTE = @lastResAddrDte,
+  LST_MAIL_ADDR_LIN1 = @lstMailAddrLin1,
+  LST_MAIL_ADDR_LIN2 = @lstMailAddrLin2,
+  LAST_MAIL_CITY = @lastMailCity,
+  LAST_MAIL_STATE = @lastMailState,
+  LST_MAIL_ZIP_CODE5 = @lstMailZipCode5,
+  LST_MAIL_ZIP_CODE4 = @lstMailZipCode4,
+  LAST_MAIL_ADDR_DTE = @lastMailAddrDte,
+  LAST_EMPLOYER_NAME = @lastEmployerName,
+  LAST_EMPLOYER_DATE = @lastEmployerDate,
+  LST_EMPL_ADDR_LIN1 = @lstEmplAddrLin1,
+  LST_EMPL_ADDR_LIN2 = @lstEmplAddrLin2,
+  LAST_EMPLOYER_CITY = @lastEmployerCity,
+  LAST_EMPLOYER_STAT = @lastEmployerStat,
+  LST_EMPL_ZIP_CODE5 = @lstEmplZipCode5,
+  LST_EMPL_ZIP_CODE4 = @lstEmplZipCode4,
+  PROFESSIONAL_LICS = @professionalLics,
+  WORK_AREA_CODE = @workAreaCode,
+  HOME_AREA_CODE = @homeAreaCode,
+  LAST_EMP_END_DATE = @lastEmpEndDate,
+  EMPLOYER_AREA_CODE = @employerAreaCode,
+  EMPLOYER2_NAME = @employer2Name,
+  EMPLOYER2_EIN = @employer2Ein,
+  EMP2_PHONE_NUMBER = @emp2PhoneNumber,
+  EMPL2_AREA_CODE = @empl2AreaCode,
+  EMP2_ADDR_LINE_1 = @emp2AddrLine1,
+  EMP2_ADDR_LINE_2 = @emp2AddrLine2,
+  EMPLOYER2_CITY = @employer2City,
+  EMPLOYER2_STATE = @employer2State,
+  EMP2_ZIP_CODE_5 = @emp2ZipCode5,
+  EMP2_ZIP_CODE_4 = @emp2ZipCode4,
+  EMP2_CONFIRMED_IND = @emp2ConfirmedInd,
+  EMP2_EFFECTIVE_DT = @emp2EffectiveDt,
+  EMPLOYER2_END_DATE = @employer2EndDate,
+  EMP2_WAGE_AMOUNT = @emp2WageAmount,
+  EMP2_WAGE_QUARTER = @emp2WageQuarter,
+  EMP2_WAGE_YEAR = @emp2WageYear,
+  EMPLOYER3_NAME = @employer3Name,
+  EMPLOYER3_EIN = @employer3Ein,
+  EMP3_PHONE_NUMBER = @emp3PhoneNumber,
+  EMP3_AREA_CODE = @emp3AreaCode,
+  EMP3_ADDR_LINE_1 = @emp3AddrLine1,
+  EMP3_ADDR_LINE_2 = @emp3AddrLine2,
+  EMPLOYER3_CITY = @employer3City,
+  EMPLOYER3_STATE = @employer3State,
+  EMP3_ZIP_CODE_5 = @emp3ZipCode5,
+  EMP3_ZIP_CODE_4 = @emp3ZipCode4,
+  EMP3_CONFIRMED_IND = @emp3ConfirmedInd,
+  EMP3_EFFECTIVE_DT = @emp3EffectiveDt,
+  EMPLOYER3_END_DATE = @employer3EndDate,
+  EMP3_WAGE_AMOUNT = @emp3WageAmount,
+  EMP3_WAGE_QUARTER = @emp3WageQuarter,
+  EMP3_WAGE_YEAR = @emp3WageYear
+where
+  (CNC_TRANSACTION_DT = @cncTransactionDt) and
+  (CNC_TRANS_SERL_NBR = @cncTransSerlNbr)
+</value>
+   </data>
+</root>

@@ -1,0 +1,118 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeAheaAdminAppealHearing"
+           program-name="SWEAHEAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeAheaAdminAppealHearing"
+           transaction="SR8Y"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_ADMIN_APPEAL_ADDRESS"
+       action="transfer"
+       to="LeAaadAdminAppealAddress"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAppeal.Identifier"
+           to="AdministrativeAppeal.Identifier"/>
+      <map from="AdministrativeAppeal.Number" to="AdministrativeAppeal.Number"/>
+      <map from="AdministrativeAppeal.Type1" to="AdministrativeAppeal.Type1"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_LNK_2_ADMN_APPEAL_BY_CSE_PER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeAapsLstAdmApplsByCsePer"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+      <return-map from="Selected" to="AdministrativeAppeal"/>
+      <return-map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToDisplay" to="Code"/>
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <return-map from="DlgflwSelected" to="Dlgflw"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_FIPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFIPL"
+       to="LeFiplListFips"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="DlgflwSelectedCounty"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_POSITION_STATEMENT"
+       action="transfer"
+       to="LePostPositionStatement"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ADMIN_APPEALS"
+       action="transfer"
+       to="LeAappAdministrativeAppealP1"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAppeal.Identifier"
+           to="AdministrativeAppeal.Identifier"/>
+      <map from="AdministrativeAppeal.Number" to="AdministrativeAppeal.Number"/>
+      <map from="AdministrativeAppeal.Type1" to="AdministrativeAppeal.Type1"/>
+      <map from="HiddenSecurity1" to="HiddenSecurity"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="HearingAddress.DetailAddrtpPrmpt"
+        to="HearingAddress.DetailAddrtpPrmpt"/>
+   <map from="HearingAddress.DetailCommon" to="HearingAddress.DetailCommon"/>
+   <map from="HearingAddress.DetailHearingAddress"
+        to="HearingAddress.DetailHearingAddress"/>
+   <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+   <map from="HearingAddress.DetailCountyPrmpt"
+        to="HearingAddress.DetailCountyPrmpt"/>
+   <map from="HearingAddress.DetailStatePrompt"
+        to="HearingAddress.DetailStatePrompt"/>
+   <map from="Hidden.DetailHidden" to="Hidden.DetailHidden"/>
+   <map from="HiddenHearing" to="HiddenHearing"/>
+   <map from="HiddenAdministrativeAppeal" to="HiddenAdministrativeAppeal"/>
+   <map from="Dlgflw" to="Dlgflw"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="AppealSelection" to="AppealSelection"/>
+   <map from="HearingAddress.DetailFips" to="HearingAddress.DetailFips"/>
+   <map from="AdmActTakenDate" to="AdmActTakenDate"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity.HiddenSecurityCommand"
+        to="HiddenSecurity.HiddenSecurityCommand"/>
+   <map from="HiddenSecurity.HiddenSecurityProfileAuthorization"
+        to="HiddenSecurity.HiddenSecurityProfileAuthorization"/>
+   <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   <map from="Hearing.ConductedDate" to="DateTime.ConductedDate"/>
+   <map from="Hearing.ConductedTime" to="DateTime.ConductedTime"/>
+   <map from="Hearing.FirstName" to="DateTime.FirstName"/>
+   <map from="Hearing.MiddleInt" to="DateTime.MiddleInt"/>
+   <map from="Hearing.Outcome" to="DateTime.Outcome"/>
+   <map from="Hearing.OutcomeReceivedDate" to="DateTime.OutcomeReceivedDate"/>
+   <map from="Hearing.LastName" to="DateTime.LastName"/>
+   <map from="Hearing.Title" to="DateTime.Title"/>
+   <map from="Hearing.Type1" to="DateTime.Type1"/>
+   <map from="Hearing.SystemGeneratedIdentifier"
+        to="DateTime.SystemGeneratedIdentifier"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="AppealedAgainst.Type1" to="AppealedAgainst.Type1"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+</procedure>

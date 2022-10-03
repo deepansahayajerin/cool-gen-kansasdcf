@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePgmNameTable">
+      <value>
+insert into CKT_PGM_NAME_TABLE
+(
+  LAST_RUN_DATE,
+  PGM_NAME,
+  PGM_DESCRIPTION,
+  PGM_TYPE,
+  PGM_ACTIVE,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  UPDATED_TIMESTAMP,
+  UPDATED_BY,
+  PGM_PARM_LIST
+)
+values
+(
+  @lastRunDate,
+  @pgmName,
+  @pgmDescription,
+  @pgmType,
+  @pgmActive,
+  @createdTimestamp,
+  @createdBy,
+  @updatedTimestamp,
+  @updatedBy,
+  @pgmParmList
+)
+</value>
+   </data>
+   <data name="DeletePgmNameTable">
+      <value>
+delete from CKT_PGM_NAME_TABLE
+where
+  PGM_NAME = @pgmName
+</value>
+   </data>
+   <data name="ReadPgmNameTable">
+      <value>
+select top(1)
+  LAST_RUN_DATE,
+  PGM_NAME,
+  PGM_DESCRIPTION,
+  PGM_TYPE,
+  PGM_ACTIVE,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  UPDATED_TIMESTAMP,
+  UPDATED_BY,
+  PGM_PARM_LIST
+from
+  CKT_PGM_NAME_TABLE
+where
+  PGM_NAME = @pgmName
+</value>
+   </data>
+   <data name="ReadProgramRun">
+      <value>
+select top(1)
+  PPI_CREATED_TSTAMP,
+  PPI_NAME,
+  START_TIMESTAMP
+from
+  CKT_PROGRAM_RUN
+where
+  (PPI_NAME = cast(@pgmName as char(18))) and
+  (PPI_CREATED_TSTAMP = @ppiCreatedTstamp)
+</value>
+   </data>
+   <data name="UpdatePgmNameTable">
+      <value>
+update CKT_PGM_NAME_TABLE
+set
+  LAST_RUN_DATE = @lastRunDate,
+  PGM_DESCRIPTION = @pgmDescription,
+  PGM_TYPE = @pgmType,
+  PGM_ACTIVE = @pgmActive,
+  CREATED_TIMESTAMP = @createdTimestamp,
+  CREATED_BY = @createdBy,
+  UPDATED_TIMESTAMP = @updatedTimestamp,
+  UPDATED_BY = @updatedBy,
+  PGM_PARM_LIST = @pgmParmList
+where
+  PGM_NAME = @pgmName
+</value>
+   </data>
+</root>

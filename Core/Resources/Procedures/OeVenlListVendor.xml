@@ -1,0 +1,29 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeVenlListVendor"
+           program-name="SWEVENLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeVenlListVendor"
+           transaction="SR6K"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_MAINTAIN_VENDOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeVendMaintainVendor"
+       send-command="RSVENL">
+      <map from="Selected" to="HiddenSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none"/>
+   <map from="StartVendor" to="StartVendor"/>
+   <map from="Exp.Vendor" to="Import1.Vendor"/>
+   <map from="Exp.VendorAddress" to="Import1.VendorAddress"/>
+   <map from="StartVendorAddress" to="StartVendorAddress"/>
+   <map from="Exp.Selection1" to="Import1.Selection1"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Selected" to="Selected"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCashReceipt">
+      <value>
+select
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COLLECTION_AMOUNT,
+  T1.OFFSET_TAX_YEAR,
+  T1.JOINT_RETURN_IND,
+  T1.OBLGOR_PRSN_NBR,
+  T1.CREATED_BY,
+  T1.CREATED_TMST,
+  T1.INJURED_SPOUSE_IND,
+  T1.JFA_RECEIVED_DATE,
+  T1.CRU_PROCESSED_DATE,
+  T2.CASH_RECEIPT_ID
+from
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.JOINT_RETURN_IND = 'Y') and
+    (T1.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER)
+order by
+  T1.CREATED_TMST desc
+</value>
+   </data>
+</root>

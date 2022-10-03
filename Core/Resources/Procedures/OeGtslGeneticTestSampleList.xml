@@ -1,0 +1,50 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeGtslGeneticTestSampleList"
+           program-name="SWEGTSLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeGtslGeneticTestSampleList"
+           transaction="SR5U"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none">
+      <map from="Case1" to="StartCase"/>
+      <map from="CsePerson" to="StartCsePerson"/>
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="Export1.DetailGeneticTest" to="Import1.DetailGeneticTest"/>
+   <map from="Export1.DetailPersonGeneticTest"
+        to="Import1.DetailPersonGeneticTest"/>
+   <map from="Export1.DetailVendor" to="Import1.DetailVendor"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailCollTime" to="Import1.DetailCollTime"/>
+   <map from="Export1.DetailVendorAddress" to="Import1.DetailVendorAddress"/>
+   <map from="Starting" to="Starting"/>
+   <map from="AcceptPersonNo" to="AcceptPersonNo"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ListCsePersons" to="ListCsePersons"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDisbCollectionDisbursementCollection">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.OTY_ID,
+  T1.OTR_TYPE_DISB,
+  T1.OTR_ID,
+  T1.CPA_TYPE_DISB,
+  T1.CSP_NUMBER_DISB,
+  T1.OBG_ID,
+  T1.CRD_ID,
+  T1.CRV_ID,
+  T1.CST_ID,
+  T1.CRT_ID,
+  T1.COL_ID,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.DISB_TRAN_ID,
+  T2.AMOUNT,
+  T2.PRQ_GENERATED_ID,
+  T2.REFERENCE_NUMBER,
+  T3.ADJ_IND,
+  T3.DISB_ADJ_PROC_DATE,
+  T3.COLL_ADJ_DT
+from
+  CKT_DISB_TRAN T2
+  join
+  CKT_COLLECTION T3
+  join
+  CKT_DISB_TRAN T1
+  on
+    (T3.COLL_ID = T1.COL_ID) and
+    (T3.OTY_ID = T1.OTY_ID) and
+    (T3.OBG_ID = T1.OBG_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER_DISB) and
+    (T3.CPA_TYPE = T1.CPA_TYPE_DISB) and
+    (T3.OTR_ID = T1.OTR_ID) and
+    (T3.OTR_TYPE = T1.OTR_TYPE_DISB) and
+    (T3.CRT_TYPE = T1.CRT_ID) and
+    (T3.CST_ID = T1.CST_ID) and
+    (T3.CRV_ID = T1.CRV_ID) and
+    (T3.CRD_ID = T1.CRD_ID)
+  join
+  CKT_DISB_TRAN_RLN T4
+  on
+    (T1.DISB_TRAN_ID = T4.DTR_P_GENERATED_ID) and
+    (T1.CPA_TYPE = T4.CPA_P_TYPE) and
+    (T1.CSP_NUMBER = T4.CSP_P_NUMBER)
+  on
+    (T2.DISB_TRAN_ID = T4.DTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T4.CPA_TYPE) and
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (@prqGeneratedId = T2.PRQ_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadDisbursement">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.AMOUNT,
+  T1.DBT_GENERATED_ID
+from
+  CKT_DISB_TRAN T1 with(readuncommitted)
+  join
+  CKT_DISB_TRAN_RLN T2 with(readuncommitted)
+  on
+    (T1.DISB_TRAN_ID = T2.DTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (@dtrPGeneratedId = T2.DTR_P_GENERATED_ID) and
+    (@cpaPType = T2.CPA_P_TYPE) and
+    (@cspPNumber = T2.CSP_P_NUMBER) and
+    (T1.DBT_GENERATED_ID = 73)
+</value>
+   </data>
+   <data name="ReadOcse34">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  CSE_WARR_AMT,
+  WARR_ERROR_LDA,
+  WARR_ERROR_GT_2,
+  WARR_ERROR_GT_30,
+  WARR_ERROR_GT_180,
+  WARR_ERROR_GT_365,
+  WARR_ERROR_GT_1095,
+  WARR_ERROR_GT_1825
+from
+  CKT_OCSE34
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select distinct
+  T1.PAYMENT_REQUEST_ID,
+  T1.PROCESS_DATE,
+  T1.AMOUNT,
+  T1.CREATED_TIMESTAMP,
+  T1.CSE_PERSON_NUMBER,
+  T1.CLASSIFICATION,
+  T1.PRINT_DATE,
+  T1.TYPE,
+  T1.PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST T1 with(readuncommitted)
+  join
+  CKT_PMNT_STAT_HIST T2 with(readuncommitted)
+  on
+    (
+      (T1.PROCESS_DATE &gt; @processDate1) or
+      (
+        (T1.PROCESS_DATE &gt; @processDate2) and
+        (T1.PROCESS_DATE &lt;= @processDate1) and
+        (T1.PRINT_DATE &gt; @processDate1)
+      ) or
+      (T1.PROCESS_DATE = @processDate2)
+    ) and
+    (T1.TYPE = 'WAR') and
+    (T1.CLASSIFICATION = 'SUP') and
+    (T1.AMOUNT &gt;= 1) and
+    (T1.PAYMENT_REQUEST_ID = T2.PRQ_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @processDate1)
+order by
+  T1.PROCESS_DATE,
+  T1.CSE_PERSON_NUMBER
+</value>
+   </data>
+   <data name="UpdateOcse34">
+      <value>
+update CKT_OCSE34
+set
+  CSE_WARR_AMT = @cseWarrAmt,
+  WARR_ERROR_LDA = @warrErrorLda,
+  WARR_ERROR_GT_2 = @warrErrorGt2,
+  WARR_ERROR_GT_30 = @warrErrorGt30,
+  WARR_ERROR_GT_180 = @warrErrorGt180,
+  WARR_ERROR_GT_365 = @warrErrorGt365,
+  WARR_ERROR_GT_1095 = @warrErrorGt1095,
+  WARR_ERROR_GT_1825 = @warrErrorGt1825
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

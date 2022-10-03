@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPaParticipantAddress">
+      <value>
+select top(1)
+  T1.TYPE,
+  T1.STREET1,
+  T1.STREET2,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP,
+  T1.ZIP4,
+  T1.IDENTIFIER,
+  T1.PRP_IDENTIFIER,
+  T1.PAF_TYPE,
+  T1.PRE_NUMBER,
+  T1.PAF_TSTAMP
+from
+  CKT_PA_REFER_PART T2
+  join
+  CKT_PA_PART_ADDR T1
+  on
+    (T2.PAF_TSTAMP = T1.PAF_TSTAMP) and
+    (T2.PRE_NUMBER = T1.PRE_NUMBER) and
+    (T2.PAF_TYPE = T1.PAF_TYPE) and
+    (T2.IDENTIFIER = T1.PRP_IDENTIFIER) and
+    (@pafTstamp = T2.PAF_TSTAMP) and
+    (@preNumber = T2.PRE_NUMBER) and
+    (@pafType = T2.PAF_TYPE) and
+    (T2.RELATIONSHIP = 'AP') and
+    (T1.TYPE = 'E')
+</value>
+   </data>
+   <data name="ReadPaReferral">
+      <value>
+select top(1)
+  NUMB,
+  RECEIVED_DATE,
+  ASSIGN_DEACT_IND,
+  ASSIGN_DEACT_DATE,
+  CASE_NUMBER,
+  TYPE,
+  MED_PYMNT_DUE_DT,
+  MED_AMT,
+  MED_FREQ,
+  MEDICAL_LAST_PYMT,
+  MED_LAST_PYMT_DT,
+  MED_ORDER_EFF_DT,
+  MED_ORDER_STATE,
+  MED_ORDER_PLACE,
+  MED_ARREARAGE,
+  MED_PAID_TO,
+  MED_PAYMENT_TYPE,
+  MED_INSURANCE_CO,
+  MED_POLICY_NBR,
+  MED_ORDER_NBR,
+  MED_ORDER_IND,
+  ASSIGNMENT_DATE,
+  CSE_REGION,
+  CSE_REF_REC_DT,
+  AR_RETAINED_IND,
+  PGM_CODE,
+  CASE_WORKER,
+  PAYMENT_MADE_TO,
+  ARREARAGE_AMT,
+  LAST_PAY_AMT,
+  PAYMENT_AMOUNT,
+  LAST_PAYMENT_DATE,
+  GOOD_CAUSE_CODE,
+  GOOD_CAUSE_DATE,
+  ORDER_EFF_DATE,
+  PAYMENT_DUE_DATE,
+  SUPPORT_ORDER_ID,
+  LAST_AP_CTC_DATE,
+  VOL_SUPPORT_IND,
+  AP_EMPLOYER_NAME,
+  FC_NEXT_JV_CT_DT,
+  FC_ORDER_EST_BY,
+  FC_JV_COURT_ORDER,
+  FC_JV_OFFEND_IND,
+  FC_CINC_IND,
+  FC_PLACEMENT_DATE,
+  FC_SRS_PAYEE,
+  FC_CARE_COST_FREQ,
+  FC_COST_OF_CARE,
+  FC_ADOPT_DISRUPT,
+  FC_PLACEMENT_TYPE,
+  FC_PREVIOUS_PA,
+  FC_INIT_CUSTODY_DT,
+  FC_RIGHTS_SEVERED,
+  FC_IV_E_CASE_NO,
+  FC_PLACEMENT_NAME,
+  FC_SRCE_OF_FUNDING,
+  FC_OTH_BEN_IND,
+  FC_ZEB_IND,
+  FC_VA_IND,
+  FC_SSI,
+  FC_SSA,
+  FC_WARDS_ACCOUNT,
+  FC_CTY_CH_RMVD_FRM,
+  FC_AP_NOTIFIED,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  KS_COUNTY,
+  NOTE,
+  AP_EMPLOYER_PHONE,
+  SUPPORT_ORDER_FREQ,
+  CS_ORDER_PLACE,
+  CS_ORDER_STATE,
+  CS_FREQ,
+  REFERRAL_FROM,
+  AP_PHONE_NUMBER,
+  AP_AREA_CODE,
+  CC_START_DATE,
+  AR_EMPLOYER_NAME,
+  CSE_INVLVMNT_IND
+from
+  CKT_PA_REFERRAL
+where
+  (NUMB = @numb) and
+  (TYPE = @type) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+</root>

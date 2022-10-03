@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeletePersonProgram1">
+      <value>
+delete from CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (PRG_GENERATED_ID = @prgGeneratedId)
+</value>
+   </data>
+   <data name="DeletePersonProgram2">
+      <value>
+delete from CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (PRG_GENERATED_ID = @prgGeneratedId)
+</value>
+   </data>
+   <data name="ReadPersonProgram1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  CLOSURE_REASON,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (CSP_NUMBER = @cspNumber) and
+  (PRG_GENERATED_ID = 12)
+</value>
+   </data>
+   <data name="ReadPersonProgram2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  CLOSURE_REASON,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (PRG_GENERATED_ID = 12) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadPersonProgram3">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.CLOSURE_REASON,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T1.MED_TYPE_DISC_DATE,
+  T1.MED_TYPE
+from
+  CKT_PROGRAM T3
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.MED_TYPE_DISC_DATE = @medTypeDiscDate) and
+    (T1.MED_TYPE in ('WT', 'EM')) and
+    (T3.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (T3.CODE = 'AF')
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadPersonProgram4">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  CLOSURE_REASON,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (CSP_NUMBER = @cspNumber) and
+  (PRG_GENERATED_ID = 12)
+</value>
+   </data>
+   <data name="ReadPersonProgram5">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.CLOSURE_REASON,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T1.MED_TYPE_DISC_DATE,
+  T1.MED_TYPE
+from
+  CKT_PROGRAM T3
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.MED_TYPE_DISC_DATE = @medTypeDiscDate) and
+    (T1.MED_TYPE in ('WT', 'EM')) and
+    (T3.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (T3.CODE = 'AF')
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadPersonProgram6">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  CLOSURE_REASON,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadPersonProgramProgram">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.CLOSURE_REASON,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T1.MED_TYPE_DISC_DATE,
+  T1.MED_TYPE,
+  T2.CODE
+from
+  CKT_PROGRAM T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T2.PROGRAM_ID = T1.PRG_GENERATED_ID)
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+</root>

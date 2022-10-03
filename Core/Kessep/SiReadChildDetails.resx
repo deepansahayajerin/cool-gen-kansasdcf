@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.ON_SS_IND,
+  T1.HEALTH_INS_IND,
+  T1.MEDICAL_SUPP_IND,
+  T1.ABSENCE_REASON_CD,
+  T1.PRIOR_MEDICAL_SUPP,
+  T1.AR_WAIVED_INS,
+  T1.EMANCIPATION_DT,
+  T1.FC_ADOPT_DISRUPT,
+  T1.FC_AP_NOTIFIED,
+  T1.FC_CINC_IND,
+  T1.FC_COST_OF_CARE,
+  T1.FC_CARE_COST_FREQ,
+  T1.FC_COUNTY_REM_FROM,
+  T1.FC_INIT_CUSTODY_DT,
+  T1.FC_IN_HM_SERV_IND,
+  T1.FC_IV_E_CASE_NO,
+  T1.FC_JV_CRT_ORDER,
+  T1.FC_JV_OFFENDER_IND,
+  T1.FC_LEVEL_OF_CARE,
+  T1.FC_NEXT_JV_CT_DT,
+  T1.FC_ORDER_EST_BY,
+  T1.FC_OTHER_BEN_IND,
+  T1.FC_PARENTAL_RIGHTS,
+  T1.FC_PRV_PAY_FRST_NM,
+  T1.FC_PRV_PAY_MI,
+  T1.FC_PLACEMENT_DATE,
+  T1.FC_PLACEMENT_NAME,
+  T1.FC_PLACEMENT_RSN,
+  T1.FC_PREVIOUS_PA,
+  T1.FC_PRV_PAY_LAST_NM,
+  T1.FC_SRCE_OF_FUNDING,
+  T1.FC_SRS_PAYEE,
+  T1.FC_SSA,
+  T1.FC_SSI,
+  T1.FC_VA_IND,
+  T1.FC_WARDS_ACCOUNT,
+  T1.FC_ZEB_IND,
+  T1.IN_SCHOOL_OVER_18,
+  T1.RESIDE_WITH_AR_IND,
+  T1.SPECIALTY_AREA,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.REL_TO_AR,
+  T1.NOTE,
+  T2.TYPE,
+  T2.OCCUPATION,
+  T2.AE_CASE_NUMBER,
+  T2.DATE_OF_DEATH,
+  T2.ILLEGAL_ALIEN_IND,
+  T2.CURRENT_SPOUSE_MI,
+  T2.CURR_SPOUSE_1ST_NM,
+  T2.BIRTH_PLACE_STATE,
+  T2.EMERGENCY_PHONE,
+  T2.NAME_MIDDLE,
+  T2.NAME_MAIDEN,
+  T2.HOME_PHONE,
+  T2.OTHER_NUMBER,
+  T2.BIRTH_PLACE_CITY,
+  T2.CURR_MARITAL_STS,
+  T2.CUR_SPOUSE_LAST_NM,
+  T2.RACE,
+  T2.HAIR_COLOR,
+  T2.EYE_COLOR,
+  T2.WEIGHT,
+  T2.HEIGHT_FT,
+  T2.HEIGHT_IN,
+  T2.OTHER_ID_INFO,
+  T2.OUT_OF_WEDLOCK,
+  T2.CSE_TO_EST_PATR,
+  T2.PAT_ESTAB_IND,
+  T2.DATE_PATERN_ESTAB,
+  T2.BC_FATHER_LAST_NM,
+  T2.BC_FATHER_FIRST_NM,
+  T2.BC_FATHERS_MI,
+  T2.BC_SIGNATURE,
+  T2.TEXT_MESSAGE_IND,
+  T2.TRIBAL_CODE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.TYPE = 'CH') and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.NUMB = @numb) and
+    (T1.CAS_NUMBER = @casNumber)
+order by
+  T1.END_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'R') and
+  (LOCATION_TYPE = 'D') and
+  (END_DATE &gt;= @endDate)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.[ROLE],
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE
+from
+  CKT_OB_TYPE T3,
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_LEGAL_ACT_DTL T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (T1.ACCOUNT_TYPE = 'S') and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.LA_DETAIL_NO = T1.LAD_R_NUMBER) and
+    (T2.LGA_IDENTIFIER = T1.LGA_R_IDENTIFIER) and
+    (T2.END_DT &gt;= @endDt)
+  on
+    (T4.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T4.CLASSIFICATION = 'J') and
+    (T4.FILED_DT &gt; @filedDt)
+where
+  (
+    (T3.DEBT_TYP_ID = T2.OTY_ID) and
+    (T3.DEBT_TYP_ID = 3)
+  ) or
+  (T2.NON_FIN_OBLG_TYPE = 'HIC')
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select top(1)
+  HCV_ID,
+  CSP_NUMBER,
+  COVER_BEGIN_DATE,
+  COVER_END_DATE
+from
+  CKT_PERSONAL_HINS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (COVER_BEGIN_DATE &lt;= @coverBeginDate) and
+  (COVER_END_DATE &gt;= @coverBeginDate)
+</value>
+   </data>
+   <data name="ReadProgram">
+      <value>
+select distinct
+  T1.PROGRAM_ID,
+  T1.CODE
+from
+  CKT_PROGRAM T1
+  join
+  CKT_PERSON_PROGRAM T2
+  on
+    (T1.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+</root>

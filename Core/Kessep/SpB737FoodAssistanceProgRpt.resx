@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseRolePersonProgramOfficeServiceProvider">
+      <value>
+select
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.CSP_NUMBER,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.CREATED_TIMESTAMP,
+  T3.PRG_GENERATED_ID,
+  T4.SPD_GENERATED_ID,
+  T4.OFF_GENERATED_ID,
+  T4.ROLE_CODE,
+  T4.EFFECTIVE_DATE,
+  T4.DISCONTINUE_DATE,
+  T5.LAST_NAME,
+  T5.FIRST_NAME,
+  T6.TYPE_CODE,
+  T6.EFFECTIVE_DATE,
+  T6.DISCONTINUE_DATE,
+  T6.OFF_OFFICE,
+  T7.EFFECTIVE_DATE,
+  T7.DISCONTINUE_DATE,
+  T7.CREATED_TIMESTAMP,
+  T8.TYPE
+from
+  CKT_CSE_PERSON T8 with(readuncommitted)
+  join
+  CKT_SERVICE_PRVDER T5 with(readuncommitted)
+  join
+  CKT_OFFICE T6 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T4 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.END_DATE &gt; @endDate) and
+    (T1.STATUS = 'O')
+  join
+  CKT_ASSIGN_CASE T7 with(readuncommitted)
+  on
+    (T1.NUMB = T7.CAS_NO) and
+    (T7.DISCONTINUE_DATE &gt; @endDate)
+  on
+    (T4.EFFECTIVE_DATE = T7.OSP_DATE) and
+    (T4.ROLE_CODE = T7.OSP_CODE) and
+    (T4.OFF_GENERATED_ID = T7.OFF_ID) and
+    (T4.SPD_GENERATED_ID = T7.SPD_ID) and
+    (T4.DISCONTINUE_DATE &gt; @endDate)
+  on
+    T6.OFFICE_ID = T4.OFF_GENERATED_ID
+  on
+    T5.SERVICE_PRVDER_ID = T4.SPD_GENERATED_ID
+  on
+    T8.NUMB = T2.CSP_NUMBER
+  join
+  CKT_PERSON_PROGRAM T3 with(readuncommitted)
+  on
+    (T8.NUMB = T3.CSP_NUMBER) and
+    (T3.DISCONTINUE_DATE &gt; @endDate) and
+    (T3.PRG_GENERATED_ID = 4)
+order by
+  T4.OFF_GENERATED_ID,
+  T4.SPD_GENERATED_ID,
+  T5.LAST_NAME,
+  T5.FIRST_NAME
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  T1.ORGANZTN_ID,
+  T1.TYPE_CODE,
+  T1.NAME
+from
+  CKT_CSE_ORGANIZATN T1
+  join
+  CKT_CSE_ORG_RELATN T2
+  on
+    (T1.TYPE_CODE = 'X') and
+    (T1.TYPE_CODE = T2.COG_CHILD_TYPE) and
+    (T1.ORGANZTN_ID = T2.COG_CHILD_CODE) and
+    (T2.REASON_CODE = 'XJ') and
+    (T2.COG_PARENT_CODE = @cogParentCode)
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select
+  OFFICE_ID,
+  TYPE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  (TYPE_CODE = 'F') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @discontinueDate)
+order by
+  OFFICE_ID
+</value>
+   </data>
+   <data name="ReadPersonProgramCsePerson">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T2.TYPE
+from
+  CKT_PROGRAM T3
+  join
+  CKT_CSE_PERSON T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (T2.NUMB = @numb) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate)
+  on
+    (T3.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (
+      T3.CODE in ('AF', 'CC', 'NF',
+        'NC', 'FC')
+    )
+</value>
+   </data>
+</root>

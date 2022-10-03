@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_EMPLOYER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  COURT_CASE_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSourceIncomeSource1">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.ISR_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.CREATED_TSTAMP,
+  T1.WITHHOLDING_TYPE,
+  T1.END_DT,
+  T1.WAGE_OR_NON_WAGE,
+  T1.ORDER_TYPE,
+  T1.IDENTIFIER,
+  T2.NAME,
+  T2.EMP_ID
+from
+  CKT_INCOME_SOURCE T2
+  join
+  CKT_LEGAL_ACT_ISRC T1
+  on
+    (@cspINumber = T2.CSP_I_NUMBER) and
+    (T2.CSP_I_NUMBER = T1.CSP_NUMBER) and
+    (T2.IDENTIFIER = T1.ISR_IDENTIFIER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T1.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSourceIncomeSource2">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.ISR_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.CREATED_TSTAMP,
+  T1.WITHHOLDING_TYPE,
+  T1.END_DT,
+  T1.WAGE_OR_NON_WAGE,
+  T1.ORDER_TYPE,
+  T1.IDENTIFIER,
+  T2.NAME,
+  T2.EMP_ID
+from
+  CKT_INCOME_SOURCE T2
+  join
+  CKT_LEGAL_ACT_ISRC T1
+  on
+    (@cspINumber = T2.CSP_I_NUMBER) and
+    (T2.CSP_I_NUMBER = T1.CSP_NUMBER) and
+    (T2.IDENTIFIER = T1.ISR_IDENTIFIER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER)
+order by
+  T1.CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSourceIncomeSource3">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.ISR_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.CREATED_TSTAMP,
+  T1.WITHHOLDING_TYPE,
+  T1.END_DT,
+  T1.WAGE_OR_NON_WAGE,
+  T1.ORDER_TYPE,
+  T1.IDENTIFIER,
+  T2.NAME,
+  T2.EMP_ID
+from
+  CKT_INCOME_SOURCE T2
+  join
+  CKT_LEGAL_ACT_ISRC T1
+  on
+    (@cspINumber = T2.CSP_I_NUMBER) and
+    (T2.CSP_I_NUMBER = T1.CSP_NUMBER) and
+    (T2.IDENTIFIER = T1.ISR_IDENTIFIER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T1.CREATED_TSTAMP &gt; @createdTstamp)
+order by
+  T1.CREATED_TSTAMP
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSourceIncomeSource4">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.ISR_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.CREATED_TSTAMP,
+  T1.WITHHOLDING_TYPE,
+  T1.END_DT,
+  T1.WAGE_OR_NON_WAGE,
+  T1.ORDER_TYPE,
+  T1.IDENTIFIER,
+  T2.NAME,
+  T2.EMP_ID
+from
+  CKT_INCOME_SOURCE T2
+  join
+  CKT_LEGAL_ACT_ISRC T1
+  on
+    (@cspINumber = T2.CSP_I_NUMBER) and
+    (T2.CSP_I_NUMBER = T1.CSP_NUMBER) and
+    (T2.IDENTIFIER = T1.ISR_IDENTIFIER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER)
+order by
+  T1.CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalActionPersonResourceCsePersonResource1">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.CPR_RESOURCE_NO,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.LIEN_TYPE,
+  T1.END_DATE,
+  T1.CREATED_TSTAMP,
+  T1.IDENTIFIER,
+  T2.RESOURCE_DESC,
+  T2.CSE_ACTION_CODE
+from
+  CKT_CSE_PERSON_RES T2
+  join
+  CKT_LEGL_ACT_PRSRC T1
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.RESOURCE_NO = T1.CPR_RESOURCE_NO) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T1.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonResourceCsePersonResource2">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.CPR_RESOURCE_NO,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.LIEN_TYPE,
+  T1.END_DATE,
+  T1.CREATED_TSTAMP,
+  T1.IDENTIFIER,
+  T2.RESOURCE_DESC,
+  T2.CSE_ACTION_CODE
+from
+  CKT_CSE_PERSON_RES T2
+  join
+  CKT_LEGL_ACT_PRSRC T1
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.RESOURCE_NO = T1.CPR_RESOURCE_NO) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER)
+order by
+  T1.CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalActionPersonResourceCsePersonResource3">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.CPR_RESOURCE_NO,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.LIEN_TYPE,
+  T1.END_DATE,
+  T1.CREATED_TSTAMP,
+  T1.IDENTIFIER,
+  T2.RESOURCE_DESC,
+  T2.CSE_ACTION_CODE
+from
+  CKT_CSE_PERSON_RES T2
+  join
+  CKT_LEGL_ACT_PRSRC T1
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.RESOURCE_NO = T1.CPR_RESOURCE_NO) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER)
+order by
+  T1.CREATED_TSTAMP
+</value>
+   </data>
+   <data name="ReadLegalActionPersonResourceCsePersonResource4">
+      <value>
+select
+  T1.CSP_NUMBER,
+  T1.CPR_RESOURCE_NO,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.LIEN_TYPE,
+  T1.END_DATE,
+  T1.CREATED_TSTAMP,
+  T1.IDENTIFIER,
+  T2.RESOURCE_DESC,
+  T2.CSE_ACTION_CODE
+from
+  CKT_CSE_PERSON_RES T2
+  join
+  CKT_LEGL_ACT_PRSRC T1
+  on
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.RESOURCE_NO = T1.CPR_RESOURCE_NO) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER)
+order by
+  T1.CREATED_TSTAMP desc
+</value>
+   </data>
+</root>

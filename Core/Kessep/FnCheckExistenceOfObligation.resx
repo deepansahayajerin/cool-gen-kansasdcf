@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonCsePerson">
+      <value>
+select distinct
+  T1.NUMB,
+  T4.CSP_NUMBER
+from
+  CKT_LEGAL_ACT_PERS T4 with(readuncommitted),
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (@ladRNumber = T3.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T3.LGA_R_IDENTIFIER) and
+    (T3.ACCOUNT_TYPE = @accountType1)
+where
+  (T4.CSP_NUMBER is not null) and
+  (@ladRNumber = T4.LAD_R_NUMBER) and
+  (@lgaRIdentifier = T4.LGA_R_IDENTIFIER) and
+  (T4.ACCOUNT_TYPE = @accountType2)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  EFFECTIVE_DT,
+  CREATED_BY,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  PERIOD_IND,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (LA_DETAIL_NO = @laDetailNo)
+</value>
+   </data>
+   <data name="ReadObligationObligationPaymentScheduleObligationTransaction1">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.OTHER_STATE_ABBR,
+  T1.CREATED_TMST,
+  T1.LGA_IDENTIFIER,
+  T1.LAD_NUMBER,
+  T2.START_DT,
+  T2.END_DT,
+  T3.OB_TRN_ID,
+  T3.OB_TRN_TYP,
+  T3.DEBT_TYP,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE
+from
+  CKT_OBLIGATION T1 with(readuncommitted)
+  join
+  CKT_OB_PYMNT_SCH T2 with(readuncommitted)
+  on
+    (T1.DTY_GENERATED_ID = T2.OTY_TYPE) and
+    (T1.OB_ID = T2.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.OBG_CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.OBG_CPA_TYPE) and
+    (@dtyGeneratedId = T1.DTY_GENERATED_ID) and
+    (@ladNumber = T1.LAD_NUMBER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (@cspNumber = T1.CSP_NUMBER)
+  join
+  CKT_OB_TRN T3 with(readuncommitted)
+  on
+    (T1.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T1.OB_ID = T3.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T3.DEBT_TYP = @debtTyp) and
+    (T3.OB_TRN_TYP = @obTrnTyp) and
+    (T3.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T3.CSP_SUP_NUMBER)
+order by
+  T2.START_DT desc
+</value>
+   </data>
+   <data name="ReadObligationObligationPaymentScheduleObligationTransaction2">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.OTHER_STATE_ABBR,
+  T1.CREATED_TMST,
+  T1.LGA_IDENTIFIER,
+  T1.LAD_NUMBER,
+  T2.START_DT,
+  T2.END_DT,
+  T3.OB_TRN_ID,
+  T3.OB_TRN_TYP,
+  T3.DEBT_TYP,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE
+from
+  CKT_OBLIGATION T1 with(readuncommitted)
+  join
+  CKT_OB_PYMNT_SCH T2 with(readuncommitted)
+  on
+    (T1.DTY_GENERATED_ID = T2.OTY_TYPE) and
+    (T1.OB_ID = T2.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.OBG_CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.OBG_CPA_TYPE) and
+    (@ladNumber = T1.LAD_NUMBER) and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (@dtyGeneratedId = T1.DTY_GENERATED_ID) and
+    (@cspNumber = T1.CSP_NUMBER)
+  join
+  CKT_OB_TRN T3 with(readuncommitted)
+  on
+    (T1.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T1.OB_ID = T3.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T3.DEBT_TYP = @debtTyp) and
+    (T3.OB_TRN_TYP = @obTrnTyp) and
+    (T3.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T3.CSP_SUP_NUMBER)
+order by
+  T2.START_DT desc,
+  T2.END_DT desc
+</value>
+   </data>
+   <data name="ReadObligationType1">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_CD = @debtTypCd
+</value>
+   </data>
+   <data name="ReadObligationType2">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

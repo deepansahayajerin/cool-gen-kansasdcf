@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  TAX_ID,
+  ORGANIZATION_NAME,
+  TAX_ID_SUFFIX
+from
+  CKT_CSE_PERSON
+where
+  (NUMB &lt;&gt; @numb) and
+  (TAX_ID = @taxId) and
+  (TAX_ID_SUFFIX = @taxIdSuffix)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  TAX_ID,
+  ORGANIZATION_NAME,
+  TAX_ID_SUFFIX
+from
+  CKT_CSE_PERSON
+where
+  (TAX_ID = @taxId) and
+  (TAX_ID_SUFFIX = @taxIdSuffix)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.TAX_ID,
+  T1.ORGANIZATION_NAME,
+  T1.TAX_ID_SUFFIX
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_FIPS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.[STATE] = @state) and
+    (T2.COUNTY = @county) and
+    (T2.LOCATION = @location) and
+    (T1.NUMB &lt;&gt; @numb)
+</value>
+   </data>
+   <data name="ReadCsePerson4">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.TAX_ID,
+  T1.ORGANIZATION_NAME,
+  T1.TAX_ID_SUFFIX
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_FIPS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.[STATE] = @state) and
+    (T2.COUNTY = @county) and
+    (T2.LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  IDENTIFIER,
+  TAX_ID_SUFFIX,
+  TAX_ID,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  (FIP_STATE = @fipState) and
+  (FIP_COUNTY = @fipCounty) and
+  (FIP_LOCATION = @fipLocation)
+</value>
+   </data>
+   <data name="UpdateTribunal">
+      <value>
+update CKT_TRIBUNAL
+set
+  TRIBUNAL_NM = @tribunalNm,
+  TAX_ID_SUFFIX = @taxIdSuffix,
+  TAX_ID = @taxId
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

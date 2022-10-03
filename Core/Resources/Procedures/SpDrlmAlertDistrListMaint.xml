@@ -1,0 +1,78 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpDrlmAlertDistrListMaint"
+           program-name="SWEDRLMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpDrlmAlertDistrListMaint"
+           transaction="SRPZ"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToTran" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromLinkCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ALLS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETALLS"
+       to="SpAllsListAlerts"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="FromLinkAlert"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpInfmInfrastructureMgmtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_EDLM"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEDLM"
+       to="SpEdlmEventDetailsListMaint"
+       send-command-type="none">
+      <return-map from="ToTranEventDetail" to="FromLinkEventDetail"/>
+      <return-map from="ToTranEvent" to="FromLinkEvent"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionOffice" to="FromSvpoOffice"/>
+      <return-map from="HiddenSelectionServiceProvider" to="FromSvpoServiceProvider"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="FromSvpoOfficeServiceProvider"/>
+   </on>
+   <map from="Event1" to="Event1"/>
+   <map from="EventDetail1" to="EventDetail1"/>
+   <map from="HiddenEvent" to="HiddenEvent"/>
+   <map from="HiddenEventDetail" to="HiddenEventDetail"/>
+   <map from="EventDetail2" to="EventDetail2"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.HiddenAlertDistributionRule"
+        to="Group.HiddenAlertDistributionRule"/>
+   <map from="Group.ReasonCode" to="Group.ReasonCode"/>
+   <map from="Group.HiddenAlert" to="Group.HiddenAlert"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Alert1" to="Group.Alert1"/>
+   <map from="Group.CuFunction" to="Group.CuFunction"/>
+   <map from="Group.BusinessObject" to="Group.BusinessObject"/>
+   <map from="Group.Alert2" to="Group.Alert2"/>
+   <map from="Group.AlertDistributionRule" to="Group.AlertDistributionRule"/>
+   <map from="Group.ServiceProvider1" to="Group.ServiceProvider1"/>
+   <map from="Group.ServiceProvider2" to="Group.ServiceProvider2"/>
+   <map from="Group.Office" to="Group.Office"/>
+   <map from="Group.OfficeServiceProvider" to="Group.OfficeServiceProvider"/>
+   <map from="Group.HiddenServiceProvider" to="Group.HiddenServiceProvider"/>
+   <map from="Group.HiddenOffice" to="Group.HiddenOffice"/>
+   <map from="Group.HiddenOfficeServiceProvider"
+        to="Group.HiddenOfficeServiceProvider"/>
+   <map from="Group.HiddenExportGrpServicePrvdr"
+        to="Group.HiddenImportGrpServicePrvdr"/>
+</procedure>

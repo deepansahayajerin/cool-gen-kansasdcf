@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteLaPersonLaCaseRole">
+      <value>
+delete from CKT_LA_PER_LA_CROL
+where
+  (IDENTIFIER = @identifier) and
+  (CRO_ID = @croId) and
+  (CRO_TYPE = @croType) and
+  (CSP_NUM = @cspNum) and
+  (CAS_NUM = @casNum) and
+  (LGA_ID = @lgaId) and
+  (LAP_ID = @lapId)
+</value>
+   </data>
+   <data name="DeleteLegalActionCaseRole#1">
+      <value>
+delete from CKT_LA_PER_LA_CROL
+where
+  (CAS_NUM = @casNum) and
+  (CSP_NUM = @cspNum) and
+  (CRO_TYPE = @croType) and
+  (CRO_ID = @croId) and
+  (LGA_ID = @lgaId)
+</value>
+   </data>
+   <data name="DeleteLegalActionCaseRole#2">
+      <value>
+delete from CKT_LEG_ACT_CAS_RL
+where
+  (CAS_NUMBER = @casNum) and
+  (CSP_NUMBER = @cspNum) and
+  (CRO_TYPE = @croType) and
+  (CRO_IDENTIFIER = @croId) and
+  (LGA_ID = @lgaId)
+</value>
+   </data>
+   <data name="DeleteLegalActionDetail#1">
+      <value>
+update CKT_LEGAL_ACT_PERS
+set
+  LAD_R_NUMBER = null,
+  LGA_R_IDENTIFIER = null
+where
+  (LGA_R_IDENTIFIER = @lgaRIdentifier) and
+  (LAD_R_NUMBER = @ladRNumber)
+</value>
+   </data>
+   <data name="DeleteLegalActionDetail#2">
+      <value>
+delete from CKT_LEGAL_ACT_DTL
+where
+  (LGA_IDENTIFIER = @lgaRIdentifier) and
+  (LA_DETAIL_NO = @ladRNumber)
+</value>
+   </data>
+   <data name="DeleteLegalActionPerson#1">
+      <value>
+delete from CKT_LA_PER_LA_CROL
+where
+  LAP_ID = @lapId
+</value>
+   </data>
+   <data name="DeleteLegalActionPerson#2">
+      <value>
+delete from CKT_LEGAL_ACT_PERS
+where
+  LA_PERSON_ID = @lapId
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRole">
+      <value>
+select
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+from
+  CKT_LA_PER_LA_CROL
+where
+  @lapId = LAP_ID
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRoleLegalActionPerson">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+from
+  CKT_LA_PER_LA_CROL
+where
+  (@lgaId = LGA_ID) and
+  (@casNum = CAS_NUM) and
+  (@croId = CRO_ID) and
+  (@cspNum = CSP_NUM) and
+  (@croType = CRO_TYPE) and
+  (LAP_ID &lt;&gt; @lapId)
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  LGA_ID,
+  INIT_CR_IND
+from
+  CKT_LEG_ACT_CAS_RL
+where
+  (LGA_ID = @lgaId) and
+  (CAS_NUMBER = @casNumber) and
+  (CRO_IDENTIFIER = @croIdentifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (CRO_TYPE = @croType)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  CREATED_BY
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (LA_DETAIL_NO = @laDetailNo) and
+  (LGA_IDENTIFIER = @lgaIdentifier)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonCsePerson">
+      <value>
+select
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@ladRNumber = LAD_R_NUMBER) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER) and
+  (CSP_NUMBER is not null)
+</value>
+   </data>
+   <data name="ReadObligationTransaction">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T1.LAP_ID
+from
+  CKT_LEGAL_ACT_PERS T2
+  join
+  CKT_OB_TRN T1
+  on
+    (T2.LA_PERSON_ID = T1.LAP_ID) and
+    (T2.LGA_R_IDENTIFIER = @lgaRIdentifier) and
+    (T2.LAD_R_NUMBER = @ladRNumber)
+</value>
+   </data>
+</root>

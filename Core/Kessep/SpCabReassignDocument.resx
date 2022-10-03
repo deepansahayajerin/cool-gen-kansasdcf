@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFieldValue">
+      <value>
+insert into CKT_FIELD_VALUE
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @valu,
+  @fldName,
+  @docName,
+  @docEffectiveDte,
+  @infIdentifier
+)
+</value>
+   </data>
+   <data name="CreateMonitoredDocument">
+      <value>
+insert into CKT_MONITORED_DOC
+(
+  REQUIRED_RESPONSE,
+  ACT_RESP_DT,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  INF_ID
+)
+values
+(
+  @requiredResponse,
+  @actRespDt,
+  @closureDate,
+  @closureReasonCod,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  null,
+  null,
+  null,
+  null,
+  @infId
+)
+</value>
+   </data>
+   <data name="CreateOutgoingDocument">
+      <value>
+insert into CKT_OUTGOING_DOC
+(
+  PRNT_SUCESSFUL_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  POD_PRINTER_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  FIELD_VAL_ARCH_DT,
+  FIELD_VAL_ARCH_IND,
+  INF_ID
+)
+values
+(
+  @prntSucessfulInd,
+  @createdBy,
+  @createdTimestamp,
+  @podPrinterId,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @docName,
+  @docEffectiveDte,
+  @fieldValArchDt,
+  @fieldValArchInd,
+  @infId
+)
+</value>
+   </data>
+   <data name="DeleteFieldValue">
+      <value>
+delete from CKT_FIELD_VALUE
+where
+  (FLD_NAME = @fldName) and
+  (DOC_NAME = @docName) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (INF_IDENTIFIER = @infIdentifier)
+</value>
+   </data>
+   <data name="DeleteMonitoredDocument">
+      <value>
+delete from CKT_MONITORED_DOC
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteOutgoingDocument#1">
+      <value>
+delete from CKT_FIELD_VALUE
+where
+  INF_IDENTIFIER = @infIdentifier
+</value>
+   </data>
+   <data name="DeleteOutgoingDocument#2">
+      <value>
+delete from CKT_MONITORED_DOC
+where
+  INF_ID = @infIdentifier
+</value>
+   </data>
+   <data name="DeleteOutgoingDocument#3">
+      <value>
+delete from CKT_OUTGOING_DOC
+where
+  INF_ID = @infIdentifier
+</value>
+   </data>
+   <data name="ReadDocument">
+      <value>
+select top(1)
+  NAME,
+  EFFECTIVE_DATE
+from
+  CKT_DOCUMENT
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (NAME = @name)
+</value>
+   </data>
+   <data name="ReadDocumentField">
+      <value>
+select top(1)
+  ORDER_POSITION,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE
+from
+  CKT_DOCUMENT_FIELD
+where
+  (@docEffectiveDte = DOC_EFFECTIVE_DTE) and
+  (@docName = DOC_NAME) and
+  (FLD_NAME = @fldName)
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select top(1)
+  NAME
+from
+  CKT_FIELD
+where
+  (NAME = @name1) and
+  (cast(@effectiveDate as date) = cast(@docEffectiveDte as date)) and
+  (cast(@name2 as char(8)) = cast(@docName as char(8)))
+</value>
+   </data>
+   <data name="ReadFieldValue">
+      <value>
+select
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  @infIdentifier = INF_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  USER_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadMonitoredDocument">
+      <value>
+select top(1)
+  REQUIRED_RESPONSE,
+  ACT_RESP_DT,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  INF_ID
+from
+  CKT_MONITORED_DOC
+where
+  @infId = INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select top(1)
+  PRNT_SUCESSFUL_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  POD_PRINTER_ID,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  FIELD_VAL_ARCH_DT,
+  FIELD_VAL_ARCH_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  @infId = INF_ID
+</value>
+   </data>
+   <data name="ReadPrinterOutputDestination">
+      <value>
+select top(1)
+  PRINTER_ID,
+  OFF_GENERATED
+from
+  CKT_PRN_OUTPT_DEST
+where
+  OFF_GENERATED = @offGenerated
+</value>
+   </data>
+   <data name="UpdateInfrastructure">
+      <value>
+update CKT_INFRASTRUCTURE
+set
+  USER_ID = @userId,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+</root>

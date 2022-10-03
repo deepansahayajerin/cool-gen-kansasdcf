@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeletePersonPrivateAttorney">
+      <value>
+delete from CKT_PRSN_PRIV_ATTR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="DeletePrivateAttorneyAddress">
+      <value>
+delete from CKT_PRIV_ATTR_ADDR
+where
+  (PPA_IDENTIFIER = @ppaIdentifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  CAS_NUMBER,
+  DATE_RETAINED,
+  DATE_DISMISSED,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  FIRM_NAME,
+  PHONE,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  EMAIL_ADDRESS,
+  BAR_NUMBER,
+  CONSENT_IND,
+  NOTE
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CAS_NUMBER = @casNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadPrivateAttorneyAddress">
+      <value>
+select
+  PPA_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_PRIV_ATTR_ADDR
+where
+  (@ppaIdentifier = PPA_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

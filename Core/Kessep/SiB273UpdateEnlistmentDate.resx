@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadMilitary">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  SENT_DT,
+  RETURN_DT,
+  RETURN_CD,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CSP_I_NUMBER,
+  MILITARY_CODE,
+  SEND_TO,
+  WORKER_ID,
+  START_DT,
+  END_DT,
+  NOTE
+from
+  CKT_INCOME_SOURCE
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateMilitary">
+      <value>
+update CKT_INCOME_SOURCE
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  WORKER_ID = @workerId,
+  START_DT = @startDt,
+  NOTE = @note
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+</root>

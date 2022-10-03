@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDisbursementType">
+      <value>
+insert into CKT_DISB_TYPE
+(
+  DISB_TYPE_ID,
+  CODE,
+  NAME,
+  CURRENT_ARREARS_IN,
+  RECAPTURE_IND,
+  CASH_NON_CASH_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PROGRAM_CODE,
+  RECOVERY_TYPE,
+  DESCRIPTION
+)
+values
+(
+  @disbTypeId,
+  @code,
+  @name,
+  @currentArrearsIn,
+  @recaptureInd,
+  @cashNonCashInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @programCode,
+  @recoveryType,
+  @description
+)
+</value>
+   </data>
+   <data name="ReadDisbursementType">
+      <value>
+select top(1)
+  DISB_TYPE_ID,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_DISB_TYPE
+where
+  (CODE = @code) and
+  (
+    (EFFECTIVE_DATE between cast(@effectiveDate as date) and cast(@discontinueDate as date)) or
+    (DISCONTINUE_DATE between cast(@effectiveDate as date) and cast(@discontinueDate as date))
+  )
+</value>
+   </data>
+</root>

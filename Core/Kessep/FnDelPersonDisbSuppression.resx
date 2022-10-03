@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteDisbSuppressionStatusHistory">
+      <value>
+delete from CKT_DISB_SUPPR_STS
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DSS_GENERATED_ID = @dssGeneratedId)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  EFFECTIVE_DATE,
+  CREATED_TIMESTAMP,
+  TYPE,
+  LGA_IDENTIFIER
+from
+  CKT_DISB_SUPPR_STS
+where
+  (DSS_GENERATED_ID = @dssGeneratedId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  UNEMPLOYMENT_IND,
+  FEDERAL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  LAST_QTR_INCOME,
+  LAST_QTR,
+  LAST_QTR_YR,
+  SECOND_QTR_INCOME,
+  SECOND_QTR,
+  SECOND_QTR_YR,
+  THIRD_QTR_INCOME,
+  THIRD_QTR,
+  THIRD_QTR_YR,
+  FOURTH_QTR_INCOME,
+  FOURTH_QTR,
+  FOURTH_QTR_YR,
+  SENT_DT,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CODE,
+  CSP_I_NUMBER,
+  SEND_TO,
+  WORKER_ID,
+  START_DT,
+  END_DT,
+  NOTE
+from
+  CKT_INCOME_SOURCE
+where
+  (IDENTIFIER = @identifier) and
+  (@cspINumber = CSP_I_NUMBER)
+</value>
+   </data>
+   <data name="UpdateCsePerson">
+      <value>
+update CKT_CSE_PERSON
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  FEDERAL_IND = @federalInd
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateIncomeSource">
+      <value>
+update CKT_INCOME_SOURCE
+set
+  LAST_QTR_INCOME = @lastQtrIncome,
+  LAST_QTR = @lastQtr,
+  LAST_QTR_YR = @lastQtrYr,
+  SECOND_QTR_INCOME = @secondQtrIncome,
+  SECOND_QTR = @secondQtr,
+  SECOND_QTR_YR = @secondQtrYr,
+  THIRD_QTR_INCOME = @thirdQtrIncome,
+  THIRD_QTR = @thirdQtr,
+  THIRD_QTR_YR = @thirdQtrYr,
+  FOURTH_QTR_INCOME = @fourthQtrIncome,
+  FOURTH_QTR = @fourthQtr,
+  FOURTH_QTR_YR = @fourthQtrYr,
+  SENT_DT = @sentDt,
+  RETURN_DT = @returnDt,
+  RETURN_CD = @returnCd,
+  NAME = @name,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  CODE = @code,
+  SEND_TO = @sendTo,
+  WORKER_ID = @workerId,
+  START_DT = @startDt,
+  END_DT = @endDt,
+  NOTE = @note
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+</root>

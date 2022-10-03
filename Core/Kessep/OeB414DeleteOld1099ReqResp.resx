@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="Delete1099LocateRequest">
+      <value>
+delete from CKT_1099_LOC_REQ
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="Delete1099LocateResponse">
+      <value>
+delete from CKT_1099_LOC_RESP
+where
+  (LRQ_IDENTIFIER = @lrqIdentifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="Read1099LocateRequest">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  REQUEST_SENT_DATE
+from
+  CKT_1099_LOC_REQ
+where
+  (REQUEST_SENT_DATE &gt; @requestSentDate1) and
+  (REQUEST_SENT_DATE &lt; @requestSentDate2)
+</value>
+   </data>
+   <data name="Read1099LocateResponse">
+      <value>
+select
+  LRQ_IDENTIFIER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  DATE_RECEIVED
+from
+  CKT_1099_LOC_RESP
+where
+  (@lrqIdentifier = LRQ_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

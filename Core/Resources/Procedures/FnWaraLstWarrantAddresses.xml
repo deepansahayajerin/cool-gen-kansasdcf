@@ -1,0 +1,101 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnWaraLstWarrantAddresses"
+           program-name="SWEWARAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnWaraLstWarrantAddresses"
+           transaction="SR80"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_WARRANTS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnWarrLstWarrants"
+       send-command="DISPLAY">
+      <map from="PassThruFlowPaymentRequest" to="StartingWarrant"/>
+      <map from="Payee" to="CsePersonsWorkSet"/>
+      <map from="DuplicateWarrants" to="HiddenDuplicateWarrants"/>
+      <return-map from="PassThruFlowPaymentRequest.SystemGeneratedIdentifier"
+                  to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <return-map from="PassThruFlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <return-map from="PassThruFlowPaymentRequest.CsePersonNumber"
+                  to="PaymentRequest.CsePersonNumber"/>
+      <return-map from="PassThruFlowPaymentRequest.Number" to="PaymentRequest.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WAST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnWastMtnWarrantRequest"
+       send-command="DISPLAY">
+      <map from="PassThruFlowPaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <map from="PassThruFlowPaymentRequest.CsePersonNumber"
+           to="PaymentRequest.CsePersonNumber"/>
+      <map from="PassThruFlowPaymentRequest.Number" to="PaymentRequest.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WDTL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnWdtlLstWarrantDtl"
+       send-command="DISPLAY">
+      <map from="PassThruFlowPaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <map from="PassThruFlowPaymentRequest.CsePersonNumber"
+           to="PaymentRequest.CsePersonNumber"/>
+      <map from="PassThruFlowPaymentRequest.Number" to="PaymentRequest.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WHST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnWhstLstWarrantStatusHist"
+       send-command="DISPLAY">
+      <map from="PassThruFlowPaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <map from="PassThruFlowPaymentRequest.CsePersonNumber"
+           to="PaymentRequest.CsePersonNumber"/>
+      <map from="PassThruFlowPaymentRequest.Number" to="PaymentRequest.Number"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_PAYEE_ACCT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="Payee" to="Received"/>
+      <map from="PassThruFlowCsePerson" to="CsePerson"/>
+   </on>
+   <map from="Group.GrDetailAddr1" to="Group.GrDetailAddr1"/>
+   <map from="Group.GrDetAddr2" to="Group.GrDetAddr2"/>
+   <map from="WarrantNoPromptIn" to="WarrantNoPrompt"/>
+   <map from="Payee" to="Payee"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="PaymentRequest.DesignatedPayeeCsePersonNo"
+        to="PaymentRequest.DesignatedPayeeCsePersonNo"/>
+   <map from="PaymentRequest.CsePersonNumber"
+        to="PaymentRequest.CsePersonNumber"/>
+   <map from="PaymentRequest.SystemGeneratedIdentifier"
+        to="PaymentRequest.SystemGeneratedIdentifier"/>
+   <map from="PaymentRequest.Number" to="PaymentRequest.Number"/>
+   <map from="PaymentRequest.Type1" to="PaymentRequest.Type1"/>
+   <map from="PaymentRequest.PrintDate" to="PaymentRequest.PrintDate"/>
+   <map from="DesigPayee.FormattedName" to="DesigPayee.FormattedName"/>
+   <map from="OrgAddr.Name" to="OrgAddr.Name"/>
+   <map from="OrgAddr.AddressLine2" to="OrgAddr.AddressLine2"/>
+   <map from="OrgAddr.AddressLine1" to="OrgAddr.AddressLine1"/>
+   <map from="OrgAddr.City" to="OrgAddr.City"/>
+   <map from="OrgAddr.State" to="OrgAddr.State"/>
+   <map from="OrgAddr.Zip5" to="OrgAddr.Zip5"/>
+   <map from="OrgAddr.Zip4" to="OrgAddr.Zip4"/>
+   <map from="HiddenPaymentRequest.Number" to="HiddenPaymentRequest.Number"/>
+</procedure>

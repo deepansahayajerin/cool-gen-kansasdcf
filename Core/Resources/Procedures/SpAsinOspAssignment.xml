@@ -1,0 +1,82 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpAsinOspAssignment"
+           program-name="SWEASINP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpAsinOspAssignment"
+           transaction="SRPV"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="Office" to="HiddenOffice"/>
+      <return-map from="HiddenSelectionServiceProvider" to="HiddenServiceProvider"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="HiddenOfficeServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenCodeValue"/>
+   </on>
+   <map from="HlegalAction" to="HlegalAction"/>
+   <map from="FirstTime" to="FirstTime"/>
+   <map from="Group.Protect" to="Group.Protect"/>
+   <map from="Pointer" to="Pointer"/>
+   <map from="Group.HcaseUnitFunctionAssignmt"
+        to="Group.HcaseUnitFunctionAssignmt"/>
+   <map from="Group.HofficeServiceProvider" to="Group.HofficeServiceProvider"/>
+   <map from="Group.Hoffice" to="Group.Hoffice"/>
+   <map from="Group.HserviceProvider" to="Group.HserviceProvider"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.CaseUnitFunctionAssignmt"
+        to="Group.CaseUnitFunctionAssignmt"/>
+   <map from="Group.ServiceProvider" to="Group.ServiceProvider"/>
+   <map from="Group.Office" to="Group.Office"/>
+   <map from="Group.OfficeServiceProvider" to="Group.OfficeServiceProvider"/>
+   <map from="Group.PromptRsn" to="Group.PromptRsn"/>
+   <map from="Group.PromptSp" to="Group.PromptSp"/>
+   <map from="Group.PromptFunc" to="Group.PromptFunc"/>
+   <map from="HmonitoredActivity" to="HmonitoredActivity"/>
+   <map from="HadministrativeAppeal" to="HadministrativeAppeal"/>
+   <map from="HadministrativeAction" to="HadministrativeAction"/>
+   <map from="HcsePersonAccount" to="HcsePersonAccount"/>
+   <map from="HobligationType" to="HobligationType"/>
+   <map from="Hobligation" to="Hobligation"/>
+   <map from="HpaReferral" to="HpaReferral"/>
+   <map from="HlegalReferral" to="HlegalReferral"/>
+   <map from="HcsePerson" to="HcsePerson"/>
+   <map from="Hcase" to="Hcase"/>
+   <map from="HiddenOffice" to="HiddenOffice"/>
+   <map from="HiddenServiceProvider" to="HiddenServiceProvider"/>
+   <map from="HiddenOfficeServiceProvider" to="HiddenOfficeServiceProvider"/>
+   <map from="HiddenCode" to="HiddenCode"/>
+   <map from="HeaderObject" to="HeaderObject"/>
+   <map from="HeaderStart" to="HeaderStart"/>
+   <map from="HeaderObjTitle1" to="HeaderObjTitle1"/>
+   <map from="HeaderObjTitle2" to="HeaderObjTitle2"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HcaseUnit" to="HcaseUnit"/>
+   <map from="HiddenCodeValue" to="HiddenCodeValue"/>
+   <map from="Htribunal" to="Htribunal"/>
+   <map from="HcsePersonsWorkSet" to="HcsePersonsWorkSet"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="OldServiceProvider" to="OldServiceProvider"/>
+   <map from="OldOffice" to="OldOffice"/>
+   <map from="OldOfficeServiceProvider" to="OldOfficeServiceProvider"/>
+   <map from="OldLegalReferralAssignment" to="OldLegalReferralAssignment"/>
+   <map from="OldLegalActionAssigment" to="OldLegalActionAssigment"/>
+   <map from="Detail" to="Detail"/>
+   <map from="Compare" to="Compare"/>
+</procedure>

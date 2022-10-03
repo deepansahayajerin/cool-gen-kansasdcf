@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateRequest">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T1.OTH_ST_CASE_STATUS,
+  T1.CASE_TYPE,
+  T1.KS_CASE_IND,
+  T1.OTH_STATE_CLS_DTE,
+  T1.CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (T1.CAS_I_NUMBER = T3.CAS_NUMBER) and
+    (T3.TYPE in ('AR', 'CH')) and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T1.CREATED_TIMESTAMP &lt;= @createdTimestamp) and
+    (T1.KS_CASE_IND = 'N')
+order by
+  T1.CASE_TYPE
+</value>
+   </data>
+</root>

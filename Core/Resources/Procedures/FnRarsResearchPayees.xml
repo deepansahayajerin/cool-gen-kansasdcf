@@ -1,0 +1,63 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnRarsResearchPayees"
+           program-name="SWERARSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnRarsResearchPayees"
+           transaction="SROP"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CASE_COMP_BY_NAME"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="SiComnCaseCompositionByName"
+       send-command="DISPLAY">
+      <map from="SelectedCsePersonsWorkSet.Number" to="Search.Number"/>
+      <map from="SelectedCsePersonsWorkSet.FormattedName"
+           to="Search.FormattedName"/>
+      <map from="SelectedCsePersonsWorkSet.Sex" to="Search.Sex"/>
+      <map from="SelectedCsePersonsWorkSet.Ssn" to="Search.Ssn"/>
+      <map from="SelectedCsePersonsWorkSet.FirstName" to="Search.FirstName"/>
+      <map from="SelectedCsePersonsWorkSet.MiddleInitial"
+           to="Search.MiddleInitial"/>
+      <map from="SelectedCsePersonsWorkSet.LastName" to="Search.LastName"/>
+      <map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_OBLIG_BY_AP_PYR ECO_LNK_LST_OBLIG_BY_AP_PAYOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="SelectedCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_PARTICIPATION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="SiPartCaseParticipation"
+       send-command="DISPLAY">
+      <map from="SelectedCsePersonsWorkSet" to="Search"/>
+      <map from="Next" to="Next"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="Search" to="Search"/>
+   <map from="Phonetic" to="Phonetic"/>
+   <map from="InitialExecution" to="InitialExecution"/>
+   <map from="Export1.DetailCsePersonsWorkSet"
+        to="Import1.DetailCsePersonsWorkSet"/>
+   <map from="Export1.DetailSystem" to="Import1.DetailSystem"/>
+   <map from="Export1.DetailCsePersonAddress"
+        to="Import1.DetailCsePersonAddress"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailAlt" to="Import1.DetailAlt"/>
+   <map from="Export1.DetailSystem1" to="Import1.DetailSystem1"/>
+   <map from="Export1.DetailSystem2" to="Import1.DetailSystem2"/>
+   <map from="ApArIndicator" to="ApArIndicator"/>
+</procedure>

@@ -1,0 +1,773 @@
+﻿<!--Name: FN_CRAM_MTN_CASH_SRCE_ASSIGNMENT, ID: 372315631, model: 746-->
+<div coolContent coolName="FN_CRAM_MTN_CASH_SRCE_ASSIGNMENT" coolType="SCREEN"
+  (coolInit)="scrollSize = 196; pageSize = 14">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 21.25%; top: 0; width: 56.25%; height: 4%;" coolCol="18"
+     coolRow="1" coolLength="45">CSE - Maintain Cash Source Assignments - CRAM</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_8"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 8.75%; top: 4%; width: 5%; height: 4%;" coolCol="8"
+     coolRow="2" coolLength="4">
+   
+   <div coolType="literal"
+     style="left: 32.5%; top: 4%; width: 31.25%; height: 4%;" coolCol="27"
+     coolRow="2" coolLength="25" coolColor="red">POTENTIAL FTI INFORMATION</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 21.25%; top: 8%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="3" coolLength="9">Worker ID</div>
+   <input type="text" coolType="field" name="field_3_31"
+     [(ngModel)]="in.search.userId" [coolVideo]="out.search.screenField?.userId"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="8"
+     style="left: 37.5%; top: 8%; width: 10%; height: 4%;" coolCol="31"
+     coolRow="3" coolLength="8">
+   <input type="text" coolType="field" name="field_3_40"
+     [(ngModel)]="in.promptServiceProvider.selectChar"
+     [coolVideo]="out.promptServiceProvider.screenField?.selectChar" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 48.75%; top: 8%; width: 1.25%; height: 4%;" coolCol="40"
+     coolRow="3" coolLength="1">
+   
+   <div coolType="prompt" style="left: 55%; top: 8%; width: 15%; height: 4%;"
+     coolCol="45" coolRow="3" coolLength="12" coolColor="white">Show History</div>
+   <input type="text" coolType="field" name="field_3_58"
+     [(ngModel)]="in.showHistory.flag"
+     [coolVideo]="out.showHistory.screenField?.flag" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="N" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 71.25%; top: 8%; width: 1.25%; height: 4%;" coolCol="58"
+     coolRow="3" coolLength="1">
+   
+   <div coolType="prompt"
+     style="left: 21.25%; top: 12%; width: 13.75%; height: 4%;" coolCol="18"
+     coolRow="4" coolLength="11">Source Code</div>
+   <input type="text" coolType="field" name="field_4_31"
+     [(ngModel)]="in.cashReceiptSourceType.code"
+     [coolVideo]="out.input.screenField?.code" coolAutotab coolColor="green"
+     coolHighlight="underscore" coolUpper [attr.maxlength]="10"
+     style="left: 37.5%; top: 12%; width: 12.5%; height: 4%;" coolCol="31"
+     coolRow="4" coolLength="10">
+   <input type="text" coolType="field" name="field_4_42"
+     [(ngModel)]="in.promptSourceCode.selectChar"
+     [coolVideo]="out.promptSourceCode.screenField?.selectChar" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 51.25%; top: 12%; width: 1.25%; height: 4%;" coolCol="42"
+     coolRow="4" coolLength="1">
+   
+   <div coolType="literal"
+     style="left: 7.5%; top: 16%; width: 7.5%; height: 4%;" coolCol="7"
+     coolRow="5" coolLength="6">Source</div>
+   
+   <div coolType="literal" style="left: 20%; top: 16%; width: 2.5%; height: 4%;"
+     coolCol="17" coolRow="5" coolLength="2">Ct</div>
+   
+   <div coolType="literal"
+     style="left: 23.75%; top: 16%; width: 3.75%; height: 4%;" coolCol="20"
+     coolRow="5" coolLength="3">INT</div>
+   
+   <div coolType="literal" style="left: 80%; top: 16%; width: 5%; height: 4%;"
+     coolCol="65" coolRow="5" coolLength="4">Eff.</div>
+   
+   <div coolType="literal"
+     style="left: 91.25%; top: 16%; width: 5%; height: 4%;" coolCol="74"
+     coolRow="5" coolLength="4">Disc</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 20%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="6" coolLength="3">Sel</div>
+   
+   <div coolType="literal" style="left: 8.75%; top: 20%; width: 5%; height: 4%;"
+     coolCol="8" coolRow="6" coolLength="4">Code</div>
+   
+   <div coolType="prompt"
+     style="left: 18.75%; top: 20%; width: 3.75%; height: 4%;" coolCol="16"
+     coolRow="6" coolLength="3">Ind</div>
+   
+   <div coolType="prompt"
+     style="left: 23.75%; top: 20%; width: 3.75%; height: 4%;" coolCol="20"
+     coolRow="6" coolLength="3">Ind</div>
+   
+   <div coolType="prompt"
+     style="left: 41.25%; top: 20%; width: 22.5%; height: 4%;" coolCol="34"
+     coolRow="6" coolLength="18">Source Description</div>
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 20%; width: 11.25%; height: 4%;" coolCol="54"
+     coolRow="6" coolLength="9">Worker Id</div>
+   
+   <div coolType="literal" style="left: 80%; top: 20%; width: 5%; height: 4%;"
+     coolCol="65" coolRow="6" coolLength="4">Date</div>
+   
+   <div coolType="literal"
+     style="left: 91.25%; top: 20%; width: 5%; height: 4%;" coolCol="74"
+     coolRow="6" coolLength="4">Date</div>
+   <input type="text" coolType="field" name="field_7_3"
+     [(ngModel)]="ref(in.assgn, pageOffset, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 24%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="1" [hidden]="pageOffset >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_7_5"
+     [(ngModel)]="ref(in.assgn, pageOffset, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 24%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="7" coolLength="10" [hidden]="pageOffset >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 24%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="7" coolLength="1" [hidden]="pageOffset >= length(in.assgn)">{{in.assgn?.[pageOffset]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 24%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="7" coolLength="1" [hidden]="pageOffset >= length(in.assgn)">{{in.assgn?.[pageOffset]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 24%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="7" coolLength="29" [hidden]="pageOffset >= length(in.assgn)">{{in.assgn?.[pageOffset]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 24%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.assgn)">{{in.assgn?.[pageOffset]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_7_63"
+     [(ngModel)]="ref(in.assgn, pageOffset, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 24%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_7_72"
+     [(ngModel)]="ref(in.assgn, pageOffset, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 24%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_8_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 1, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 1]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 28%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 1 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_8_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 1, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 1]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 28%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="8" coolLength="10" [hidden]="pageOffset + 1 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 28%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 1 >= length(in.assgn)">{{in.assgn?.[pageOffset + 1]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 28%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 1 >= length(in.assgn)">{{in.assgn?.[pageOffset + 1]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 28%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="8" coolLength="29" [hidden]="pageOffset + 1 >= length(in.assgn)">{{in.assgn?.[pageOffset + 1]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 28%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 1 >= length(in.assgn)">{{in.assgn?.[pageOffset + 1]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_8_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 1, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 1]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 28%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 1 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_8_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 1, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 1]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 28%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 1 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 2, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 2]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 2 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_9_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 2, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 2]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 32%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="9" coolLength="10" [hidden]="pageOffset + 2 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 32%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 2 >= length(in.assgn)">{{in.assgn?.[pageOffset + 2]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 32%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 2 >= length(in.assgn)">{{in.assgn?.[pageOffset + 2]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 32%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="9" coolLength="29" [hidden]="pageOffset + 2 >= length(in.assgn)">{{in.assgn?.[pageOffset + 2]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 32%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 2 >= length(in.assgn)">{{in.assgn?.[pageOffset + 2]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_9_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 2, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 2]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 32%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 2 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_9_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 2, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 2]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 32%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 2 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_10_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 3, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 3]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 3 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_10_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 3, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 3]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 36%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="10" coolLength="10" [hidden]="pageOffset + 3 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 36%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 3 >= length(in.assgn)">{{in.assgn?.[pageOffset + 3]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 36%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 3 >= length(in.assgn)">{{in.assgn?.[pageOffset + 3]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 36%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="10" coolLength="29" [hidden]="pageOffset + 3 >= length(in.assgn)">{{in.assgn?.[pageOffset + 3]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 36%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 3 >= length(in.assgn)">{{in.assgn?.[pageOffset + 3]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_10_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 3, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 3]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 36%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 3 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_10_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 3, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 3]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 36%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 3 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_11_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 4, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 4]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 4 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_11_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 4, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 4]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 40%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="11" coolLength="10" [hidden]="pageOffset + 4 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 40%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 4 >= length(in.assgn)">{{in.assgn?.[pageOffset + 4]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 40%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 4 >= length(in.assgn)">{{in.assgn?.[pageOffset + 4]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 40%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="11" coolLength="29" [hidden]="pageOffset + 4 >= length(in.assgn)">{{in.assgn?.[pageOffset + 4]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 40%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 4 >= length(in.assgn)">{{in.assgn?.[pageOffset + 4]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_11_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 4, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 4]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 40%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 4 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_11_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 4, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 4]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 40%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 4 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_12_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 5, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 5]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 5 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_12_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 5, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 5]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 44%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 5 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 44%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 5 >= length(in.assgn)">{{in.assgn?.[pageOffset + 5]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 44%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 5 >= length(in.assgn)">{{in.assgn?.[pageOffset + 5]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 44%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="12" coolLength="29" [hidden]="pageOffset + 5 >= length(in.assgn)">{{in.assgn?.[pageOffset + 5]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 44%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 5 >= length(in.assgn)">{{in.assgn?.[pageOffset + 5]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_12_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 5, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 5]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 44%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 5 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_12_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 5, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 5]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 44%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 5 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 6, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 6]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 6 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_13_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 6, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 6]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 48%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 6 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 48%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 6 >= length(in.assgn)">{{in.assgn?.[pageOffset + 6]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 48%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 6 >= length(in.assgn)">{{in.assgn?.[pageOffset + 6]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 48%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="13" coolLength="29" [hidden]="pageOffset + 6 >= length(in.assgn)">{{in.assgn?.[pageOffset + 6]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 48%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 6 >= length(in.assgn)">{{in.assgn?.[pageOffset + 6]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_13_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 6, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 6]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 48%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 6 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_13_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 6, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 6]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 48%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 6 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_14_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 7, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 7]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 7 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_14_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 7, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 7]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 52%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 7 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 52%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 7 >= length(in.assgn)">{{in.assgn?.[pageOffset + 7]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 52%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 7 >= length(in.assgn)">{{in.assgn?.[pageOffset + 7]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 52%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="14" coolLength="29" [hidden]="pageOffset + 7 >= length(in.assgn)">{{in.assgn?.[pageOffset + 7]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 52%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 7 >= length(in.assgn)">{{in.assgn?.[pageOffset + 7]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_14_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 7, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 7]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 52%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 7 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_14_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 7, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 7]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 52%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 7 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_15_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 8, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 8]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 8 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_15_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 8, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 8]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 56%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 8 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 56%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 8 >= length(in.assgn)">{{in.assgn?.[pageOffset + 8]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 56%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 8 >= length(in.assgn)">{{in.assgn?.[pageOffset + 8]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 56%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="15" coolLength="29" [hidden]="pageOffset + 8 >= length(in.assgn)">{{in.assgn?.[pageOffset + 8]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 56%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 8 >= length(in.assgn)">{{in.assgn?.[pageOffset + 8]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_15_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 8, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 8]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 56%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 8 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_15_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 8, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 8]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 56%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 8 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_16_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 9, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 9]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 9 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_16_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 9, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 9]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 60%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 9 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 60%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 9 >= length(in.assgn)">{{in.assgn?.[pageOffset + 9]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 60%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 9 >= length(in.assgn)">{{in.assgn?.[pageOffset + 9]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 60%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="16" coolLength="29" [hidden]="pageOffset + 9 >= length(in.assgn)">{{in.assgn?.[pageOffset + 9]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 60%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 9 >= length(in.assgn)">{{in.assgn?.[pageOffset + 9]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_16_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 9, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 9]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 60%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 9 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_16_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 9, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 9]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 60%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 9 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 10, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 10]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 10 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_17_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 10, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 10]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 64%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 10 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 64%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 10 >= length(in.assgn)">{{in.assgn?.[pageOffset + 10]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 64%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 10 >= length(in.assgn)">{{in.assgn?.[pageOffset + 10]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 64%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="17" coolLength="29" [hidden]="pageOffset + 10 >= length(in.assgn)">{{in.assgn?.[pageOffset + 10]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 64%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 10 >= length(in.assgn)">{{in.assgn?.[pageOffset + 10]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_17_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 10, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 10]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 64%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 10 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_17_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 10, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 10]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 64%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 10 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_18_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 11, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 11]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 11 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_18_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 11, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 11]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 68%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 11 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 68%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 11 >= length(in.assgn)">{{in.assgn?.[pageOffset + 11]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 68%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 11 >= length(in.assgn)">{{in.assgn?.[pageOffset + 11]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 68%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="18" coolLength="29" [hidden]="pageOffset + 11 >= length(in.assgn)">{{in.assgn?.[pageOffset + 11]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 68%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 11 >= length(in.assgn)">{{in.assgn?.[pageOffset + 11]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_18_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 11, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 11]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 68%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 11 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_18_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 11, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 11]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 68%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 11 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_19_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 12, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 12]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 12 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_19_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 12, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 12]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 72%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 12 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 72%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 12 >= length(in.assgn)">{{in.assgn?.[pageOffset + 12]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 72%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 12 >= length(in.assgn)">{{in.assgn?.[pageOffset + 12]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 72%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="19" coolLength="29" [hidden]="pageOffset + 12 >= length(in.assgn)">{{in.assgn?.[pageOffset + 12]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 72%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 12 >= length(in.assgn)">{{in.assgn?.[pageOffset + 12]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_19_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 12, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 12]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 72%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 12 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_19_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 12, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 12]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 72%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 12 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_20_3"
+     [(ngModel)]="ref(in.assgn, pageOffset + 13, 'action.actionEntry').value"
+     [coolVideo]="out.assgn?.[pageOffset + 13]?.gexportAction.screenField?.actionEntry"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 76%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 13 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_20_5"
+     [(ngModel)]="ref(in.assgn, pageOffset + 13, 'cashReceiptSourceType.code').value"
+     [coolVideo]="out.assgn?.[pageOffset + 13]?.gcashReceiptSourceType.screenField?.code"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="10"
+     style="left: 5%; top: 76%; width: 12.5%; height: 4%;" coolCol="5"
+     coolRow="20" coolLength="10" [hidden]="pageOffset + 13 >= length(in.assgn)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 20%; top: 76%; width: 1.25%; height: 4%;" coolCol="17"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 13 >= length(in.assgn)">{{in.assgn?.[pageOffset + 13]?.cashReceiptSourceType.courtInd}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 76%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 13 >= length(in.assgn)">{{in.assgn?.[pageOffset + 13]?.cashReceiptSourceType.interfaceIndicator}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 76%; width: 36.25%; height: 4%;" coolCol="24"
+     coolRow="20" coolLength="29" [hidden]="pageOffset + 13 >= length(in.assgn)">{{in.assgn?.[pageOffset + 13]?.cashReceiptSourceType.name}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 66.25%; top: 76%; width: 10%; height: 4%;" coolCol="54"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 13 >= length(in.assgn)">{{in.assgn?.[pageOffset + 13]?.detail.userId}}</div>
+   <input type="text" coolType="field" name="field_20_63"
+     [(ngModel)]="ref(in.assgn, pageOffset + 13, 'receiptResearchAssignment.effectiveDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 13]?.greceiptResearchAssignment.screenField?.effectiveDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 77.5%; top: 76%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 13 >= length(in.assgn)">
+   <input type="text" coolType="field" name="field_20_72"
+     [(ngModel)]="ref(in.assgn, pageOffset + 13, 'receiptResearchAssignment.discontinueDate').value"
+     [coolVideo]="out.assgn?.[pageOffset + 13]?.greceiptResearchAssignment.screenField?.discontinueDate"
+     coolAutotab coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 88.75%; top: 76%; width: 10%; height: 4%;" coolCol="72"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 13 >= length(in.assgn)">
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="71" coolRow="21" coolLength="9"
+     style="left: 87.5%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 97.5%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="78">PF KEY: 1 Help  3 Exit  4 List  7 Prev  8 Next  9 Return  11 Clear  12 Signoff</div>
+   
+   <div coolType="literal"
+     style="left: 10%; top: 92%; width: 86.25%; height: 4%;" coolCol="9"
+     coolRow="24" coolLength="69">16 CRUC  17 LstAssg  18 LstUnassg  19 ListSrc  20 Assign  21 UnAssign</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="CRUC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=CRUC</a>
+   <a coolType="action" coolCommand="LIST_ASG" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F5">F17=LIST_ASG</a>
+   <a coolType="action" coolCommand="L_UNASG" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F6">F18=L_UNASG</a>
+   <a coolType="action" coolCommand="LIST_SOU" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F7">F19=LIST_SOU</a>
+   <a coolType="action" coolCommand="ASSIGN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F8">F20=ASSIGN</a>
+   <a coolType="action" coolCommand="UNASSIGN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F9">F21=UNASSIGN</a>
+   </div>

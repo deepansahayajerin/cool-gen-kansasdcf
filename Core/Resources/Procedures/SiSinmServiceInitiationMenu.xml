@@ -1,0 +1,36 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiSinmServiceInitiationMenu"
+           program-name="SWESINMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiSinmServiceInitiationMenu"
+           transaction="SR2U"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="CoCsmmChildSupMainMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_PERSON_MANAGEMENT"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_PA_REFERRAL_MENU"
+       action="transfer"
+       to="SiRefmPaReferralMenu"
+       send-command="XXFMMENU">
+      <map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_SI_INQUIRY_MENU"
+       action="transfer"
+       to="SiInrmInformationRequestMenu"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_TO_SI_INTERSTATE_MENU"
+       display-first="true"
+       action="transfer"
+       to="SiItsmInterstateMenu"
+       send-command-type="none"/>
+   <map from="Case1" to="Case1"/>
+   <map from="Next" to="Next"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1
+  join
+  CKT_LA_PER_LA_CROL T4
+  on
+    (T1.NUMB = T4.CAS_NUM) and
+    (@lapId = T4.LAP_ID) and
+    (T1.STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME,
+  T1.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.TYPE = 'C') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.END_DATE = @endDate) and
+    (@casNumber = T2.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME,
+  T1.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@ladRNumber = T2.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T2.LGA_R_IDENTIFIER) and
+    (T2.ACCOUNT_TYPE = 'S') and
+    (T1.TYPE = 'C')
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME,
+  T1.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@lgaIdentifier = T2.LGA_IDENTIFIER) and
+    (T2.[ROLE] = 'R')
+</value>
+   </data>
+   <data name="ReadCsePerson4">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE
+from
+  CKT_LEGAL_ACTION T5
+  join
+  CKT_LEGAL_ACT_DTL T4
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_OBLIGATION T3
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T1.TYPE = 'C')
+  on
+    (T4.LA_DETAIL_NO = T3.LAD_NUMBER) and
+    (T4.LGA_IDENTIFIER = T3.LGA_IDENTIFIER) and
+    (T4.DETAIL_TYPE = 'F')
+  on
+    (T5.LEGAL_ACTION_ID = T4.LGA_IDENTIFIER) and
+    (T5.STANDARD_NO = @standardNo) and
+    (T5.CLASSIFICATION = 'J')
+</value>
+   </data>
+   <data name="ReadCsePerson5">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME,
+  T1.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@ladRNumber = T2.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T2.LGA_R_IDENTIFIER) and
+    (T2.ACCOUNT_TYPE = 'S') and
+    (T1.TYPE = 'C')
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_DATE &gt; @endDate)
+order by
+  VERIFIED_DATE desc,
+  TYPE,
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_DATE &gt; @endDate)
+order by
+  VERIFIED_DATE desc,
+  TYPE,
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress3">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  VERIFIED_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_DATE &gt; @endDate)
+order by
+  VERIFIED_DATE desc,
+  TYPE,
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadCsePersonLegalActionPerson1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME,
+  T1.FAMILY_VIOL_IND,
+  T2.LA_PERSON_ID,
+  T2.LGA_IDENTIFIER,
+  T2.[ROLE],
+  T2.LGA_R_IDENTIFIER,
+  T2.LAD_R_NUMBER,
+  T2.ACCOUNT_TYPE,
+  T2.CURRENT_AMOUNT
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@lgaIdentifier = T2.LGA_IDENTIFIER) and
+    (T2.[ROLE] = 'P')
+</value>
+   </data>
+   <data name="ReadCsePersonLegalActionPerson2">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME,
+  T1.FAMILY_VIOL_IND,
+  T2.LA_PERSON_ID,
+  T2.LGA_R_IDENTIFIER,
+  T2.LAD_R_NUMBER,
+  T2.ACCOUNT_TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OBLIGATION T3
+  on
+    (@lgaId = T3.LGA_ID) and
+    (T1.NUMB = T3.CSP_NUMBER)
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.ACCOUNT_TYPE = 'R') and
+    (@ladRNumber = T2.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T2.LGA_R_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  [ROLE]
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

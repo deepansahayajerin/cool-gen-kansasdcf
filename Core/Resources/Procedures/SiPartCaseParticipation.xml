@@ -1,0 +1,56 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiPartCaseParticipation"
+           program-name="SWEPARTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiPartCaseParticipation"
+           transaction="SR2B"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_LIST_CASES_BY_PERSON"
+       action="transfer"
+       to="SiComnCaseCompositionByName"
+       send-command="DISPLAY">
+      <map from="Search.Number" to="Search.Number"/>
+      <map from="Search.FormattedName" to="Search.FormattedName"/>
+      <map from="Search.Sex" to="Search.Sex"/>
+      <map from="Search.Ssn" to="Search.Ssn"/>
+      <map from="Search.FirstName" to="Search.FirstName"/>
+      <map from="Search.MiddleInitial" to="Search.MiddleInitial"/>
+      <map from="Search.LastName" to="Search.LastName"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_NAME_LIST"
+       action="transfer"
+       to="SiNameNameList"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Next" to="Case1"/>
+      <map from="Search" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Search" to="Selected"/>
+      <map from="Selected" to="Case1"/>
+      <return-map from="Selected.Number" to="Search.Number"/>
+      <return-map from="Selected.FormattedName" to="Search.FormattedName"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailCase" to="Import1.DetailCase"/>
+   <map from="Export1.DetailCaseRole" to="Import1.DetailCaseRole"/>
+   <map from="HiddenPageKeys.HiddenPageKeyCase"
+        to="HiddenPageKeys.HiddenPageKeyCase"/>
+   <map from="Next" to="Next"/>
+   <map from="Selected" to="Selected"/>
+   <map from="Search" to="Search"/>
+   <map from="HiddenPageKeys.HiddenPageKeyCaseRole"
+        to="HiddenPageKeys.HiddenPageKeyCaseRole"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

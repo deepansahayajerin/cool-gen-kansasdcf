@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsenetTransactionEnvelopInterstateCaseInterstateApIdentification">
+      <value>
+select
+  T1.CCA_TRANSACTION_DT,
+  T1.CCA_TRANS_SER_NUM,
+  T1.LAST_UPDATED_TIMES,
+  T1.DIRECTION_IND,
+  T1.PROCESSING_STATUS,
+  T2.ACTION_CODE,
+  T2.FUNCTIONAL_TYPE_CO,
+  T3.ALT_SSN2,
+  T3.ALT_SSN1,
+  T3.SSN
+from
+  CKT_INTERST_CASE T2 with(readuncommitted)
+  join
+  CKT_CSENET_TRN_ENV T1 with(readuncommitted)
+  on
+    (T2.TRANSACTION_DATE = T1.CCA_TRANSACTION_DT) and
+    (T2.TRANS_SERIAL_NBR = T1.CCA_TRANS_SER_NUM) and
+    (T2.ACTION_CODE = 'R') and
+    (T2.FUNCTIONAL_TYPE_CO = 'LO1') and
+    (T1.DIRECTION_IND = 'I') and
+    (T1.PROCESSING_STATUS = 'D') and
+    (T1.LAST_UPDATED_TIMES &gt; @lastUpdatedTimes)
+  join
+  CKT_INTERST_AP_ID T3 with(readuncommitted)
+  on
+    (T2.TRANSACTION_DATE = T3.CCA_TRANSACTION_DT) and
+    (T2.TRANS_SERIAL_NBR = T3.CCA_TRANS_SER_NUM)
+</value>
+   </data>
+</root>

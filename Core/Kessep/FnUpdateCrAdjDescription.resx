@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptBalanceAdjustment">
+      <value>
+select top(1)
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRT_I_IDENTIFIER,
+  T1.CST_I_IDENTIFIER,
+  T1.CRV_I_IDENTIFIER,
+  T1.CRR_IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T1.DESCRIPTION
+from
+  CKT_CASH_RECEIPT T4
+  join
+  CKT_CASH_RECEIPT T3
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (T1.CREATED_TIMESTAMP = @createdTimestamp) and
+    (T1.CRR_IDENTIFIER = @crrIdentifier) and
+    (T3.CRT_IDENTIFIER = T1.CRT_I_IDENTIFIER) and
+    (T3.CST_IDENTIFIER = T1.CST_I_IDENTIFIER) and
+    (T3.CRV_IDENTIFIER = T1.CRV_I_IDENTIFIER) and
+    (T3.CASH_RECEIPT_ID = @cashReceiptId1)
+  on
+    (T4.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T4.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T4.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T4.CASH_RECEIPT_ID = @cashReceiptId2)
+</value>
+   </data>
+   <data name="UpdateCashReceiptBalanceAdjustment">
+      <value>
+update CKT_CRBAL_ADJ
+set
+  DESCRIPTION = @description
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CRT_I_IDENTIFIER = @crtIIdentifier) and
+  (CST_I_IDENTIFIER = @cstIIdentifier) and
+  (CRV_I_IDENTIFIER = @crvIIdentifier) and
+  (CRR_IDENTIFIER = @crrIdentifier) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+</root>

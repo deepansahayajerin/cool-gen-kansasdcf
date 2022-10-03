@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateLegalActionPerson">
+      <value>
+insert into CKT_LEGAL_ACT_PERS
+(
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  END_REASON,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT
+)
+values
+(
+  @laPersonId,
+  @cspNumber,
+  @lgaIdentifier,
+  @effectiveDt,
+  @role,
+  @endDt,
+  @endReason,
+  @createdTstamp,
+  @createdBy,
+  null,
+  null,
+  @accountType,
+  @arrearsAmount,
+  @arrearsAmount,
+  @arrearsAmount
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+</root>

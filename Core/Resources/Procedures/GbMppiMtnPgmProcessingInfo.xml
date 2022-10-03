@@ -1,0 +1,39 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="GbMppiMtnPgmProcessingInfo"
+           program-name="SWEMPPIP"
+           class="Gov.Kansas.DCF.Cse.Kessep.GbMppiMtnPgmProcessingInfo"
+           transaction="SRB9"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_SCREEN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="GbLppiLstPgmProcessingInfo"
+       send-command="DISPLAY">
+      <return-map from="Flow.Name" to="ProgramProcessingInfo.Name"/>
+      <return-map from="Flow.CreatedTimestamp"
+                  to="ProgramProcessingInfo.CreatedTimestamp"/>
+      <return-map from="Flow.Description" to="ProgramProcessingInfo.Description"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MPCR"
+       action="link"
+       return-when="ACO_NE0000_RETURN ECO_LNK_TO_MPPI"
+       return-command="DISPLAY"
+       to="GbMpcrMtnPgmChkptRestart"
+       send-command="DISPLAY">
+      <map from="ProgramCheckpointRestart.ProgramName"
+           to="ProgramCheckpointRestart.ProgramName"/>
+   </on>
+   <map from="ProgramProcessingInfo" to="ProgramProcessingInfo"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="HiddenId" to="HiddenId"/>
+   <map from="DateTime" to="DateTime"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="NextTranInfo"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

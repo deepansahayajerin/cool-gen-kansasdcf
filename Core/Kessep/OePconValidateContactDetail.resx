@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadContact">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CONTACT_NUMBER,
+  FAX,
+  NAME_TITLE,
+  COMPANY_NAME,
+  REL_TO_CSE_PERSON,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  HOME_PHONE,
+  WORK_PHONE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  WORK_PHONE_EXT,
+  FAX_EXT,
+  WORK_PHONE_AREA,
+  HOME_PHONE_AREA,
+  FAX_AREA
+from
+  CKT_CONTACT
+where
+  (@cspNumber = CSP_NUMBER) and
+  (CONTACT_NUMBER = @contactNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage">
+      <value>
+select
+  IDENTIFIER,
+  POLICY_EFF_DATE,
+  CSP_H_NUMBER,
+  CON_H_NUMBER
+from
+  CKT_HINS_COVERAGE
+where
+  (@conHNumber = CON_H_NUMBER) and
+  (@cspHNumber = CSP_H_NUMBER)
+</value>
+   </data>
+   <data name="ReadMarriageHistory">
+      <value>
+select
+  CSP_R_NUMBER,
+  MARRIAGE_DATE,
+  CSP_I_NUMBER,
+  CON_I_NUMBER,
+  IDENTIFIER
+from
+  CKT_MARRIAGE_HIST
+where
+  (@conINumber = CON_I_NUMBER) and
+  (@cspINumber = CSP_I_NUMBER)
+</value>
+   </data>
+</root>

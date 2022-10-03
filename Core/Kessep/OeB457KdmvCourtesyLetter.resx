@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateKsDriversLicense">
+      <value>
+insert into CKT_KDMV
+(
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  APPEAL_REC_DATE,
+  APPEAL_RESOLVED,
+  PAYMENT_AGRMNT_DT,
+  FIRST_PMNT_DUE_DT,
+  MANUAL_IND,
+  MANUAL_DATE,
+  APPEAL_RESLVD_DT,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  AMOUNT_OWED,
+  AMOUNT_DUE,
+  REC_CLOSURE_REASON,
+  RECORD_CLOSURE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  NOTE_1,
+  NOTE_2,
+  NOTE_3,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+)
+values
+(
+  @createdBy,
+  @createdTstamp,
+  @cspNum,
+  @lgaIdentifier,
+  @ksDvrLicense,
+  @validationDate,
+  @courtesyLtrDate,
+  @ltr30DayDate,
+  @servCompleteInd,
+  @ltr30DayDate,
+  @ltr30DayDate,
+  @ltr30DayDate,
+  @ltr30DayDate,
+  @servCompleteInd,
+  @ltr30DayDate,
+  @ltr30DayDate,
+  @servCompleteInd,
+  @ltr30DayDate,
+  @ltr30DayDate,
+  @ltr30DayDate,
+  @restrictionStatus,
+  @amountOwed,
+  @amountOwed,
+  @restrictionStatus,
+  @ltr30DayDate,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  @note1,
+  @note1,
+  @note1,
+  @processedInd,
+  @sequenceCounter
+)
+</value>
+   </data>
+   <data name="ReadCaseCaseUnitCaseRole">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.CSP_NO_AP,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T4 with(readuncommitted)
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.CASE_ROLE_ID = T4.CRO_IDENTIFIER) and
+    (T3.TYPE = T4.CRO_TYPE) and
+    (T3.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T3.CAS_NUMBER = T4.CAS_NUMBER) and
+    (@lgaId = T4.LGA_ID)
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T1.STATUS = 'O')
+  join
+  CKT_CASE_UNIT T2 with(readuncommitted)
+  on
+    (@cspNumber = T2.CSP_NO_AP) and
+    (T1.NUMB = T2.CAS_NO)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadKsDriversLicense1">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_KDMV
+where
+  CREATED_TSTAMP &gt; @createdTstamp
+</value>
+   </data>
+   <data name="ReadKsDriversLicense2">
+      <value>
+select top(1)
+  T1.CREATED_TSTAMP,
+  T1.CSP_NUM,
+  T1.LGA_IDENTIFIER,
+  T1.VALIDATION_DATE,
+  T1.COURTESY_LTR_DATE,
+  T1.PROCESSED_IND,
+  T1.SEQUENCE_COUNTER
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_KDMV T1
+  on
+    (@cspNum = T1.CSP_NUM) and
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T2.STANDARD_NO = @standardNo) and
+    (T1.COURTESY_LTR_DATE = @courtesyLtrDate)
+</value>
+   </data>
+   <data name="ReadKsDriversLicense3">
+      <value>
+select top(1)
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  (CSP_NUM = @cspNum) and
+  (PROCESSED_IND = 'Y')
+</value>
+   </data>
+   <data name="ReadKsDriversLicense4">
+      <value>
+select top(1)
+  CREATED_TSTAMP,
+  CSP_NUM,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV with(readuncommitted)
+where
+  CREATED_TSTAMP &gt; @createdTstamp
+order by
+  VALIDATION_DATE desc
+</value>
+   </data>
+   <data name="ReadKsDriversLicense5">
+      <value>
+select
+  CREATED_TSTAMP,
+  CSP_NUM,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  (VALIDATION_DATE = @validationDate) and
+  (SEQUENCE_COUNTER &gt; @sequenceCounter)
+order by
+  SEQUENCE_COUNTER
+</value>
+   </data>
+   <data name="ReadKsDriversLicense6">
+      <value>
+select
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  PROCESSED_IND = 'Y'
+</value>
+   </data>
+   <data name="ReadKsDriversLicenseCsePerson">
+      <value>
+select top(1)
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.CSP_NUM,
+  T1.LGA_IDENTIFIER,
+  T1.KS_DVR_LICENSE,
+  T1.VALIDATION_DATE,
+  T1.COURTESY_LTR_DATE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.PROCESSED_IND,
+  T1.SEQUENCE_COUNTER,
+  T2.TYPE,
+  T2.DATE_OF_DEATH,
+  T2.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_KDMV T1
+  on
+    (T1.VALIDATION_DATE = @validationDate) and
+    (T2.NUMB = T1.CSP_NUM) and
+    (T2.NUMB = @numb) and
+    (T2.TYPE = 'C') and
+    (T2.DATE_OF_DEATH &lt;= @dateOfDeath)
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T2.NUMB = T3.CSP_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_OBLIGATION T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T2.DTY_GENERATED_ID &lt;&gt; 4) and
+    (T2.DTY_GENERATED_ID &lt;&gt; 5) and
+    (T2.DTY_GENERATED_ID &lt;&gt; 6) and
+    (T2.DTY_GENERATED_ID &lt;&gt; 7) and
+    (T2.DTY_GENERATED_ID &lt;&gt; 8) and
+    (T2.DTY_GENERATED_ID &lt;&gt; 9) and
+    (T2.DTY_GENERATED_ID &lt;&gt; 15) and
+    (@cspNumber = T2.CSP_NUMBER)
+order by
+  T1.STANDARD_NO
+</value>
+   </data>
+   <data name="UpdateKsDriversLicense1">
+      <value>
+update CKT_KDMV
+set
+  LGA_IDENTIFIER = @lgaIdentifier,
+  COURTESY_LTR_DATE = @courtesyLtrDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (CSP_NUM = @cspNum) and
+  (SEQUENCE_COUNTER = @sequenceCounter)
+</value>
+   </data>
+   <data name="UpdateKsDriversLicense2">
+      <value>
+update CKT_KDMV
+set
+  PROCESSED_IND = @processedInd
+where
+  (CSP_NUM = @cspNum) and
+  (SEQUENCE_COUNTER = @sequenceCounter)
+</value>
+   </data>
+   <data name="UpdateKsDriversLicense3">
+      <value>
+update CKT_KDMV
+set
+  PROCESSED_IND = @processedInd
+where
+  (CSP_NUM = @cspNum) and
+  (SEQUENCE_COUNTER = @sequenceCounter)
+</value>
+   </data>
+</root>

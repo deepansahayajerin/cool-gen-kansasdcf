@@ -1,0 +1,57 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpGborGlobalBusObjReassign"
+           program-name="SWEGBORP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpGborGlobalBusObjReassign"
+           transaction="SRJ1"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenSelectionCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OFFICE_SERVICE_PROVDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionOffice" to="HiddenOffice"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="HiddenSelectionOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionServiceProvider"
+                  to="HiddenSelectionServiceProvider"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.OfficeServiceProvider" to="Import1.OfficeServiceProvider"/>
+   <map from="HiddenOffice" to="HiddenOffice"/>
+   <map from="HiddenSelectionServiceProvider"
+        to="HiddenSelectionServiceProvider"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Export1.ServiceProvider" to="Import1.ServiceProvider"/>
+   <map from="ExistingServiceProvider" to="ExistingServiceProvider"/>
+   <map from="ExistingOffice" to="ExistingOffice"/>
+   <map from="ExistingOfficeServiceProvider" to="ExistingOfficeServiceProvider"/>
+   <map from="ListOsp" to="ListOsp"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.GlobalReassignment" to="Import1.GlobalReassignment"/>
+   <map from="Export1.ListBoCode" to="Import1.ListBoCode"/>
+   <map from="Export1.ListReaCode" to="Import1.ListReaCode"/>
+   <map from="Export1.Office" to="Import1.Office"/>
+   <map from="Export1.ListOsp" to="Import1.ListOsp"/>
+   <map from="Export1.HiddenGlobalReassignment"
+        to="Import1.HiddenGlobalReassignment"/>
+   <map from="Export1.HiddenServiceProvider.SystemGeneratedId"
+        to="Import1.HiddenServiceProvider.SystemGeneratedId"/>
+   <map from="Export1.HiddenServiceProvider.UserId"
+        to="Import1.HiddenServiceProvider.UserId"/>
+</procedure>

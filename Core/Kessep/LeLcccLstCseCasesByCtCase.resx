@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T1.CSE_OPEN_DATE
+from
+  CKT_LEGAL_ACTION T4 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T3 with(readuncommitted)
+  on
+    T1.NUMB = T3.CAS_NUMBER
+  on
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T4.COURT_CASE_NO = @courtCaseNo) and
+    (T4.TRB_ID = @trbId)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.END_DATE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'AP') and
+    (T1.END_DATE &gt;= @endDate)
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS with(readuncommitted)
+where
+  (COUNTY_ABBR = @countyAbbr) and
+  (STATE_ABBREVIATION = @stateAbbreviation)
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION,
+  T1.COUNTY_DESC,
+  T1.STATE_ABBREVIATION,
+  T1.COUNTY_ABBR
+from
+  CKT_FIPS T1 with(readuncommitted)
+  join
+  CKT_TRIBUNAL T2 with(readuncommitted)
+  on
+    (T1.LOCATION = T2.FIP_LOCATION) and
+    (T1.COUNTY = T2.FIP_COUNTY) and
+    (T1.[STATE] = T2.FIP_STATE) and
+    (T2.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR with(readuncommitted)
+where
+  TRB_ID = @trbId
+</value>
+   </data>
+   <data name="ReadFipsTribAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR with(readuncommitted)
+where
+  COUNTRY = @country
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select distinct top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_FIPS T3 with(readuncommitted)
+  join
+  CKT_TRIBUNAL T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  on
+    (T2.IDENTIFIER = T1.TRB_ID) and
+    (T1.COURT_CASE_NO = @courtCaseNo)
+  on
+    (T3.LOCATION = T2.FIP_LOCATION) and
+    (T3.COUNTY = T2.FIP_COUNTY) and
+    (T3.[STATE] = T2.FIP_STATE) and
+    (T3.COUNTY_ABBR = @countyAbbr) and
+    (T3.STATE_ABBREVIATION = @stateAbbreviation)
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select distinct top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_FIPS_TRIB_ADDR T3 with(readuncommitted)
+  on
+    (T1.TRB_ID = T3.TRB_ID) and
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T3.COUNTRY = @country)
+</value>
+   </data>
+   <data name="ReadLegalAction3">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  T1.JUDICIAL_DIVISION,
+  T1.TRIBUNAL_NM,
+  T1.FIP_LOCATION,
+  T1.JUDICIAL_DISTRICT,
+  T1.IDENTIFIER,
+  T1.FIP_COUNTY,
+  T1.FIP_STATE
+from
+  CKT_TRIBUNAL T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T2 with(readuncommitted)
+  on
+    (T1.IDENTIFIER = T2.TRB_ID) and
+    (T2.LEGAL_ACTION_ID = @legalActionId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole1">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE
+from
+  CKT_CASE_ROLE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.CAS_NUMBER = T3.CAS_NUMBER) and
+    (@cspNumber1 = T3.CSP_NUMBER) and
+    (T1.TYPE = 'AR') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T3.TYPE = 'CH') and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt; @startDate)
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T1.CAS_NUMBER = T4.CAS_NUMBER) and
+    (T4.CSP_NUMBER = @cspNumber2) and
+    (T4.TYPE = 'AP') and
+    (T4.START_DATE &lt;= @startDate) and
+    (T4.END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE
+from
+  CKT_CASE_ROLE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (@cspNumber1 = T1.CSP_NUMBER) and
+    (T1.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T3.CSP_NUMBER = @cspNumber2) and
+    (T1.TYPE = 'AR') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T3.TYPE = 'AP') and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OB_TRN T3
+  on
+    (T1.NUMB = T3.CSP_SUP_NUMBER) and
+    (T3.CPA_SUP_TYPE is not null) and
+    (T3.OB_TRN_ID = @obTrnId) and
+    (T3.OB_TRN_TYP = 'DE') and
+    (T3.DEBT_TYP = 'D') and
+    (T3.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T3.OTY_TYPE = @otyType)
+</value>
+   </data>
+   <data name="ReadGoodCause">
+      <value>
+select top(1)
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_NUMBER1,
+  CSP_NUMBER1,
+  CRO_TYPE1,
+  CRO_IDENTIFIER1
+from
+  CKT_GOOD_CAUSE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (@croType = CRO_TYPE) and
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (CAS_NUMBER1 is not null) and
+  (CRO_IDENTIFIER1 is not null) and
+  (CRO_TYPE1 is not null) and
+  (CSP_NUMBER1 = @cspNumber1) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

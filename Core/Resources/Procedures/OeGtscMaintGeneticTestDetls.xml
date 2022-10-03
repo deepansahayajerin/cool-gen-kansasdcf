@@ -1,0 +1,122 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeGtscMaintGeneticTestDetls"
+           program-name="SWEGTSCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeGtscMaintGeneticTestDetls"
+           transaction="SR5T"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_2_GTSL_GEN_TEST_SAMP_LST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETGTSL"
+       to="OeGtslGeneticTestSampleList"
+       send-command="DISPLAY">
+      <map from="SelectedForPrevSample" to="CsePerson"/>
+      <return-map from="SelectedPrevSampleVendorAddress"
+                  to="SelectedPrevSampleVendorAddress"/>
+      <return-map from="SelectedPrevSampleVendor.Identifier"
+                  to="SelectedPrevSampleVendor.Identifier"/>
+      <return-map from="SelectedPrevSampleVendor.Name" to="SelectedPrevSampleVendor.Name"/>
+      <return-map from="SelectedPrevSampleGeneticTest" to="SelectedPrevSampleGeneticTest"/>
+      <return-map from="SelectedPrevSamplePersonGeneticTest"
+                  to="SelectedPrevSamplePersonGeneticTest"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COMP_CASE_COMPOSITION ECO_XFR_TO_COMP_CASE_COMPOSITN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FLWCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="HiddenComp" to="HiddenComp"/>
+      <map from="Selected" to="Case1"/>
+      <return-map from="SelectedChildCsePersonsWorkSet" to="SelectedChild"/>
+      <return-map from="SelectedAp" to="SelectedAllegedFather"/>
+      <return-map from="Case1" to="SelectedCase"/>
+      <return-map from="MotherCsePersonsWorkSet" to="SelectedMother"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_VENDOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETVENL"
+       to="OeVenlListVendor"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="SelectedVendor"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="SelectedForList" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_GTAL_GEN_TEST_AC_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETGTAL"
+       to="OeGtalGeneticTestAcList"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="SelectedGeneticTestAccount"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none">
+      <map from="Selected" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_LEG_ACT_BY_CC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACS"
+       to="LeLacsLstLglActnByCseCase"
+       send-command="DISPLAY">
+      <map from="Selected" to="Case1"/>
+      <return-map from="DlgflwSelected" to="SelectedLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="Print" to="FilterDocument"/>
+      <map from="DocmProtectFilter" to="ProtectFilter"/>
+      <return-map from="ReturnDoc" to="Print"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="HiddenComp" to="HiddenComp"/>
+   <map from="HiddenSelCombn.DetailHiddenCombnCsePerson"
+        to="HiddenSelCombn.DetailHiddenCombnCsePerson"/>
+   <map from="GeneticTestInformation" to="GeneticTestInformation"/>
+   <map from="HiddenListPrevSampCh" to="HiddenListPrevSampCh"/>
+   <map from="HiddenListPrevSampMo" to="HiddenListPrevSampMo"/>
+   <map from="HiddenListPrevSampFa" to="HiddenListPrevSampFa"/>
+   <map from="ListGenTestAccount" to="ListGenTestAccount"/>
+   <map from="ListGenTestType" to="ListGenTestType"/>
+   <map from="ListDrawSiteFather" to="ListDrawSiteFather"/>
+   <map from="ListDrawSiteMother" to="ListDrawSiteMother"/>
+   <map from="ListDrawSiteChild" to="ListDrawSiteChild"/>
+   <map from="ListPrevSampFather" to="ListPrevSampFather"/>
+   <map from="ListPrevSampMother" to="ListPrevSampMother"/>
+   <map from="ListPrevSampChild" to="ListPrevSampChild"/>
+   <map from="ListTestSite" to="ListTestSite"/>
+   <map from="ListLegalActionsLacs" to="ListLegalActionsLacs"/>
+   <map from="HiddenSelected" to="SelectedLegalAction"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Selected" to="SelectedCase"/>
+   <map from="HiddenGeneticTestInformation" to="HiddenGeneticTestInformation"/>
+   <map from="HiddenForEvents" to="HiddenForEvents"/>
+   <map from="GeneticTestType" to="GeneticTestType"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="CaseRoleInactive" to="CaseRoleInactive"/>
+   <map from="ActiveAp" to="ActiveAp"/>
+   <map from="ActiveChild" to="ActiveChild"/>
+   <map from="HiddenGeneticTest" to="HiddenGeneticTest"/>
+   <map from="SelectedMother" to="SelectedMother"/>
+   <map from="HiddenSelCombn.DetailHiddenCombnCaseRole.Type1"
+        to="HiddenSelCombn.DetailHiddenCombnCaseRole.Type1"/>
+</procedure>

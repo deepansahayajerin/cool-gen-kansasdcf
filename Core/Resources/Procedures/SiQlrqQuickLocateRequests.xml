@@ -1,0 +1,61 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiQlrqQuickLocateRequests"
+           program-name="SWEQLRQP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiQlrqQuickLocateRequests"
+           transaction="SR2E"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Next" to="Case1"/>
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+      <return-map from="ArCsePersonsWorkSet" to="Ar"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="State" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiItsmInterstateMenu"
+       send-command="XXFMMENU">
+      <map from="ApCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="DisplayOnly" to="Case1"/>
+      <map from="Next" to="Next"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="HiddenGroupExportDetails.HiddenGroupExportState"
+        to="HiddenGroupImportDetails.HiddenGroupImportState"/>
+   <map from="HiddenGroupExportDetails.HiddenGroupExportSend"
+        to="HiddenGroupImportDetails.HiddenGroupImportSend"/>
+   <map from="HiddenGroupExportDetails.HiddenGroupExportReturn"
+        to="HiddenGroupImportDetails.HiddenGroupImportReturn"/>
+   <map from="Details.Hidden" to="Details.Hidden"/>
+   <map from="Details.Send" to="Details.Send"/>
+   <map from="Next" to="Next"/>
+   <map from="ApCsePersonsWorkSet" to="Ap"/>
+   <map from="Ar" to="Ar"/>
+   <map from="Details.State" to="Details.State"/>
+   <map from="Details.Return1" to="Details.Return1"/>
+   <map from="Header.HeaderState" to="Header.HeaderState"/>
+   <map from="Header.HeaderPrompt" to="Header.HeaderPrompt"/>
+   <map from="Header.HeaderSend" to="Header.HeaderSend"/>
+   <map from="Header.HeaderReturn" to="Header.HeaderReturn"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="PromptPerson" to="PromptPerson"/>
+   <map from="OspServiceProvider" to="OspServiceProvider"/>
+   <map from="OspOffice" to="OspOffice"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="DisplayOnly.Number" to="DisplayOnly.Number"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

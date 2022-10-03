@@ -1,0 +1,146 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeIadaIdentifyAdminAction"
+           program-name="SWEIADAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeIadaIdentifyAdminAction"
+           transaction="SR8N"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Required" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADMIN_ACTION_AVAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETADAA"
+       to="LeAdaaLstAdminActionsAvail"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="AdministrativeAction"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACN"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="LegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.Classification" to="SearchLegalAction.Classification"/>
+      <return-map from="DlgflwSelected" to="LegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_OPAY_OBLG_BY_AP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOPAY"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="PassObligationType" to="ObligationType"/>
+      <return-map from="SelectedObligation.SystemGeneratedIdentifier"
+                  to="Obligation.SystemGeneratedIdentifier"/>
+      <return-map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <return-map from="CsePersonsWorkSet.FormattedName"
+                  to="CsePersonsWorkSet.FormattedName"/>
+      <return-map from="PassLegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="PassLegalAction.Identifier" to="LegalAction.Identifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="DocmProtectFilter" to="ProtectFilter"/>
+      <map from="Print" to="FilterDocument"/>
+      <return-map from="ReturnDoc" to="Print"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_IWO_GARNISHMENT_LIEN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeIwglIwoGarnishmentLien"
+       send-command="DISPLAY">
+      <map from="Fips" to="Fips"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLTRB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="Foreign"/>
+      <return-map from="DlgflwSelectedFips" to="Fips"/>
+      <return-map from="DlgflwSelectedTribunal" to="Tribunal"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_OBLO_ADM_ACTS_BY_OBLIGOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeObloAdminActionsByObligor"
+       send-command="DISPLAY">
+      <map from="ListOptSystManual" to="ListOptSystManualActs"/>
+      <map from="AdministrativeAction" to="Required"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="SelectedObligationType" to="ObligationType"/>
+      <return-map from="AllObligations" to="AllObligations"/>
+      <return-map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="SelectedAdministrativeAction.Type1"
+                  to="AdministrativeAction.Type1"/>
+      <return-map from="SelectedObligationAdministrativeAction.TakenDate"
+                  to="ObligationAdministrativeAction.TakenDate"/>
+      <return-map from="SelectedObligation.SystemGeneratedIdentifier"
+                  to="Obligation.SystemGeneratedIdentifier"/>
+   </on>
+   <map from="AdministrativeAction" to="AdministrativeAction"/>
+   <map from="Obligation" to="Obligation"/>
+   <map from="AllObligations" to="AllObligations"/>
+   <map from="ObligationAdministrativeAction"
+        to="ObligationAdministrativeAction"/>
+   <map from="HiddenPrevLegalAction" to="HiddenPrevLegalAction"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="PromptAdminActionType" to="PromptAdminActionType"/>
+   <map from="HiddenPrevObligationAdministrativeAction"
+        to="HiddenPrevObligationAdministrativeAction"/>
+   <map from="HiddenPrevCsePersonsWorkSet" to="HiddenPrevCsePersonsWorkSet"/>
+   <map from="HiddenPrevAdministrativeAction"
+        to="HiddenPrevAdministrativeAction"/>
+   <map from="PromptObligationNbr" to="PromptObligationNbr"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="ObligationType" to="ObligationType"/>
+   <map from="AdminActionTakenBy" to="AdminActionTakenBy"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="PromptTribunal" to="PromptTribunal"/>
+   <map from="HiddenFips" to="HiddenFips"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenSecurity" to="HiddenSecurity"/>
+   <map from="Foreign" to="Foreign"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="HiddenPrevObligation.SystemGeneratedIdentifier"
+        to="HiddenPrevObligation.SystemGeneratedIdentifier"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+   <map from="Print.Name" to="Print.Name"/>
+</procedure>

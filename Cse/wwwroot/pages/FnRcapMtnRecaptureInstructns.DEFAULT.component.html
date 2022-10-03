@@ -1,0 +1,546 @@
+﻿<!--Name: FN_RCAP_MTN_RECAPTURE_INSTRUCTNS, ID: 372126721, model: 746-->
+<div coolContent coolName="FN_RCAP_MTN_RECAPTURE_INSTRUCTNS" coolType="SCREEN"
+  (coolInit)="scrollSize = 125; pageSize = 11">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 25%; top: 0; width: 52.5%; height: 4%;"
+     coolCol="21" coolRow="1" coolLength="42">CSE - Display Recapture Obligations - RCAP</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 12%; width: 8.75%; height: 4%;" coolCol="3"
+     coolRow="4" coolLength="7">Obligor</div>
+   <input type="text" coolType="field" name="field_4_11"
+     [(ngModel)]="in.csePerson.number"
+     [coolVideo]="out.csePerson.screenField?.number" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="10"
+     style="left: 12.5%; top: 12%; width: 12.5%; height: 4%;" coolCol="11"
+     coolRow="4" coolLength="10">
+   <input type="text" coolType="field" name="field_4_22"
+     [(ngModel)]="in.promptCsePerson.selectChar"
+     [coolVideo]="out.promptCsePerson.screenField?.selectChar" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 26.25%; top: 12%; width: 1.25%; height: 4%;" coolCol="22"
+     coolRow="4" coolLength="1">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 28.75%; top: 12%; width: 41.25%; height: 4%;" coolCol="24"
+     coolRow="4" coolLength="33">{{in.csePersonsWorkSet.formattedName}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 24%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="7" coolLength="3">Sel</div>
+   
+   <div coolType="prompt"
+     style="left: 6.25%; top: 24%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="7" coolLength="7">Ob Type</div>
+   
+   <div coolType="prompt" style="left: 17.5%; top: 24%; width: 5%; height: 4%;"
+     coolCol="15" coolRow="7" coolLength="4">Ob #</div>
+   
+   <div coolType="prompt" style="left: 25%; top: 24%; width: 10%; height: 4%;"
+     coolCol="21" coolRow="7" coolLength="8">Due Date</div>
+   
+   <div coolType="prompt"
+     style="left: 38.75%; top: 24%; width: 10%; height: 4%;" coolCol="32"
+     coolRow="7" coolLength="8">Orig Amt</div>
+   
+   <div coolType="prompt" style="left: 52.5%; top: 24%; width: 10%; height: 4%;"
+     coolCol="43" coolRow="7" coolLength="8">Amt Owed</div>
+   
+   <div coolType="prompt" style="left: 65%; top: 24%; width: 6.25%; height: 4%;"
+     coolCol="53" coolRow="7" coolLength="5">Recap</div>
+   
+   <div coolType="prompt"
+     style="left: 72.5%; top: 24%; width: 13.75%; height: 4%;" coolCol="59"
+     coolRow="7" coolLength="11">Court Order</div>
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.import1, pageOffset, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 32%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="9" coolLength="7" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 32%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="9" coolLength="3" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 32%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="9" coolLength="8" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 32%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="9" coolLength="10" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 32%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="9" coolLength="10" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="9" coolLength="1" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 32%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="9" coolLength="20" [hidden]="pageOffset >= length(in.import1)">{{in.import1?.[pageOffset]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_10_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 1, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 1]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 1 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 36%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="10" coolLength="7" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 36%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="10" coolLength="3" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 36%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 36%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="10" coolLength="10"
+     [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 36%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="10" coolLength="10"
+     [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 36%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="10" coolLength="20"
+     [hidden]="pageOffset + 1 >= length(in.import1)">{{in.import1?.[pageOffset + 1]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_11_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 2, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 2]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 2 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 40%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="11" coolLength="7" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 40%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="11" coolLength="3" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 40%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 40%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="11" coolLength="10"
+     [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 40%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="11" coolLength="10"
+     [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 40%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="11" coolLength="20"
+     [hidden]="pageOffset + 2 >= length(in.import1)">{{in.import1?.[pageOffset + 2]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_12_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 3, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 3]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 3 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 44%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="12" coolLength="7" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 44%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="12" coolLength="3" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 44%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 44%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="12" coolLength="10"
+     [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 44%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="12" coolLength="10"
+     [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 44%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="12" coolLength="20"
+     [hidden]="pageOffset + 3 >= length(in.import1)">{{in.import1?.[pageOffset + 3]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 4, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 4]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 4 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 48%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="13" coolLength="7" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 48%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="13" coolLength="3" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 48%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 48%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="13" coolLength="10"
+     [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 48%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="13" coolLength="10"
+     [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 48%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="13" coolLength="20"
+     [hidden]="pageOffset + 4 >= length(in.import1)">{{in.import1?.[pageOffset + 4]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_14_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 5, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 5]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 5 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 52%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="14" coolLength="7" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 52%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="14" coolLength="3" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 52%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 52%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="14" coolLength="10"
+     [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 52%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="14" coolLength="10"
+     [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 52%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="14" coolLength="20"
+     [hidden]="pageOffset + 5 >= length(in.import1)">{{in.import1?.[pageOffset + 5]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_15_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 6, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 6]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 6 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 56%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="15" coolLength="7" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 56%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="15" coolLength="3" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 56%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 56%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="15" coolLength="10"
+     [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 56%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="15" coolLength="10"
+     [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 56%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="15" coolLength="20"
+     [hidden]="pageOffset + 6 >= length(in.import1)">{{in.import1?.[pageOffset + 6]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_16_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 7, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 7]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 7 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 60%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="16" coolLength="7" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 60%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="16" coolLength="3" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 60%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 60%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="16" coolLength="10"
+     [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 60%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="16" coolLength="10"
+     [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 60%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="16" coolLength="20"
+     [hidden]="pageOffset + 7 >= length(in.import1)">{{in.import1?.[pageOffset + 7]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 8, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 8]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 8 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 64%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="17" coolLength="7" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 64%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="17" coolLength="3" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 64%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 64%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="17" coolLength="10"
+     [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 64%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="17" coolLength="10"
+     [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 64%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="17" coolLength="20"
+     [hidden]="pageOffset + 8 >= length(in.import1)">{{in.import1?.[pageOffset + 8]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_18_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 9, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 9]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 9 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 68%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="18" coolLength="7" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 68%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="18" coolLength="3" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 68%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 68%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="18" coolLength="10"
+     [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 68%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="18" coolLength="10"
+     [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 68%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="18" coolLength="20"
+     [hidden]="pageOffset + 9 >= length(in.import1)">{{in.import1?.[pageOffset + 9]?.legalAction.standardNumber}}</div>
+   <input type="text" coolType="field" name="field_19_3"
+     [(ngModel)]="ref(in.import1, pageOffset + 10, 'select.selectChar').value"
+     [coolVideo]="out.export1?.[pageOffset + 10]?.select.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="1"
+     [hidden]="pageOffset + 10 >= length(in.import1)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 6.25%; top: 72%; width: 8.75%; height: 4%;" coolCol="6"
+     coolRow="19" coolLength="7"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.obligationType.code}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 17.5%; top: 72%; width: 3.75%; height: 4%;" coolCol="15"
+     coolRow="19" coolLength="3"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.obligation.systemGeneratedIdentifier|coolNumber:'000;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 72%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="19" coolLength="8"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.debtDetail.dueDt|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 72%; width: 12.5%; height: 4%;" coolCol="30"
+     coolRow="19" coolLength="10"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.obligationTransaction.amount|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 50%; top: 72%; width: 12.5%; height: 4%;" coolCol="41"
+     coolRow="19" coolLength="10"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.debtDetail.balanceDueAmt|coolNumber:'###,##0.00;#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 67.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="55"
+     coolRow="19" coolLength="1"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.recap.flag}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 72.5%; top: 72%; width: 25%; height: 4%;" coolCol="59"
+     coolRow="19" coolLength="20"
+     [hidden]="pageOffset + 10 >= length(in.import1)">{{in.import1?.[pageOffset + 10]?.legalAction.standardNumber}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 83.75%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="67">PF KEY: 1 Help  2 Display  3 Exit  4 List  7 Prev  8 Next  9 Return</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 92%; width: 95%; height: 4%;" coolCol="2"
+     coolRow="24" coolLength="76">11 Clear 12 Signoff 15 Recap-No 16 Recap-Yes 17 OREC 18 ROHL 19 RHST 20 OPSC</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="NORCP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=NORCP</a>
+   <a coolType="action" coolCommand="YESRCP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=YESRCP</a>
+   <a coolType="action" coolCommand="OREC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F5">F17=OREC</a>
+   <a coolType="action" coolCommand="ROHL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F6">F18=ROHL</a>
+   <a coolType="action" coolCommand="RHST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F7">F19=RHST</a>
+   <a coolType="action" coolCommand="OPSC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F8">F20=OPSC</a>
+   </div>

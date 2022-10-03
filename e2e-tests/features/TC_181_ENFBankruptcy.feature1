@@ -1,0 +1,273 @@
+Feature: TC-181-ENF-Bankruptcy
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy - BKRP" window appears
+    Then take snapshot "Sc1_page1"
+    When user enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    When user enters "<TYPE>" in "Type"
+    And enters "<BANKRUPTCY_COURT_N>" in "Bankruptcy Court #"
+    And enters "Today" in "Filed"
+    And enters "<EXPECTED_DISCHARGE_DAY_AFTER>" in "Expected Discharge"
+    Then snapshot "Sc1_1_page1"
+    And enters "" in "Bankruptcy Dist Court"
+    And user presses "F5"
+    Then message "OE0083: Invalid bankruptcy district court." is displayed
+    Then snapshot "Sc1_page2"
+    When user enters "<BANKRUPTCY_DIST_COURT>" in "Bankruptcy Dist Court"
+    When user enters "" in "Expected Discharge"
+    And user presses "F5"
+    Then message "OE0000: Either expected discharge, discharge, or dis/with date is required." is displayed
+    Then snapshot "Sc1_page3"
+    When user enters "<EXPECTED_DISCHARGE_DAY_AFTER>" in "Expected Discharge"
+    Then snapshot "Sc1_1_page3"
+    And enters "" in "Filed"
+    And user presses "F5"
+    Then message "OE0000: Bankruptcy filed date is required." is displayed
+    Then snapshot "Sc1_page4"
+    When user enters "Today" in "Filed"
+    And enters "" in "Bankruptcy Court #"
+    And user presses "F5"
+    Then message "OE0082: Invalid bankruptcy court number." is displayed
+    Then snapshot "Sc1_page5"
+    When user enters "<BANKRUPTCY_COURT_N>" in "Bankruptcy Court #"
+    And enters "" in "Type"
+    And user presses "F5"
+    Then message "OE0081: Bankruptcy type not supplied or invalid." is displayed
+    Then snapshot "Sc1_page6"
+    When user enters "<TYPE>" in "Type"
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    Then snapshot "Sc1_page7"
+    When user enters "HIST" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - History - HIST" window appears
+    When user enters "<PERSON>" in "Person"
+    And user presses "F2"
+    Then snapshot "Sc1_page8"
+    #Then record "BKRP Notice of Filing Chapter 7 Recorded." is displayed
+    When second text field under "Date" next to "POTENTIAL FTI INFORMATION" section has a value "BKRP NOTICE OF FILING CHAPTER 7 RECORDED"
+    Then snapshot "Sc1_page10"
+
+
+    Examples:
+      | PERSON  | TYPE | BANKRUPTCY_COURT_N | BANKRUPTCY_DIST_COURT | EXPECTED_DISCHARGE_DAY_AFTER |
+      | 3804952 | 07   | TEST 1234          | TEST DIST COURT2      | Tomorrow                     |
+  #| 3804946 | 07   | TEST 1234          | TEST DIST COURT2      | Tomorrow                     |
+
+
+  Scenario Outline: Scenario2
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy - BKRP" window appears
+    Then take snapshot "Sc2_page1"
+    When user enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    When user enters "<TRUSTEE_OFFICER_NAME_LAST>" in "Trustee Officer Last"
+    And enters "<TRUSTEE_OFFICER_NAME_FIRST>" in the next field
+    And enters "<TRUSTEE_OFFICER_NAME_MI>" in the next field
+    And enters "<TRUSTEE_ADDRESS>" in "Address" under "Trustee Officer Last"
+    And enters "<TRUSTEE_ADDRESS_CITY>" in "City" under "Trustee Officer Last"
+    Then take snapshot "Sc2_page2"
+    And enters "<TRUSTEE_ADDRESS_ST>" in the next field
+    And enters "<TRUSTEE_ADDRESS_ZIP>" in "Zip" under "Trustee Officer Last"
+    And enters "<TRUSTEE_PHONE_1>" in "Phone" under "Trustee Officer Last"
+    And enters "<TRUSTEE_PHONE_2>" in the next field
+
+    When user enters "<ATTORNEY_NAME_LAST>" in "Attorney Last"
+    And enters "<ATTORNEY_NAME_FIRST>" in the next field
+    And enters "<ATTORNEY_NAME_MI>" in the next field
+    And enters "<ATTORNEY_ADDRESS>" in "Address" under "Attorney Last"
+    And enters "<ATTORNEY_ADDRESS_CITY>" in "City" under "Attorney Last"
+    And enters "<ATTORNEY_ADDRESS_ST>" in the next field
+    And enters "<ATTORNEY_ADDRESS_ZIP>" in "Zip" under "Attorney Last"
+    And enters "<ATTORNEY_PHONE_1>" in "Phone" under "Attorney Last"
+    And enters "<ATTORNEY_PHONE_2>" in the next field
+
+    And user presses "F6"
+    Then message "ACO_NI0000: Successfully updated." is displayed
+    Then snapshot "Sc2_page2"
+    When user enters "<MOTION_TO_LIFT_REQUEST_DAY_BEFORE>" in "Motion to lift Requested"
+    And user presses "F6"
+    Then message "OE0125: Invalid motion to lift requested date." is displayed
+    Then take snapshot "Sc2_page3"
+    When user enters "<MOTION_TO_LIFT_REQUEST_DAY_AFTER>" in "Motion to lift Requested"
+    And user presses "F6"
+    Then message "OE0125: Invalid motion to lift requested date" is displayed
+    Then take snapshot "Sc2_page4"
+    When user enters "Today" in "Motion to lift Requested"
+    And user presses "F6"
+    Then message "ACO_NI0000: Successfully updated." is displayed
+    Then take snapshot "Sc2_page5"
+    #When user presses "Shift+F12"
+    # print the request
+    When user enters "DMON" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Document Monitor - DMON" window appears
+    Then take snapshot "Sc2_page6"
+
+    Examples:
+      | PERSON  | TRUSTEE_OFFICER_NAME_LAST | TRUSTEE_OFFICER_NAME_FIRST | TRUSTEE_OFFICER_NAME_MI | TRUSTEE_ADDRESS | TRUSTEE_ADDRESS_CITY | TRUSTEE_ADDRESS_ST | TRUSTEE_ADDRESS_ZIP | TRUSTEE_PHONE_1 | TRUSTEE_PHONE_2 | ATTORNEY_NAME_LAST | ATTORNEY_NAME_FIRST | ATTORNEY_NAME_MI | ATTORNEY_ADDRESS | ATTORNEY_ADDRESS_CITY | ATTORNEY_ADDRESS_ST | ATTORNEY_ADDRESS_ZIP | ATTORNEY_PHONE_1 | ATTORNEY_PHONE_2 | MOTION_TO_LIFT_REQUEST_DAY_BEFORE | MOTION_TO_LIFT_REQUEST_DAY_AFTER |
+      | 3804952 | TO Last                   | TO Firts                   | S                       | 1 State ST      | TOPEKA               | KS                 | 66546               | 123             | 4567890         | A Last             | A Firts             | M                | 2 State ST       | TOPEKA                | KS                  | 66546                | 321              | 0987654          | Yesterday                         | Tomorrow                         |
+  #| 3804946 | TO Last                   | TO Firts                   | S                       | 1 State ST      | TOPEKA               | KS                 | 66546               | 123             | 4567890         | A Last             | A Firts             | M                | 2 State ST       | TOPEKA                | KS                  | 66546                | 321              | 0987654          | Yesterday                         | Tomorrow                         |
+
+  Scenario Outline: Scenario3
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy - BKRP" window appears
+    Then take snapshot "Sc3_page1"
+    When user enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    When user enters "<TYPE>" in "Type"
+    And enters "<BANKRUPTCY_COURT_N>" in "Bankruptcy Court #"
+    And enters "Today" in "Filed"
+    And enters "<EXPECTED_DISCHARGE_DAY_AFTER>" in "Expected Discharge"
+    And enters "<BANKRUPTCY_DIST_COURT>" in "Bankruptcy Dist Court"
+    And user presses "F5"
+    Then message "OE0132: Dismiss/Withdraw or discharge existing BKRP before adding a new one." is displayed
+    Then snapshot "Sc3_page2"
+    And user presses "F2"
+    Then snapshot "Sc3_page3"
+    When user enters "" in "Expected Discharge"
+    ## Less than Filed date
+    And enters "<DISCHARGED_DAY_BOFORE>" in "Discharged"
+    And user presses "F6"
+    Then message "OE0000: Bankruptcy discharge date can not be less than bankruptcy filed date." is displayed
+    Then snapshot "Sc3_page4"
+    And enters "Today" in "Discharged"
+    And user presses "F6"
+    Then message "ACO_NI0000: Successfully updated." is displayed
+    Then snapshot "Sc3_page5"
+    When user enters "HIST" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - History - HIST" window appears
+    And user presses "F8"
+    #Then record "BKRP_DISCHARGE_DT_RECORDED" is displayed
+    When 5th text field under "Date" next to "POTENTIAL FTI INFORMATION" section has a value "BKRP_DISCHARGE_DT_RECORDED"
+
+    Then snapshot "Sc3_page6"
+
+    Examples:
+      | PERSON  | TYPE | BANKRUPTCY_COURT_N | BANKRUPTCY_DIST_COURT | EXPECTED_DISCHARGE_DAY_AFTER | DISCHARGED_DAY_BOFORE |
+      | 3804952 | 13   | TEST 12345         | TEST DIST COURT3      | Tomorrow                     | Yesterday             |
+  # | 3804946 | 13   | TEST 12345         | TEST DIST COURT3      | Tomorrow                     | Yesterday             |
+
+
+  Scenario Outline: Scenario4
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy - BKRP" window appears
+    Then take snapshot "Sc4_page1"
+    When user enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    When user enters "<TYPE>" in "Type"
+    And enters "" in "Discharged"
+    And enters "" in "Expected Discharge"
+    And user presses "F5"
+    Then message "OE0000: Either expected discharge, discharge, or dis/with date is required." is displayed
+    Then snapshot "Sc4_page2"
+    When user enters "<EXPECTED_DISCHARGE_DAY_AFTER>" in "Expected Discharge"
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    Then snapshot "Sc4_page3"
+    #When user presses "Shift+F12"
+    # print the request
+    When user enters "DMON" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Document Monitor - DMON" window appears
+    Then take snapshot "Sc4_page4"
+    When user enters "HIST" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - History - HIST" window appears
+    When user presses "F8"
+    # Then record "BKRPNOTICE OF FILING CHAPTER 13 IS RECORDED" is displayed
+    When 8th text field under "Date" next to "POTENTIAL FTI INFORMATION" section has a value "BKRPNOTICE OF FILING CHAPTER 13 RECORDED"
+    Then take snapshot "Sc4_page5"
+
+    Examples:
+      | PERSON  | TYPE | EXPECTED_DISCHARGE_DAY_AFTER |
+      | 3804952 | 13   | Tomorrow                     |
+  #| 3804946 | 13   | Tomorrow                     |
+
+  Scenario Outline: Scenario5
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy - BKRP" window appears
+    Then take snapshot "Sc5_page1"
+    When user enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    Then take snapshot "Sc5_1_page1"
+    # check that Identifier = 2
+    Then "Identifier" has the value "2"
+    Then take snapshot "Sc5_page2"
+    And user presses "F7"
+    # check that Identifier = 1
+    Then "Identifier" has the value "1"
+    Then take snapshot "Sc5_page3"
+    And user presses "F8"
+    # check that Identifier = 2
+    Then "Identifier" has the value "2"
+    Then take snapshot "Sc5_page4"
+    When user enters "" in "Expected Discharge"
+    And enters "Today" in "Discharged"
+    And user presses "F6"
+    Then message "OE0000: Discharge date is not allowed with type 13 bankruptcies." is displayed
+    Then snapshot "Sc5_page5"
+    When user enters "" in "Discharged"
+    And enters "Today" in "Dis/With"
+    And user presses "F6"
+    Then message "ACO_NI0000: Successfully updated." is displayed
+    Then snapshot "Sc5_page6"
+    When user enters "HIST" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - History - HIST" window appears
+    When user presses "F8"
+    # Then record "BKRP Dismissal/Withdraw DT(13) RECORDER" is displayed
+    When 11th text field under "Date" next to "POTENTIAL FTI INFORMATION" section has a value "BKRP DISMISSAL/WITHDRAW DT (13) RECORDED"
+    Then take snapshot "Sc5_page7"
+
+    Examples:
+      | PERSON  | TRUSTEE_OFFICER_NAME_LAST |
+      | 3804952 | TO LAST                   |
+  #| 3804946 | TO LAST                   |
+
+
+  Scenario Outline: Scenario6
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy - BKRP" window appears
+    Then take snapshot "Sc6_page1"
+    When user enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    Then take snapshot "Sc6_page2"
+    And user presses "F10"
+    Then message "ACO_NI0000: Delete was successful." is displayed
+
+    Examples:
+      | PERSON  |
+      | 3804952 |
+  # | 3804946 |
+
+  # Run Scenario6 again to delete also the 2 record
+  Scenario Outline: Scenario7
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy - BKRP" window appears
+    Then take snapshot "Sc6_page1"
+    When user enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    Then take snapshot "Sc6_page2"
+    And user presses "F10"
+    Then message "ACO_NI0000: Delete was successful." is displayed
+
+    Examples:
+      | PERSON  |
+      | 3804952 |
+#| 3804946 |

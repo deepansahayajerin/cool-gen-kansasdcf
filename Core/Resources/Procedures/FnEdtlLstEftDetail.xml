@@ -1,0 +1,112 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnEdtlLstEftDetail"
+           program-name="SWEEDTLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnEdtlLstEftDetail"
+           transaction="SR71"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_REC_CRRC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnCrrcRecCollctnDetailsPri"
+       send-command="DISPLAY">
+      <map from="PassThruFlowCashReceiptDetail.SequentialIdentifier"
+           to="CashReceiptDetail.SequentialIdentifier"/>
+      <map from="PassThruFlowCashReceiptEvent" to="HiddenCashReceiptEvent"/>
+      <map from="PassThruFlowCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowCashReceiptType" to="HiddenCashReceiptType"/>
+      <map from="PassThruFlowCollectionType.SequentialIdentifier"
+           to="CollectionType2.SequentialIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_EFTS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnEftlLstEfts"
+       send-command="DISPLAY">
+      <map from="Payee" to="CsePersonsWorkSet"/>
+      <return-map from="PassElectronicFundTransmission.TransmissionIdentifier"
+                  to="ElectronicFundTransmission.TransmissionIdentifier"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_EFT_STAT_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnEhstLstEftStatusHist"
+       send-command="DISPLAY">
+      <map from="PaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="PaymentRequest.Amount" to="PaymentRequest.Amount"/>
+      <map from="ElectronicFundTransmission" to="ElectronicFundTransmission"/>
+   </on>
+   <on exit-state="ECO_LNK_MTN_EFT_TRANSMISSION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnMtrnMaintainEftTrnsmission"
+       send-command="DISPLAY">
+      <map from="ElectronicFundTransmission.ReceivingDfiIdentification"
+           to="ElectronicFundTransmission.ReceivingDfiIdentification"/>
+      <map from="ElectronicFundTransmission.DfiAccountNumber"
+           to="ElectronicFundTransmission.DfiAccountNumber"/>
+      <map from="ElectronicFundTransmission.TransmissionType"
+           to="ElectronicFundTransmission.TransmissionType"/>
+      <map from="ElectronicFundTransmission.TransmissionIdentifier"
+           to="ElectronicFundTransmission.TransmissionIdentifier"/>
+      <map from="ElectronicFundTransmission.EffectiveEntryDate"
+           to="ElectronicFundTransmission.EffectiveEntryDate"/>
+      <map from="ElectronicFundTransmission.CheckDigit"
+           to="ElectronicFundTransmission.CheckDigit"/>
+      <map from="ElectronicFundTransmission.ReceivingDfiAccountNumber"
+           to="ElectronicFundTransmission.ReceivingDfiAccountNumber"/>
+      <return-map from="PaymentRequest.SystemGeneratedIdentifier"
+                  to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <return-map from="PaymentRequest.CsePersonNumber"
+                  to="PaymentRequest.CsePersonNumber"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_PAYEE_ACCT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="Payee" to="Received"/>
+      <map from="PassThruFlowCsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_MNTHLY_PAYEE_SUM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnPsumLstMnthlyPyeeSummry"
+       send-command="DISPLAY">
+      <map from="Payee" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="Disbursements.DetailDisbursementTransaction"
+        to="Disbursements.DetailDisbursementTransaction"/>
+   <map from="ElectronicFundTransmission" to="ElectronicFundTransmission"/>
+   <map from="Payee" to="Payee"/>
+   <map from="PaymentStatus" to="PaymentStatus"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="DesignatedPayee" to="DesignatedPayee"/>
+   <map from="ReissuedDate" to="ReissuedDate"/>
+   <map from="Disbursements.DetailCommon" to="Disbursements.DetailCommon"/>
+   <map from="Disbursements.DetailDisbursementType"
+        to="Disbursements.DetailDisbursementType"/>
+   <map from="IssuedTo" to="IssuedTo"/>
+   <map from="EftNumber" to="EftNumber"/>
+   <map from="Disbursements.DetailDisbCode" to="Disbursements.DetailDisbCode"/>
+   <map from="PaymentRequest.ProcessDate" to="PaymentRequest.ProcessDate"/>
+   <map from="ReissuedTo.Number" to="ReissuedTo.Number"/>
+   <map from="PaymentRequest.Amount" to="PaymentRequest.Amount"/>
+   <map from="PaymentRequest.SystemGeneratedIdentifier"
+        to="PaymentRequest.SystemGeneratedIdentifier"/>
+   <map from="PaymentRequest.CsePersonNumber"
+        to="PaymentRequest.CsePersonNumber"/>
+</procedure>

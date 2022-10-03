@@ -1,0 +1,127 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeObloAdminActionsByObligor"
+           program-name="SWEOBLOP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeObloAdminActionsByObligor"
+           transaction="SR9Q"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_ADMIN_ACTION_AVAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETADAA"
+       to="LeAdaaLstAdminActionsAvail"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="Required"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CRED_REPORTING"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeCredCreditReporting"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="Ap"/>
+      <return-map from="Ap.Number" to="CsePersonsWorkSet.Number"/>
+      <return-map from="Ap.Ssn" to="CsePersonsWorkSet.Ssn"/>
+      <return-map from="Ap.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OFFICE_SERVICE_PROVDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionServiceProvider"
+                  to="ZdelImportRequiredServiceProvider"/>
+      <return-map from="HiddenSelectionOffice" to="ZdelImportRequiredOffice"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IADA_IDENTIFY_ADM_ACT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeIadaIdentifyAdminAction"
+       send-command="DISPLAY">
+      <map from="SelectedObligationType" to="ObligationType"/>
+      <map from="AllObligations" to="AllObligations"/>
+      <map from="CsePersonsWorkSet" to="HiddenPrevCsePersonsWorkSet"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="SelectedAdministrativeAction.Type1"
+           to="AdministrativeAction.Type1"/>
+      <map from="SelectedAdministrativeAction.Type1"
+           to="HiddenPrevAdministrativeAction.Type1"/>
+      <map from="SelectedObligationAdministrativeAction.TakenDate"
+           to="HiddenPrevObligationAdministrativeAction.TakenDate"/>
+      <map from="SelectedObligationAdministrativeAction.TakenDate"
+           to="ObligationAdministrativeAction.TakenDate"/>
+      <map from="SelectedObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="SelectedObligation.SystemGeneratedIdentifier"
+           to="HiddenPrevObligation.SystemGeneratedIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EXMP_ADM_ACT_EXEMPTN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeExmpAdminActionExemption"
+       send-command="DISPLAY">
+      <map from="SelectedObligationType" to="ObligationType"/>
+      <map from="AllObligations" to="AllObligations"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="SelectedAdministrativeAction.Type1"
+           to="AdministrativeAction.Type1"/>
+      <map from="SelectedObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+   </on>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="Required" to="Required"/>
+   <map from="StartDate" to="StartDate"/>
+   <map from="PromptAdminActType" to="PromptAdminActType"/>
+   <map from="ListOptSystManualActs" to="ListOptSystManualActs"/>
+   <map from="Standard" to="Standard"/>
+   <map from="One" to="One"/>
+   <map from="Two" to="Two"/>
+   <map from="Three" to="Three"/>
+   <map from="Four" to="Four"/>
+   <map from="Five" to="Five"/>
+   <map from="Six" to="Six"/>
+   <map from="Seven" to="Seven"/>
+   <map from="Eight" to="Eight"/>
+   <map from="Nine" to="Nine"/>
+   <map from="Ten" to="Ten"/>
+   <map from="Eleven" to="Eleven"/>
+   <map from="Twelve" to="Twelve"/>
+   <map from="AdminAction.SsnChangeFlag" to="AdminAction.SsnChangeFlag"/>
+   <map from="AdminAction.SelectOption" to="AdminAction.SelectOption"/>
+   <map from="AdminAction.DetailObligationType"
+        to="AdminAction.DetailObligationType"/>
+   <map from="AdminAction.DetailHiddenCrtfd" to="AdminAction.DetailHiddenCrtfd"/>
+   <map from="AdminAction.DetailHiddenOblgr" to="AdminAction.DetailHiddenOblgr"/>
+   <map from="AdminAction.DetailHidden" to="AdminAction.DetailHidden"/>
+   <map from="AdminAction.DetailAdministrativeAction"
+        to="AdminAction.DetailAdministrativeAction"/>
+   <map from="AdminAction.DetailAdministrativeActCertification"
+        to="AdminAction.DetailAdministrativeActCertification"/>
+   <map from="AdminAction.DetailFederalDebtSetoff"
+        to="AdminAction.DetailFederalDebtSetoff"/>
+   <map from="AdminAction.DetailObligationAdministrativeAction"
+        to="AdminAction.DetailObligationAdministrativeAction"/>
+   <map from="AdminAction.FdsoDecertFlag" to="AdminAction.FdsoDecertFlag"/>
+   <map from="AdminAction.ManAutoFlag" to="AdminAction.ManAutoFlag"/>
+   <map from="AdminAction.FlowExmp" to="AdminAction.FlowExmp"/>
+   <map from="ShowAll" to="ShowAll"/>
+   <map from="AdminAction.Pass" to="AdminAction.Pass"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="CsePersonsWorkSet.FirstName" to="CsePersonsWorkSet.FirstName"/>
+   <map from="CsePersonsWorkSet.MiddleInitial"
+        to="CsePersonsWorkSet.MiddleInitial"/>
+   <map from="CsePersonsWorkSet.LastName" to="CsePersonsWorkSet.LastName"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+</procedure>

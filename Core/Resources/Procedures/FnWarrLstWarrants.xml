@@ -1,0 +1,138 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnWarrLstWarrants"
+           program-name="SWEWARRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnWarrLstWarrants"
+           transaction="SR48"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_PERSON_NAME_LIST"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="Phonetic" to="Phonetic"/>
+      <return-map from="Selected" to="Pass"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WARA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="none"
+       display-first-on-return="true"
+       to="FnWaraLstWarrantAddresses"
+       send-command="DISPLAY">
+      <map from="PassThruFlowPaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <map from="PassThruFlowPaymentRequest.CsePersonNumber"
+           to="PaymentRequest.CsePersonNumber"/>
+      <map from="PassThruFlowPaymentRequest.Number" to="PaymentRequest.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_PAYMENT_STATUSES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="FnPstlLstPaymentStatuses"
+       send-command="DISPLAY">
+      <return-map from="FlowSelection.Code" to="PaymentStatus.Code"/>
+      <return-map from="FlowSelection.Name" to="PaymentStatus.Name"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WAST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       display-first-on-return="true"
+       to="FnWastMtnWarrantRequest"
+       send-command="DISPLAY">
+      <map from="PassThruFlowPaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <map from="PassThruFlowPaymentRequest.CsePersonNumber"
+           to="PaymentRequest.CsePersonNumber"/>
+      <map from="PassThruFlowPaymentRequest.Number" to="PaymentRequest.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WDTL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       display-first-on-return="true"
+       to="FnWdtlLstWarrantDtl"
+       send-command="DISPLAY">
+      <map from="PassThruFlowPaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <map from="PassThruFlowPaymentRequest.CsePersonNumber"
+           to="PaymentRequest.CsePersonNumber"/>
+      <map from="PassThruFlowPaymentRequest.Number" to="PaymentRequest.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WHST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="none"
+       display-first-on-return="true"
+       to="FnWhstLstWarrantStatusHist"
+       send-command="DISPLAY">
+      <map from="PassThruFlowPaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <map from="PassThruFlowPaymentRequest.CsePersonNumber"
+           to="PaymentRequest.CsePersonNumber"/>
+      <map from="PassThruFlowPaymentRequest.Number" to="PaymentRequest.Number"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_PAYEE_ACCT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="none"
+       display-first-on-return="true"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="Received"/>
+      <map from="PassThruFlowCsePerson" to="CsePerson"/>
+   </on>
+   <map from="From" to="From"/>
+   <map from="To" to="To"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Export1.DetailPaymentStatusHistory"
+        to="Import1.DetailPaymentStatusHistory"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailCsePersonsWorkSet"
+        to="Import1.DetailCsePersonsWorkSet"/>
+   <map from="Export1.DetailPaymentStatus" to="Import1.DetailPaymentStatus"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptStatusTextWorkArea" to="PromptStatusTextWorkArea"/>
+   <map from="PromptCsePersonTextWorkArea" to="PromptCsePersonTextWorkArea"/>
+   <map from="Dp" to="Dp"/>
+   <map from="PromptDpCsePerson" to="PromptDpCsePerson"/>
+   <map from="HiddenDuplicateWarrants" to="HiddenDuplicateWarrants"/>
+   <map from="Export1.DetailPaymentRequest.InterstateInd"
+        to="Import1.DetailPaymentRequest.InterstateInd"/>
+   <map from="PaymentStatus.Name" to="PaymentStatus.Name"/>
+   <map from="PaymentStatus.Code" to="PaymentStatus.Code"/>
+   <map from="StartingWarrant.Number" to="StartingWarrant.Number"/>
+   <map from="Export1.DetailPaymentRequest.Amount"
+        to="Import1.DetailPaymentRequest.Amount"/>
+   <map from="Export1.DetailPaymentRequest.ImprestFundCode"
+        to="Import1.DetailPaymentRequest.ImprestFundCode"/>
+   <map from="Export1.DetailPaymentRequest.Classification"
+        to="Import1.DetailPaymentRequest.Classification"/>
+   <map from="Export1.DetailPaymentRequest.CsePersonNumber"
+        to="Import1.DetailPaymentRequest.CsePersonNumber"/>
+   <map from="Export1.DetailPaymentRequest.ProcessDate"
+        to="Import1.DetailPaymentRequest.ProcessDate"/>
+   <map from="Export1.DetailPaymentRequest.SystemGeneratedIdentifier"
+        to="Import1.DetailPaymentRequest.SystemGeneratedIdentifier"/>
+   <map from="Export1.DetailPaymentRequest.Number"
+        to="Import1.DetailPaymentRequest.Number"/>
+   <map from="Export1.DetailPaymentRequest.PrintDate"
+        to="Import1.DetailPaymentRequest.PrintDate"/>
+   <map from="Export1.DetailPaymentRequest.RecoupmentIndKpc"
+        to="Import1.DetailPaymentRequest.RecoupmentIndKpc"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

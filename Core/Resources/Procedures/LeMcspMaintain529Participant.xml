@@ -1,0 +1,44 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeMcspMaintain529Participant"
+           program-name="SWEMCSPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeMcspMaintain529Participant"
+           transaction="SRMP"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LAPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLAPS"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <map from="ToLapsListByLrol" to="ListByLrolOrLops"/>
+      <map from="ToLaps.Number" to="CsePersonsWorkSet.Number"/>
+      <return-map from="Selected" to="FromLaps"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NAME"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="FromName"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU_CSMM ECO_XFR_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="CoCsmmChildSupMainMenu"
+       send-command-type="none"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Search" to="Search"/>
+   <map from="DisplayHistory" to="DisplayHistory"/>
+   <map from="Group.Data529AccountParticipant"
+        to="Group.Data529AccountParticipant"/>
+   <map from="Group.CsePersonsWorkSet" to="Group.CsePersonsWorkSet"/>
+   <map from="Group.Hiddendata529AccountParticipant"
+        to="Group.Hiddendata529AccountParticipant"/>
+   <map from="Group.HiddenCsePersonsWorkSet" to="Group.HiddenCsePersonsWorkSet"/>
+   <map from="Group.CsePerson" to="Group.CsePerson"/>
+   <map from="Group.CourtOrder" to="Group.CourtOrder"/>
+   <map from="Group.Common" to="Group.Common"/>
+</procedure>

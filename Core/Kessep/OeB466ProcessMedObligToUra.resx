@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonCsePersonObligationTypeObligation">
+      <value>
+select
+  T4.CSP_NUMBER,
+  T5.CSP_SUP_NUMBER,
+  T3.DEBT_TYP_ID,
+  T3.DEBT_TYP_CLASS,
+  T4.CPA_TYPE,
+  T4.OB_ID,
+  T4.PRIM_SEC_CD,
+  T4.ORD_TYP_CD,
+  T5.OB_TRN_ID,
+  T5.OB_TRN_TYP,
+  T5.OB_TRN_AMT,
+  T5.LAST_UPDATED_BY,
+  T5.LAST_UPDATED_TMST,
+  T5.CPA_SUP_TYPE,
+  T5.URA_UPD_PROC_DATE,
+  T6.DUE_DT,
+  T6.CVRD_PRD_START_DT,
+  T6.CVD_PRD_END_DT,
+  T6.PRECNVRSN_PGM_CD
+from
+  CKT_OB_TYPE T3 with(readcommitted)
+  join
+  CKT_OBLIGATION T4 with(readcommitted)
+  on
+    (T3.DEBT_TYP_ID = T4.DTY_GENERATED_ID) and
+    (T4.CSP_NUMBER between cast(@number1 as char(10)) and cast(@number2 as char(10))) and
+    (T3.DEBT_TYP_ID = @debtTypId)
+  join
+  CKT_OB_TRN T5 with(readcommitted)
+  on
+    (T4.DTY_GENERATED_ID = T5.OTY_TYPE) and
+    (T4.OB_ID = T5.OBG_GENERATED_ID) and
+    (T4.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T4.CPA_TYPE = T5.CPA_TYPE) and
+    (T5.CPA_SUP_TYPE is not null) and
+    (T5.CSP_SUP_NUMBER is not null) and
+    (T5.URA_UPD_PROC_DATE = @uraUpdProcDate)
+  join
+  CKT_DEBT_DTL T6 with(readcommitted)
+  on
+    (T5.OTY_TYPE = T6.OTY_TYPE) and
+    (T5.OBG_GENERATED_ID = T6.OBG_GENERATED_ID) and
+    (T5.OB_TRN_TYP = T6.OTR_TYPE) and
+    (T5.OB_TRN_ID = T6.OTR_GENERATED_ID) and
+    (T5.CPA_TYPE = T6.CPA_TYPE) and
+    (T5.CSP_NUMBER = T6.CSP_NUMBER)
+order by
+  T4.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySumImHousehold1">
+      <value>
+select top(1)
+  YEAR0,
+  MONTH0,
+  GRANT_MED_AMT,
+  URA_MEDICAL_AMOUNT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0)
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySumImHousehold2">
+      <value>
+select
+  YEAR0,
+  MONTH0,
+  GRANT_MED_AMT,
+  URA_MEDICAL_AMOUNT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (YEAR0 &lt;= @year0) and
+  (
+    (YEAR0 &lt; @year0) or
+    (
+      (YEAR0 = @year0) and
+      (MONTH0 &lt;= @month0)
+    )
+  )
+order by
+  YEAR0 desc,
+  MONTH0 desc
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadSupported">
+      <value>
+select distinct
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.RECOMP_BAL_FROM_DT,
+  T1.TRIGGER_TYPE
+from
+  CKT_CSE_PERSON_ACC T1
+  join
+  CKT_IM_HH_MBR_MSUM T3
+  on
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.YEAR0 = @year0) and
+    (T3.MONTH0 = @month0) and
+    (@imhAeCaseNo = T3.IMH_AE_CASE_NO)
+</value>
+   </data>
+   <data name="UpdateDebt">
+      <value>
+update CKT_OB_TRN
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  URA_UPD_PROC_DATE = @uraUpdProcDate
+where
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OB_TRN_ID = @obTrnId) and
+  (OB_TRN_TYP = @obTrnTyp) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+   <data name="UpdateImHouseholdMbrMnthlySum">
+      <value>
+update CKT_IM_HH_MBR_MSUM
+set
+  GRANT_MED_AMT = @grantMedAmt,
+  URA_MEDICAL_AMOUNT = @uraMedicalAmount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0) and
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateSupported">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt,
+  TRIGGER_TYPE = @triggerType
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

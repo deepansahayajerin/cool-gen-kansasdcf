@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptSourceType1">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  NAME,
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_CRSRC_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType2">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  NAME,
+  [STATE],
+  COUNTY,
+  LOCATION
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType3">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CODE,
+  CATEGORY_IND
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  TAX_ID,
+  ORGANIZATION_NAME,
+  TAX_ID_SUFFIX
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  (@trbId = TRB_ID) and
+  (TYPE in ('M', 'B'))
+order by
+  TYPE
+</value>
+   </data>
+   <data name="ReadTribunal1">
+      <value>
+select top(1)
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  IDENTIFIER,
+  TAX_ID_SUFFIX,
+  TAX_ID,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  (FIP_STATE = @fipState) and
+  (FIP_COUNTY = @fipCounty) and
+  (FIP_LOCATION = @fipLocation)
+</value>
+   </data>
+   <data name="ReadTribunal2">
+      <value>
+select top(1)
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  IDENTIFIER,
+  TAX_ID_SUFFIX,
+  TAX_ID,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

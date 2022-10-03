@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.ADJUSTMENT_IND,
+  T1.COLLECTION_AMOUNT
+from
+  CKT_CR_DETAIL T1 with(readuncommitted)
+  join
+  CKT_CRDTL_BAL_ADJ T2 with(readuncommitted)
+  on
+    (T1.CRD_ID = T2.CRD_S_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T2.CRV_S_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T2.CST_S_IDENTIFIER) and
+    (T1.CRT_IDENTIFIER = T2.CRT_S_IDENTIFIER) and
+    (@crdIdentifier = T2.CRD_IDENTIFIER) and
+    (@crvIdentifier = T2.CRV_IDENTIFIER) and
+    (@cstIdentifier = T2.CST_IDENTIFIER) and
+    (@crtIdentifier = T2.CRT_IDENTIFIER) and
+    (T1.ADJUSTMENT_IND = 'Y')
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCashReceiptCashReceiptType">
+      <value>
+select distinct
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.ADJUSTMENT_IND,
+  T1.COURT_ORDER_NUMBER,
+  T1.CASE_NUMBER,
+  T1.OFFSET_TAXID,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.MULTI_PAYOR,
+  T1.OFFSET_TAX_YEAR,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.REFUNDED_AMT,
+  T1.DISTRIBUTED_AMT,
+  T1.COLLAMT_APPL_IND,
+  T1.CLT_IDENTIFIER,
+  T1.OVRRD_MNL_DIST_IND,
+  T2.CASH_RECEIPT_ID,
+  T3.CATEGORY_IND,
+  T4.CR_SRCE_TYPE_ID,
+  T4.COURT_IND
+from
+  CKT_CRSRC_TYPE T4 with(readcommitted)
+  join
+  CKT_CR_TYPE T3 with(readcommitted)
+  join
+  CKT_CASH_RECEIPT T2 with(readcommitted)
+  join
+  CKT_CR_DETAIL T1 with(readcommitted)
+  on
+    (T1.COLLAMT_APPL_IND = ' ') and
+    (T1.ADJUSTMENT_IND = ' ') and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (
+      (
+        (cast(@sequentialNumber1 as integer) = 0) and
+        (cast(@sequentialNumber2 as integer) = 999999999)
+      ) or
+      (T2.CASH_RECEIPT_ID between cast(@sequentialNumber1 as integer) and cast(@sequentialNumber2 as integer))
+    )
+  join
+  CKT_CRDTL_STATHIST T5 with(readcommitted)
+  on
+    (T1.CRD_ID = T5.CRD_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T5.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T5.CST_IDENTIFIER) and
+    (T1.CRT_IDENTIFIER = T5.CRT_IDENTIFIER) and
+    (T5.DISCONTINUE_DATE = @discontinueDate) and
+    (T5.CDS_IDENTIFIER between 4 and 6)
+  on
+    T3.CRTYPE_ID = T2.CRT_IDENTIFIER
+  on
+    T4.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER
+order by
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T2.CASH_RECEIPT_ID,
+  T1.CRD_ID
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_COLLECTION T5 with(readuncommitted)
+  on
+    (T1.NUMB = T5.CSP_NUMBER) and
+    (@crdId = T5.CRD_ID) and
+    (@crvId = T5.CRV_ID) and
+    (@cstId = T5.CST_ID) and
+    (@crtType = T5.CRT_TYPE) and
+    (T1.NUMB = @numb)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  PRECNVRSN_PGM_CD
+from
+  CKT_DEBT_DTL
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (PRECNVRSN_PGM_CD in ('AF', 'FC'))
+</value>
+   </data>
+   <data name="ReadObligor">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  LAST_MAN_DIST_DT,
+  LAST_COL_AMT,
+  LAST_COL_DT
+from
+  CKT_CSE_PERSON_ACC
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadOverpaymentHistory">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  EFFECTIVE_DT,
+  OVERPAYMENT_IND,
+  CREATED_TMST
+from
+  CKT_OVRPYMNT_HIST with(readuncommitted)
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DT &lt;= @effectiveDt)
+order by
+  EFFECTIVE_DT desc,
+  CREATED_TMST desc
+</value>
+   </data>
+   <data name="ReadProgram">
+      <value>
+select
+  PROGRAM_ID,
+  CODE,
+  INTERSTATE_IND
+from
+  CKT_PROGRAM with(readuncommitted)
+</value>
+   </data>
+</root>

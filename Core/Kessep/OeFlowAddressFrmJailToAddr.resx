@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCsePersonAddress1">
+      <value>
+insert into CKT_CSE_PERS_ADDR
+(
+  IDENTIFIER,
+  CSP_NUMBER,
+  ZDEL_START_DATE,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  ZDEL_VERIFIED_CODE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  COUNTY,
+  ORA_TSTAMP,
+  ORA_CREATED_BY
+)
+values
+(
+  @identifier,
+  @cspNumber,
+  @zdelStartDate,
+  @sendDate,
+  @source,
+  @street1,
+  @street2,
+  @city,
+  @type,
+  @workerId,
+  @verifiedDate,
+  @endDate,
+  @endCode,
+  @zdelVerifiedCode,
+  @lastUpdatedTmst,
+  @lastUpdatedBy,
+  @createdTimestamp,
+  @createdBy,
+  @state,
+  @zipCode,
+  @zip4,
+  @zip3,
+  @street3,
+  @street3,
+  @province,
+  @postalCode,
+  @zdelVerifiedCode,
+  @locationType,
+  @county,
+  null,
+  null
+)
+</value>
+   </data>
+   <data name="CreateCsePersonAddress2">
+      <value>
+insert into CKT_CSE_PERS_ADDR
+(
+  IDENTIFIER,
+  CSP_NUMBER,
+  ZDEL_START_DATE,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  ZDEL_VERIFIED_CODE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  COUNTY,
+  ORA_TSTAMP,
+  ORA_CREATED_BY
+)
+values
+(
+  @identifier,
+  @cspNumber,
+  @zdelStartDate,
+  @sendDate,
+  @source,
+  @street1,
+  @street2,
+  @city,
+  @type,
+  @workerId,
+  @verifiedDate,
+  @endDate,
+  @endCode,
+  @zdelVerifiedCode,
+  @lastUpdatedTmst,
+  @lastUpdatedBy,
+  @createdTimestamp,
+  @createdBy,
+  @state,
+  @zipCode,
+  @zip4,
+  @zip3,
+  @street3,
+  @street3,
+  @province,
+  @postalCode,
+  @zdelVerifiedCode,
+  @locationType,
+  @county,
+  null,
+  null
+)
+</value>
+   </data>
+   <data name="ReadCaseRoleCase">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE in ('AP', 'AR')) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select
+  CU_NUMBER,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (CSP_NO_AP = @cspNoAp) and
+  (@casNo = CAS_NO)
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (CSP_NO_AR = @cspNoAr) and
+  (@casNo = CAS_NO)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (SOURCE = 'JAIL') and
+  (END_DATE = @endDate)
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (END_DATE = @endDate) and
+  (VERIFIED_DATE &gt; @verifiedDate)
+order by
+  VERIFIED_DATE desc
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="UpdateCsePersonAddress1">
+      <value>
+update CKT_CSE_PERS_ADDR
+set
+  END_DATE = @endDate,
+  END_CODE = @endCode,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateCsePersonAddress2">
+      <value>
+update CKT_CSE_PERS_ADDR
+set
+  END_DATE = @endDate,
+  END_CODE = @endCode,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonAccount">
+      <value>
+select distinct
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.RECOMP_BAL_FROM_DT,
+  T1.TRIGGER_TYPE
+from
+  CKT_CSE_PERSON_ACC T1
+  join
+  CKT_IM_HH_MBR_MSUM T3
+  on
+    (T1.TYPE = 'S') and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T3.YEAR0 = @year0) and
+    (T3.MONTH0 = @month0) and
+    (T3.IMH_AE_CASE_NO = @imhAeCaseNo)
+</value>
+   </data>
+   <data name="UpdateCsePersonAccount">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt,
+  TRIGGER_TYPE = @triggerType
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

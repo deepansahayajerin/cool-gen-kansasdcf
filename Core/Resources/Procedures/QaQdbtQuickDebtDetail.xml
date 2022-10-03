@@ -1,0 +1,286 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="QaQdbtQuickDebtDetail"
+           program-name="SWEQDBTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.QaQdbtQuickDebtDetail"
+           transaction="SRQV"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_COMN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMN"
+       to="SiComnCaseCompositionByName"
+       send-command="DISPLAY">
+      <map from="ComnLink.Number" to="Search.Number"/>
+      <map from="ComnLink.Sex" to="Search.Sex"/>
+      <map from="ComnLink.Ssn" to="Search.Ssn"/>
+      <map from="ComnLink.FirstName" to="Search.FirstName"/>
+      <map from="ComnLink.MiddleInitial" to="Search.MiddleInitial"/>
+      <map from="ComnLink.FormattedName" to="Search.FormattedName"/>
+      <map from="ComnLink.LastName" to="Search.LastName"/>
+      <map from="Case1" to="Next"/>
+      <return-map from="HiddenSelectedCase" to="Next"/>
+      <return-map from="HiddenSelectedCsePersonsWorkSet.Number" to="ComnLink.Number"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_PREV"
+       action="transfer"
+       to="QaQchdQuickChildData"
+       send-command="DISPLAY">
+      <map from="HeaderLine" to="HeaderLine"/>
+      <map from="ComnLink.Number" to="ComnLink.Number"/>
+      <map from="ComnLink.UniqueKey" to="ComnLink.UniqueKey"/>
+      <map from="ComnLink.Sex" to="ComnLink.Sex"/>
+      <map from="ComnLink.Dob" to="ComnLink.Dob"/>
+      <map from="ComnLink.Ssn" to="ComnLink.Ssn"/>
+      <map from="ComnLink.FirstName" to="ComnLink.FirstName"/>
+      <map from="ComnLink.MiddleInitial" to="ComnLink.MiddleInitial"/>
+      <map from="ComnLink.FormattedName" to="ComnLink.FormattedName"/>
+      <map from="ComnLink.LastName" to="ComnLink.LastName"/>
+      <map from="ApMultiCasesPrompt" to="ArMultiCasesPrompt"/>
+      <map from="ApMultiCasesPrompt" to="ApMultiCasesPrompt"/>
+      <map from="ArMultiCases" to="ArMultiCases"/>
+      <map from="MultipleAps" to="MultipleAps"/>
+      <map from="ApMultiCases" to="ApMultiCases"/>
+      <map from="ApCaseRole.Type1" to="ApCaseRole.Type1"/>
+      <map from="ApCaseRole.StartDate" to="ApCaseRole.StartDate"/>
+      <map from="ApCaseRole.EndDate" to="ApCaseRole.EndDate"/>
+      <map from="ApCaseRole.Note" to="ApCaseRole.Note"/>
+      <map from="ApCaseRole.OnSsInd" to="ApCaseRole.OnSsInd"/>
+      <map from="ApClient.Type1" to="ApClient.Type1"/>
+      <map from="ApClient.Number" to="ApClient.Number"/>
+      <map from="ApClient.DateOfDeath" to="ApClient.DateOfDeath"/>
+      <map from="ApClient.OtherNumber" to="ApClient.OtherNumber"/>
+      <map from="ApClient.CurrentMaritalStatus" to="ApClient.CurrentMaritalStatus"/>
+      <map from="ApClient.CurrentSpouseLastName"
+           to="ApClient.CurrentSpouseLastName"/>
+      <map from="ApClient.AeCaseNumber" to="ApClient.AeCaseNumber"/>
+      <map from="ApClient.HomePhoneAreaCode" to="ApClient.HomePhoneAreaCode"/>
+      <map from="ApClient.WorkPhoneAreaCode" to="ApClient.WorkPhoneAreaCode"/>
+      <map from="ApClient.WorkPhone" to="ApClient.WorkPhone"/>
+      <map from="ApClient.WorkPhoneExt" to="ApClient.WorkPhoneExt"/>
+      <map from="ApPrompt" to="ApPrompt"/>
+      <map from="ApCsePersonsWorkSet.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="ApCsePersonsWorkSet.FirstName" to="ApCsePersonsWorkSet.FirstName"/>
+      <map from="ApCsePersonsWorkSet.MiddleInitial"
+           to="ApCsePersonsWorkSet.MiddleInitial"/>
+      <map from="ApCsePersonsWorkSet.FormattedName"
+           to="ApCsePersonsWorkSet.FormattedName"/>
+      <map from="ApCsePersonsWorkSet.Ssn" to="ApCsePersonsWorkSet.Ssn"/>
+      <map from="ApCsePersonsWorkSet.UniqueKey" to="ApCsePersonsWorkSet.UniqueKey"/>
+      <map from="ArCsePersonsWorkSet.Number" to="ArCsePersonsWorkSet.Number"/>
+      <map from="ArCsePersonsWorkSet.FirstName" to="ArCsePersonsWorkSet.FirstName"/>
+      <map from="ArCsePersonsWorkSet.MiddleInitial"
+           to="ArCsePersonsWorkSet.MiddleInitial"/>
+      <map from="ArCsePersonsWorkSet.FormattedName"
+           to="ArCsePersonsWorkSet.FormattedName"/>
+      <map from="ArCsePersonsWorkSet.Ssn" to="ArCsePersonsWorkSet.Ssn"/>
+      <map from="ArCsePersonsWorkSet.UniqueKey" to="ArCsePersonsWorkSet.UniqueKey"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Next" to="Next"/>
+      <map from="Office" to="Office"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_NEXT_SCRN"
+       action="transfer"
+       to="QaQcolQuickCollectionDetail"
+       send-command="DISPLAY">
+      <map from="HeaderLine" to="HeaderLine"/>
+      <map from="FlowFromLacs" to="FlowFromLacs"/>
+      <map from="MultiCourtCase" to="MultiCourtCase"/>
+      <map from="CourtOrderPrompt" to="CourtOrderPrompt"/>
+      <map from="SelectCourtOrder" to="SelectCourtOrder"/>
+      <map from="ComnLink.Number" to="ComnLink.Number"/>
+      <map from="ComnLink.UniqueKey" to="ComnLink.UniqueKey"/>
+      <map from="ComnLink.Sex" to="ComnLink.Sex"/>
+      <map from="ComnLink.Dob" to="ComnLink.Dob"/>
+      <map from="ComnLink.Ssn" to="ComnLink.Ssn"/>
+      <map from="ComnLink.FirstName" to="ComnLink.FirstName"/>
+      <map from="ComnLink.MiddleInitial" to="ComnLink.MiddleInitial"/>
+      <map from="ComnLink.FormattedName" to="ComnLink.FormattedName"/>
+      <map from="ComnLink.LastName" to="ComnLink.LastName"/>
+      <map from="ArMultiCasesPrompt" to="ArMultiCasesPrompt"/>
+      <map from="ApMultiCasesPrompt" to="ApMultiCasesPrompt"/>
+      <map from="ArMultiCases" to="ArMultiCases"/>
+      <map from="MultipleAps" to="MultipleAps"/>
+      <map from="ApMultiCases" to="ApMultiCases"/>
+      <map from="ApClient.Type1" to="ApClient.Type1"/>
+      <map from="ApClient.Number" to="ApClient.Number"/>
+      <map from="ApClient.DateOfDeath" to="ApClient.DateOfDeath"/>
+      <map from="ApClient.OtherNumber" to="ApClient.OtherNumber"/>
+      <map from="ApClient.CurrentMaritalStatus" to="ApClient.CurrentMaritalStatus"/>
+      <map from="ApClient.CurrentSpouseLastName"
+           to="ApClient.CurrentSpouseLastName"/>
+      <map from="ApClient.AeCaseNumber" to="ApClient.AeCaseNumber"/>
+      <map from="ApClient.HomePhoneAreaCode" to="ApClient.HomePhoneAreaCode"/>
+      <map from="ApClient.WorkPhoneAreaCode" to="ApClient.WorkPhoneAreaCode"/>
+      <map from="ApClient.WorkPhone" to="ApClient.WorkPhone"/>
+      <map from="ApClient.WorkPhoneExt" to="ApClient.WorkPhoneExt"/>
+      <map from="ApCsePersonsWorkSet.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="ApCsePersonsWorkSet.FirstName" to="ApCsePersonsWorkSet.FirstName"/>
+      <map from="ApCsePersonsWorkSet.MiddleInitial"
+           to="ApCsePersonsWorkSet.MiddleInitial"/>
+      <map from="ApCsePersonsWorkSet.FormattedName"
+           to="ApCsePersonsWorkSet.FormattedName"/>
+      <map from="ApCsePersonsWorkSet.Ssn" to="ApCsePersonsWorkSet.Ssn"/>
+      <map from="ApCsePersonsWorkSet.UniqueKey" to="ApCsePersonsWorkSet.UniqueKey"/>
+      <map from="ArCsePersonsWorkSet.Number" to="ArCsePersonsWorkSet.Number"/>
+      <map from="ArCsePersonsWorkSet.FirstName" to="ArCsePersonsWorkSet.FirstName"/>
+      <map from="ArCsePersonsWorkSet.MiddleInitial"
+           to="ArCsePersonsWorkSet.MiddleInitial"/>
+      <map from="ArCsePersonsWorkSet.FormattedName"
+           to="ArCsePersonsWorkSet.FormattedName"/>
+      <map from="ArCsePersonsWorkSet.Ssn" to="ArCsePersonsWorkSet.Ssn"/>
+      <map from="ArCsePersonsWorkSet.UniqueKey" to="ArCsePersonsWorkSet.UniqueKey"/>
+      <map from="Office" to="Office"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Next" to="Next"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpHistHistory"
+       send-command="DISPLAY">
+      <map from="HistFlow" to="HeaderInfrastructure"/>
+      <return-map from="HeaderInfrastructure" to="HistFlow"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <return-map from="Selected" to="FromComp"/>
+      <return-map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       action="transfer"
+       to="QaQarmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_OPAY_OBLG_BY_AP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOPAY"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="ApCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="PassLegalAction.CourtCaseNumber"
+                  to="SelectCourtOrder.CourtCaseNumber"/>
+      <return-map from="PassLegalAction.StandardNumber"
+                  to="SelectCourtOrder.StandardNumber"/>
+      <return-map from="PassLegalAction.Identifier" to="SelectCourtOrder.Identifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LACS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACS"
+       to="LeLacsLstLglActnByCseCase"
+       send-command="DISPLAY">
+      <map from="Filter.Classification" to="Filter.Classification"/>
+      <map from="Next" to="Case1"/>
+      <return-map from="DlgflwSelected" to="FlowFromLacs"/>
+      <return-map from="SelectedTribunal" to="Tribunal"/>
+      <return-map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OCTO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnOctoLstObligByCourtOrder"
+       send-command="DISPLAY">
+      <map from="SelectCourtOrder" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PEPR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiPeprPersonProgramMaint"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <return-map from="Next" to="Next"/>
+   </on>
+   <map from="DisbSupp" to="DisbSupp"/>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="HiddenPf19FromQcol" to="HiddenPf19FromQcol"/>
+   <map from="ApPrompt" to="ApPrompt"/>
+   <map from="ApMultiCasesPrompt" to="ApMultiCasesPrompt"/>
+   <map from="Next" to="Next"/>
+   <map from="ApMultiCases" to="ApMultiCases"/>
+   <map from="CaseFuncWorkSet" to="CaseFuncWorkSet"/>
+   <map from="ArMultiCasesPrompt" to="ArMultiCasesPrompt"/>
+   <map from="ArMultiCases" to="ArMultiCases"/>
+   <map from="MultipleAps" to="MultipleAps"/>
+   <map from="AltSsnAlias" to="AltSsnAlias"/>
+   <map from="ProgCodeDescription" to="ProgCodeDescription"/>
+   <map from="Program" to="Program"/>
+   <map from="Office" to="Office"/>
+   <map from="LastModDate" to="LastModDate"/>
+   <map from="PdLastMonth" to="PdLastMonth"/>
+   <map from="CurrPdLastMo" to="CurrPdLastMo"/>
+   <map from="CredCommon" to="CredCommon"/>
+   <map from="IwoArrears" to="IwoArrears"/>
+   <map from="IwoCurrent" to="IwoCurrent"/>
+   <map from="LastPymnt" to="LastPymnt"/>
+   <map from="IwoPymnt" to="IwoPymnt"/>
+   <map from="ArRecov" to="ArRecov"/>
+   <map from="MultiCourtCase" to="MultiCourtCase"/>
+   <map from="HiddenLegalAction" to="HiddenLegalAction"/>
+   <map from="Med" to="Med"/>
+   <map from="CreditReportingAction" to="CreditReportingAction"/>
+   <map from="ArrearsJudgement" to="ArrearsJudgement"/>
+   <map from="Export718BJudgement" to="Import718BJudgement"/>
+   <map from="MedicalJudgement" to="MedicalJudgement"/>
+   <map from="SpousalArrears" to="SpousalArrears"/>
+   <map from="CostOfRaisingChild" to="CostOfRaisingChild"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Standard.PageNumber" to="Standard.PageNumber"/>
+   <map from="Case1.Number" to="Case1.Number"/>
+   <map from="Case1.Status" to="Case1.Status"/>
+   <map from="ArCsePersonsWorkSet.Number" to="ArCsePersonsWorkSet.Number"/>
+   <map from="ArCsePersonsWorkSet.FormattedName"
+        to="ArCsePersonsWorkSet.FormattedName"/>
+   <map from="ArCsePersonsWorkSet.Ssn" to="ArCsePersonsWorkSet.Ssn"/>
+   <map from="ApCsePersonsWorkSet.Number" to="ApCsePersonsWorkSet.Number"/>
+   <map from="ApCsePersonsWorkSet.FormattedName"
+        to="ApCsePersonsWorkSet.FormattedName"/>
+   <map from="ApCsePersonsWorkSet.Ssn" to="ApCsePersonsWorkSet.Ssn"/>
+   <map from="CaseCloseRsn.Description" to="CaseCloseRsn.Description"/>
+   <map from="Case1.ClosureReason" to="Case1.ClosureReason"/>
+   <map from="Case1.CseOpenDate" to="Case1.CseOpenDate"/>
+   <map from="Case1.StatusDate" to="Case1.StatusDate"/>
+   <map from="ApClient.Number" to="ApClient.Number"/>
+   <map from="ApClient.CurrentMaritalStatus" to="ApClient.CurrentMaritalStatus"/>
+   <map from="HiddenNextTranInfo.LastTran" to="HiddenNextTranInfo.LastTran"/>
+   <map from="HiddenNextTranInfo.LegalActionIdentifier"
+        to="HiddenNextTranInfo.LegalActionIdentifier"/>
+   <map from="HiddenNextTranInfo.CourtCaseNumber"
+        to="HiddenNextTranInfo.CourtCaseNumber"/>
+   <map from="HiddenNextTranInfo.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+   <map from="ServiceProvider.LastName" to="ServiceProvider.LastName"/>
+   <map from="SelectCourtOrder.LastModificationReviewDate"
+        to="SelectCourtOrder.LastModificationReviewDate"/>
+   <map from="Amts.CsCurrDue" to="Amts.CsCurrDue"/>
+   <map from="Amts.SpCurrDue" to="Amts.SpCurrDue"/>
+   <map from="Amts.MsCurrDue" to="Amts.MsCurrDue"/>
+   <map from="Amts.TotalCurrColl" to="Amts.TotalCurrColl"/>
+   <map from="SelectCourtOrder.FiledDate" to="SelectCourtOrder.FiledDate"/>
+   <map from="Amts.CsCurrArrears" to="Amts.CsCurrArrears"/>
+   <map from="Amts.SpCurrArrears" to="Amts.SpCurrArrears"/>
+   <map from="CourtOrderPrompt.Flag" to="CourtOrderPrompt.Flag"/>
+   <map from="Treas.AmountOwed" to="Treas.AmountOwed"/>
+   <map from="Sdso.RecoveryAmount" to="Sdso.RecoveryAmount"/>
+   <map from="Fdso.AmountOwed" to="Fdso.AmountOwed"/>
+   <map from="Iwo.OrderType" to="Iwo.OrderType"/>
+   <map from="Iwo.EffectiveDate" to="Iwo.EffectiveDate"/>
+   <map from="CredAdministrativeActCertification.DateSent"
+        to="CredAdministrativeActCertification.DateSent"/>
+   <map from="ScreenOwedAmounts.TotalAmountOwed"
+        to="ScreenOwedAmounts.TotalAmountOwed"/>
+   <map from="SelectCourtOrder.StandardNumber"
+        to="SelectCourtOrder.StandardNumber"/>
+   <map from="FlowFromLacs.StandardNumber" to="FlowFromLacs.StandardNumber"/>
+   <map from="FlowFromLacs.CourtCaseNumber" to="FlowFromLacs.CourtCaseNumber"/>
+   <map from="Sdso.CurrentAmount" to="Sdso.CurrentAmount"/>
+   <map from="Fdso.CurrentAmount" to="Fdso.CurrentAmount"/>
+</procedure>

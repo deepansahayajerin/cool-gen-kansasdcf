@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateNarrativeDetail">
+      <value>
+insert into CKT_NARR_DETAIL
+(
+  INFRASTRUCTURE_ID,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CASE_NUMBER,
+  NARRATIVE_TEXT,
+  LINE_NUMBER
+)
+values
+(
+  @infrastructureId,
+  @createdTimestamp,
+  @createdBy,
+  @caseNumber,
+  @narrativeText,
+  @lineNumber
+)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.OUT_OF_WEDLOCK,
+  T2.CSE_TO_EST_PATR,
+  T2.PAT_ESTAB_IND,
+  T2.DATE_PATERN_ESTAB,
+  T2.BC_FATHER_LAST_NM,
+  T2.BC_FATHER_FIRST_NM,
+  T2.BC_FATHERS_MI,
+  T2.BC_SIGNATURE,
+  T2.HOSPITAL_PAT_EST,
+  T2.PAT_LOCK_IND,
+  T2.PAT_LOCK_UPDATE_DT,
+  T2.PAT_LOCK_UPDATD_BY
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.CAS_NUMBER = @casNumber) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'CH') and
+    (
+      (
+        (T2.PAT_ESTAB_IND = 'Y') and
+        (T2.PAT_LOCK_IND &lt;&gt; 'Y')
+      ) or
+      (T2.OUT_OF_WEDLOCK = 'U') or
+      (T2.CSE_TO_EST_PATR = 'U')
+    )
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  OUT_OF_WEDLOCK,
+  CSE_TO_EST_PATR,
+  PAT_ESTAB_IND,
+  DATE_PATERN_ESTAB,
+  BC_FATHER_LAST_NM,
+  BC_FATHER_FIRST_NM,
+  BC_FATHERS_MI,
+  BC_SIGNATURE,
+  HOSPITAL_PAT_EST,
+  PAT_LOCK_IND,
+  PAT_LOCK_UPDATE_DT,
+  PAT_LOCK_UPDATD_BY
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb) and
+  (TYPE = 'C')
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.CAS_NUMBER &lt;&gt; @casNumber)
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.START_DATE &lt;= @startDate) and
+    (T4.END_DATE &gt;= @startDate) and
+    (T4.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadInfrastructure1">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  PROCESS_STATUS,
+  EVENT_TYPE,
+  EVENT_DETAIL_NAME,
+  REASON_CODE,
+  BUSINESS_OBJECT_CD,
+  DENORM_NUMERIC_12,
+  DENORM_TEXT_12,
+  DENORM_DATE,
+  DENORM_TIMESTAMP,
+  INITIATING_ST_CD,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  CASE_UNIT_NUM,
+  USER_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  [FUNCTION]
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadInfrastructure2">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  SITUATION_NUMBER,
+  CASE_NUMBER,
+  CSE_PERSON_NUM
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadInfrastructure3">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  SITUATION_NUMBER,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  CASE_UNIT_NUM
+from
+  CKT_INFRASTRUCTURE
+where
+  (CSE_PERSON_NUM = @csePersonNum) and
+  (SITUATION_NUMBER = @situationNumber) and
+  (SYSTEM_GENERATED_I &lt;&gt; @situationNumber)
+order by
+  CASE_NUMBER,
+  CASE_UNIT_NUM
+</value>
+   </data>
+   <data name="ReadLegalActionPersonLegalAction1">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DT,
+  T1.END_DT,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T2.LEGAL_ACTION_ID,
+  T2.CLASSIFICATION,
+  T2.FILED_DT,
+  T2.END_DT
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_LEGAL_ACT_DTL T3
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.ACCOUNT_TYPE = 'S') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T3.LA_DETAIL_NO = T1.LAD_R_NUMBER) and
+    (T3.LGA_IDENTIFIER = T1.LGA_R_IDENTIFIER) and
+    (T3.DETAIL_TYPE = 'N') and
+    (T3.NON_FIN_OBLG_TYPE = 'EP') and
+    (T3.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T3.END_DT &gt;= @effectiveDt)
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T2.CLASSIFICATION = 'J') and
+    (T2.FILED_DT &lt;&gt; @filedDt)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonLegalAction2">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DT,
+  T1.END_DT,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T2.LEGAL_ACTION_ID,
+  T2.CLASSIFICATION,
+  T2.FILED_DT,
+  T2.END_DT
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_LEGAL_ACT_DTL T3
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.ACCOUNT_TYPE = 'S') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T3.LA_DETAIL_NO = T1.LAD_R_NUMBER) and
+    (T3.LGA_IDENTIFIER = T1.LGA_R_IDENTIFIER) and
+    (T3.DETAIL_TYPE = 'N') and
+    (T3.NON_FIN_OBLG_TYPE = 'EP') and
+    (T3.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T3.END_DT &gt;= @effectiveDt)
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T2.FILED_DT &lt;&gt; @filedDt) and
+    (T2.END_DT &gt;= @endDt)
+</value>
+   </data>
+   <data name="ReadNarrativeDetail">
+      <value>
+select
+  INFRASTRUCTURE_ID,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CASE_NUMBER,
+  NARRATIVE_TEXT,
+  LINE_NUMBER
+from
+  CKT_NARR_DETAIL
+where
+  INFRASTRUCTURE_ID = @infrastructureId
+order by
+  LINE_NUMBER
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_OFFC_SRVC_PRVR T1
+  on
+    (T1.ROLE_CODE in ('SS', 'PM', 'TR')) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T2.SERVICE_PRVDER_ID = T1.SPD_GENERATED_ID) and
+    (T2.USER_ID = @userId)
+</value>
+   </data>
+   <data name="UpdateCsePerson1">
+      <value>
+update CKT_CSE_PERSON
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  OUT_OF_WEDLOCK = @outOfWedlock,
+  CSE_TO_EST_PATR = @cseToEstPatr,
+  PAT_ESTAB_IND = @patEstabInd,
+  DATE_PATERN_ESTAB = @datePaternEstab,
+  BC_FATHER_LAST_NM = @bcFatherLastNm,
+  BC_FATHER_FIRST_NM = @bcFatherFirstNm,
+  BC_FATHERS_MI = @bcFathersMi,
+  BC_SIGNATURE = @bcSignature,
+  HOSPITAL_PAT_EST = @hospitalPatEst
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCsePerson2">
+      <value>
+update CKT_CSE_PERSON
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  PAT_LOCK_IND = @patLockInd,
+  PAT_LOCK_UPDATE_DT = @patLockUpdateDt,
+  PAT_LOCK_UPDATD_BY = @patLockUpdatdBy
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCsePerson3">
+      <value>
+update CKT_CSE_PERSON
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  PAT_LOCK_IND = @patLockInd,
+  PAT_LOCK_UPDATE_DT = @patLockUpdateDt,
+  PAT_LOCK_UPDATD_BY = @patLockUpdatdBy
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

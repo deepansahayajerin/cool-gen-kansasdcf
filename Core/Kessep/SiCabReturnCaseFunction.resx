@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseUnit1">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  (CAS_NO = @casNo) and
+  (CLOSURE_REASON_COD = ' ') and
+  (
+    (CLOSURE_DATE &gt; @closureDate1) or
+    (CLOSURE_DATE = @closureDate2)
+  )
+order by
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  (CAS_NO = @casNo) and
+  (CLOSURE_REASON_COD &lt;&gt; ' ')
+order by
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+</root>

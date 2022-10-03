@@ -1,0 +1,38 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="CoDrptDisplayReport"
+           program-name="SWEDRPTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.CoDrptDisplayReport"
+           transaction="SRG6">
+   <on exit-state="LNK_TO_RPRT"
+       action="link"
+       return-when="OE0000_RETURN_LNK_BLANK"
+       return-command="DISPLAY"
+       to="CoRprtReprintOptionSelection"
+       send-command="DISPLAY">
+      <map from="Job.Name" to="Job.Name"/>
+      <map from="Job.Description" to="Job.Description"/>
+      <map from="JobRun.StartTimestamp" to="JobRun.StartTimestamp"/>
+      <map from="JobRun.EndTimestamp" to="JobRun.EndTimestamp"/>
+      <map from="JobRun.Status" to="JobRun.Status"/>
+      <map from="JobRun.SystemGenId" to="JobRun.SystemGenId"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Job" to="Job"/>
+   <map from="MaxHeaderLines" to="MaxHeaderLines"/>
+   <map from="DisplaySide" to="DisplaySide"/>
+   <map from="MaxPages" to="MaxPages"/>
+   <map from="Group.ReportData" to="Group.ReportData"/>
+   <map from="Group.WorkArea" to="Group.WorkArea"/>
+   <map from="DisplayPage" to="DisplayPage"/>
+   <map from="CurrPageEndLine" to="CurrPageEndLine"/>
+   <map from="FirstTimeThru" to="FirstTimeThru"/>
+   <map from="ScrollInd" to="ScrollInd"/>
+   <map from="Page.Page1" to="Page.Page1"/>
+   <map from="JobRun.SystemGenId" to="JobRun.SystemGenId"/>
+   <map from="JobRun.StartTimestamp" to="JobRun.StartTimestamp"/>
+</procedure>

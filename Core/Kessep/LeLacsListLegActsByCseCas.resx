@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadLegalActionAppeal">
+      <value>
+select top(1)
+  LA_APPEAL_ID,
+  APL_ID,
+  LGA_ID
+from
+  CKT_LEG_ACT_APPEAL
+where
+  @lgaId = LGA_ID
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal1">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T1.SYSTEM_GEN_IND,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T1.COURT_CASE_NO &gt;= @courtCaseNo)
+  on
+    T2.IDENTIFIER = T1.TRB_ID
+order by
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal2">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T1.SYSTEM_GEN_IND,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T1.COURT_CASE_NO &gt;= @courtCaseNo)
+  on
+    T2.IDENTIFIER = T1.TRB_ID
+order by
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal3">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T1.SYSTEM_GEN_IND,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T1.COURT_CASE_NO &lt;= @courtCaseNo)
+  on
+    T2.IDENTIFIER = T1.TRB_ID
+order by
+  T1.COURT_CASE_NO desc,
+  T1.TRB_ID desc
+</value>
+   </data>
+   <data name="ReadLegalActionTribunalLegalActionCaseRole1">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T1.SYSTEM_GEN_IND,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.CRO_TYPE,
+  T3.CRO_IDENTIFIER,
+  T3.CREATED_BY,
+  T3.CREATED_TSTAMP,
+  T3.INIT_CR_IND
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T1.CREATED_TSTAMP &gt;= @createdTstamp)
+  on
+    T2.IDENTIFIER = T1.TRB_ID
+order by
+  T1.CREATED_TSTAMP,
+  T1.LEGAL_ACTION_ID
+</value>
+   </data>
+   <data name="ReadLegalActionTribunalLegalActionCaseRole2">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T1.SYSTEM_GEN_IND,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.CRO_TYPE,
+  T3.CRO_IDENTIFIER,
+  T3.CREATED_BY,
+  T3.CREATED_TSTAMP,
+  T3.INIT_CR_IND
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T1.CREATED_TSTAMP &lt;= @createdTstamp)
+  on
+    T2.IDENTIFIER = T1.TRB_ID
+order by
+  T1.CREATED_TSTAMP desc,
+  T1.LEGAL_ACTION_ID desc
+</value>
+   </data>
+   <data name="ReadLegalActionTribunalLegalActionCaseRole3">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.TRB_ID,
+  T1.SYSTEM_GEN_IND,
+  T2.JUDICIAL_DIVISION,
+  T2.TRIBUNAL_NM,
+  T2.FIP_LOCATION,
+  T2.JUDICIAL_DISTRICT,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.CRO_TYPE,
+  T3.CRO_IDENTIFIER,
+  T3.CREATED_BY,
+  T3.CREATED_TSTAMP,
+  T3.INIT_CR_IND
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (T1.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T3.CAS_NUMBER = @casNumber)
+  on
+    T2.IDENTIFIER = T1.TRB_ID
+order by
+  T1.CREATED_TSTAMP desc,
+  T1.LEGAL_ACTION_ID desc
+</value>
+   </data>
+</root>

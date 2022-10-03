@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCommand">
+      <value>
+select
+  CMD_VALUE,
+  CMD_DESC
+from
+  CKT_COMMAND
+where
+  CMD_VALUE &gt;= @cmdValue
+order by
+  CMD_VALUE
+</value>
+   </data>
+   <data name="ReadProfileAuthorization">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  FK_PRO_NAME,
+  FK_TRN_TRANCODE,
+  FK_TRN_SCREENID,
+  FK_CMD_VALUE
+from
+  CKT_PROF_AUTH
+where
+  (FK_TRN_SCREENID = @fkTrnScreenid) and
+  (FK_TRN_TRANCODE = @fkTrnTrancode) and
+  (FK_CMD_VALUE = @fkCmdValue)
+</value>
+   </data>
+   <data name="ReadTransaction">
+      <value>
+select top(1)
+  SCREEN_ID,
+  TRANCODE,
+  DESCRIPTION,
+  MENU_IND,
+  NEXT_TRAN_AUTH
+from
+  CKT_TRANSACTION
+where
+  SCREEN_ID = @screenId
+</value>
+   </data>
+   <data name="ReadTransactionCommand">
+      <value>
+select top(1)
+  TRC_ID,
+  FK_TRN_SCREENID,
+  FK_TRN_TRANCODE,
+  FK_CMD_VALUE
+from
+  CKT_TRANS_COMMAND
+where
+  (@fkCmdValue = FK_CMD_VALUE) and
+  (@fkTrnTrancode = FK_TRN_TRANCODE) and
+  (@fkTrnScreenid = FK_TRN_SCREENID)
+</value>
+   </data>
+</root>

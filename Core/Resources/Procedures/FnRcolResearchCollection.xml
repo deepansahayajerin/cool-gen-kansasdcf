@@ -1,0 +1,160 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnRcolResearchCollection"
+           program-name="SWERCOLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnRcolResearchCollection"
+           transaction="SR7J"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_PERSON_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command="NMSRCH">
+      <map from="PhoneticParms" to="Phonetic"/>
+      <map from="ApCsePersonsWorkSet.LastName"
+           to="SearchCsePersonsWorkSet.LastName"/>
+      <map from="ApCsePersonsWorkSet.Dob" to="SearchCsePersonsWorkSet.Dob"/>
+      <map from="ApCsePersonsWorkSet.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+      <map from="ApCsePersonsWorkSet.Number" to="SearchCsePersonsWorkSet.Number"/>
+      <map from="ApCsePersonsWorkSet.Sex" to="SearchCsePersonsWorkSet.Sex"/>
+      <map from="ApCsePersonsWorkSet.FirstName"
+           to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="ApCsePersonsWorkSet.MiddleInitial"
+           to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <return-map from="Selected" to="PassFromRarsRapsName"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_RESEARCH_EMPLOYER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnRempRsrchColUsingEmplyr"
+       send-command="FORWARD">
+      <map from="Employer" to="Employer"/>
+      <return-map from="RempSelection" to="PassedSelection"/>
+      <return-map from="ApCsePerson.Number" to="PassedFromRarsAndRapsCsePerson.Number"/>
+      <return-map from="Employer.Identifier" to="EmployerFromRemp.Identifier"/>
+      <return-map from="Employer.Ein" to="EmployerFromRemp.Ein"/>
+      <return-map from="Employer.Name" to="EmployerFromRemp.Name"/>
+      <return-map from="Employer.PhoneNo" to="EmployerFromRemp.PhoneNo"/>
+      <return-map from="Employer.AreaCode" to="EmployerFromRemp.AreaCode"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_RESEARCH_LEGAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETRLEG"
+       to="FnRlegRsrchColUsingLegInfo"
+       send-command="DISPLAY">
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="Case1" to="Case1"/>
+      <return-map from="SelectedAr.Number" to="ArFromRleg.Number"/>
+      <return-map from="SelectedAp.Number" to="ApFromRleg.Number"/>
+      <return-map from="RlegSelection" to="PassedSelection"/>
+      <return-map from="CsePerson.Number" to="PassedFromRarsAndRapsCsePerson.Number"/>
+      <return-map from="SelectedLegalAction" to="PassedFromRlegLegalAction"/>
+      <return-map from="SelectedCase" to="PassedFromRlegCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OCTO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOCTO"
+       to="FnOctoLstObligByCourtOrder"
+       send-command="DISPLAY">
+      <map from="LegalAction.StandardNumber" to="Search.StandardNumber"/>
+      <map from="LegalAction.CourtCaseNumber" to="Search.CourtCaseNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_RESEARCH_PAYOR ECO_LNK_LST_RESEARCH_PAYEE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnRarsResearchPayees"
+       send-command="NMSRCH">
+      <map from="ApArIndicator" to="ApArIndicator"/>
+      <map from="ToRars" to="Search"/>
+      <map from="PhoneticParms" to="Phonetic"/>
+      <return-map from="Selection" to="PassedSelection"/>
+      <return-map from="SelectedCsePersonsWorkSet" to="PassFromRarsRapsName"/>
+      <return-map from="SelectedCsePersonAddress"
+                  to="PassedFromRarsAndRapsCsePersonAddress"/>
+      <return-map from="SelectedCsePerson.Number"
+                  to="PassedFromRarsAndRapsCsePerson.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LACS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACS"
+       to="LeLacsLstLglActnByCseCase"
+       send-command="DISPLAY">
+      <map from="LegalAction.CourtCaseNumber" to="Filter.CourtCaseNumber"/>
+      <map from="Case1" to="Case1"/>
+      <return-map from="DlgflwSelected" to="Short1"/>
+      <return-map from="SelectedFips" to="Fips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LACN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACN"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="LegalAction.StandardNumber" to="SearchLegalAction.StandardNumber"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <return-map from="DlgflwSelected" to="Short1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LAPS ECO_LNK_TO_LAPS1"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLAPS"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <map from="ApCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="Pass3PartSsn" to="SsnWorkArea"/>
+      <return-map from="Selected" to="Short1"/>
+   </on>
+   <map from="Case1" to="Case1"/>
+   <map from="Standard" to="Standard"/>
+   <map from="EmpPrompt" to="EmpPrompt"/>
+   <map from="Fips" to="Fips"/>
+   <map from="EmployerPhone" to="EmployerPhone"/>
+   <map from="Employer.Ein" to="Employer.Ein"/>
+   <map from="ArCsePersonsWorkSet.LastName" to="ArCsePersonsWorkSet.LastName"/>
+   <map from="ApCsePersonsWorkSet.LastName" to="ApCsePersonsWorkSet.LastName"/>
+   <map from="Employer.Name" to="Employer.Name"/>
+   <map from="ApCsePersonsWorkSet.Ssn" to="ApCsePersonsWorkSet.Ssn"/>
+   <map from="ApCsePersonsWorkSet.Dob" to="ApCsePersonsWorkSet.Dob"/>
+   <map from="ApCsePersonsWorkSet.FormattedName"
+        to="ApCsePersonsWorkSet.FormattedName"/>
+   <map from="ArCsePersonsWorkSet.Dob" to="ArCsePersonsWorkSet.Dob"/>
+   <map from="ArCsePersonsWorkSet.Ssn" to="ArCsePersonsWorkSet.Ssn"/>
+   <map from="ArCsePersonsWorkSet.FormattedName"
+        to="ArCsePersonsWorkSet.FormattedName"/>
+   <map from="ArCsePersonAddress.ZipCode" to="ArCsePersonAddress.ZipCode"/>
+   <map from="ArCsePersonAddress.State" to="ArCsePersonAddress.State"/>
+   <map from="ArCsePersonAddress.City" to="ArCsePersonAddress.City"/>
+   <map from="ArCsePersonAddress.Street2" to="ArCsePersonAddress.Street2"/>
+   <map from="ArCsePersonAddress.Street1" to="ArCsePersonAddress.Street1"/>
+   <map from="ApCsePersonAddress.ZipCode" to="ApCsePersonAddress.ZipCode"/>
+   <map from="ApCsePersonAddress.State" to="ApCsePersonAddress.State"/>
+   <map from="ApCsePersonAddress.City" to="ApCsePersonAddress.City"/>
+   <map from="ApCsePersonAddress.Street2" to="ApCsePersonAddress.Street2"/>
+   <map from="ApCsePersonAddress.Street1" to="ApCsePersonAddress.Street1"/>
+   <map from="ArCsePerson.Number" to="ArCsePerson.Number"/>
+   <map from="ApCsePerson.Number" to="ApCsePerson.Number"/>
+   <map from="ArCsePersonsWorkSet.Sex" to="ArCsePersonsWorkSet.Sex"/>
+   <map from="ApCsePersonsWorkSet.Sex" to="ApCsePersonsWorkSet.Sex"/>
+   <map from="ArCsePersonsWorkSet.FirstName" to="ArCsePersonsWorkSet.FirstName"/>
+   <map from="ArCsePersonsWorkSet.MiddleInitial"
+        to="ArCsePersonsWorkSet.MiddleInitial"/>
+   <map from="ApCsePersonsWorkSet.FirstName" to="ApCsePersonsWorkSet.FirstName"/>
+   <map from="ApCsePersonsWorkSet.MiddleInitial"
+        to="ApCsePersonsWorkSet.MiddleInitial"/>
+   <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   <map from="Short1.CourtCaseNumber" to="Short1.CourtCaseNumber"/>
+   <map from="ApCsePersonsWorkSet.Char10" to="ApCsePersonsWorkSet.Char10"/>
+   <map from="ArCsePersonsWorkSet.Char10" to="ArCsePersonsWorkSet.Char10"/>
+</procedure>

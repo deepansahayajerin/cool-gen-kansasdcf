@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateUraAdjustment">
+      <value>
+insert into CKT_URA_ADJ
+(
+  IDENTIFIER,
+  ADJ_YEAR,
+  ADJ_MONTH,
+  ADJ_ADC_GRANT,
+  ADJ_PASSTHRU,
+  ADJ_MED_ASSIST,
+  ADJ_FC_GRANT,
+  ADJ_HURA,
+  ADJ_REASON,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_NUMBER,
+  IMH_AE_CASE_NO,
+  IHM_START_DATE,
+  ADJ_MEDI_URA
+)
+values
+(
+  @identifier,
+  @adjYear,
+  @adjMonth,
+  @adjAdcGrant,
+  @adjPassthru,
+  @adjMedAssist,
+  @adjFcGrant,
+  @adjHura,
+  @adjReason,
+  @createdBy,
+  @createdTstamp,
+  @cspNumber,
+  @imhAeCaseNo,
+  @ihmStartDate,
+  @adjMediUra
+)
+</value>
+   </data>
+   <data name="ReadImHouseholdMember">
+      <value>
+select top(1)
+  IMH_AE_CASE_NO,
+  CSP_NUMBER,
+  START_DATE
+from
+  CKT_IM_HSHLD_MBR
+where
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (START_DATE = @startDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadUraAdjustment">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  IMH_AE_CASE_NO,
+  IHM_START_DATE
+from
+  CKT_URA_ADJ
+where
+  (@ihmStartDate = IHM_START_DATE) and
+  (@imhAeCaseNo = IMH_AE_CASE_NO) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+</root>

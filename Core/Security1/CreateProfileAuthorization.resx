@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateProfileAuthorization">
+      <value>
+insert into CKT_PROF_AUTH
+(
+  CREATED_TIMESTAMP,
+  ACTIVE_IND,
+  ACTIVE_COUNT,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAM,
+  FK_PRO_NAME,
+  FK_TRN_TRANCODE,
+  FK_TRN_SCREENID,
+  FK_CMD_VALUE,
+  CASE_AUTH,
+  LEGAL_ACTION_AUTH
+)
+values
+(
+  @createdTimestamp,
+  @activeInd,
+  @activeCount,
+  @createdBy,
+  @lastUpdatedBy,
+  @lastUpdatedTstam,
+  @fkProName,
+  @fkTrnTrancode,
+  @fkTrnScreenid,
+  @fkCmdValue,
+  @caseAuth,
+  @legalActionAuth
+)
+</value>
+   </data>
+   <data name="ReadProfile">
+      <value>
+select top(1)
+  NAME
+from
+  CKT_PROFILE
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="ReadTransactionCommand">
+      <value>
+select top(1)
+  TRC_ID,
+  FK_TRN_SCREENID,
+  FK_TRN_TRANCODE,
+  FK_CMD_VALUE
+from
+  CKT_TRANS_COMMAND
+where
+  (FK_CMD_VALUE = @fkCmdValue) and
+  (FK_TRN_SCREENID = @fkTrnScreenid) and
+  (FK_TRN_TRANCODE = @fkTrnTrancode)
+</value>
+   </data>
+</root>

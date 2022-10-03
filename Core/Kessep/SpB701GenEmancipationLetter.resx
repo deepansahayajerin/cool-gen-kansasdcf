@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY
+from
+  CKT_CASE
+where
+  (NUMB = @numb) and
+  (STATUS = 'O') and
+  (STATUS_DATE &lt;= @statusDate)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'AR') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T2.TYPE = 'C')
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePersonCase1">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  EMANCIPATION_DT,
+  IN_SCHOOL_OVER_18,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'CH') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (EMANCIPATION_DT between cast(@date1 as date) and cast(@date2 as date)) and
+  (IN_SCHOOL_OVER_18 &lt;&gt; 'Y') and
+  (
+    (
+      (CAS_NUMBER = @casNumber) and
+      (CSP_NUMBER = @cspNumber) and
+      (CASE_ROLE_ID &gt; @caseRoleId)
+    ) or
+    (
+      (CAS_NUMBER = @casNumber) and
+      (CSP_NUMBER &gt; @cspNumber)
+    ) or
+    (CAS_NUMBER &gt; @casNumber)
+  )
+order by
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CASE_ROLE_ID
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePersonCase2">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  EMANCIPATION_DT,
+  IN_SCHOOL_OVER_18,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'CH') and
+  (
+    (
+      (CAS_NUMBER = @casNumber) and
+      (CSP_NUMBER = @cspNumber) and
+      (CASE_ROLE_ID &gt; @caseRoleId)
+    ) or
+    (
+      (CAS_NUMBER = @casNumber) and
+      (CSP_NUMBER &gt; @cspNumber)
+    ) or
+    (CAS_NUMBER &gt; @casNumber)
+  )
+order by
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CASE_ROLE_ID
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPersonProgram">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadProgramProcessingInfo">
+      <value>
+select top(1)
+  NAME,
+  CREATED_TIMESTAMP,
+  PARAMETER_LIST
+from
+  CKT_PGM_PRCSS_INFO
+where
+  (NAME = @name) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+   <data name="UpdateCaseRole">
+      <value>
+update CKT_CASE_ROLE
+set
+  EMANCIPATION_DT = @emancipationDt,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (CASE_ROLE_ID = @caseRoleId)
+</value>
+   </data>
+   <data name="UpdateProgramProcessingInfo">
+      <value>
+update CKT_PGM_PRCSS_INFO
+set
+  PARAMETER_LIST = @parameterList
+where
+  (NAME = @name) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+</root>

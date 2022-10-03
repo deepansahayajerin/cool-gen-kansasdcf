@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateImHouseholdMbrMnthlyAdj">
+      <value>
+insert into CKT_IM_HH_MBR_MADJ
+(
+  TYPE,
+  ADJUSTMENT_AMT,
+  LEVEL_APPLIED_TO,
+  CREATED_BY,
+  CREATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER,
+  IMS_MONTH,
+  IMS_YEAR,
+  ADJUSTMENT_REASON
+)
+values
+(
+  @type,
+  @adjustmentAmt,
+  @levelAppliedTo,
+  @createdBy,
+  @createdTmst,
+  @imhAeCaseNo,
+  @cspNumber,
+  @imsMonth,
+  @imsYear,
+  @adjustmentReason
+)
+</value>
+   </data>
+   <data name="ReadCollectionCashReceiptDetailCashReceiptObligationTransaction">
+      <value>
+select
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.DISB_DT,
+  T1.ADJ_IND,
+  T1.CONCURRENT_IND,
+  T1.DISB_ADJ_PROC_DATE,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.COLL_ADJ_PROC_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.DISB_PROC_NEED_IND,
+  T1.DIST_MTD,
+  T1.PGM_APPLD_TO,
+  T1.APPL_TO_ORD_TYP_CD,
+  T1.CRT_NOTICE_REQ_IND,
+  T1.CRT_NOTICE_PROC_DT,
+  T1.DISB_TO_AR_IND,
+  T1.MNL_DIST_RSN_TXT,
+  T1.COL_ADJ_RSN_TXT,
+  T1.CT_ORD_APPLIED_TO,
+  T1.APPLIED_TO_FUT_IND,
+  T1.CSENET_OB_REQ_IND,
+  T1.CSENET_OB_ADJ_P_DT,
+  T1.CRT_NTC_ADJ_PRC_DT,
+  T1.PGM_ST_APPLD_TO,
+  T2.COURT_ORDER_NUMBER,
+  T2.COLLECTION_DATE,
+  T2.OBLGOR_PRSN_NBR,
+  T3.CASH_RECEIPT_ID,
+  T4.CSP_SUP_NUMBER,
+  T4.CPA_SUP_TYPE,
+  T5.DUE_DT,
+  T6.DEBT_TYP_ID,
+  T6.DEBT_TYP_CD,
+  T6.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T6
+  join
+  CKT_OB_TRN T4
+  join
+  CKT_CASH_RECEIPT T3
+  join
+  CKT_CR_DETAIL T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T1.PGM_APPLD_TO in ('AF', 'FC')) and
+    (T1.ADJ_IND &lt;&gt; 'Y') and
+    (T1.CONCURRENT_IND &lt;&gt; 'Y') and
+    (T2.CRD_ID = T1.CRD_ID) and
+    (T2.CRV_IDENTIFIER = T1.CRV_ID) and
+    (T2.CST_IDENTIFIER = T1.CST_ID) and
+    (T2.CRT_IDENTIFIER = T1.CRT_TYPE) and
+    (T1.COLL_DT &gt;= @collDt)
+  on
+    (T3.CRT_IDENTIFIER = T2.CRT_IDENTIFIER) and
+    (T3.CST_IDENTIFIER = T2.CST_IDENTIFIER) and
+    (T3.CRV_IDENTIFIER = T2.CRV_IDENTIFIER)
+  on
+    (T4.OTY_TYPE = T1.OTY_ID) and
+    (T4.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T4.OB_TRN_ID = T1.OTR_ID) and
+    (T4.CPA_TYPE = T1.CPA_TYPE) and
+    (T4.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T4.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T4.OB_TRN_TYP = 'DE') and
+    (T4.CPA_SUP_TYPE = 'S') and
+    (T4.CSP_SUP_NUMBER is not null)
+  join
+  CKT_DEBT_DTL T5
+  on
+    (T4.OTY_TYPE = T5.OTY_TYPE) and
+    (T4.OBG_GENERATED_ID = T5.OBG_GENERATED_ID) and
+    (T4.OB_TRN_TYP = T5.OTR_TYPE) and
+    (T4.OB_TRN_ID = T5.OTR_GENERATED_ID) and
+    (T4.CPA_TYPE = T5.CPA_TYPE) and
+    (T4.CSP_NUMBER = T5.CSP_NUMBER)
+  on
+    T6.DEBT_TYP_ID = T4.OTY_TYPE
+order by
+  T1.COLL_DT,
+  T2.OBLGOR_PRSN_NBR,
+  T3.CASH_RECEIPT_ID,
+  T1.CRD_ID,
+  T5.DUE_DT,
+  T1.OTR_ID,
+  T1.COLL_ID
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum">
+      <value>
+select top(1)
+  YEAR0,
+  MONTH0,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber) and
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0)
+</value>
+   </data>
+   <data name="ReadProgramCheckpointRestart">
+      <value>
+select top(1)
+  PROGRAM_NAME,
+  UPDATE_FREQUENCY_C,
+  READ_FREQUENCY_COU,
+  CHECKPOINT_COUNT,
+  LST_CHKPNT_TMST,
+  RESTART_IND,
+  RESTART_INFO
+from
+  CKT_PGM_CHKPNT_RST
+where
+  PROGRAM_NAME = 'SWEFBFXF'
+</value>
+   </data>
+   <data name="ReadUraCollectionApplication">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTY_IDENTIFIER,
+  OBG_IDENTIFIER,
+  OTR_IDENTIFIER,
+  OTR_TYPE,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_IDENTIFIER,
+  COL_IDENTIFIER,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER0,
+  IMS_MONTH,
+  IMS_YEAR,
+  CREATED_TSTAMP
+from
+  CKT_URA_COLL_APPL with(readuncommitted)
+where
+  (@obgIdentifier = OBG_IDENTIFIER) and
+  (@cpaType = CPA_TYPE) and
+  (@otyIdentifier = OTY_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER) and
+  (@otrIdentifier = OTR_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@colIdentifier = COL_IDENTIFIER) and
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@otrType = OTR_TYPE)
+</value>
+   </data>
+   <data name="UpdateImHouseholdMbrMnthlySum">
+      <value>
+update CKT_IM_HH_MBR_MSUM
+set
+  URA_AMOUNT = @uraAmount,
+  URA_MEDICAL_AMOUNT = @uraMedicalAmount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (YEAR0 = @year0) and
+  (MONTH0 = @month0) and
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateProgramCheckpointRestart1">
+      <value>
+update CKT_PGM_CHKPNT_RST
+set
+  LST_CHKPNT_TMST = @lstChkpntTmst,
+  RESTART_IND = @restartInd,
+  RESTART_INFO = @restartInfo
+where
+  PROGRAM_NAME = @programName
+</value>
+   </data>
+   <data name="UpdateProgramCheckpointRestart2">
+      <value>
+update CKT_PGM_CHKPNT_RST
+set
+  LST_CHKPNT_TMST = @lstChkpntTmst,
+  RESTART_IND = @restartInd,
+  RESTART_INFO = @restartInfo
+where
+  PROGRAM_NAME = @programName
+</value>
+   </data>
+</root>

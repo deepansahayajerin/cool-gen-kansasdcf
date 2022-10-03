@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER = @cspNumber1) and
+    (T2.TYPE = 'CH')
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T1.NUMB = T4.CAS_NUMBER) and
+    (@cspNumber2 = T4.CSP_NUMBER) and
+    (T4.TYPE = 'AR')
+  join
+  CKT_CASE_ROLE T5
+  on
+    (T1.NUMB = T5.CAS_NUMBER) and
+    (@cspNumber3 = T5.CSP_NUMBER) and
+    (T5.TYPE = 'AP') and
+    (
+      (
+        (T5.START_DATE &lt;= @startDate) and
+        (T5.END_DATE &gt;= @startDate) and
+        (T4.START_DATE &lt;= @startDate) and
+        (T4.END_DATE &gt;= @startDate) and
+        (T2.START_DATE &lt;= @startDate) and
+        (T2.END_DATE &gt;= @startDate)
+      ) or
+      (
+        (T1.STATUS = 'C') and
+        (T5.END_DATE = T1.STATUS_DATE) and
+        (T4.END_DATE = T1.STATUS_DATE) and
+        (T2.END_DATE = T1.STATUS_DATE)
+      )
+    )
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

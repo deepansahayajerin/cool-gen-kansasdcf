@@ -1,0 +1,41 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiQuckQuickAuditScreen"
+           program-name="SWEQUCKP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiQuckQuickAuditScreen"
+           transaction="SRSQ"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_FIPS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFIPL"
+       to="LeFiplListFips"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="SelectedFips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected.Id" to="SelectedCodeValue.Id"/>
+      <return-map from="DlgflwSelected.Cdvalue" to="SelectedCodeValue.Cdvalue"/>
+      <return-map from="DlgflwSelected.Description" to="SelectedCodeValue.Description"/>
+      <return-map from="DlgflwSelected.EffectiveDate"
+                  to="SelectedCodeValue.EffectiveDate"/>
+      <return-map from="DlgflwSelected.ExpirationDate"
+                  to="SelectedCodeValue.ExpirationDate"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="QaQamnQualityAssuranceMenu"
+       send-command="XXFMMENU"/>
+   <map from="DisplayOnly" to="DisplayOnly"/>
+   <map from="Search" to="Search"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ReqStatePrompt" to="ReqStatePrompt"/>
+   <map from="RequestedDataPrompt" to="RequestedDataPrompt"/>
+   <map from="SelectedFips.State" to="SelectedFips.State"/>
+   <map from="SelectedFips.StateDescription" to="SelectedFips.StateDescription"/>
+</procedure>

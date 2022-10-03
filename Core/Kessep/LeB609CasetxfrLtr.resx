@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFieldFieldValue">
+      <value>
+select
+  T1.NAME,
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME,
+  T1.SCREEN_NAME,
+  T1.DESCRIPTION,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T2.VALU,
+  T2.FLD_NAME,
+  T2.DOC_NAME,
+  T2.DOC_EFFECTIVE_DTE,
+  T2.INF_IDENTIFIER
+from
+  CKT_FIELD T1
+  join
+  CKT_FIELD_VALUE T2
+  on
+    (@infIdentifier = T2.INF_IDENTIFIER) and
+    (T1.NAME = T2.FLD_NAME)
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select
+  PRNT_SUCESSFUL_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  FIELD_VAL_ARCH_DT,
+  FIELD_VAL_ARCH_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  PRNT_SUCESSFUL_IND = 'T'
+</value>
+   </data>
+   <data name="UpdateOutgoingDocument">
+      <value>
+update CKT_OUTGOING_DOC
+set
+  PRNT_SUCESSFUL_IND = @prntSucessfulInd
+where
+  INF_ID = @infId
+</value>
+   </data>
+</root>

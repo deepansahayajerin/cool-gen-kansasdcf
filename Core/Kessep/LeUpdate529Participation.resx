@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="Read529AccountParticipant">
+      <value>
+select top(1)
+  IDENTIFIER,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER
+from
+  CKT_529_PARTICIPNT
+where
+  (@cspNumber = CSP_NUMBER) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="Update529AccountParticipant">
+      <value>
+update CKT_529_PARTICIPNT
+set
+  START_DATE = @startDate,
+  END_DATE = @endDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

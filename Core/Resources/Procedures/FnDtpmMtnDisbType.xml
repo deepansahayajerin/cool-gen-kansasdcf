@@ -1,0 +1,51 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDtpmMtnDisbType"
+           program-name="SWEDTPMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDtpmMtnDisbType"
+           transaction="SR93"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_DISB_TYPES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDTYP"
+       to="FnDtypLstDisbTypes"
+       send-command="DISPLAY">
+      <return-map from="Flag" to="Flag"/>
+      <return-map from="Flow.SystemGeneratedIdentifier"
+                  to="DisbursementType.SystemGeneratedIdentifier"/>
+      <return-map from="Flow.Code" to="DisbursementType.Code"/>
+      <return-map from="Flow.Name" to="DisbursementType.Name"/>
+      <return-map from="Flow.ProgramCode" to="DisbursementType.ProgramCode"/>
+      <return-map from="Flow.EffectiveDate" to="DisbursementType.EffectiveDate"/>
+      <return-map from="Flow.DiscontinueDate" to="DisbursementType.DiscontinueDate"/>
+      <return-map from="Flow.Description" to="DisbursementType.Description"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="DisbursementType.Code" to="DisbursementType.Code"/>
+   <map from="DisbursementType.Name" to="DisbursementType.Name"/>
+   <map from="DisbursementType.CurrentArrearsInd"
+        to="DisbursementType.CurrentArrearsInd"/>
+   <map from="DisbursementType.ProgramCode" to="DisbursementType.ProgramCode"/>
+   <map from="DisbursementType.RecaptureInd" to="DisbursementType.RecaptureInd"/>
+   <map from="DisbursementType.Description" to="DisbursementType.Description"/>
+   <map from="DisbursementType.EffectiveDate"
+        to="DisbursementType.EffectiveDate"/>
+   <map from="DisbursementType.DiscontinueDate"
+        to="DisbursementType.DiscontinueDate"/>
+   <map from="HiddenDisbursementType.Code" to="HiddenDisbursementType.Code"/>
+   <map from="DisbursementType.SystemGeneratedIdentifier"
+        to="DisbursementType.SystemGeneratedIdentifier"/>
+   <map from="DisbursementType.CashNonCashInd"
+        to="DisbursementType.CashNonCashInd"/>
+   <map from="HiddenDisbursementType.SystemGeneratedIdentifier"
+        to="HiddenDisbursementType.SystemGeneratedIdentifier"/>
+   <map from="HiddenDisbursementType.EffectiveDate"
+        to="HiddenDisbursementType.EffectiveDate"/>
+</procedure>

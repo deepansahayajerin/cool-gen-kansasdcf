@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select top(1)
+  OTR_TYPE,
+  OTY_ID,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  AS_OF_DT,
+  DISCONTINUE_DT
+from
+  CKT_ACCRUAL_INSTR
+where
+  (@otyId = OTY_ID) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (AS_OF_DT &lt;= @asOfDt) and
+  (DISCONTINUE_DT &gt; @asOfDt)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  BAL_DUE_AMT,
+  INT_BAL_DUE_AMT,
+  RETIRED_DT
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (RETIRED_DT = @retiredDt)
+</value>
+   </data>
+   <data name="ReadManualDistributionAuditObligation1">
+      <value>
+select distinct
+  T1.OTY_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.EFFECTIVE_DT,
+  T1.DISCONTINUE_DT,
+  T2.LGA_ID
+from
+  CKT_LEGAL_ACTION T5
+  join
+  CKT_OBLIGATION T2
+  join
+  CKT_MNL_DIST_AUDIT T1
+  on
+    (T2.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T2.OB_ID = T1.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.DISCONTINUE_DT &gt; @effectiveDt)
+  on
+    (T5.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T5.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadManualDistributionAuditObligation2">
+      <value>
+select
+  T1.OTY_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.EFFECTIVE_DT,
+  T1.DISCONTINUE_DT,
+  T2.LGA_ID
+from
+  CKT_OBLIGATION T2
+  join
+  CKT_MNL_DIST_AUDIT T1
+  on
+    (T2.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T2.OB_ID = T1.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.DISCONTINUE_DT &gt; @effectiveDt)
+</value>
+   </data>
+</root>

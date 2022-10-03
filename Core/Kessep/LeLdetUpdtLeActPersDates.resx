@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (LA_DETAIL_NO = @laDetailNo)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select
+  LA_PERSON_ID,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  END_REASON,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@ladRNumber = LAD_R_NUMBER) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER)
+</value>
+   </data>
+   <data name="UpdateLegalActionPerson">
+      <value>
+update CKT_LEGAL_ACT_PERS
+set
+  EFFECTIVE_DT = @effectiveDt
+where
+  LA_PERSON_ID = @laPersonId
+</value>
+   </data>
+</root>

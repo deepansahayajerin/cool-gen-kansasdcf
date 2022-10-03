@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="Read529AccountParticipant1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  STANDARD_NO,
+  START_DATE,
+  END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER
+from
+  CKT_529_PARTICIPNT
+where
+  (CSP_NUMBER = @cspNumber) and
+  (STANDARD_NO = @standardNo) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate) and
+  (IDENTIFIER &lt;&gt; @identifier)
+</value>
+   </data>
+   <data name="Read529AccountParticipant2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  STANDARD_NO,
+  START_DATE,
+  END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER
+from
+  CKT_529_PARTICIPNT
+where
+  (CSP_NUMBER = @cspNumber) and
+  (STANDARD_NO = @standardNo) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @endDate)
+</value>
+   </data>
+   <data name="Read529AccountParticipantCsePerson">
+      <value>
+select
+  IDENTIFIER,
+  STANDARD_NO,
+  START_DATE,
+  END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_NUMBER
+from
+  CKT_529_PARTICIPNT
+where
+  (CSP_NUMBER &gt;= @cspNumber) and
+  (
+    (END_DATE &gt;= @endDate) or
+    (cast(@flag as char(1)) = 'Y')
+  )
+order by
+  CSP_NUMBER,
+  STANDARD_NO,
+  START_DATE
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.STANDARD_NO = @standardNo) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

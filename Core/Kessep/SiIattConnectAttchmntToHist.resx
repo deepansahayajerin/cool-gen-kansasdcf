@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateRequestAttachmentInterstateRequest">
+      <value>
+select
+  INT_H_GENERATED_ID,
+  SYS_GEN_SEQ_NBR,
+  LAST_UPDATED_TIMES,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP
+from
+  CKT_INT_RQST_ATTCH
+where
+  INT_H_GENERATED_ID = @intHGeneratedId
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  CREATED_TSTAMP
+from
+  CKT_INT_RQST_HIST
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+   <data name="UpdateInterstateRequestAttachment">
+      <value>
+update CKT_INT_RQST_ATTCH
+set
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  CREATED_TIMESTAMP = @createdTimestamp
+where
+  (INT_H_GENERATED_ID = @intHGeneratedId) and
+  (SYS_GEN_SEQ_NBR = @sysGenSeqNbr)
+</value>
+   </data>
+</root>

@@ -1,0 +1,59 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeHiavAvailableInsByPerson"
+           program-name="SWEHIAVP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeHiavAvailableInsByPerson"
+           transaction="SRBL"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HIPH ECO_XFR_TO_HIPH"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETHIPH"
+       to="OeHiphInsuranceCovByHolder"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="Selected.InsuranceGroupNumber"
+           to="HealthInsuranceCoverage.InsuranceGroupNumber"/>
+      <map from="Selected.InsurancePolicyNumber"
+           to="HealthInsuranceCoverage.InsurancePolicyNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeHinmHealthInsuranceMenu"
+       send-command-type="none">
+      <map from="CsePerson" to="StartCsePerson"/>
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="State" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="CsePersonPrompt" to="CsePersonPrompt"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="HealthInsuranceAvailability" to="HealthInsuranceAvailability"/>
+   <map from="StatePrompt" to="StatePrompt"/>
+   <map from="CostPrompt" to="CostPrompt"/>
+   <map from="EmpStatePrompt" to="EmpStatePrompt"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Cost" to="Cost"/>
+   <map from="HiddenHealthInsuranceAvailability"
+        to="HiddenHealthInsuranceAvailability"/>
+</procedure>

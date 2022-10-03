@@ -1,0 +1,491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCashReceiptDetailHistory">
+      <value>
+insert into CKT_CRDTL_HIST
+(
+  LAST_UPDATED_TMST,
+  INTERFACE_TRANS_ID,
+  OFFSET_TAXID,
+  JOINT_RETURN_IND,
+  JOINT_RETURN_NAME,
+  REFUNDED_AMOUNT,
+  DISTRIBUTED_AMOUNT,
+  ADJUSTMENT_IND,
+  CRDETAIL_HIST_ID,
+  SUPP_PRSN_FN_2,
+  SUPP_PRSN_LN_2,
+  SUPP_PRSN_MN_2,
+  COLLCT_TYPE_ID,
+  CREVENT_NBR_ID,
+  CR_NBR_ID,
+  COLLECTION_DATE,
+  OBLGOR_PERS_NBR_ID,
+  COURT_ORDER_NUMBER,
+  CASE_NUMBER,
+  OBLGOR_FIRST_NM,
+  OBLGOR_LAST_NM,
+  OBLGOR_MIDDLE_NM,
+  OBLGOR_PHONE_NBR,
+  OBLGOR_SSN,
+  OFFSET_TAX_YEAR,
+  DFLT_CLLCTN_DT_IND,
+  MULTI_PAYOR,
+  RECEIVED_AMOUNT,
+  COLLECTION_AMOUNT,
+  PAYEE_FIRST_NAME,
+  PAYEE_MIDDLE_NAME,
+  PAYEE_LAST_NAME,
+  SUPP_PRSN_FN_1,
+  SUP_PRSN_MID_NM1,
+  SUP_PRSN_LST_NM1,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  COLLECTION_AMT_FUL,
+  CASH_REC_TYPE,
+  CASH_REC_SRC_TYPE,
+  REFERENC,
+  NOTES
+)
+values
+(
+  @lastUpdatedTmst,
+  @interfaceTransId,
+  @offsetTaxid,
+  @jointReturnInd,
+  @jointReturnName,
+  @refundedAmount,
+  @distributedAmount,
+  @adjustmentInd,
+  @crdetailHistId,
+  @suppPrsnFn2,
+  @suppPrsnLn2,
+  @suppPrsnMn2,
+  @collctTypeId,
+  @creventNbrId,
+  @crNbrId,
+  @collectionDate,
+  @oblgorPersNbrId,
+  @courtOrderNumber,
+  @caseNumber,
+  @oblgorFirstNm,
+  @oblgorLastNm,
+  @oblgorMiddleNm,
+  @oblgorPhoneNbr,
+  @oblgorSsn,
+  @offsetTaxYear,
+  @dfltCllctnDtInd,
+  @multiPayor,
+  @receivedAmount,
+  @collectionAmount,
+  @payeeFirstName,
+  @payeeMiddleName,
+  @payeeLastName,
+  @suppPrsnFn1,
+  @supPrsnMidNm1,
+  @supPrsnLstNm1,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @collectionAmtFul,
+  @cashRecType,
+  @cashRecSrcType,
+  @referenc,
+  @notes
+)
+</value>
+   </data>
+   <data name="CreateCashReceiptDetailStatHistory">
+      <value>
+insert into CKT_CRDTL_STATHIST
+(
+  CRD_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CDS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  REASON_CODE_ID,
+  CREATED_BY,
+  DISCONTINUE_DATE,
+  REASON_TEXT
+)
+values
+(
+  @crdIdentifier,
+  @crvIdentifier,
+  @cstIdentifier,
+  @crtIdentifier,
+  @cdsIdentifier,
+  @createdTimestamp,
+  @reasonCodeId,
+  @createdBy,
+  @discontinueDate,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.INTERFACE_TRAN_ID,
+  T1.ADJUSTMENT_IND,
+  T1.COURT_ORDER_NUMBER,
+  T1.CASE_NUMBER,
+  T1.OFFSET_TAXID,
+  T1.RECEIVED_AMOUNT,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.MULTI_PAYOR,
+  T1.OFFSET_TAX_YEAR,
+  T1.JOINT_RETURN_IND,
+  T1.JOINT_RETURN_NAME,
+  T1.DFLTD_COLL_DAT_IND,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.OBLGOR_FIRST_NM,
+  T1.OBLGOR_LAST_NM,
+  T1.OBLGOR_MID_NM,
+  T1.OBLGOR_PHONE_NBR,
+  T1.PAYEE_FIRST_NAME,
+  T1.PAYEE_MIDDLE_NAME,
+  T1.PAYEE_LAST_NAME,
+  T1.SUP_PRSN_FRST_NM1,
+  T1.SUP_PRSN_MID_NM1,
+  T1.SUP_PRSN_LST_NM1,
+  T1.SUP_PRSN_FRST_NM2,
+  T1.SUP_PRSN_LST_NM2,
+  T1.SUP_PRSN_MID_NM2,
+  T1.CREATED_BY,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.REFUNDED_AMT,
+  T1.DISTRIBUTED_AMT,
+  T1.COLLAMT_APPL_IND,
+  T1.SUPP_PERS_NO_VOL,
+  T1.REFERENC,
+  T1.NOTES,
+  T1.OVRRD_MNL_DIST_IND
+from
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID = @cashReceiptId) and
+    (T2.CRV_IDENTIFIER = @crvIdentifier) and
+    (T2.CRT_IDENTIFIER = @crtIdentifier) and
+    (T2.CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatHistoryCashReceiptDetailStatus">
+      <value>
+select top(1)
+  T1.CRD_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CDS_IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T1.REASON_CODE_ID,
+  T1.CREATED_BY,
+  T1.DISCONTINUE_DATE,
+  T1.REASON_TEXT,
+  T2.CODE,
+  T2.NAME,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.LAST_UPDATE_BY,
+  T2.LAST_UPDATE_TMST,
+  T2.DESCRIPTION
+from
+  CKT_CR_DETAIL_STAT T2
+  join
+  CKT_CRDTL_STATHIST T1
+  on
+    (@crdIdentifier = T1.CRD_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T2.CRDETAIL_STAT_ID = T1.CDS_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatus">
+      <value>
+select top(1)
+  CRDETAIL_STAT_ID,
+  CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATE_BY,
+  LAST_UPDATE_TMST,
+  DESCRIPTION
+from
+  CKT_CR_DETAIL_STAT
+where
+  CRDETAIL_STAT_ID = @crdetailStatId
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  DISB_DT,
+  ADJ_IND,
+  CONCURRENT_IND,
+  DISB_ADJ_PROC_DATE,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  CAR_ID,
+  OTY_ID,
+  COLL_ADJ_DT,
+  COLL_ADJ_PROC_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OB_TRN_AMT,
+  DISB_PROC_NEED_IND,
+  DIST_MTD,
+  PGM_APPLD_TO,
+  APPL_TO_ORD_TYP_CD,
+  CRT_NOTICE_REQ_IND,
+  CRT_NOTICE_PROC_DT,
+  AE_NOTIFIED_DT,
+  BAL_BEF_COLL,
+  CUM_INT_CHRGD,
+  CUM_INT_COLL_AFT,
+  INT_BAL_AFT_COLL,
+  DISB_TO_AR_IND,
+  MNL_DIST_RSN_TXT,
+  COL_ADJ_RSN_TXT,
+  CT_ORD_APPLIED_TO,
+  APPLIED_TO_FUT_IND
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (ADJ_IND &lt;&gt; 'Y')
+</value>
+   </data>
+   <data name="ReadCollectionAdjustmentReason">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID
+from
+  CKT_COLL_ADJ_RSN
+where
+  OB_TRN_RLN_RSN_ID = @obTrnRlnRsnId
+</value>
+   </data>
+   <data name="ReadCsePersonObligor">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RECOMP_BAL_FROM_DT
+from
+  CKT_CSE_PERSON_ACC
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadDebtDebtDetail">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.OB_TRN_AMT,
+  T1.CREATED_BY,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.ZDEL_PRECNV_RCPT_N,
+  T1.ZDEL_PRECNVRSN_ISN,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.DUE_DT,
+  T2.BAL_DUE_AMT,
+  T2.INT_BAL_DUE_AMT,
+  T2.ADC_DT,
+  T2.RETIRED_DT,
+  T2.CVRD_PRD_START_DT,
+  T2.CVD_PRD_END_DT,
+  T2.PRECNVRSN_PGM_CD,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY
+from
+  CKT_OB_TRN T1
+  join
+  CKT_DEBT_DTL T2
+  on
+    (T1.OTY_TYPE = @otyType) and
+    (T1.OB_TRN_TYP = @obTrnTyp) and
+    (T1.OB_TRN_ID = @obTrnId) and
+    (T1.CPA_TYPE = @cpaType) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T1.OTY_TYPE = T2.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T1.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDebtDetailStatusHistory">
+      <value>
+select top(1)
+  OB_TRN_STAT_HST_ID,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  OTR_TYPE,
+  OTR_ID,
+  CPA_TYPE,
+  CSP_NUMBER,
+  OBG_ID,
+  OB_TRN_ST_CD,
+  OTY_TYPE,
+  RSN_TXT
+from
+  CKT_DBT_DT_STS_HIS
+where
+  (@otyType = OTY_TYPE) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (@otrId = OTR_ID) and
+  (@otrType = OTR_TYPE)
+order by
+  EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetail">
+      <value>
+update CKT_CR_DETAIL
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  REFUNDED_AMT = @refundedAmt,
+  DISTRIBUTED_AMT = @distributedAmt,
+  COLLAMT_APPL_IND = @collamtApplInd
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetailStatHistory">
+      <value>
+update CKT_CRDTL_STATHIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (CRD_IDENTIFIER = @crdIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CDS_IDENTIFIER = @cdsIdentifier) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+   <data name="UpdateCollection">
+      <value>
+update CKT_COLLECTION
+set
+  ADJ_IND = @adjInd,
+  CAR_ID = @carId,
+  COLL_ADJ_DT = @collAdjDt,
+  COLL_ADJ_PROC_DATE = @collAdjProcDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  COL_ADJ_RSN_TXT = @colAdjRsnTxt
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+   <data name="UpdateObligor">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

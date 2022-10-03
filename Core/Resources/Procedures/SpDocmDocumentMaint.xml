@@ -1,0 +1,48 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpDocmDocumentMaint"
+           program-name="SWEDOCMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpDocmDocumentMaint"
+           transaction="SR3Z"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpDmnuDocumentMaintMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_DUDE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpDudeDocumentDetailMaint"
+       send-command="DISPLAY">
+      <map from="ReturnDoc.Description" to="Document.Description"/>
+      <map from="ReturnDoc.Name" to="Document.Name"/>
+   </on>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="Export1.G" to="Import1.G"/>
+   <map from="Export1.Detail" to="Import1.Detail"/>
+   <map from="StartName" to="StartName"/>
+   <map from="ZdelGroupExportPrevious.ZdelGExportPreviousDocument"
+        to="ZdelGroupImportPrevious.ZdelGImportPrev"/>
+   <map from="ZdelGroupExportPrevious.ZdelGExportPreviousCommon"
+        to="ZdelGroupImportPrevious.ZdelGroupImportDetailPrev"/>
+   <map from="HiddenPageKeys.GexportH" to="HiddenPageKeys.GimportH"/>
+   <map from="FilterDocument" to="FilterDocument"/>
+   <map from="FilterPrompt" to="FilterPrompt"/>
+   <map from="FilterCodeValue" to="FilterCodeValue"/>
+   <map from="FilterPrevious" to="FilterPrevious"/>
+   <map from="StartNamePrevious" to="StartNamePrevious"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="ProtectFilter" to="ProtectFilter"/>
+   <map from="Standard.NextTransaction" to="Scrolling.NextTransaction"/>
+   <map from="Standard.ScrollingMessage" to="Scrolling.ScrollingMessage"/>
+</procedure>

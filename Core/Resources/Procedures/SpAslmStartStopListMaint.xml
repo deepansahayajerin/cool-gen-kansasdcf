@@ -1,0 +1,48 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpAslmStartStopListMaint"
+           program-name="SWEASLMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpAslmStartStopListMaint"
+           transaction="SRP6"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_ADLM"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETADLM"
+       to="SpAdlmActivityDetailListMnt"
+       send-command-type="none">
+      <return-map from="ToTranActivityDetail" to="FromLinkActivityDetail"/>
+      <return-map from="ToTranActivity" to="FromLinkActivity"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpInfmInfrastructureMgmtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_EDLM"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEDLM"
+       to="SpEdlmEventDetailsListMaint"
+       send-command-type="none">
+      <return-map from="ToTranEventDetail" to="FromLinkEventDetail"/>
+      <return-map from="ToTranEvent" to="FromLinkEvent"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.HiddenActivityDetail" to="Group.HiddenActivityDetail"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenEventDetail" to="HiddenEventDetail"/>
+   <map from="EventDetail1" to="EventDetail1"/>
+   <map from="HiddenEvent" to="HiddenEvent"/>
+   <map from="Event1" to="Event1"/>
+   <map from="EventDetail2" to="EventDetail2"/>
+   <map from="Group.HiddenActivityStartStop" to="Group.HiddenActivityStartStop"/>
+   <map from="Group.HiddenActivity" to="Group.HiddenActivity"/>
+   <map from="Group.ActivityStartStop" to="Group.ActivityStartStop"/>
+   <map from="Group.Activity" to="Group.Activity"/>
+   <map from="Group.ActivityDetail1" to="Group.ActivityDetail1"/>
+   <map from="Group.ActivityDetail2" to="Group.ActivityDetail2"/>
+   <map from="Group.Common" to="Group.Common"/>
+</procedure>

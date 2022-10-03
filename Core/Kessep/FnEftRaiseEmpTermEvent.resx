@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseUnit">
+      <value>
+select
+  CAS_NO,
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  CSP_NO_AP = @cspNoAp
+</value>
+   </data>
+   <data name="ReadEmployer1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EIN,
+  KANSAS_ID
+from
+  CKT_EMPLOYER
+where
+  EIN = @ein
+</value>
+   </data>
+   <data name="ReadEmployer2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EIN,
+  KANSAS_ID
+from
+  CKT_EMPLOYER
+where
+  KANSAS_ID = cast(@companyIdentificationNumber as char(9))
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CSP_I_NUMBER,
+  EMP_ID,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (@empId = EMP_ID) and
+  (CSP_I_NUMBER = @cspINumber) and
+  (TYPE = 'E')
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="UpdateIncomeSource">
+      <value>
+update CKT_INCOME_SOURCE
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  END_DT = @endDt
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+</root>

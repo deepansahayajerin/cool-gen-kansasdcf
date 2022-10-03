@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPersonIncomeHistory">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  ISR_IDENTIFIER,
+  IDENTIFIER,
+  INCOME_EFF_DT,
+  INCOME_AMT,
+  FREQ,
+  WORKER_ID,
+  VERIFIED_DT,
+  PAYMENT_TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_I_NUMBER,
+  BAQ_ALLOTMENT
+from
+  CKT_PERS_INC_HIST
+where
+  (IDENTIFIER = @identifier) and
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdatePersonIncomeHistory">
+      <value>
+update CKT_PERS_INC_HIST
+set
+  INCOME_EFF_DT = @incomeEffDt,
+  INCOME_AMT = @incomeAmt,
+  FREQ = @freq,
+  WORKER_ID = @workerId,
+  VERIFIED_DT = @verifiedDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  BAQ_ALLOTMENT = @baqAllotment
+where
+  (CSP_NUMBER = @cspNumber) and
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+</root>

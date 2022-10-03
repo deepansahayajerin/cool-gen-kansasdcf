@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateInterfacePaymentHistoryReques">
+      <value>
+insert into CKT_INT_PMT_HIS_RQ
+(
+  OBLIGOR_CSEPER_NUM,
+  KAECSES_CRTORD_NUM,
+  REQUESTING_USER_ID,
+  DATE_REQUESTED,
+  DATE_PROCESSED,
+  SUCCESSFULLY_CONVT
+)
+values
+(
+  @obligorCseperNum,
+  @kaecsesCrtordNum,
+  @requestingUserId,
+  @dateRequested,
+  @dateProcessed,
+  @successfullyConvt
+)
+</value>
+   </data>
+   <data name="ReadInterfacePaymentHistoryReques">
+      <value>
+select top(1)
+  OBLIGOR_CSEPER_NUM,
+  KAECSES_CRTORD_NUM,
+  REQUESTING_USER_ID,
+  DATE_REQUESTED,
+  DATE_PROCESSED,
+  SUCCESSFULLY_CONVT
+from
+  CKT_INT_PMT_HIS_RQ
+where
+  (OBLIGOR_CSEPER_NUM = @obligorCseperNum) and
+  (KAECSES_CRTORD_NUM = @kaecsesCrtordNum)
+</value>
+   </data>
+   <data name="UpdateInterfacePaymentHistoryReques">
+      <value>
+update CKT_INT_PMT_HIS_RQ
+set
+  REQUESTING_USER_ID = @requestingUserId,
+  DATE_REQUESTED = @dateRequested,
+  DATE_PROCESSED = @dateProcessed,
+  SUCCESSFULLY_CONVT = @successfullyConvt
+where
+  (OBLIGOR_CSEPER_NUM = @obligorCseperNum) and
+  (KAECSES_CRTORD_NUM = @kaecsesCrtordNum)
+</value>
+   </data>
+</root>

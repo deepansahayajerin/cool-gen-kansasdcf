@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRoleCsePersonCaseRoleCsePerson">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE,
+  T3.EMANCIPATION_DT,
+  T4.TYPE,
+  T4.OUT_OF_WEDLOCK,
+  T4.PAT_ESTAB_IND
+from
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  join
+  CKT_CSE_PERSON T4 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  on
+    (@casNumber = T3.CAS_NUMBER) and
+    (T4.NUMB = T3.CSP_NUMBER) and
+    (T3.TYPE = 'CH') and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @endDate)
+  on
+    (T1.START_DATE &lt;= T3.END_DATE) and
+    (T1.END_DATE &gt;= T3.START_DATE) and
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.TYPE = 'AP')
+order by
+  T3.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadLegalActionDetailLegalAction">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.CREATED_TSTAMP,
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE,
+  T2.CLASSIFICATION,
+  T2.STANDARD_NO,
+  T2.CREATED_TSTAMP
+from
+  CKT_LEGAL_ACTION T2 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T3 with(readuncommitted)
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (@croIdentifier1 = T3.CRO_IDENTIFIER) and
+    (@croType1 = T3.CRO_TYPE) and
+    (@cspNumber1 = T3.CSP_NUMBER) and
+    (@casNumber1 = T3.CAS_NUMBER) and
+    (T2.CLASSIFICATION = 'J') and
+    (T2.CREATED_TSTAMP &lt;= @createdTstamp)
+  join
+  CKT_LEG_ACT_CAS_RL T4 with(readuncommitted)
+  on
+    (T2.LEGAL_ACTION_ID = T4.LGA_ID) and
+    (@croIdentifier2 = T4.CRO_IDENTIFIER) and
+    (@croType2 = T4.CRO_TYPE) and
+    (@cspNumber2 = T4.CSP_NUMBER) and
+    (@casNumber2 = T4.CAS_NUMBER)
+  join
+  CKT_LEGAL_ACT_DTL T1 with(readuncommitted)
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T1.CREATED_TSTAMP &lt;= @createdTstamp) and
+    (T1.DETAIL_TYPE = 'N') and
+    (T1.NON_FIN_OBLG_TYPE = 'HIC')
+</value>
+   </data>
+</root>

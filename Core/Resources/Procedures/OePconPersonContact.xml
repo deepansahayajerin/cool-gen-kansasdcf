@@ -1,0 +1,130 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OePconPersonContact"
+           program-name="SWEPCONP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OePconPersonContact"
+           transaction="SR6H"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="Work.FormattedName" to="Selected.FormattedName"/>
+      <map from="Work.Number" to="Selected.Number"/>
+      <map from="Work.Sex" to="Selected.Sex"/>
+      <map from="Work.Dob" to="Selected.Dob"/>
+      <map from="Work.Ssn" to="Selected.Ssn"/>
+      <map from="Work.FirstName" to="Selected.FirstName"/>
+      <map from="Work.MiddleInitial" to="Selected.MiddleInitial"/>
+      <map from="Work.LastName" to="Selected.LastName"/>
+      <return-map from="Selected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_PCOL_CONTACT_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPCOL"
+       to="OePcolPersonContactList"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <map from="Work" to="CsePersonsWorkSet"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="CsePersonsWorkSet.FormattedName" to="Work.FormattedName"/>
+      <return-map from="CsePersonsWorkSet.Number" to="Work.Number"/>
+      <return-map from="SelectedContact.ContactNumber" to="Contact.ContactNumber"/>
+      <return-map from="SelectedContact.CompanyName" to="Contact.CompanyName"/>
+      <return-map from="SelectedContact.NameLast" to="Contact.NameLast"/>
+      <return-map from="SelectedContact.NameFirst" to="Contact.NameFirst"/>
+      <return-map from="SelectedContact.MiddleInitial" to="Contact.MiddleInitial"/>
+      <return-map from="SelectedContact.Fax" to="Contact.Fax"/>
+      <return-map from="SelectedContact.NameTitle" to="Contact.NameTitle"/>
+      <return-map from="SelectedContact.RelationshipToCsePerson"
+                  to="Contact.RelationshipToCsePerson"/>
+      <return-map from="SelectedContact.HomePhone" to="Contact.HomePhone"/>
+      <return-map from="SelectedContact.WorkPhone" to="Contact.WorkPhone"/>
+      <return-map from="SelectedContact.LastUpdatedBy" to="Contact.LastUpdatedBy"/>
+      <return-map from="CsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="ZD_LIST_DOCS_DEFINED_FOR_SCREEN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPF24"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Hidden" to="Hidden"/>
+      <return-map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="Case1" to="StartCase"/>
+      <map from="Work" to="PersonName"/>
+      <map from="CsePerson" to="StartCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="Selected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="StartingStateCode" to="Starting"/>
+      <map from="ListStateCodeCode" to="Code"/>
+      <map from="Hidden" to="Hidden"/>
+      <return-map from="DlgflwSelected" to="SelectedState"/>
+      <return-map from="Hidden" to="Hidden"/>
+   </on>
+   <map from="HrespForHealthIns" to="HrespForHealthIns"/>
+   <map from="HiddenPrevContact" to="HiddenPrevContact"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="ContactAddress" to="ContactAddress"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HiddenPrevCsePerson" to="HiddenPrevCsePerson"/>
+   <map from="Work" to="Work"/>
+   <map from="Export1.DetailContactDetail" to="Import1.DetailContactDetail"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="LastUpdated" to="LastUpdated"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ListStateCodeStandard" to="ListStateCodeStandard"/>
+   <map from="ListPersonNo" to="ListPersonNo"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="AbendData" to="AbendData"/>
+   <map from="StartingStateCode" to="StartingStateCode"/>
+   <map from="ListStateCodeCode" to="ListStateCodeCode"/>
+   <map from="Starting" to="Starting"/>
+   <map from="Country" to="Country"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Contact.MiddleInitial" to="Contact.MiddleInitial"/>
+   <map from="Contact.NameFirst" to="Contact.NameFirst"/>
+   <map from="Contact.NameLast" to="Contact.NameLast"/>
+   <map from="Contact.RelationshipToCsePerson"
+        to="Contact.RelationshipToCsePerson"/>
+   <map from="Contact.CompanyName" to="Contact.CompanyName"/>
+   <map from="Contact.ContactNumber" to="Contact.ContactNumber"/>
+   <map from="Contact.WorkPhoneExt" to="Contact.WorkPhoneExt"/>
+   <map from="Contact.FaxExt" to="Contact.FaxExt"/>
+   <map from="Contact.HomePhoneAreaCode" to="Contact.HomePhoneAreaCode"/>
+   <map from="Contact.HomePhone" to="Contact.HomePhone"/>
+   <map from="Contact.WorkPhoneAreaCode" to="Contact.WorkPhoneAreaCode"/>
+   <map from="Contact.WorkPhone" to="Contact.WorkPhone"/>
+   <map from="Contact.FaxAreaCode" to="Contact.FaxAreaCode"/>
+   <map from="Contact.Fax" to="Contact.Fax"/>
+   <map from="Contact.VerifiedDate" to="Contact.VerifiedDate"/>
+   <map from="Contact.VerifiedUserId" to="Contact.VerifiedUserId"/>
+   <map from="Contact.NameTitle" to="Contact.NameTitle"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

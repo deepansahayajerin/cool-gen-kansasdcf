@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection1">
+      <value>
+select
+  COLL_ID,
+  COLL_DT,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_DT,
+  CREATED_TMST,
+  OB_TRN_AMT
+from
+  CKT_COLLECTION with(readuncommitted)
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (ADJ_IND = 'Y') and
+  (COLL_ADJ_DT between cast(@date1 as date) and cast(@date2 as date)) and
+  (OTR_TYPE = 'DE')
+order by
+  COLL_ADJ_DT
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select
+  COLL_ID,
+  COLL_DT,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  COLL_ADJ_DT,
+  CREATED_TMST,
+  OB_TRN_AMT
+from
+  CKT_COLLECTION with(readuncommitted)
+where
+  (@otyId = OTY_ID) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) and
+  (OTR_TYPE = 'DE')
+order by
+  COLL_DT
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_LEGAL_ACTION T4 with(readuncommitted)
+  join
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.LAD_R_NUMBER is not null) and
+    (T2.ACCOUNT_TYPE = 'R')
+  on
+    (T4.LEGAL_ACTION_ID = T2.LGA_R_IDENTIFIER) and
+    (@trbId = T4.TRB_ID) and
+    (T4.COURT_CASE_NO = @courtCaseNo)
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC with(readuncommitted)
+where
+  (TYPE = 'R') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select distinct
+  T1.NAME,
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME
+from
+  CKT_FIELD T1 with(readuncommitted)
+  join
+  CKT_DOCUMENT_FIELD T2 with(readuncommitted)
+  on
+    (T1.NAME = T2.FLD_NAME) and
+    (T2.DOC_NAME = @docName) and
+    (T2.DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+    (T1.DEPENDANCY = @dependancy) and
+    (T1.SUBROUTINE_NAME = @subroutineName)
+order by
+  T1.NAME
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalAction3">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (CLASSIFICATION = 'J') and
+  (FILED_DT &gt; @filedDt1) and
+  (FILED_DT &lt;= @filedDt2) and
+  (END_DT &gt; @filedDt2)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail1">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.OTY_ID
+from
+  CKT_LEGAL_ACT_DTL T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T3 with(readuncommitted)
+  on
+    (T1.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (T1.DETAIL_TYPE = 'N') and
+    (T1.NON_FIN_OBLG_TYPE = cast(@code as char(7))) and
+    (T1.END_DT &gt;= @endDt) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier) and
+    (T3.ACCOUNT_TYPE = 'R') and
+    (T3.END_DT &gt;= @endDt) and
+    (T3.CSP_NUMBER = @cspNumber)
+order by
+  T1.END_DT
+</value>
+   </data>
+   <data name="ReadLegalActionDetail2">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.OTY_ID
+from
+  CKT_LEGAL_ACT_DTL T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T3 with(readuncommitted)
+  on
+    (@otyId = T1.OTY_ID) and
+    (T1.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (T1.END_DT &gt;= @endDt) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier) and
+    (T3.ACCOUNT_TYPE = 'R') and
+    (T3.END_DT &gt;= @endDt) and
+    (T3.CSP_NUMBER = @cspNumber)
+order by
+  T1.END_DT
+</value>
+   </data>
+   <data name="ReadLegalActionDetail3">
+      <value>
+select
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  [LIMIT],
+  NON_FIN_OBLG_TYPE,
+  DETAIL_TYPE,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL with(readuncommitted)
+where
+  (DETAIL_TYPE = 'N') and
+  (NON_FIN_OBLG_TYPE = cast(@code as char(7))) and
+  (END_DT &gt;= @endDt) and
+  (LGA_IDENTIFIER = @lgaIdentifier)
+order by
+  END_DT
+</value>
+   </data>
+   <data name="ReadLegalActionDetail4">
+      <value>
+select
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  [LIMIT],
+  NON_FIN_OBLG_TYPE,
+  DETAIL_TYPE,
+  FRQ_PRD_CD,
+  DAY_OF_WEEK,
+  DAY_OF_MONTH_1,
+  DAY_OF_MONTH_2,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL with(readuncommitted)
+where
+  (@otyId = OTY_ID) and
+  (END_DT &gt;= @endDt) and
+  (LGA_IDENTIFIER = @lgaIdentifier)
+order by
+  END_DT
+</value>
+   </data>
+   <data name="ReadLegalActionDetailObligationType1">
+      <value>
+select distinct top(1)
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.OTY_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T4 with(readuncommitted)
+  on
+    (T1.LA_DETAIL_NO = T4.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T4.LGA_R_IDENTIFIER) and
+    (T1.END_DT &gt;= @endDt) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier) and
+    (T4.ACCOUNT_TYPE = 'R') and
+    (T4.END_DT &gt;= @endDt) and
+    (T4.CSP_NUMBER = @cspNumber)
+  on
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (T2.DEBT_TYP_CD = @debtTypCd)
+order by
+  T1.END_DT
+</value>
+   </data>
+   <data name="ReadLegalActionDetailObligationType2">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.OTY_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T1 with(readuncommitted)
+  on
+    (T1.END_DT &gt;= @endDt) and
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (T2.DEBT_TYP_CD = @debtTypCd) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier)
+order by
+  T1.END_DT
+</value>
+   </data>
+   <data name="ReadLegalActionDetailObligationType3">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.OTY_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T4 with(readuncommitted)
+  on
+    (T1.LA_DETAIL_NO = T4.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T4.LGA_R_IDENTIFIER) and
+    (T1.END_DT &gt;= @endDt) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier) and
+    (T4.ACCOUNT_TYPE = 'R') and
+    (T4.END_DT &gt;= @endDt) and
+    (T4.CSP_NUMBER = @cspNumber)
+  on
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (T2.DEBT_TYP_CD in ('WA', 'WC'))
+order by
+  T1.END_DT
+</value>
+   </data>
+   <data name="ReadLegalActionDetailObligationType4">
+      <value>
+select
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.[LIMIT],
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.DAY_OF_WEEK,
+  T1.DAY_OF_MONTH_1,
+  T1.DAY_OF_MONTH_2,
+  T1.OTY_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T1 with(readuncommitted)
+  on
+    (T1.END_DT &gt;= @endDt) and
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (T2.DEBT_TYP_CD in ('WA', 'WC')) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier)
+order by
+  T1.END_DT
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetail1">
+      <value>
+select distinct top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.TRB_ID,
+  T2.LA_DETAIL_NO,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.ARREARS_AMOUNT,
+  T2.CURRENT_AMOUNT,
+  T2.JUDGEMENT_AMOUNT,
+  T2.[LIMIT],
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T2.FRQ_PRD_CD,
+  T2.DAY_OF_WEEK,
+  T2.DAY_OF_MONTH_1,
+  T2.DAY_OF_MONTH_2,
+  T2.OTY_ID
+from
+  CKT_OB_TYPE T3 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T2 with(readuncommitted)
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (@trbId = T1.TRB_ID) and
+    (T1.CLASSIFICATION = 'J') and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.END_DT &gt;= @endDt)
+  on
+    (T3.DEBT_TYP_ID = T2.OTY_ID) and
+    (T3.DEBT_TYP_CD = 'CS')
+order by
+  T1.FILED_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetail2">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.TRB_ID,
+  T2.LA_DETAIL_NO,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.ARREARS_AMOUNT,
+  T2.CURRENT_AMOUNT,
+  T2.JUDGEMENT_AMOUNT,
+  T2.[LIMIT],
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T2.FRQ_PRD_CD,
+  T2.DAY_OF_WEEK,
+  T2.DAY_OF_MONTH_1,
+  T2.DAY_OF_MONTH_2,
+  T2.OTY_ID
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T2 with(readuncommitted)
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (@trbId = T1.TRB_ID) and
+    (T1.CLASSIFICATION in ('J', 'O')) and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.NON_FIN_OBLG_TYPE = 'HIC') and
+    (T2.END_DT &gt;= @endDt)
+order by
+  T1.FILED_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetail3">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.TRB_ID,
+  T2.LA_DETAIL_NO,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.ARREARS_AMOUNT,
+  T2.CURRENT_AMOUNT,
+  T2.JUDGEMENT_AMOUNT,
+  T2.[LIMIT],
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T2.FRQ_PRD_CD,
+  T2.DAY_OF_WEEK,
+  T2.DAY_OF_MONTH_1,
+  T2.DAY_OF_MONTH_2,
+  T2.OTY_ID
+from
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T2 with(readuncommitted)
+  on
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (@trbId = T1.TRB_ID) and
+    (T1.CLASSIFICATION = 'J') and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T2.END_DT &gt;= @endDt)
+order by
+  T1.FILED_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetailObligationType1">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.TRB_ID,
+  T2.LA_DETAIL_NO,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.ARREARS_AMOUNT,
+  T2.CURRENT_AMOUNT,
+  T2.JUDGEMENT_AMOUNT,
+  T2.[LIMIT],
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T2.FRQ_PRD_CD,
+  T2.DAY_OF_WEEK,
+  T2.DAY_OF_MONTH_1,
+  T2.DAY_OF_MONTH_2,
+  T2.OTY_ID,
+  T3.DEBT_TYP_CD,
+  T3.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_DTL T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T1.LEGAL_ACTION_ID = @legalActionId) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt)
+  on
+    (T3.DEBT_TYP_ID = T2.OTY_ID) and
+    (T3.DEBT_TYP_CD = 'WA')
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetailObligationType2">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.TRB_ID,
+  T2.LA_DETAIL_NO,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.ARREARS_AMOUNT,
+  T2.CURRENT_AMOUNT,
+  T2.JUDGEMENT_AMOUNT,
+  T2.[LIMIT],
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T2.FRQ_PRD_CD,
+  T2.DAY_OF_WEEK,
+  T2.DAY_OF_MONTH_1,
+  T2.DAY_OF_MONTH_2,
+  T2.OTY_ID,
+  T3.DEBT_TYP_CD,
+  T3.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T3 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T2 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (@trbId = T1.TRB_ID) and
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T1.CLASSIFICATION = 'J') and
+    (T2.END_DT &gt;= @endDt) and
+    (T1.FILED_DT &gt; @filedDt) and
+    (T1.FILED_DT &lt;= @endDt) and
+    (T1.END_DT &gt; @endDt)
+  on
+    (T3.DEBT_TYP_ID = T2.OTY_ID) and
+    (T3.DEBT_TYP_CLASS = 'A')
+</value>
+   </data>
+   <data name="ReadMonthlyObligorSummary1">
+      <value>
+select top(1)
+  FNCL_MSUM_TYP,
+  FNCL_MSUM_YR_MTH,
+  MFS_GENERATED_ID,
+  CPA_S_TYPE,
+  CSP_S_NUMBER,
+  OBG_S_GENERATED_ID,
+  OTY_TYPE,
+  FM_CURR_BAL
+from
+  CKT_MNTHLY_OBR_SUM with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgSGeneratedId = OBG_S_GENERATED_ID) and
+  (@cspSNumber = CSP_S_NUMBER) and
+  (@cpaSType = CPA_S_TYPE) and
+  (FNCL_MSUM_YR_MTH = @fnclMsumYrMth)
+</value>
+   </data>
+   <data name="ReadMonthlyObligorSummary2">
+      <value>
+select top(1)
+  FNCL_MSUM_TYP,
+  FNCL_MSUM_YR_MTH,
+  MFS_GENERATED_ID,
+  CPA_S_TYPE,
+  CSP_S_NUMBER,
+  OBG_S_GENERATED_ID,
+  OTY_TYPE,
+  FM_CURR_BAL
+from
+  CKT_MNTHLY_OBR_SUM with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgSGeneratedId = OBG_S_GENERATED_ID) and
+  (@cspSNumber = CSP_S_NUMBER) and
+  (@cpaSType = CPA_S_TYPE) and
+  (FNCL_MSUM_YR_MTH &lt; @fnclMsumYrMth)
+order by
+  FNCL_MSUM_YR_MTH desc
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  LGA_ID,
+  PRIM_SEC_CD
+from
+  CKT_OBLIGATION with(readuncommitted)
+where
+  (@lgaId = LGA_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadObligationTransaction">
+      <value>
+select
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  OB_TRN_AMT,
+  DEBT_ADJ_TYP,
+  DEB_ADJ_DT,
+  CREATED_TMST,
+  DEBT_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (OB_TRN_TYP = 'DA') and
+  (CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+order by
+  DEB_ADJ_DT
+</value>
+   </data>
+   <data name="ReadObligationTransactionDebtDetail">
+      <value>
+select
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.OB_TRN_AMT,
+  T1.DEBT_ADJ_TYP,
+  T1.DEB_ADJ_DT,
+  T1.CREATED_TMST,
+  T1.DEBT_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.DUE_DT,
+  T2.RETIRED_DT,
+  T2.CREATED_TMST
+from
+  CKT_OB_TRN T1 with(readuncommitted)
+  join
+  CKT_DEBT_DTL T2 with(readuncommitted)
+  on
+    (@otyType = T1.OTY_TYPE) and
+    (@obgGeneratedId = T1.OBG_GENERATED_ID) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (@cpaType = T1.CPA_TYPE) and
+    (T1.OTY_TYPE = T2.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T2.OTR_TYPE) and
+    (T1.OB_TRN_ID = T2.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.OB_TRN_TYP = 'DE') and
+    (T1.DEBT_TYP = 'D') and
+    (
+      (T1.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) or
+      (
+        (T2.DUE_DT between cast(@date1 as date) and cast(@date2 as date)) and
+        (T1.CREATED_TMST &lt;= @timestamp2)
+      )
+    )
+order by
+  T2.DUE_DT
+</value>
+   </data>
+   <data name="ReadObligationType1">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE with(readuncommitted)
+where
+  DEBT_TYP_CD = @debtTypCd
+</value>
+   </data>
+   <data name="ReadObligationType2">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE with(readuncommitted)
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  TRIBUNAL_NM,
+  IDENTIFIER
+from
+  CKT_TRIBUNAL with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_INTERSTAT_RQST T4 with(readuncommitted)
+  on
+    (T1.NUMB = T4.CSP_NUMBER) and
+    (T4.CRO_ID is not null) and
+    (T4.CRO_TYPE = 'AP') and
+    (T4.CAS_NUMBER = @casNumber) and
+    (T4.OTH_ST_CASE_STATUS = 'O')
+  join
+  CKT_INT_RQST_HIST T5 with(readuncommitted)
+  on
+    (T4.IDENTIFIER = T5.INT_GENERATED_ID) and
+    (T5.TRANSACTION_SERIAL = @transactionSerial) and
+    (T5.TRANSACTION_DATE = @transactionDate) and
+    (T5.TRANSACTION_DIRECT = 'O')
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_INTERSTAT_RQST T4 with(readuncommitted)
+  on
+    (T1.NUMB = T4.CSP_NUMBER) and
+    (T4.CRO_ID is not null) and
+    (T4.CRO_TYPE = 'AP') and
+    (T4.CAS_NUMBER = @casNumber) and
+    (T4.OTHR_STATE_FIPS_CD = @othrStateFipsCd) and
+    (T4.OTH_ST_CASE_STATUS = 'C') and
+    (T4.OTH_STATE_CLS_DTE = @othStateClsDte)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_INTERSTAT_RQST T4 with(readuncommitted)
+  on
+    (T1.NUMB = T4.CSP_NUMBER) and
+    (T4.CRO_ID is not null) and
+    (T4.CRO_TYPE = 'AP') and
+    (T4.CAS_NUMBER = @casNumber) and
+    (T4.OTHR_STATE_FIPS_CD = @othrStateFipsCd) and
+    (T4.OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  OTHER_FIPS_STATE,
+  OTHER_FIPS_COUNTY,
+  OTHER_FIPS_LOCATIO,
+  TRANS_SERIAL_NBR,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  KS_CASE_ID,
+  INTERSTATE_CASE_ID,
+  ACTION_REASON_CODE,
+  CASE_DATA_IND,
+  AP_IDENTIFICATION,
+  AP_LOCATE_DATA_IND,
+  PARTICIPANT_DATA_I,
+  ORDER_DATA_IND,
+  COLLECTION_DATA_IN,
+  INFORMATION_IND
+from
+  CKT_INTERST_CASE with(readuncommitted)
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="ReadInterstateCollection">
+      <value>
+select
+  CCA_TRANSACTION_DT,
+  CCA_TRANS_SER_NUM,
+  SYS_GENERATED_ID
+from
+  CKT_INTERST_COLLCT
+where
+  (@ccaTransactionDt = CCA_TRANSACTION_DT) and
+  (@ccaTransSerNum = CCA_TRANS_SER_NUM)
+</value>
+   </data>
+   <data name="ReadInterstateMiscellaneous">
+      <value>
+select top(1)
+  STATUS_CHANGE_CODE,
+  NEW_CASE_ID,
+  INFO_TEXT_1,
+  INFO_TEXT_2,
+  INFO_TEXT_3,
+  CCA_TRANS_SER_NUM,
+  CCA_TRANSACTION_DT,
+  INFO_TEXT_LINE_4,
+  INFO_TEXT_LINE_5
+from
+  CKT_INTERST_MISC with(readuncommitted)
+where
+  (@ccaTransactionDt = CCA_TRANSACTION_DT) and
+  (@ccaTransSerNum = CCA_TRANS_SER_NUM)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHR_STATE_FIPS_CD,
+  OTH_ST_CASE_STATUS,
+  OTH_STATE_CLS_DTE,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (OTHR_STATE_FIPS_CD = @othrStateFipsCd) and
+  (CAS_I_NUMBER = @casINumber)
+</value>
+   </data>
+   <data name="ReadInterstateSupportOrder">
+      <value>
+select distinct
+  CCA_TRANSACTION_DT,
+  SYS_GENERATED_ID,
+  CCA_TRAN_SER_NUM,
+  LEGAL_ACTION_ID
+from
+  CKT_INTERST_SUP_OR with(readuncommitted)
+where
+  (@ccaTransactionDt = CCA_TRANSACTION_DT) and
+  (@ccaTranSerNum = CCA_TRAN_SER_NUM) and
+  (LEGAL_ACTION_ID &gt; 0)
+</value>
+   </data>
+</root>

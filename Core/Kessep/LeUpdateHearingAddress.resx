@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (STATE_ABBREVIATION = @stateAbbreviation) and
+  (COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadHearingAddress">
+      <value>
+select top(1)
+  HRG_GENERATED_ID,
+  TYPE,
+  LOCATION,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  COUNTY,
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP
+from
+  CKT_HEARING_ADDR
+where
+  (TYPE = @type) and
+  (HRG_GENERATED_ID = @hrgGeneratedId)
+</value>
+   </data>
+   <data name="UpdateHearingAddress">
+      <value>
+update CKT_HEARING_ADDR
+set
+  LOCATION = @location,
+  STREET_1 = @street1,
+  STREET_2 = @street2,
+  CITY = @city,
+  STATE_PROVINCE = @stateProvince,
+  COUNTY = @county,
+  ZIP_CD = @zipCd,
+  ZIP4 = @zip4,
+  ZIP3 = @zip3,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (HRG_GENERATED_ID = @hrgGeneratedId) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteLegalActionIncomeSource">
+      <value>
+delete from CKT_LEGAL_ACT_ISRC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="DeleteLegalActionPersonResource">
+      <value>
+delete from CKT_LEGL_ACT_PRSRC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CPR_RESOURCE_NO = @cprResourceNo) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSource">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  ISR_IDENTIFIER,
+  EFFECTIVE_DT,
+  END_DT,
+  IDENTIFIER
+from
+  CKT_LEGAL_ACT_ISRC
+where
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonResource">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CPR_RESOURCE_NO,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  LIEN_TYPE,
+  END_DATE,
+  IDENTIFIER
+from
+  CKT_LEGL_ACT_PRSRC
+where
+  (CPR_RESOURCE_NO = @cprResourceNo) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

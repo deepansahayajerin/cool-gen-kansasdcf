@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_DISB_TRAN T6 with(readuncommitted)
+  on
+    (T1.NUMB = T6.CSP_NUMBER_DISB) and
+    (T6.CPA_TYPE_DISB = 'R') and
+    (T6.OTR_TYPE_DISB = 'DE') and
+    (T6.COL_ID is not null) and
+    (T6.OTY_ID is not null) and
+    (T6.OBG_ID is not null) and
+    (T6.OTR_ID is not null) and
+    (T6.CRT_ID is not null) and
+    (T6.CST_ID is not null) and
+    (T6.CRV_ID is not null) and
+    (T6.CRD_ID is not null)
+  join
+  CKT_DISB_TRAN_RLN T7 with(readuncommitted)
+  on
+    (T6.DISB_TRAN_ID = T7.DTR_P_GENERATED_ID) and
+    (T6.CPA_TYPE = T7.CPA_P_TYPE) and
+    (T6.CSP_NUMBER = T7.CSP_P_NUMBER) and
+    (@dtrGeneratedId = T7.DTR_GENERATED_ID) and
+    (@cpaType = T7.CPA_TYPE) and
+    (@cspNumber = T7.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePersonDisbursementSummary">
+      <value>
+select
+  CSP_NUMBER_OBLGR,
+  FISCAL_YEAR,
+  NON_TAF_AMOUNT,
+  CSP_NUMBER_OBLGEE,
+  CPA_TYPE_OBLGEE,
+  CPA_TYPE_OBLGR
+from
+  CKT_DISB_SUMMARY with(readuncommitted)
+where
+  (CPA_TYPE_OBLGR = 'R') and
+  (FISCAL_YEAR = @fiscalYear) and
+  (CPA_TYPE_OBLGEE = 'E') and
+  (CSP_NUMBER_OBLGEE = @cspNumberOblgee)
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  AMOUNT,
+  PRQ_GENERATED_ID
+from
+  CKT_DISB_TRAN with(readuncommitted)
+where
+  @prqGeneratedId = PRQ_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadObligationObligationTransaction">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.PRQ_ID,
+  T1.CREATED_TMST,
+  T2.OB_TRN_ID,
+  T2.OB_TRN_TYP,
+  T2.OB_TRN_AMT,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE
+from
+  CKT_OBLIGATION T1 with(readuncommitted)
+  join
+  CKT_OB_TRN T2 with(readuncommitted)
+  on
+    (T2.OB_TRN_TYP = 'DE') and
+    (T1.DTY_GENERATED_ID = T2.OTY_TYPE) and
+    (T1.OB_ID = T2.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T1.OB_ID = @obId) and
+    (T1.DTY_GENERATED_ID = @dtyGeneratedId) and
+    (T1.CPA_TYPE = @cpaType) and
+    (T1.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  TYPE,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST with(readuncommitted)
+where
+  (PAYMENT_REQUEST_ID = @paymentRequestId) and
+  (TYPE = 'RCV')
+</value>
+   </data>
+</root>

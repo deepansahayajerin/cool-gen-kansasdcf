@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select top(1)
+  OTR_TYPE,
+  OTY_ID,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  DISCONTINUE_DT
+from
+  CKT_ACCRUAL_INSTR
+where
+  (@otrType = OTR_TYPE) and
+  (@otyId = OTY_ID) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (DISCONTINUE_DT &gt;= @discontinueDt)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  RETIRED_DT
+from
+  CKT_DEBT_DTL
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (RETIRED_DT &lt; @retiredDt1) and
+  (RETIRED_DT &gt; @retiredDt2)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (LA_DETAIL_NO = @laDetailNo) and
+  (LGA_IDENTIFIER = @lgaIdentifier)
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  OBLIG_PSCH_AMT,
+  END_DT
+from
+  CKT_OB_PYMNT_SCH
+where
+  (OTY_TYPE = @otyType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (OBG_CSP_NUMBER = @obgCspNumber) and
+  (OBG_CPA_TYPE = @obgCpaType) and
+  (END_DT &gt;= @endDt)
+</value>
+   </data>
+   <data name="ReadObligationTransaction1">
+      <value>
+select distinct
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.OB_TRN_AMT,
+  T1.DEBT_ADJ_TYP,
+  T1.DEBT_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T1.LAP_ID
+from
+  CKT_LEGAL_ACT_PERS T2
+  join
+  CKT_OB_TRN T1
+  on
+    (T2.LA_PERSON_ID = T1.LAP_ID) and
+    (@ladRNumber = T2.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T2.LGA_R_IDENTIFIER) and
+    (
+      (
+        (T1.OB_TRN_TYP = 'DE') and
+        (T1.DEBT_TYP = 'A')
+      ) or
+      (T1.OB_TRN_TYP = 'DA')
+    )
+</value>
+   </data>
+   <data name="ReadObligationTransaction2">
+      <value>
+select distinct
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.OB_TRN_AMT,
+  T1.DEBT_ADJ_TYP,
+  T1.DEBT_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T1.LAP_ID
+from
+  CKT_LEGAL_ACT_PERS T2
+  join
+  CKT_OB_TRN T1
+  on
+    (T2.LA_PERSON_ID = T1.LAP_ID) and
+    (@ladRNumber = T2.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T2.LGA_R_IDENTIFIER) and
+    (
+      (
+        (T1.OB_TRN_TYP = 'DE') and
+        (T1.DEBT_TYP = 'D')
+      ) or
+      (T1.OB_TRN_TYP = 'DA')
+    )
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

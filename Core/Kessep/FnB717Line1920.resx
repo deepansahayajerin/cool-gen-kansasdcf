@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalReferral">
+      <value>
+select
+  CAS_NUMBER,
+  IDENTIFIER,
+  STATUS,
+  REFERRAL_DATE,
+  REFERRAL_REASON_1,
+  REFERRAL_REASON_2,
+  REFERRAL_REASON_3,
+  REFERRAL_REASON_4,
+  REFERRAL_REASON_5,
+  COURT_CASE_NO
+from
+  CKT_LEGAL_REFERRAL with(readuncommitted)
+where
+  (@casNumber = CAS_NUMBER) and
+  (STATUS &lt;&gt; 'C') and
+  (STATUS &lt;&gt; 'W') and
+  (STATUS &lt;&gt; 'R') and
+  (REFERRAL_DATE between cast(@date1 as date) and cast(@date2 as date))
+</value>
+   </data>
+</root>

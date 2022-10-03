@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  T1.COLLECTION_TYPE_ID,
+  T1.CODE
+from
+  CKT_COLLTN_TYPE T1
+  join
+  CKT_CR_DETAIL T2
+  on
+    (T1.COLLECTION_TYPE_ID = T2.CLT_IDENTIFIER) and
+    (T2.CRD_ID = @crdId) and
+    (T2.CRV_IDENTIFIER = @crvIdentifier) and
+    (T2.CST_IDENTIFIER = @cstIdentifier) and
+    (T2.CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonObligor1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T3.CSP_NUMBER,
+  T3.CPA_TYPE
+from
+  CKT_LEGAL_ACTION T4
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_OBLIGATION T3
+  on
+    T1.NUMB = T3.CSP_NUMBER
+  on
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T4.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadCsePersonObligor2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (@casNumber = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP')
+  join
+  CKT_CSE_PERSON_ACC T2
+  on
+    T1.NUMB = T2.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePersonObligor3">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CSE_PERSON_ACC T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDebtCsePersonCsePersonDebtDetailObligationType">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.NUMB,
+  T2.TYPE,
+  T3.NUMB,
+  T3.TYPE,
+  T4.DUE_DT,
+  T5.DEBT_TYP_ID,
+  T5.DEBT_TYP_CD,
+  T5.SUP_PRSN_REQ_IND
+from
+  CKT_CSE_PERSON T3
+  join
+  CKT_OB_TYPE T5
+  join
+  CKT_CSE_PERSON T2
+  join
+  CKT_OB_TRN T1
+  on
+    (T1.OTY_TYPE = @otyType) and
+    (T1.OB_TRN_TYP = @obTrnTyp) and
+    (T1.OB_TRN_ID = @obTrnId) and
+    (T1.CPA_TYPE = @cpaType) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.CPA_SUP_TYPE is not null)
+  on
+    T5.DEBT_TYP_ID = T1.OTY_TYPE
+  join
+  CKT_DEBT_DTL T4
+  on
+    (T1.OTY_TYPE = T4.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T4.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T4.OTR_TYPE) and
+    (T1.OB_TRN_ID = T4.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T4.CPA_TYPE) and
+    (T1.CSP_NUMBER = T4.CSP_NUMBER)
+  on
+    T3.NUMB = T1.CSP_SUP_NUMBER
+</value>
+   </data>
+   <data name="ReadDebtCsePersonDebtDetailObligationType1">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.NUMB,
+  T2.TYPE,
+  T3.DUE_DT,
+  T4.DEBT_TYP_ID,
+  T4.DEBT_TYP_CD,
+  T4.SUP_PRSN_REQ_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_OB_TYPE T4
+  join
+  CKT_OB_TRN T1
+  on
+    (T1.OTY_TYPE = @otyType) and
+    (T1.OB_TRN_TYP = @obTrnTyp) and
+    (T1.OB_TRN_ID = @obTrnId) and
+    (T1.CPA_TYPE = @cpaType1) and
+    (T1.CSP_NUMBER = @cspNumber1) and
+    (T1.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T4.DEBT_TYP_ID = T1.OTY_TYPE) and
+    (@cpaType2 = T1.CPA_TYPE) and
+    (@cspNumber2 = T1.CSP_NUMBER) and
+    (T1.CPA_SUP_TYPE is not null)
+  join
+  CKT_DEBT_DTL T3
+  on
+    (T1.OTY_TYPE = T3.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T3.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T3.OTR_TYPE) and
+    (T1.OB_TRN_ID = T3.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER)
+  on
+    T2.NUMB = T1.CSP_SUP_NUMBER
+</value>
+   </data>
+   <data name="ReadDebtCsePersonDebtDetailObligationType2">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.NUMB,
+  T2.TYPE,
+  T3.DUE_DT,
+  T4.DEBT_TYP_ID,
+  T4.DEBT_TYP_CD,
+  T4.SUP_PRSN_REQ_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_OB_TYPE T4
+  join
+  CKT_OB_TRN T1
+  on
+    (T1.OTY_TYPE = @otyType) and
+    (T1.OB_TRN_TYP = @obTrnTyp) and
+    (T1.OB_TRN_ID = @obTrnId) and
+    (T1.CPA_TYPE = @cpaType1) and
+    (T1.CSP_NUMBER = @cspNumber1) and
+    (T1.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T4.DEBT_TYP_ID = T1.OTY_TYPE) and
+    (@cpaType2 = T1.CPA_TYPE) and
+    (@cspNumber2 = T1.CSP_NUMBER) and
+    (T1.CPA_SUP_TYPE is not null)
+  join
+  CKT_DEBT_DTL T3
+  on
+    (T1.OTY_TYPE = T3.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T3.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T3.OTR_TYPE) and
+    (T1.OB_TRN_ID = T3.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER)
+  on
+    T2.NUMB = T1.CSP_SUP_NUMBER
+</value>
+   </data>
+   <data name="ReadDebtCsePersonDebtDetailObligationType3">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T2.NUMB,
+  T2.TYPE,
+  T3.DUE_DT,
+  T4.DEBT_TYP_ID,
+  T4.DEBT_TYP_CD,
+  T4.SUP_PRSN_REQ_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_OB_TYPE T4
+  join
+  CKT_OB_TRN T1
+  on
+    (T1.OTY_TYPE = @otyType) and
+    (T1.OB_TRN_TYP = @obTrnTyp) and
+    (T1.OB_TRN_ID = @obTrnId) and
+    (T1.CPA_TYPE = @cpaType) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T4.DEBT_TYP_ID = T1.OTY_TYPE) and
+    (T1.CPA_SUP_TYPE is not null)
+  join
+  CKT_DEBT_DTL T3
+  on
+    (T1.OTY_TYPE = T3.OTY_TYPE) and
+    (T1.OBG_GENERATED_ID = T3.OBG_GENERATED_ID) and
+    (T1.OB_TRN_TYP = T3.OTR_TYPE) and
+    (T1.OB_TRN_ID = T3.OTR_GENERATED_ID) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER)
+  on
+    T2.NUMB = T1.CSP_SUP_NUMBER
+</value>
+   </data>
+   <data name="ReadImHousehold">
+      <value>
+select top(1)
+  AE_CASE_NO
+from
+  CKT_IM_HOUSEHOLD
+where
+  AE_CASE_NO = @aeCaseNo
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySumCsePerson">
+      <value>
+select
+  T1.YEAR0,
+  T1.MONTH0,
+  T1.RELATIONSHIP,
+  T1.IMH_AE_CASE_NO,
+  T1.CSP_NUMBER,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_IM_HH_MBR_MSUM T1
+  on
+    (@imhAeCaseNo = T1.IMH_AE_CASE_NO) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.YEAR0 between cast(@year1 as smallint) and cast(@year2 as smallint))
+order by
+  T1.YEAR0 desc,
+  T1.MONTH0 desc
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySumImHousehold">
+      <value>
+select
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (YEAR0 between cast(@year1 as smallint) and cast(@year2 as smallint)) and
+  (
+    (cast(@aeCaseNo as char(8)) = ' ') or
+    (IMH_AE_CASE_NO = @aeCaseNo)
+  )
+order by
+  YEAR0 desc,
+  MONTH0 desc
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  STANDARD_NO = @standardNo
+</value>
+   </data>
+   <data name="ReadUraCollectionApplicationCollection">
+      <value>
+select
+  T1.COLL_AMT_APPLD,
+  T1.CREATED_BY,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTY_IDENTIFIER,
+  T1.OBG_IDENTIFIER,
+  T1.OTR_IDENTIFIER,
+  T1.OTR_TYPE,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.COL_IDENTIFIER,
+  T1.IMH_AE_CASE_NO,
+  T1.CSP_NUMBER0,
+  T1.IMS_MONTH,
+  T1.IMS_YEAR,
+  T1.CREATED_TSTAMP,
+  T1.TYPE,
+  T2.APPLIED_TO_CD,
+  T2.COLL_DT,
+  T2.ADJ_IND,
+  T2.CONCURRENT_IND,
+  T2.OB_TRN_AMT,
+  T2.DIST_MTD,
+  T2.PGM_APPLD_TO,
+  T2.CT_ORD_APPLIED_TO,
+  T2.PGM_ST_APPLD_TO
+from
+  CKT_COLLECTION T2
+  join
+  CKT_URA_COLL_APPL T1
+  on
+    (@cspNumber0 = T1.CSP_NUMBER0) and
+    (@imsYear = T1.IMS_YEAR) and
+    (@imsMonth = T1.IMS_MONTH) and
+    (@imhAeCaseNo = T1.IMH_AE_CASE_NO) and
+    (T2.OBG_ID = T1.OBG_IDENTIFIER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.OTY_ID = T1.OTY_IDENTIFIER) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OTR_ID = T1.OTR_IDENTIFIER) and
+    (T2.CRV_ID = T1.CRV_IDENTIFIER) and
+    (T2.COLL_ID = T1.COL_IDENTIFIER) and
+    (T2.CRD_ID = T1.CRD_IDENTIFIER) and
+    (T2.CST_ID = T1.CST_IDENTIFIER) and
+    (T2.CRT_TYPE = T1.CRT_IDENTIFIER) and
+    (T2.OTR_TYPE = T1.OTR_TYPE) and
+    (T2.ADJ_IND = 'N') and
+    (T2.CONCURRENT_IND = 'N') and
+    (T2.COLL_DT between cast(@date1 as date) and cast(@date2 as date))
+order by
+  T2.COLL_DT desc
+</value>
+   </data>
+   <data name="ReadUraCollectionApplicationCollectionImHouseholdMbrMnthlySum">
+      <value>
+select
+  T1.COLL_AMT_APPLD,
+  T1.CREATED_BY,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTY_IDENTIFIER,
+  T1.OBG_IDENTIFIER,
+  T1.OTR_IDENTIFIER,
+  T1.OTR_TYPE,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.COL_IDENTIFIER,
+  T1.IMH_AE_CASE_NO,
+  T1.CSP_NUMBER0,
+  T1.IMS_MONTH,
+  T1.IMS_YEAR,
+  T1.CREATED_TSTAMP,
+  T1.TYPE,
+  T2.APPLIED_TO_CD,
+  T2.COLL_DT,
+  T2.ADJ_IND,
+  T2.CONCURRENT_IND,
+  T2.OB_TRN_AMT,
+  T2.DIST_MTD,
+  T2.PGM_APPLD_TO,
+  T2.CT_ORD_APPLIED_TO,
+  T2.PGM_ST_APPLD_TO,
+  T3.RELATIONSHIP
+from
+  CKT_COLLECTION T2
+  join
+  CKT_IM_HH_MBR_MSUM T3
+  join
+  CKT_URA_COLL_APPL T1
+  on
+    (T3.CSP_NUMBER = T1.CSP_NUMBER0) and
+    (T3.YEAR0 = T1.IMS_YEAR) and
+    (T3.MONTH0 = T1.IMS_MONTH) and
+    (T3.IMH_AE_CASE_NO = T1.IMH_AE_CASE_NO) and
+    (T3.YEAR0 between cast(@year1 as smallint) and cast(@year2 as smallint))
+  on
+    (T2.OBG_ID = T1.OBG_IDENTIFIER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.OTY_ID = T1.OTY_IDENTIFIER) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OTR_ID = T1.OTR_IDENTIFIER) and
+    (T2.CRV_ID = T1.CRV_IDENTIFIER) and
+    (T2.COLL_ID = T1.COL_IDENTIFIER) and
+    (T2.CRD_ID = T1.CRD_IDENTIFIER) and
+    (T2.CST_ID = T1.CST_IDENTIFIER) and
+    (T2.CRT_TYPE = T1.CRT_IDENTIFIER) and
+    (T2.OTR_TYPE = T1.OTR_TYPE) and
+    (@cpaType = T2.CPA_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.ADJ_IND = 'N') and
+    (T2.CONCURRENT_IND = 'N') and
+    (T2.COLL_DT between cast(@date1 as date) and cast(@date2 as date))
+order by
+  T1.IMS_YEAR desc,
+  T1.IMS_MONTH desc,
+  T2.COLL_DT desc
+</value>
+   </data>
+</root>

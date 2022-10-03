@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadHealthInsuranceCompany1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CARRIER_CODE,
+  POLICY_CARRIER,
+  CONTACT_NAME,
+  INSURER_PHONE,
+  INSURER_FAX,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  INSURER_FAX_EXT,
+  INSURER_PHONE_EXT,
+  INSURER_PH_AREA,
+  INSURER_FAX_AREA,
+  START_DATE,
+  END_DATE
+from
+  CKT_HEALTH_INS_CO
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompany2">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.CARRIER_CODE,
+  T1.POLICY_CARRIER,
+  T1.CONTACT_NAME,
+  T1.INSURER_PHONE,
+  T1.INSURER_FAX,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.INSURER_FAX_EXT,
+  T1.INSURER_PHONE_EXT,
+  T1.INSURER_PH_AREA,
+  T1.INSURER_FAX_AREA,
+  T1.START_DATE,
+  T1.END_DATE
+from
+  CKT_HEALTH_INS_CO T1
+  join
+  CKT_HINS_CO_ADDR T2
+  on
+    (T1.POLICY_CARRIER = @policyCarrier) and
+    (T1.IDENTIFIER = T2.HIC_IDENTIFIER) and
+    (T2.STREET_1 = @street1) and
+    (T2.STREET_2 = @street2) and
+    (T2.CITY = @city) and
+    (T2.[STATE] = @state)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompany3">
+      <value>
+select
+  IDENTIFIER,
+  CARRIER_CODE,
+  POLICY_CARRIER,
+  CONTACT_NAME,
+  INSURER_PHONE,
+  INSURER_FAX,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  INSURER_FAX_EXT,
+  INSURER_PHONE_EXT,
+  INSURER_PH_AREA,
+  INSURER_FAX_AREA,
+  START_DATE,
+  END_DATE
+from
+  CKT_HEALTH_INS_CO
+where
+  CARRIER_CODE = @carrierCode
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompanyAddress">
+      <value>
+select top(1)
+  HIC_IDENTIFIER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_HINS_CO_ADDR
+where
+  (@hicIdentifier = HIC_IDENTIFIER) and
+  (ADDRESS_TYPE = @addressType)
+</value>
+   </data>
+   <data name="UpdateHealthInsuranceCompany">
+      <value>
+update CKT_HEALTH_INS_CO
+set
+  CARRIER_CODE = @carrierCode,
+  POLICY_CARRIER = @policyCarrier,
+  CONTACT_NAME = @contactName,
+  INSURER_PHONE = @insurerPhone,
+  INSURER_FAX = @insurerFax,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  INSURER_FAX_EXT = @insurerFaxExt,
+  INSURER_PHONE_EXT = @insurerPhoneExt,
+  INSURER_PH_AREA = @insurerPhArea,
+  INSURER_FAX_AREA = @insurerFaxArea,
+  START_DATE = @startDate,
+  END_DATE = @endDate
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateHealthInsuranceCompanyAddress">
+      <value>
+update CKT_HINS_CO_ADDR
+set
+  STREET_1 = @street1,
+  STREET_2 = @street2,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CODE5 = @zipCode5,
+  ZIP_CODE4 = @zipCode4,
+  ZIP3 = @zip3,
+  COUNTRY = @country,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (HIC_IDENTIFIER = @hicIdentifier) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+</root>

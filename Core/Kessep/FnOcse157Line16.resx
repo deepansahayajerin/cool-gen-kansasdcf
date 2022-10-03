@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignment">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE with(readuncommitted)
+where
+  (@casNo = CAS_NO) and
+  (EFFECTIVE_DATE &lt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePersonCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.EMANCIPATION_DT,
+  T2.TYPE,
+  T2.OUT_OF_WEDLOCK,
+  T2.PAT_ESTAB_IND,
+  T2.DATE_PATERN_ESTAB,
+  T3.CSE_OPEN_DATE,
+  T3.PA_MEDICAL_SERVICE,
+  T3.INTERSTATE_CASE_ID
+from
+  CKT_CASE T3 with(readuncommitted)
+  join
+  CKT_CSE_PERSON T2 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T1 with(readuncommitted)
+  on
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'CH') and
+    (T2.PAT_ESTAB_IND = 'Y') and
+    (T2.DATE_PATERN_ESTAB between cast(@date1 as date) and cast(@date2 as date)) and
+    (T2.NUMB between cast(@suppPersonNumber1 as char(10)) and cast(@suppPersonNumber2 as char(10))) and
+    (T2.NUMB &gt; @numb)
+  on
+    T3.NUMB = T1.CAS_NUMBER
+order by
+  T1.CSP_NUMBER
+</value>
+   </data>
+</root>

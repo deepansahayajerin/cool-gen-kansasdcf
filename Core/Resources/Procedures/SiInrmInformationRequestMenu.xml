@@ -1,0 +1,53 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiInrmInformationRequestMenu"
+           program-name="SWEINRMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiInrmInformationRequestMenu"
+           transaction="SR1T"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_CALLER_LIST_INQUIRY"
+       action="transfer"
+       to="SiInrcInqListByCallerName"
+       send-command="XXFMMENU">
+      <map from="InformationRequest" to="InformationRequest"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_APPL_LIST_INQUIRY"
+       action="transfer"
+       to="SiInraInqListByApplicantNm"
+       send-command="XXFMMENU">
+      <map from="InformationRequest" to="MenuEntry"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MAINTAIN_INQUIRY"
+       action="transfer"
+       to="SiInrdInquiryMaintenance"
+       send-command="XXFMMENU">
+      <map from="InformationRequest.Number" to="InformationRequest.Number"/>
+      <map from="InformationRequest.ApplicantLastName"
+           to="InformationRequest.ApplicantLastName"/>
+      <map from="InformationRequest.ApplicantFirstName"
+           to="InformationRequest.ApplicantFirstName"/>
+      <map from="InformationRequest.ApplicantMiddleInitial"
+           to="InformationRequest.ApplicantMiddleInitial"/>
+      <map from="InformationRequest.CallerLastName"
+           to="InformationRequest.CallerLastName"/>
+      <map from="InformationRequest.CallerFirstName"
+           to="InformationRequest.CallerFirstName"/>
+      <map from="InformationRequest.CallerMiddleInitial"
+           to="InformationRequest.CallerMiddleInitial"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiSinmServiceInitiationMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Next" to="Next"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="InformationRequest.Number" to="InformationRequest.Number"/>
+   <map from="InformationRequest.ApplicantLastName"
+        to="InformationRequest.ApplicantLastName"/>
+   <map from="InformationRequest.ApplicantFirstName"
+        to="InformationRequest.ApplicantFirstName"/>
+   <map from="InformationRequest.ApplicantMiddleInitial"
+        to="InformationRequest.ApplicantMiddleInitial"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

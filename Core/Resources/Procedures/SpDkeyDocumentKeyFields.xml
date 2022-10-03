@@ -1,0 +1,171 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpDkeyDocumentKeyFields"
+           program-name="SWEDKEYP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpDkeyDocumentKeyFields"
+           transaction="SRPD"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST ECO_LNK_TO_LACC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="LeLcccLstCseCasesByCtCase"
+       send-command="DISPLAY">
+      <map from="PromptLegalAction.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="SelectedCase" to="FromPromptCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LACS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="LeLacsLstLglActnByCseCase"
+       send-command="DISPLAY">
+      <map from="PromptCase" to="Case1"/>
+      <return-map from="DlgflwSelected" to="FromPromptLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DDOC"
+       action="transfer"
+       to="SpDdocDeadDocument"
+       send-command="PRINT">
+      <map from="Infrastructure" to="Infrastructure"/>
+      <map from="NextTranInfo" to="NextTranInfo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="PromptCase" to="Next"/>
+      <return-map from="SelectedChildCsePersonsWorkSet" to="FromPromptChild"/>
+      <return-map from="Selected" to="FromPromptCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OFFICE_SERVICE_PROVDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionOffice.SystemGeneratedId"
+                  to="FromPromptOffice.SystemGeneratedId"/>
+      <return-map from="HiddenSelectionOffice.Name" to="FromPromptOffice.Name"/>
+      <return-map from="HiddenSelectionServiceProvider" to="FromPromptServiceProvider"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="FromPromptOfficeServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_RESOURCE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeReslPersonResourceList"
+       send-command="DISPLAY">
+      <map from="ToAsinCsePerson.Number" to="StartingCsePerson.Number"/>
+      <return-map from="Selected" to="FromPromptCsePersonResource"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ASIN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpAsinOspAssignment"
+       send-command="DISPLAY">
+      <map from="ToAsinAdministrativeAppeal" to="HadministrativeAppeal"/>
+      <map from="ToAsinAdministrativeAction" to="HadministrativeAction"/>
+      <map from="ToAsinCsePersonAccount" to="HcsePersonAccount"/>
+      <map from="ToAsinObligationType.SystemGeneratedIdentifier"
+           to="HobligationType.SystemGeneratedIdentifier"/>
+      <map from="ToAsinObligation" to="Hobligation"/>
+      <map from="ToAsinPaReferral" to="HpaReferral"/>
+      <map from="ToAsinLegalReferral" to="HlegalReferral"/>
+      <map from="ToAsinLegalAction.Identifier" to="HlegalAction.Identifier"/>
+      <map from="ToAsinCsePerson" to="HcsePerson"/>
+      <map from="ToAsinCaseUnit" to="HcaseUnit"/>
+      <map from="PromptCase" to="Hcase"/>
+      <map from="ToAsinHeaderObject" to="HeaderObject"/>
+   </on>
+   <on exit-state="ECO_LNK_2_ADMN_APPEAL_BY_CSE_PER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="LeAapsLstAdmApplsByCsePer"
+       send-command="DISPLAY">
+      <map from="PromptCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Selected" to="FromPromptAdministrativeAppeal"/>
+   </on>
+   <map from="Export1.G" to="Import1.G"/>
+   <map from="Export1.GexportPrevFieldValue" to="Import1.GimportPrevFieldValue"/>
+   <map from="ValidateOdra" to="ValidateOdra"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Infrastructure" to="Infrastructure"/>
+   <map from="Filter" to="Filter"/>
+   <map from="Scrolling" to="Scrolling"/>
+   <map from="NextTranInfo" to="NextTranInfo"/>
+   <map from="Export1.GexportFieldName" to="Import1.GimportFieldName"/>
+   <map from="Export1.GexportFieldValue" to="Import1.GimportFieldValue"/>
+   <map from="Export1.GexportPrompt" to="Import1.GimportPrompt"/>
+   <map from="Export1.GexportScreenName" to="Import1.GimportScreenName"/>
+   <map from="HiddenPageKeys.GexportHiddenDocumentField"
+        to="HiddenPageKeys.GimportHiddenDocumentField"/>
+   <map from="HiddenPageKeys.GexportHiddenField"
+        to="HiddenPageKeys.GimportHiddenField"/>
+   <map from="SpDocKey.KeyAdminAppeal" to="SpDocKey.KeyAdminAppeal"/>
+   <map from="SpDocKey.KeyCase" to="SpDocKey.KeyCase"/>
+   <map from="SpDocKey.KeyChild" to="SpDocKey.KeyChild"/>
+   <map from="SpDocKey.KeyLegalAction" to="SpDocKey.KeyLegalAction"/>
+   <map from="SpDocKey.KeyWorksheet" to="SpDocKey.KeyWorksheet"/>
+   <map from="SpDocKey.KeyAppointment" to="SpDocKey.KeyAppointment"/>
+   <map from="SpDocKey.KeyBankruptcy" to="SpDocKey.KeyBankruptcy"/>
+   <map from="SpDocKey.KeyPerson" to="SpDocKey.KeyPerson"/>
+   <map from="SpDocKey.KeyContact" to="SpDocKey.KeyContact"/>
+   <map from="SpDocKey.KeyAdminActionCert" to="SpDocKey.KeyAdminActionCert"/>
+   <map from="SpDocKey.KeyGeneticTest" to="SpDocKey.KeyGeneticTest"/>
+   <map from="SpDocKey.KeyInfoRequest" to="SpDocKey.KeyInfoRequest"/>
+   <map from="SpDocKey.KeyHealthInsCoverage" to="SpDocKey.KeyHealthInsCoverage"/>
+   <map from="SpDocKey.KeyIncarceration" to="SpDocKey.KeyIncarceration"/>
+   <map from="SpDocKey.KeyMilitaryService" to="SpDocKey.KeyMilitaryService"/>
+   <map from="SpDocKey.KeyResource" to="SpDocKey.KeyResource"/>
+   <map from="SpDocKey.KeyTribunal" to="SpDocKey.KeyTribunal"/>
+   <map from="SpDocKey.KeyIncomeSource" to="SpDocKey.KeyIncomeSource"/>
+   <map from="SpDocKey.KeyWorkerComp" to="SpDocKey.KeyWorkerComp"/>
+   <map from="SpDocKey.KeyAp" to="SpDocKey.KeyAp"/>
+   <map from="SpDocKey.KeyAr" to="SpDocKey.KeyAr"/>
+   <map from="SpDocKey.KeyObligation" to="SpDocKey.KeyObligation"/>
+   <map from="SpDocKey.KeyObligationType" to="SpDocKey.KeyObligationType"/>
+   <map from="SpDocKey.KeyObligationAdminAction"
+        to="SpDocKey.KeyObligationAdminAction"/>
+   <map from="SpDocKey.KeyAdminAction" to="SpDocKey.KeyAdminAction"/>
+   <map from="SpDocKey.KeyPersonAccount" to="SpDocKey.KeyPersonAccount"/>
+   <map from="SpDocKey.KeyLegalReferral" to="SpDocKey.KeyLegalReferral"/>
+   <map from="OutDocRtrnAddr.ServProvLastName"
+        to="OutDocRtrnAddr.ServProvLastName"/>
+   <map from="OutDocRtrnAddr.ServProvFirstName"
+        to="OutDocRtrnAddr.ServProvFirstName"/>
+   <map from="OutDocRtrnAddr.ServProvMi" to="OutDocRtrnAddr.ServProvMi"/>
+   <map from="OutDocRtrnAddr.OffcAddrStreet1"
+        to="OutDocRtrnAddr.OffcAddrStreet1"/>
+   <map from="OutDocRtrnAddr.OffcAddrStreet2"
+        to="OutDocRtrnAddr.OffcAddrStreet2"/>
+   <map from="OutDocRtrnAddr.OffcAddrCity" to="OutDocRtrnAddr.OffcAddrCity"/>
+   <map from="OutDocRtrnAddr.OffcAddrState" to="OutDocRtrnAddr.OffcAddrState"/>
+   <map from="OutDocRtrnAddr.OffcAddrZip" to="OutDocRtrnAddr.OffcAddrZip"/>
+   <map from="OutDocRtrnAddr.OffcAddrZip4" to="OutDocRtrnAddr.OffcAddrZip4"/>
+   <map from="OutDocRtrnAddr.OffcAddrZip3" to="OutDocRtrnAddr.OffcAddrZip3"/>
+   <map from="OutDocRtrnAddr.OspWorkPhoneAreaCode"
+        to="OutDocRtrnAddr.OspWorkPhoneAreaCode"/>
+   <map from="OutDocRtrnAddr.OspWorkPhoneNumber"
+        to="OutDocRtrnAddr.OspWorkPhoneNumber"/>
+   <map from="OutDocRtrnAddr.OspWorkPhoneExtension"
+        to="OutDocRtrnAddr.OspWorkPhoneExtension"/>
+   <map from="OutDocRtrnAddr.OspCertificationNumber"
+        to="OutDocRtrnAddr.OspCertificationNumber"/>
+   <map from="OutDocRtrnAddr.OspRoleCode" to="OutDocRtrnAddr.OspRoleCode"/>
+   <map from="OutDocRtrnAddr.OfficeName" to="OutDocRtrnAddr.OfficeName"/>
+   <map from="OutDocRtrnAddr.ServProvUserId" to="OutDocRtrnAddr.ServProvUserId"/>
+   <map from="SpDocKey.KeyCashRcptDetail" to="SpDocKey.KeyCashRcptDetail"/>
+   <map from="SpDocKey.KeyCashRcptEvent" to="SpDocKey.KeyCashRcptEvent"/>
+   <map from="SpDocKey.KeyCashRcptSource" to="SpDocKey.KeyCashRcptSource"/>
+   <map from="SpDocKey.KeyCashRcptType" to="SpDocKey.KeyCashRcptType"/>
+   <map from="SpDocKey.KeyRecaptureRule" to="SpDocKey.KeyRecaptureRule"/>
+   <map from="SpDocKey.KeyPersonAddress" to="SpDocKey.KeyPersonAddress"/>
+   <map from="SpDocKey.KeyLegalActionDetail" to="SpDocKey.KeyLegalActionDetail"/>
+   <map from="SpDocKey.KeyInterstateRequest" to="SpDocKey.KeyInterstateRequest"/>
+</procedure>

@@ -1,0 +1,185 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiAddrAddressMaintenance"
+           program-name="SWEADDRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiAddrAddressMaintenance"
+           transaction="SR1A"
+           primary-window="SI_ADDR_ADDRESS_MAINTENANCE"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CODE_TABLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="PromptCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="PromptCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="HiddenCsePerson" to="StartCsePerson"/>
+      <map from="Case1" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_FOREIGN_ADDRESS_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiFadsForeignAddressMaint"
+       send-command="DISPLAY">
+      <map from="ApCommon" to="ApCommon"/>
+      <map from="ArCommon" to="ArCommon"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Next" to="Next"/>
+      <map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+      <map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="Next" to="Next"/>
+      <return-map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+      <return-map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_ROLE_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiRoleCaseRoleMaintenance"
+       send-command="DISPLAY">
+      <map from="Case1.Number" to="Case1.Number"/>
+      <return-map from="Selected.Number" to="ArFromCaseRole.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <return-map from="Selected.Number" to="ApCsePersonsWorkSet.Number"/>
+      <return-map from="Selected.FormattedName" to="ApCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="Next" to="Next"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ApCommon" to="ApCommon"/>
+   <map from="ArCommon" to="ArCommon"/>
+   <map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+   <map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+   <map from="EmptyAddrSelect" to="EmptyAddrSelect"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Plus" to="Plus"/>
+   <map from="SaveSubscript" to="SaveSubscript"/>
+   <map from="Pagenum.LastAddr" to="Pagenum.LastAddr"/>
+   <map from="Save" to="Save"/>
+   <map from="ApList" to="ApList"/>
+   <map from="MtStatePrmt" to="MtStatePrmt"/>
+   <map from="MtEnddtCdPrmt" to="MtEnddtCdPrmt"/>
+   <map from="MtSrcePrmt" to="MtSrcePrmt"/>
+   <map from="Hidden.HsendDate" to="Hidden.HsendDate"/>
+   <map from="ForeignAddress" to="ForeignAddress"/>
+   <map from="ForeignAddr" to="ForeignAddr"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="ApActive" to="ApActive"/>
+   <map from="HiddenNext" to="HiddenNext"/>
+   <map from="HiddenAp" to="HiddenAp"/>
+   <map from="MtTypePrmt" to="MtTypePrmt"/>
+   <map from="MtReturnPrmt" to="MtReturnPrmt"/>
+   <map from="Standard" to="Standard"/>
+   <map from="MtCntyPrmt" to="MtCntyPrmt"/>
+   <map from="Group.DetCommon" to="Group.DetCommon"/>
+   <map from="Group.StatePrmt" to="Group.StatePrmt"/>
+   <map from="Group.EnddtCdPrmt" to="Group.EnddtCdPrmt"/>
+   <map from="Group.SrcePrmt" to="Group.SrcePrmt"/>
+   <map from="Group.ReturnPrmt" to="Group.ReturnPrmt"/>
+   <map from="Group.TypePrmt" to="Group.TypePrmt"/>
+   <map from="Group.CntyPrmt" to="Group.CntyPrmt"/>
+   <map from="ArFromCaseRole" to="ArFromCaseRole"/>
+   <map from="ArList" to="ArList"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="Alrt" to="Alrt"/>
+   <map from="EmptyAddr.Street1" to="EmptyAddr.Street1"/>
+   <map from="EmptyAddr.Street2" to="EmptyAddr.Street2"/>
+   <map from="EmptyAddr.City" to="EmptyAddr.City"/>
+   <map from="EmptyAddr.SendDate" to="EmptyAddr.SendDate"/>
+   <map from="EmptyAddr.Type1" to="EmptyAddr.Type1"/>
+   <map from="EmptyAddr.Source" to="EmptyAddr.Source"/>
+   <map from="EmptyAddr.VerifiedDate" to="EmptyAddr.VerifiedDate"/>
+   <map from="EmptyAddr.EndDate" to="EmptyAddr.EndDate"/>
+   <map from="EmptyAddr.EndCode" to="EmptyAddr.EndCode"/>
+   <map from="EmptyAddr.WorkerId" to="EmptyAddr.WorkerId"/>
+   <map from="AeAddr.Street1" to="AeAddr.Street1"/>
+   <map from="AeAddr.Street2" to="AeAddr.Street2"/>
+   <map from="AeAddr.City" to="AeAddr.City"/>
+   <map from="AeAddr.SendDate" to="AeAddr.SendDate"/>
+   <map from="AeAddr.Type1" to="AeAddr.Type1"/>
+   <map from="AeAddr.Source" to="AeAddr.Source"/>
+   <map from="AeAddr.VerifiedDate" to="AeAddr.VerifiedDate"/>
+   <map from="AeAddr.EndDate" to="AeAddr.EndDate"/>
+   <map from="AeAddr.EndCode" to="AeAddr.EndCode"/>
+   <map from="AeAddr.WorkerId" to="AeAddr.WorkerId"/>
+   <map from="LastAddr.Identifier" to="LastAddr.Identifier"/>
+   <map from="EmptyAddr.LocationType" to="EmptyAddr.LocationType"/>
+   <map from="EmptyAddr.State" to="EmptyAddr.State"/>
+   <map from="EmptyAddr.ZipCode" to="EmptyAddr.ZipCode"/>
+   <map from="EmptyAddr.Zip4" to="EmptyAddr.Zip4"/>
+   <map from="AeAddr.LocationType" to="AeAddr.LocationType"/>
+   <map from="AeAddr.State" to="AeAddr.State"/>
+   <map from="AeAddr.ZipCode" to="AeAddr.ZipCode"/>
+   <map from="AeAddr.Zip4" to="AeAddr.Zip4"/>
+   <map from="EmptyAddr.County" to="EmptyAddr.County"/>
+   <map from="AeAddr.County" to="AeAddr.County"/>
+   <map from="Group.DetCsePersonAddress.Street1"
+        to="Group.DetCsePersonAddress.Street1"/>
+   <map from="Group.DetCsePersonAddress.Street2"
+        to="Group.DetCsePersonAddress.Street2"/>
+   <map from="Group.DetCsePersonAddress.City"
+        to="Group.DetCsePersonAddress.City"/>
+   <map from="Group.DetCsePersonAddress.SendDate"
+        to="Group.DetCsePersonAddress.SendDate"/>
+   <map from="Group.DetCsePersonAddress.Type1"
+        to="Group.DetCsePersonAddress.Type1"/>
+   <map from="Group.DetCsePersonAddress.Source"
+        to="Group.DetCsePersonAddress.Source"/>
+   <map from="Group.DetCsePersonAddress.VerifiedDate"
+        to="Group.DetCsePersonAddress.VerifiedDate"/>
+   <map from="Group.DetCsePersonAddress.EndDate"
+        to="Group.DetCsePersonAddress.EndDate"/>
+   <map from="Group.DetCsePersonAddress.EndCode"
+        to="Group.DetCsePersonAddress.EndCode"/>
+   <map from="Group.DetCsePersonAddress.WorkerId"
+        to="Group.DetCsePersonAddress.WorkerId"/>
+   <map from="Group.DetCsePersonAddress.Identifier"
+        to="Group.DetCsePersonAddress.Identifier"/>
+   <map from="Group.DetCsePersonAddress.LocationType"
+        to="Group.DetCsePersonAddress.LocationType"/>
+   <map from="Group.DetCsePersonAddress.State"
+        to="Group.DetCsePersonAddress.State"/>
+   <map from="Group.DetCsePersonAddress.ZipCode"
+        to="Group.DetCsePersonAddress.ZipCode"/>
+   <map from="Group.DetCsePersonAddress.Zip4"
+        to="Group.DetCsePersonAddress.Zip4"/>
+   <map from="Group.DetCsePersonAddress.County"
+        to="Group.DetCsePersonAddress.County"/>
+   <map from="EmptyAddr.Identifier" to="EmptyAddr.Identifier"/>
+   <map from="Group.HiddenDet.VerifiedDate" to="Group.HiddenDet.VerifiedDate"/>
+   <map from="Group.HiddenDet.EndDate" to="Group.HiddenDet.EndDate"/>
+   <map from="Group.HiddenDet.LocationType" to="Group.HiddenDet.LocationType"/>
+   <map from="Group.HiddenDet.State" to="Group.HiddenDet.State"/>
+   <map from="AeAddr.LastUpdatedTimestamp" to="AeAddr.LastUpdatedTimestamp"/>
+   <map from="EmptyAddr.LastUpdatedTimestamp"
+        to="EmptyAddr.LastUpdatedTimestamp"/>
+   <map from="Group.DetCsePersonAddress.LastUpdatedTimestamp"
+        to="Group.DetCsePersonAddress.LastUpdatedTimestamp"/>
+   <map from="Group.HiddenDet.ZipCode" to="Group.HiddenDet.ZipCode"/>
+   <map from="Group.HiddenDet.Street1" to="Group.HiddenDet.Street1"/>
+   <map from="Group.HiddenDet.Street2" to="Group.HiddenDet.Street2"/>
+   <map from="Group.HiddenDet.City" to="Group.HiddenDet.City"/>
+   <map from="Group.HiddenDet.Source" to="Group.HiddenDet.Source"/>
+   <map from="Group.HiddenDet.EndCode" to="Group.HiddenDet.EndCode"/>
+   <map from="Group.HiddenDet.County" to="Group.HiddenDet.County"/>
+   <map from="Group.HiddenDet.Zip4" to="Group.HiddenDet.Zip4"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

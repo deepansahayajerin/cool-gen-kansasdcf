@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadStatsVerifi1">
+      <value>
+select
+  YEAR_MONTH,
+  FIRST_RUN_NUMBER,
+  LINE_NUMBER,
+  PROGRAM_TYPE,
+  CREATED_TIMESTAMP,
+  SERVICE_PRVDR_ID,
+  OFFICE_ID,
+  CASE_WRK_ROLE,
+  PARENT_ID,
+  CASE_NUMBER,
+  SUPP_PERSON_NUMBER,
+  OBLIGOR_PERSON_NBR,
+  DATE_PATERNITY_EST,
+  COURT_ORDER_NUMBER,
+  TRAN_AMOUNT,
+  DDDD,
+  DEBT_DETAIL_BALDUE,
+  OBLIGATION_TYPE,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  COLL_CREATED_DATE,
+  CASE_ROLE_TYPE,
+  CASE_ASIN_EFF_DTE,
+  CASE_ASIN_END_DTE,
+  PERSON_PROG_CODE,
+  COMMENT0
+from
+  CKT_STATS_VERIFI with(readuncommitted)
+where
+  (YEAR_MONTH = @yearMonth) and
+  (FIRST_RUN_NUMBER = @firstRunNumber) and
+  (LINE_NUMBER between cast(@lineNumber1 as smallint) and cast(@lineNumber2 as smallint)) and
+  (OFFICE_ID between cast(@officeId1 as smallint) and cast(@officeId2 as smallint)) and
+  (SERVICE_PRVDR_ID between cast(@servicePrvdrId1 as integer) and cast(@servicePrvdrId2 as integer)) and
+  (PARENT_ID between cast(@parentId1 as integer) and cast(@parentId2 as integer)) and
+  (
+    (OBLIGOR_PERSON_NBR between cast(@obligorPersonNbr1 as char(10)) and cast(@obligorPersonNbr2 as char(10))) or
+    (OBLIGOR_PERSON_NBR = ' ')
+  ) and
+  (
+    (CASE_NUMBER between cast(@caseNumber1 as char(10)) and cast(@caseNumber2 as char(10))) or
+    (CASE_NUMBER = ' ')
+  ) and
+  (
+    (SUPP_PERSON_NUMBER between cast(@suppPersonNumber1 as char(10)) and cast(@suppPersonNumber2 as char(10))) or
+    (SUPP_PERSON_NUMBER = ' ')
+  ) and
+  (
+    (cast(@programType as char(4)) = ' ') or
+    (PROGRAM_TYPE = @programType)
+  )
+order by
+  CASE_NUMBER
+</value>
+   </data>
+   <data name="ReadStatsVerifi2">
+      <value>
+select
+  YEAR_MONTH,
+  FIRST_RUN_NUMBER,
+  LINE_NUMBER,
+  PROGRAM_TYPE,
+  CREATED_TIMESTAMP,
+  SERVICE_PRVDR_ID,
+  OFFICE_ID,
+  CASE_WRK_ROLE,
+  PARENT_ID,
+  CASE_NUMBER,
+  SUPP_PERSON_NUMBER,
+  OBLIGOR_PERSON_NBR,
+  DATE_PATERNITY_EST,
+  COURT_ORDER_NUMBER,
+  TRAN_AMOUNT,
+  DDDD,
+  DEBT_DETAIL_BALDUE,
+  OBLIGATION_TYPE,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  COLL_CREATED_DATE,
+  CASE_ROLE_TYPE,
+  CASE_ASIN_EFF_DTE,
+  CASE_ASIN_END_DTE,
+  PERSON_PROG_CODE,
+  COMMENT0
+from
+  CKT_STATS_VERIFI with(readuncommitted)
+where
+  (YEAR_MONTH = @yearMonth) and
+  (FIRST_RUN_NUMBER = @firstRunNumber) and
+  (LINE_NUMBER between cast(@lineNumber1 as smallint) and cast(@lineNumber2 as smallint)) and
+  (OFFICE_ID between cast(@officeId1 as smallint) and cast(@officeId2 as smallint)) and
+  (SERVICE_PRVDR_ID between cast(@servicePrvdrId1 as integer) and cast(@servicePrvdrId2 as integer)) and
+  (PARENT_ID between cast(@parentId1 as integer) and cast(@parentId2 as integer)) and
+  (
+    (OBLIGOR_PERSON_NBR between cast(@obligorPersonNbr1 as char(10)) and cast(@obligorPersonNbr2 as char(10))) or
+    (OBLIGOR_PERSON_NBR = ' ')
+  ) and
+  (
+    (CASE_NUMBER between cast(@caseNumber1 as char(10)) and cast(@caseNumber2 as char(10))) or
+    (CASE_NUMBER = ' ')
+  ) and
+  (
+    (SUPP_PERSON_NUMBER between cast(@suppPersonNumber1 as char(10)) and cast(@suppPersonNumber2 as char(10))) or
+    (SUPP_PERSON_NUMBER = ' ')
+  ) and
+  (
+    (cast(@programType as char(4)) = ' ') or
+    (PROGRAM_TYPE = @programType)
+  )
+order by
+  SUPP_PERSON_NUMBER
+</value>
+   </data>
+</root>

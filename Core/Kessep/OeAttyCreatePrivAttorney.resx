@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePersonPrivateAttorney">
+      <value>
+insert into CKT_PRSN_PRIV_ATTR
+(
+  CSP_NUMBER,
+  IDENTIFIER,
+  CAS_NUMBER,
+  DATE_RETAINED,
+  DATE_DISMISSED,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  FIRM_NAME,
+  PHONE,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FAX_AREA,
+  FAX_EXT,
+  PHONE_AREA,
+  PHONE_EXT,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY,
+  EMAIL_ADDRESS,
+  BAR_NUMBER,
+  CONSENT_IND,
+  NOTE
+)
+values
+(
+  @cspNumber,
+  @identifier,
+  @casNumber,
+  @dateRetained,
+  @dateDismissed,
+  @lastName,
+  @firstName,
+  @middleInitial,
+  @firmName,
+  @phone,
+  @faxNumber,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @faxArea,
+  @faxExt,
+  @phoneArea,
+  @phoneExt,
+  @courtCaseNumber,
+  @fipsStateAbbrev,
+  @fipsCountyAbbrev,
+  @tribCountry,
+  @emailAddress,
+  @barNumber,
+  @consentInd,
+  @note
+)
+</value>
+   </data>
+   <data name="CreatePrivateAttorneyAddress">
+      <value>
+insert into CKT_PRIV_ATTR_ADDR
+(
+  PPA_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @ppaIdentifier,
+  @cspNumber,
+  @effectiveDate,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @province,
+  @postalCode,
+  @zipCode5,
+  @zipCode4,
+  @zip3,
+  @country,
+  @addressType,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER
+from
+  CKT_PRSN_PRIV_ATTR
+where
+  @cspNumber = CSP_NUMBER
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,121 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDpayMtnDesignatedPayee"
+           program-name="SWEDPAYP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDpayMtnDesignatedPayee"
+           transaction="SR44"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="Selected.Number" to="Selected.Number"/>
+      <map from="Selected.FormattedName" to="Selected.FormattedName"/>
+      <map from="Selected.Sex" to="Selected.Sex"/>
+      <map from="Selected.Dob" to="Selected.Dob"/>
+      <map from="Selected.Ssn" to="Selected.Ssn"/>
+      <map from="Selected.FirstName" to="Selected.FirstName"/>
+      <map from="Selected.MiddleInitial" to="Selected.MiddleInitial"/>
+      <map from="Selected.LastName" to="Selected.LastName"/>
+      <return-map from="Selected" to="ThruFlowCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_DESIG_PAYEE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDPYL"
+       to="FnDpylLstDesignatedPayees"
+       send-command="DISPLAY">
+      <map from="ThruFlowStartingFrom" to="StartingDate"/>
+      <map from="Supported" to="Supported"/>
+      <map from="ThruFlowObligationTransaction.SystemGeneratedIdentifier"
+           to="PassedObligationTransaction.SystemGeneratedIdentifier"/>
+      <map from="ThruFlowObligor" to="PassedObligor"/>
+      <map from="ThruFlowObligationType" to="PassedObligationType"/>
+      <map from="ThruFlowObligation" to="PassedObligation"/>
+      <map from="Payee" to="PayeeCsePersonsWorkSet"/>
+      <map from="Payee" to="FlowPayee"/>
+      <return-map from="StartingDate" to="ThruFlowStartingFrom"/>
+      <return-map from="PassedSupported" to="Supported"/>
+      <return-map from="PassBothType.SequentialIdentifier"
+                  to="BothTypeOfDpIn1View.SequentialIdentifier"/>
+      <return-map from="PassBothType.EffectiveDate"
+                  to="BothTypeOfDpIn1View.EffectiveDate"/>
+      <return-map from="PassBothType.DiscontinueDate"
+                  to="BothTypeOfDpIn1View.DiscontinueDate"/>
+      <return-map from="PassedObligor" to="ThruFlowObligor"/>
+      <return-map from="PassedObligationType.SystemGeneratedIdentifier"
+                  to="ThruFlowObligationType.SystemGeneratedIdentifier"/>
+      <return-map from="PassedObligationTransaction" to="ThruFlowObligationTransaction"/>
+      <return-map from="PassedObligation.SystemGeneratedIdentifier"
+                  to="ThruFlowObligation.SystemGeneratedIdentifier"/>
+      <return-map from="FlowDesigPayee.Number" to="DesignatedPayee.Number"/>
+      <return-map from="FlowDesigPayee.FormattedName" to="DesignatedPayee.FormattedName"/>
+      <return-map from="PayeeCsePersonsWorkSet.Number" to="Payee.Number"/>
+      <return-map from="PayeeCsePersonsWorkSet.FormattedName" to="Payee.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_LST_PAYEE_ACCT"
+       action="transfer"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="HiddenPayee" to="CsePerson"/>
+   </on>
+   <map from="Payee" to="Payee"/>
+   <map from="HiddenInitialCommand" to="HiddenInitialCommand"/>
+   <map from="DesignatedPayee" to="DesignatedPayee"/>
+   <map from="HiddenDesignatedPayee" to="HiddenDesignatedPayee"/>
+   <map from="HiddenPayee" to="HiddenPayee"/>
+   <map from="ArpayeePrompt" to="ArpayeePrompt"/>
+   <map from="DesignatedPayeePrompt" to="DesignatedPayeePrompt"/>
+   <map from="ThruFlowObligor" to="ThruFlowObligor"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ThruFlowObligationTransaction" to="ThruFlowObligationTransaction"/>
+   <map from="ThruFlowStartingFrom" to="ThruFlowStartingFrom"/>
+   <map from="BothTypeOfDpIn1View.EffectiveDate"
+        to="BothTypeOfDpIn1View.EffectiveDate"/>
+   <map from="BothTypeOfDpIn1View.DiscontinueDate"
+        to="BothTypeOfDpIn1View.DiscontinueDate"/>
+   <map from="Payor.Number" to="Payor.Number"/>
+   <map from="ThruFlowObligation.SystemGeneratedIdentifier"
+        to="ThruFlowObligation.SystemGeneratedIdentifier"/>
+   <map from="BothTypeOfDpIn1View.CreatedBy" to="BothTypeOfDpIn1View.CreatedBy"/>
+   <map from="ThruFlowObligationType.SystemGeneratedIdentifier"
+        to="ThruFlowObligationType.SystemGeneratedIdentifier"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="CsePersonAddress.City" to="CsePersonAddress.City"/>
+   <map from="CsePersonAddress.Street1" to="CsePersonAddress.Street1"/>
+   <map from="CsePersonAddress.State" to="CsePersonAddress.State"/>
+   <map from="CsePersonAddress.Street2" to="CsePersonAddress.Street2"/>
+   <map from="CsePersonAddress.ZipCode" to="CsePersonAddress.ZipCode"/>
+   <map from="BothTypeOfDpIn1View.LastUpdatedBy"
+        to="BothTypeOfDpIn1View.LastUpdatedBy"/>
+   <map from="BothTypeOfDpIn1View.Notes" to="BothTypeOfDpIn1View.Notes"/>
+   <map from="HidBothTypeOfDpIn1.EffectiveDate"
+        to="HidBothTypeOfDpIn1.EffectiveDate"/>
+   <map from="HidBothTypeOfDpIn1.DiscontinueDate"
+        to="HidBothTypeOfDpIn1.DiscontinueDate"/>
+   <map from="BothTypeOfDpIn1View.SequentialIdentifier"
+        to="HidBothTypeOfDpIn1.SequentialIdentifier"/>
+   <map from="HidBothTypeOfDpIn1.SequentialIdentifier"
+        to="BothTypeOfDpIn1View.SequentialIdentifier"/>
+   <map from="HidBothTypeOfDpIn1.CreatedBy" to="HidBothTypeOfDpIn1.CreatedBy"/>
+   <map from="HidBothTypeOfDpIn1.CreatedTmst"
+        to="HidBothTypeOfDpIn1.CreatedTmst"/>
+   <map from="HidBothTypeOfDpIn1.LastUpdatedBy"
+        to="HidBothTypeOfDpIn1.LastUpdatedBy"/>
+   <map from="HidBothTypeOfDpIn1.LastUpdatedTmst"
+        to="HidBothTypeOfDpIn1.LastUpdatedTmst"/>
+   <map from="HidBothTypeOfDpIn1.Notes" to="HidBothTypeOfDpIn1.Notes"/>
+   <map from="CsePersonAddress.Zip4" to="CsePersonAddress.Zip4"/>
+   <map from="CsePersonAddress.Street3" to="CsePersonAddress.Street3"/>
+   <map from="CsePersonAddress.Street4" to="CsePersonAddress.Street4"/>
+   <map from="CsePersonAddress.Province" to="CsePersonAddress.Province"/>
+   <map from="CsePersonAddress.PostalCode" to="CsePersonAddress.PostalCode"/>
+   <map from="CsePersonAddress.Country" to="CsePersonAddress.Country"/>
+</procedure>

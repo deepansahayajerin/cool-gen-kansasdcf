@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateAppointment">
+      <value>
+update CKT_APPOINTMENT
+set
+  CAS_NUMBER = @casNumber,
+  CSP_NUMBER = @cspNumber,
+  CRO_TYPE = @croType,
+  CRO_ID = @croId
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="AssociateCase">
+      <value>
+update CKT_INFO_REQ
+set
+  FK_CKT_CASENUMB = @fkCktCasenumb
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="AssociateGeneticTest1">
+      <value>
+update CKT_GENETIC_TEST
+set
+  CAS_NUMBER = @casNumber,
+  CSP_NUMBER = @cspNumber,
+  CRO_TYPE = @croType,
+  CRO_IDENTIFIER = @croIdentifier
+where
+  TEST_NUMBER = @testNumber
+</value>
+   </data>
+   <data name="AssociateGeneticTest2">
+      <value>
+update CKT_GENETIC_TEST
+set
+  CAS_M_NUMBER = @casMNumber,
+  CSP_M_NUMBER = @cspMNumber,
+  CRO_M_TYPE = @croMType,
+  CRO_M_IDENTIFIER = @croMIdentifier
+where
+  TEST_NUMBER = @testNumber
+</value>
+   </data>
+   <data name="CreateCaseRole">
+      <value>
+insert into CKT_CASE_ROLE
+(
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  ON_SS_IND,
+  HEALTH_INS_IND,
+  MEDICAL_SUPP_IND,
+  MOTHERS_FIRST_NM,
+  MOTHERS_MID_INIT,
+  FATHERS_LAST_NAME,
+  FATHERS_MID_INIT,
+  FATHERS_FIRST_NAME,
+  MOTHER_MAIDEN_LAST,
+  PARENT_TYPE,
+  NOTIFIED_DATE,
+  NUMBER_OF_CHILDREN,
+  LIVING_WITH_AR_IND,
+  NONPAYMENT_CAT,
+  CONTACT_FIRST_NAME,
+  CONTACT_MID_INIT,
+  CONTACT_PHONE,
+  CONTACT_LAST_NAME,
+  CHILD_CARE_EXPENSE,
+  ASSIGNMENT_DATE,
+  ASSIGNMENT_TERM_CD,
+  ASSIGN_OF_RIGHTS,
+  ASSIGNMENT_TERM_DT,
+  ABSENCE_REASON_CD,
+  BC_FATHERS_MI,
+  BC_FATHER_FIRST_NM,
+  PRIOR_MEDICAL_SUPP,
+  BC_SIGNATURE,
+  AR_WAIVED_INS,
+  BC_FATHER_LAST_NM,
+  OUT_OF_WEDLOCK,
+  EMANCIPATION_DT,
+  FC_ADOPT_DISRUPT,
+  FC_AP_NOTIFIED,
+  FC_CINC_IND,
+  FC_COST_OF_CARE,
+  FC_CARE_COST_FREQ,
+  FC_COUNTY_REM_FROM,
+  FC_INIT_CUSTODY_DT,
+  FC_IN_HM_SERV_IND,
+  FC_IV_E_CASE_NO,
+  FC_JV_CRT_ORDER,
+  FC_JV_OFFENDER_IND,
+  FC_LEVEL_OF_CARE,
+  FC_NEXT_JV_CT_DT,
+  FC_ORDER_EST_BY,
+  FC_OTHER_BEN_IND,
+  FC_PARENTAL_RIGHTS,
+  FC_PRV_PAY_FRST_NM,
+  FC_PRV_PAY_MI,
+  FC_PLACEMENT_DATE,
+  FC_PLACEMENT_NAME,
+  FC_PLACEMENT_RSN,
+  FC_PREVIOUS_PA,
+  FC_PRV_PAY_LAST_NM,
+  FC_SRCE_OF_FUNDING,
+  FC_SRS_PAYEE,
+  FC_SSA,
+  FC_SSI,
+  FC_VA_IND,
+  FC_WARDS_ACCOUNT,
+  FC_ZEB_IND,
+  IN_SCHOOL_OVER_18,
+  PAT_ESTAB_IND,
+  RESIDE_WITH_AR_IND,
+  SPECIALTY_AREA,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CONFIRMED_TYPE,
+  REL_TO_AR,
+  AR_CHG_PRC_REQ_IND,
+  AR_CHG_PROC_DT,
+  AR_INVALID_IND,
+  NOTE
+)
+values
+(
+  @casNumber,
+  @cspNumber,
+  @type,
+  @caseRoleId,
+  @startDate,
+  @endDate,
+  @onSsInd,
+  @healthInsInd,
+  @medicalSuppInd,
+  @mothersFirstNm,
+  @mothersMidInit,
+  @fathersLastName,
+  @fathersMidInit,
+  @fathersFirstName,
+  @motherMaidenLast,
+  @parentType,
+  @notifiedDate,
+  @numberOfChildren,
+  @livingWithArInd,
+  @nonpaymentCat,
+  @contactFirstName,
+  @contactMidInit,
+  @contactPhone,
+  @contactLastName,
+  @childCareExpense,
+  @assignmentDate,
+  @assignmentTermCd,
+  @assignOfRights,
+  @assignmentTermDt,
+  @absenceReasonCd,
+  @bcFathersMi,
+  @bcFatherFirstNm,
+  @priorMedicalSupp,
+  @bcFathersMi,
+  @arWaivedIns,
+  @bcFatherLastNm,
+  @bcFathersMi,
+  @emancipationDt,
+  @fcAdoptDisrupt,
+  @fcApNotified,
+  @fcCincInd,
+  @fcCostOfCare,
+  @fcCareCostFreq,
+  @fcCountyRemFrom,
+  @fcInitCustodyDt,
+  @fcInHmServInd,
+  @fcIvECaseNo,
+  @fcJvCrtOrder,
+  @fcJvOffenderInd,
+  @fcLevelOfCare,
+  @fcNextJvCtDt,
+  @fcOrderEstBy,
+  @fcOtherBenInd,
+  @fcParentalRights,
+  @fcPrvPayFrstNm,
+  @fcPrvPayMi,
+  @fcPlacementDate,
+  @fcPlacementName,
+  @fcPlacementRsn,
+  @fcPreviousPa,
+  @fcPrvPayLastNm,
+  @fcSrceOfFunding,
+  @fcSrsPayee,
+  @fcSsa,
+  @fcSsi,
+  @fcVaInd,
+  @fcWardsAccount,
+  @fcZebInd,
+  @inSchoolOver18,
+  @bcFathersMi,
+  @resideWithArInd,
+  @specialtyArea,
+  @lastUpdatedTmst,
+  @lastUpdatedBy,
+  @createdTimestamp,
+  @createdBy,
+  @confirmedType,
+  @relToAr,
+  @arChgPrcReqInd,
+  @arChgProcDt,
+  @arInvalidInd,
+  @note
+)
+</value>
+   </data>
+   <data name="ReadAppointment">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  APP_TSTAMP,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_APPOINTMENT
+where
+  (@croId = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  CLOSURE_REASON,
+  NUMB,
+  INFO_REQUEST_NO,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE,
+  OFFICE_IDENTIFIER,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CLOSURE_LETR_DATE,
+  NOTE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  ON_SS_IND,
+  HEALTH_INS_IND,
+  MEDICAL_SUPP_IND,
+  MOTHERS_FIRST_NM,
+  MOTHERS_MID_INIT,
+  FATHERS_LAST_NAME,
+  FATHERS_MID_INIT,
+  FATHERS_FIRST_NAME,
+  MOTHER_MAIDEN_LAST,
+  PARENT_TYPE,
+  NOTIFIED_DATE,
+  NUMBER_OF_CHILDREN,
+  LIVING_WITH_AR_IND,
+  NONPAYMENT_CAT,
+  CONTACT_FIRST_NAME,
+  CONTACT_MID_INIT,
+  CONTACT_PHONE,
+  CONTACT_LAST_NAME,
+  CHILD_CARE_EXPENSE,
+  ASSIGNMENT_DATE,
+  ASSIGNMENT_TERM_CD,
+  ASSIGN_OF_RIGHTS,
+  ASSIGNMENT_TERM_DT,
+  ABSENCE_REASON_CD,
+  PRIOR_MEDICAL_SUPP,
+  AR_WAIVED_INS,
+  EMANCIPATION_DT,
+  FC_ADOPT_DISRUPT,
+  FC_AP_NOTIFIED,
+  FC_CINC_IND,
+  FC_COST_OF_CARE,
+  FC_CARE_COST_FREQ,
+  FC_COUNTY_REM_FROM,
+  FC_INIT_CUSTODY_DT,
+  FC_IN_HM_SERV_IND,
+  FC_IV_E_CASE_NO,
+  FC_JV_CRT_ORDER,
+  FC_JV_OFFENDER_IND,
+  FC_LEVEL_OF_CARE,
+  FC_NEXT_JV_CT_DT,
+  FC_ORDER_EST_BY,
+  FC_OTHER_BEN_IND,
+  FC_PARENTAL_RIGHTS,
+  FC_PRV_PAY_FRST_NM,
+  FC_PRV_PAY_MI,
+  FC_PLACEMENT_DATE,
+  FC_PLACEMENT_NAME,
+  FC_PLACEMENT_RSN,
+  FC_PREVIOUS_PA,
+  FC_PRV_PAY_LAST_NM,
+  FC_SRCE_OF_FUNDING,
+  FC_SRS_PAYEE,
+  FC_SSA,
+  FC_SSI,
+  FC_VA_IND,
+  FC_WARDS_ACCOUNT,
+  FC_ZEB_IND,
+  IN_SCHOOL_OVER_18,
+  RESIDE_WITH_AR_IND,
+  SPECIALTY_AREA,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  CONFIRMED_TYPE,
+  REL_TO_AR,
+  AR_CHG_PRC_REQ_IND,
+  AR_CHG_PROC_DT,
+  AR_INVALID_IND,
+  NOTE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (CASE_ROLE_ID = @caseRoleId) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  REL_TO_AR
+from
+  CKT_CASE_ROLE
+where
+  @casNumber = CAS_NUMBER
+order by
+  CASE_ROLE_ID desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.TYPE = 'AP') and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.CAS_NUMBER = @casNumber)
+order by
+  T1.END_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.TYPE = 'AR') and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.CAS_NUMBER = @casNumber)
+order by
+  T1.END_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson3">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.REL_TO_AR,
+  T2.TYPE,
+  T2.PAT_ESTAB_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.END_DATE = @endDate) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.TYPE
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select top(1)
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  @casNo = CAS_NO
+order by
+  CU_NUMBER desc
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoChild = CSP_NO_CHILD) and
+  (CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit3">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (START_DATE &lt;= @startDate) and
+  (CLOSURE_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadGeneticTest1">
+      <value>
+select top(1)
+  TEST_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_M_NUMBER,
+  CSP_M_NUMBER,
+  CRO_M_TYPE,
+  CRO_M_IDENTIFIER,
+  CAS_A_NUMBER,
+  CSP_A_NUMBER,
+  CRO_A_TYPE,
+  CRO_A_IDENTIFIER
+from
+  CKT_GENETIC_TEST
+where
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadGeneticTest2">
+      <value>
+select top(1)
+  TEST_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_M_NUMBER,
+  CSP_M_NUMBER,
+  CRO_M_TYPE,
+  CRO_M_IDENTIFIER,
+  CAS_A_NUMBER,
+  CSP_A_NUMBER,
+  CRO_A_TYPE,
+  CRO_A_IDENTIFIER
+from
+  CKT_GENETIC_TEST
+where
+  (@croAIdentifier = CRO_A_IDENTIFIER) and
+  (@croAType = CRO_A_TYPE) and
+  (@casANumber = CAS_A_NUMBER) and
+  (@cspANumber = CSP_A_NUMBER)
+</value>
+   </data>
+   <data name="ReadGeneticTest3">
+      <value>
+select top(1)
+  TEST_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_M_NUMBER,
+  CSP_M_NUMBER,
+  CRO_M_TYPE,
+  CRO_M_IDENTIFIER,
+  CAS_A_NUMBER,
+  CSP_A_NUMBER,
+  CRO_A_TYPE,
+  CRO_A_IDENTIFIER
+from
+  CKT_GENETIC_TEST
+where
+  (@croMIdentifier = CRO_M_IDENTIFIER) and
+  (@croMType = CRO_M_TYPE) and
+  (@casMNumber = CAS_M_NUMBER) and
+  (@cspMNumber = CSP_M_NUMBER)
+</value>
+   </data>
+   <data name="ReadInformationRequest1">
+      <value>
+select top(1)
+  NUMB,
+  APPL_LAST_NM,
+  APPL_FIRST_NM,
+  APPL_MI,
+  APPL_STREET_1,
+  APPL_STREET_2,
+  APPL_CITY,
+  APPL_STATE,
+  APPLICANT_ZIP5,
+  APPL_ZIP4,
+  APPL_ZIP3,
+  APPL_PHONE,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  APPL_PROC_IND,
+  REOPEN_REASON_TYPE,
+  MISCELLANEOUS_RSN,
+  FK_CKT_CASENUMB
+from
+  CKT_INFO_REQ
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInformationRequest2">
+      <value>
+select
+  NUMB,
+  APPL_LAST_NM,
+  APPL_FIRST_NM,
+  APPL_MI,
+  APPL_STREET_1,
+  APPL_STREET_2,
+  APPL_CITY,
+  APPL_STATE,
+  APPLICANT_ZIP5,
+  TYPE,
+  CREATED_TIMESTAMP,
+  REOPEN_REASON_TYPE,
+  FK_CKT_CASENUMB
+from
+  CKT_INFO_REQ
+where
+  @fkCktCasenumb = FK_CKT_CASENUMB
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadInterstateRequest1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="ReadInterstateRequest2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST
+where
+  (@croId = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="UpdateCase1">
+      <value>
+update CKT_CASE
+set
+  CLOSURE_REASON = @closureReason,
+  STATUS = @status,
+  STATUS_DATE = @statusDate,
+  CSE_OPEN_DATE = @cseOpenDate,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  CLOSURE_LETR_DATE = @closureLetrDate
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCase2">
+      <value>
+update CKT_CASE
+set
+  INFO_REQUEST_NO = @infoRequestNo
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCaseRole">
+      <value>
+update CKT_CASE_ROLE
+set
+  START_DATE = @startDate,
+  END_DATE = @endDate,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (CASE_ROLE_ID = @caseRoleId)
+</value>
+   </data>
+   <data name="UpdateCaseUnit">
+      <value>
+update CKT_CASE_UNIT
+set
+  START_DATE = @startDate,
+  CLOSURE_DATE = @closureDate,
+  CLOSURE_REASON_COD = @closureReasonCod,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CU_NUMBER = @cuNumber) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="UpdateInformationRequest">
+      <value>
+update CKT_INFO_REQ
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  APPL_PROC_IND = @applProcInd
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

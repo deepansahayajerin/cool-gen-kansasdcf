@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteDashboardAuditData">
+      <value>
+delete from CKT_DB_AUDIT_DATA
+where
+  (REPORT_MONTH = @reportMonth) and
+  (DASHBOARD_PRIORITY = @dashboardPriority) and
+  (RUN_NUMBER = @runNumber) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+   <data name="ReadDashboardAuditData1">
+      <value>
+select top(1)
+  REPORT_MONTH,
+  DASHBOARD_PRIORITY,
+  RUN_NUMBER,
+  CREATED_TIMESTAMP
+from
+  CKT_DB_AUDIT_DATA
+where
+  (REPORT_MONTH = @reportMonth) and
+  (RUN_NUMBER = @runNumber) and
+  (DASHBOARD_PRIORITY = '1-1(D)')
+</value>
+   </data>
+   <data name="ReadDashboardAuditData2">
+      <value>
+select top(1)
+  REPORT_MONTH,
+  DASHBOARD_PRIORITY,
+  RUN_NUMBER,
+  CREATED_TIMESTAMP
+from
+  CKT_DB_AUDIT_DATA
+where
+  (REPORT_MONTH = @reportMonth) and
+  (RUN_NUMBER = @runNumber) and
+  (DASHBOARD_PRIORITY = '5-24')
+</value>
+   </data>
+   <data name="ReadDashboardAuditData3">
+      <value>
+select
+  REPORT_MONTH,
+  DASHBOARD_PRIORITY,
+  RUN_NUMBER,
+  CREATED_TIMESTAMP
+from
+  CKT_DB_AUDIT_DATA
+where
+  (REPORT_MONTH = @reportMonth) and
+  (RUN_NUMBER = @runNumber)
+</value>
+   </data>
+   <data name="ReadDashboardAuditData4">
+      <value>
+select
+  REPORT_MONTH,
+  DASHBOARD_PRIORITY,
+  RUN_NUMBER,
+  CREATED_TIMESTAMP
+from
+  CKT_DB_AUDIT_DATA
+where
+  CREATED_TIMESTAMP &lt; @createdTimestamp
+</value>
+   </data>
+   <data name="ReadDashboardAuditData5">
+      <value>
+select
+  REPORT_MONTH,
+  DASHBOARD_PRIORITY,
+  RUN_NUMBER,
+  CREATED_TIMESTAMP
+from
+  CKT_DB_AUDIT_DATA
+where
+  REPORT_MONTH &lt;= @reportMonth
+order by
+  REPORT_MONTH
+</value>
+   </data>
+   <data name="ReadDashboardAuditData6">
+      <value>
+select
+  REPORT_MONTH,
+  DASHBOARD_PRIORITY,
+  RUN_NUMBER,
+  CREATED_TIMESTAMP
+from
+  CKT_DB_AUDIT_DATA
+where
+  REPORT_MONTH = @reportMonth
+order by
+  RUN_NUMBER desc
+</value>
+   </data>
+</root>

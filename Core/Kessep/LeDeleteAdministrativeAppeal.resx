@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteAdministrativeAppeal#1">
+      <value>
+delete from CKT_ASSGN_AAP
+where
+  AAP_ID = @aapId
+</value>
+   </data>
+   <data name="DeleteAdministrativeAppeal#2">
+      <value>
+delete from CKT_HEARING_ADDR
+from
+  CKT_HEARING_ADDR T3
+  join
+  CKT_HEARING T2
+  on
+    (T2.HEARING_ID = T3.HRG_GENERATED_ID) and
+    (T2.AAP_IDENTIFIER = @aapId)
+</value>
+   </data>
+   <data name="DeleteAdministrativeAppeal#3">
+      <value>
+delete from CKT_HEARING
+where
+  AAP_IDENTIFIER = @aapId
+</value>
+   </data>
+   <data name="DeleteAdministrativeAppeal#4">
+      <value>
+delete from CKT_ADMIN_APPEAL
+where
+  ADMIN_APPEAL_ID = @aapId
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID
+from
+  CKT_ADMIN_APPEAL
+where
+  ADMIN_APPEAL_ID = @adminAppealId
+</value>
+   </data>
+</root>

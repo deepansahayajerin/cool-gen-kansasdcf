@@ -1,0 +1,29 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnPhstLstMaxPassthruHistory"
+           program-name="SWEPHSTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnPhstLstMaxPassthruHistory"
+           transaction="SR78"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_MTN_MAX_PASSTHRU"
+       action="transfer"
+       to="FnMxptMtnMaxPassthru"
+       send-command="RTFRMLNK">
+      <map from="Mxpt" to="Flag"/>
+      <map from="FlowSelection.Amount" to="MaximumPassthru.Amount"/>
+      <map from="FlowSelection.Description" to="MaximumPassthru.Description"/>
+      <map from="FlowSelection.EffectiveDate" to="MaximumPassthru.EffectiveDate"/>
+      <map from="FlowSelection.DiscontinueDate"
+           to="MaximumPassthru.DiscontinueDate"/>
+      <map from="FlowSelection.SystemGeneratedIdentifier"
+           to="MaximumPassthru.SystemGeneratedIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.MaximumPassthru" to="Import1.MaximumPassthru"/>
+</procedure>

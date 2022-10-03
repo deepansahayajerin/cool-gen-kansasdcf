@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFundTransaction">
+      <value>
+select top(1)
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FUND_TRANS_ID
+from
+  CKT_FUND_TRANS
+where
+  (FUND_TRANS_ID = @fundTransId) and
+  (FTT_IDENTIFIER = @fttIdentifier) and
+  (FUN_IDENTIFIER = @funIdentifier) and
+  (PCA_CODE = @pcaCode)
+</value>
+   </data>
+   <data name="ReadFundTransactionStatus">
+      <value>
+select top(1)
+  FUND_TRANS_STAT_ID
+from
+  CKT_FUND_TRANSTAT
+where
+  FUND_TRANS_STAT_ID = @fundTransStatId
+</value>
+   </data>
+   <data name="ReadFundTransactionStatusFundTransactionStatusHistory">
+      <value>
+select
+  FTS_IDENTIFIER,
+  FTR_IDENTIFIER,
+  FUN_IDENTIFIER,
+  PCA_EFFECTIVE_DATE,
+  PCA_CODE,
+  FTT_IDENTIFIER,
+  EFFECTIVE_TMST,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+from
+  CKT_FUND_TRNSTATHS
+where
+  (@ftrIdentifier = FTR_IDENTIFIER) and
+  (@funIdentifier = FUN_IDENTIFIER) and
+  (@fttIdentifier = FTT_IDENTIFIER) and
+  (@pcaEffectiveDate = PCA_EFFECTIVE_DATE) and
+  (@pcaCode = PCA_CODE)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

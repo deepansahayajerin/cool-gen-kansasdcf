@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateTribunal1">
+      <value>
+update CKT_TRIBUNAL
+set
+  FIP_LOCATION = @fipLocation,
+  FIP_COUNTY = @fipCounty,
+  FIP_STATE = @fipState
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="AssociateTribunal2">
+      <value>
+update CKT_FIPS_TRIB_ADDR
+set
+  TRB_ID = @trbId
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="CreateFipsTribAddress">
+      <value>
+insert into CKT_FIPS_TRIB_ADDR
+(
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+)
+values
+(
+  @identifier,
+  @faxExtension,
+  @faxAreaCd,
+  @phoneExtension,
+  @areaCd,
+  @type,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @zipCd,
+  @zip4,
+  @zip3,
+  @county,
+  @street3,
+  @street4,
+  @province,
+  @postalCode,
+  @country,
+  @phoneNumber,
+  @faxNumber,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  null,
+  null,
+  null,
+  @trbId
+)
+</value>
+   </data>
+   <data name="DeleteFipsTribAddress">
+      <value>
+delete from CKT_FIPS_TRIB_ADDR
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="DisassociateFipsTribAddress">
+      <value>
+update CKT_FIPS_TRIB_ADDR
+set
+  TRB_ID = null
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="DisassociateTribunal">
+      <value>
+update CKT_TRIBUNAL
+set
+  FIP_LOCATION = null,
+  FIP_COUNTY = null,
+  FIP_STATE = null
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  TAX_ID,
+  ORGANIZATION_NAME,
+  TAX_ID_SUFFIX
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFips3">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadFips4">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  COUNTY_DESC,
+  STATE_ABBREVIATION,
+  CSP_NUMBER
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  (@trbId = TRB_ID) and
+  (TYPE = @type) and
+  (IDENTIFIER &lt;&gt; @identifier)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  (@trbId = TRB_ID) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress3">
+      <value>
+select top(1)
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadFipsTribAddress4">
+      <value>
+select top(1)
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadFipsTribAddress5">
+      <value>
+select
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadFipsTribAddress6">
+      <value>
+select
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  (@fipLocation = FIP_LOCATION) and
+  (@fipCounty = FIP_COUNTY) and
+  (@fipState = FIP_STATE)
+</value>
+   </data>
+   <data name="ReadTribunal1">
+      <value>
+select top(1)
+  JUDICIAL_DIVISION,
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  JUDICIAL_DISTRICT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  IDENTIFIER,
+  TAX_ID_SUFFIX,
+  TAX_ID,
+  DOCUMENT_HEADER_1,
+  DOCUMENT_HEADER_2,
+  DOCUMENT_HEADER_3,
+  DOCUMENT_HEADER_4,
+  DOCUMENT_HEADER_5,
+  DOCUMENT_HEADER_6,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadTribunal2">
+      <value>
+select top(1)
+  FIP_LOCATION,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  (@fipLocation = FIP_LOCATION) and
+  (@fipCounty = FIP_COUNTY) and
+  (@fipState = FIP_STATE) and
+  (IDENTIFIER &lt;&gt; @identifier)
+</value>
+   </data>
+   <data name="UpdateFipsTribAddress">
+      <value>
+update CKT_FIPS_TRIB_ADDR
+set
+  FAX_EXTENSION = @faxExtension,
+  FAX_AREA_CD = @faxAreaCd,
+  PHONE_EXTENSION = @phoneExtension,
+  AREA_CD = @areaCd,
+  TYPE = @type,
+  STREET_1 = @street1,
+  STREET_2 = @street2,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CD = @zipCd,
+  ZIP4 = @zip4,
+  ZIP3 = @zip3,
+  COUNTY = @county,
+  STREET_3 = @street3,
+  STREET_4 = @street4,
+  PROVINCE = @province,
+  POSTAL_CODE = @postalCode,
+  COUNTRY = @country,
+  PHONE_NUMBER = @phoneNumber,
+  FAX_NUMBER = @faxNumber,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateTribunal1">
+      <value>
+update CKT_TRIBUNAL
+set
+  JUDICIAL_DIVISION = @judicialDivision,
+  TRIBUNAL_NM = @tribunalNm,
+  JUDICIAL_DISTRICT = @judicialDistrict,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  DOCUMENT_HEADER_1 = @documentHeader1,
+  DOCUMENT_HEADER_2 = @documentHeader2,
+  DOCUMENT_HEADER_3 = @documentHeader3,
+  DOCUMENT_HEADER_4 = @documentHeader4,
+  DOCUMENT_HEADER_5 = @documentHeader5,
+  DOCUMENT_HEADER_6 = @documentHeader6
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateTribunal2">
+      <value>
+update CKT_TRIBUNAL
+set
+  TRIBUNAL_NM = @tribunalNm,
+  TAX_ID_SUFFIX = @taxIdSuffix,
+  TAX_ID = @taxId,
+  DOCUMENT_HEADER_1 = @documentHeader1,
+  DOCUMENT_HEADER_2 = @documentHeader2,
+  DOCUMENT_HEADER_3 = @documentHeader3,
+  DOCUMENT_HEADER_4 = @documentHeader4,
+  DOCUMENT_HEADER_5 = @documentHeader5,
+  DOCUMENT_HEADER_6 = @documentHeader6
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

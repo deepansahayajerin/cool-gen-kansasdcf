@@ -1,0 +1,92 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLapsLstLglActnByCsePers"
+           program-name="SWELAPSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLapsLstLglActnByCsePers"
+           transaction="SR8T"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_IWGL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeIwglIwoGarnishmentLien"
+       send-command="FROMLACN">
+      <map from="DlgflwSelected" to="LegalAction"/>
+      <map from="DlgflwIwglType" to="IwglType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DlgflwRequired" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LEGAL_ACTION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeLactLegalAction"
+       send-command="REDISP">
+      <map from="Selected.Identifier" to="LegalAction.Identifier"/>
+      <map from="Selected.Classification" to="LegalAction.Classification"/>
+      <map from="Selected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <map from="Selected.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <map from="LegalActions.LegalAction" to="LegalActions.LegalAction"/>
+   <map from="Standard" to="Standard"/>
+   <map from="LegalActions.ObligationType" to="LegalActions.ObligationType"/>
+   <map from="LegalActions.DetailFips" to="LegalActions.DetailFips"/>
+   <map from="HiddenSecurity" to="HiddenSecurity"/>
+   <map from="SsnWorkArea" to="SsnWorkArea"/>
+   <map from="LegalActions.DetailTribunal" to="LegalActions.DetailTribunal"/>
+   <map from="LegalActions.Common" to="LegalActions.Common"/>
+   <map from="LegalActions.LegalActionDetail"
+        to="LegalActions.LegalActionDetail"/>
+   <map from="LegalActions.LegalActionPerson"
+        to="LegalActions.LegalActionPerson"/>
+   <map from="LegalActions.Prc" to="LegalActions.Prc"/>
+   <map from="ListByLrolOrLops" to="ListByLrolOrLops"/>
+   <map from="ListEarlierThan" to="ListEarlierThan"/>
+   <map from="LegalActions.DetailForeign" to="LegalActions.DetailForeign"/>
+   <map from="LegalActions.LaActTaken" to="LegalActions.DetailLaActTaken"/>
+   <map from="LegalActions.DetailLaAppInd" to="LegalActions.DetailLaAppInd"/>
+   <map from="RequiredClassification" to="RequiredClassification"/>
+   <map from="PromptClassification" to="PromptClassification"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+   <map from="HiddenNextTranInfo.LegalActionIdentifier"
+        to="HiddenNextTranInfo.LegalActionIdentifier"/>
+   <map from="HiddenNextTranInfo.CourtCaseNumber"
+        to="HiddenNextTranInfo.CourtCaseNumber"/>
+   <map from="HiddenNextTranInfo.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumber"
+        to="HiddenNextTranInfo.CsePersonNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberAp"
+        to="HiddenNextTranInfo.CsePersonNumberAp"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligee"
+        to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligor"
+        to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+   <map from="HiddenNextTranInfo.ObligationId"
+        to="HiddenNextTranInfo.ObligationId"/>
+   <map from="HiddenNextTranInfo.StandardCrtOrdNumber"
+        to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+   <map from="HiddenNextTranInfo.InfrastructureId"
+        to="HiddenNextTranInfo.InfrastructureId"/>
+   <map from="HiddenNextTranInfo.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+   <map from="HiddenNextTranInfo.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+   <map from="HiddenNextTranInfo.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+   <map from="HiddenNextTranInfo.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+   <map from="HiddenNextTranInfo.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+   <map from="HiddenNextTranInfo.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

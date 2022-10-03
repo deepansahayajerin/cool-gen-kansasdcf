@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  SOURCE_CREATION_DT,
+  CREATED_BY
+from
+  CKT_CR_EVENT
+where
+  (SOURCE_CREATION_DT = @sourceCreationDt) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (
+    (cast(@userId as char(8)) &lt;&gt; 'SWELB578') or
+    (
+      (cast(@userId as char(8)) = 'SWELB578') and
+      (CREATED_BY = 'SWELB578')
+    )
+  )
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_CRSRC_TYPE
+where
+  (CODE = @code) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+</root>

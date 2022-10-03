@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalActionCsePersonLegalActionDetail">
+      <value>
+select distinct top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.ESTABLISHMENT_CD,
+  T1.FILED_DT_ENTRED_ON,
+  T5.CSP_NUMBER,
+  T3.LA_DETAIL_NO,
+  T3.CREATED_TSTAMP,
+  T3.OTY_ID
+from
+  CKT_CASE_ROLE T7 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T5 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T4 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T4.LGA_ID) and
+    (T1.CLASSIFICATION = 'J') and
+    (T1.FILED_DT_ENTRED_ON &gt; @filedDtEntredOn)
+  on
+    (T5.CASE_ROLE_ID = T4.CRO_IDENTIFIER) and
+    (T5.TYPE = T4.CRO_TYPE) and
+    (T5.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T5.CAS_NUMBER = T4.CAS_NUMBER) and
+    (@casNumber = T5.CAS_NUMBER) and
+    (T5.TYPE = 'AP')
+  join
+  CKT_LEG_ACT_CAS_RL T6 with(readuncommitted)
+  on
+    T1.LEGAL_ACTION_ID = T6.LGA_ID
+  on
+    (T7.CASE_ROLE_ID = T6.CRO_IDENTIFIER) and
+    (T7.TYPE = T6.CRO_TYPE) and
+    (T7.CSP_NUMBER = T6.CSP_NUMBER) and
+    (T7.CAS_NUMBER = T6.CAS_NUMBER) and
+    (@cspNumber = T7.CSP_NUMBER) and
+    (@casNumber = T7.CAS_NUMBER) and
+    (T7.TYPE = 'CH') and
+    (T7.END_DATE &gt;= T5.START_DATE) and
+    (T7.START_DATE &lt;= T5.END_DATE)
+  join
+  CKT_LEGAL_ACT_DTL T3 with(readuncommitted)
+  on
+    (
+      (T1.FILED_DT_ENTRED_ON between cast(@date1 as date) and cast(@date2 as date)) or
+      (
+        (T1.FILED_DT_ENTRED_ON &gt; @filedDtEntredOn) and
+        (T3.CREATED_TSTAMP &gt; @createdTstamp1) and
+        (T3.CREATED_TSTAMP &lt; @createdTstamp2)
+      )
+    ) and
+    (T1.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T3.OTY_ID = 1)
+</value>
+   </data>
+</root>

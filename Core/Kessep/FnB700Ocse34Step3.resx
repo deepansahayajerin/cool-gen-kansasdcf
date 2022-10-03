@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptCashReceiptType">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID
+from
+  CKT_CASH_RECEIPT
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCollectionType">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  RECEIVED_AMOUNT,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  OBLGOR_PRSN_NBR,
+  CREATED_TMST,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  CLT_IDENTIFIER
+from
+  CKT_CR_DETAIL
+where
+  (OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CLT_IDENTIFIER is not null)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatusCashReceiptDetailStatHistory">
+      <value>
+select top(1)
+  T1.CRDETAIL_STAT_ID,
+  T1.CODE,
+  T2.CRD_IDENTIFIER,
+  T2.CRV_IDENTIFIER,
+  T2.CST_IDENTIFIER,
+  T2.CRT_IDENTIFIER,
+  T2.CREATED_TIMESTAMP,
+  T2.REASON_CODE_ID,
+  T2.DISCONTINUE_DATE
+from
+  CKT_CR_DETAIL_STAT T1
+  join
+  CKT_CRDTL_STATHIST T2
+  on
+    (T1.CRDETAIL_STAT_ID = T2.CDS_IDENTIFIER) and
+    (@crdIdentifier = T2.CRD_IDENTIFIER) and
+    (@crvIdentifier = T2.CRV_IDENTIFIER) and
+    (@cstIdentifier = T2.CST_IDENTIFIER) and
+    (@crtIdentifier = T2.CRT_IDENTIFIER) and
+    (T2.REASON_CODE_ID = 'PROCCANREF') and
+    (T2.DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptEventCashReceiptSourceType">
+      <value>
+select top(1)
+  cast(@cstIdentifier as smallint),
+  cast(@crvIdentifier as integer),
+  CR_SRCE_TYPE_ID,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @cstIdentifier
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select
+  PAYMENT_REQUEST_ID,
+  AMOUNT,
+  CSE_PERSON_NUMBER,
+  CLASSIFICATION,
+  PRINT_DATE,
+  TYPE,
+  RCT_R_TSTAMP,
+  PRQ_R_GENERATED_ID
+from
+  CKT_PMNT_REQUEST
+where
+  (
+    (CLASSIFICATION = 'ADV') and
+    (PRINT_DATE between cast(@date1 as date) and cast(@date2 as date))
+  ) or
+  (
+    (CLASSIFICATION = 'REF') and
+    (
+      (PAYMENT_REQUEST_ID &gt; @paymentRequestId) or
+      (PAYMENT_REQUEST_ID = @paymentRequestId)
+    )
+  )
+order by
+  PAYMENT_REQUEST_ID
+</value>
+   </data>
+   <data name="ReadPaymentStatusPaymentStatusHistory">
+      <value>
+select top(1)
+  T1.PAYMENT_STATUS_ID,
+  T1.CODE,
+  T1.EFFECTIVE_DATE,
+  T2.PST_GENERATED_ID,
+  T2.PRQ_GENERATED_ID,
+  T2.PYMNT_STAT_HIST_ID,
+  T2.EFFECTIVE_DATE
+from
+  CKT_PAYMENT_STATUS T1,
+  CKT_PMNT_STAT_HIST T2
+where
+  (@prqGeneratedId = T2.PRQ_GENERATED_ID) and
+  (T2.EFFECTIVE_DATE between cast(@date1 as date) and cast(@date2 as date)) and
+  (T1.PAYMENT_STATUS_ID = 28)
+</value>
+   </data>
+   <data name="ReadReceiptRefund">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  AMOUNT,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CLT_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadReceiptRefundCollectionType">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  AMOUNT,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER,
+  CLT_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (CLT_IDENTIFIER is not null)
+</value>
+   </data>
+</root>

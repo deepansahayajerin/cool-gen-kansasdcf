@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EIN,
+  NAME
+from
+  CKT_EMPLOYER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadEmployerAddress">
+      <value>
+select top(1)
+  LOCATION_TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  IDENTIFIER,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  EMP_ID
+from
+  CKT_EMPLOYER_ADDR
+where
+  @empId = EMP_ID
+</value>
+   </data>
+   <data name="ReadEmployerHistoryEmployerHistoryDetail">
+      <value>
+select
+  T1.ACTION_TAKEN,
+  T1.ACTION_DATE,
+  T1.NOTE,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.EMP_ID,
+  T2.LINE_NUMBER,
+  T2.LAST_UPDATED_TMST,
+  T2.CHANGE
+from
+  CKT_EMPLOYER_HIST T1
+  join
+  CKT_EMP_HIST_DTL T2
+  on
+    (@empId = T1.EMP_ID) and
+    (T1.CREATED_TMST &lt;= @createdTmst) and
+    (T1.EMP_ID = T2.EMP_ID) and
+    (T1.CREATED_TMST = T2.EHX_CREATED_TMST)
+order by
+  T1.CREATED_TMST desc,
+  T2.LINE_NUMBER
+</value>
+   </data>
+</root>

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  TRANS_SERIAL_NBR,
+  TRANSACTION_DATE
+from
+  CKT_INTERST_CASE with(readuncommitted)
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="ReadInterstateSupportOrder">
+      <value>
+select top(1)
+  CCA_TRANSACTION_DT,
+  SYS_GENERATED_ID,
+  CCA_TRAN_SER_NUM,
+  FIPS_STATE,
+  FIPS_COUNTY,
+  FIPS_LOCATION,
+  NUMBER,
+  ORDER_FILING_DATE,
+  TYPE,
+  DEBT_TYPE,
+  PAYMENT_FREQ,
+  AMOUNT_ORDERED,
+  EFFECTIVE_DATE,
+  END_DATE,
+  CANCEL_DATE,
+  ARREARS_FREQ,
+  ARREARS_FRQ_AMT,
+  ARREARS_TOTAL_AMT,
+  ARRS_AFDC_FROM_DTE,
+  ARRS_AFDC_THRU_DTE,
+  ARREARS_AFDC_AMT,
+  ARR_NAFDC_FROM_DTE,
+  ARR_NAFDC_THRU_DTE,
+  ARR_NAFDC_AMT,
+  FOST_CARE_FROM_DTE,
+  FOST_CARE_THRU_DTE,
+  FOSTER_CARE_AMOUNT,
+  MEDICAL_FROM_DATE,
+  MEDICAL_THRU_DATE,
+  MEDICAL_AMOUNT,
+  MEDICAL_ORDERED_IN,
+  TRIBUNAL_CASE_NUM,
+  DATE_OF_LAST_PAY,
+  CNTRL_ORDER_FLAG,
+  NEW_ORDER_FLAG,
+  DOCKET_NUMBER,
+  LEGAL_ACTION_ID
+from
+  CKT_INTERST_SUP_OR
+where
+  (SYS_GENERATED_ID = @sysGeneratedId) and
+  (CCA_TRAN_SER_NUM = @ccaTranSerNum) and
+  (CCA_TRANSACTION_DT = @ccaTransactionDt)
+</value>
+   </data>
+   <data name="UpdateInterstateSupportOrder">
+      <value>
+update CKT_INTERST_SUP_OR
+set
+  FIPS_STATE = @fipsState,
+  FIPS_COUNTY = @fipsCounty,
+  FIPS_LOCATION = @fipsLocation,
+  NUMBER = @number,
+  ORDER_FILING_DATE = @orderFilingDate,
+  TYPE = @type,
+  DEBT_TYPE = @debtType,
+  PAYMENT_FREQ = @paymentFreq,
+  AMOUNT_ORDERED = @amountOrdered,
+  EFFECTIVE_DATE = @effectiveDate,
+  END_DATE = @endDate,
+  CANCEL_DATE = @cancelDate,
+  ARREARS_FREQ = @arrearsFreq,
+  ARREARS_FRQ_AMT = @arrearsFrqAmt,
+  ARREARS_TOTAL_AMT = @arrearsTotalAmt,
+  ARRS_AFDC_FROM_DTE = @arrsAfdcFromDte,
+  ARRS_AFDC_THRU_DTE = @arrsAfdcThruDte,
+  ARREARS_AFDC_AMT = @arrearsAfdcAmt,
+  ARR_NAFDC_FROM_DTE = @arrNafdcFromDte,
+  ARR_NAFDC_THRU_DTE = @arrNafdcThruDte,
+  ARR_NAFDC_AMT = @arrNafdcAmt,
+  FOST_CARE_FROM_DTE = @fostCareFromDte,
+  FOST_CARE_THRU_DTE = @fostCareThruDte,
+  FOSTER_CARE_AMOUNT = @fosterCareAmount,
+  MEDICAL_FROM_DATE = @medicalFromDate,
+  MEDICAL_THRU_DATE = @medicalThruDate,
+  MEDICAL_AMOUNT = @medicalAmount,
+  MEDICAL_ORDERED_IN = @medicalOrderedIn,
+  TRIBUNAL_CASE_NUM = @tribunalCaseNum,
+  DATE_OF_LAST_PAY = @dateOfLastPay,
+  CNTRL_ORDER_FLAG = @cntrlOrderFlag,
+  NEW_ORDER_FLAG = @newOrderFlag,
+  DOCKET_NUMBER = @docketNumber,
+  LEGAL_ACTION_ID = @legalActionId
+where
+  (CCA_TRANSACTION_DT = @ccaTransactionDt) and
+  (SYS_GENERATED_ID = @sysGeneratedId) and
+  (CCA_TRAN_SER_NUM = @ccaTranSerNum)
+</value>
+   </data>
+</root>

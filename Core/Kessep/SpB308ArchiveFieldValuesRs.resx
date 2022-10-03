@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteFieldValue">
+      <value>
+delete from CKT_FIELD_VALUE
+where
+  (FLD_NAME = @fldName) and
+  (DOC_NAME = @docName) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (INF_IDENTIFIER = @infIdentifier)
+</value>
+   </data>
+   <data name="ReadFieldValueDocumentField">
+      <value>
+select
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.VALU,
+  T1.FLD_NAME,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_IDENTIFIER,
+  T3.NAME,
+  T3.DEPENDANCY
+from
+  CKT_FIELD T3
+  join
+  CKT_FIELD_VALUE T1
+  on
+    (@infIdentifier = T1.INF_IDENTIFIER) and
+    (T3.NAME = T1.FLD_NAME) and
+    (T3.DEPENDANCY &lt;&gt; ' KEY')
+</value>
+   </data>
+   <data name="ReadFieldValueField">
+      <value>
+select
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.VALU,
+  T1.FLD_NAME,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_IDENTIFIER,
+  T2.NAME,
+  T2.DEPENDANCY
+from
+  CKT_FIELD T2
+  join
+  CKT_FIELD_VALUE T1
+  on
+    (@infIdentifier = T1.INF_IDENTIFIER) and
+    (T2.NAME = T1.FLD_NAME) and
+    (T2.DEPENDANCY &lt;&gt; ' KEY')
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructure">
+      <value>
+select distinct
+  PRNT_SUCESSFUL_IND,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  FIELD_VAL_ARCH_DT,
+  FIELD_VAL_ARCH_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  (PRNT_SUCESSFUL_IND = 'Y') and
+  (FIELD_VAL_ARCH_IND &lt;&gt; 'Y') and
+  (FIELD_VAL_ARCH_DT &lt; @fieldValArchDt) and
+  (LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) and
+  (INF_ID &lt; @infId)
+order by
+  INF_ID desc
+</value>
+   </data>
+   <data name="UpdateOutgoingDocument1">
+      <value>
+update CKT_OUTGOING_DOC
+set
+  FIELD_VAL_ARCH_IND = @fieldValArchInd
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="UpdateOutgoingDocument2">
+      <value>
+update CKT_OUTGOING_DOC
+set
+  FIELD_VAL_ARCH_DT = @fieldValArchDt,
+  FIELD_VAL_ARCH_IND = @fieldValArchInd
+where
+  INF_ID = @infId
+</value>
+   </data>
+</root>

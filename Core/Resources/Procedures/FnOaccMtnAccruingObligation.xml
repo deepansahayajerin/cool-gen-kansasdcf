@@ -1,0 +1,296 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnOaccMtnAccruingObligation"
+           program-name="SWEOACCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnOaccMtnAccruingObligation"
+           transaction="SR32"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_PEPR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiPeprPersonProgramMaint"
+       send-command="DISPLAY">
+      <map from="HiddenFlowToPeprCase" to="Next"/>
+      <map from="HiddenFlowToPeprCsePersonsWorkSet.Number"
+           to="CsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="Flow"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_DESIG_PAYEE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDPAY"
+       to="FnDpayMtnDesignatedPayee"
+       send-command="OBLIG">
+      <map from="ZdelExportDesignatedPayee.Number" to="DesignatedPayee.Number"/>
+      <map from="ZdelExportDesignatedPayee.FormattedName"
+           to="DesignatedPayee.FormattedName"/>
+      <map from="ObligorCsePerson" to="ThruFlowObligor"/>
+      <map from="ObligorCsePersonsWorkSet" to="ObligorCsePersonsWorkSet"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="PassObligation" to="ThruFlowObligation"/>
+      <map from="PassObligationType.SystemGeneratedIdentifier"
+           to="ThruFlowObligationType.SystemGeneratedIdentifier"/>
+      <map from="PassObligationTransaction" to="ThruFlowObligationTransaction"/>
+      <map from="DlgflwAr.Number" to="Payee.Number"/>
+      <map from="PassSupported" to="Supported"/>
+      <return-map from="PassedDesignatedPayee" to="ZdelImportDesignatedPayee"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_OBLIG_BY_CRT_ORDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMOCTO"
+       to="FnOctoLstObligByCourtOrder"
+       send-command="DISPLAY">
+      <map from="LegalAction" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_OBLIG_BY_AP_PAYOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMOPAY"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="ObligorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Passed" to="ObligorCsePerson"/>
+      <return-map from="CsePersonsWorkSet.Number" to="ObligorCsePersonsWorkSet.Number"/>
+      <return-map from="CsePersonsWorkSet.FormattedName"
+                  to="ObligorCsePersonsWorkSet.FormattedName"/>
+      <return-map from="PassLegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="PassLegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+      <return-map from="PassLegalAction.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="PassObligationType" to="ObligationType"/>
+      <return-map from="SelectedObligation.SystemGeneratedIdentifier"
+                  to="ObligorObligation.SystemGeneratedIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_MTN_OB_S_C_SUPP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCspmLstMtnObligSCSupp"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="CsePerson"/>
+      <map from="ObligorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="Obligation" to="Obligation"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTN_ACCR_OBLIG_SUSP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnAsusLstMtnAccrngOblgSusp"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson.Number" to="CsePerson.Number"/>
+      <map from="ObligorCsePerson.Type1" to="CsePerson.Type1"/>
+      <map from="ConcurrentObligorCsePerson" to="ConcurrentCsePerson"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="Obligation" to="Obligation"/>
+      <map from="Concurrent" to="ConcurrentObligation"/>
+      <map from="PassObligationTransaction.Amount"
+           to="ObligationTransaction.Amount"/>
+      <map from="PassObligationTransaction.SystemGeneratedIdentifier"
+           to="ObligationTransaction.SystemGeneratedIdentifier"/>
+      <map from="PassSupportedPerson" to="SupportedCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTN_MANUAL_DIST_INST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnMdisLstMtnManualDistInst"
+       send-command="DISPLAY">
+      <map from="HiddenLegalActionDetail.Number" to="LegalActionDetail.Number"/>
+      <map from="ObligorCsePerson" to="CsePerson"/>
+      <map from="ObligorCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="Obligation" to="Obligation"/>
+      <map from="AccrualAmount" to="ZdelImportObligationAmt"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_OBLIGATION_TYPE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnObtlLstObligTypes"
+       send-command="DISPLAY">
+      <map from="PassObligationType.Classification" to="Search.Classification"/>
+      <return-map from="Search.Code" to="ObligationType.Code"/>
+      <return-map from="Search.Classification" to="ObligationType.Classification"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ASIN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SpAsinOspAssignment"
+       send-command="DISPLAY">
+      <map from="FlowCsePersonAccount" to="HcsePersonAccount"/>
+      <map from="ObligationType" to="HobligationType"/>
+      <map from="Obligation" to="Hobligation"/>
+      <map from="LegalAction" to="HlegalAction"/>
+      <map from="ObligorCsePerson" to="HcsePerson"/>
+      <map from="CaseId" to="Hcase"/>
+      <map from="FlowSpTextWorkArea" to="HeaderObject"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_REC_IND_PYMNT_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnReipRecIndividualPmntHist"
+       send-command="DISPLAY">
+      <map from="ObligorCsePerson" to="CsePerson"/>
+      <map from="LegalAction" to="LegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COLP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnColpMtnCollectionProtect"
+       send-command="DISPLAY">
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="ObligorCsePerson" to="CsePerson"/>
+      <map from="Obligation" to="Obligation"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Country" to="Starting"/>
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="Country"/>
+   </on>
+   <map from="Group.Hidden" to="Group.Hidden"/>
+   <map from="HiddenIntstInfo" to="HiddenIntstInfo"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenFlowToPeprCase" to="HiddenFlowToPeprCase"/>
+   <map from="HiddenFlowToPeprCsePersonsWorkSet"
+        to="HiddenFlowToPeprCsePersonsWorkSet"/>
+   <map from="HiddenInterstateRequest" to="HiddenInterstateRequest"/>
+   <map from="InterstateRequest" to="InterstateRequest"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ManualDistributionInd" to="ManualDistributionInd"/>
+   <map from="Group.AccrualSuspended" to="Group.AccrualSuspended"/>
+   <map from="Group.ProratePercentage" to="Group.ProratePercentage"/>
+   <map from="ObligationActive" to="ObligationActiveInd"/>
+   <map from="ConcurrentObligorCsePerson" to="ConcurrentObligorCsePerson"/>
+   <map from="AccrualAmount" to="AccrualAmount"/>
+   <map from="HiddenCommon" to="HiddenCommon"/>
+   <map from="Group.ObligationTransaction" to="Group.ObligationTransaction"/>
+   <map from="Group.HiddenConcurrent" to="Group.HiddenConcurrent"/>
+   <map from="HiddenPrevious" to="HiddenPrevious"/>
+   <map from="InterestSuspendedInd" to="InterestSuspendedInd"/>
+   <map from="HiddenLegalActionDetail" to="HiddenLegalActionDetail"/>
+   <map from="Group.Zdel" to="Group.Zdel"/>
+   <map from="AccrualInstructions" to="AccrualInstructions"/>
+   <map from="AltAddrPrompt" to="AltAddrPrompt"/>
+   <map from="CaseId" to="CaseId"/>
+   <map from="HistoryIndicator" to="HistoryIndicator"/>
+   <map from="HiddenObligationPaymentSchedule"
+        to="HiddenObligationPaymentSchedule"/>
+   <map from="BeforeLink" to="BeforeLink"/>
+   <map from="ObligationCreatedDate" to="ObligationCreatedDate"/>
+   <map from="Group.Previous" to="Group.Previous"/>
+   <map from="HiddenObligorCsePerson" to="HiddenObligorCsePerson"/>
+   <map from="HiddenObligorObligation" to="HiddenObligorObligation"/>
+   <map from="HiddenAlternate" to="HiddenAlternate"/>
+   <map from="HiddenDiscontinueDate" to="HiddenDiscontinueDate"/>
+   <map from="Group.Sel" to="Group.Sel"/>
+   <map from="Group.ProgramScreenAttributes" to="Group.ProgramScreenAttributes"/>
+   <map from="InterstateDebtExists" to="InterstateDebtExists"/>
+   <map from="Group.Case1" to="Group.Case1"/>
+   <map from="Group.ServiceProvider" to="Group.ServiceProvider"/>
+   <map from="Group.SupportedCsePerson" to="Group.SupportedCsePerson"/>
+   <map from="Group.AccrualInstructions" to="Group.AccrualInstructions"/>
+   <map from="HiddenAccrualInstructions" to="HiddenAccrualInstructions"/>
+   <map from="ObCollProtAct" to="ObCollProtAct"/>
+   <map from="ProtectQuestionLiteral" to="ProtectQuestionLiteral"/>
+   <map from="CollProtAnswer" to="CollProtAnswer"/>
+   <map from="CountryPrompt" to="CountryPrompt"/>
+   <map from="LegalActionDetail" to="LegalActionDetail"/>
+   <map from="HiddenConcurrent" to="HiddenConcurrent"/>
+   <map from="HiddenProtectHistory" to="HiddenProtectHistory"/>
+   <map from="Obligation.HistoryInd" to="ObligorObligation.HistoryInd"/>
+   <map from="Group.SupportedCsePersonsWorkSet.Dob"
+        to="Group.SupportedCsePersonsWorkSet.Dob"/>
+   <map from="ObligorCsePersonsWorkSet.FormattedName"
+        to="ObligorCsePersonsWorkSet.FormattedName"/>
+   <map from="ConcurrentObligorCsePersonsWorkSet.FormattedName"
+        to="ConcurrentObligorCsePersonsWorkSet.FormattedName"/>
+   <map from="Obligation.Description" to="ObligorObligation.Description"/>
+   <map from="ObligationType.Code" to="ObligationType.Code"/>
+   <map from="Obligation.SystemGeneratedIdentifier"
+        to="ObligorObligation.SystemGeneratedIdentifier"/>
+   <map from="Concurrent.SystemGeneratedIdentifier"
+        to="ConcurrentObligorObligation.SystemGeneratedIdentifier"/>
+   <map from="ObligationType.SystemGeneratedIdentifier"
+        to="ObligationType.SystemGeneratedIdentifier"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   <map from="HiddenLegalAction.StandardNumber"
+        to="HiddenLegalAction.StandardNumber"/>
+   <map from="ObligorCsePerson.Number" to="ObligorCsePerson.Number"/>
+   <map from="DiscontinueDate.Date" to="DiscontinueDate.Date"/>
+   <map from="ObligationPaymentSchedule.StartDt"
+        to="ObligationPaymentSchedule.StartDt"/>
+   <map from="HiddenObligationType.Code" to="HiddenObligationType.Code"/>
+   <map from="ObligationPaymentSchedule.FrequencyCode"
+        to="ObligationPaymentSchedule.FrequencyCode"/>
+   <map from="ConcurrentObligorCsePersonsWorkSet.Number"
+        to="ConcurrentObligorCsePersonsWorkSet.Number"/>
+   <map from="ObligorCsePersonsWorkSet.Number"
+        to="ObligorCsePersonsWorkSet.Number"/>
+   <map from="FrequencyWorkSet.FrequencyDescription"
+        to="FrequencyWorkSet.FrequencyDescription"/>
+   <map from="ObligationPaymentSchedule.DayOfWeek"
+        to="ObligationPaymentSchedule.DayOfWeek"/>
+   <map from="ObligationPaymentSchedule.DayOfMonth1"
+        to="ObligationPaymentSchedule.DayOfMonth1"/>
+   <map from="ObligationPaymentSchedule.DayOfMonth2"
+        to="ObligationPaymentSchedule.DayOfMonth2"/>
+   <map from="ObligationPaymentSchedule.PeriodInd"
+        to="ObligationPaymentSchedule.PeriodInd"/>
+   <map from="ObligationPaymentSchedule.EndDt"
+        to="ObligationPaymentSchedule.EndDt"/>
+   <map from="FrequencyWorkSet.FrequencyCode"
+        to="FrequencyWorkSet.FrequencyCode"/>
+   <map from="Group.SupportedCsePersonsWorkSet.Number"
+        to="Group.SupportedCsePersonsWorkSet.Number"/>
+   <map from="Obligation.OrderTypeCode" to="ObligorObligation.OrderTypeCode"/>
+   <map from="Obligation.PrimarySecondaryCode"
+        to="ObligorObligation.PrimarySecondaryCode"/>
+   <map from="Obligation.LastUpdatedBy" to="ObligorObligation.LastUpdatedBy"/>
+   <map from="Obligation.CreatedBy" to="ObligorObligation.CreatedBy"/>
+   <map from="Alternate.Number" to="Alternate.Number"/>
+   <map from="Alternate.FormattedName" to="Alternate.FormattedName"/>
+   <map from="Obligation.OtherStateAbbr" to="ObligorObligation.OtherStateAbbr"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="Obligation.CreatedTmst" to="ObligorObligation.CreatedTmst"/>
+   <map from="Obligation.LastUpdateTmst" to="ObligorObligation.LastUpdateTmst"/>
+   <map from="ObligorCsePersonsWorkSet.Char2"
+        to="ObligorCsePersonsWorkSet.Char2"/>
+   <map from="HiddenLegalAction.Identifier" to="HiddenLegalAction.Identifier"/>
+   <map from="HiddenObligationType.SystemGeneratedIdentifier"
+        to="HiddenObligationType.SystemGeneratedIdentifier"/>
+   <map from="Alternate.Char2" to="Alternate.Char2"/>
+   <map from="Group.SupportedCsePersonsWorkSet.FormattedName"
+        to="Group.SupportedCsePersonsWorkSet.FormattedName"/>
+   <map from="Group.SuspendAccrual.Flag" to="Group.SuspendAccrual.Flag"/>
+   <map from="Country.Description" to="Country.Description"/>
+   <map from="Country.Cdvalue" to="Country.Cdvalue"/>
+   <map from="HiddenAltAddress.Number" to="ZdelImportDesignatedPayee.Number"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select top(1)
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.DISCONTINUE_DT
+from
+  CKT_OBLIGATION T3
+  join
+  CKT_ACCRUAL_INSTR T1
+  on
+    (T1.DISCONTINUE_DT &gt;= @discontinueDt) and
+    (T1.OTR_TYPE = 'DE') and
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_GENERATED_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (@ladNumber = T3.LAD_NUMBER) and
+    (@lgaIdentifier = T3.LGA_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.RETIRED_DT
+from
+  CKT_OBLIGATION T3
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T1.RETIRED_DT = @retiredDt) and
+    (T1.OTR_TYPE = 'DE') and
+    (T3.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T3.OB_ID = T1.OBG_GENERATED_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (@ladNumber = T3.LAD_NUMBER) and
+    (@lgaIdentifier = T3.LGA_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (LA_DETAIL_NO = @laDetailNo) and
+  (LGA_IDENTIFIER = @lgaIdentifier)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  LGA_IDENTIFIER,
+  LAD_NUMBER
+from
+  CKT_OBLIGATION
+where
+  (@ladNumber = LAD_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

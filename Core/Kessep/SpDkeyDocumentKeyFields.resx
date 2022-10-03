@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeAppeal">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID,
+  TYPE,
+  CSP_Q_NUMBER
+from
+  CKT_ADMIN_APPEAL with(readuncommitted)
+where
+  ADMIN_APPEAL_ID = @adminAppealId
+</value>
+   </data>
+   <data name="ReadCase1">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.STATUS = 'O') and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_LEGAL_ACT_PERS T5 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T1.STATUS = 'O') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  join
+  CKT_LA_PER_LA_CROL T4 with(readuncommitted)
+  on
+    (T2.CASE_ROLE_ID = T4.CRO_ID) and
+    (T2.TYPE = T4.CRO_TYPE) and
+    (T2.CSP_NUMBER = T4.CSP_NUM) and
+    (T2.CAS_NUMBER = T4.CAS_NUM)
+  on
+    (T5.LA_PERSON_ID = T4.LAP_ID) and
+    (T5.EFFECTIVE_DT &lt;= @startDate) and
+    (T5.END_DT &gt;= @startDate) and
+    (T5.LGA_IDENTIFIER = @lgaIdentifier)
+</value>
+   </data>
+   <data name="ReadCase3">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.STATUS = 'O') and
+    (T2.TYPE in ('AP', 'AR')) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonResource">
+      <value>
+select
+  CSP_NUMBER,
+  RESOURCE_NO
+from
+  CKT_CSE_PERSON_RES with(readuncommitted)
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadDocument1">
+      <value>
+select top(1)
+  NAME,
+  TYPE,
+  DESCRIPTION,
+  BUSINESS_OBJECT,
+  RQURED_RSPNSE_DAYS,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_DOCUMENT with(readuncommitted)
+where
+  (NAME = @name) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadDocument2">
+      <value>
+select top(1)
+  NAME,
+  TYPE,
+  DESCRIPTION,
+  BUSINESS_OBJECT,
+  RQURED_RSPNSE_DAYS,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_DOCUMENT with(readuncommitted)
+where
+  (NAME = @name) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="ReadDocument3">
+      <value>
+select top(1)
+  T1.NAME,
+  T1.TYPE,
+  T1.DESCRIPTION,
+  T1.BUSINESS_OBJECT,
+  T1.RQURED_RSPNSE_DAYS,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE
+from
+  CKT_DOCUMENT T1 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T2 with(readuncommitted)
+  on
+    (T1.EFFECTIVE_DATE = T2.DOC_EFFECTIVE_DTE) and
+    (T1.NAME = T2.DOC_NAME) and
+    (@infId = T2.INF_ID)
+</value>
+   </data>
+   <data name="ReadDocumentFieldField1">
+      <value>
+select
+  T1.ORDER_POSITION,
+  T1.REQUIRED_SWITCH,
+  T1.FLD_NAME,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T2.DEPENDANCY,
+  T2.SUBROUTINE_NAME,
+  T2.SCREEN_NAME,
+  T2.DESCRIPTION
+from
+  CKT_FIELD T2 with(readuncommitted)
+  join
+  CKT_DOCUMENT_FIELD T1 with(readuncommitted)
+  on
+    (@docEffectiveDte = T1.DOC_EFFECTIVE_DTE) and
+    (@docName = T1.DOC_NAME) and
+    (T2.NAME = T1.FLD_NAME)
+</value>
+   </data>
+   <data name="ReadDocumentFieldField2">
+      <value>
+select
+  T1.ORDER_POSITION,
+  T1.REQUIRED_SWITCH,
+  T1.FLD_NAME,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T2.DEPENDANCY,
+  T2.SUBROUTINE_NAME,
+  T2.SCREEN_NAME,
+  T2.DESCRIPTION
+from
+  CKT_FIELD T2 with(readuncommitted)
+  join
+  CKT_DOCUMENT_FIELD T1 with(readuncommitted)
+  on
+    (@docEffectiveDte = T1.DOC_EFFECTIVE_DTE) and
+    (@docName = T1.DOC_NAME) and
+    (T2.NAME = T1.FLD_NAME) and
+    (T2.DEPENDANCY in (' KEY', 'SYSTEM'))
+order by
+  T2.DEPENDANCY,
+  T1.FLD_NAME
+</value>
+   </data>
+   <data name="ReadDocumentFieldField3">
+      <value>
+select
+  T1.ORDER_POSITION,
+  T1.REQUIRED_SWITCH,
+  T1.FLD_NAME,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T2.DEPENDANCY,
+  T2.SUBROUTINE_NAME,
+  T2.SCREEN_NAME,
+  T2.DESCRIPTION
+from
+  CKT_FIELD T2 with(readuncommitted)
+  join
+  CKT_DOCUMENT_FIELD T1 with(readuncommitted)
+  on
+    (@docEffectiveDte = T1.DOC_EFFECTIVE_DTE) and
+    (@docName = T1.DOC_NAME) and
+    (T2.NAME = T1.FLD_NAME) and
+    (T2.DEPENDANCY in (' KEY', 'SYSTEM')) and
+    (
+      (T1.ORDER_POSITION &gt; @orderPosition) or
+      (
+        (T1.ORDER_POSITION = @orderPosition) and
+        (T2.NAME &gt; @name)
+      )
+    )
+order by
+  T1.ORDER_POSITION,
+  T1.FLD_NAME
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  DENORM_NUMERIC_12,
+  DENORM_TEXT_12,
+  DENORM_DATE,
+  DENORM_TIMESTAMP,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  CASE_UNIT_NUM,
+  USER_ID,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REFERENCE_DATE
+from
+  CKT_INFRASTRUCTURE with(readuncommitted)
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select top(1)
+  PRNT_SUCESSFUL_IND,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_ID
+from
+  CKT_OUTGOING_DOC with(readuncommitted)
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="ReadTransaction">
+      <value>
+select top(1)
+  SCREEN_ID,
+  TRANCODE
+from
+  CKT_TRANSACTION with(readuncommitted)
+where
+  TRANCODE = @trancode
+</value>
+   </data>
+</root>

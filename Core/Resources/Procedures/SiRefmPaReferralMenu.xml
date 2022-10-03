@@ -1,0 +1,49 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiRefmPaReferralMenu"
+           program-name="SWEREFMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiRefmPaReferralMenu"
+           transaction="SR2F"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiSinmServiceInitiationMenu"
+       send-command="XXFMMENU">
+      <map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_PA_REFERRAL_PG1"
+       action="transfer"
+       to="SiPar1PaReferralPage1"
+       send-command="XXFMMENU">
+      <map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+      <map from="PaReferral" to="Screen"/>
+      <map from="PaReferral.Number" to="PaReferral.Number"/>
+      <map from="PaReferral.Type1" to="PaReferral.Type1"/>
+      <map from="PaReferral.From" to="PaReferral.From"/>
+      <map from="Standard" to="Standard"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="Office" to="Office"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OFFICE_SERVICE_PROVDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="SelectedOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionOffice" to="SelectedOffice"/>
+      <return-map from="HiddenSelectionServiceProvider" to="SelectedServiceProvider"/>
+   </on>
+   <map from="PaReferral" to="PaReferral"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Next" to="Next"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="Office" to="Office"/>
+   <map from="OfficeAddress" to="OfficeAddress"/>
+   <map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+   <map from="Hidden" to="Hidden"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

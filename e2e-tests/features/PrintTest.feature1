@@ -1,0 +1,71 @@
+Feature: TC-181-ENF-Bankruptcy--Test
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy - BKRP" window appears
+    When user enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    When user enters "<TYPE>" in "Type"
+    And enters "<BANKRUPTCY_COURT_N>" in "Bankruptcy Court #"
+    And enters "Today" in "Filed"
+    When user enters "<BANKRUPTCY_DIST_COURT>" in "Bankruptcy Dist Court"
+    When user enters "<EXPECTED_DISCHARGE_DAY_AFTER>" in "Expected Discharge"
+    When user enters "<BANKRUPTCY_COURT_N>" in "Bankruptcy Court #"
+    When user enters "<TYPE>" in "Type"
+
+    When user enters "<TRUSTEE_OFFICER_NAME_LAST>" in "Trustee Officer Last"
+    And enters "<TRUSTEE_OFFICER_NAME_FIRST>" in the next field
+    And enters "<TRUSTEE_OFFICER_NAME_MI>" in the next field
+    And enters "<TRUSTEE_ADDRESS>" in "Address" under "Trustee Officer Last"
+    And enters "<TRUSTEE_ADDRESS_CITY>" in "City" under "Trustee Officer Last"
+    Then take snapshot "Sc2_page2"
+    And enters "<TRUSTEE_ADDRESS_ST>" in the next field
+    And enters "<TRUSTEE_ADDRESS_ZIP>" in "Zip" under "Trustee Officer Last"
+    And enters "<TRUSTEE_PHONE_1>" in "Phone" under "Trustee Officer Last"
+    And enters "<TRUSTEE_PHONE_2>" in the next field
+
+    When user enters "<ATTORNEY_NAME_LAST>" in "Attorney Last"
+    And enters "<ATTORNEY_NAME_FIRST>" in the next field
+    And enters "<ATTORNEY_NAME_MI>" in the next field
+    And enters "<ATTORNEY_ADDRESS>" in "Address" under "Attorney Last"
+    And enters "<ATTORNEY_ADDRESS_CITY>" in "City" under "Attorney Last"
+    And enters "<ATTORNEY_ADDRESS_ST>" in the next field
+    And enters "<ATTORNEY_ADDRESS_ZIP>" in "Zip" under "Attorney Last"
+    And enters "<ATTORNEY_PHONE_1>" in "Phone" under "Attorney Last"
+    And enters "<ATTORNEY_PHONE_2>" in the next field
+    When user enters "Today" in "Motion to lift Requested"
+
+
+    And user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    #When user presses "Shift+F12"
+    # print the request
+
+
+    Examples:
+      | PERSON  | TYPE | BANKRUPTCY_COURT_N | BANKRUPTCY_DIST_COURT | EXPECTED_DISCHARGE_DAY_AFTER | TRUSTEE_OFFICER_NAME_LAST | TRUSTEE_OFFICER_NAME_FIRST | TRUSTEE_OFFICER_NAME_MI | TRUSTEE_ADDRESS | TRUSTEE_ADDRESS_CITY | TRUSTEE_ADDRESS_ST | TRUSTEE_ADDRESS_ZIP | TRUSTEE_PHONE_1 | TRUSTEE_PHONE_2 | ATTORNEY_NAME_LAST | ATTORNEY_NAME_FIRST | ATTORNEY_NAME_MI | ATTORNEY_ADDRESS | ATTORNEY_ADDRESS_CITY | ATTORNEY_ADDRESS_ST | ATTORNEY_ADDRESS_ZIP | ATTORNEY_PHONE_1 | ATTORNEY_PHONE_2 | MOTION_TO_LIFT_REQUEST_DAY_BEFORE | MOTION_TO_LIFT_REQUEST_DAY_AFTER |
+      #| 3804952 | 07   | TEST 1234          | TEST DIST COURT2      | Tomorrow                     |
+      | 3804946 | 07   | TEST 1234          | TEST DIST COURT2      | Tomorrow                     | TO Last                   | TO Firts                   | S                       | 1 State ST      | TOPEKA               | KS                 | 66546               | 123             | 4567890         | A Last             | A Firts             | M                | 2 State ST       | TOPEKA                | KS                  | 66546                | 321              | 0987654          | Yesterday                         | Tomorrow                         |
+
+
+  Scenario Outline: Scenario2
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy - BKRP" window appears
+    Then take snapshot "Sc6_page1"
+    When user enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    Then take snapshot "Sc6_page2"
+    And user presses "F10"
+    Then message "ACO_NI0000: Delete was successful." is displayed
+
+    Examples:
+      | PERSON  |
+      #| 3804952 |
+      | 3804946 |

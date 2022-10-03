@@ -1,0 +1,76 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeCalsFcrCaseList"
+           program-name="SWECALSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeCalsFcrCaseList"
+           transaction="SRST"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_ALOM_MENU"
+       display-first="true"
+       action="transfer"
+       to="OeAlomLocateInterfacesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LINK_TO_CADS ECO_LNK_TO_LST_CASE_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCadsCaseDetails"
+       send-command="DISPLAY">
+      <map from="PassCaseNumber.Number" to="Case1.Number"/>
+      <map from="PassCaseNumber" to="Next"/>
+   </on>
+   <on exit-state="ECO_LINK_TO_MBLS"
+       action="link"
+       return-when="ACO_NE0000_RETURN_NM"
+       return-command="DISPLAY"
+       to="OeMblsFcrCaseMemberList"
+       send-command="DISPLAY">
+      <map from="PassFcrCaseId" to="FilterCaseId"/>
+   </on>
+   <map from="Starting" to="Starting"/>
+   <map from="FcrCaseList.SelectChar" to="FcrCaseList.SelectChar"/>
+   <map from="HiddenPrevPageStarting" to="HiddenPrevPageStarting"/>
+   <map from="Scrolling" to="Scrolling"/>
+   <map from="FilterSel" to="FilterSel"/>
+   <map from="FilterTo" to="FilterTo"/>
+   <map from="HiddenFilterPrevStart" to="HiddenFilterPrevStart"/>
+   <map from="HiddenFilterPrevSel" to="HiddenFilterPrevSel"/>
+   <map from="HiddenFilterPrevFrom" to="HiddenFilterPrevFrom"/>
+   <map from="HiddenFilterPrevTo" to="HiddenFilterPrevTo"/>
+   <map from="HiddenMoreThan1TblFg" to="HiddenMoreThan1TblFg"/>
+   <map from="HiddenPrevPageEndDate" to="HiddenPrevPageEndDate"/>
+   <map from="HiddenPrevPageEndCase" to="HiddenPrevPageEndCase"/>
+   <map from="FilterFrom" to="FilterFrom"/>
+   <map from="PassCaseNumber" to="Pass"/>
+   <map from="FcrCaseList.FcrCaseInfo.CaseId"
+        to="FcrCaseList.FcrCaseInfo.CaseId"/>
+   <map from="FcrCaseList.FcrCaseInfo.OrderIndicator"
+        to="FcrCaseList.FcrCaseInfo.OrderIndicator"/>
+   <map from="FcrCaseList.FcrCaseInfo.ActionTypeCode"
+        to="FcrCaseList.FcrCaseInfo.ActionTypeCode"/>
+   <map from="FcrCaseList.FcrCaseInfo.BatchNumber"
+        to="FcrCaseList.FcrCaseInfo.BatchNumber"/>
+   <map from="FcrCaseList.FcrCaseInfo.FipsCountyCode"
+        to="FcrCaseList.FcrCaseInfo.FipsCountyCode"/>
+   <map from="FcrCaseList.FcrCaseInfo.PreviousCaseId"
+        to="FcrCaseList.FcrCaseInfo.PreviousCaseId"/>
+   <map from="FcrCaseList.FcrCaseInfo.CaseSentDateToFcr"
+        to="FcrCaseList.FcrCaseInfo.CaseSentDateToFcr"/>
+   <map from="FcrCaseList.FcrCaseInfo.FcrCaseResponseDate"
+        to="FcrCaseList.FcrCaseInfo.FcrCaseResponseDate"/>
+   <map from="FcrCaseList.FcrCaseInfo.AcknowlegementCode"
+        to="FcrCaseList.FcrCaseInfo.AcknowlegementCode"/>
+   <map from="FcrCaseList.FcrCaseInfo.ErrorCode1"
+        to="FcrCaseList.FcrCaseInfo.ErrorCode1"/>
+   <map from="FcrCaseList.FcrCaseInfo.ErrorCode2"
+        to="FcrCaseList.FcrCaseInfo.ErrorCode2"/>
+   <map from="FcrCaseList.FcrCaseInfo.ErrorCode3"
+        to="FcrCaseList.FcrCaseInfo.ErrorCode3"/>
+   <map from="FcrCaseList.FcrCaseInfo.ErrorCode4"
+        to="FcrCaseList.FcrCaseInfo.ErrorCode4"/>
+   <map from="FcrCaseList.FcrCaseInfo.ErrorCode5"
+        to="FcrCaseList.FcrCaseInfo.ErrorCode5"/>
+   <map from="Hidden.LastTran" to="Hidden.LastTran"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+</procedure>

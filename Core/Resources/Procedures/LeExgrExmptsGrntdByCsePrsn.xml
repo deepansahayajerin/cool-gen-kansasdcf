@@ -1,0 +1,101 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeExgrExmptsGrntdByCsePrsn"
+           program-name="SWEEXGRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeExgrExmptsGrntdByCsePrsn"
+           transaction="SR8K"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_OBLIGATION_TYPES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOBTL"
+       to="FnObtlLstObligTypes"
+       send-command="DISPLAY">
+      <return-map from="Selected.SystemGeneratedIdentifier"
+                  to="Required.SystemGeneratedIdentifier"/>
+      <return-map from="Selected.Code" to="Required.Code"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADMIN_ACTION_AVAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETADAA"
+       to="LeAdaaLstAdminActionsAvail"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="AdministrativeAction"/>
+   </on>
+   <on exit-state="ECO_LNK_2_EXMP_ADM_ACT_EXEMPTION"
+       action="transfer"
+       to="LeExmpAdminActionExemption"
+       send-command="DISPLAY">
+      <map from="SelectedObligationType.SystemGeneratedIdentifier"
+           to="ObligationType.SystemGeneratedIdentifier"/>
+      <map from="SelectedObligationType.Code" to="ObligationType.Code"/>
+      <map from="SelectedObligationAdmActionExemption.EffectiveDate"
+           to="HiddenPrevObligationAdmActionExemption.EffectiveDate"/>
+      <map from="SelectedObligationAdmActionExemption.EndDate"
+           to="HiddenPrevObligationAdmActionExemption.EndDate"/>
+      <map from="SelectedObligationAdmActionExemption.LastName"
+           to="HiddenPrevObligationAdmActionExemption.LastName"/>
+      <map from="SelectedObligationAdmActionExemption.FirstName"
+           to="HiddenPrevObligationAdmActionExemption.FirstName"/>
+      <map from="SelectedObligationAdmActionExemption.MiddleInitial"
+           to="HiddenPrevObligationAdmActionExemption.MiddleInitial"/>
+      <map from="SelectedObligationAdmActionExemption.Reason"
+           to="HiddenPrevObligationAdmActionExemption.Reason"/>
+      <map from="SelectedObligationAdmActionExemption.Description"
+           to="HiddenPrevObligationAdmActionExemption.Description"/>
+      <map from="SelectedObligationAdmActionExemption.EffectiveDate"
+           to="ObligationAdmActionExemption.EffectiveDate"/>
+      <map from="SelectedObligationAdmActionExemption.EndDate"
+           to="ObligationAdmActionExemption.EndDate"/>
+      <map from="SelectedObligationAdmActionExemption.LastName"
+           to="ObligationAdmActionExemption.LastName"/>
+      <map from="SelectedObligationAdmActionExemption.FirstName"
+           to="ObligationAdmActionExemption.FirstName"/>
+      <map from="SelectedObligationAdmActionExemption.MiddleInitial"
+           to="ObligationAdmActionExemption.MiddleInitial"/>
+      <map from="SelectedObligationAdmActionExemption.Reason"
+           to="ObligationAdmActionExemption.Reason"/>
+      <map from="SelectedObligationAdmActionExemption.Description"
+           to="ObligationAdmActionExemption.Description"/>
+      <map from="SelectedObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="AllObligations" to="AllObligations"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="SelectedAdministrativeAction" to="AdministrativeAction"/>
+      <map from="SelectedObligation.SystemGeneratedIdentifier"
+           to="HiddenPrevObligation.SystemGeneratedIdentifier"/>
+      <map from="CsePersonsWorkSet" to="HiddenPrevCsePersonsWorkSet"/>
+      <map from="SelectedAdministrativeAction" to="HiddenPrevAdministrativeAction"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="AdministrativeAction" to="AdministrativeAction"/>
+   <map from="Exemptions.Common" to="Exemptions.Common"/>
+   <map from="Exemptions.AdministrativeAction"
+        to="Exemptions.AdministrativeAction"/>
+   <map from="Exemptions.CsePersonsWorkSet" to="Exemptions.CsePersonsWorkSet"/>
+   <map from="Exemptions.Obligation" to="Exemptions.Obligation"/>
+   <map from="Exemptions.ObligationAdmActionExemption"
+        to="Exemptions.ObligationAdmActionExemption"/>
+   <map from="Exemptions.ObligationType" to="Exemptions.ObligationType"/>
+   <map from="Required" to="Required"/>
+   <map from="Starting" to="Starting"/>
+   <map from="PromptObligationType" to="PromptObligationType"/>
+   <map from="PromptAdminAction" to="PromptAdminAction"/>
+   <map from="Display" to="Display"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="CsePersonsWorkSet.FirstName" to="CsePersonsWorkSet.FirstName"/>
+   <map from="CsePersonsWorkSet.MiddleInitial"
+        to="CsePersonsWorkSet.MiddleInitial"/>
+   <map from="CsePersonsWorkSet.LastName" to="CsePersonsWorkSet.LastName"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+</procedure>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeActionCriteria">
+      <value>
+select top(1)
+  AAT_TYPE,
+  ADMIN_ACTION_ID,
+  EFFECTIVE_DT,
+  END_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  DESCRIPTION
+from
+  CKT_ADMN_ACT_CRITR
+where
+  (ADMIN_ACTION_ID = @adminActionId) and
+  (AAT_TYPE = @aatType)
+</value>
+   </data>
+   <data name="UpdateAdministrativeActionCriteria">
+      <value>
+update CKT_ADMN_ACT_CRITR
+set
+  EFFECTIVE_DT = @effectiveDt,
+  END_DT = @endDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  DESCRIPTION = @description
+where
+  (AAT_TYPE = @aatType) and
+  (ADMIN_ACTION_ID = @adminActionId)
+</value>
+   </data>
+</root>

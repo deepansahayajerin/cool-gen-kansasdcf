@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCreditReportingAction">
+      <value>
+insert into CKT_CRED_RPT_ACT
+(
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+)
+values
+(
+  @identifier,
+  @cseActionCode,
+  @craTransCode,
+  @craTransDate,
+  @dateSentToCra,
+  @originalAmount,
+  @currentAmount,
+  @highestAmount,
+  @cpaType,
+  @cspNumber,
+  @aacType,
+  @aacTakenDate,
+  @aacTanfCode
+)
+</value>
+   </data>
+   <data name="ReadCreditReportingAction1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CRA_TRANS_DATE &gt; @craTransDate) and
+  (
+    (CSE_ACTION_CODE &lt;&gt; 'STA') or
+    (CSE_ACTION_CODE &lt;&gt; 'DEL')
+  )
+order by
+  CRA_TRANS_DATE
+</value>
+   </data>
+   <data name="ReadCreditReportingAction2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CSE_ACTION_CODE = 'ISS')
+order by
+  CRA_TRANS_DATE
+</value>
+   </data>
+   <data name="ReadCreditReportingAction3">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (DATE_SENT_TO_CRA &gt; @dateSentToCra)
+order by
+  CRA_TRANS_DATE desc
+</value>
+   </data>
+   <data name="ReadCreditReportingAction4">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+order by
+  CRA_TRANS_DATE desc
+</value>
+   </data>
+   <data name="ReadCreditReportingAction5">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadCreditReportingAction6">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (CSE_ACTION_CODE = 'ACT') and
+  (CRA_TRANS_DATE &gt; @craTransDate) and
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+order by
+  CRA_TRANS_DATE desc
+</value>
+   </data>
+   <data name="ReadCreditReportingAction7">
+      <value>
+select
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CSE_ACTION_CODE = 'ISS')
+</value>
+   </data>
+   <data name="ReadCreditReportingAction8">
+      <value>
+select
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CSE_ACTION_CODE in ('ISS', 'ACT')) and
+  (
+    (ORIGINAL_AMOUNT = 0) or
+    (HIGHEST_AMOUNT = 0) or
+    (CURRENT_AMOUNT = 0)
+  )
+</value>
+   </data>
+   <data name="ReadCreditReportingAction9">
+      <value>
+select
+  IDENTIFIER,
+  CSE_ACTION_CODE,
+  CRA_TRANS_CODE,
+  CRA_TRANS_DATE,
+  DATE_SENT_TO_CRA,
+  ORIGINAL_AMOUNT,
+  CURRENT_AMOUNT,
+  HIGHEST_AMOUNT,
+  CPA_TYPE,
+  CSP_NUMBER,
+  AAC_TYPE,
+  AAC_TAKEN_DATE,
+  AAC_TANF_CODE
+from
+  CKT_CRED_RPT_ACT
+where
+  (@aacTakenDate = AAC_TAKEN_DATE) and
+  (@aacType = AAC_TYPE) and
+  (@aacTanfCode = AAC_TANF_CODE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (CSE_ACTION_CODE = 'ACT')
+</value>
+   </data>
+   <data name="ReadCsePersonObligorCreditReporting1">
+      <value>
+select
+  CSP_NUMBER,
+  CPA_TYPE,
+  TYPE,
+  TAKEN_DT,
+  ORIGINAL_AMT,
+  CURRENT_AMT,
+  CURRENT_AMT_DT,
+  NOTIFICATION_DT,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  DATE_SENT,
+  DATE_STAYED,
+  DATE_STAY_RELEASED,
+  HIGHEST_AMOUNT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (DATE_STAYED &gt; @dateStayed) and
+  (DATE_STAY_RELEASED = @dateStayed)
+order by
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCsePersonObligorCreditReporting2">
+      <value>
+select
+  CSP_NUMBER,
+  CPA_TYPE,
+  TYPE,
+  TAKEN_DT,
+  ORIGINAL_AMT,
+  CURRENT_AMT,
+  CURRENT_AMT_DT,
+  NOTIFICATION_DT,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  DATE_SENT,
+  DATE_STAYED,
+  DATE_STAY_RELEASED,
+  HIGHEST_AMOUNT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  CREATED_BY = 'CONVERSN'
+order by
+  CSP_NUMBER
+</value>
+   </data>
+   <data name="UpdateCreditReporting1">
+      <value>
+update CKT_ADMIN_ACT_CERT
+set
+  ORIGINAL_AMT = @originalAmt,
+  CURRENT_AMT = @currentAmt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  HIGHEST_AMOUNT = @highestAmount
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReporting2">
+      <value>
+update CKT_ADMIN_ACT_CERT
+set
+  CURRENT_AMT_DT = @currentAmtDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReporting3">
+      <value>
+update CKT_ADMIN_ACT_CERT
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  DATE_SENT = @dateSent
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReporting4">
+      <value>
+update CKT_ADMIN_ACT_CERT
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  DATE_STAY_RELEASED = @dateStayReleased
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReporting5">
+      <value>
+update CKT_ADMIN_ACT_CERT
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  DATE_STAY_RELEASED = @dateStayReleased
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReporting6">
+      <value>
+update CKT_ADMIN_ACT_CERT
+set
+  NOTIFICATION_DT = @notificationDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReporting7">
+      <value>
+update CKT_ADMIN_ACT_CERT
+set
+  ORIGINAL_AMT = @originalAmt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReporting8">
+      <value>
+update CKT_ADMIN_ACT_CERT
+set
+  ORIGINAL_AMT = @originalAmt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReportingAction1">
+      <value>
+update CKT_CRED_RPT_ACT
+set
+  ORIGINAL_AMOUNT = @originalAmount,
+  CURRENT_AMOUNT = @currentAmount
+where
+  (IDENTIFIER = @identifier) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (AAC_TYPE = @aacType) and
+  (AAC_TAKEN_DATE = @aacTakenDate) and
+  (AAC_TANF_CODE = @aacTanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReportingAction2">
+      <value>
+update CKT_CRED_RPT_ACT
+set
+  CURRENT_AMOUNT = @currentAmount,
+  HIGHEST_AMOUNT = @highestAmount
+where
+  (IDENTIFIER = @identifier) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (AAC_TYPE = @aacType) and
+  (AAC_TAKEN_DATE = @aacTakenDate) and
+  (AAC_TANF_CODE = @aacTanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReportingAction3">
+      <value>
+update CKT_CRED_RPT_ACT
+set
+  ORIGINAL_AMOUNT = @originalAmount,
+  HIGHEST_AMOUNT = @highestAmount
+where
+  (IDENTIFIER = @identifier) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (AAC_TYPE = @aacType) and
+  (AAC_TAKEN_DATE = @aacTakenDate) and
+  (AAC_TANF_CODE = @aacTanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReportingAction4">
+      <value>
+update CKT_CRED_RPT_ACT
+set
+  ORIGINAL_AMOUNT = @originalAmount,
+  HIGHEST_AMOUNT = @highestAmount
+where
+  (IDENTIFIER = @identifier) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (AAC_TYPE = @aacType) and
+  (AAC_TAKEN_DATE = @aacTakenDate) and
+  (AAC_TANF_CODE = @aacTanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReportingAction5">
+      <value>
+update CKT_CRED_RPT_ACT
+set
+  ORIGINAL_AMOUNT = @originalAmount,
+  CURRENT_AMOUNT = @currentAmount
+where
+  (IDENTIFIER = @identifier) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (AAC_TYPE = @aacType) and
+  (AAC_TAKEN_DATE = @aacTakenDate) and
+  (AAC_TANF_CODE = @aacTanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReportingAction6">
+      <value>
+update CKT_CRED_RPT_ACT
+set
+  CURRENT_AMOUNT = @currentAmount,
+  HIGHEST_AMOUNT = @highestAmount
+where
+  (IDENTIFIER = @identifier) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (AAC_TYPE = @aacType) and
+  (AAC_TAKEN_DATE = @aacTakenDate) and
+  (AAC_TANF_CODE = @aacTanfCode)
+</value>
+   </data>
+   <data name="UpdateCreditReportingAction7">
+      <value>
+update CKT_CRED_RPT_ACT
+set
+  ORIGINAL_AMOUNT = @originalAmount,
+  HIGHEST_AMOUNT = @highestAmount
+where
+  (IDENTIFIER = @identifier) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (AAC_TYPE = @aacType) and
+  (AAC_TAKEN_DATE = @aacTakenDate) and
+  (AAC_TANF_CODE = @aacTanfCode)
+</value>
+   </data>
+</root>

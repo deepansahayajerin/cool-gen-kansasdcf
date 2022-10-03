@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE
+from
+  CKT_CASE_ROLE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (@cspNumber1 = T1.CSP_NUMBER) and
+    (T1.END_DATE &gt; @endDate) and
+    (T1.START_DATE &lt;= @endDate) and
+    (T1.CAS_NUMBER = T3.CAS_NUMBER) and
+    (@cspNumber2 = T3.CSP_NUMBER) and
+    (T3.END_DATE &gt; @endDate) and
+    (T3.START_DATE &lt;= @endDate)
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select top(1)
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DESCRIPTION
+from
+  CKT_CODE_VALUE with(readuncommitted)
+where
+  (COD_ID = @codId) and
+  (CDVALUE = cast(@relationshipToCsePerson as char(15)))
+</value>
+   </data>
+   <data name="ReadContact">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CONTACT_NUMBER,
+  REL_TO_CSE_PERSON,
+  LAST_NAME,
+  FIRST_NAME
+from
+  CKT_CONTACT with(readuncommitted)
+where
+  (CONTACT_NUMBER = @contactNumber) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadEmployerEmployerAddress">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.EIN,
+  T1.NAME,
+  T2.LOCATION_TYPE,
+  T2.STREET1,
+  T2.STREET2,
+  T2.CITY,
+  T2.IDENTIFIER,
+  T2.[STATE],
+  T2.ZIP_CODE
+from
+  CKT_EMPLOYER T1 with(readuncommitted)
+  join
+  CKT_EMPLOYER_ADDR T2 with(readuncommitted)
+  on
+    (T1.IDENTIFIER = @identifier) and
+    (T1.IDENTIFIER = T2.EMP_ID)
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_CD,
+  CSP_I_NUMBER,
+  EMP_ID
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+</root>

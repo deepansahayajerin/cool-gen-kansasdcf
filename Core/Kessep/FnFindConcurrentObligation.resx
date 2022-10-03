@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonAccountCsePerson">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationObligationType1">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID
+from
+  CKT_OBLIGATION T1
+  join
+  CKT_OBG_RLN T3
+  on
+    (T1.DTY_GENERATED_ID = T3.OTY_FIRST_ID) and
+    (T1.OB_ID = T3.OBG_F_GENERATED_ID) and
+    (T1.CSP_NUMBER = T3.CSP_F_NUMBER) and
+    (T1.CPA_TYPE = T3.CPA_F_TYPE) and
+    (@otySecondId = T3.OTY_SECOND_ID) and
+    (@obgGeneratedId = T3.OBG_GENERATED_ID) and
+    (@cspNumber = T3.CSP_NUMBER) and
+    (@cpaType = T3.CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadObligationObligationType2">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID
+from
+  CKT_OBLIGATION T1
+  join
+  CKT_OBG_RLN T3
+  on
+    (T1.DTY_GENERATED_ID = T3.OTY_SECOND_ID) and
+    (T1.OB_ID = T3.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (@otyFirstId = T3.OTY_FIRST_ID) and
+    (@obgFGeneratedId = T3.OBG_F_GENERATED_ID) and
+    (@cspFNumber = T3.CSP_F_NUMBER) and
+    (@cpaFType = T3.CPA_F_TYPE)
+</value>
+   </data>
+</root>

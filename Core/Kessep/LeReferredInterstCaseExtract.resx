@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_ASSIGN_CASE T2
+  on
+    (T1.NUMB = T2.CAS_NO) and
+    (T2.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T2.OFF_ID = 21)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.END_DATE &gt;= @endDate) and
+    (@casNumber = T2.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalReferral">
+      <value>
+select
+  CAS_NUMBER,
+  IDENTIFIER,
+  STATUS
+from
+  CKT_LEGAL_REFERRAL
+where
+  @casNumber = CAS_NUMBER
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE &gt;= @discontinueDate)
+  join
+  CKT_ASSGN_LEG_REF T3
+  on
+    (T2.EFFECTIVE_DATE = T3.OSP_DATE) and
+    (T2.ROLE_CODE = T3.OSP_CODE) and
+    (T2.OFF_GENERATED_ID = T3.OFF_ID) and
+    (T2.SPD_GENERATED_ID = T3.SPD_ID) and
+    (T3.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (@lgrId = T3.LGR_ID) and
+    (@casNo = T3.CAS_NO)
+</value>
+   </data>
+</root>

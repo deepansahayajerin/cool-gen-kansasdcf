@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadServiceProviderOfficeServiceProvRelationship">
+      <value>
+select
+  SPD_R_GENERATED_ID,
+  OSP_EFFECTIVE_DATE,
+  OSP_ROLE_CODE,
+  OFF_GENERATED_ID,
+  SPD_GENERATED_ID,
+  OSP_R_EFFECTIVE_DT,
+  OSP_R_ROLE_CODE,
+  OFF_R_GENERATED_ID,
+  REASON_CODE,
+  CREATED_DTSTAMP
+from
+  CKT_OFC_SRCPRV_RLT with(readuncommitted)
+where
+  (OSP_ROLE_CODE = @ospRoleCode) and
+  (OSP_EFFECTIVE_DATE = @ospEffectiveDate) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+order by
+  CREATED_DTSTAMP desc
+</value>
+   </data>
+</root>

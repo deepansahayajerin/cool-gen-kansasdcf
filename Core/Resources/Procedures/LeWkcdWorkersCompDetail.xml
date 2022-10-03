@@ -1,0 +1,38 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeWkcdWorkersCompDetail"
+           program-name="SWEWKCDP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeWkcdWorkersCompDetail"
+           transaction="SSAG"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="FromName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_WKCL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeWkclWorkersCompList"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="Selected" to="HiddenWorkersCompClaim"/>
+      <return-map from="CsePersonsWorkSet.FormattedName"
+                  to="CsePersonsWorkSet.FormattedName"/>
+      <return-map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptPerson" to="PromptPerson"/>
+   <map from="Export1.G" to="Import1.G"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="HiddenWorkersCompClaim" to="HiddenWorkersCompClaim"/>
+</procedure>

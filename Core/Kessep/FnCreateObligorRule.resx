@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateObligorRule">
+      <value>
+insert into CKT_RECAPTURE_RULE
+(
+  RECAPTURE_RULE_ID,
+  DTY_GENERATED_ID,
+  CPA_D_TYPE,
+  CSP_D_NUMBER,
+  EFFECTIVE_DATE,
+  NEGOTIATED_DATE,
+  DISCONTINUE_DATE,
+  NA_ARREARS_MAX_AMT,
+  NA_ARREARS_AMOUNT,
+  NA_ARREARS_PCT,
+  NA_CURR_MAX_AMOUNT,
+  NA_CURR_AMOUNT,
+  NA_CURR_PERCENTAGE,
+  PASSTHRU_PERCENTAG,
+  PASSTHRU_AMOUNT,
+  PASSTHRU_MAX_AMT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DEFAULT_RULE_FILLE,
+  OBLIGOR_RULE_FILLE,
+  TYPE,
+  REPYMNT_LTR_PRT_DT
+)
+values
+(
+  @recaptureRuleId,
+  null,
+  @cpaDType,
+  @cspDNumber,
+  @effectiveDate,
+  @negotiatedDate,
+  @discontinueDate,
+  @naArrearsMaxAmt,
+  @naArrearsAmount,
+  @naArrearsPct,
+  @naCurrMaxAmount,
+  @naCurrAmount,
+  @naCurrPercentage,
+  @passthruPercentag,
+  @passthruAmount,
+  @passthruMaxAmt,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @defaultRuleFille,
+  @obligorRuleFille,
+  @type,
+  @repymntLtrPrtDt
+)
+</value>
+   </data>
+   <data name="ReadObligor">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadObligorRule">
+      <value>
+select top(1)
+  RECAPTURE_RULE_ID,
+  CPA_D_TYPE,
+  CSP_D_NUMBER,
+  EFFECTIVE_DATE,
+  NEGOTIATED_DATE,
+  DISCONTINUE_DATE,
+  NA_ARREARS_MAX_AMT,
+  NA_ARREARS_AMOUNT,
+  NA_ARREARS_PCT,
+  NA_CURR_MAX_AMOUNT,
+  NA_CURR_AMOUNT,
+  NA_CURR_PERCENTAGE,
+  PASSTHRU_PERCENTAG,
+  PASSTHRU_AMOUNT,
+  PASSTHRU_MAX_AMT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OBLIGOR_RULE_FILLE,
+  TYPE,
+  REPYMNT_LTR_PRT_DT
+from
+  CKT_RECAPTURE_RULE
+where
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (@cpaDType = CPA_D_TYPE) and
+  (@cspDNumber = CSP_D_NUMBER)
+</value>
+   </data>
+   <data name="UpdateObligorRule">
+      <value>
+update CKT_RECAPTURE_RULE
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  RECAPTURE_RULE_ID = @recaptureRuleId
+</value>
+   </data>
+</root>

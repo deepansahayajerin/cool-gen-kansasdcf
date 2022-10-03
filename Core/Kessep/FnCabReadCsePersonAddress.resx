@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFipsTribAddress">
+      <value>
+select distinct top(1)
+  T1.IDENTIFIER,
+  T1.STREET_1,
+  T1.STREET_2,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CD,
+  T1.ZIP4,
+  T1.ZIP3,
+  T1.COUNTY,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.FIP_STATE,
+  T1.FIP_COUNTY,
+  T1.FIP_LOCATION
+from
+  CKT_FIPS T2
+  join
+  CKT_FIPS_TRIB_ADDR T1
+  on
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE) and
+    (T2.CSP_NUMBER is not null) and
+    (
+      (
+        (cast(@number1 as char(10)) &gt; ' ') and
+        (T2.CSP_NUMBER = @number1)
+      ) or
+      (
+        (cast(@number2 as char(10)) &gt; ' ') and
+        (T2.CSP_NUMBER = @number2)
+      )
+    )
+</value>
+   </data>
+</root>

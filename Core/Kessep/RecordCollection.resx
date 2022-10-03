@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCashReceiptDetail">
+      <value>
+update CKT_CR_DETAIL
+set
+  CLT_IDENTIFIER = @cltIdentifier
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CRD_ID = @crdId)
+</value>
+   </data>
+   <data name="CreateCashReceiptDetail">
+      <value>
+insert into CKT_CR_DETAIL
+(
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  INTERFACE_TRAN_ID,
+  ADJUSTMENT_IND,
+  COURT_ORDER_NUMBER,
+  CASE_NUMBER,
+  OFFSET_TAXID,
+  RECEIVED_AMOUNT,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  MULTI_PAYOR,
+  OFFSET_TAX_YEAR,
+  JOINT_RETURN_IND,
+  JOINT_RETURN_NAME,
+  DFLTD_COLL_DAT_IND,
+  OBLGOR_PRSN_NBR,
+  OBLGOR_SSN,
+  OBLGOR_FIRST_NM,
+  OBLGOR_LAST_NM,
+  OBLGOR_MID_NM,
+  OBLGOR_PHONE_NBR,
+  PAYEE_FIRST_NAME,
+  PAYEE_MIDDLE_NAME,
+  PAYEE_LAST_NAME,
+  SUP_PRSN_FRST_NM1,
+  SUP_PRSN_MID_NM1,
+  SUP_PRSN_LST_NM1,
+  SUP_PRSN_FRST_NM2,
+  SUP_PRSN_LST_NM2,
+  SUP_PRSN_MID_NM2,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  COLLAMT_APPL_IND,
+  CLT_IDENTIFIER,
+  SUPP_PERS_NO_VOL,
+  REFERENC,
+  NOTES,
+  OVRRD_MNL_DIST_IND,
+  INJURED_SPOUSE_IND,
+  JFA_RECEIVED_DATE,
+  CRU_PROCESSED_DATE
+)
+values
+(
+  @crvIdentifier,
+  @cstIdentifier,
+  @crtIdentifier,
+  @crdId,
+  @interfaceTranId,
+  @adjustmentInd,
+  @courtOrderNumber,
+  @caseNumber,
+  @offsetTaxid,
+  @receivedAmount,
+  @collectionAmount,
+  @collectionDate,
+  @multiPayor,
+  @offsetTaxYear,
+  @jointReturnInd,
+  @jointReturnName,
+  @dfltdCollDatInd,
+  @oblgorPrsnNbr,
+  @oblgorSsn,
+  @oblgorFirstNm,
+  @oblgorLastNm,
+  @oblgorMidNm,
+  @oblgorPhoneNbr,
+  @payeeFirstName,
+  @payeeMiddleName,
+  @payeeLastName,
+  @supPrsnFrstNm1,
+  @supPrsnMidNm1,
+  @supPrsnLstNm1,
+  @supPrsnFrstNm2,
+  @supPrsnLstNm2,
+  @supPrsnMidNm2,
+  @createdBy,
+  @createdTmst,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @refundedAmt,
+  @refundedAmt,
+  @collamtApplInd,
+  null,
+  @suppPersNoVol,
+  @referenc,
+  @notes,
+  @ovrrdMnlDistInd,
+  @injuredSpouseInd,
+  @jfaReceivedDate,
+  @jfaReceivedDate
+)
+</value>
+   </data>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE
+from
+  CKT_COLLTN_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+</root>

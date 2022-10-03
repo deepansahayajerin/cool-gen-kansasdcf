@@ -1,0 +1,93 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeAaccAdmActTaknByCrtCase"
+           program-name="SWEAACCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeAaccAdmActTaknByCrtCase"
+           transaction="SR8A"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLTRB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="Foreign"/>
+      <return-map from="DlgflwSelectedTribunal" to="Tribunal"/>
+      <return-map from="DlgflwSelectedFips" to="Fips"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADMIN_ACTION_AVAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETADAA"
+       to="LeAdaaLstAdminActionsAvail"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="Required"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CRED_REPORTING"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeCredCreditReporting"
+       send-command="DISPLAY">
+      <map from="DlgflwSelectedObligor" to="Ap"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IADA_IDENTIFY_ADM_ACT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeIadaIdentifyAdminAction"
+       send-command="DISPLAY">
+      <map from="Fips" to="Fips"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="Fips" to="HiddenFips"/>
+      <map from="SelectedObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="DlgflwIadaAllObligatns" to="AllObligations"/>
+      <map from="SelectedObligationAdministrativeAction.TakenDate"
+           to="ObligationAdministrativeAction.TakenDate"/>
+      <map from="DlgflwSelectedObligor" to="CsePersonsWorkSet"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="SelectedAdministrativeAction.Type1"
+           to="AdministrativeAction.Type1"/>
+      <map from="SelectedObligation.SystemGeneratedIdentifier"
+           to="HiddenPrevObligation.SystemGeneratedIdentifier"/>
+      <map from="SelectedObligationAdministrativeAction.TakenDate"
+           to="HiddenPrevObligationAdministrativeAction.TakenDate"/>
+      <map from="DlgflwSelectedObligor" to="HiddenPrevCsePersonsWorkSet"/>
+      <map from="SelectedLegalAction.CourtCaseNumber"
+           to="HiddenPrevLegalAction.CourtCaseNumber"/>
+      <map from="SelectedAdministrativeAction.Type1"
+           to="HiddenPrevAdministrativeAction.Type1"/>
+   </on>
+   <map from="AdminAction.DetailAdministrativeActCertification"
+        to="AdminAction.DetailAdministrativeActCertification"/>
+   <map from="AdminAction.DetailObligationAdministrativeAction"
+        to="AdminAction.DetailObligationAdministrativeAction"/>
+   <map from="SelOpt.DetailSelOpt" to="SelOpt.DetailSelOpt"/>
+   <map from="AdminAction.DetailCsePersonsWorkSet"
+        to="AdminAction.DetailCsePersonsWorkSet"/>
+   <map from="AdminAction.DetailHiddenOblgr" to="AdminAction.DetailHiddenOblgr"/>
+   <map from="AdminAction.DetailAdministrativeAction"
+        to="AdminAction.DetailAdministrativeAction"/>
+   <map from="AdminAction.DetailHiddenCrtfd" to="AdminAction.DetailHiddenCrtfd"/>
+   <map from="AdminAction.DetailObligation" to="AdminAction.DetailObligation"/>
+   <map from="Required" to="Required"/>
+   <map from="StartDate" to="StartDate"/>
+   <map from="PromptAdminActType" to="PromptAdminActType"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="OptionAutoManualAdmAc" to="OptionAutoManualAdmAc"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="PromptTribunal" to="PromptTribunal"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Foreign" to="Foreign"/>
+   <map from="AdminAction.DetailFederalDebtSetoff.NonAdcAmount"
+        to="AdminAction.DetailFederalDebtSetoff.NonAdcAmount"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+</procedure>

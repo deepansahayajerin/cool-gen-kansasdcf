@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection">
+      <value>
+select top(1)
+  COLL_ID,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID
+from
+  CKT_COLLECTION
+where
+  (@otyId = OTY_ID) and
+  (@otrType = OTR_TYPE) and
+  (@otrId = OTR_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgId = OBG_ID)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  OB_DSC,
+  PRIM_SEC_CD,
+  CREATED_TMST
+from
+  CKT_OBLIGATION
+where
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligationTransaction">
+      <value>
+select
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OB_TRN_ID,
+  OB_TRN_TYP,
+  DEBT_TYP,
+  CSP_SUP_NUMBER,
+  CPA_SUP_TYPE,
+  OTY_TYPE
+from
+  CKT_OB_TRN with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE)
+</value>
+   </data>
+   <data name="ReadObligationTransactionRlnObligationTransactionRlnRsn1">
+      <value>
+select top(1)
+  ONR_GENERATED_ID,
+  OTR_TYPE,
+  OTR_GENERATED_ID,
+  CPA_TYPE,
+  CSP_NUMBER,
+  OBG_GENERATED_ID,
+  OTR_P_TYPE,
+  OTR_P_GENERATED_ID,
+  CPA_P_TYPE,
+  CSP_P_NUMBER,
+  OBG_P_GENERATED_ID,
+  OB_TRN_RLN_ID,
+  OTY_TYPE_PRIMARY,
+  OTY_TYPE_SECONDARY
+from
+  CKT_OB_TRN_RLN with(readuncommitted)
+where
+  (@otyTypePrimary = OTY_TYPE_PRIMARY) and
+  (@otrPType = OTR_P_TYPE) and
+  (@otrPGeneratedId = OTR_P_GENERATED_ID) and
+  (@cpaPType = CPA_P_TYPE) and
+  (@cspPNumber = CSP_P_NUMBER) and
+  (@obgPGeneratedId = OBG_P_GENERATED_ID) and
+  (ONR_GENERATED_ID &lt;&gt; @onrGeneratedId)
+</value>
+   </data>
+   <data name="ReadObligationTransactionRlnObligationTransactionRlnRsn2">
+      <value>
+select top(1)
+  ONR_GENERATED_ID,
+  OTR_TYPE,
+  OTR_GENERATED_ID,
+  CPA_TYPE,
+  CSP_NUMBER,
+  OBG_GENERATED_ID,
+  OTR_P_TYPE,
+  OTR_P_GENERATED_ID,
+  CPA_P_TYPE,
+  CSP_P_NUMBER,
+  OBG_P_GENERATED_ID,
+  OB_TRN_RLN_ID,
+  OTY_TYPE_PRIMARY,
+  OTY_TYPE_SECONDARY
+from
+  CKT_OB_TRN_RLN with(readuncommitted)
+where
+  (@otyTypeSecondary = OTY_TYPE_SECONDARY) and
+  (@otrType = OTR_TYPE) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (ONR_GENERATED_ID &lt;&gt; @onrGeneratedId)
+</value>
+   </data>
+</root>

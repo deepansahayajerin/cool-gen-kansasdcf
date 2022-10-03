@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCsePerson">
+      <value>
+update CKT_OBLIGATION
+set
+  CSP_P_NUMBER = @cspPNumber
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="DisassociateCsePerson#1">
+      <value>
+update CKT_OBLIGATION
+set
+  CSP_P_NUMBER = null
+where
+  (CPA_TYPE = @cpaType1) and
+  (CSP_NUMBER = @cspNumber1) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+   <data name="DisassociateCsePerson#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_OBLIGATION T1
+where
+  (T1.CPA_TYPE = @cpaType2) and
+  (T1.CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="DisassociateCsePerson#3">
+      <value>
+delete from CKT_CSE_PERSON_ACC
+where
+  (TYPE = @cpaType2) and
+  (CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  CSP_P_NUMBER
+from
+  CKT_OBLIGATION
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+</root>

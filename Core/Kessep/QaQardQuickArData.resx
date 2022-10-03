@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CSE_OPEN_DATE,
+  T1.EXPEDIDED_PAT_IND,
+  T1.PA_MEDICAL_SERVICE,
+  T1.IC_TRANS_SER_NO,
+  T1.INTERSTATE_CASE_ID,
+  T1.ADC_OPEN_DATE,
+  T1.ADC_CLOSE_DATE,
+  T1.DUP_CASE_INDICATOR
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T1.NUMB &lt;&gt; @numb) and
+    (T1.STATUS = 'O') and
+    (T2.START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select top(1)
+  CLOSURE_REASON,
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE,
+  EXPEDIDED_PAT_IND,
+  PA_MEDICAL_SERVICE,
+  IC_TRANS_SER_NO,
+  INTERSTATE_CASE_ID,
+  ADC_OPEN_DATE,
+  ADC_CLOSE_DATE,
+  DUP_CASE_INDICATOR
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseCaseRole">
+      <value>
+select top(1)
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CSE_OPEN_DATE,
+  T1.EXPEDIDED_PAT_IND,
+  T1.PA_MEDICAL_SERVICE,
+  T1.IC_TRANS_SER_NO,
+  T1.INTERSTATE_CASE_ID,
+  T1.ADC_OPEN_DATE,
+  T1.ADC_CLOSE_DATE,
+  T1.DUP_CASE_INDICATOR,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T1.STATUS = 'O') and
+    (T1.NUMB &lt;&gt; @numb)
+</value>
+   </data>
+   <data name="ReadCodeValue1">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.DESCRIPTION
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T1.CDVALUE = cast(@closureReason as char(2))) and
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'CASE CLOSURE REASON')
+</value>
+   </data>
+   <data name="ReadCodeValue2">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.DESCRIPTION
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T1.CDVALUE = cast(@code as char(3))) and
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'PROGRAM')
+</value>
+   </data>
+   <data name="ReadCodeValue3">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.DESCRIPTION
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T1.CDVALUE = cast(@paMedicalService as char(2))) and
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'PA MED SERVICE')
+</value>
+   </data>
+   <data name="ReadCodeValue4">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.DESCRIPTION
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T1.CDVALUE = cast(@reason as char(2))) and
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'NON COOP REASON')
+</value>
+   </data>
+   <data name="ReadCodeValue5">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.DESCRIPTION
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T1.CDVALUE = cast(@status as char(1))) and
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'LEGAL REFERRAL STATUS')
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.AE_CASE_NUMBER,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T1.NUMB = @numb) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.AE_CASE_NUMBER,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.TYPE = 'CH') and
+    (T2.END_DATE &lt;= @endDate) and
+    (T2.START_DATE &lt;= @endDate)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.AE_CASE_NUMBER,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson4">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.AE_CASE_NUMBER,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.TYPE = 'CH') and
+    (T2.START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson5">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.AE_CASE_NUMBER,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson6">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.AE_CASE_NUMBER,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate)
+</value>
+   </data>
+   <data name="ReadDisbursementStatusHistory">
+      <value>
+select top(1)
+  DBS_GENERATED_ID,
+  DTR_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  DISB_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_DISB_STAT_HIST
+where
+  (CSP_NUMBER = @cspNumber) and
+  (DBS_GENERATED_ID = 3) and
+  (CPA_TYPE = 'E') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadGoodCause">
+      <value>
+select distinct top(1)
+  T1.CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_IDENTIFIER
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_GOOD_CAUSE T1
+  on
+    (T2.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.TYPE = T1.CRO_TYPE) and
+    (T2.CASE_ROLE_ID = T1.CRO_IDENTIFIER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.CSP_NUMBER = @cspNumber)
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select distinct top(1)
+  T1.IDENTIFIER,
+  T1.TYPE,
+  T1.CSP_I_NUMBER,
+  T1.START_DT,
+  T1.END_DT
+from
+  CKT_INCOME_SOURCE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.START_DT &lt;= @startDt) and
+    (T1.END_DT &gt;= @startDt) and
+    (T1.TYPE &lt;&gt; 'R') and
+    (T1.CSP_I_NUMBER = T3.CSP_NUMBER) and
+    (T3.CAS_NUMBER = @casNumber) and
+    (T3.TYPE = 'AR') and
+    (T1.CSP_I_NUMBER = @cspINumber)
+order by
+  T1.END_DT desc
+</value>
+   </data>
+   <data name="ReadLegalReferral">
+      <value>
+select
+  CAS_NUMBER,
+  IDENTIFIER,
+  REF_BY_USER_ID,
+  STATUS_DATE,
+  STATUS,
+  REFERRAL_DATE,
+  REFERRAL_REASON_1,
+  REFERRAL_REASON_2,
+  REFERRAL_REASON_3,
+  REFERRAL_REASON_4,
+  REFERRAL_REASON_5
+from
+  CKT_LEGAL_REFERRAL
+where
+  (CAS_NUMBER = @casNumber) and
+  (STATUS &lt;&gt; 'C')
+order by
+  REFERRAL_DATE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadNonCooperation">
+      <value>
+select distinct top(1)
+  T1.CODE,
+  T1.REASON,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_IDENTIFIER
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_NON_COPERATION T1
+  on
+    (T2.CASE_ROLE_ID = T1.CRO_IDENTIFIER) and
+    (T2.TYPE = T1.CRO_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.CSP_NUMBER = @cspNumber)
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_ASSGN_LEG_REF T3
+  on
+    (T1.SERVICE_PRVDER_ID = T3.SPD_ID) and
+    (@lgrId = T3.LGR_ID) and
+    (@casNo = T3.CAS_NO) and
+    (T3.REASON_CODE = 'RSP') and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+</root>

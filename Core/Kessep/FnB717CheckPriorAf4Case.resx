@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPersonProgramCsePersonProgram">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T4.CSP_NUMBER,
+  T3.CODE
+from
+  CKT_PROGRAM T3 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  join
+  CKT_PERSON_PROGRAM T1 with(readuncommitted)
+  on
+    (@casNumber = T4.CAS_NUMBER) and
+    (T4.TYPE in ('CH', 'AR')) and
+    (T4.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T1.DISCONTINUE_DATE &gt;= T4.START_DATE) and
+    (T1.EFFECTIVE_DATE &lt;= T4.END_DATE) and
+    (T4.START_DATE &lt;= @startDate)
+  on
+    (
+      T3.CODE in ('AF', 'FC', 'NF',
+        'NC')
+    ) and
+    (T3.PROGRAM_ID = T1.PRG_GENERATED_ID)
+</value>
+   </data>
+</root>

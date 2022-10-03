@@ -1,0 +1,41 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeAapsLstAdmApplsByCsePer"
+           program-name="SWEAAPSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeAapsLstAdmApplsByCsePer"
+           transaction="SR8D"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_ADMIN_APPEAL"
+       action="transfer"
+       to="LeAappAdministrativeAppealP1"
+       send-command="RETAAPS">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="SsnWorkArea" to="SsnWorkArea"/>
+      <map from="Selected.Identifier" to="AdministrativeAppeal.Identifier"/>
+      <map from="Selected.Number" to="AdministrativeAppeal.Number"/>
+      <map from="Selected.Type1" to="AdministrativeAppeal.Type1"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.AdministrativeAppeal" to="Import1.AdministrativeAppeal"/>
+   <map from="Export1.AdministrativeAction" to="Import1.AdministrativeAction"/>
+   <map from="Export1.DateWorkArea" to="Import1.DateWorkArea"/>
+   <map from="Starting" to="Starting"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   <map from="HiddenSecurity.HiddenSecurityCommand"
+        to="HiddenSecurity.HiddenSecurityCommand"/>
+   <map from="HiddenSecurity.HiddenSecurityProfileAuthorization"
+        to="HiddenSecurity.HiddenSecurityProfileAuthorization"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+</procedure>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteInfrastructure#1">
+      <value>
+update CKT_APPOINTMENT
+set
+  INF_ID = null
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#2">
+      <value>
+delete from CKT_ASSGN_MNT_ACT
+from
+  CKT_ASSGN_MNT_ACT T3
+  join
+  CKT_MONITORED_ACT T2
+  on
+    (T2.SYSTEM_GENERATED_I = T3.MAC_ID) and
+    (T2.INF_SYS_GEN_ID = @infId)
+</value>
+   </data>
+   <data name="DeleteInfrastructure#3">
+      <value>
+delete from CKT_MONITORED_ACT
+where
+  INF_SYS_GEN_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#4">
+      <value>
+delete from CKT_OSP_ALERT
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#5">
+      <value>
+delete from CKT_FIELD_VALUE
+where
+  INF_IDENTIFIER = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#6">
+      <value>
+delete from CKT_MONITORED_DOC
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#7">
+      <value>
+delete from CKT_OUTGOING_DOC
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#8">
+      <value>
+delete from ZDEL_REC_DOCUMENT
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#9">
+      <value>
+delete from CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @infId
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  EVENT_ID,
+  EVENT_TYPE,
+  REASON_CODE,
+  REFERENCE_DATE
+from
+  CKT_INFRASTRUCTURE
+where
+  (EVENT_ID = @eventId) and
+  (EVENT_TYPE = cast(@type as char(15))) and
+  (REASON_CODE = @reasonCode) and
+  (
+    (REFERENCE_DATE &lt;= @referenceDate1) or
+    (REFERENCE_DATE = @referenceDate2)
+  )
+</value>
+   </data>
+</root>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadObligationCsePerson">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T1.PRIM_SEC_CD,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.DELINQUENT_IND
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_OBLIGATION T1
+  on
+    (T3.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T3.STANDARD_NO = @standardNo) and
+    (
+      T1.DTY_GENERATED_ID in (cast(@systemGeneratedIdentifier1 as smallint), cast(@systemGeneratedIdentifier2 as smallint), cast(@systemGeneratedIdentifier3 as smallint),
+        cast(@systemGeneratedIdentifier4 as smallint), cast(@systemGeneratedIdentifier5 as smallint))
+    )
+</value>
+   </data>
+   <data name="UpdateObligation">
+      <value>
+update CKT_OBLIGATION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst,
+  DELINQUENT_IND = @delinquentInd
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OB_ID = @obId) and
+  (DTY_GENERATED_ID = @dtyGeneratedId)
+</value>
+   </data>
+</root>

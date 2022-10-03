@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  INTERFACE_TRAN_ID,
+  COURT_ORDER_NUMBER,
+  CASE_NUMBER,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  OBLGOR_PRSN_NBR,
+  OBLGOR_SSN,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  CLT_IDENTIFIER
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailCashReceiptCashReceiptType">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.INTERFACE_TRAN_ID,
+  T1.COURT_ORDER_NUMBER,
+  T1.CASE_NUMBER,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.OBLGOR_SSN,
+  T1.REFUNDED_AMT,
+  T1.DISTRIBUTED_AMT,
+  T1.CLT_IDENTIFIER,
+  T2.CASH_RECEIPT_ID,
+  T2.TOTAL_NC_FEE_AMT,
+  T3.CODE,
+  T5.CR_SRCE_TYPE_ID,
+  T5.CODE
+from
+  CKT_CRSRC_TYPE T5
+  join
+  CKT_CR_TYPE T3
+  join
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T1.CRV_IDENTIFIER = @crvIdentifier) and
+    (T1.CST_IDENTIFIER = @cstIdentifier) and
+    (T1.CRT_IDENTIFIER = @crtIdentifier) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER)
+  on
+    T3.CRTYPE_ID = T2.CRT_IDENTIFIER
+  on
+    T5.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatHistoryCashReceiptDetailStatus">
+      <value>
+select top(1)
+  T1.CRD_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CDS_IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T1.REASON_CODE_ID,
+  T1.DISCONTINUE_DATE,
+  T2.CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_CR_DETAIL_STAT T2
+  join
+  CKT_CRDTL_STATHIST T1
+  on
+    (@crdIdentifier = T1.CRD_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (T2.CRDETAIL_STAT_ID = T1.CDS_IDENTIFIER)
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceTypeCashReceiptTypeCashReceipt">
+      <value>
+select top(1)
+  T1.CR_SRCE_TYPE_ID,
+  T1.CODE,
+  T2.CRTYPE_ID,
+  T2.CODE,
+  T3.CRV_IDENTIFIER,
+  T3.CST_IDENTIFIER,
+  T3.CASH_RECEIPT_ID,
+  T3.TOTAL_NC_FEE_AMT
+from
+  CKT_CR_TYPE T2
+  join
+  CKT_CRSRC_TYPE T1
+  join
+  CKT_CASH_RECEIPT T3
+  on
+    (T3.CASH_RECEIPT_ID = @cashReceiptId) and
+    (T1.CR_SRCE_TYPE_ID = T3.CST_IDENTIFIER)
+  on
+    T2.CRTYPE_ID = T3.CRT_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadCollection1">
+      <value>
+select top(1)
+  COLL_ID,
+  APPLIED_TO_CD,
+  COLL_DT,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  CAR_ID,
+  OTY_ID,
+  COLL_ADJ_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OB_TRN_AMT,
+  DIST_MTD,
+  COL_ADJ_RSN_TXT
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (ADJ_IND = 'Y')
+order by
+  COLL_ADJ_DT desc
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select top(1)
+  COLL_ID,
+  ADJ_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  OTY_ID,
+  DIST_MTD
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (DIST_MTD in ('M', 'W')) and
+  (ADJ_IND &lt;&gt; 'Y')
+</value>
+   </data>
+   <data name="ReadCollectionAdjustmentReason">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID,
+  OB_TRN_RLN_RSN_CD,
+  OB_TRN_RLN_RSN_NM,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT
+from
+  CKT_COLL_ADJ_RSN
+where
+  OB_TRN_RLN_RSN_ID = @obTrnRlnRsnId
+</value>
+   </data>
+   <data name="ReadCollectionObligationTransactionObligationObligationType">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.APPLIED_TO_CD,
+  T1.COLL_DT,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.CAR_ID,
+  T1.OTY_ID,
+  T1.COLL_ADJ_DT,
+  T1.CREATED_BY,
+  T1.CREATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.DIST_MTD,
+  T1.COL_ADJ_RSN_TXT,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE
+from
+  CKT_OB_TRN T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T1.COLL_ID = @collId) and
+    (T2.OTY_TYPE = T1.OTY_ID) and
+    (T2.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T2.OB_TRN_ID = T1.OTR_ID) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T1.OBG_ID) and
+    (T2.CPA_TYPE = 'R') and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadObligCollProtectionHist">
+      <value>
+select top(1)
+  T1.CVRD_COLL_STRT_DT,
+  T1.CVRD_COLL_END_DT,
+  T1.DEACTIVATION_DATE,
+  T1.CREATED_TMST,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTY_IDENTIFIER,
+  T1.OBG_IDENTIFIER
+from
+  CKT_OB_COLL_PHIST T1
+  join
+  CKT_COLLECTION T4
+  on
+    (T1.OTY_IDENTIFIER = T4.OTY_ID) and
+    (T1.OBG_IDENTIFIER = T4.OBG_ID) and
+    (T1.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T1.CPA_TYPE = T4.CPA_TYPE) and
+    (@crtType = T4.CRT_TYPE) and
+    (@cstId = T4.CST_ID) and
+    (@crvId = T4.CRV_ID) and
+    (T1.DEACTIVATION_DATE = @deactivationDate) and
+    (T4.COLL_DT between T1.CVRD_COLL_STRT_DT and T1.CVRD_COLL_END_DT)
+</value>
+   </data>
+</root>

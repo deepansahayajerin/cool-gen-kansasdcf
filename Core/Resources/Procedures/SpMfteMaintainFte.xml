@@ -1,0 +1,31 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpMfteMaintainFte"
+           program-name="SWEMFTEP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpMfteMaintainFte"
+           transaction="SRD6"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_OFFICE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOFCL"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="FromOfcl"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="YearMonth" to="YearMonth"/>
+   <map from="Group.HiddenOffice" to="Group.HiddenOffice"/>
+   <map from="Group.Office1" to="Group.Office1"/>
+   <map from="Group.HiddenOfficeStaffing" to="Group.HiddenOfficeStaffing"/>
+   <map from="Group.OfficeStaffing" to="Group.OfficeStaffing"/>
+   <map from="Group.Office2" to="Group.Office2"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="HiddenExportYearMonth" to="HiddenImportYearMonth"/>
+</procedure>

@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE in ('AP', 'AR', 'CH')) and
+    (T1.END_DATE &gt; @endDate)
+order by
+  T1.TYPE,
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE in ('AP', 'AR', 'CH')) and
+    (T1.END_DATE &lt;= @endDate)
+order by
+  T1.TYPE,
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRole">
+      <value>
+select
+  IDENTIFIER,
+  CRO_ID,
+  CRO_TYPE,
+  CSP_NUM,
+  CAS_NUM,
+  LGA_ID,
+  LAP_ID
+from
+  CKT_LA_PER_LA_CROL
+where
+  @lapId = LAP_ID
+</value>
+   </data>
+   <data name="ReadLaPersonLaCaseRoleLegalActionCaseRoleLegalActionPerson">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.CRO_ID,
+  T1.CRO_TYPE,
+  T1.CSP_NUM,
+  T1.CAS_NUM,
+  T1.LGA_ID,
+  T1.LAP_ID,
+  T2.CREATED_BY,
+  T2.CREATED_TSTAMP,
+  T3.CSP_NUMBER,
+  T3.EFFECTIVE_DT,
+  T3.END_DT,
+  T3.END_REASON,
+  T3.LGA_R_IDENTIFIER,
+  T3.LAD_R_NUMBER,
+  T3.ACCOUNT_TYPE,
+  T3.ARREARS_AMOUNT,
+  T3.CURRENT_AMOUNT,
+  T3.JUDGEMENT_AMOUNT
+from
+  CKT_LEG_ACT_CAS_RL T2
+  join
+  CKT_LEGAL_ACT_PERS T3
+  join
+  CKT_LA_PER_LA_CROL T1
+  on
+    (@ladRNumber = T3.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T3.LGA_R_IDENTIFIER) and
+    (@cspNumber1 = T3.CSP_NUMBER) and
+    (T3.LA_PERSON_ID = T1.LAP_ID)
+  on
+    (T2.LGA_ID = T1.LGA_ID) and
+    (T2.CAS_NUMBER = T1.CAS_NUM) and
+    (T2.CRO_IDENTIFIER = T1.CRO_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUM) and
+    (T2.CRO_TYPE = T1.CRO_TYPE) and
+    (@croIdentifier = T2.CRO_IDENTIFIER) and
+    (@croType = T2.CRO_TYPE) and
+    (@cspNumber2 = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (@lgaId = T2.LGA_ID)
+</value>
+   </data>
+   <data name="ReadLegalActionDetailLegalAction">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO
+from
+  CKT_LEGAL_ACT_DTL
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (LA_DETAIL_NO = @laDetailNo)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonCsePerson">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DT,
+  T1.END_DT,
+  T1.END_REASON,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T1.ARREARS_AMOUNT,
+  T1.CURRENT_AMOUNT,
+  T1.JUDGEMENT_AMOUNT,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (@ladRNumber = T1.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T1.LGA_R_IDENTIFIER) and
+    (T2.NUMB = T1.CSP_NUMBER)
+order by
+  T1.CSP_NUMBER
+</value>
+   </data>
+</root>

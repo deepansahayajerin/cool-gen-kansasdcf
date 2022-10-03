@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NO) and
+    (@cspNoAp = T2.CSP_NO_AP)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCaseRoleCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.STATUS
+from
+  CKT_CASE T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt; @startDate) and
+    (T1.TYPE in ('AP', 'AR', 'CH')) and
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (T2.STATUS = 'O') and
+    (T1.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  UNEMPLOYMENT_IND,
+  FEDERAL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadEmployment">
+      <value>
+select distinct top(1)
+  T1.IDENTIFIER,
+  T1.TYPE,
+  T1.LAST_QTR_INCOME,
+  T1.LAST_QTR,
+  T1.LAST_QTR_YR,
+  T1.SECOND_QTR_INCOME,
+  T1.SECOND_QTR,
+  T1.SECOND_QTR_YR,
+  T1.THIRD_QTR_INCOME,
+  T1.THIRD_QTR,
+  T1.THIRD_QTR_YR,
+  T1.FOURTH_QTR_INCOME,
+  T1.FOURTH_QTR,
+  T1.FOURTH_QTR_YR,
+  T1.SENT_DT,
+  T1.RETURN_DT,
+  T1.RETURN_CD,
+  T1.NAME,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.CSP_I_NUMBER,
+  T1.SELF_EMPLOYED_IND,
+  T1.EMP_ID,
+  T1.SEND_TO,
+  T1.WORKER_ID,
+  T1.START_DT,
+  T1.END_DT,
+  T1.NOTE,
+  T1.NOTE_2
+from
+  CKT_EMPLOYER T2
+  join
+  CKT_INCOME_SOURCE T1
+  on
+    (@cspINumber = T1.CSP_I_NUMBER) and
+    (T2.IDENTIFIER = T1.EMP_ID) and
+    (T2.EIN = @ein)
+order by
+  T1.END_DT desc,
+  T1.IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadFplsLocateRequest">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  TRANSACTION_STATUS,
+  STATE_ABBR,
+  STATION_NUMBER,
+  TRANSACTION_TYPE,
+  SSN,
+  CASE_ID,
+  LOCAL_CODE,
+  USERS_FIELD,
+  TYPE_OF_CASE,
+  AP_FIRST_NAME,
+  AP_MIDDLE_NAME,
+  AP_FIRST_LAST_NAME,
+  AP_SECOND_LAST_NAM,
+  AP_THIRD_LAST_NAME,
+  AP_DATE_OF_BIRTH,
+  SEX,
+  COLLECT_ALL_RESPON,
+  TRANSACTION_ERROR,
+  AP_CITY_OF_BIRTH,
+  AP_STATE_OR_COUNTR,
+  APS_FATHERS_FIRST,
+  APS_FATHERS_MI,
+  APS_FATHERS_LAST_N,
+  APS_MOTHERS_FIRST,
+  APS_MOTHERS_MI,
+  APS_MOTHERS_MAIDEN,
+  CP_SSN,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  REQUEST_SENT_DATE,
+  SEND_REQUEST_TO
+from
+  CKT_FPLS_LOC_REQ
+where
+  @cspNumber = CSP_NUMBER
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadFplsLocateResponse">
+      <value>
+select top(1)
+  FLQ_IDENTIFIER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  DATE_RECEIVED,
+  USAGE_STATUS,
+  DATE_USED,
+  AGENCY_CODE,
+  NAME_SENT_IND,
+  AP_NAME_RETURNED,
+  ADDR_DATE_FORMAT_I,
+  DATE_OF_ADDRESS,
+  RESPONSE_CODE,
+  ADDRESS_FORMAT_IND,
+  DOD_ELIG_CODE,
+  DOD_DT_DEATH_SEPN,
+  DOD_STATUS,
+  DOD_SERVICE_CODE,
+  DOD_PAY_GRADE_CODE,
+  SESA_RESPONDING_ST,
+  SESA_WAGE_CLM_IND,
+  SESA_WAGE_AMOUNT,
+  IRS_NAME_CONTROL,
+  IRS_TAX_YEAR,
+  NPRC_EMPD_OR_SEPD,
+  SSA_FED_MILITARY,
+  SSA_CORP_DIVISION,
+  MBR_BENEFIT_AMOUNT,
+  MBR_DATE_OF_DEATH,
+  VA_BENEFIT_CODE,
+  VA_DATE_OF_DEATH,
+  VA_AWD_AMT_EFF_DT,
+  VA_AMOUNT_OF_AWARD,
+  VA_SUSPENSE_CODE,
+  VA_INCARC_CODE,
+  VA_RETIRE_PAY_CODE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RETURNED_ADDRESS,
+  SSN_RETURNED,
+  DOD_ANNUAL_SALARY,
+  DOD_DATE_OF_BIRTH,
+  SUBMITTING_OFFICE,
+  ADDRESS_IND_TYPE,
+  HEALTH_INS_BEN_IND,
+  EMPLOYMENT_STATUS,
+  EMPLOYMENT_IND,
+  DATE_OF_HIRE,
+  REP_FED_AGENCY,
+  FEIN,
+  COR_ADD_MUL_SSN,
+  SSN_MATCH_IND,
+  REPORTING_QUARTER,
+  NDNH_RESPONSE
+from
+  CKT_FPLS_LOC_RESP
+where
+  (@cspNumber = CSP_NUMBER) and
+  (FLQ_IDENTIFIER = @flqIdentifier)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  EVENT_ID,
+  REASON_CODE,
+  CSE_PERSON_NUM,
+  USER_ID,
+  CREATED_BY,
+  REFERENCE_DATE
+from
+  CKT_INFRASTRUCTURE
+where
+  (CSE_PERSON_NUM = @csePersonNum) and
+  (EVENT_ID = @eventId) and
+  (USER_ID = @userId) and
+  (REASON_CODE = @reasonCode) and
+  (CREATED_BY = @createdBy)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="ReadInvalidSsn">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  SSN
+from
+  CKT_INVALID_SSN
+where
+  (SSN = @ssn) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadProgramProcessingInfo">
+      <value>
+select top(1)
+  NAME,
+  CREATED_TIMESTAMP,
+  PARAMETER_LIST
+from
+  CKT_PGM_PRCSS_INFO
+where
+  NAME = @name
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="UpdateFplsLocateRequest">
+      <value>
+update CKT_FPLS_LOC_REQ
+set
+  TRANSACTION_STATUS = @transactionStatus,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  SEND_REQUEST_TO = @sendRequestTo
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

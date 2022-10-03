@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (TYPE = 'AP') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'AR') and
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCaseRole3">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (TYPE = 'FA') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRole4">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (TYPE = 'FA') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRole5">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (TYPE = 'MO') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRole6">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (TYPE = 'CH') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCaseRole7">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CAS_NUMBER = @casNumber) and
+  (TYPE = @type) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRole8">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'AP') and
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCaseRole9">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = @type) and
+  (CASE_ROLE_ID = @caseRoleId)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T2.TYPE,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.FAMILY_VIOL_IND,
+  T2.FVI_SET_DATE,
+  T2.FVI_UPDATED_BY
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.CAS_NUMBER = @casNumber) and
+    (T1.TYPE = 'AR') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.NUMB = @numb)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T2.TYPE,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.FAMILY_VIOL_IND,
+  T2.FVI_SET_DATE,
+  T2.FVI_UPDATED_BY
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.CAS_NUMBER = @casNumber) and
+    (T1.TYPE = 'AR') and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt;= @startDate) and
+    (T2.NUMB = T1.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson3">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (TYPE = 'CH') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.FAMILY_VIOL_IND,
+  T1.FVI_SET_DATE,
+  T1.FVI_UPDATED_BY
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.TYPE = 'C') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.END_DATE &gt;= @endDate) and
+    (T2.START_DATE &lt;= @endDate) and
+    (T2.TYPE = 'AR') and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.FAMILY_VIOL_IND,
+  T1.PAT_ESTAB_IND
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.PAT_ESTAB_IND = 'N') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  FAMILY_VIOL_IND,
+  PAT_ESTAB_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson4">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  FAMILY_VIOL_IND,
+  FVI_SET_DATE,
+  FVI_UPDATED_BY
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb1) and
+  (NUMB = @numb2)
+</value>
+   </data>
+   <data name="ReadCsePerson5">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  FAMILY_VIOL_IND,
+  FVI_SET_DATE,
+  FVI_UPDATED_BY
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson6">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson7">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.FAMILY_VIOL_IND,
+  T1.PAT_ESTAB_IND
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.TYPE = 'CH') and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T1.FAMILY_VIOL_IND &lt;&gt; ' ')
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.FAMILY_VIOL_IND,
+  T1.FVI_SET_DATE,
+  T1.FVI_UPDATED_BY,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = @casNumber) and
+    (T2.TYPE = 'AP') and
+    (T2.END_DATE &gt;= @endDate)
+order by
+  T2.END_DATE desc
+</value>
+   </data>
+   <data name="ReadDisbursementTransaction">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  AMOUNT,
+  PROCESS_DATE
+from
+  CKT_DISB_TRAN
+where
+  (CSP_NUMBER = @cspNumber) and
+  (PROCESS_DATE &gt;= @processDate) and
+  (AMOUNT &gt; 0)
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+from
+  CKT_INTERSTAT_RQST
+where
+  (@croId1 = CRO_ID) and
+  (@croType = CRO_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@casNumber = CAS_NUMBER) and
+  (CRO_ID = @croId2) and
+  (KS_CASE_IND &lt;&gt; ' ') and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_LEGAL_ACT_DTL T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.DETAIL_TYPE = 'N') and
+    (T1.NON_FIN_OBLG_TYPE = 'EP') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T1.LA_DETAIL_NO = T2.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T2.LGA_R_IDENTIFIER) and
+    (T2.ACCOUNT_TYPE = 'S') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (@cspNumber = T2.CSP_NUMBER)
+  on
+    (T3.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T3.END_DT &gt;= @effectiveDt) and
+    (T3.FILED_DT &lt;&gt; @filedDt)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  EFFECTIVE_DT,
+  END_DT,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@ladRNumber = LAD_R_NUMBER) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER) and
+  (ACCOUNT_TYPE = 'R') and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt;= @effectiveDt) and
+  (CSP_NUMBER is not null) and
+  (CSP_NUMBER &lt;&gt; @cspNumber)
+</value>
+   </data>
+   <data name="UpdateCaseRole">
+      <value>
+update CKT_CASE_ROLE
+set
+  END_DATE = @endDate,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (CASE_ROLE_ID = @caseRoleId)
+</value>
+   </data>
+   <data name="UpdateCsePerson1">
+      <value>
+update CKT_CSE_PERSON
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  FAMILY_VIOL_IND = @familyViolInd,
+  FVI_SET_DATE = @fviSetDate,
+  FVI_UPDATED_BY = @fviUpdatedBy
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCsePerson2">
+      <value>
+update CKT_CSE_PERSON
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  FAMILY_VIOL_IND = @familyViolInd,
+  FVI_SET_DATE = @fviSetDate,
+  FVI_UPDATED_BY = @fviUpdatedBy
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

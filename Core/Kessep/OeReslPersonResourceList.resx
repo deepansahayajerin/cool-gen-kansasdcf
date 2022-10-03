@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonResource">
+      <value>
+select
+  CSP_NUMBER,
+  RESOURCE_NO,
+  RESOURCE_DISP_DATE,
+  LIEN_INDICATOR,
+  TYPE,
+  RESOURCE_DESC,
+  EQUITY
+from
+  CKT_CSE_PERSON_RES
+where
+  (@cspNumber = CSP_NUMBER) and
+  (
+    (cast(@resourceNo as smallint) = 0) or
+    (RESOURCE_NO &lt;= @resourceNo)
+  ) and
+  (
+    (cast(@actionEntry as char(2)) &lt;&gt; 'Y') or
+    (RESOURCE_DISP_DATE &gt;= @resourceDispDate)
+  )
+order by
+  RESOURCE_NO desc
+</value>
+   </data>
+</root>

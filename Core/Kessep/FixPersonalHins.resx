@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadHealthInsuranceCoverage">
+      <value>
+select
+  IDENTIFIER,
+  POLICY_EXP_DATE
+from
+  CKT_HINS_COVERAGE
+where
+  POLICY_EXP_DATE &lt;&gt; @policyExpDate
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select
+  HCV_ID,
+  CSP_NUMBER,
+  COVER_END_DATE
+from
+  CKT_PERSONAL_HINS
+where
+  (@hcvId = HCV_ID) and
+  (COVER_END_DATE = @coverEndDate)
+</value>
+   </data>
+   <data name="UpdatePersonalHealthInsurance">
+      <value>
+update CKT_PERSONAL_HINS
+set
+  COVER_END_DATE = @coverEndDate
+where
+  (HCV_ID = @hcvId) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

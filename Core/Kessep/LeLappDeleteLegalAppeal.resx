@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteAppeal#1">
+      <value>
+delete from CKT_LEG_ACT_APPEAL
+where
+  APL_ID = @aplId
+</value>
+   </data>
+   <data name="DeleteAppeal#2">
+      <value>
+delete from CKT_APPEAL
+where
+  APPEAL_ID = @aplId
+</value>
+   </data>
+   <data name="DeleteLegalActionAppeal">
+      <value>
+delete from CKT_LEG_ACT_APPEAL
+where
+  (LA_APPEAL_ID = @laAppealId) and
+  (APL_ID = @aplId) and
+  (LGA_ID = @lgaId)
+</value>
+   </data>
+   <data name="ReadAppealLegalActionAppeal">
+      <value>
+select top(1)
+  APL_ID,
+  LA_APPEAL_ID,
+  LGA_ID
+from
+  CKT_LEG_ACT_APPEAL
+where
+  (APL_ID = @aplId) and
+  (@lgaId = LGA_ID)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionAppeal">
+      <value>
+select top(1)
+  LA_APPEAL_ID,
+  APL_ID,
+  LGA_ID
+from
+  CKT_LEG_ACT_APPEAL
+where
+  @aplId = APL_ID
+</value>
+   </data>
+</root>

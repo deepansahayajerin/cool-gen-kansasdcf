@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateContact">
+      <value>
+select
+  INT_GENERATED_ID,
+  START_DATE,
+  CONTACT_PHONE_NUM,
+  END_DATE,
+  NAME_LAST,
+  NAME_FIRST,
+  NAME_MIDDLE,
+  CONTACT_NAME_SUFFI,
+  AREA_CODE,
+  CONTACT_PHONE_EXT,
+  CONTACT_FAX_NUMBER,
+  CONT_FAX_AREA_CODE,
+  CONT_INTERNET_ADDR,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES
+from
+  CKT_INT_CONTACT
+where
+  INT_GENERATED_ID = @intGeneratedId
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateInterstateContact">
+      <value>
+update CKT_INT_CONTACT
+set
+  CONTACT_PHONE_NUM = @contactPhoneNum,
+  END_DATE = @endDate,
+  NAME_LAST = @nameLast,
+  NAME_FIRST = @nameFirst,
+  NAME_MIDDLE = @nameMiddle,
+  CONTACT_NAME_SUFFI = @contactNameSuffi,
+  AREA_CODE = @areaCode,
+  CONTACT_PHONE_EXT = @contactPhoneExt,
+  CONTACT_FAX_NUMBER = @contactFaxNumber,
+  CONT_FAX_AREA_CODE = @contFaxAreaCode,
+  CONT_INTERNET_ADDR = @contInternetAddr,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes
+where
+  (INT_GENERATED_ID = @intGeneratedId) and
+  (START_DATE = @startDate)
+</value>
+   </data>
+</root>

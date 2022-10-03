@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCashReceiptCashReceiptType">
+      <value>
+select top(1)
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.CREATED_TMST,
+  T2.CASH_RECEIPT_ID,
+  T2.RECEIPT_DATE,
+  T3.CATEGORY_IND
+from
+  CKT_CR_TYPE T3
+  join
+  CKT_CASH_RECEIPT T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.CRD_ID = @crdId) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T2.CASH_RECEIPT_ID = @cashReceiptId)
+  on
+    T3.CRTYPE_ID = T2.CRT_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadDisbursementCsePerson">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DISB_TRAN_ID,
+  PROCESS_DATE,
+  REFERENCE_NUMBER
+from
+  CKT_DISB_TRAN
+where
+  (PROCESS_DATE between cast(@processDate1 as date) and cast(@processDate2 as date)) and
+  (CSP_NUMBER between cast(@number1 as char(10)) and cast(@number2 as char(10)))
+order by
+  CSP_NUMBER,
+  REFERENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadDisbursementCsePersonDisbursementType">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.AMOUNT,
+  T1.PROCESS_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.DBT_GENERATED_ID,
+  T1.REFERENCE_NUMBER,
+  T3.CODE,
+  T3.PROGRAM_CODE
+from
+  CKT_DISB_TYPE T3
+  join
+  CKT_DISB_TRAN T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.REFERENCE_NUMBER = @referenceNumber) and
+    (T3.DISB_TYPE_ID = T1.DBT_GENERATED_ID) and
+    (T3.PROGRAM_CODE = 'NA') and
+    (T3.DISB_TYPE_ID &lt;&gt; 73)
+order by
+  T1.CSP_NUMBER,
+  T1.REFERENCE_NUMBER,
+  T1.PROCESS_DATE,
+  T1.AMOUNT desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,33 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="GbLppiLstPgmProcessingInfo"
+           program-name="SWELPPIP"
+           class="Gov.Kansas.DCF.Cse.Kessep.GbLppiLstPgmProcessingInfo"
+           transaction="SRB8"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_MTNX"
+       action="transfer"
+       to="GbMppiMtnPgmProcessingInfo"
+       send-command="DISPLAY">
+      <map from="Flow.Name" to="ProgramProcessingInfo.Name"/>
+      <map from="Flow.CreatedTimestamp"
+           to="ProgramProcessingInfo.CreatedTimestamp"/>
+      <map from="Flow.Description" to="ProgramProcessingInfo.Description"/>
+   </on>
+   <map from="Search" to="Search"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailCreated" to="Import1.DetailCreated"/>
+   <map from="Export1.DetailDescription" to="Import1.DetailDescription"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Export1.DetailProgramProcessingInfo.CreatedTimestamp"
+        to="Import1.DetailProgramProcessingInfo.CreatedTimestamp"/>
+   <map from="Export1.DetailProgramProcessingInfo.Name"
+        to="Import1.DetailProgramProcessingInfo.Name"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

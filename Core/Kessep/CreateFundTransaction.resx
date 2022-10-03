@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFundTransaction">
+      <value>
+insert into CKT_FUND_TRANS
+(
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FUND_TRANS_ID,
+  DEPOSIT_NUMBER,
+  AMOUNT,
+  BUSINESS_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+)
+values
+(
+  @fttIdentifier,
+  @pcaCode,
+  @pcaEffectiveDate,
+  @funIdentifier,
+  @fundTransId,
+  @depositNumber,
+  @amount,
+  @businessDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst
+)
+</value>
+   </data>
+   <data name="CreateFundTransactionStatusHistory">
+      <value>
+insert into CKT_FUND_TRNSTATHS
+(
+  FTR_IDENTIFIER,
+  FUN_IDENTIFIER,
+  PCA_EFFECTIVE_DATE,
+  PCA_CODE,
+  FTT_IDENTIFIER,
+  FTS_IDENTIFIER,
+  EFFECTIVE_TMST,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @ftrIdentifier,
+  @funIdentifier,
+  @pcaEffectiveDate,
+  @pcaCode,
+  @fttIdentifier,
+  @ftsIdentifier,
+  @effectiveTmst,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="ReadFundTransactionStatus">
+      <value>
+select top(1)
+  FUND_TRANS_STAT_ID,
+  CODE
+from
+  CKT_FUND_TRANSTAT
+where
+  FUND_TRANS_STAT_ID = @fundTransStatId
+</value>
+   </data>
+   <data name="ReadFundTransactionType">
+      <value>
+select top(1)
+  FUND_TRANS_TYPE_ID,
+  FUND_AFFECT_IND
+from
+  CKT_FUND_TRNS_TYPE
+where
+  FUND_TRANS_TYPE_ID = @fundTransTypeId
+</value>
+   </data>
+   <data name="ReadPcaFundExplosionRule">
+      <value>
+select top(1)
+  T1.FUN_IDENTIFIER,
+  T1.PCA_EFFECTIVE_DATE,
+  T1.PCA_CODE,
+  T1.INDEX_NUMBER
+from
+  CKT_PROG_COST_ACCT T3
+  join
+  CKT_PCA_EXPL_RULE T1
+  on
+    (T1.FUN_IDENTIFIER = @funIdentifier) and
+    (T3.EFFECTIVE_DATE = T1.PCA_EFFECTIVE_DATE) and
+    (T3.CODE = T1.PCA_CODE) and
+    (T3.CODE = @code) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+</root>

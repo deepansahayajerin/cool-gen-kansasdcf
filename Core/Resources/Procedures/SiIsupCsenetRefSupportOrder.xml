@@ -1,0 +1,80 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiIsupCsenetRefSupportOrder"
+           program-name="SWEISUPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiIsupCsenetRefSupportOrder"
+           transaction="SR1V"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_MISC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiImisCsenetRefInfo"
+       send-command="DISPLAY">
+      <map from="InterstateCase.TransSerialNumber"
+           to="InterstateCase.TransSerialNumber"/>
+      <map from="InterstateCase.KsCaseId" to="InterstateCase.KsCaseId"/>
+      <map from="InterstateCase.InterstateCaseId"
+           to="InterstateCase.InterstateCaseId"/>
+      <map from="InterstateCase.ApIdentificationInd"
+           to="InterstateCase.ApIdentificationInd"/>
+      <map from="InterstateCase.ApLocateDataInd"
+           to="InterstateCase.ApLocateDataInd"/>
+      <map from="InterstateCase.ParticipantDataInd"
+           to="InterstateCase.ParticipantDataInd"/>
+      <map from="InterstateCase.CaseDataInd" to="InterstateCase.CaseDataInd"/>
+      <map from="InterstateCase.OrderDataInd" to="InterstateCase.OrderDataInd"/>
+      <map from="InterstateCase.InformationInd" to="InterstateCase.InformationInd"/>
+      <map from="InterstateCase.CollectionDataInd"
+           to="InterstateCase.CollectionDataInd"/>
+      <map from="InterstateCase.TransactionDate"
+           to="InterstateCase.TransactionDate"/>
+      <map from="Hidden" to="Hidden"/>
+      <map from="Office" to="Office"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <return-map from="InterstateCase.TransSerialNumber"
+                  to="InterstateCase.TransSerialNumber"/>
+      <return-map from="InterstateCase.InterstateCaseId"
+                  to="InterstateCase.InterstateCaseId"/>
+      <return-map from="InterstateCase.KsCaseId" to="InterstateCase.KsCaseId"/>
+      <return-map from="InterstateCase.ApIdentificationInd"
+                  to="InterstateCase.ApIdentificationInd"/>
+      <return-map from="InterstateCase.ApLocateDataInd"
+                  to="InterstateCase.ApLocateDataInd"/>
+      <return-map from="InterstateCase.ParticipantDataInd"
+                  to="InterstateCase.ParticipantDataInd"/>
+      <return-map from="InterstateCase.CaseDataInd" to="InterstateCase.CaseDataInd"/>
+      <return-map from="InterstateCase.OrderDataInd" to="InterstateCase.OrderDataInd"/>
+      <return-map from="InterstateCase.CollectionDataInd"
+                  to="InterstateCase.CollectionDataInd"/>
+      <return-map from="InterstateCase.InformationInd" to="InterstateCase.InformationInd"/>
+      <return-map from="InterstateCase.TransactionDate"
+                  to="InterstateCase.TransactionDate"/>
+      <return-map from="Hidden" to="Hidden"/>
+      <return-map from="Office" to="Office"/>
+      <return-map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <return-map from="ServiceProvider" to="ServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiIstmInterstateReferralMenu"
+       send-command-type="none">
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+      <map from="Office" to="Office"/>
+   </on>
+   <map from="InterstateCase" to="InterstateCase"/>
+   <map from="Office" to="Office"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="InterstateSupportOrder" to="InterstateSupportOrder"/>
+   <map from="Export1.G" to="Import1.G"/>
+   <map from="SubscrSave" to="SubscrSave"/>
+   <map from="Plus" to="Plus"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="ServiceProviderAddress" to="ServiceProviderAddress"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

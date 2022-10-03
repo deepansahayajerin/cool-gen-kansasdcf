@@ -1,0 +1,93 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnPsumLstMnthlyPyeeSummry"
+           program-name="SWEPSUMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnPsumLstMnthlyPyeeSummry"
+           transaction="SR47"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_WARRANTS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnWarrLstWarrants"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="FlowStart" to="From"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_PAYEE_ACCT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="FlowStart" to="StartingDate"/>
+      <map from="FlowEnd" to="EndingDate"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_EFTS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnEftlLstEfts"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAH_HOUSEHOLD_URA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETURAH"
+       to="OeUrahHouseholdUra"
+       send-command="DISPLAY">
+      <map from="Case1" to="Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi"/>
+      <map from="ImHousehold" to="Search"/>
+      <map from="Start" to="ZzzzzzzzzzzzzzzzzzzzzzzMonthlyObligeeSummary"/>
+   </on>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="Start" to="Start"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Export1.Yy" to="Import1.Yy"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="HiddenPageKeys.GexportHiddenPageKey"
+        to="HiddenPageKeys.GimportHiddenPageKey"/>
+   <map from="PromptPayee.SelectChar" to="PromptPayee.SelectChar"/>
+   <map from="Export1.MonthlyObligeeSummary.AdcReimbursedAmount"
+        to="Import1.MonthlyObligeeSummary.AdcReimbursedAmount"/>
+   <map from="Export1.MonthlyObligeeSummary.FeeAmount"
+        to="Import1.MonthlyObligeeSummary.FeeAmount"/>
+   <map from="Export1.MonthlyObligeeSummary.CollectionsDisbursedToAr"
+        to="Import1.MonthlyObligeeSummary.CollectionsDisbursedToAr"/>
+   <map from="Export1.MonthlyObligeeSummary.CollectionsAmount"
+        to="Import1.MonthlyObligeeSummary.CollectionsAmount"/>
+   <map from="Export1.MonthlyObligeeSummary.Year"
+        to="Import1.MonthlyObligeeSummary.Year"/>
+   <map from="Export1.MonthlyObligeeSummary.Month"
+        to="Import1.MonthlyObligeeSummary.Month"/>
+   <map from="Export1.MonthlyObligeeSummary.DisbursementsSuppressed"
+        to="Import1.MonthlyObligeeSummary.DisbursementsSuppressed"/>
+   <map from="Export1.MonthlyObligeeSummary.PassthruAmount"
+        to="Import1.MonthlyObligeeSummary.PassthruAmount"/>
+   <map from="Export1.MonthlyObligeeSummary.RecapturedAmt"
+        to="Import1.MonthlyObligeeSummary.RecapturedAmt"/>
+   <map from="Export1.MonthlyObligeeSummary.NumberOfCollections"
+        to="Import1.MonthlyObligeeSummary.NumberOfCollections"/>
+   <map from="Scrolling.PageNumber" to="Scrolling.PageNumber"/>
+   <map from="Export1.MonthlyObligeeSummary.TotExcessUraAmt"
+        to="Import1.MonthlyObligeeSummary.TotExcessUraAmt"/>
+</procedure>

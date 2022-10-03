@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFplsLocateRequest">
+      <value>
+insert into CKT_FPLS_LOC_REQ
+(
+  CSP_NUMBER,
+  IDENTIFIER,
+  TRANSACTION_STATUS,
+  ZDEL_REQ_CREAT_DT,
+  ZDEL_CREAT_USER_ID,
+  STATE_ABBR,
+  STATION_NUMBER,
+  TRANSACTION_TYPE,
+  SSN,
+  CASE_ID,
+  LOCAL_CODE,
+  USERS_FIELD,
+  TYPE_OF_CASE,
+  AP_FIRST_NAME,
+  AP_MIDDLE_NAME,
+  AP_FIRST_LAST_NAME,
+  AP_SECOND_LAST_NAM,
+  AP_THIRD_LAST_NAME,
+  AP_DATE_OF_BIRTH,
+  SEX,
+  COLLECT_ALL_RESPON,
+  TRANSACTION_ERROR,
+  AP_CITY_OF_BIRTH,
+  AP_STATE_OR_COUNTR,
+  APS_FATHERS_FIRST,
+  APS_FATHERS_MI,
+  APS_FATHERS_LAST_N,
+  APS_MOTHERS_FIRST,
+  APS_MOTHERS_MI,
+  APS_MOTHERS_MAIDEN,
+  CP_SSN,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  REQUEST_SENT_DATE,
+  SEND_REQUEST_TO
+)
+values
+(
+  @cspNumber,
+  @identifier,
+  @transactionStatus,
+  @zdelReqCreatDt,
+  @zdelCreatUserId,
+  @stateAbbr,
+  @stationNumber,
+  @transactionType,
+  @ssn,
+  @caseId,
+  @localCode,
+  @usersField,
+  @typeOfCase,
+  @apFirstName,
+  @apMiddleName,
+  @apFirstLastName,
+  @apSecondLastNam,
+  @apThirdLastName,
+  @apDateOfBirth,
+  @sex,
+  @collectAllRespon,
+  @transactionError,
+  @apCityOfBirth,
+  @apStateOrCountr,
+  @apsFathersFirst,
+  @apsFathersMi,
+  @apsFathersLastN,
+  @apsMothersFirst,
+  @apsMothersMi,
+  @apsMothersMaiden,
+  @cpSsn,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTimes,
+  @requestSentDate,
+  @sendRequestTo
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  BIRTH_PLACE_STATE,
+  BIRTH_PLACE_CITY
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFplsLocateRequest">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  TRANSACTION_STATUS,
+  ZDEL_REQ_CREAT_DT,
+  ZDEL_CREAT_USER_ID,
+  STATE_ABBR,
+  STATION_NUMBER,
+  TRANSACTION_TYPE,
+  SSN,
+  CASE_ID,
+  LOCAL_CODE,
+  USERS_FIELD,
+  TYPE_OF_CASE,
+  AP_FIRST_NAME,
+  AP_MIDDLE_NAME,
+  AP_FIRST_LAST_NAME,
+  AP_SECOND_LAST_NAM,
+  AP_THIRD_LAST_NAME,
+  AP_DATE_OF_BIRTH,
+  SEX,
+  COLLECT_ALL_RESPON,
+  TRANSACTION_ERROR,
+  AP_CITY_OF_BIRTH,
+  AP_STATE_OR_COUNTR,
+  APS_FATHERS_FIRST,
+  APS_FATHERS_MI,
+  APS_FATHERS_LAST_N,
+  APS_MOTHERS_FIRST,
+  APS_MOTHERS_MI,
+  APS_MOTHERS_MAIDEN,
+  CP_SSN,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  REQUEST_SENT_DATE,
+  SEND_REQUEST_TO
+from
+  CKT_FPLS_LOC_REQ
+where
+  @cspNumber = CSP_NUMBER
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadInvalidSsn">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  SSN
+from
+  CKT_INVALID_SSN
+where
+  (@cspNumber = CSP_NUMBER) and
+  (SSN = @ssn)
+</value>
+   </data>
+   <data name="UpdateFplsLocateRequest">
+      <value>
+update CKT_FPLS_LOC_REQ
+set
+  USERS_FIELD = @usersField,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  REQUEST_SENT_DATE = @requestSentDate,
+  SEND_REQUEST_TO = @sendRequestTo
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

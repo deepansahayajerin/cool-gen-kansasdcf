@@ -1,0 +1,50 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="CoCdvcMaintainCodeValueComb"
+           program-name="SWECDVCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.CoCdvcMaintainCodeValueComb"
+           transaction="SR5K"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="PrimaryCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="PrimaryCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_NAMES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCNAME"
+       to="CoCdnlListCodeNames"
+       send-command="DISPLAY">
+      <return-map from="DlgflwSelected" to="SelectedFromList"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="CoStbmSupportTablesMenu"
+       send-command-type="none"/>
+   <map from="PrimaryCode" to="PrimaryCode"/>
+   <map from="Secondary" to="Secondary"/>
+   <map from="Starting" to="Starting"/>
+   <map from="ListPrimaryCodeNames" to="ListPrimaryCodeNames"/>
+   <map from="ListCrossValCodeName" to="ListCrossValCodeNames"/>
+   <map from="ListPrimaryCodeValues" to="ListPrimaryCodeValues"/>
+   <map from="Export1.DetailSelection" to="Import1.DetailSelection"/>
+   <map from="Export1.Detail" to="Import1.Detail"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PrimaryCodeValue.Cdvalue" to="PrimaryCodeValue.Cdvalue"/>
+   <map from="PrimaryCodeValue.Description" to="PrimaryCodeValue.Description"/>
+   <map from="PrimaryCodeValue.Id" to="PrimaryCodeValue.Id"/>
+   <map from="Export1.DetailSecondary.Cdvalue"
+        to="Import1.DetailSecondary.Cdvalue"/>
+   <map from="Export1.DetailSecondary.Description"
+        to="Import1.DetailSecondary.Description"/>
+   <map from="Export1.DetailSecondary.EffectiveDate"
+        to="Import1.DetailSecondary.EffectiveDate"/>
+   <map from="Export1.DetailSecondary.Id" to="Import1.DetailSecondary.Id"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

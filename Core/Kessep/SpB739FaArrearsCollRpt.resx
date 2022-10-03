@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFaArrearsCollections">
+      <value>
+insert into CKT_FA_ARREARS_COL
+(
+  OFFICE,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CONTRACTOR,
+  CSE_CASE_NUM,
+  CASE_OPEN_DATE,
+  FISCAL_IND,
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  CHILD_PERSON_NUMBER,
+  FS_START_DATE,
+  STANDARD_NUMBER,
+  COURT_ORDER_EST_BY,
+  ARREARS_AMOUNT_DUE,
+  TOTAL_COLLECT_AMT,
+  CASEWORKER_LNAME,
+  CASEWORKER_FNAME,
+  CASE_CLOSED_DATE,
+  CASE_CLOSER_REASON,
+  NON_COOP_CD,
+  CURR_NON_COOP_CD
+)
+values
+(
+  @office,
+  @createdBy,
+  @createdTstamp,
+  @contractor,
+  @cseCaseNum,
+  @caseOpenDate,
+  @fiscalInd,
+  @fiscalYear,
+  @runNumber,
+  @childPersonNumber,
+  @fsStartDate,
+  @standardNumber,
+  @courtOrderEstBy,
+  @arrearsAmountDue,
+  @totalCollectAmt,
+  @caseworkerLname,
+  @caseworkerFname,
+  @caseClosedDate,
+  @caseCloserReason,
+  @nonCoopCd,
+  @currNonCoopCd
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseCaseRoleCsePersonLegalActionCaseRole">
+      <value>
+select distinct
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T4.LGA_ID,
+  T4.CREATED_TSTAMP
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_LEG_ACT_CAS_RL T4
+  on
+    (T2.CASE_ROLE_ID = T4.CRO_IDENTIFIER) and
+    (T2.TYPE = T4.CRO_TYPE) and
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T4.CAS_NUMBER) and
+    (@lgaId = T4.LGA_ID) and
+    (T2.TYPE = 'AP') and
+    (T2.END_DATE &gt;= @endDate) and
+    (T2.CSP_NUMBER = @cspNumber)
+  join
+  CKT_LEGAL_ACT_PERS T5
+  on
+    (T2.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T5.ACCOUNT_TYPE = 'R') and
+    (T5.EFFECTIVE_DT &lt;= @effectiveDt)
+  join
+  CKT_LA_PER_LA_CROL T6
+  on
+    (T5.LA_PERSON_ID = T6.LAP_ID) and
+    (T4.LGA_ID = T6.LGA_ID) and
+    (T4.CAS_NUMBER = T6.CAS_NUM) and
+    (T4.CRO_IDENTIFIER = T6.CRO_ID) and
+    (T4.CSP_NUMBER = T6.CSP_NUM) and
+    (T4.CRO_TYPE = T6.CRO_TYPE)
+</value>
+   </data>
+   <data name="ReadCaseCaseRolePersonProgramOfficeServiceProvider">
+      <value>
+select
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CSE_OPEN_DATE,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.CSP_NUMBER,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T3.CREATED_TIMESTAMP,
+  T3.PRG_GENERATED_ID,
+  T4.SPD_GENERATED_ID,
+  T4.OFF_GENERATED_ID,
+  T4.ROLE_CODE,
+  T4.EFFECTIVE_DATE,
+  T4.DISCONTINUE_DATE,
+  T5.LAST_NAME,
+  T5.FIRST_NAME,
+  T6.TYPE_CODE,
+  T6.NAME,
+  T6.EFFECTIVE_DATE,
+  T6.DISCONTINUE_DATE,
+  T6.OFF_OFFICE,
+  T7.EFFECTIVE_DATE,
+  T7.DISCONTINUE_DATE,
+  T7.CREATED_TIMESTAMP,
+  T8.TYPE,
+  T8.DATE_OF_DEATH,
+  T8.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T8 with(readuncommitted)
+  join
+  CKT_SERVICE_PRVDER T5 with(readuncommitted)
+  join
+  CKT_OFFICE T6 with(readuncommitted)
+  join
+  CKT_OFFC_SRVC_PRVR T4 with(readuncommitted)
+  join
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (T2.END_DATE &gt; @endDate)
+  join
+  CKT_ASSIGN_CASE T7 with(readuncommitted)
+  on
+    (T1.NUMB = T7.CAS_NO) and
+    (T7.DISCONTINUE_DATE &gt; @endDate)
+  on
+    (T4.EFFECTIVE_DATE = T7.OSP_DATE) and
+    (T4.ROLE_CODE = T7.OSP_CODE) and
+    (T4.OFF_GENERATED_ID = T7.OFF_ID) and
+    (T4.SPD_GENERATED_ID = T7.SPD_ID) and
+    (T4.DISCONTINUE_DATE &gt; @endDate)
+  on
+    T6.OFFICE_ID = T4.OFF_GENERATED_ID
+  on
+    T5.SERVICE_PRVDER_ID = T4.SPD_GENERATED_ID
+  on
+    T8.NUMB = T2.CSP_NUMBER
+  join
+  CKT_PERSON_PROGRAM T3 with(readuncommitted)
+  on
+    (T8.NUMB = T3.CSP_NUMBER) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt; @endDate) and
+    (T3.PRG_GENERATED_ID = 4)
+order by
+  T4.OFF_GENERATED_ID,
+  T4.SPD_GENERATED_ID,
+  T5.LAST_NAME,
+  T5.FIRST_NAME
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  T1.ORGANZTN_ID,
+  T1.TYPE_CODE,
+  T1.NAME
+from
+  CKT_CSE_ORGANIZATN T1
+  join
+  CKT_CSE_ORG_RELATN T2
+  on
+    (T1.TYPE_CODE = 'X') and
+    (T1.TYPE_CODE = T2.COG_CHILD_TYPE) and
+    (T1.ORGANZTN_ID = T2.COG_CHILD_CODE) and
+    (T2.REASON_CODE = 'XJ') and
+    (T2.COG_PARENT_CODE = @cogParentCode)
+</value>
+   </data>
+   <data name="ReadCseOrganizationOffice">
+      <value>
+select top(1)
+  T3.COG_CHILD_CODE,
+  T3.COG_CHILD_TYPE,
+  T2.OFFICE_ID,
+  T2.TYPE_CODE,
+  T2.NAME,
+  T2.COG_TYPE_CODE,
+  T2.COG_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.OFF_OFFICE
+from
+  CKT_CSE_ORG_RELATN T3 with(readuncommitted)
+  join
+  CKT_OFFICE T2 with(readuncommitted)
+  on
+    (T3.COG_CHILD_TYPE = 'J') and
+    (T3.REASON_CODE = 'JC') and
+    (T3.COG_PARENT_TYPE = T2.COG_TYPE_CODE) and
+    (T3.COG_PARENT_CODE = T2.COG_CODE)
+  join
+  CKT_ASSIGN_CASE T6 with(readuncommitted)
+  on
+    (T2.OFFICE_ID = T6.OFF_ID) and
+    (T6.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T6.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (@casNo = T6.CAS_NO)
+</value>
+   </data>
+   <data name="ReadCsePersonPersonProgram">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_TIMESTAMP,
+  T2.PRG_GENERATED_ID
+from
+  CKT_PROGRAM T3
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_PERSON_PROGRAM T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate)
+  on
+    (T3.PROGRAM_ID = T2.PRG_GENERATED_ID) and
+    (
+      T3.CODE in ('AF', 'CC', 'NF',
+        'NC', 'MA', 'FC')
+    )
+</value>
+   </data>
+   <data name="ReadFaArrearsCollections1">
+      <value>
+select top(1)
+  OFFICE,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CONTRACTOR,
+  CSE_CASE_NUM,
+  CASE_OPEN_DATE,
+  FISCAL_IND,
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  CHILD_PERSON_NUMBER,
+  FS_START_DATE,
+  STANDARD_NUMBER,
+  COURT_ORDER_EST_BY,
+  ARREARS_AMOUNT_DUE,
+  TOTAL_COLLECT_AMT,
+  CASEWORKER_LNAME,
+  CASEWORKER_FNAME,
+  CASE_CLOSED_DATE,
+  CASE_CLOSER_REASON,
+  NON_COOP_CD,
+  CURR_NON_COOP_CD
+from
+  CKT_FA_ARREARS_COL
+where
+  (FISCAL_YEAR = @fiscalYear) and
+  (FISCAL_IND = @fiscalInd) and
+  (CSE_CASE_NUM = @cseCaseNum) and
+  (CHILD_PERSON_NUMBER = @childPersonNumber) and
+  (RUN_NUMBER = @runNumber)
+</value>
+   </data>
+   <data name="ReadFaArrearsCollections2">
+      <value>
+select top(1)
+  OFFICE,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CONTRACTOR,
+  CSE_CASE_NUM,
+  CASE_OPEN_DATE,
+  FISCAL_IND,
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  CHILD_PERSON_NUMBER,
+  FS_START_DATE,
+  STANDARD_NUMBER,
+  COURT_ORDER_EST_BY,
+  ARREARS_AMOUNT_DUE,
+  TOTAL_COLLECT_AMT,
+  CASEWORKER_LNAME,
+  CASEWORKER_FNAME,
+  CASE_CLOSED_DATE,
+  CASE_CLOSER_REASON,
+  NON_COOP_CD,
+  CURR_NON_COOP_CD
+from
+  CKT_FA_ARREARS_COL
+where
+  (FISCAL_IND = @fiscalInd) and
+  (FISCAL_YEAR = @fiscalYear)
+order by
+  RUN_NUMBER desc
+</value>
+   </data>
+   <data name="ReadFaArrearsCollections3">
+      <value>
+select
+  OFFICE,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CONTRACTOR,
+  CSE_CASE_NUM,
+  CASE_OPEN_DATE,
+  FISCAL_IND,
+  FISCAL_YEAR,
+  RUN_NUMBER,
+  CHILD_PERSON_NUMBER,
+  FS_START_DATE,
+  STANDARD_NUMBER,
+  COURT_ORDER_EST_BY,
+  ARREARS_AMOUNT_DUE,
+  TOTAL_COLLECT_AMT,
+  CASEWORKER_LNAME,
+  CASEWORKER_FNAME,
+  CASE_CLOSED_DATE,
+  CASE_CLOSER_REASON,
+  NON_COOP_CD,
+  CURR_NON_COOP_CD
+from
+  CKT_FA_ARREARS_COL
+where
+  (RUN_NUMBER = @runNumber) and
+  (FISCAL_IND = @fiscalInd) and
+  (FISCAL_YEAR = @fiscalYear)
+order by
+  CONTRACTOR,
+  OFFICE,
+  CSE_CASE_NUM,
+  CHILD_PERSON_NUMBER
+</value>
+   </data>
+   <data name="ReadInfrastructure1">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  CASE_NUMBER,
+  REFERENCE_DATE,
+  DETAIL
+from
+  CKT_INFRASTRUCTURE
+where
+  (REASON_CODE = 'CASECLOSED') and
+  (CASE_NUMBER = @caseNumber) and
+  (REFERENCE_DATE between cast(@date1 as date) and cast(@date2 as date))
+order by
+  REFERENCE_DATE
+</value>
+   </data>
+   <data name="ReadInfrastructure2">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  REASON_CODE,
+  CASE_NUMBER,
+  REFERENCE_DATE,
+  DETAIL
+from
+  CKT_INFRASTRUCTURE
+where
+  (REASON_CODE in ('REOPEN_PARFRL', 'CASOPNPARFRL')) and
+  (CASE_NUMBER = @caseNumber) and
+  (REFERENCE_DATE between cast(@date1 as date) and cast(@date2 as date))
+order by
+  REFERENCE_DATE desc
+</value>
+   </data>
+   <data name="ReadLegalActionObligationDebtObligor">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.ESTABLISHMENT_CD,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.OB_ID,
+  T2.DTY_GENERATED_ID,
+  T2.CREATED_TMST,
+  T3.OB_TRN_ID,
+  T3.OB_TRN_TYP,
+  T3.OB_TRN_AMT,
+  T3.CREATED_TMST,
+  T3.DEBT_TYP,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_OBLIGATION T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID) and
+    (T2.DTY_GENERATED_ID in (10, 13))
+  join
+  CKT_OB_TRN T3
+  on
+    (T2.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T2.OB_ID = T3.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T2.CPA_TYPE = T3.CPA_TYPE) and
+    (T3.CPA_SUP_TYPE is not null) and
+    (@cspSupNumber = T3.CSP_SUP_NUMBER)
+  join
+  CKT_DEBT_DTL T6
+  on
+    (T3.OTY_TYPE = T6.OTY_TYPE) and
+    (T3.OBG_GENERATED_ID = T6.OBG_GENERATED_ID) and
+    (T3.OB_TRN_TYP = T6.OTR_TYPE) and
+    (T3.OB_TRN_ID = T6.OTR_GENERATED_ID) and
+    (T3.CPA_TYPE = T6.CPA_TYPE) and
+    (T3.CSP_NUMBER = T6.CSP_NUMBER) and
+    (
+      (T6.RETIRED_DT &lt;= @retiredDt1) or
+      (T6.RETIRED_DT &gt; @retiredDt2)
+    ) and
+    (T6.CREATED_TMST between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+order by
+  T1.STANDARD_NO
+</value>
+   </data>
+   <data name="ReadNonCooperation1">
+      <value>
+select distinct top(1)
+  T1.CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_IDENTIFIER
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_NON_COPERATION T1
+  on
+    (T2.CASE_ROLE_ID = T1.CRO_IDENTIFIER) and
+    (T2.TYPE = T1.CRO_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @endDate) and
+    (T2.TYPE = 'AR') and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate)
+order by
+  T1.EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadNonCooperation2">
+      <value>
+select distinct top(1)
+  T1.CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_IDENTIFIER
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_NON_COPERATION T1
+  on
+    (T2.CASE_ROLE_ID = T1.CRO_IDENTIFIER) and
+    (T2.TYPE = T1.CRO_TYPE) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T1.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @endDate) and
+    (T2.TYPE = 'AR') and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T1.EFFECTIVE_DATE &lt;= @startDate) and
+    (T1.DISCONTINUE_DATE &gt;= @startDate)
+order by
+  T1.EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  (TYPE_CODE = 'F') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @discontinueDate)
+order by
+  OFFICE_ID
+</value>
+   </data>
+   <data name="ReadPersonProgramCsePerson">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.PRG_GENERATED_ID,
+  T2.TYPE
+from
+  CKT_PROGRAM T3
+  join
+  CKT_CSE_PERSON T2
+  join
+  CKT_PERSON_PROGRAM T1
+  on
+    (T2.NUMB = @numb) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate)
+  on
+    (T3.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+    (T3.CODE = 'FS')
+order by
+  T1.EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,23 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnPstlLstPaymentStatuses"
+           program-name="SWEPSTLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnPstlLstPaymentStatuses"
+           transaction="SR90"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command="XFERMENU"/>
+   <on exit-state="ECO_XFR_TO_MTN_PAYMENT_STAT"
+       action="transfer"
+       to="FnPstmMtnPaymentStatus"
+       send-command="RETPSTL">
+      <map from="Flag" to="Flag"/>
+      <map from="FlowSelection" to="FlowSelection"/>
+   </on>
+   <map from="Export1.PaymentStatus" to="Import1.PaymentStatus"/>
+   <map from="ShowHistory" to="ShowHistory"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+</procedure>

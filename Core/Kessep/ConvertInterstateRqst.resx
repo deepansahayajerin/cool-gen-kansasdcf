@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateRequestHistory1">
+      <value>
+select
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  TRANSACTION_DIRECT,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  ACTION_REASON_CODE
+from
+  CKT_INT_RQST_HIST
+where
+  ACTION_REASON_CODE in ('OICNV', 'IICNV', 'IICLS',
+    'IICRO')
+order by
+  ACTION_REASON_CODE
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory2">
+      <value>
+select
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  TRANSACTION_DIRECT,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  ACTION_REASON_CODE
+from
+  CKT_INT_RQST_HIST
+where
+  ACTION_REASON_CODE in ('OICNV', 'IICNV')
+order by
+  FUNCTIONAL_TYPE_CO
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory3">
+      <value>
+select
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  TRANSACTION_DIRECT,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  ACTION_REASON_CODE
+from
+  CKT_INT_RQST_HIST
+where
+  (FUNCTIONAL_TYPE_CO in ('PAT', 'EST', 'ENF')) and
+  (ACTION_CODE = 'R') and
+  (TRANSACTION_DIRECT = 'O')
+order by
+  FUNCTIONAL_TYPE_CO
+</value>
+   </data>
+   <data name="UpdateInterstateRequestHistory1">
+      <value>
+update CKT_INT_RQST_HIST
+set
+  CREATED_BY = @createdBy
+where
+  (INT_GENERATED_ID = @intGeneratedId) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+   <data name="UpdateInterstateRequestHistory2">
+      <value>
+update CKT_INT_RQST_HIST
+set
+  CREATED_BY = @createdBy
+where
+  (INT_GENERATED_ID = @intGeneratedId) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+   <data name="UpdateInterstateRequestHistory3">
+      <value>
+update CKT_INT_RQST_HIST
+set
+  TRANSACTION_DIRECT = @transactionDirect
+where
+  (INT_GENERATED_ID = @intGeneratedId) and
+  (CREATED_TSTAMP = @createdTstamp)
+</value>
+   </data>
+</root>

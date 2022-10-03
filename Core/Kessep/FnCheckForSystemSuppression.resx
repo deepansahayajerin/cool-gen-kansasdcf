@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDeceasedSuppression">
+      <value>
+insert into CKT_DISB_SUPPR_STS
+(
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  CLT_SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PERSON_DISB_FILLER,
+  COLLECTION_FILLER,
+  TYPE,
+  REASON_TEXT,
+  AUTOMATIC_FILLER,
+  EXCESS_URA_FILLER,
+  XURA_FILLER,
+  DUPLICATE_FILLER,
+  COURT_ORDER_SUPPR,
+  LGA_IDENTIFIER,
+  DECEASED_FILLER,
+  NO_ADDRESS_FILLER
+)
+values
+(
+  @cpaType,
+  @cspNumber,
+  @dssGeneratedId,
+  null,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @personDisbFiller,
+  @personDisbFiller,
+  @type,
+  @reasonText,
+  @personDisbFiller,
+  @excessUraFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  null,
+  @deceasedFiller,
+  @personDisbFiller
+)
+</value>
+   </data>
+   <data name="CreateNoActiveAddressSuppression">
+      <value>
+insert into CKT_DISB_SUPPR_STS
+(
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  CLT_SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PERSON_DISB_FILLER,
+  COLLECTION_FILLER,
+  TYPE,
+  REASON_TEXT,
+  AUTOMATIC_FILLER,
+  EXCESS_URA_FILLER,
+  XURA_FILLER,
+  DUPLICATE_FILLER,
+  COURT_ORDER_SUPPR,
+  LGA_IDENTIFIER,
+  DECEASED_FILLER,
+  NO_ADDRESS_FILLER
+)
+values
+(
+  @cpaType,
+  @cspNumber,
+  @dssGeneratedId,
+  null,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @personDisbFiller,
+  @personDisbFiller,
+  @type,
+  @reasonText,
+  @personDisbFiller,
+  @excessUraFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  @personDisbFiller,
+  null,
+  @personDisbFiller,
+  @noAddressFiller
+)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CSE_P_DSIG_PYE T2
+  on
+    (T1.NUMB = T2.CSE_PERS_NUM) and
+    (@csePersoNum = T2.CSE_PERSO_NUM) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = 'E') and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory1">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  TYPE,
+  REASON_TEXT
+from
+  CKT_DISB_SUPPR_STS
+where
+  (TYPE = @type) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory2">
+      <value>
+select top(1)
+  max(DSS_GENERATED_ID)
+from
+  CKT_DISB_SUPPR_STS
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory3">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  TYPE,
+  REASON_TEXT
+from
+  CKT_DISB_SUPPR_STS
+where
+  (TYPE &lt;&gt; @type) and
+  (TYPE in ('Y', 'Z')) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistory4">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  DSS_GENERATED_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  TYPE,
+  REASON_TEXT
+from
+  CKT_DISB_SUPPR_STS
+where
+  (TYPE in ('Y', 'Z')) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadInterstatePaymentAddress">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  ADDRESS_START_DATE,
+  TYPE,
+  STREET1,
+  CITY,
+  ADDRESS_END_DATE,
+  LOCATION_TYPE
+from
+  CKT_INT_PYMNT_ADDR
+where
+  (TYPE = 'PY') and
+  (ADDRESS_START_DATE &lt;= @addressStartDate) and
+  (ADDRESS_END_DATE &gt;= @addressStartDate) and
+  (INT_GENERATED_ID = @intGeneratedId)
+</value>
+   </data>
+   <data name="UpdateDisbSuppressionStatusHistory1">
+      <value>
+update CKT_DISB_SUPPR_STS
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DSS_GENERATED_ID = @dssGeneratedId)
+</value>
+   </data>
+   <data name="UpdateDisbSuppressionStatusHistory2">
+      <value>
+update CKT_DISB_SUPPR_STS
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  REASON_TEXT = @reasonText
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DSS_GENERATED_ID = @dssGeneratedId)
+</value>
+   </data>
+</root>

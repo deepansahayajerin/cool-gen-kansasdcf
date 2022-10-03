@@ -1,0 +1,231 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeDelaDeleteLegalActions"
+           program-name="SWEDELAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeDelaDeleteLegalActions"
+           transaction="SR8I"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFips" to="Fips"/>
+      <return-map from="DlgflwSelectedTribunal" to="Tribunal"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CSE_PERSN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="REDISP"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <return-map from="Selected.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="Selected.Classification" to="LegalAction.Classification"/>
+      <return-map from="Selected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="Selected.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COURT_CAPTION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="REDISP"
+       to="LeCaptCourtCaption"
+       send-command="DISPLAY">
+      <map from="Fips" to="Fips"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="Foreign" to="FipsTribAddress"/>
+      <return-map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="LegalAction.Classification" to="LegalAction.Classification"/>
+      <return-map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="REDISP"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <map from="Tribunal" to="SearchTribunal"/>
+      <map from="LegalAction.ForeignOrderNumber"
+           to="SearchLegalAction.ForeignOrderNumber"/>
+      <map from="LegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="LegalAction.Classification" to="SearchLegalAction.Classification"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.StandardNumber" to="SearchLegalAction.StandardNumber"/>
+      <map from="Foreign" to="FipsTribAddress"/>
+      <return-map from="DlgflwSelected.ForeignOrderNumber"
+                  to="LegalAction.ForeignOrderNumber"/>
+      <return-map from="DlgflwSelected.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="DlgflwSelected.Classification" to="LegalAction.Classification"/>
+      <return-map from="DlgflwSelected.ActionTaken" to="LegalAction.ActionTaken"/>
+      <return-map from="DlgflwSelected.FiledDate" to="LegalAction.FiledDate"/>
+      <return-map from="DlgflwSelected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="DlgflwSelected.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_DETAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="REDISP"
+       to="LeLdetLegalDetail"
+       send-command="DISPLAY">
+      <map from="Fips" to="Fips"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="LegalAction" to="HiddenLegalAction"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="Foreign" to="FipsTribAddress"/>
+      <return-map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="LegalAction.Classification" to="LegalAction.Classification"/>
+      <return-map from="LegalAction.FiledDate" to="LegalAction.FiledDate"/>
+      <return-map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="LegalAction.PaymentLocation" to="LegalAction.PaymentLocation"/>
+      <return-map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+      <return-map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_ACTION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="REDISP"
+       to="LeLactLegalAction"
+       send-command="DISPLAY">
+      <map from="Foreign" to="FipsTribAddress"/>
+      <map from="Fips" to="Fips"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="LegalAction.ForeignOrderNumber"
+           to="LegalAction.ForeignOrderNumber"/>
+      <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="LegalAction.AttorneyApproval" to="LegalAction.AttorneyApproval"/>
+      <map from="LegalAction.ApprovalSentDate" to="LegalAction.ApprovalSentDate"/>
+      <map from="LegalAction.PetitionerApproval"
+           to="LegalAction.PetitionerApproval"/>
+      <map from="LegalAction.ApprovalReceivedDate"
+           to="LegalAction.ApprovalReceivedDate"/>
+      <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+      <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+      <map from="LegalAction.Type1" to="LegalAction.Type1"/>
+      <map from="LegalAction.FiledDate" to="LegalAction.FiledDate"/>
+      <map from="LegalAction.ForeignOrderRegistrationDate"
+           to="LegalAction.ForeignOrderRegistrationDate"/>
+      <map from="LegalAction.UresaSentDate" to="LegalAction.UresaSentDate"/>
+      <map from="LegalAction.UresaAcknowledgedDate"
+           to="LegalAction.UresaAcknowledgedDate"/>
+      <map from="LegalAction.UifsaSentDate" to="LegalAction.UifsaSentDate"/>
+      <map from="LegalAction.UifsaAcknowledgedDate"
+           to="LegalAction.UifsaAcknowledgedDate"/>
+      <map from="LegalAction.InitiatingState" to="LegalAction.InitiatingState"/>
+      <map from="LegalAction.InitiatingCounty" to="LegalAction.InitiatingCounty"/>
+      <map from="LegalAction.RespondingState" to="LegalAction.RespondingState"/>
+      <map from="LegalAction.RespondingCounty" to="LegalAction.RespondingCounty"/>
+      <map from="LegalAction.OrderAuthority" to="LegalAction.OrderAuthority"/>
+      <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.LongArmStatuteIndicator"
+           to="LegalAction.LongArmStatuteIndicator"/>
+      <map from="LegalAction.PaymentLocation" to="LegalAction.PaymentLocation"/>
+      <map from="LegalAction.DismissedWithoutPrejudiceInd"
+           to="LegalAction.DismissedWithoutPrejudiceInd"/>
+      <map from="LegalAction.DismissalCode" to="LegalAction.DismissalCode"/>
+      <map from="LegalAction.RefileDate" to="LegalAction.RefileDate"/>
+      <map from="LegalAction.LastModificationReviewDate"
+           to="LegalAction.LastModificationReviewDate"/>
+      <map from="LegalAction.EndDate" to="LegalAction.EndDate"/>
+      <map from="LegalAction.EstablishmentCode" to="LegalAction.EstablishmentCode"/>
+      <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+      <map from="LegalAction.NonCsePetitioner" to="LegalAction.NonCsePetitioner"/>
+      <map from="LegalAction.ForeignFipsState" to="LegalAction.ForeignFipsState"/>
+      <map from="LegalAction.ForeignFipsCounty" to="LegalAction.ForeignFipsCounty"/>
+      <map from="LegalAction.ForeignFipsLocation"
+           to="LegalAction.ForeignFipsLocation"/>
+      <map from="LegalAction" to="HiddenLegalAction"/>
+      <return-map from="LegalAction" to="LegalAction"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_ROLE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="REDISP"
+       to="LeLrolLegalRole"
+       send-command="DISPLAY">
+      <map from="Foreign" to="FipsTribAddress"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="Fips" to="Fips"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="LegalAction" to="HiddenLegalAction"/>
+      <return-map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="LegalAction.Classification" to="LegalAction.Classification"/>
+      <return-map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="LegalAction.FiledDate" to="LegalAction.FiledDate"/>
+      <return-map from="LegalAction.PaymentLocation" to="LegalAction.PaymentLocation"/>
+      <return-map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+      <return-map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptClass" to="PromptClass"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="HiddenLegalAction" to="HiddenLegalAction"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="PromptTribStateCounty" to="PromptTribStateCounty"/>
+   <map from="Foreign" to="Foreign"/>
+   <map from="ActionTaken" to="ActionTaken"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.AttorneyApproval" to="LegalAction.AttorneyApproval"/>
+   <map from="LegalAction.ApprovalSentDate" to="LegalAction.ApprovalSentDate"/>
+   <map from="LegalAction.PetitionerApproval"
+        to="LegalAction.PetitionerApproval"/>
+   <map from="LegalAction.ApprovalReceivedDate"
+        to="LegalAction.ApprovalReceivedDate"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+   <map from="LegalAction.Type1" to="LegalAction.Type1"/>
+   <map from="LegalAction.FiledDate" to="LegalAction.FiledDate"/>
+   <map from="LegalAction.ForeignOrderRegistrationDate"
+        to="LegalAction.ForeignOrderRegistrationDate"/>
+   <map from="LegalAction.OrderAuthority" to="LegalAction.OrderAuthority"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="LegalAction.PaymentLocation" to="LegalAction.PaymentLocation"/>
+   <map from="LegalAction.UresaSentDate" to="LegalAction.UresaSentDate"/>
+   <map from="LegalAction.UresaAcknowledgedDate"
+        to="LegalAction.UresaAcknowledgedDate"/>
+   <map from="LegalAction.UifsaSentDate" to="LegalAction.UifsaSentDate"/>
+   <map from="LegalAction.UifsaAcknowledgedDate"
+        to="LegalAction.UifsaAcknowledgedDate"/>
+   <map from="LegalAction.InitiatingState" to="LegalAction.InitiatingState"/>
+   <map from="LegalAction.InitiatingCounty" to="LegalAction.InitiatingCounty"/>
+   <map from="LegalAction.RespondingState" to="LegalAction.RespondingState"/>
+   <map from="LegalAction.RespondingCounty" to="LegalAction.RespondingCounty"/>
+   <map from="LegalAction.DismissedWithoutPrejudiceInd"
+        to="LegalAction.DismissedWithoutPrejudiceInd"/>
+   <map from="LegalAction.DismissalCode" to="LegalAction.DismissalCode"/>
+   <map from="LegalAction.RefileDate" to="LegalAction.RefileDate"/>
+   <map from="LegalAction.LongArmStatuteIndicator"
+        to="LegalAction.LongArmStatuteIndicator"/>
+   <map from="LegalAction.EstablishmentCode" to="LegalAction.EstablishmentCode"/>
+   <map from="LegalAction.LastModificationReviewDate"
+        to="LegalAction.LastModificationReviewDate"/>
+   <map from="LegalAction.EndDate" to="LegalAction.EndDate"/>
+   <map from="LegalAction.ForeignOrderNumber"
+        to="LegalAction.ForeignOrderNumber"/>
+   <map from="Fips.StateAbbreviation" to="Fips.StateAbbreviation"/>
+   <map from="Fips.CountyDescription" to="Fips.CountyDescription"/>
+   <map from="Fips.CountyAbbreviation" to="Fips.CountyAbbreviation"/>
+   <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   <map from="LegalAction.NonCsePetitioner" to="LegalAction.NonCsePetitioner"/>
+   <autoflow command="EXIT" exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"/>
+</procedure>

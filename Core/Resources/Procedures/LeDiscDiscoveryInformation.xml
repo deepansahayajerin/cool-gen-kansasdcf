@@ -1,0 +1,111 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeDiscDiscoveryInformation"
+           program-name="SWEDISCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeDiscDiscoveryInformation"
+           transaction="SR8J"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LST_LGL_ACT_BY_CP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLLGLACT"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <map from="HiddenSecurity1" to="HiddenSecurity"/>
+      <return-map from="Selected.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="Selected.Classification" to="LegalAction.Classification"/>
+      <return-map from="Selected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="Selected.StandardNumber" to="LegalAction.StandardNumber"/>
+      <return-map from="HiddenSecurity" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <map from="Tribunal" to="SearchTribunal"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="FipsTribAddress"/>
+      <return-map from="DlgflwSelectedFips" to="DlgflwSelectedFips"/>
+      <return-map from="DlgflwSelectedTribunal" to="DlgflwSelectedTribunal"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLLGLACT"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="LegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="LegalAction.Classification" to="SearchLegalAction.Classification"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.ForeignOrderNumber"
+           to="SearchLegalAction.ForeignOrderNumber"/>
+      <map from="LegalAction.StandardNumber" to="SearchLegalAction.StandardNumber"/>
+      <map from="Fips" to="SearchFips"/>
+      <map from="Tribunal" to="SearchTribunal"/>
+      <return-map from="DlgflwSelected.Identifier" to="LegalAction.Identifier"/>
+      <return-map from="DlgflwSelected.Classification" to="LegalAction.Classification"/>
+      <return-map from="DlgflwSelected.ActionTaken" to="LegalAction.ActionTaken"/>
+      <return-map from="DlgflwSelected.FiledDate" to="LegalAction.FiledDate"/>
+      <return-map from="DlgflwSelected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <return-map from="DlgflwSelected.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="RequiredCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <map from="LegalActionFlow" to="LegalActionFlow"/>
+   <map from="PromptClass" to="PromptClass"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="PromptTribunal" to="PromptTribunal"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="HiddenTribunal" to="HiddenTribunal"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity.HiddenSecurityCommand"
+        to="HiddenSecurity.HiddenSecurityCommand"/>
+   <map from="HiddenSecurity.HiddenSecurityProfileAuthorization"
+        to="HiddenSecurity.HiddenSecurityProfileAuthorization"/>
+   <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   <map from="ActionTaken" to="ActionTaken"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="Discovery.FirstName" to="Discovery.FirstName"/>
+   <map from="Discovery.MiddleInt" to="Discovery.MiddleInt"/>
+   <map from="Discovery.LastName" to="Discovery.LastName"/>
+   <map from="Discovery.RequestedDate" to="Discovery.RequestedDate"/>
+   <map from="Discovery.RequestDescription" to="Discovery.RequestDescription"/>
+   <map from="Discovery.ResponseDate" to="Discovery.ResponseDate"/>
+   <map from="Discovery.ResponseDescription" to="Discovery.ResponseDescription"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="HiddenPrevLegalAction.Classification"
+        to="HiddenPrevLegalAction.Classification"/>
+   <map from="HiddenPrevLegalAction.CourtCaseNumber"
+        to="HiddenPrevLegalAction.CourtCaseNumber"/>
+   <map from="HiddenPrevDiscovery.RequestedDate"
+        to="HiddenPrevDiscovery.RequestedDate"/>
+   <map from="Discovery.RequestedByCseInd" to="Discovery.RequestedByCseInd"/>
+   <map from="Discovery.RespReqByFirstName" to="Discovery.RespReqByFirstName"/>
+   <map from="Discovery.RespReqByMi" to="Discovery.RespReqByMi"/>
+   <map from="Discovery.RespReqByLastName" to="Discovery.RespReqByLastName"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Fips.StateAbbreviation" to="Fips.StateAbbreviation"/>
+   <map from="Fips.CountyAbbreviation" to="Fips.CountyAbbreviation"/>
+   <map from="Fips.CountyDescription" to="Fips.CountyDescription"/>
+   <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadIwoAction">
+      <value>
+select top(1)
+  IDENTIFIER,
+  STATUS_CD,
+  STATUS_DATE,
+  STATUS_REASON_CD,
+  DOC_TRACKING_ID,
+  FILE_CONTROL_ID,
+  BATCH_CONTROL_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER,
+  INF_ID
+from
+  CKT_IWO_ACTION
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="ReadIwoTransactionCsePersonLegalAction">
+      <value>
+select top(1)
+  cast(@iwtIdentifier as smallint),
+  cast(@lgaIdentifier as integer),
+  cast(@cspNumber as char(10)),
+  LEGAL_ACTION_ID,
+  KEY_CHANGE_DATE
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @lgaIdentifier
+</value>
+   </data>
+</root>

@@ -1,0 +1,160 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeHicoHealthInsuranceCompany"
+           program-name="SWEHICOP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeHicoHealthInsuranceCompany"
+           transaction="SR5Z"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="State" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedState"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_INSURANCE_CO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETHICL"
+       to="OeHiclHealthInsuCompanyList"
+       send-command="DISPLAY">
+      <map from="HealthInsuranceCompanyAddress"
+           to="StartingHealthInsuranceCompanyAddress"/>
+      <map from="HealthInsuranceCompany" to="StartingHealthInsuranceCompany"/>
+      <return-map from="HiclSelectionCount" to="HiclSelectionCount"/>
+      <return-map from="SelectedHealthInsuranceCompanyAddress.City"
+                  to="PromptHealthInsuranceCompanyAddress.City"/>
+      <return-map from="SelectedHealthInsuranceCompanyAddress.State"
+                  to="PromptHealthInsuranceCompanyAddress.State"/>
+      <return-map from="SelectedHealthInsuranceCompanyAddress.Street1"
+                  to="PromptHealthInsuranceCompanyAddress.Street1"/>
+      <return-map from="SelectedHealthInsuranceCompanyAddress.Street2"
+                  to="PromptHealthInsuranceCompanyAddress.Street2"/>
+      <return-map from="SelectedHealthInsuranceCompanyAddress.ZipCode5"
+                  to="PromptHealthInsuranceCompanyAddress.ZipCode5"/>
+      <return-map from="SelectedHealthInsuranceCompanyAddress.ZipCode4"
+                  to="PromptHealthInsuranceCompanyAddress.ZipCode4"/>
+      <return-map from="SelectedHealthInsuranceCompany.InsurancePolicyCarrier"
+                  to="PromptHealthInsuranceCompany.InsurancePolicyCarrier"/>
+      <return-map from="SelectedHealthInsuranceCompany.CarrierCode"
+                  to="PromptHealthInsuranceCompany.CarrierCode"/>
+      <return-map from="SelectedHealthInsuranceCompany.Identifier"
+                  to="PromptHealthInsuranceCompany.Identifier"/>
+      <return-map from="SelectedHealthInsuranceCompany.InsurerPhoneAreaCode"
+                  to="PromptHealthInsuranceCompany.InsurerPhoneAreaCode"/>
+      <return-map from="SelectedHealthInsuranceCompany.InsurerFaxAreaCode"
+                  to="PromptHealthInsuranceCompany.InsurerFaxAreaCode"/>
+      <return-map from="SelectedHealthInsuranceCompany.InsurerPhoneExt"
+                  to="PromptHealthInsuranceCompany.InsurerPhoneExt"/>
+      <return-map from="SelectedHealthInsuranceCompany.InsurerPhone"
+                  to="PromptHealthInsuranceCompany.InsurerPhone"/>
+      <return-map from="SelectedHealthInsuranceCompany.InsurerFax"
+                  to="PromptHealthInsuranceCompany.InsurerFax"/>
+      <return-map from="SelectedHealthInsuranceCompany.StartDate"
+                  to="PromptHealthInsuranceCompany.StartDate"/>
+      <return-map from="SelectedHealthInsuranceCompany.EndDate"
+                  to="PromptHealthInsuranceCompany.EndDate"/>
+      <return-map from="SelectedHealthInsuranceCompany.ContactName"
+                  to="PromptHealthInsuranceCompany.ContactName"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeHinmHealthInsuranceMenu"
+       send-command-type="none">
+      <map from="HiddenCase" to="StartCase"/>
+      <map from="HiddenCsePerson" to="StartCsePerson"/>
+   </on>
+   <map from="WorkPromptCarrierCode" to="WorkPromptCarrierCode"/>
+   <map from="PromptState" to="PromptState"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="SelectedState" to="SelectedState"/>
+   <map from="HiddenCase" to="HiddenCase"/>
+   <map from="HiddenCsePerson" to="HiddenCsePerson"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="HealthInsuranceCompany.StartDate"
+        to="HealthInsuranceCompany.StartDate"/>
+   <map from="HealthInsuranceCompany.EndDate"
+        to="HealthInsuranceCompany.EndDate"/>
+   <map from="HiddenHealthInsuranceCompany.StartDate"
+        to="HiddenHealthInsuranceCompany.StartDate"/>
+   <map from="HiddenHealthInsuranceCompany.EndDate"
+        to="HiddenHealthInsuranceCompany.EndDate"/>
+   <map from="HealthInsuranceCompany.InsurancePolicyCarrier"
+        to="HealthInsuranceCompany.InsurancePolicyCarrier"/>
+   <map from="HealthInsuranceCompany.Identifier"
+        to="HealthInsuranceCompany.Identifier"/>
+   <map from="HiddenHealthInsuranceCompany.Identifier"
+        to="HiddenHealthInsuranceCompany.Identifier"/>
+   <map from="HiddenHealthInsuranceCompany.CarrierCode"
+        to="HiddenHealthInsuranceCompany.CarrierCode"/>
+   <map from="HiddenHealthInsuranceCompany.InsurancePolicyCarrier"
+        to="HiddenHealthInsuranceCompany.InsurancePolicyCarrier"/>
+   <map from="HealthInsuranceCompany.CarrierCode"
+        to="HealthInsuranceCompany.CarrierCode"/>
+   <map from="HealthInsuranceCompanyAddress.Street1"
+        to="HealthInsuranceCompanyAddress.Street1"/>
+   <map from="HealthInsuranceCompanyAddress.Street2"
+        to="HealthInsuranceCompanyAddress.Street2"/>
+   <map from="HealthInsuranceCompanyAddress.City"
+        to="HealthInsuranceCompanyAddress.City"/>
+   <map from="HealthInsuranceCompanyAddress.State"
+        to="HealthInsuranceCompanyAddress.State"/>
+   <map from="HealthInsuranceCompanyAddress.ZipCode5"
+        to="HealthInsuranceCompanyAddress.ZipCode5"/>
+   <map from="HealthInsuranceCompanyAddress.ZipCode4"
+        to="HealthInsuranceCompanyAddress.ZipCode4"/>
+   <map from="HealthInsuranceCompanyAddress.EffectiveDate"
+        to="HealthInsuranceCompanyAddress.EffectiveDate"/>
+   <map from="HiddenHealthInsuranceCompanyAddress.EffectiveDate"
+        to="HiddenHealthInsuranceCompanyAddress.EffectiveDate"/>
+   <map from="HiddenHealthInsuranceCompanyAddress.Street1"
+        to="HiddenHealthInsuranceCompanyAddress.Street1"/>
+   <map from="HiddenHealthInsuranceCompanyAddress.Street2"
+        to="HiddenHealthInsuranceCompanyAddress.Street2"/>
+   <map from="HiddenHealthInsuranceCompanyAddress.City"
+        to="HiddenHealthInsuranceCompanyAddress.City"/>
+   <map from="HiddenHealthInsuranceCompanyAddress.State"
+        to="HiddenHealthInsuranceCompanyAddress.State"/>
+   <map from="HealthInsuranceCompanyAddress.AddressType"
+        to="HealthInsuranceCompanyAddress.AddressType"/>
+   <map from="HealthInsuranceCompany.ContactName"
+        to="HealthInsuranceCompany.ContactName"/>
+   <map from="HealthInsuranceCompany.InsurerPhoneAreaCode"
+        to="HealthInsuranceCompany.InsurerPhoneAreaCode"/>
+   <map from="HealthInsuranceCompany.InsurerPhone"
+        to="HealthInsuranceCompany.InsurerPhone"/>
+   <map from="HealthInsuranceCompany.InsurerPhoneExt"
+        to="HealthInsuranceCompany.InsurerPhoneExt"/>
+   <map from="HealthInsuranceCompany.InsurerFaxAreaCode"
+        to="HealthInsuranceCompany.InsurerFaxAreaCode"/>
+   <map from="HealthInsuranceCompany.InsurerFax"
+        to="HealthInsuranceCompany.InsurerFax"/>
+   <map from="HealthInsuranceCompany.InsurerFaxExt"
+        to="HealthInsuranceCompany.InsurerFaxExt"/>
+   <map from="HiddenHealthInsuranceCompany.ContactName"
+        to="PromptHealthInsuranceCompany.ContactName"/>
+   <map from="HiddenHealthInsuranceCompany.InsurerPhone"
+        to="PromptHealthInsuranceCompany.InsurerPhone"/>
+   <map from="HiddenHealthInsuranceCompany.InsurerFax"
+        to="PromptHealthInsuranceCompany.InsurerFax"/>
+   <map from="HiddenHealthInsuranceCompany.CreatedBy"
+        to="PromptHealthInsuranceCompany.CreatedBy"/>
+   <map from="HiddenHealthInsuranceCompany.CreatedTimestamp"
+        to="PromptHealthInsuranceCompany.CreatedTimestamp"/>
+   <map from="HiddenHealthInsuranceCompany.LastUpdatedBy"
+        to="PromptHealthInsuranceCompany.LastUpdatedBy"/>
+   <map from="HiddenHealthInsuranceCompany.LastUpdatedTimestamp"
+        to="PromptHealthInsuranceCompany.LastUpdatedTimestamp"/>
+   <map from="HiddenHealthInsuranceCompany.InsurerFaxExt"
+        to="PromptHealthInsuranceCompany.InsurerFaxExt"/>
+   <map from="HiddenHealthInsuranceCompany.InsurerPhoneExt"
+        to="PromptHealthInsuranceCompany.InsurerPhoneExt"/>
+   <map from="HiddenHealthInsuranceCompany.InsurerPhoneAreaCode"
+        to="PromptHealthInsuranceCompany.InsurerPhoneAreaCode"/>
+   <map from="HiddenHealthInsuranceCompany.InsurerFaxAreaCode"
+        to="PromptHealthInsuranceCompany.InsurerFaxAreaCode"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

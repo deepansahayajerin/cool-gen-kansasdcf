@@ -1,0 +1,122 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OePatmGeneticWorkUraLrMenu"
+           program-name="SWEPATMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OePatmGeneticWorkUraLrMenu"
+           transaction="SR6Y"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeOblmObligationEstbMenu"
+       send-command="XXFMMENU">
+      <map from="PersonName" to="PersonNameH"/>
+      <map from="StartCsePerson" to="CurrentHCsePerson"/>
+      <map from="StartCase" to="CurrentHCase"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_GTAL"
+       action="transfer"
+       to="OeGtalGeneticTestAcList"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_MENU_TO_GTDS"
+       action="transfer"
+       to="OeGtdsDisplayGenTestDetls"
+       send-command="XXFMMENU">
+      <map from="PersonName.FormattedName"
+           to="ChildCsePersonsWorkSet.FormattedName"/>
+      <map from="StartCase" to="Case1"/>
+      <map from="StartCsePerson" to="ChildCsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_GTSL"
+       action="transfer"
+       to="OeGtslGeneticTestSampleList"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+      <map from="StartCsePerson" to="CsePerson"/>
+      <map from="PersonName.FormattedName" to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_VEND"
+       action="transfer"
+       to="OeVendMaintainVendor"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_MENU_TO_VENL"
+       action="transfer"
+       to="OeVenlListVendor"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_MENU_TO_GTSC"
+       action="transfer"
+       to="OeGtscMaintGeneticTestDetls"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="SelectedCase"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_WORK"
+       action="transfer"
+       to="OeWorkCsWorksheetPage1"
+       send-command="XXFMMENU">
+      <map from="PersonName.FormattedName" to="ParentAName.FormattedName"/>
+      <map from="StartCsePerson" to="ParentACsePerson"/>
+      <map from="StartCase" to="Case1"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_CSWL"
+       action="transfer"
+       to="OeCswlChildSupWorksheetList"
+       send-command="XXFMMENU">
+      <map from="PersonName.FormattedName" to="Name.FormattedName"/>
+      <map from="StartCase" to="SearchCase"/>
+      <map from="StartCsePerson" to="SearchCsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_LGRQ"
+       action="transfer"
+       to="OeLgrqLegalRequest"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Case1"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_URAH"
+       action="transfer"
+       to="OeUrahHouseholdUra"
+       send-command="XXFMMENU">
+      <map from="StartCase" to="Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_URAC"
+       action="transfer"
+       to="OeUracUraByCourtOrder"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_MENU_TO_CURA ECO_XFR_MENU_TO_MURA"
+       action="transfer"
+       to="OeCuraMembersUra"
+       send-command="XXFMMENU">
+      <map from="StartCsePerson" to="SearchCsePerson"/>
+   </on>
+   <on exit-state="EXO_XFR_MENU_TO_UCOL"
+       action="transfer"
+       to="OeUcolListUraCollections"
+       send-command="DISPLAY">
+      <map from="StartCase" to="SearchCase"/>
+      <map from="StartCsePerson" to="SearchMemberCsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_UHMM"
+       action="transfer"
+       to="OeUhmmUraHouseholdMbrMaint"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_XFR_MENU_TO_IMHH"
+       action="transfer"
+       to="OeImhhListHhInfo"
+       send-command="DISPLAY">
+      <map from="StartCase" to="SearchCriteria.SearchCase"/>
+      <map from="StartCsePerson" to="SearchCriteria.SearchCsePerson"/>
+      <map from="PersonName.FormattedName"
+           to="SearchCriteria.SearchCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_XFR_MENU_TO_URAL"
+       action="transfer"
+       to="OeUralListUraAdj"
+       send-command="DISPLAY">
+      <map from="StartCsePerson.Number" to="CsePerson1.Number"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Current" to="Current"/>
+   <map from="StartCsePerson" to="StartCsePerson"/>
+   <map from="PersonName" to="PersonName"/>
+   <map from="StartCase" to="StartCase"/>
+   <map from="Hidden" to="Hidden"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

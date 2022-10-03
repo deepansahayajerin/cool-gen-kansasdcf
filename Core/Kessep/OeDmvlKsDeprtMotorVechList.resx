@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T3 with(readuncommitted)
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T1.NUMB &gt;= @numb) and
+    (T3.CRO_TYPE = 'AP') and
+    (@lgaId = T3.LGA_ID) and
+    (T1.STATUS = 'O')
+  join
+  CKT_CASE_UNIT T4 with(readuncommitted)
+  on
+    (T1.NUMB = T4.CAS_NO) and
+    (T4.CSP_NO_AP = @cspNoAp)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH,
+  FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadKsDriversLicense">
+      <value>
+select top(1)
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  (CSP_NUM = @cspNum) and
+  (COURTESY_LTR_DATE &gt; @courtesyLtrDate)
+</value>
+   </data>
+   <data name="ReadKsDriversLicenseLegalAction">
+      <value>
+select
+  T1.CSP_NUM,
+  T1.LGA_IDENTIFIER,
+  T1.COURTESY_LTR_DATE,
+  T1.LTR_30_DAY_DATE,
+  T1.SEQUENCE_COUNTER,
+  T2.FILED_DT,
+  T2.COURT_CASE_NO,
+  T2.END_DT,
+  T2.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T2 with(readuncommitted)
+  join
+  CKT_KDMV T1 with(readuncommitted)
+  on
+    (T1.CSP_NUM = @cspNum) and
+    (T1.COURTESY_LTR_DATE &gt; @courtesyLtrDate1) and
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (
+      (T1.COURTESY_LTR_DATE &lt; @courtesyLtrDate2) or
+      (
+        (T1.COURTESY_LTR_DATE = @courtesyLtrDate2) and
+        (T1.LTR_30_DAY_DATE &lt; @ltr30DayDate)
+      ) or
+      (
+        (T1.COURTESY_LTR_DATE = @courtesyLtrDate2) and
+        (T1.LTR_30_DAY_DATE = @ltr30DayDate) and
+        (T2.STANDARD_NO &gt; @standardNo)
+      )
+    )
+order by
+  T1.COURTESY_LTR_DATE desc,
+  T1.LTR_30_DAY_DATE desc,
+  T2.STANDARD_NO
+</value>
+   </data>
+</root>

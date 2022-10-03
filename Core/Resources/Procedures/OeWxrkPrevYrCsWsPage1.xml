@@ -1,0 +1,293 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeWxrkPrevYrCsWsPage1"
+           program-name="SWEWXRKP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeWxrkPrevYrCsWsPage1"
+           transaction="SSAM"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ACO_NI0000_CLEAR_SUCCESSFUL"
+       action="transfer"
+       to="OeWxrkPrevYrCsWsPage1"
+       send-command="RDISPLAY">
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSWL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSWL"
+       to="OeCswlChildSupWorksheetList"
+       send-command="DISPLAY">
+      <map from="WorkLink" to="WorkLink"/>
+      <map from="ParentACsePerson" to="SearchCsePerson"/>
+      <map from="Case1" to="SearchCase"/>
+      <return-map from="SelectedDate" to="LastUpdtDate"/>
+      <return-map from="SelectedChildSupportWorksheet.Status"
+                  to="ChildSupportWorksheet.Status"/>
+      <return-map from="SelectedChildSupportWorksheet.Identifier"
+                  to="ChildSupportWorksheet.Identifier"/>
+      <return-map from="SelectedChildSupportWorksheet.CsGuidelineYear"
+                  to="ChildSupportWorksheet.CsGuidelineYear"/>
+      <return-map from="SelectedCsePersonSupportWorksheet.NetAdjParentalChildSuppAmt"
+                  to="ParentACsePersonSupportWorksheet.NetAdjParentalChildSuppAmt"/>
+      <return-map from="SelectedCsePersonSupportWorksheet.Identifer"
+                  to="ParentACsePersonSupportWorksheet.Identifer"/>
+      <return-map from="SelectedCase" to="Case1"/>
+   </on>
+   <on exit-state="OE0000_MUST_FLOW_TO_LACS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLACS"
+       to="LeLacsLstLglActnByCseCase"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="DlgflwSelected" to="SelectedLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Required" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CS_WORKSHEET_2"
+       action="link"
+       return-when="ECO_LNK_TO_CS_WORKSHEET_1"
+       return-command="DISPPAGE"
+       to="OeWxr2PrevYrCsWsPage2"
+       send-command="DISPPAGE">
+      <map from="FromCren" to="FromCren"/>
+      <map from="County" to="County"/>
+      <map from="ParentBName" to="ParentBName"/>
+      <map from="ParentAName" to="ParentAName"/>
+      <map from="LastUpdtDate" to="LastUpdtDate"/>
+      <map from="PrevChildSupportWorksheet" to="PrevChildSupportWorksheet"/>
+      <map from="ParentBF2TotalCsAdj" to="ParentBF2TotalCsAdj"/>
+      <map from="ParentAF2TotalCsAdj" to="ParentAF2TotalCsAdj"/>
+      <map from="D1otalCsInc" to="D1otalCsInc"/>
+      <map from="Export1.Work" to="Import1.Work"/>
+      <map from="Export1.ParentB" to="Import1.ParentB"/>
+      <map from="Export1.ParentA" to="Import1.ParentA"/>
+      <map from="ParentBF3AdjCsOblig" to="ParentBF3AdjCsOblig"/>
+      <map from="ParentBE7F2TotAdj" to="ParentBE7F2TotAdjust"/>
+      <map from="ParentAF3AdjCsOblig" to="ParentAF3AdjCsOblig"/>
+      <map from="ParentAE7F2TotAdj" to="ParentAE7F2TotAdjust"/>
+      <map from="ParentAD9F1NetCs" to="ParentAD9F1NetCs"/>
+      <map from="ParentBD9F1NetCs" to="ParentBD9F1NetCs"/>
+      <map from="ParentBD8Adjustments" to="ParentBD8Adjustments"/>
+      <map from="ParentAD8Adjustments" to="ParentAD8Adjustments"/>
+      <map from="ParentBD7CsOblig" to="ParentBD7CsOblig"/>
+      <map from="ParentAD7CsOblig" to="ParentAD7CsOblig"/>
+      <map from="D6otalChildSuppOblig" to="D6otalChildSuppOblig"/>
+      <map from="TotalChildCareCost" to="TotalChildCareCost"/>
+      <map from="ParentAChildCareCost" to="ParentAChildCareCost"/>
+      <map from="ParentBChildCareCost" to="ParentBChildCareCost"/>
+      <map from="ParentBTotalTaxCredit" to="ParentBTotalTaxCredit"/>
+      <map from="ParentATotalTaxCredit" to="ParentATotalTaxCredit"/>
+      <map from="TotalInsurancePrem" to="TotalInsurancePrem"/>
+      <map from="CsObligTotalAmount" to="CsObligTotalAmount"/>
+      <map from="CsOblig1618TotalAmt" to="CsObligAgrp3TotalInc"/>
+      <map from="CsOblig715TotalAmt" to="CsObligAgrp2TotalAmt"/>
+      <map from="CsOblig06TotalAmt" to="CsObligAgrp1TotalAmt"/>
+      <map from="ParentBD2PercentInc" to="ParentBD2PercentInc"/>
+      <map from="ParentAD2PercentInc" to="ParentAD2PercentInc"/>
+      <map from="ParentBC5D1TotCsInc" to="ParentBC5D1TotCsInc"/>
+      <map from="ParentAC5D1TotCsInc" to="ParentAC5D1TotCsInc"/>
+      <map from="ParentBC1TotGrossInc" to="ParentBC1TotGrossInc"/>
+      <map from="ParentAC1TotGrossInc" to="ParentAC1TotGrossInc"/>
+      <map from="ParentBB3SeGrossInc" to="ParentBB3SeGrossInc"/>
+      <map from="ParentAB3SeGrossInc" to="ParentAB3SeGrossInc"/>
+      <map from="ChildSupportWorksheet" to="ChildSupportWorksheet"/>
+      <map from="ParentBCsePersonSupportWorksheet"
+           to="ParentBCsePersonSupportWorksheet"/>
+      <map from="ParentACsePersonSupportWorksheet"
+           to="ParentACsePersonSupportWorksheet"/>
+      <map from="ParentBCsePerson" to="ParentBCsePerson"/>
+      <map from="PrevParentBCsePerson" to="PrevParentB"/>
+      <map from="ParentACsePerson" to="ParentACsePerson"/>
+      <map from="PrevParentACsePerson" to="PrevParentA"/>
+      <map from="Case1" to="Case1"/>
+      <map from="PrevCase" to="PrevCase"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="LegalAction" to="LegalAction"/>
+      <map from="Next" to="Next"/>
+      <map from="ServiceProvider" to="ServiceProvider"/>
+      <map from="Office" to="Office"/>
+      <map from="CaseOpen" to="CaseOpen"/>
+      <map from="CaseRoleInactive" to="CaseRoleInactive"/>
+      <map from="Common" to="Common"/>
+      <map from="ParentAD10F1NetCs" to="ParentAD10F1NetCs"/>
+      <map from="ParentBD10F1NetCs" to="ParentBD10F1NetCs"/>
+      <map from="ParentAEnfFee" to="ParentAEnfFee"/>
+      <map from="ParentBEnfFee" to="ParentBEnfFee"/>
+      <return-map from="FromCren" to="FromCren"/>
+      <return-map from="County" to="County"/>
+      <return-map from="ParentBName.FormattedName" to="ParentBName.FormattedName"/>
+      <return-map from="ParentBName.FirstName" to="ParentBName.FirstName"/>
+      <return-map from="ParentAName.FormattedName" to="ParentAName.FormattedName"/>
+      <return-map from="ParentAName.FirstName" to="ParentAName.FirstName"/>
+      <return-map from="LastUpdtDate" to="LastUpdtDate"/>
+      <return-map from="Export1.Work" to="Import1.Work"/>
+      <return-map from="Export1.ParentB" to="Import1.ParentB"/>
+      <return-map from="Export1.ParentA" to="Import1.ParentA"/>
+      <return-map from="ParentBF3AdjCsOblig" to="ParentBF3AdjCsOblig"/>
+      <return-map from="ParentBE7F2TotAdj" to="ParentBE7F2TotAdjust"/>
+      <return-map from="ParentBF2TotalCsAdj" to="ParentBF2TotalCsAdj"/>
+      <return-map from="ParentAF2TotalCsAdj" to="ParentAF2TotalCsAdj"/>
+      <return-map from="ParentAF3AdjCsOblig" to="ParentAF3AdjCsOblig"/>
+      <return-map from="ParentAE7F2TotAdj" to="ParentAE7F2TotAdjust"/>
+      <return-map from="ParentAD9F1NetCs" to="ParentAD9F1NetCs"/>
+      <return-map from="ParentBD9F1NetCs" to="ParentBD9F1NetCs"/>
+      <return-map from="ParentBD8Adjustments" to="ParentBD8Adjustments"/>
+      <return-map from="ParentAD8Adjustments" to="ParentAD8Adjustments"/>
+      <return-map from="ParentBD7CsOblig" to="ParentBD7CsOblig"/>
+      <return-map from="ParentAD7CsOblig" to="ParentAD7CsOblig"/>
+      <return-map from="D6otalChildSuppOblig" to="D6otalChildSuppOblig"/>
+      <return-map from="TotalChildCareCost" to="TotalChildCareCost"/>
+      <return-map from="ParentAChildCareCost" to="ParentAChildCareCost"/>
+      <return-map from="ParentBChildCareCost" to="ParentBChildCareCost"/>
+      <return-map from="ParentBTotalTaxCredit" to="ParentBTotalTaxCredit"/>
+      <return-map from="ParentATotalTaxCredit" to="ParentATotalTaxCredit"/>
+      <return-map from="TotalInsurancePrem" to="TotalInsurancePrem"/>
+      <return-map from="CsObligTotalAmount" to="CsObligTotalAmount"/>
+      <return-map from="CsOblig1618TotalAmt" to="CsObligAgrp3TotalInc"/>
+      <return-map from="CsOblig715TotalAmt" to="CsObligAgrp2TotalAmt"/>
+      <return-map from="CsOblig06TotalAmt" to="CsObligAgrp1TotalAmt"/>
+      <return-map from="ParentBD2PercentInc" to="ParentBD2PercentInc"/>
+      <return-map from="ParentAD2PercentInc" to="ParentAD2PercentInc"/>
+      <return-map from="D1otalCsInc" to="D1otalCsInc"/>
+      <return-map from="ParentBC5D1TotCsInc" to="ParentBC5D1TotCsInc"/>
+      <return-map from="ParentAC5D1TotCsInc" to="ParentAC5D1TotCsInc"/>
+      <return-map from="ParentBC1TotGrossInc" to="ParentBC1TotGrossInc"/>
+      <return-map from="ParentAC1TotGrossInc" to="ParentAC1TotGrossInc"/>
+      <return-map from="ParentBB3SeGrossInc" to="ParentBB3SeGrossInc"/>
+      <return-map from="ParentAB3SeGrossInc" to="ParentAB3SeGrossInc"/>
+      <return-map from="ChildSupportWorksheet" to="ChildSupportWorksheet"/>
+      <return-map from="PrevChildSupportWorksheet.Identifier"
+                  to="PrevChildSupportWorksheet.Identifier"/>
+      <return-map from="PrevChildSupportWorksheet.Status"
+                  to="PrevChildSupportWorksheet.Status"/>
+      <return-map from="PrevChildSupportWorksheet.CsGuidelineYear"
+                  to="PrevChildSupportWorksheet.CsGuidelineYear"/>
+      <return-map from="ParentBCsePersonSupportWorksheet"
+                  to="ParentBCsePersonSupportWorksheet"/>
+      <return-map from="ParentACsePersonSupportWorksheet"
+                  to="ParentACsePersonSupportWorksheet"/>
+      <return-map from="ParentBCsePerson" to="ParentBCsePerson"/>
+      <return-map from="PrevParentB" to="PrevParentBCsePerson"/>
+      <return-map from="ParentACsePerson" to="ParentACsePerson"/>
+      <return-map from="PrevParentA" to="PrevParentACsePerson"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="PrevCase" to="PrevCase"/>
+      <return-map from="Tribunal" to="Tribunal"/>
+      <return-map from="LegalAction" to="LegalAction"/>
+      <return-map from="Next" to="Next"/>
+      <return-map from="ServiceProvider" to="ServiceProvider"/>
+      <return-map from="Office" to="Office"/>
+      <return-map from="CaseOpen" to="CaseOpen"/>
+      <return-map from="CaseRoleInactive" to="CaseRoleInactive"/>
+      <return-map from="Common" to="Common"/>
+      <return-map from="ParentAD10F1NetCs" to="ParentAD10F1NetCs"/>
+      <return-map from="ParentBD10F1NetCs" to="ParentBD10F1NetCs"/>
+      <return-map from="ParentAEnfFee" to="ParentAEnfFee"/>
+      <return-map from="ParentBEnfFee" to="ParentBEnfFee"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SI_COMP_CASE_COMP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected.Number" to="SelectedFromComp.Number"/>
+      <return-map from="Selected.FormattedName" to="SelectedFromComp.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none"/>
+   <map from="Prev2" to="Prev2"/>
+   <map from="ParentAF2TotalCsAdj" to="ParentAF2TotalCsAdj"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ParentBCsePerson" to="ParentBCsePerson"/>
+   <map from="CommandH" to="CommandH"/>
+   <map from="GuidelineYearPrompt" to="GuidelineYearPrompt"/>
+   <map from="AuthorizingPrompt" to="AuthorizingPrompt"/>
+   <map from="ParentAPrompt" to="ParentAPrompt"/>
+   <map from="ChildSupportWorksheet" to="ChildSupportWorksheet"/>
+   <map from="PrevChildSupportWorksheet" to="PrevChildSupportWorksheet"/>
+   <map from="ParentBF2TotalCsAdj" to="ParentBF2TotalCsAdj"/>
+   <map from="ParentACsePerson" to="ParentACsePerson"/>
+   <map from="ParentAName" to="ParentAName"/>
+   <map from="ParentBName" to="ParentBName"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ParentACsePersonSupportWorksheet"
+        to="ParentACsePersonSupportWorksheet"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="CaseRoleInactive" to="CaseRoleInactive"/>
+   <map from="PrevCase" to="PrevCase"/>
+   <map from="PrevParentACsePerson" to="PrevParentACsePerson"/>
+   <map from="PrevParentBCsePerson" to="PrevParentBCsePerson"/>
+   <map from="D1otalCsInc" to="D1otalCsInc"/>
+   <map from="Common" to="Common"/>
+   <map from="H" to="H"/>
+   <map from="County" to="County"/>
+   <map from="ParentBCsePersonSupportWorksheet"
+        to="ParentBCsePersonSupportWorksheet"/>
+   <map from="Export1.ParentA" to="Import1.ParentA"/>
+   <map from="Export1.Work" to="Import1.Work"/>
+   <map from="Export1.ParentB" to="Import1.ParentB"/>
+   <map from="PrevParentBCsePersonSupportWorksheet"
+        to="PrevParentBCsePersonSupportWorksheet"/>
+   <map from="LastUpdtDate" to="LastUpdtDate"/>
+   <map from="PrevParentACsePersonSupportWorksheet"
+        to="PrevParentACsePersonSupportWorksheet"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="ParentBF3AdjCsOblig" to="ParentBF3AdjCsOblig"/>
+   <map from="ParentBE7F2TotAdj" to="ParentBE7F2TotAdjust"/>
+   <map from="ParentAF3AdjCsOblig" to="ParentAF3AdjCsOblig"/>
+   <map from="ParentAE7F2TotAdj" to="ParentAE7F2TotAdjust"/>
+   <map from="ParentAD9F1NetCs" to="ParentAD9F1NetCs"/>
+   <map from="ParentBD9F1NetCs" to="ParentBD9F1NetCs"/>
+   <map from="ParentBD8Adjustments" to="ParentBD8Adjustments"/>
+   <map from="ParentAD8Adjustments" to="ParentAD8Adjustments"/>
+   <map from="ParentBD7CsOblig" to="ParentBD7CsOblig"/>
+   <map from="ParentAD7CsOblig" to="ParentAD7CsOblig"/>
+   <map from="D6otalChildSuppOblig" to="D6otalChildSuppOblig"/>
+   <map from="TotalChildCareCost" to="TotalChildCareCost"/>
+   <map from="ParentAChildCareCost" to="ParentAChildCareCost"/>
+   <map from="ParentBChildCareCost" to="ParentBChildCareCost"/>
+   <map from="ParentBTotalTaxCredit" to="ParentBTotalTaxCredit"/>
+   <map from="ParentATotalTaxCredit" to="ParentATotalTaxCredit"/>
+   <map from="TotalInsurancePrem" to="TotalInsurancePrem"/>
+   <map from="CsObligTotalAmount" to="CsObligTotalAmount"/>
+   <map from="CsOblig1618TotalAmt" to="CsObligAgrp3TotalInc"/>
+   <map from="CsOblig715TotalAmt" to="CsObligAgrp2TotalAmt"/>
+   <map from="CsOblig06TotalAmt" to="CsObligAgrp1TotalAmt"/>
+   <map from="ParentBD2PercentInc" to="ParentBD2PercentInc"/>
+   <map from="ParentAD2PercentInc" to="ParentAD2PercentInc"/>
+   <map from="ParentBC5D1TotCsInc" to="ParentBC5D1TotCsInc"/>
+   <map from="ParentAC5D1TotCsInc" to="ParentAC5D1TotCsInc"/>
+   <map from="ParentBC1TotGrossInc" to="ParentBC1TotGrossInc"/>
+   <map from="ParentAC1TotGrossInc" to="ParentAC1TotGrossInc"/>
+   <map from="ParentBB3SeGrossInc" to="ParentBB3SeGrossInc"/>
+   <map from="ParentAB3SeGrossInc" to="ParentAB3SeGrossInc"/>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Office" to="Office"/>
+   <map from="Next" to="Next"/>
+   <map from="ParentBPrompt" to="ParentBPrompt"/>
+   <map from="ParentAD10F1NetCs" to="ParentAD10F1NetCs"/>
+   <map from="ParentBD10F1NetCs" to="ParentBD10F1NetCs"/>
+   <map from="ParentAEnfFee" to="ParentAEnfFee"/>
+   <map from="ParentBEnfFee" to="ParentBEnfFee"/>
+   <map from="FromCren" to="FromCren"/>
+   <map from="GuidelineYearChange" to="GuidelineYearChange"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="Selected.CourtCaseNumber"
+        to="SelectedLegalAction.CourtCaseNumber"/>
+   <map from="WorkPrev.Command" to="WorkPrev.Command"/>
+</procedure>

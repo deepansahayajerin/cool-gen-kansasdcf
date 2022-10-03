@@ -1,0 +1,123 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiRegiCaseRegistration"
+           program-name="SWEREGIP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiRegiCaseRegistration"
+           transaction="SR2G"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_COMN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="none"
+       to="SiComnCaseCompositionByName"
+       send-command="DISPLAY">
+      <map from="FromInterstateCase" to="InterstateCase"/>
+      <map from="FromInrdInformationRequest" to="InformationRequest"/>
+      <map from="FromPaReferral" to="PaReferral"/>
+      <map from="SelectActionCsePersonsWorkSet.Number" to="Search.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="FromRegiToName" to="FromRegi"/>
+      <map from="NewCsePersonsWorkSet.Number" to="SearchCsePersonsWorkSet.Number"/>
+      <map from="NewCsePersonsWorkSet.Sex" to="SearchCsePersonsWorkSet.Sex"/>
+      <map from="NewCsePersonsWorkSet.Dob" to="SearchCsePersonsWorkSet.Dob"/>
+      <map from="NewCsePersonsWorkSet.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+      <map from="NewCsePersonsWorkSet.FirstName"
+           to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="NewCsePersonsWorkSet.MiddleInitial"
+           to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <map from="NewCsePersonsWorkSet.LastName"
+           to="SearchCsePersonsWorkSet.LastName"/>
+      <return-map from="Selected" to="NameReturn"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ORG_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="ADD"
+       to="SiOrgzOrganizationMaintenance"
+       send-command-type="none">
+      <return-map from="HiddenSelected.Number" to="NewCsePersonsWorkSet.Number"/>
+      <return-map from="HiddenSelected.FormattedName"
+                  to="NewCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_OFFICE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="none"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="Office"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CASE_COMPOSITION"
+       action="transfer"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_SI_IIMC"
+       action="transfer"
+       to="SiIimcIsManualConversion"
+       send-command="DISPLAY">
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IIDC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="none"
+       to="SiIidcInterstateApIdComp"
+       send-command="DISPLAY">
+      <map from="HiddenSelected.Number" to="CseCsePersonsWorkSet.Number"/>
+      <map from="FromInterstateCase.TransSerialNumber"
+           to="InterstateCase.TransSerialNumber"/>
+      <map from="FromInterstateCase.TransactionDate"
+           to="InterstateCase.TransactionDate"/>
+      <map from="FromInterstateCase.CaseType" to="InterstateCase.CaseType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CPAT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMCPAT"
+       to="SiCpatChildPaternityMaint"
+       send-command="DISPLAY">
+      <map from="Case1" to="Next"/>
+      <map from="RegisterSuccessful" to="FromRegi"/>
+   </on>
+   <map from="Next" to="Next"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Case1" to="Case1"/>
+   <map from="NewCsePersonsWorkSet" to="NewCsePersonsWorkSet"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="Export1.DetailCsePersonsWorkSet"
+        to="Import1.DetailCsePersonsWorkSet"/>
+   <map from="FromIapi" to="FromIapi"/>
+   <map from="RegisterSuccessful" to="RegisterSuccessful"/>
+   <map from="Office" to="Office"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="FromInterstateCase" to="FromInterstateCase"/>
+   <map from="FromPaReferral" to="FromPaReferral"/>
+   <map from="FromInrdCommon" to="FromInrdCommon"/>
+   <map from="FromPar1" to="FromPar1"/>
+   <map from="NotFromReferral" to="NotFromReferral"/>
+   <map from="SelectActionWorkArea" to="SelectActionWorkArea"/>
+   <map from="SelectActionCommon" to="SelectActionCommon"/>
+   <map from="SelectActionCsePersonsWorkSet" to="SelectActionCsePersonsWorkSet"/>
+   <map from="Export1.DetailCaseCnfrm" to="Import1.DetailCaseCnfrm"/>
+   <map from="Export1.DetailCaseRole" to="Import1.DetailCaseRole"/>
+   <map from="Export1.DetailFamily" to="Import1.DetailFamily"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="BeenToName" to="BeenToName"/>
+   <map from="NewSsnWorkArea" to="NewSsnWorkArea"/>
+   <map from="FromInrdInformationRequest" to="FromInrdInformationRequest"/>
+   <map from="ReturnFromCpat" to="ReturnFromCpat"/>
+</procedure>

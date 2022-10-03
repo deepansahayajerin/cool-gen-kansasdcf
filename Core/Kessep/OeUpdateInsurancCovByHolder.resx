@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateHealthInsuranceCoverage1">
+      <value>
+update CKT_HINS_COVERAGE
+set
+  CSP_H_NUMBER = @cspHNumber,
+  CON_H_NUMBER = @conHNumber
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="AssociateHealthInsuranceCoverage2">
+      <value>
+update CKT_HINS_COVERAGE
+set
+  CSE_NUMBER = @cseNumber,
+  ISR_IDENTIFIER = @isrIdentifier
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="DisassociateIncomeSource">
+      <value>
+update CKT_HINS_COVERAGE
+set
+  CSE_NUMBER = null,
+  ISR_IDENTIFIER = null
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadCaseCsePerson">
+      <value>
+select
+  T1.NUMB,
+  T1.STATUS,
+  T3.CSP_NUMBER
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T3.TYPE = 'CH') and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate) and
+    (T1.STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadContact">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CONTACT_NUMBER,
+  REL_TO_CSE_PERSON,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_CONTACT
+where
+  (@cspNumber = CSP_NUMBER) and
+  (CONTACT_NUMBER = @contactNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T1.TYPE = 'C') and
+    (T1.NUMB &lt;&gt; @numb)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  PAID_BY_CSEP_IND,
+  GROUP_NUMBER,
+  VERIFIED_DATE,
+  VERIFIED_USER_ID,
+  POLICY_NUMBER,
+  POLICY_EXP_DATE,
+  COVERAGE_CODE_1,
+  COVERAGE_CODE_2,
+  COVERAGE_CODE_3,
+  COVERAGE_CODE_4,
+  COVERAGE_CODE_5,
+  COVERAGE_CODE_6,
+  COVERAGE_CODE_7,
+  POLICY_EFF_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CSP_H_NUMBER,
+  CON_H_NUMBER,
+  CSP_NUMBER,
+  HIC_IDENTIFIER,
+  OTH_COV_PERSONS,
+  CSE_NUMBER,
+  ISR_IDENTIFIER
+from
+  CKT_HINS_COVERAGE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  GROUP_NUMBER,
+  POLICY_NUMBER,
+  CSP_NUMBER,
+  HIC_IDENTIFIER
+from
+  CKT_HINS_COVERAGE
+where
+  (GROUP_NUMBER = @groupNumber) and
+  (POLICY_NUMBER = @policyNumber) and
+  (@cspNumber = CSP_NUMBER) and
+  (HIC_IDENTIFIER = @hicIdentifier)
+</value>
+   </data>
+   <data name="ReadIncomeSource1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_I_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadIncomeSource2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_I_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select
+  HCV_ID,
+  CSP_NUMBER,
+  COVER_END_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_PERSONAL_HINS
+where
+  (@hcvId = HCV_ID) and
+  (COVER_END_DATE &gt; @coverEndDate)
+</value>
+   </data>
+   <data name="UpdateHealthInsuranceCoverage">
+      <value>
+update CKT_HINS_COVERAGE
+set
+  PAID_BY_CSEP_IND = @paidByCsepInd,
+  GROUP_NUMBER = @groupNumber,
+  VERIFIED_DATE = @verifiedDate,
+  VERIFIED_USER_ID = @verifiedUserId,
+  POLICY_NUMBER = @policyNumber,
+  POLICY_EXP_DATE = @policyExpDate,
+  COVERAGE_CODE_1 = @coverageCode1,
+  COVERAGE_CODE_2 = @coverageCode2,
+  COVERAGE_CODE_3 = @coverageCode3,
+  COVERAGE_CODE_4 = @coverageCode4,
+  COVERAGE_CODE_5 = @coverageCode5,
+  COVERAGE_CODE_6 = @coverageCode6,
+  COVERAGE_CODE_7 = @coverageCode7,
+  POLICY_EFF_DATE = @policyEffDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  OTH_COV_PERSONS = @othCovPersons
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdatePersonalHealthInsurance">
+      <value>
+update CKT_PERSONAL_HINS
+set
+  COVER_END_DATE = @coverEndDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (HCV_ID = @hcvId) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

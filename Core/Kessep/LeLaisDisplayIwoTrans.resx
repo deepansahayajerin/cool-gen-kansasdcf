@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EIWO_END_DATE,
+  EIWO_START_DATE
+from
+  CKT_EMPLOYER
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME,
+  CSP_I_NUMBER,
+  EMP_ID
+from
+  CKT_INCOME_SOURCE
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadIwoAction">
+      <value>
+select
+  IDENTIFIER,
+  ACTION_TYPE,
+  STATUS_CD,
+  STATUS_DATE,
+  STATUS_REASON_CD,
+  SVRITY_CLEARED_IND,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  IWT_IDENTIFIER
+from
+  CKT_IWO_ACTION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (@iwtIdentifier = IWT_IDENTIFIER) and
+  (ACTION_TYPE = 'RESUB')
+order by
+  STATUS_DATE
+</value>
+   </data>
+   <data name="ReadIwoTransactionIwoAction">
+      <value>
+select
+  T1.IDENTIFIER,
+  T1.TRANSACTION_NUMBER,
+  T1.STATUS_DATE,
+  T1.LGA_IDENTIFIER,
+  T1.CSP_NUMBER,
+  T1.CSP_I_NUMBER,
+  T1.ISR_IDENTIFIER,
+  T2.IDENTIFIER,
+  T2.ACTION_TYPE,
+  T2.STATUS_CD,
+  T2.STATUS_DATE,
+  T2.STATUS_REASON_CD,
+  T2.SVRITY_CLEARED_IND,
+  T2.LAST_UPDATED_TMST
+from
+  CKT_IWO_TRANS T1
+  join
+  CKT_IWO_ACTION T2
+  on
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.LGA_IDENTIFIER = T2.LGA_IDENTIFIER) and
+    (T1.IDENTIFIER = T2.IWT_IDENTIFIER) and
+    (T2.ACTION_TYPE &lt;&gt; 'RESUB')
+order by
+  T2.STATUS_DATE desc,
+  T2.LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  COURT_CASE_NO,
+  PAYMENT_LOCATION,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+</root>

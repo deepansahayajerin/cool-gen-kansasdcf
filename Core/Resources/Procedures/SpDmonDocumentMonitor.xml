@@ -1,0 +1,118 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpDmonDocumentMonitor"
+           program-name="SWEDMONP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpDmonDocumentMonitor"
+           transaction="SRDA"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_NATE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SpNateMaintNarrativeDetail"
+       send-command="DISPLAY"
+       send-current-exit-state="true">
+      <map from="SelectedDateWorkArea.Date" to="HeaderDateWorkArea.Date"/>
+      <map from="SelectedInfrastructure.CaseNumber"
+           to="HeaderInfrastructure.CaseNumber"/>
+      <map from="SelectedInfrastructure.CsePersonNumber"
+           to="HeaderInfrastructure.CsePersonNumber"/>
+      <map from="SelectedInfrastructure.SystemGeneratedIdentifier"
+           to="HeaderInfrastructure.SystemGeneratedIdentifier"/>
+      <map from="SelectedInfrastructure.CreatedBy"
+           to="HeaderInfrastructure.CreatedBy"/>
+      <map from="SelectedInfrastructure.Function"
+           to="HeaderInfrastructure.Function"/>
+      <map from="SelectedInfrastructure.ProcessStatus"
+           to="HeaderInfrastructure.ProcessStatus"/>
+      <map from="SelectedInfrastructure.EventType"
+           to="HeaderInfrastructure.EventType"/>
+      <map from="SelectedInfrastructure.CreatedTimestamp"
+           to="HeaderInfrastructure.CreatedTimestamp"/>
+      <map from="SelectedInfrastructure.EventDetailName"
+           to="HeaderInfrastructure.EventDetailName"/>
+      <map from="SelectedCsePersonsWorkSet.FormattedName"
+           to="HeaderCsePersonsWorkSet.FormattedName"/>
+      <map from="Hidden.LegalActionIdentifier"
+           to="HiddenNextTranInfo.LegalActionIdentifier"/>
+      <map from="Hidden.CourtCaseNumber" to="HiddenNextTranInfo.CourtCaseNumber"/>
+      <map from="Hidden.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+      <map from="Hidden.CsePersonNumber" to="HiddenNextTranInfo.CsePersonNumber"/>
+      <map from="Hidden.CsePersonNumberAp"
+           to="HiddenNextTranInfo.CsePersonNumberAp"/>
+      <map from="Hidden.CsePersonNumberObligee"
+           to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+      <map from="Hidden.CsePersonNumberObligor"
+           to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+      <map from="Hidden.CourtOrderNumber" to="HiddenNextTranInfo.CourtOrderNumber"/>
+      <map from="Hidden.ObligationId" to="HiddenNextTranInfo.ObligationId"/>
+      <map from="Hidden.StandardCrtOrdNumber"
+           to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+      <map from="Hidden.InfrastructureId" to="HiddenNextTranInfo.InfrastructureId"/>
+      <map from="Hidden.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+      <map from="Hidden.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+      <map from="Hidden.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+      <map from="Hidden.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+      <map from="Hidden.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+      <map from="Hidden.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+      <map from="SelectedLegalAction.CourtCaseNumber"
+           to="HeaderLegalAction.CourtCaseNumber"/>
+      <map from="UseNate" to="CallingProcedureNameAs"/>
+      <map from="FilterServiceProvider.UserId" to="HeaderServiceProvider.UserId"/>
+      <map from="FilterLegalAction" to="HistLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DlgflwSelected" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OFFICE_SERVICE_PROVDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionOffice" to="SelectedOffice"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="SelectedOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionServiceProvider" to="SelectedServiceProvider"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command="CLEAR"/>
+   <on exit-state="ECO_LNK_TO_DDOC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDDOC"
+       to="SpDdocDeadDocument"
+       send-command="DISPLAY">
+      <map from="SelectedInfrastructure" to="Infrastructure"/>
+   </on>
+   <map from="FilterOffice" to="FilterOffice"/>
+   <map from="FilterOfficeServiceProvider" to="FilterOfficeServiceProvider"/>
+   <map from="Export1.Gxnfrastructure" to="Import1.Ginfrastructure"/>
+   <map from="UseNate" to="UseNate"/>
+   <map from="FilterServiceProvider" to="FilterServiceProvider"/>
+   <map from="FilterSvpo" to="FilterSvpo"/>
+   <map from="FilterDateWorkArea" to="FilterDateWorkArea"/>
+   <map from="FilterShowAll" to="FilterShowAll"/>
+   <map from="FilterInfrastructure" to="FilterInfrastructure"/>
+   <map from="FilterFipsTribAddress" to="FilterFipsTribAddress"/>
+   <map from="Export1.Gxrev" to="Import1.Girev"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.GxegalAction" to="Import1.GiegalAction"/>
+   <map from="Export1.GxodeValue" to="Import1.GiodeValue"/>
+   <map from="Export1.GxsePersonsWorkSet" to="Import1.GisePersonsWorkSet"/>
+   <map from="Export1.GxonitoredDocument" to="Import1.GionitoredDocument"/>
+   <map from="Export1.Gxommon" to="Import1.Giommon"/>
+   <map from="Export1.Gxocument" to="Import1.Giocument"/>
+   <map from="FilterFips" to="FilterFips"/>
+   <map from="ErrorForScrollDisplay" to="ErrorForScrollDisplay"/>
+   <map from="FilterLegalAction.CourtCaseNumber"
+        to="FilterLegalAction.CourtCaseNumber"/>
+</procedure>

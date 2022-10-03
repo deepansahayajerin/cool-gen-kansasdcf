@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadStatsReport">
+      <value>
+select
+  YEAR_MONTH,
+  FIRST_RUN_NUMBER,
+  LINE_NUMBER,
+  CREATED_TIMESTAMP,
+  SERVICE_PRVDR_ID,
+  OFFICE_ID,
+  CASE_WRK_ROLE,
+  CASE_EFF_DATE,
+  PARENT_ID,
+  CHIEF_ID,
+  COLUMN1,
+  COLUMN2,
+  COLUMN3,
+  COLUMN4,
+  COLUMN5,
+  COLUMN6,
+  COLUMN7,
+  COLUMN8,
+  COLUMN9,
+  COLUMN10,
+  COLUMN11,
+  COLUMN12,
+  COLUMN13,
+  COLUMN14,
+  COLUMN15
+from
+  CKT_STATS_REPORT
+where
+  (YEAR_MONTH = @yearMonth) and
+  (FIRST_RUN_NUMBER = @firstRunNumber) and
+  (LINE_NUMBER = 33) and
+  (OFFICE_ID &gt;= @officeId) and
+  (
+    (OFFICE_ID &gt; @officeId) or
+    (
+      (OFFICE_ID = @officeId) and
+      (SERVICE_PRVDR_ID &gt; @servicePrvdrId)
+    )
+  )
+order by
+  OFFICE_ID,
+  SERVICE_PRVDR_ID
+</value>
+   </data>
+   <data name="UpdateStatsReport">
+      <value>
+update CKT_STATS_REPORT
+set
+  COLUMN1 = @column1,
+  COLUMN2 = @column2,
+  COLUMN3 = @column3,
+  COLUMN4 = @column4,
+  COLUMN5 = @column5,
+  COLUMN6 = @column6,
+  COLUMN7 = @column7,
+  COLUMN8 = @column8,
+  COLUMN9 = @column9,
+  COLUMN10 = @column10,
+  COLUMN11 = @column11,
+  COLUMN12 = @column12,
+  COLUMN13 = @column13,
+  COLUMN14 = @column14,
+  COLUMN15 = @column15
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

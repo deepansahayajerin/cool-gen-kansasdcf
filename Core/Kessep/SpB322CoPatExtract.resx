@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole1">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE,
+  EMANCIPATION_DT
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AP') and
+  (END_DATE = @endDate)
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE,
+  EMANCIPATION_DT
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'CH') and
+  (END_DATE &gt;= @endDate)
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  T1.ORGANZTN_ID,
+  T1.TYPE_CODE,
+  T1.NAME
+from
+  CKT_CSE_ORGANIZATN T1
+  join
+  CKT_CSE_ORG_RELATN T2
+  on
+    (T1.TYPE_CODE = T2.COG_CHILD_TYPE) and
+    (T1.ORGANZTN_ID = T2.COG_CHILD_CODE) and
+    (T2.REASON_CODE = 'RC') and
+    (T2.COG_PARENT_TYPE = @cogParentType) and
+    (T2.COG_PARENT_CODE = @cogParentCode)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH,
+  BIRTH_PLACE_STATE,
+  OUT_OF_WEDLOCK,
+  CSE_TO_EST_PATR,
+  PAT_ESTAB_IND,
+  DATE_PATERN_ESTAB,
+  BC_SIGNATURE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select distinct
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH,
+  BIRTH_PLACE_STATE,
+  OUT_OF_WEDLOCK,
+  CSE_TO_EST_PATR,
+  PAT_ESTAB_IND,
+  DATE_PATERN_ESTAB,
+  BC_SIGNATURE
+from
+  CKT_CSE_PERSON
+where
+  (OUT_OF_WEDLOCK = 'Y') and
+  (PAT_ESTAB_IND = 'N') and
+  (BC_SIGNATURE in ('N', ' ')) and
+  (BIRTH_PLACE_STATE in ('KS', ' ')) and
+  (DATE_OF_DEATH = @dateOfDeath)
+</value>
+   </data>
+   <data name="ReadIncarceration">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  VERIFIED_DATE,
+  END_DATE,
+  START_DATE,
+  INCARCERATED
+from
+  CKT_INCARCERATION
+where
+  (@cspNumber = CSP_NUMBER) and
+  (END_DATE in (cast(@date1 as date), cast(@date2 as date))) and
+  (INCARCERATED &lt;&gt; 'N') and
+  (VERIFIED_DATE &gt; @date2)
+</value>
+   </data>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  CSP_I_NUMBER,
+  END_DT
+from
+  CKT_INCOME_SOURCE
+where
+  (@cspINumber = CSP_I_NUMBER) and
+  (
+    (
+      (TYPE = 'E') and
+      (RETURN_CD = 'E')
+    ) or
+    (
+      (TYPE = 'M') and
+      (RETURN_CD in ('A', 'R'))
+    ) or
+    (
+      (TYPE = 'O') and
+      (RETURN_CD = 'V')
+    )
+  ) and
+  (RETURN_DT &gt; @returnDt) and
+  (END_DT = @endDt)
+</value>
+   </data>
+   <data name="ReadLegalReferral">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  IDENTIFIER,
+  STATUS,
+  REFERRAL_DATE,
+  REFERRAL_REASON_1,
+  REFERRAL_REASON_2,
+  REFERRAL_REASON_3,
+  REFERRAL_REASON_4,
+  REFERRAL_REASON_5
+from
+  CKT_LEGAL_REFERRAL
+where
+  (@casNumber = CAS_NUMBER) and
+  (STATUS in ('O', 'S')) and
+  (
+    (REFERRAL_REASON_1 in ('ADM', 'EST', 'PAT')) or
+    (REFERRAL_REASON_2 in ('ADM', 'EST', 'PAT')) or
+    (REFERRAL_REASON_3 in ('ADM', 'EST', 'PAT')) or
+    (REFERRAL_REASON_4 in ('ADM', 'EST', 'PAT')) or
+    (REFERRAL_REASON_5 in ('ADM', 'EST', 'PAT'))
+  )
+</value>
+   </data>
+   <data name="ReadOfficeOfficeServiceProviderServiceProvider">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.NAME,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.OFF_OFFICE,
+  T4.SPD_ID,
+  T4.OFF_ID,
+  T4.OSP_CODE,
+  T4.OSP_DATE,
+  T3.SERVICE_PRVDER_ID,
+  T3.LAST_NAME,
+  T3.FIRST_NAME
+from
+  CKT_OFFICE T1
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T3.SERVICE_PRVDER_ID = T4.SPD_ID) and
+    (T4.REASON_CODE = 'RSP') and
+    (T4.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T4.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (@casNo = T4.CAS_NO)
+  on
+    T1.OFFICE_ID = T4.OFF_ID
+</value>
+   </data>
+   <data name="ReadServiceProviderOfficeServiceProviderOfficeServiceProvRelationship">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T3.SPD_R_GENERATED_ID,
+  T3.OFF_R_GENERATED_ID,
+  T3.OSP_R_ROLE_CODE,
+  T3.OSP_R_EFFECTIVE_DT,
+  T3.OSP_EFFECTIVE_DATE,
+  T3.OSP_ROLE_CODE,
+  T3.OFF_GENERATED_ID,
+  T3.SPD_GENERATED_ID,
+  T3.REASON_CODE
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFC_SRCPRV_RLT T3
+  on
+    (T1.SERVICE_PRVDER_ID = T3.SPD_R_GENERATED_ID) and
+    (@ospRoleCode = T3.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T3.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T3.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T3.SPD_GENERATED_ID)
+</value>
+   </data>
+</root>

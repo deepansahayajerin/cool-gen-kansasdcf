@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadContractorFeeInformation">
+      <value>
+select
+  VEN_IDENTIFIER,
+  RATE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  DIST_PGM_TYPE,
+  JUDICIAL_DISTRICT,
+  OFF_ID,
+  OTY_ID
+from
+  CKT_CON_FEE_INFO
+where
+  @offId = OFF_ID
+order by
+  JUDICIAL_DISTRICT,
+  DIST_PGM_TYPE,
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+</root>

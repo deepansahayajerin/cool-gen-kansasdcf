@@ -1,0 +1,1154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase1">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_SERVICE_PRVDER T6
+  join
+  CKT_OFFC_SRVC_PRVR T5
+  join
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate)
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T1.NUMB = T4.CAS_NO) and
+    (T4.EFFECTIVE_DATE &lt;= @startDate) and
+    (T4.DISCONTINUE_DATE &gt; @startDate)
+  on
+    (T5.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T5.ROLE_CODE = T4.OSP_CODE) and
+    (T5.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T5.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T5.EFFECTIVE_DATE &lt;= @startDate) and
+    (T5.DISCONTINUE_DATE &gt; @startDate)
+  on
+    (T6.SERVICE_PRVDER_ID = T5.SPD_GENERATED_ID) and
+    (T6.USER_ID = @userId)
+order by
+  T1.NUMB desc
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_SERVICE_PRVDER T6
+  join
+  CKT_OFFC_SRVC_PRVR T5
+  join
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate)
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T1.NUMB = T4.CAS_NO) and
+    (T4.EFFECTIVE_DATE &lt;= @startDate) and
+    (T4.DISCONTINUE_DATE &gt; @startDate)
+  on
+    (T5.EFFECTIVE_DATE = T4.OSP_DATE) and
+    (T5.ROLE_CODE = T4.OSP_CODE) and
+    (T5.OFF_GENERATED_ID = T4.OFF_ID) and
+    (T5.SPD_GENERATED_ID = T4.SPD_ID) and
+    (T5.EFFECTIVE_DATE &lt;= @startDate) and
+    (T5.DISCONTINUE_DATE &gt; @startDate)
+  on
+    (T6.SERVICE_PRVDER_ID = T5.SPD_GENERATED_ID) and
+    (T6.USER_ID &lt;&gt; @userId)
+order by
+  T1.NUMB desc
+</value>
+   </data>
+   <data name="ReadCodeCodeValue">
+      <value>
+select top(1)
+  T1.COD_ID,
+  T1.CODE_NAME,
+  T2.COV_ID,
+  T2.CDVALUE,
+  T2.DESCRIPTION
+from
+  CKT_CODE T1
+  join
+  CKT_CODE_VALUE T2
+  on
+    (T1.CODE_NAME = 'LICENSING AGENCIES TIMEFRAMES') and
+    (T1.COD_ID = T2.COD_ID) and
+    (substring(T2.CDVALUE, 7, 4) = substring(cast(@agencyNumber as char(5)), 2, 4))
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLocateRequest1">
+      <value>
+select top(1)
+  SSN_NUMBER,
+  DATE_OF_BIRTH,
+  CSE_PERSON_NUMBER,
+  REQUEST_DATE,
+  RESPONSE_DATE,
+  LICENSE_ISSUED_DT,
+  LICENSE_EXP_DATE,
+  LICENSE_SUSP_DATE,
+  LICENSE_NUMBER,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER,
+  LIC_SOURCE_NAME,
+  STREET_1,
+  ADDRESS_TYPE,
+  STREET_2,
+  STREET_3,
+  STREET_4,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST
+where
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (
+    (RESPONSE_DATE &gt; @responseDate) or
+    (
+      (RESPONSE_DATE = @responseDate) and
+      (AGENCY_NUMBER &lt; @agencyNumber)
+    ) or
+    (
+      (RESPONSE_DATE = @responseDate) and
+      (AGENCY_NUMBER = @agencyNumber) and
+      (SEQUENCE_NUMBER &lt; @sequenceNumber)
+    )
+  )
+order by
+  RESPONSE_DATE,
+  AGENCY_NUMBER desc,
+  SEQUENCE_NUMBER desc
+</value>
+   </data>
+   <data name="ReadLocateRequest10">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &gt; @responseDate1) and
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber1) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (
+      (T1.RESPONSE_DATE &lt; @responseDate2) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER &gt; @csePersonNumber2)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber2) and
+        (T1.AGENCY_NUMBER &gt; @agencyNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber2) and
+        (T1.AGENCY_NUMBER = @agencyNumber) and
+        (T1.SEQUENCE_NUMBER &gt; @sequenceNumber)
+      )
+    )
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE desc,
+  T1.CSE_PERSON_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadLocateRequest11">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &lt;= @responseDate1) and
+    (T1.RESPONSE_DATE &gt; @responseDate2) and
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE desc,
+  T1.CSE_PERSON_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadLocateRequest12">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &lt;= @responseDate1) and
+    (T1.RESPONSE_DATE &gt; @responseDate2) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (
+      (T1.RESPONSE_DATE &lt; @responseDate3) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER &gt; @csePersonNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+        (T1.AGENCY_NUMBER &gt; @agencyNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+        (T1.AGENCY_NUMBER = @agencyNumber) and
+        (T1.SEQUENCE_NUMBER &gt; @sequenceNumber)
+      )
+    )
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE desc,
+  T1.CSE_PERSON_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadLocateRequest13">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &gt; @responseDate) and
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE desc,
+  T1.CSE_PERSON_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadLocateRequest14">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &gt; @responseDate1) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (
+      (T1.RESPONSE_DATE &lt; @responseDate2) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER &gt; @csePersonNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+        (T1.AGENCY_NUMBER &gt; @agencyNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+        (T1.AGENCY_NUMBER = @agencyNumber) and
+        (T1.SEQUENCE_NUMBER &gt; @sequenceNumber)
+      )
+    )
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE desc,
+  T1.CSE_PERSON_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadLocateRequest15">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &lt;= @responseDate1) and
+    (T1.RESPONSE_DATE &gt; @responseDate2) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE desc,
+  T1.CSE_PERSON_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadLocateRequest16">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &gt; @responseDate) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE desc,
+  T1.CSE_PERSON_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadLocateRequest2">
+      <value>
+select top(1)
+  SSN_NUMBER,
+  DATE_OF_BIRTH,
+  CSE_PERSON_NUMBER,
+  REQUEST_DATE,
+  RESPONSE_DATE,
+  LICENSE_ISSUED_DT,
+  LICENSE_EXP_DATE,
+  LICENSE_SUSP_DATE,
+  LICENSE_NUMBER,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER,
+  LIC_SOURCE_NAME,
+  STREET_1,
+  ADDRESS_TYPE,
+  STREET_2,
+  STREET_3,
+  STREET_4,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST
+where
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (
+    (RESPONSE_DATE &lt; @responseDate) or
+    (
+      (RESPONSE_DATE = @responseDate) and
+      (AGENCY_NUMBER &gt; @agencyNumber)
+    ) or
+    (
+      (RESPONSE_DATE = @responseDate) and
+      (AGENCY_NUMBER = @agencyNumber) and
+      (SEQUENCE_NUMBER &gt; @sequenceNumber)
+    )
+  )
+order by
+  RESPONSE_DATE desc,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadLocateRequest3">
+      <value>
+select top(1)
+  SSN_NUMBER,
+  DATE_OF_BIRTH,
+  CSE_PERSON_NUMBER,
+  REQUEST_DATE,
+  RESPONSE_DATE,
+  LICENSE_ISSUED_DT,
+  LICENSE_EXP_DATE,
+  LICENSE_SUSP_DATE,
+  LICENSE_NUMBER,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER,
+  LIC_SOURCE_NAME,
+  STREET_1,
+  ADDRESS_TYPE,
+  STREET_2,
+  STREET_3,
+  STREET_4,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST
+where
+  CSE_PERSON_NUMBER = @csePersonNumber
+order by
+  RESPONSE_DATE desc,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadLocateRequest4">
+      <value>
+select top(1)
+  SSN_NUMBER,
+  DATE_OF_BIRTH,
+  CSE_PERSON_NUMBER,
+  REQUEST_DATE,
+  RESPONSE_DATE,
+  LICENSE_ISSUED_DT,
+  LICENSE_EXP_DATE,
+  LICENSE_SUSP_DATE,
+  LICENSE_NUMBER,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER,
+  LIC_SOURCE_NAME,
+  STREET_1,
+  ADDRESS_TYPE,
+  STREET_2,
+  STREET_3,
+  STREET_4,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  CREATED_TIMESTAMP,
+  CREATED_BY,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST
+where
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (AGENCY_NUMBER = @agencyNumber) and
+  (SEQUENCE_NUMBER = @sequenceNumber)
+</value>
+   </data>
+   <data name="ReadLocateRequest5">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &lt;= @responseDate1) and
+    (T1.RESPONSE_DATE &gt; @responseDate2) and
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber1) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (
+      (T1.RESPONSE_DATE &gt; @responseDate3) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER &lt; @csePersonNumber2)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber2) and
+        (T1.AGENCY_NUMBER &lt; @agencyNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber2) and
+        (T1.AGENCY_NUMBER = @agencyNumber) and
+        (T1.SEQUENCE_NUMBER &lt; @sequenceNumber)
+      )
+    )
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE,
+  T1.CSE_PERSON_NUMBER desc,
+  T1.AGENCY_NUMBER desc,
+  T1.SEQUENCE_NUMBER desc
+</value>
+   </data>
+   <data name="ReadLocateRequest6">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &gt; @responseDate1) and
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber1) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (
+      (T1.RESPONSE_DATE &gt; @responseDate2) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER &lt; @csePersonNumber2)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber2) and
+        (T1.AGENCY_NUMBER &lt; @agencyNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber2) and
+        (T1.AGENCY_NUMBER = @agencyNumber) and
+        (T1.SEQUENCE_NUMBER &lt; @sequenceNumber)
+      )
+    )
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE,
+  T1.CSE_PERSON_NUMBER desc,
+  T1.AGENCY_NUMBER desc,
+  T1.SEQUENCE_NUMBER desc
+</value>
+   </data>
+   <data name="ReadLocateRequest7">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &lt;= @responseDate1) and
+    (T1.RESPONSE_DATE &gt; @responseDate2) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (
+      (T1.RESPONSE_DATE &gt; @responseDate3) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER &lt; @csePersonNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+        (T1.AGENCY_NUMBER &lt; @agencyNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+        (T1.AGENCY_NUMBER = @agencyNumber) and
+        (T1.SEQUENCE_NUMBER &lt; @sequenceNumber)
+      )
+    )
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE,
+  T1.CSE_PERSON_NUMBER desc,
+  T1.AGENCY_NUMBER desc,
+  T1.SEQUENCE_NUMBER desc
+</value>
+   </data>
+   <data name="ReadLocateRequest8">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &gt; @responseDate1) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (
+      (T1.RESPONSE_DATE &gt; @responseDate2) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER &lt; @csePersonNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+        (T1.AGENCY_NUMBER &lt; @agencyNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate2) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber) and
+        (T1.AGENCY_NUMBER = @agencyNumber) and
+        (T1.SEQUENCE_NUMBER &lt; @sequenceNumber)
+      )
+    )
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE,
+  T1.CSE_PERSON_NUMBER desc,
+  T1.AGENCY_NUMBER desc,
+  T1.SEQUENCE_NUMBER desc
+</value>
+   </data>
+   <data name="ReadLocateRequest9">
+      <value>
+select distinct
+  T1.SSN_NUMBER,
+  T1.DATE_OF_BIRTH,
+  T1.CSE_PERSON_NUMBER,
+  T1.REQUEST_DATE,
+  T1.RESPONSE_DATE,
+  T1.LICENSE_ISSUED_DT,
+  T1.LICENSE_EXP_DATE,
+  T1.LICENSE_SUSP_DATE,
+  T1.LICENSE_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER,
+  T1.LIC_SOURCE_NAME,
+  T1.STREET_1,
+  T1.ADDRESS_TYPE,
+  T1.STREET_2,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CODE_5,
+  T1.ZIP_CODE_4,
+  T1.ZIP_CODE_3,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY
+from
+  CKT_LOC_REQUEST T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.RESPONSE_DATE &lt;= @responseDate1) and
+    (T1.RESPONSE_DATE &gt; @responseDate2) and
+    (T1.CSE_PERSON_NUMBER = @csePersonNumber1) and
+    (T1.CSE_PERSON_NUMBER = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (
+      (T1.RESPONSE_DATE &lt; @responseDate3) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER &gt; @csePersonNumber2)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber2) and
+        (T1.AGENCY_NUMBER &gt; @agencyNumber)
+      ) or
+      (
+        (T1.RESPONSE_DATE = @responseDate3) and
+        (T1.CSE_PERSON_NUMBER = @csePersonNumber2) and
+        (T1.AGENCY_NUMBER = @agencyNumber) and
+        (T1.SEQUENCE_NUMBER &gt; @sequenceNumber)
+      )
+    )
+  join
+  CKT_ASSIGN_CASE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NO) and
+    (@ospDate = T4.OSP_DATE) and
+    (@ospCode = T4.OSP_CODE) and
+    (@offId = T4.OFF_ID) and
+    (@spdId = T4.SPD_ID)
+order by
+  T1.RESPONSE_DATE desc,
+  T1.CSE_PERSON_NUMBER,
+  T1.AGENCY_NUMBER,
+  T1.SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode)
+</value>
+   </data>
+</root>

@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePersonProgram1">
+      <value>
+insert into CKT_PERSON_PROGRAM
+(
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STATUS,
+  CLOSURE_REASON,
+  ASSIGNED_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CHANGED_IND,
+  CHANGE_DATE,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+)
+values
+(
+  @cspNumber,
+  @effectiveDate,
+  @status,
+  @closureReason,
+  @assignedDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @changedInd,
+  @changeDate,
+  @prgGeneratedId,
+  @medTypeDiscDate,
+  @medType
+)
+</value>
+   </data>
+   <data name="CreatePersonProgram2">
+      <value>
+insert into CKT_PERSON_PROGRAM
+(
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STATUS,
+  CLOSURE_REASON,
+  ASSIGNED_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CHANGED_IND,
+  CHANGE_DATE,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+)
+values
+(
+  @cspNumber,
+  @effectiveDate,
+  @status,
+  @closureReason,
+  @assignedDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @changedInd,
+  @changeDate,
+  @prgGeneratedId,
+  @medTypeDiscDate,
+  @medType
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.END_DATE &gt; @endDate)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAccount1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RECOMP_BAL_FROM_DT
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'S')
+</value>
+   </data>
+   <data name="ReadCsePersonAccount2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RECOMP_BAL_FROM_DT
+from
+  CKT_CSE_PERSON_ACC
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'S')
+</value>
+   </data>
+   <data name="ReadInterfacePersonProgram">
+      <value>
+select top(1)
+  RECORD_TYPE,
+  PROGRAM_CODE,
+  STATUS_IND,
+  CLOSURE_REASON,
+  REFERRED_FROM,
+  PROG_EFFECTIVE_DT,
+  PROGRAM_END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  PROCESS_DATE,
+  ASSIGNED_DATE,
+  PARTICIPATION_CODE,
+  CSP_NUMBER
+from
+  CKT_INTFC_PERS_PGM
+where
+  (CREATED_TIMESTAMP &lt; @createdTimestamp) and
+  (CSP_NUMBER = @cspNumber) and
+  (PROGRAM_CODE = @programCode) and
+  (PROG_EFFECTIVE_DT &lt;= @progEffectiveDt) and
+  (PROGRAM_END_DATE = @programEndDate) and
+  (PARTICIPATION_CODE = 'IN')
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadPersonProgram1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  CLOSURE_REASON,
+  ASSIGNED_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CHANGED_IND,
+  CHANGE_DATE,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE = @discontinueDate) and
+  (@prgGeneratedId = PRG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadPersonProgram2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  CLOSURE_REASON,
+  ASSIGNED_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CHANGED_IND,
+  CHANGE_DATE,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@prgGeneratedId = PRG_GENERATED_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &lt; @discontinueDate)
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadPersonProgram3">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (DISCONTINUE_DATE &gt;= @discontinueDate)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadProgram1">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadProgram2">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+where
+  CODE = 'NA'
+</value>
+   </data>
+   <data name="UpdateCsePersonAccount1">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="UpdateCsePersonAccount2">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="UpdateCsePersonAccount3">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="UpdatePersonProgram">
+      <value>
+update CKT_PERSON_PROGRAM
+set
+  CLOSURE_REASON = @closureReason,
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATD_TSTAMP = @lastUpdatdTstamp,
+  MED_TYPE_DISC_DATE = @medTypeDiscDate,
+  MED_TYPE = @medType
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (PRG_GENERATED_ID = @prgGeneratedId)
+</value>
+   </data>
+</root>

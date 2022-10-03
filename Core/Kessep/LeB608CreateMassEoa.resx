@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCourtCaptionLegalAction">
+      <value>
+select
+  T1.LGA_IDENTIFIER,
+  T1.COURT_CAPTION_NO,
+  T1.LINE,
+  T2.COURT_CASE_NO,
+  T2.STANDARD_NO,
+  T2.CREATED_TSTAMP,
+  T2.TRB_ID
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_COURT_CAPTION T1
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T2.STANDARD_NO = @standardNo)
+order by
+  T2.CREATED_TSTAMP desc,
+  T1.COURT_CAPTION_NO
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.IDENTIFIER,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.FIRM_NAME,
+  T1.COURT_CASE_NUMBER
+from
+  CKT_PRSN_PRIV_ATTR T1
+  join
+  CKT_LEGAL_ACTION T3
+  on
+    (T1.IDENTIFIER = @identifier) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.COURT_CASE_NUMBER = T3.COURT_CASE_NO) and
+    (T3.LEGAL_ACTION_ID = @legalActionId) and
+    (T3.STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadPrivateAttorneyAddress">
+      <value>
+select top(1)
+  PPA_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE5
+from
+  CKT_PRIV_ATTR_ADDR
+where
+  (@ppaIdentifier = PPA_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadTribunalFips">
+      <value>
+select top(1)
+  T1.FIP_LOCATION,
+  T1.IDENTIFIER,
+  T1.DOCUMENT_HEADER_1,
+  T1.DOCUMENT_HEADER_2,
+  T1.DOCUMENT_HEADER_3,
+  T1.DOCUMENT_HEADER_4,
+  T1.DOCUMENT_HEADER_5,
+  T1.DOCUMENT_HEADER_6,
+  T1.FIP_COUNTY,
+  T1.FIP_STATE,
+  T2.COUNTY_DESC
+from
+  CKT_FIPS T2
+  join
+  CKT_TRIBUNAL T1
+  join
+  CKT_LEGAL_ACTION T3
+  on
+    (T1.IDENTIFIER = T3.TRB_ID) and
+    (T3.LEGAL_ACTION_ID = @legalActionId) and
+    (T3.STANDARD_NO = @standardNo)
+  on
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE)
+</value>
+   </data>
+</root>

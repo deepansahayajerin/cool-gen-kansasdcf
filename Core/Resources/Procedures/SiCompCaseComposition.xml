@@ -1,0 +1,103 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiCompCaseComposition"
+           program-name="SWECOMPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiCompCaseComposition"
+           transaction="SR1G"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Next" to="Case1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LEGAL_REQUEST"
+       action="transfer"
+       to="OeLgrqLegalRequest"
+       send-command="RETCOMP">
+      <map from="SelectedCaseRole.SelectedCsePerson" to="CaseRole.Hidden"/>
+      <map from="SelectedCaseRole.SelectedCsePersonsWorkSet"
+           to="CaseRole.CsePersonsWorkSet"/>
+      <map from="SelectedCaseRole.SelectedCaseRole1.Identifier"
+           to="CaseRole.CaseRole1.Identifier"/>
+      <map from="SelectedCaseRole.SelectedCaseRole1.Type1"
+           to="CaseRole.CaseRole1.Type1"/>
+      <map from="SelectedCaseRole.SelectedCaseRole1.StartDate"
+           to="CaseRole.CaseRole1.StartDate"/>
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="Document" to="FilterDocument"/>
+      <map from="DocmProtectFilter" to="ProtectFilter"/>
+      <return-map from="ReturnDoc" to="Document"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_DISPLAY_GENETIC_TEST"
+       action="transfer"
+       to="OeGtdsDisplayGenTestDetls"
+       send-command="RETCOMP">
+      <map from="SelectedChildCsePersonsWorkSet.Number"
+           to="ChildCsePersonsWorkSet.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ASIN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SpAsinOspAssignment"
+       send-command="DISPLAY">
+      <map from="Case1" to="Hcase"/>
+      <map from="AsinObject" to="HeaderObject"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="HiddenComp" to="HiddenComp"/>
+   <map from="ChildStandard" to="Child1"/>
+   <map from="HiddenChild" to="HiddenChild"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ApStandard" to="Ap1"/>
+   <map from="Next" to="Next"/>
+   <map from="HiddenAp" to="HiddenAp"/>
+   <map from="ArCommon" to="ArCommon"/>
+   <map from="FatherCommon" to="FatherCommon"/>
+   <map from="MotherCommon" to="MotherCommon"/>
+   <map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+   <map from="MotherCsePersonsWorkSet" to="MotherCsePersonsWorkSet"/>
+   <map from="FatherCsePersonsWorkSet" to="FatherCsePersonsWorkSet"/>
+   <map from="Ap.ApDetailCommon" to="Ap.ApDetailCommon"/>
+   <map from="Ap.ApDetailWorkArea" to="Ap.ApDetailWorkArea"/>
+   <map from="Ap.ApDetailCsePersonsWorkSet" to="Ap.ApDetailCsePersonsWorkSet"/>
+   <map from="Child.ChildDetailCommon" to="Child.ChildDetailCommon"/>
+   <map from="Child.ChildDetailWorkArea" to="Child.ChildDetailWorkArea"/>
+   <map from="Child.ChildDetailCsePersonsWorkSet"
+        to="Child.ChildDetailCsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PageKeysAp.PageKeysAp1" to="PageKeysAp.PageKeysAp1"/>
+   <map from="PageKeysChild.PageKeysChild1" to="PageKeysChild.PageKeysChild1"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Selected" to="Selected"/>
+   <map from="PageKeysAp.PageKeysApStatus" to="PageKeysAp.PageKeysApStatus"/>
+   <map from="PageKeysChild.PageKysChildStatus"
+        to="PageKeysChild.PageKysChildStatus"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="DocSelection" to="DocSelection"/>
+   <map from="ScrollSelAp.ScrollSelApDetailCommon"
+        to="ScrollSelAp.ScrollSelApDetailCommon"/>
+   <map from="ScrollSelAp.ScrollSelApDetailWorkArea"
+        to="ScrollSelAp.ScrollSelApDetailWorkArea"/>
+   <map from="ScrollSelAp.ScrollSelApDetailCsePersonsWorkSet"
+        to="ScrollSelAp.ScrollSelApDetailCsePersonsWorkSet"/>
+   <map from="ScrollSelCh.ScrollSelChDetailCommon"
+        to="ScrollSelCh.ScrollSelChDetailCommon"/>
+   <map from="ScrollSelCh.ScrollSelChDetailWorkArea"
+        to="ScrollSelCh.ScrollSelChDetailWorkArea"/>
+   <map from="ScrollSelCh.ScrollSelChDetailCsePersonsWorkSet"
+        to="ScrollSelCh.ScrollSelChDetailCsePersonsWorkSet"/>
+   <map from="HiddenFromAlts" to="HiddenFromAlts"/>
+   <map from="Document.Name" to="Document.Name"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

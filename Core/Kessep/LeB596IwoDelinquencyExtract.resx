@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_LEGAL_ACT_PERS T5
+  join
+  CKT_CASE T1
+  join
+  CKT_LA_PER_LA_CROL T4
+  on
+    T1.NUMB = T4.CAS_NUM
+  on
+    (T5.LA_PERSON_ID = T4.LAP_ID) and
+    (T5.ACCOUNT_TYPE = 'R') and
+    (T5.LAD_R_NUMBER is not null) and
+    (@lgaRIdentifier = T5.LGA_R_IDENTIFIER) and
+    (@cspNumber = T5.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  count(*)
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_CR_DETAIL T1
+  on
+    (T1.COURT_ORDER_NUMBER = @courtOrderNumber) and
+    (T1.COLLECTION_DATE &gt;= @collectionDate) and
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.CODE = 'I')
+</value>
+   </data>
+   <data name="ReadCseOrganization">
+      <value>
+select top(1)
+  T1.ORGANZTN_ID,
+  T1.TYPE_CODE,
+  T1.NAME
+from
+  CKT_CSE_ORGANIZATN T1
+  join
+  CKT_CSE_ORG_RELATN T2
+  on
+    (T1.TYPE_CODE = T2.COG_CHILD_TYPE) and
+    (T1.ORGANZTN_ID = T2.COG_CHILD_CODE) and
+    (T2.REASON_CODE = 'RC') and
+    (T2.COG_PARENT_TYPE = @cogParentType) and
+    (T2.COG_PARENT_CODE = @cogParentCode)
+</value>
+   </data>
+   <data name="ReadEmployerEmployerAddress">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.NAME,
+  T2.LOCATION_TYPE,
+  T2.CITY,
+  T2.IDENTIFIER,
+  T2.[STATE]
+from
+  CKT_EMPLOYER T1
+  join
+  CKT_EMPLOYER_ADDR T2
+  on
+    (T1.IDENTIFIER = @identifier) and
+    (T1.IDENTIFIER = T2.EMP_ID)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION,
+  T1.STATE_ABBREVIATION,
+  T1.COUNTY_ABBR
+from
+  CKT_FIPS T1
+  join
+  CKT_TRIBUNAL T2
+  on
+    (T1.LOCATION = T2.FIP_LOCATION) and
+    (T1.COUNTY = T2.FIP_COUNTY) and
+    (T1.[STATE] = T2.FIP_STATE) and
+    (T2.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  [STATE],
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  TRB_ID = @trbId
+</value>
+   </data>
+   <data name="ReadIncomeSourceCsePerson">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  NAME,
+  CSP_I_NUMBER,
+  EMP_ID
+from
+  CKT_INCOME_SOURCE
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionAssigmentOfficeServiceProvider">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.OSP_EFFECTIVE_DATE,
+  T1.OSP_ROLE_CODE,
+  T1.OFF_GENERATED_ID,
+  T1.SPD_GENERATED_ID,
+  T1.EFFECTIVE_DT,
+  T1.END_DT,
+  T1.REASON_CODE,
+  T1.CREATED_TIMESTAMP,
+  T2.DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR T2
+  join
+  CKT_LA_SERV_PROV T1
+  on
+    (T1.REASON_CODE = 'RSP') and
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T2.ROLE_CODE = T1.OSP_ROLE_CODE) and
+    (T2.EFFECTIVE_DATE = T1.OSP_EFFECTIVE_DATE) and
+    (T2.OFF_GENERATED_ID = T1.OFF_GENERATED_ID) and
+    (T2.SPD_GENERATED_ID = T1.SPD_GENERATED_ID)
+order by
+  T1.END_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSource">
+      <value>
+select
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  ISR_IDENTIFIER,
+  EFFECTIVE_DT,
+  CREATED_TSTAMP,
+  WITHHOLDING_TYPE,
+  END_DT,
+  WAGE_OR_NON_WAGE,
+  ORDER_TYPE,
+  IDENTIFIER
+from
+  CKT_LEGAL_ACT_ISRC
+where
+  (CREATED_TSTAMP &gt;= @createdTstamp1) and
+  (CREATED_TSTAMP &lt; @createdTstamp2)
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal">
+      <value>
+select top(1)
+  T1.LEGAL_ACTION_ID,
+  T1.ACTION_TAKEN,
+  T1.COURT_CASE_NO,
+  T1.STANDARD_NO,
+  T1.TRB_ID,
+  T2.FIP_LOCATION,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T1
+  on
+    (T1.LEGAL_ACTION_ID = @legalActionId) and
+    (T2.IDENTIFIER = T1.TRB_ID)
+</value>
+   </data>
+   <data name="ReadLegalReferral">
+      <value>
+select
+  CAS_NUMBER,
+  IDENTIFIER,
+  STATUS,
+  REFERRAL_DATE,
+  REFERRAL_REASON_1,
+  REFERRAL_REASON_2,
+  REFERRAL_REASON_3,
+  REFERRAL_REASON_4,
+  REFERRAL_REASON_5,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_REFERRAL
+where
+  (COURT_CASE_NO = @courtCaseNo) and
+  (TRB_ID = @trbId)
+order by
+  REFERRAL_DATE desc
+</value>
+   </data>
+   <data name="ReadNonEmployIncomeSourceAddress">
+      <value>
+select top(1)
+  ISR_IDENTIFIER,
+  CITY,
+  [STATE],
+  LOCATION_TYPE,
+  CSE_PERSON
+from
+  CKT_NONEMP_IS_ADDR
+where
+  (@csePerson = CSE_PERSON) and
+  (@isrIdentifier = ISR_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.TYPE_CODE,
+  T1.NAME,
+  T1.COG_TYPE_CODE,
+  T1.COG_CODE,
+  T1.OFF_OFFICE
+from
+  CKT_OFFICE T1
+  join
+  CKT_COUNTY_SERVICE T2
+  on
+    (T1.OFFICE_ID = T2.OFF_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T2.[FUNCTION] = 'ENF') and
+    (T2.COG_CODE = @cogCode) and
+    (T2.COG_TYPE_CODE = 'C')
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select top(1)
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  COG_TYPE_CODE,
+  COG_CODE,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = 21
+</value>
+   </data>
+   <data name="ReadOffice3">
+      <value>
+select top(1)
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  COG_TYPE_CODE,
+  COG_CODE,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider1">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR T1
+  join
+  CKT_LA_SERV_PROV T2
+  on
+    (T1.ROLE_CODE = T2.OSP_ROLE_CODE) and
+    (T1.EFFECTIVE_DATE = T2.OSP_EFFECTIVE_DATE) and
+    (T1.OFF_GENERATED_ID = T2.OFF_GENERATED_ID) and
+    (T1.SPD_GENERATED_ID = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt) and
+    (T2.REASON_CODE = 'RSP') and
+    (@lgaIdentifier = T2.LGA_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider2">
+      <value>
+select top(1)
+  T1.SPD_GENERATED_ID,
+  T1.OFF_GENERATED_ID,
+  T1.ROLE_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR T1
+  join
+  CKT_ASSGN_LEG_REF T2
+  on
+    (T1.EFFECTIVE_DATE = T2.OSP_DATE) and
+    (T1.ROLE_CODE = T2.OSP_CODE) and
+    (T1.OFF_GENERATED_ID = T2.OFF_ID) and
+    (T1.SPD_GENERATED_ID = T2.SPD_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T2.REASON_CODE = 'RSP') and
+    (@lgrId = T2.LGR_ID) and
+    (@casNo = T2.CAS_NO)
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_ASSIGN_CASE T3
+  on
+    (T1.SERVICE_PRVDER_ID = T3.SPD_ID) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T3.REASON_CODE = 'RSP') and
+    (@casNo = T3.CAS_NO)
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+</root>

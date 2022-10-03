@@ -1,0 +1,94 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiRmadRoleMaintForDisb"
+           program-name="SWERMADP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiRmadRoleMaintForDisb"
+           transaction="SRC8"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="NewCsePersonsWorkSet.Number" to="SearchCsePersonsWorkSet.Number"/>
+      <map from="NewCsePersonsWorkSet.Sex" to="SearchCsePersonsWorkSet.Sex"/>
+      <map from="NewCsePersonsWorkSet.Dob" to="SearchCsePersonsWorkSet.Dob"/>
+      <map from="NewCsePersonsWorkSet.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+      <map from="NewCsePersonsWorkSet.FirstName"
+           to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="NewCsePersonsWorkSet.MiddleInitial"
+           to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <map from="NewCsePersonsWorkSet.LastName"
+           to="SearchCsePersonsWorkSet.LastName"/>
+      <return-map from="Selected" to="NewCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ORGZ"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETORGZ"
+       to="SiOrgzOrganizationMaintenance"
+       send-command-type="none">
+      <return-map from="HiddenSelected.Number" to="NewCsePersonsWorkSet.Number"/>
+      <return-map from="HiddenSelected.FormattedName"
+                  to="NewCsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Next" to="Next"/>
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   </on>
+   <map from="Display.DisplayServiceProvider"
+        to="Display.DisplayServiceProvider"/>
+   <map from="Display.DisplayOffice" to="Display.DisplayOffice"/>
+   <map from="Display.DisplayRowOperation" to="Display.DisplayRowOperation"/>
+   <map from="Display.DisplayRowNumber" to="Display.DisplayRowNumber"/>
+   <map from="Display.DisplayCase" to="Display.DisplayCase"/>
+   <map from="Export1.AllExportRowIndicator" to="Import1.AllImportRowIndicator"/>
+   <map from="Export1.AllCaseRole" to="Import1.AllCaseRole"/>
+   <map from="Export1.AllCsePersonsWorkSet" to="Import1.AllCsePersonsWorkSet"/>
+   <map from="Export1.AllCase" to="Import1.AllCase"/>
+   <map from="Export1.AllExportRowNumber" to="Import1.AllImportRowNumber"/>
+   <map from="Export1.AllExportRowOperation" to="Import1.AllImportRowOperation"/>
+   <map from="Export1.AllOffice" to="Import1.AllOffice"/>
+   <map from="Export1.AllServiceProvider" to="Import1.AllServiceProvider"/>
+   <map from="PageNumber" to="PageNumber"/>
+   <map from="HiddenDisplay.HiddenDisplayRole"
+        to="HiddenDisplay.HiddenDisplayRole"/>
+   <map from="CaseRoleText" to="CaseRoleText"/>
+   <map from="Message" to="Message"/>
+   <map from="Response" to="Response"/>
+   <map from="GapCommon" to="GapCommon"/>
+   <map from="GapCase" to="GapCase"/>
+   <map from="SelectAction" to="SelectAction"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="NewCsePersonsWorkSet" to="NewCsePersonsWorkSet"/>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="NewCaseRole" to="NewCaseRole"/>
+   <map from="Display.DisplayCaseRole" to="Display.DisplayCaseRole"/>
+   <map from="Display.DisplayCommon" to="Display.DisplayCommon"/>
+   <map from="Display.DisplayCsePersonsWorkSet"
+        to="Display.DisplayCsePersonsWorkSet"/>
+   <map from="BeenToName" to="BeenToName"/>
+   <map from="NewSsnWorkArea" to="NewSsnWorkArea"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="CaseRole" to="CaseRole"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Case1.Status" to="Case1.Status"/>
+   <map from="Case1.CseOpenDate" to="Case1.CseOpenDate"/>
+   <map from="Standard.ScrollingMessage" to="Standard.ScrollingMessage"/>
+</procedure>

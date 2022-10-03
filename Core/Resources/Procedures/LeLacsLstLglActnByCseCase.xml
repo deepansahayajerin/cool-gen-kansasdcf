@@ -1,0 +1,84 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLacsLstLglActnByCseCase"
+           program-name="SWELACSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLacsLstLglActnByCseCase"
+           transaction="SR8R"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_IWGL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeIwglIwoGarnishmentLien"
+       send-command="FROMLACN">
+      <map from="DlgflwIwglType" to="IwglType"/>
+      <map from="DlgflwSelected" to="LegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DlgflwRequired" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LEGAL_ACTION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeLactLegalAction"
+       send-command="REDISP">
+      <map from="DlgflwSelected.Identifier" to="LegalAction.Identifier"/>
+      <map from="DlgflwSelected.Classification" to="LegalAction.Classification"/>
+      <map from="DlgflwSelected.ActionTaken" to="LegalAction.ActionTaken"/>
+      <map from="DlgflwSelected.FiledDate" to="LegalAction.FiledDate"/>
+      <map from="DlgflwSelected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <map from="DlgflwSelected.StandardNumber" to="LegalAction.StandardNumber"/>
+      <map from="DlgflwSelected.ForeignOrderNumber"
+           to="LegalAction.ForeignOrderNumber"/>
+   </on>
+   <on exit-state="ECO_LINK_TO_GLDV"
+       action="link"
+       return-when="ACO_NE0000_RETURN_NM"
+       return-command="DISPLAY"
+       to="LeGldvCsGuidelinesDeviation"
+       send-command="DISPLAY">
+      <map from="Case1" to="LactCase"/>
+      <map from="LacsWorkArea" to="FromLacs"/>
+      <map from="LacsLegalAction.Identifier" to="LegalAction.Identifier"/>
+   </on>
+   <map from="Previous" to="Previous"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Case1" to="Case1"/>
+   <map from="CourtCaseNumberOnly" to="CourtCaseNumberOnly"/>
+   <map from="CutOff" to="CutOff"/>
+   <map from="Filter" to="Filter"/>
+   <map from="ListLactsPriorToCase" to="ListLactsPriorToCase"/>
+   <map from="PromptClassification" to="PromptClassification"/>
+   <map from="List.Common" to="List.Common"/>
+   <map from="List.LegalAction" to="List.LegalAction"/>
+   <map from="List.DetailTribunal" to="List.DetailTribunal"/>
+   <map from="List.DetailLaAppInd" to="List.DetailLaAppInd"/>
+   <map from="List.DetailFips" to="List.DetailFips"/>
+   <map from="List.DetailForeign" to="List.DetailForeign"/>
+   <map from="List.DetailActionTaken" to="List.DetailActionTaken"/>
+   <map from="Minus" to="Minus"/>
+   <map from="Plus" to="Plus"/>
+   <map from="NextCourtCaseNumOnlyLegalAction"
+        to="NextCourtCaseNumOnlyLegalAction"/>
+   <map from="NextCourtCaseNumOnlyTribunal" to="NextCourtCaseNumOnlyTribunal"/>
+   <map from="More" to="More"/>
+   <map from="Prev" to="Prev"/>
+   <map from="PrevCourtCaseNumOnlyLegalAction"
+        to="PrevCourtCaseNumOnlyLegalAction"/>
+   <map from="PrevCourtCaseNumOnlyTribunal" to="PrevCourtCaseNumOnlyTribunal"/>
+   <map from="NextAllActions" to="NextAllActions"/>
+   <map from="PrevAllActions" to="PrevAllActions"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

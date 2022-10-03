@@ -1,0 +1,99 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeMarhMarriageHistory"
+           program-name="SWEMARHP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeMarhMarriageHistory"
+           transaction="SR6M"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="Case1" to="Current"/>
+      <map from="PrimeCsePersonsWorkSet" to="PersonName"/>
+      <map from="PrimeCsePerson" to="StartCsePerson"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="SelectedForList" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_MARRIAGE_HISTORY"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RSMHIST"
+       to="OeMarlMarriageHistoryList"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <map from="PrimeCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="LinkLmhistSelctedPrime" to="CsePerson"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="CsePersonsWorkSet" to="PrimeCsePersonsWorkSet"/>
+      <return-map from="SelectedSpouseContact" to="HiddenSelectedContact"/>
+      <return-map from="SelectedSpouseCsePerson" to="HiddenSelectdSpouse"/>
+      <return-map from="Selected" to="HiddenSelectedMarriageHistory"/>
+      <return-map from="CsePerson" to="HiddenSelectedPrime"/>
+   </on>
+   <map from="PrimeCsePerson" to="PrimeCsePerson"/>
+   <map from="MarriageHistory" to="MarriageHistory"/>
+   <map from="HiddenSelectedPrime" to="HiddenSelectedPrime"/>
+   <map from="HiddenSelectedSpouse" to="HiddenSelectdSpouse"/>
+   <map from="HiddenSelectedMarriageHistory" to="HiddenSelectedMarriageHistory"/>
+   <map from="DispMarriageCountry" to="DispMarriageCountry"/>
+   <map from="DispDivorceCountry" to="DispDivorceCountry"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="SpouseCsePersonsWorkSet" to="SpouseCsePersonsWorkSet"/>
+   <map from="PrimeCsePersonsWorkSet" to="PrimeCsePersonsWorkSet"/>
+   <map from="SpouseCsePerson" to="SpouseCsePerson"/>
+   <map from="UpdateTimestamp" to="UpdateTimestamp"/>
+   <map from="ListPrimeCsePersons" to="ListPrimeCsePersons"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ListMarriageStateCodes" to="ListMarriageStateCodes"/>
+   <map from="ListMarriageCountry" to="ListMarriageCountry"/>
+   <map from="ListDivorceStateCodes" to="ListDivorceStateCodes"/>
+   <map from="ListDivorceCountry" to="ListDivorceCountry"/>
+   <map from="ListSpouseCsePersons" to="ListSpouseCsePersons"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="Standard" to="Standard"/>
+   <map from="SelectedForList" to="SelectedForList"/>
+   <map from="LinkLmhistSelctedPrime" to="LinkLmhistSelctedPrime"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="SpouseContact.ContactNumber" to="SpouseContact.ContactNumber"/>
+   <map from="SpouseContact.MiddleInitial" to="SpouseContact.MiddleInitial"/>
+   <map from="SpouseContact.NameFirst" to="SpouseContact.NameFirst"/>
+   <map from="SpouseContact.NameLast" to="SpouseContact.NameLast"/>
+   <map from="HiddenSelectedContact.NameLast"
+        to="HiddenSelectedContact.NameLast"/>
+   <map from="HiddenSelectedContact.NameFirst"
+        to="HiddenSelectedContact.NameFirst"/>
+   <map from="HiddenSelectedContact.MiddleInitial"
+        to="HiddenSelectedContact.MiddleInitial"/>
+   <map from="HiddenSelectedContact.ContactNumber"
+        to="HiddenSelectedContact.ContactNumber"/>
+   <map from="SpouseContact.RelationshipToCsePerson"
+        to="HiddenSelectedContact.RelationshipToCsePerson"/>
+   <map from="HiddenSelectedContact.RelationshipToCsePerson"
+        to="SpouseContact.RelationshipToCsePerson"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

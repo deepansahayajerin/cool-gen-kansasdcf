@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteContact">
+      <value>
+delete from CKT_CONTACT
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CONTACT_NUMBER = @contactNumber)
+</value>
+   </data>
+   <data name="DeleteContactAddress">
+      <value>
+delete from CKT_CONTACT_ADDR
+where
+  (CON_NUMBER = @conNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="DeleteContactDetail">
+      <value>
+delete from CKT_CONTACT_DETAIL
+where
+  (CON_NUMBER = @conNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadContact">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CONTACT_NUMBER
+from
+  CKT_CONTACT
+where
+  (@cspNumber = CSP_NUMBER) and
+  (CONTACT_NUMBER = @contactNumber)
+</value>
+   </data>
+   <data name="ReadContactAddress">
+      <value>
+select
+  CON_NUMBER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE
+from
+  CKT_CONTACT_ADDR
+where
+  (@conNumber = CON_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadContactDetail">
+      <value>
+select
+  CON_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER
+from
+  CKT_CONTACT_DETAIL
+where
+  (@conNumber = CON_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

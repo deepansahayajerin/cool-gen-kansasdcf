@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  COURT_ORDER_NUMBER,
+  COLLECTION_DATE,
+  OBLGOR_SSN,
+  COLLAMT_APPL_IND,
+  CLT_IDENTIFIER
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select distinct
+  T1.COLL_ID,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.CAR_ID,
+  T1.OTY_ID,
+  T1.CREATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.CRT_NOTICE_REQ_IND,
+  T1.CRT_NOTICE_PROC_DT,
+  T1.CRT_NTC_ADJ_PRC_DT
+from
+  CKT_LEGAL_ACTION T4 with(readuncommitted)
+  join
+  CKT_OBLIGATION T3 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (@crdId = T1.CRD_ID) and
+    (@crvId = T1.CRV_ID) and
+    (@cstId = T1.CST_ID) and
+    (@crtType = T1.CRT_TYPE) and
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T1.OTR_TYPE = 'DE') and
+    (T3.CPA_TYPE = 'R') and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T1.CRT_NOTICE_REQ_IND = 'Y') and
+    (
+      (T1.CRT_NOTICE_PROC_DT = @crtNoticeProcDt) or
+      (T1.CRT_NTC_ADJ_PRC_DT = @crtNoticeProcDt)
+    )
+  on
+    (T4.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T4.STANDARD_NO = @standardNo)
+order by
+  T1.CREATED_TMST
+</value>
+   </data>
+   <data name="ReadCollectionAdjustmentReason">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID,
+  OB_TRN_RLN_RSN_CD,
+  OB_TRN_RLN_RSN_NM
+from
+  CKT_COLL_ADJ_RSN
+where
+  OB_TRN_RLN_RSN_ID = @obTrnRlnRsnId
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  T1.COLLECTION_TYPE_ID,
+  T1.CODE,
+  T1.NAME
+from
+  CKT_COLLTN_TYPE T1
+  join
+  CKT_CR_DETAIL T2
+  on
+    (T1.COLLECTION_TYPE_ID = T2.CLT_IDENTIFIER) and
+    (T2.CRD_ID = @crdId) and
+    (T2.CRV_IDENTIFIER = @crvIdentifier) and
+    (T2.CST_IDENTIFIER = @cstIdentifier) and
+    (T2.CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadReceiptRefundCashReceiptDetail">
+      <value>
+select top(1)
+  T1.CREATED_TIMESTAMP,
+  T1.TAXID,
+  T1.AMOUNT,
+  T1.REQUEST_DATE,
+  T1.CRV_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T2.COURT_ORDER_NUMBER,
+  T2.COLLECTION_DATE,
+  T2.OBLGOR_SSN,
+  T2.COLLAMT_APPL_IND,
+  T2.CLT_IDENTIFIER
+from
+  CKT_CR_DETAIL T2
+  join
+  CKT_RECEIPT_REFUND T1
+  on
+    (T1.CREATED_TIMESTAMP = @createdTimestamp) and
+    (T2.CRD_ID = T1.CRD_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadTrigger">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  ACTION0,
+  STATUS,
+  DENORM_NUMERIC_1,
+  DENORM_NUMERIC_2,
+  DENORM_NUMERIC_3,
+  DENORM_TEXT_1,
+  DENORM_TEXT_2,
+  DENORM_TEXT_3,
+  CREATED_TIMESTAMP,
+  UPDATED_TIMESTAMP,
+  DENORM_TIMESTAMP
+from
+  CKT_TRIGGER with(readuncommitted)
+where
+  (TYPE in (cast(@type1 as char(8)), cast(@type2 as char(8)))) and
+  (STATUS = @status) and
+  (CREATED_TIMESTAMP &gt; @createdTimestamp1) and
+  (CREATED_TIMESTAMP &lt; @createdTimestamp2)
+order by
+  DENORM_TEXT_1,
+  DENORM_NUMERIC_1,
+  DENORM_NUMERIC_2
+</value>
+   </data>
+</root>

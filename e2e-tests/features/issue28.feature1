@@ -1,0 +1,41 @@
+Feature: Issue28-Validation Problem
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "BKRP" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Bankruptcy" window appears
+    Then take snapshot "page1"
+    When user enters "003804946" in "Person #"
+    And user presses "F2"
+    When user enters "07" in "Type"
+    And user enters "TEST123" in "Bankruptcy Court #"
+    And user enters "Yesterday" in "Filed"
+    And user enters "Tomorrow" in "Expected Discharge"
+    When user enters "" in "Bankruptcy Dist Court"
+    And user presses "F5"
+    Then message "OE0083: Invalid bankruptcy district court." is displayed
+    #And user enters "3 years after today" in "Dis/With"
+    When user enters "TEST DIST COURT" in "Bankruptcy Dist Court"
+    And user enters "" in "Expected Discharge"
+    And user presses "F5"
+    Then message "OE0000: Either expected discharge, discharge, or dis/with date is required" is displayed
+    When user enters "" in "Filed"
+    And user presses "F5"
+    Then message "OE0000: Bankruptcy filed date is required." is displayed
+    When user enters "Yesterday" in "Filed"
+    And user enters "" in "Bankruptcy Court #"
+    And user presses "F5"
+    Then message "OE0082: Invalid bankruptcy court number." is displayed
+    When user enters "TEST123" in "Bankruptcy Court #"
+    And user enters "" in "Type"
+    And user presses "F5"
+    Then message "OE0081: Bankruptcy type not supplied or invalid" is displayed
+# When user enters "07" in "Type"
+# Then message "Successfully added." is displayed
+
+

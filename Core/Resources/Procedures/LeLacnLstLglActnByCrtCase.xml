@@ -1,0 +1,117 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeLacnLstLglActnByCrtCase"
+           program-name="SWELACNP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeLacnLstLglActnByCrtCase"
+           transaction="SR8Q"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LRES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeLresLegalResponse"
+       send-command="DISPLAY">
+      <map from="FipsTribAddress" to="FipsTribAddress"/>
+      <map from="SearchTribunal" to="Tribunal"/>
+      <map from="SearchTribunal" to="HiddenTribunal"/>
+      <map from="SearchFips" to="Fips"/>
+      <map from="DlgflwSelected" to="HiddenLegalAction"/>
+      <map from="DlgflwSelected" to="LegalAction"/>
+      <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLTRIB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="SearchFips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFipsTribAddress" to="FipsTribAddress"/>
+      <return-map from="DlgflwSelectedFips" to="DlgflwSelectedFips"/>
+      <return-map from="DlgflwSelectedTribunal" to="DlgflwSelectedTribunal"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LEGAL_ACTION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeLactLegalAction"
+       send-command="REDISP">
+      <map from="DlgflwSelected.ForeignOrderNumber"
+           to="LegalAction.ForeignOrderNumber"/>
+      <map from="DlgflwSelected.Identifier" to="LegalAction.Identifier"/>
+      <map from="DlgflwSelected.Classification" to="LegalAction.Classification"/>
+      <map from="DlgflwSelected.ActionTaken" to="LegalAction.ActionTaken"/>
+      <map from="DlgflwSelected.FiledDate" to="LegalAction.FiledDate"/>
+      <map from="DlgflwSelected.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <map from="DlgflwSelected.StandardNumber" to="LegalAction.StandardNumber"/>
+      <map from="HiddenSecurity" to="HiddenSecurity1"/>
+      <return-map from="HiddenSecurity1" to="HiddenSecurity"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_HEAR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeHearLegalHearing"
+       send-command="DISPLAY">
+      <map from="SearchTribunal" to="HiddenTribunal"/>
+      <map from="SearchFips" to="HiddenFips"/>
+      <map from="SearchFips" to="Fips"/>
+      <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+      <map from="SearchTribunal" to="Tribunal"/>
+      <map from="DlgflwSelected" to="LegalAction"/>
+      <map from="DlgflwSelected" to="HiddenLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SERV"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeServServiceInformation"
+       send-command="DISPLAY">
+      <map from="FipsTribAddress" to="FipsTribAddress"/>
+      <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+      <map from="DlgflwSelected" to="HiddenPrevLegalAction"/>
+      <map from="DlgflwSelected" to="LegalAction"/>
+      <map from="SearchFips" to="Fips"/>
+      <map from="SearchTribunal" to="Tribunal"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IWGL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeIwglIwoGarnishmentLien"
+       send-command="FROMLACN">
+      <map from="DlgflwSelected" to="LegalAction"/>
+      <map from="DlgflwIwglType" to="IwglType"/>
+   </on>
+   <map from="SearchLegalAction" to="SearchLegalAction"/>
+   <map from="LegalAction.LegalAction1" to="LegalAction.LegalAction1"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptClassificaton" to="PromptClassification"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity" to="HiddenSecurity"/>
+   <map from="SearchFips" to="SearchFips"/>
+   <map from="SearchTribunal" to="SearchTribunal"/>
+   <map from="PromptTribunal" to="PromptTribunal"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="LegalAction.LaActionTaken" to="LegalAction.LaActionTaken"/>
+   <map from="LegalAction.LappInd" to="LegalAction.LappInd"/>
+   <map from="LegalAction.Common" to="LegalAction.Common"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="LegalAction.ServiceProcess" to="LegalAction.ServiceProcess"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

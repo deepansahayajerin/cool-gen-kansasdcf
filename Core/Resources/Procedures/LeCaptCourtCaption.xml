@@ -1,0 +1,38 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeCaptCourtCaption"
+           program-name="SWECAPTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeCaptCourtCaption"
+           transaction="SR9T"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LROL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLROL"
+       to="LeLrolLegalRole"
+       send-command="FROMCAPT">
+      <map from="FipsTribAddress" to="FipsTribAddress"/>
+      <map from="Tribunal" to="Tribunal"/>
+      <map from="Fips" to="Fips"/>
+      <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+      <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+      <map from="LegalActionFlow" to="LegalActionFlow"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Cc" to="Import1.Cc"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="Classification" to="Classification"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="HiddenSecurity" to="HiddenSecurity"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="LegalActionFlow" to="LegalActionFlow"/>
+</procedure>

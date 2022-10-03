@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID,
+  cast(@crvId as integer),
+  cast(@cstId as smallint),
+  cast(@crtId as smallint),
+  cast(@crdId as smallint)
+from
+  CKT_CASH_RECEIPT
+where
+  (CRT_IDENTIFIER = @crtId) and
+  (CST_IDENTIFIER = @cstId) and
+  (CRV_IDENTIFIER = @crvId)
+</value>
+   </data>
+   <data name="ReadDisbCollection">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.OTY_ID,
+  T1.OTR_TYPE_DISB,
+  T1.OTR_ID,
+  T1.CPA_TYPE_DISB,
+  T1.CSP_NUMBER_DISB,
+  T1.OBG_ID,
+  T1.CRD_ID,
+  T1.CRV_ID,
+  T1.CST_ID,
+  T1.CRT_ID,
+  T1.COL_ID
+from
+  CKT_DISB_TRAN T1
+  join
+  CKT_DISB_TRAN_RLN T2
+  on
+    (T1.DISB_TRAN_ID = T2.DTR_P_GENERATED_ID) and
+    (T1.CPA_TYPE = T2.CPA_P_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_P_NUMBER) and
+    (@dtrGeneratedId = T2.DTR_GENERATED_ID) and
+    (@cpaType = T2.CPA_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionDisbursementStatusHistory">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.PROCESS_DATE,
+  T1.CREATED_BY,
+  T1.INTERSTATE_IND,
+  T1.DESIGNATED_PAYEE,
+  T1.REFERENCE_NUMBER,
+  T2.DBS_GENERATED_ID,
+  T2.DISB_STAT_HIST_ID,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_DISB_TRAN T1 with(readuncommitted)
+  join
+  CKT_DISB_STAT_HIST T2 with(readuncommitted)
+  on
+    (T1.INTERSTATE_IND &lt;&gt; 'Y') and
+    (T1.CREATED_BY &lt;&gt; 'SWEFB652') and
+    (T1.PROCESS_DATE &lt;&gt; @processDate) and
+    (T1.DISB_TRAN_ID = T2.DTR_GENERATED_ID) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CPA_TYPE = T2.CPA_TYPE) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T2.DBS_GENERATED_ID = 1)
+order by
+  T1.DESIGNATED_PAYEE
+</value>
+   </data>
+   <data name="ReadOcse34">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  CSE_PYMNT_AMT,
+  PAY_ERROR_LDA,
+  PAY_ERROR_GT_2,
+  PAY_ERROR_GT_30,
+  PAY_ERROR_GT_180,
+  PAY_ERROR_GT_365,
+  PAY_ERROR_GT_1095,
+  PAY_ERROR_GT_1825
+from
+  CKT_OCSE34
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="UpdateOcse34">
+      <value>
+update CKT_OCSE34
+set
+  CSE_PYMNT_AMT = @csePymntAmt,
+  PAY_ERROR_LDA = @payErrorLda,
+  PAY_ERROR_GT_2 = @payErrorGt2,
+  PAY_ERROR_GT_30 = @payErrorGt30,
+  PAY_ERROR_GT_180 = @payErrorGt180,
+  PAY_ERROR_GT_365 = @payErrorGt365,
+  PAY_ERROR_GT_1095 = @payErrorGt1095,
+  PAY_ERROR_GT_1825 = @payErrorGt1825
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

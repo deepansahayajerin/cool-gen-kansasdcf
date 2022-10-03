@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteProgramRun#1">
+      <value>
+select top(1)
+  1
+from
+  CKT_PROGRAM_ERROR
+where
+  (PPI_CREATED_TSTAMP = @ppiCreatedTstamp) and
+  (PPI_NAME = @ppiName) and
+  (PRR_START_TSTAMP = @prrStartTstamp)
+</value>
+   </data>
+   <data name="DeleteProgramRun#2">
+      <value>
+delete from CKT_PROGRAM_RUN
+where
+  (PPI_CREATED_TSTAMP = @ppiCreatedTstamp) and
+  (PPI_NAME = @ppiName) and
+  (START_TIMESTAMP = @prrStartTstamp)
+</value>
+   </data>
+   <data name="ReadProgramControlTotal">
+      <value>
+select top(1)
+  PRR_START_TSTAMP,
+  PPI_NAME,
+  PPI_CREATED_TSTAMP,
+  PGM_CONTROL_TOT_ID
+from
+  CKT_PGM_CNTL_TOTAL
+where
+  (@prrStartTstamp = PRR_START_TSTAMP) and
+  (@ppiName = PPI_NAME) and
+  (@ppiCreatedTstamp = PPI_CREATED_TSTAMP)
+</value>
+   </data>
+   <data name="ReadProgramError">
+      <value>
+select top(1)
+  PRR_START_TSTAMP,
+  PPI_CREATED_TSTAMP,
+  PPI_NAME,
+  PGM_ERROR_ID
+from
+  CKT_PROGRAM_ERROR
+where
+  (@prrStartTstamp = PRR_START_TSTAMP) and
+  (@ppiCreatedTstamp = PPI_CREATED_TSTAMP) and
+  (@ppiName = PPI_NAME)
+</value>
+   </data>
+   <data name="ReadProgramRun">
+      <value>
+select
+  PPI_CREATED_TSTAMP,
+  PPI_NAME,
+  START_TIMESTAMP
+from
+  CKT_PROGRAM_RUN
+where
+  START_TIMESTAMP &lt; @startTimestamp
+</value>
+   </data>
+</root>

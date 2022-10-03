@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignment">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  (@casNo = CAS_NO) and
+  (REASON_CODE = 'RSP')
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseCaseRole">
+      <value>
+select distinct
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CR_DETAIL T9
+  join
+  CKT_DISB_TRAN T7
+  join
+  CKT_CASE_ROLE T2
+  join
+  CKT_DISB_TRAN T5
+  on
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.CSP_NUMBER = T5.CSP_NUMBER) and
+    (T5.CPA_TYPE = 'E') and
+    (T5.TYPE = 'D') and
+    (T5.DISB_TRAN_ID = @disbTranId)
+  join
+  CKT_DISB_TRAN_RLN T6
+  on
+    (T5.DISB_TRAN_ID = T6.DTR_GENERATED_ID) and
+    (T5.CPA_TYPE = T6.CPA_TYPE) and
+    (T5.CSP_NUMBER = T6.CSP_NUMBER)
+  on
+    (T7.DISB_TRAN_ID = T6.DTR_P_GENERATED_ID) and
+    (T7.CPA_TYPE = T6.CPA_P_TYPE) and
+    (T7.CSP_NUMBER = T6.CSP_P_NUMBER) and
+    (T7.COL_ID is not null) and
+    (T7.OTY_ID is not null) and
+    (T7.OBG_ID is not null) and
+    (T7.CSP_NUMBER_DISB is not null) and
+    (T7.CPA_TYPE_DISB is not null) and
+    (T7.OTR_ID is not null) and
+    (T7.OTR_TYPE_DISB is not null)
+  on
+    (T9.CRD_ID = T7.CRD_ID) and
+    (T9.CRV_IDENTIFIER = T7.CRV_ID) and
+    (T9.CST_IDENTIFIER = T7.CST_ID) and
+    (T9.CRT_IDENTIFIER = T7.CRT_ID)
+  join
+  CKT_CASE_ROLE T10
+  on
+    (T9.OBLGOR_PRSN_NBR = T10.CSP_NUMBER) and
+    (T10.TYPE = 'AP') and
+    (T2.CAS_NUMBER = T10.CAS_NUMBER)
+order by
+  T2.END_DATE desc
+</value>
+   </data>
+   <data name="ReadCseOrganization1">
+      <value>
+select top(1)
+  T1.ORGANZTN_ID,
+  T1.TYPE_CODE,
+  T1.NAME
+from
+  CKT_CSE_ORGANIZATN T1
+  join
+  CKT_CSE_ORG_RELATN T2
+  on
+    (T1.TYPE_CODE = 'X') and
+    (T1.TYPE_CODE = T2.COG_CHILD_TYPE) and
+    (T1.ORGANZTN_ID = T2.COG_CHILD_CODE) and
+    (T2.REASON_CODE = 'XJ') and
+    (@cogParentType = T2.COG_PARENT_TYPE) and
+    (@cogParentCode = T2.COG_PARENT_CODE)
+</value>
+   </data>
+   <data name="ReadCseOrganization2">
+      <value>
+select top(1)
+  ORGANZTN_ID,
+  TYPE_CODE
+from
+  CKT_CSE_ORGANIZATN
+where
+  (TYPE_CODE = @typeCode) and
+  (ORGANZTN_ID = @organztnId)
+</value>
+   </data>
+   <data name="ReadCseOrganization3">
+      <value>
+select top(1)
+  T1.ORGANZTN_ID,
+  T1.TYPE_CODE
+from
+  CKT_CSE_ORGANIZATN T1
+  join
+  CKT_CSE_ORG_RELATN T2
+  on
+    (T1.TYPE_CODE = 'J') and
+    (T1.TYPE_CODE = T2.COG_CHILD_TYPE) and
+    (T1.ORGANZTN_ID = T2.COG_CHILD_CODE) and
+    (T2.REASON_CODE = 'JC') and
+    (@cogParentType = T2.COG_PARENT_TYPE) and
+    (@cogParentCode = T2.COG_PARENT_CODE)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CSE_P_DSIG_PYE T2
+  on
+    (T1.NUMB = T2.CSE_PERS_NUM) and
+    (T2.CSE_PERS_NUM = @csePersNum) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadServiceProviderOffice">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T2.OFFICE_ID,
+  T2.COG_TYPE_CODE,
+  T2.COG_CODE,
+  T2.OFF_OFFICE
+from
+  CKT_SERVICE_PRVDER T1,
+  CKT_OFFICE T2
+where
+  (T1.SERVICE_PRVDER_ID = @servicePrvderId) and
+  (T2.OFFICE_ID = @officeId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,138 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCresCaseRviewEstablishment"
+           program-name="SWECRESP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCresCaseRviewEstablishment"
+           transaction="SR4J"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CR_ENFORCEMENT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SpCrenCaseReviewEnforcement"
+       send-command="DISPLAY">
+      <map from="HiddenPass1" to="HiddenPass1"/>
+      <map from="HiddenPass.GexportHiddenPassed"
+           to="HiddenPass.GimportHiddenPassedFlag"/>
+      <map from="HiddenPass.GexportH" to="HiddenPass.GimportH"/>
+      <map from="Case1" to="Case1"/>
+      <map from="HiddenPassedReviewType" to="HiddenPassedReviewType"/>
+      <map from="Hidden" to="Hidden"/>
+      <map from="CaseClosedIndicator" to="CaseClosedIndicator"/>
+      <map from="MultiAp" to="MultiAp"/>
+      <map from="ApSelected" to="ApSelected"/>
+      <map from="SelectedAp" to="SelectedAp"/>
+      <map from="Ap1" to="Ap"/>
+      <return-map from="HidnPassNarrative.GexportHiddenPassedFlag"
+                  to="HiddenPass.GimportHiddenPassed"/>
+      <return-map from="HidnPassNarrative.GexportH" to="HiddenPass.GimportH"/>
+      <return-map from="MultiAp" to="MultiAp"/>
+      <return-map from="ApSelected" to="ApSelected"/>
+      <return-map from="SelectedAp" to="SelectedAp"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_HICV"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeHicvHinsCoverageViability"
+       send-command="DISPLAY">
+      <map from="SelectedChildCsePerson" to="ChildCsePerson"/>
+      <map from="Ap1" to="ApCsePersonsWorkSet"/>
+      <map from="Case1" to="Case1"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       action="transfer"
+       to="SpCrmeCaseReviewMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_INCL_INC_SOURCE_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiInclIncomeSourceList"
+       send-command="DISPLAY">
+      <map from="Ap1" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LEGAL_REQUEST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeLgrqLegalRequest"
+       send-command="DISPLAY">
+      <map from="Ap1" to="ApCsePersonsWorkSet"/>
+      <map from="Ar" to="ArCsePersonsWorkSet"/>
+      <map from="Case1" to="Case1"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CURA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeCuraMembersUra"
+       send-command="DISPLAY">
+      <map from="SelectedChildCsePerson" to="SearchCsePerson"/>
+   </on>
+   <map from="Ar" to="Ar"/>
+   <map from="ApServed" to="ApServed"/>
+   <map from="Export1.Ap1RightsSevered" to="Import1.Ap1RightsSevered"/>
+   <map from="Case1" to="Case1"/>
+   <map from="Export1.ReferredToLegal" to="Import1.ReferredToLegal"/>
+   <map from="Export1.Export4" to="Import1.Import4"/>
+   <map from="Export1.Export3" to="Import1.Import3"/>
+   <map from="Export1.Export2" to="Import1.Import2"/>
+   <map from="Export1.Export5" to="Import1.Import5"/>
+   <map from="Export1.MedicalCoverage" to="Import1.MedicalCoverage"/>
+   <map from="Export1.Judgement" to="Import1.Judgement"/>
+   <map from="Export1.MedicalSupport" to="Import1.MedicalSupport"/>
+   <map from="Export1.CurrentSupport" to="Import1.CurrentSupport"/>
+   <map from="Export1.MedicalProvider" to="Import1.MedicalProvider"/>
+   <map from="Export1.MedicalCoverageAp2" to="Import1.MedicalCoverageAp2"/>
+   <map from="Export1.JudgementAp2" to="Import1.JudgementAp2"/>
+   <map from="Export1.MedicalSupportAp2" to="Import1.MedicalSupportAp2"/>
+   <map from="Export1.CurrentSupportAp2" to="Import1.CurrentSupportAp2"/>
+   <map from="Export1.ReferredToLegalAp2" to="Import1.ReferredToLegalAp2"/>
+   <map from="Export1.Ap1ResponsibleParty" to="Import1.Ap1ResponsibleParty"/>
+   <map from="Export1.Ap2ResponsibleParty" to="Import1.Ap2ResponsibleParty"/>
+   <map from="Export1.MedicalInsViable1" to="Import1.MedicalInsViable1"/>
+   <map from="Export1.MedicalInsViable2" to="Import1.MedicalInsViable2"/>
+   <map from="HiddenPassedReviewType" to="HiddenPassedReviewType"/>
+   <map from="Export1.MedicalSupportAr" to="Import1.MedicalSupportAr"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenPass1" to="HiddenPass1"/>
+   <map from="Export1.Compliance" to="Import1.Compliance"/>
+   <map from="Export1.ChildCsePersonsWorkSet"
+        to="Import1.ChildCsePersonsWorkSet"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.Ap2RightsSevered" to="Import1.Ap2RightsSevered"/>
+   <map from="Export1.DaysRemainInCompli" to="Import1.DaysRemainInCompli"/>
+   <map from="Export1.FedCompliance" to="Import1.FedCompliance"/>
+   <map from="Export1.ChildAge" to="Import1.ChildAge"/>
+   <map from="Export1.ChildHlthInsuAvail" to="Import1.ChildHlthInsuAvail"/>
+   <map from="MoreApsMsg" to="MoreApsMsg"/>
+   <map from="Export1.ProgramPerChild.Program"
+        to="Import1.ProgramPerChild.Program"/>
+   <map from="Export1.LegalReferral" to="Import1.LegalReferral"/>
+   <map from="CaseClosedIndicator" to="CaseClosedIndicator"/>
+   <map from="JudgementAp2" to="MedicalSupportAp2"/>
+   <map from="MedicalSupportAp2" to="CurrentSupportAp2"/>
+   <map from="LegalReferral" to="LegalReferral"/>
+   <map from="ActivityLiteral" to="ActivityLiteral"/>
+   <map from="Export1.Start" to="Import1.Start"/>
+   <map from="MultiAp" to="MultiAp"/>
+   <map from="ApSelected" to="ApSelected"/>
+   <map from="SelectedAp" to="SelectedAp"/>
+   <map from="EstReview" to="EstReview"/>
+   <map from="HiddenPass.GexportH" to="HiddenPass.GimportH"/>
+   <map from="Ap1.Number" to="Ap1.Number"/>
+   <map from="Ap1.Ssn" to="Ap1.Ssn"/>
+   <map from="Export1.ChildCaseRole.ArWaivedInsurance"
+        to="Import1.ChildCaseRole.ArWaivedInsurance"/>
+   <map from="Ap1.FormattedName" to="Ap1.FormattedName"/>
+   <map from="Ap2.Number" to="Ap2.Number"/>
+   <map from="SelectedChildCsePersonsWorkSet.FormattedName"
+        to="Ap2.FormattedName"/>
+   <autoflow command="LGRQ" exit-state="ECO_LNK_TO_LEGAL_REQUEST"/>
+</procedure>

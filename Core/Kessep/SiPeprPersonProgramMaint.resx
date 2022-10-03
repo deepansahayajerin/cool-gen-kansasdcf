@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPersonProgram1">
+      <value>
+select top(1)
+  min(T1.EFFECTIVE_DATE)
+from
+  CKT_PERSON_PROGRAM T1,
+  CKT_PROGRAM T3
+where
+  (T1.CSP_NUMBER = @cspNumber) and
+  (
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate) or
+    (
+      (T1.DISCONTINUE_DATE = @discontinueDate) and
+      (T1.EFFECTIVE_DATE &gt; @effectiveDate)
+    ) or
+    (
+      (T1.DISCONTINUE_DATE = @discontinueDate) and
+      (T1.EFFECTIVE_DATE = @effectiveDate) and
+      (T3.PROGRAM_ID = T1.PRG_GENERATED_ID) and
+      (T3.CODE &lt; @code)
+    )
+  )
+</value>
+   </data>
+   <data name="ReadPersonProgram2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadPersonProgram3">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  PRG_GENERATED_ID
+from
+  CKT_PERSON_PROGRAM
+where
+  (CSP_NUMBER = @cspNumber) and
+  (DISCONTINUE_DATE &lt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadProgram">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  TITLE
+from
+  CKT_PROGRAM
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+</root>

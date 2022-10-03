@@ -1,0 +1,121 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCrbiLstCrInterfaceBalance"
+           program-name="SWECRBIP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCrbiLstCrInterfaceBalance"
+           transaction="SR7L"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CRDL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrdlLstCashReceiptDetails"
+       send-command="DISPLAY">
+      <map from="PassAreaFirstCashReceipt.SequentialNumber"
+           to="UserCashReceipt.SequentialNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_CR_BAL_ADJ"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrajLstCrBalanceAdjstmts"
+       send-command="CRBI">
+      <map from="PassAreaFirstCashReceipt" to="PassArea"/>
+      <return-map from="CashReceiptSourceType" to="PassArea"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_CASH_SOURCES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnCrslLstCashRcptSources"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="PassArea"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_RMSR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnRmsrRequestMiscRefunds"
+       send-command="DISPLAY">
+      <map from="CashReceiptSourceType.Code" to="CashReceiptSourceType.Code"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CRDA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrdaListCrDetailAdjstmts"
+       send-command="DISPLAY">
+      <map from="PassAreaFirstCashReceipt" to="PassArea"/>
+      <return-map from="PassCashReceiptSourceType" to="PassArea"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADJUST_REC_INTERFACE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCriaAdjRecptdInterface"
+       send-command="CRBI">
+      <map from="PassAreaCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="IncreaseCashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="PassAreaFirstCashReceipt.SequentialNumber"
+           to="IncreaseCashReceipt.SequentialNumber"/>
+      <map from="PassAreaFirstCashReceipt.ReceiptAmount"
+           to="IncreaseCashReceipt.ReceiptAmount"/>
+      <map from="PassAreaFirstCashReceipt.CashDue"
+           to="IncreaseCashReceipt.CashDue"/>
+      <map from="PassAreaCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="DecreaseCashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="PassAreaSecond.SequentialNumber"
+           to="DecreaseCashReceipt.SequentialNumber"/>
+      <map from="PassAreaSecond.ReceiptAmount"
+           to="DecreaseCashReceipt.ReceiptAmount"/>
+      <map from="PassAreaSecond.CashDue" to="DecreaseCashReceipt.CashDue"/>
+      <map from="PassAreaCashReceiptRlnRsn.Code"
+           to="PassAreaCashReceiptRlnRsn.Code"/>
+      <return-map from="PassArea" to="PassArea"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASH_RECEIPTING"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrecCashReceipting"
+       send-command="DISPLAY">
+      <map from="PassAreaCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="PassAreaFirstCashReceiptEvent.SystemGeneratedIdentifier"
+           to="CashReceiptEvent.SystemGeneratedIdentifier"/>
+      <map from="PassAreaCashReceiptType.SystemGeneratedIdentifier"
+           to="CashReceiptType.SystemGeneratedIdentifier"/>
+      <map from="PassAreaFirstCashReceipt.SequentialNumber"
+           to="CashReceipt.SequentialNumber"/>
+      <map from="PassAreaFirstCashReceipt.ReceiptAmount"
+           to="CashReceipt.ReceiptAmount"/>
+      <map from="PassAreaFirstCashReceipt.CashDue" to="CashReceipt.CashDue"/>
+   </on>
+   <map from="TotalBalDue" to="TotalBalDue"/>
+   <map from="List.MbrHidden" to="List.MbrHidden"/>
+   <map from="List.MbrNetRcptAmt" to="List.MbrNetRcptAmt"/>
+   <map from="List.MbrRcptAdjAmt" to="List.MbrRcptAdjAmt"/>
+   <map from="List.MbrIntfAdjAmt" to="List.MbrIntfAdjAmt"/>
+   <map from="List.MbrCashReceipt" to="List.MbrCashReceipt"/>
+   <map from="List.MbrCashReceiptEvent" to="List.MbrCashReceiptEvent"/>
+   <map from="List.MbrCommon" to="List.MbrCommon"/>
+   <map from="TotalDispBalDue" to="TotalDispBalDue"/>
+   <map from="CallingPrad" to="CallingPrad"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ToDate" to="ToDate"/>
+   <map from="CrSrcType" to="CrSrcType"/>
+   <map from="CashReceiptSourceType" to="CashReceiptSourceType"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="FromDate" to="FromDate"/>
+   <map from="HiddenCashReceiptSourceType" to="HiddenCashReceiptSourceType"/>
+   <map from="HiddenFromDate" to="HiddenFromDate"/>
+   <map from="HiddenToDate" to="HiddenToDate"/>
+   <map from="OfBalanceOnly" to="OutOfBalanceOnly"/>
+   <map from="HiddenOutOfBalance" to="HiddenOutOfBalance"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

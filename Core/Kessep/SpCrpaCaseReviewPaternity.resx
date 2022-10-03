@@ -1,0 +1,580 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAbsentParent">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber1 = CAS_NUMBER) and
+  (CSP_NUMBER = @cspNumber1) and
+  (CASE_ROLE_ID = @caseRoleId) and
+  (TYPE = @type) and
+  (CAS_NUMBER = @casNumber2) and
+  (CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="ReadAbsentParentMother">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.END_DATE,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CASE_ROLE T1,
+  CKT_CASE_ROLE T2
+where
+  (T2.CASE_ROLE_ID = @caseRoleId1) and
+  (T2.TYPE = @type1) and
+  (T2.CAS_NUMBER = @casNumber1) and
+  (T2.CSP_NUMBER = @cspNumber1) and
+  (T1.CASE_ROLE_ID = @caseRoleId2) and
+  (T1.TYPE = @type2) and
+  (T1.CAS_NUMBER = @casNumber2) and
+  (T1.CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadChild">
+      <value>
+select
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  HEALTH_INS_IND,
+  MEDICAL_SUPP_IND,
+  AR_WAIVED_INS,
+  REL_TO_AR
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'CH') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb1) and
+  (NUMB = @numb2)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb1) and
+  (NUMB = @numb2)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb1) and
+  (NUMB = @numb2)
+</value>
+   </data>
+   <data name="ReadCsePerson4">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.OUT_OF_WEDLOCK,
+  T1.CSE_TO_EST_PATR,
+  T1.PAT_ESTAB_IND,
+  T1.BC_FATHER_LAST_NM,
+  T1.BC_FATHER_FIRST_NM,
+  T1.BC_SIGNATURE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'CH') and
+    (
+      (T1.OUT_OF_WEDLOCK = 'U') or
+      (T1.CSE_TO_EST_PATR = 'U')
+    )
+</value>
+   </data>
+   <data name="ReadCsePerson5">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  OUT_OF_WEDLOCK,
+  CSE_TO_EST_PATR,
+  PAT_ESTAB_IND,
+  BC_FATHER_LAST_NM,
+  BC_FATHER_FIRST_NM,
+  BC_SIGNATURE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAbsentParent1">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.CREATED_TIMESTAMP
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AP')
+</value>
+   </data>
+   <data name="ReadCsePersonAbsentParent2">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.CREATED_TIMESTAMP
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt; @startDate) and
+    (T2.TYPE = 'AP')
+order by
+  T2.CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadCsePersonApplicantRecipient">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.ASSIGNMENT_DATE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePersonMother">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'MO') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadFather">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadFatherMotherChild">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.END_DATE,
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE,
+  T3.HEALTH_INS_IND,
+  T3.MEDICAL_SUPP_IND,
+  T3.AR_WAIVED_INS,
+  T3.REL_TO_AR
+from
+  CKT_CASE_ROLE T1
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T1.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T3.CASE_ROLE_ID = @caseRoleId1) and
+    (T3.TYPE = @type1) and
+    (T3.CAS_NUMBER = @casNumber1) and
+    (T3.CSP_NUMBER = @cspNumber1)
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.CAS_NUMBER = T2.CAS_NUMBER) and
+    (T2.CASE_ROLE_ID = @caseRoleId2) and
+    (T2.TYPE = @type2) and
+    (T2.CAS_NUMBER = @casNumber2) and
+    (T2.CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="ReadGeneticTest1">
+      <value>
+select top(1)
+  TEST_NUMBER,
+  ACTUAL_TEST_DATE,
+  RESULT_RCVD_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_M_NUMBER,
+  CSP_M_NUMBER,
+  CRO_M_TYPE,
+  CRO_M_IDENTIFIER,
+  CAS_A_NUMBER,
+  CSP_A_NUMBER,
+  CRO_A_TYPE,
+  CRO_A_IDENTIFIER
+from
+  CKT_GENETIC_TEST
+where
+  TEST_NUMBER = @testNumber
+</value>
+   </data>
+   <data name="ReadGeneticTest2">
+      <value>
+select
+  TEST_NUMBER,
+  ACTUAL_TEST_DATE,
+  RESULT_RCVD_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_M_NUMBER,
+  CSP_M_NUMBER,
+  CRO_M_TYPE,
+  CRO_M_IDENTIFIER,
+  CAS_A_NUMBER,
+  CSP_A_NUMBER,
+  CRO_A_TYPE,
+  CRO_A_IDENTIFIER
+from
+  CKT_GENETIC_TEST
+where
+  (@croIdentifier = CRO_IDENTIFIER) and
+  (@croType = CRO_TYPE) and
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  CREATED_TIMESTAMP desc,
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadLegalReferralLegalReferralCaseRoleCaseRole">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.IDENTIFIER,
+  T1.REFERRAL_DATE,
+  T1.REFERRAL_REASON_1,
+  T1.REFERRAL_REASON_2,
+  T1.REFERRAL_REASON_3,
+  T1.REFERRAL_REASON_4,
+  T1.REFERRAL_REASON_5,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.CAS_NUMBER_ROLE,
+  T2.CSP_NUMBER,
+  T2.CRO_TYPE,
+  T2.CRO_ID,
+  T3.START_DATE,
+  T3.END_DATE,
+  T4.TYPE
+from
+  CKT_CSE_PERSON T4
+  join
+  CKT_CASE_ROLE T3
+  join
+  CKT_LEGAL_REFERRAL T1
+  join
+  CKT_LEG_REF_CROLE T2
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T1.IDENTIFIER = T2.LGR_ID) and
+    (T1.CAS_NUMBER = T2.CAS_NUMBER) and
+    (
+      (T1.REFERRAL_REASON_1 = 'PAT') or
+      (T1.REFERRAL_REASON_2 = 'PAT') or
+      (T1.REFERRAL_REASON_3 = 'PAT') or
+      (T1.REFERRAL_REASON_4 = 'PAT') or
+      (T1.REFERRAL_REASON_5 = 'PAT')
+    )
+  on
+    (T3.CASE_ROLE_ID = T2.CRO_ID) and
+    (T3.TYPE = T2.CRO_TYPE) and
+    (T3.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T3.CAS_NUMBER = T2.CAS_NUMBER_ROLE) and
+    (T3.TYPE = 'AP')
+  on
+    (T4.NUMB = T3.CSP_NUMBER) and
+    (T4.NUMB = @numb)
+order by
+  T1.REFERRAL_DATE desc
+</value>
+   </data>
+   <data name="ReadMonitoredActivity">
+      <value>
+select distinct top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.FED_NCOMP_DTE,
+  T1.START_DATE,
+  T1.CLOSURE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.INF_SYS_GEN_ID
+from
+  CKT_INFRASTRUCTURE T2
+  join
+  CKT_MONITORED_ACT T1
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (T2.CSE_PERSON_NUM = @csePersonNum) and
+    (T1.ACTIVITY_CTRL_NUM = 80)
+order by
+  T1.START_DATE desc,
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadMother">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber1 = CAS_NUMBER) and
+  (CASE_ROLE_ID = @caseRoleId) and
+  (TYPE = @type) and
+  (CAS_NUMBER = @casNumber2) and
+  (CSP_NUMBER = @cspNumber1) and
+  (CSP_NUMBER = @cspNumber2)
+</value>
+   </data>
+   <data name="ReadNarrativeDetail1">
+      <value>
+select
+  INFRASTRUCTURE_ID,
+  CREATED_TIMESTAMP,
+  NARRATIVE_TEXT,
+  LINE_NUMBER
+from
+  CKT_NARR_DETAIL
+where
+  (INFRASTRUCTURE_ID = @infrastructureId) and
+  (substring(NARRATIVE_TEXT, 1, 13) = 'PATERNITY -- ')
+order by
+  CREATED_TIMESTAMP desc,
+  LINE_NUMBER
+</value>
+   </data>
+   <data name="ReadNarrativeDetail2">
+      <value>
+select
+  INFRASTRUCTURE_ID,
+  CREATED_TIMESTAMP,
+  NARRATIVE_TEXT,
+  LINE_NUMBER
+from
+  CKT_NARR_DETAIL
+where
+  (INFRASTRUCTURE_ID = @infrastructureId) and
+  (substring(NARRATIVE_TEXT, 1, 13) = 'PATERNITY -- ')
+order by
+  CREATED_TIMESTAMP desc,
+  LINE_NUMBER
+</value>
+   </data>
+   <data name="ReadServiceProcessLegalActionLegalActionPerson1">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.SERVICE_DATE,
+  T1.IDENTIFIER,
+  T2.CLASSIFICATION,
+  T2.ACTION_TAKEN,
+  T2.COURT_CASE_NO,
+  T2.CREATED_TSTAMP,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.EFFECTIVE_DT,
+  T3.[ROLE],
+  T3.END_DT,
+  T3.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_SERVICE_PROCSS T1
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T2.CLASSIFICATION = 'P') and
+    (T2.ACTION_TAKEN = 'DET2PATP')
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T3.[ROLE] = 'R') and
+    (T3.CSP_NUMBER = @cspNumber)
+order by
+  T3.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadServiceProcessLegalActionLegalActionPerson2">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.SERVICE_DATE,
+  T1.IDENTIFIER,
+  T2.CLASSIFICATION,
+  T2.ACTION_TAKEN,
+  T2.COURT_CASE_NO,
+  T2.CREATED_TSTAMP,
+  T3.LA_PERSON_ID,
+  T3.CSP_NUMBER,
+  T3.EFFECTIVE_DT,
+  T3.[ROLE],
+  T3.END_DT,
+  T3.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_SERVICE_PROCSS T1
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T2.CLASSIFICATION = 'P') and
+    (T2.ACTION_TAKEN in ('DET1PATP', 'PATCSONP', 'VOLPATPK'))
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T3.[ROLE] = 'R') and
+    (T3.CSP_NUMBER = @cspNumber)
+order by
+  T3.EFFECTIVE_DT desc
+</value>
+   </data>
+</root>

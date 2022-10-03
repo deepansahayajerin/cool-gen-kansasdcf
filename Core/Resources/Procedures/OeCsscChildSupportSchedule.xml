@@ -1,0 +1,45 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeCsscChildSupportSchedule"
+           program-name="SWECSSCP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeCsscChildSupportSchedule"
+           transaction="SR5N"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="CoStbmSupportTablesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CODE_VALUES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToCdvlActiveCodesOnly" to="DisplayActiveCasesOnly"/>
+      <map from="ToCdvl" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromCdvl"/>
+   </on>
+   <map from="ChildSupportSchedule" to="ChildSupportSchedule"/>
+   <map from="AgeGrp3" to="AgeGrp3"/>
+   <map from="AgeGrp2" to="AgeGrp2"/>
+   <map from="AgeGrp1" to="AgeGrp1"/>
+   <map from="Export1.Work" to="Import1.Work"/>
+   <map from="Export1.AgeGrp1" to="Import1.AgeGrp1"/>
+   <map from="Export1.AgeGrp2" to="Import1.AgeGrp2"/>
+   <map from="Export1.AgeGrp3" to="Import1.AgeGrp3"/>
+   <map from="PrevH" to="PrevH"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="GlYearPrompt" to="GlYearPrompt"/>
+   <map from="Export1.Detail.CombinedGrossMnthlyIncomeAmt"
+        to="Import1.Detail.CombinedGrossMnthlyIncomeAmt"/>
+   <map from="Export1.PrevH.CombinedGrossMnthlyIncomeAmt"
+        to="Import1.PrevH.CombinedGrossMnthlyIncomeAmt"/>
+   <map from="HeaderAgeGrp1.Text25" to="HeaderAgeGrp1.Text25"/>
+   <map from="HeaderAgeGrp2.Text25" to="HeaderAgeGrp2.Text25"/>
+   <map from="DtlAgeGrp1.Text10" to="DtlAgeGrp1.Text10"/>
+   <map from="DtlAgeGrp2.Text10" to="DtlAgeGrp2.Text10"/>
+   <map from="DtlAgeGrp3.Text10" to="DtlAgeGrp3.Text10"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

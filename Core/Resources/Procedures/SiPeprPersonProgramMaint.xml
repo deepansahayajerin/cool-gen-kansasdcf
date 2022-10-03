@@ -1,0 +1,112 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiPeprPersonProgramMaint"
+           program-name="SWEPEPRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiPeprPersonProgramMaint"
+           transaction="SR2M"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_NATE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNATE"
+       to="SpNateMaintNarrativeDetail"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="HeaderCsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="HeaderCsePersonsWorkSet.FormattedName"/>
+      <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+      <map from="Ap" to="Ap"/>
+      <map from="Ar" to="Ar"/>
+      <map from="Infrastructure" to="HeaderInfrastructure"/>
+      <map from="ExternalEvent" to="ExternalEvent"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Next" to="Case1"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <return-map from="SelectedChildCsePersonsWorkSet" to="HiddenSelChild"/>
+      <return-map from="Selected" to="HiddenSelected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+      <map from="Ap" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CODE_TABLES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenCodeValue"/>
+   </on>
+   <map from="Ar" to="Ar"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="Next" to="Next"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ApPrompt" to="ApPrompt"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="Export1.DetailProgram" to="Import1.DetailProgram"/>
+   <map from="Export1.DetailPersonProgram" to="Import1.DetailPersonProgram"/>
+   <map from="HiddenPageKeys.HiddenPageKeyPersonProgram"
+        to="HiddenPageKeys.HiddenPageKeyPersonProgram"/>
+   <map from="HiddenPageKeys.HiddenPageKeyProgram"
+        to="HiddenPageKeys.HiddenPageKeyProgram"/>
+   <map from="Export1.DetailPrompt2" to="Import1.DetailPrompt2"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="HiddenSelChild" to="HiddenSelChild"/>
+   <map from="ActiveChild" to="ActiveChild"/>
+   <map from="HiddenAp" to="HiddenAp"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <map from="Export1.DetailPrompt" to="Import1.DetailPrompt"/>
+   <map from="Export1.DetailCreated" to="Import1.DetailCreated"/>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="LastUpdatedBy.UserId" to="LastUpdatedBy.UserId"/>
+   <map from="Original.OriginalDetails"
+        to="Original.OriginalDetailPersonProgram"/>
+   <map from="Original.OriginalDetail" to="Original.OriginalDetailProgram"/>
+   <map from="Previous" to="Previous"/>
+   <map from="Ap.ReplicationIndicator" to="Ap.ReplicationIndicator"/>
+   <map from="Ap.Number" to="Ap.Number"/>
+   <map from="Ap.FormattedName" to="Ap.FormattedName"/>
+   <map from="HiddenNextTranInfo.LegalActionIdentifier"
+        to="HiddenNextTranInfo.LegalActionIdentifier"/>
+   <map from="HiddenNextTranInfo.CourtCaseNumber"
+        to="HiddenNextTranInfo.CourtCaseNumber"/>
+   <map from="HiddenNextTranInfo.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumber"
+        to="HiddenNextTranInfo.CsePersonNumber"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberAp"
+        to="HiddenNextTranInfo.CsePersonNumberAp"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligee"
+        to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+   <map from="HiddenNextTranInfo.CsePersonNumberObligor"
+        to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+   <map from="HiddenNextTranInfo.CourtOrderNumber"
+        to="HiddenNextTranInfo.CourtOrderNumber"/>
+   <map from="HiddenNextTranInfo.ObligationId"
+        to="HiddenNextTranInfo.ObligationId"/>
+   <map from="HiddenNextTranInfo.StandardCrtOrdNumber"
+        to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+   <map from="HiddenNextTranInfo.InfrastructureId"
+        to="HiddenNextTranInfo.InfrastructureId"/>
+   <map from="HiddenNextTranInfo.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+   <map from="HiddenNextTranInfo.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+   <map from="HiddenNextTranInfo.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+   <map from="HiddenNextTranInfo.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+   <map from="HiddenNextTranInfo.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+   <map from="HiddenNextTranInfo.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

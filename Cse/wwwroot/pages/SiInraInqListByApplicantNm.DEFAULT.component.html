@@ -1,0 +1,541 @@
+﻿<!--Name: SI_INRA_INQ_LIST_BY_APPLICANT_NM, ID: 371426281, model: 746-->
+<div coolContent coolName="SI_INRA_INQ_LIST_BY_APPLICANT_NM" coolType="SCREEN"
+  (coolInit)="scrollSize = 100; pageSize = 14">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 20%; top: 0; width: 56.25%; height: 4%;"
+     coolCol="17" coolRow="1" coolLength="45">CSE - Information Request by Applicant - INRA</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 12%; width: 17.5%; height: 4%;" coolCol="2"
+     coolRow="4" coolLength="14">Applicant Name</div>
+   <input type="text" coolType="field" name="field_4_17"
+     [(ngModel)]="in.menuEntry.applicantLastName"
+     [coolVideo]="out.menuEntry.screenField?.applicantLastName" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="17"
+     style="left: 20%; top: 12%; width: 21.25%; height: 4%;" coolCol="17"
+     coolRow="4" coolLength="17">
+   <input type="text" coolType="field" name="field_4_35"
+     [(ngModel)]="in.menuEntry.applicantFirstName"
+     [coolVideo]="out.menuEntry.screenField?.applicantFirstName" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="12"
+     style="left: 42.5%; top: 12%; width: 15%; height: 4%;" coolCol="35"
+     coolRow="4" coolLength="12">
+   <input type="text" coolType="field" name="field_4_48"
+     [(ngModel)]="in.menuEntry.applicantMiddleInitial"
+     [coolVideo]="out.menuEntry.screenField?.applicantMiddleInitial" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="1"
+     style="left: 58.75%; top: 12%; width: 1.25%; height: 4%;" coolCol="48"
+     coolRow="4" coolLength="1">
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 20%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="6" coolLength="3">Sel</div>
+   
+   <div coolType="literal"
+     style="left: 17.5%; top: 20%; width: 17.5%; height: 4%;" coolCol="15"
+     coolRow="6" coolLength="14">Applicant Name</div>
+   
+   <div coolType="literal"
+     style="left: 52.5%; top: 20%; width: 11.25%; height: 4%;" coolCol="43"
+     coolRow="6" coolLength="9">Date Sent</div>
+   
+   <div coolType="literal"
+     style="left: 67.5%; top: 20%; width: 11.25%; height: 4%;" coolCol="55"
+     coolRow="6" coolLength="9">Date Recd</div>
+   
+   <div coolType="literal"
+     style="left: 83.75%; top: 20%; width: 11.25%; height: 4%;" coolCol="68"
+     coolRow="6" coolLength="9">Request #</div>
+   <input type="text" coolType="field" name="field_7_3"
+     [(ngModel)]="ref(in.group, pageOffset, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 24%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="1" [hidden]="pageOffset >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 24%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="7" coolLength="17" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 24%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="7" coolLength="12" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 24%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="7" coolLength="1" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 24%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 24%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="7" coolLength="8" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 24%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="7" coolLength="10" [hidden]="pageOffset >= length(in.group)">{{in.group?.[pageOffset]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_8_3"
+     [(ngModel)]="ref(in.group, pageOffset + 1, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 1]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 28%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 28%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="8" coolLength="17" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 28%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="8" coolLength="12" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 28%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 28%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 28%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 28%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="8" coolLength="10" [hidden]="pageOffset + 1 >= length(in.group)">{{in.group?.[pageOffset + 1]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.group, pageOffset + 2, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 2]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 32%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="9" coolLength="17" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 32%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="9" coolLength="12" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 32%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 32%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 32%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="9" coolLength="10" [hidden]="pageOffset + 2 >= length(in.group)">{{in.group?.[pageOffset + 2]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_10_3"
+     [(ngModel)]="ref(in.group, pageOffset + 3, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 3]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 36%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="10" coolLength="17" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 36%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="10" coolLength="12" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 36%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 36%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 36%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="10" coolLength="10" [hidden]="pageOffset + 3 >= length(in.group)">{{in.group?.[pageOffset + 3]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_11_3"
+     [(ngModel)]="ref(in.group, pageOffset + 4, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 4]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 40%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="11" coolLength="17" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 40%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="11" coolLength="12" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 40%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 40%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 40%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="11" coolLength="10" [hidden]="pageOffset + 4 >= length(in.group)">{{in.group?.[pageOffset + 4]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_12_3"
+     [(ngModel)]="ref(in.group, pageOffset + 5, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 5]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 44%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="12" coolLength="17" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 44%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="12" coolLength="12" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 44%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 44%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 44%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 5 >= length(in.group)">{{in.group?.[pageOffset + 5]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.group, pageOffset + 6, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 6]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 48%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="13" coolLength="17" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 48%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="13" coolLength="12" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 48%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 48%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 48%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 6 >= length(in.group)">{{in.group?.[pageOffset + 6]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_14_3"
+     [(ngModel)]="ref(in.group, pageOffset + 7, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 7]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 52%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="14" coolLength="17" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 52%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="14" coolLength="12" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 52%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 52%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 52%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 7 >= length(in.group)">{{in.group?.[pageOffset + 7]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_15_3"
+     [(ngModel)]="ref(in.group, pageOffset + 8, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 8]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 8 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 56%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="15" coolLength="17" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 56%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="15" coolLength="12" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 56%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 56%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 56%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 8 >= length(in.group)">{{in.group?.[pageOffset + 8]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_16_3"
+     [(ngModel)]="ref(in.group, pageOffset + 9, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 9]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 9 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 60%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="16" coolLength="17" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 60%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="16" coolLength="12" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 60%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 60%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 60%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 9 >= length(in.group)">{{in.group?.[pageOffset + 9]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.group, pageOffset + 10, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 10]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 10 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 64%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="17" coolLength="17" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 64%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="17" coolLength="12" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 64%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 64%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 64%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 10 >= length(in.group)">{{in.group?.[pageOffset + 10]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_18_3"
+     [(ngModel)]="ref(in.group, pageOffset + 11, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 11]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 11 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 68%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="18" coolLength="17" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 68%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="18" coolLength="12" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 68%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 68%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 68%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 11 >= length(in.group)">{{in.group?.[pageOffset + 11]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_19_3"
+     [(ngModel)]="ref(in.group, pageOffset + 12, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 12]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 12 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 72%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="19" coolLength="17" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 72%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="19" coolLength="12" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 72%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 72%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 72%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 12 >= length(in.group)">{{in.group?.[pageOffset + 12]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   <input type="text" coolType="field" name="field_20_3"
+     [(ngModel)]="ref(in.group, pageOffset + 13, 'common.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset + 13]?.common.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 76%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 13 >= length(in.group)">
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 8.75%; top: 76%; width: 21.25%; height: 4%;" coolCol="8"
+     coolRow="20" coolLength="17" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.informationRequest.applicantLastName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 31.25%; top: 76%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="20" coolLength="12" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.informationRequest.applicantFirstName}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 76%; width: 1.25%; height: 4%;" coolCol="39"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.informationRequest.applicantMiddleInitial}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 52.5%; top: 76%; width: 10%; height: 4%;" coolCol="43"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.informationRequest.dateApplicationSent|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 67.5%; top: 76%; width: 10%; height: 4%;" coolCol="55"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.informationRequest.dateReceivedByCseComplete|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 83.75%; top: 76%; width: 12.5%; height: 4%;" coolCol="68"
+     coolRow="20" coolLength="10" [hidden]="pageOffset + 13 >= length(in.group)">{{in.group?.[pageOffset + 13]?.informationRequest.number|coolNumber:'0000000000;#':1}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="71" coolRow="21" coolLength="9"
+     style="left: 87.5%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="2" coolRow="22" coolLength="79"
+     style="left: 1.25%; top: 84%; width: 98.75%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 88%; width: 88.75%; height: 4%;" coolCol="2"
+     coolRow="23" coolLength="71">PF KEY: 1 Help  2 Display  3 Exit  7 Prev  8 Next  11 Clear  12 Signoff</div>
+   
+   <div coolType="literal"
+     style="left: 11.25%; top: 92%; width: 8.75%; height: 4%;" coolCol="10"
+     coolRow="24" coolLength="7">15 INRD</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="INRD" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=INRD</a>
+   </div>

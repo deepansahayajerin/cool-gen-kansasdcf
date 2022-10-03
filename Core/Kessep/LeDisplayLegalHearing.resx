@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFipsTribAddress">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  @trbId = TRB_ID
+</value>
+   </data>
+   <data name="ReadHearing1">
+      <value>
+select top(1)
+  HEARING_ID,
+  LGA_IDENTIFIER,
+  HEARING_DT,
+  HEARING_TIME,
+  TYPE,
+  LAST_NM,
+  FIRST_NM,
+  MIDDLE_INT,
+  SUFFIX,
+  TITLE,
+  OUTCOME_RECEIVE_DT,
+  OUTCOME,
+  NOTE
+from
+  CKT_HEARING
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (
+    (
+      (HEARING_DT = @hearingDt) and
+      (HEARING_TIME &gt; @hearingTime)
+    ) or
+    (HEARING_DT &gt; @hearingDt)
+  )
+order by
+  HEARING_DT,
+  HEARING_TIME
+</value>
+   </data>
+   <data name="ReadHearing2">
+      <value>
+select top(1)
+  HEARING_ID,
+  LGA_IDENTIFIER,
+  HEARING_DT,
+  HEARING_TIME,
+  TYPE,
+  LAST_NM,
+  FIRST_NM,
+  MIDDLE_INT,
+  SUFFIX,
+  TITLE,
+  OUTCOME_RECEIVE_DT,
+  OUTCOME,
+  NOTE
+from
+  CKT_HEARING
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (
+    (
+      (HEARING_DT = @hearingDt) and
+      (HEARING_TIME &gt; @hearingTime)
+    ) or
+    (HEARING_DT &gt; @hearingDt)
+  )
+order by
+  HEARING_DT,
+  HEARING_TIME
+</value>
+   </data>
+   <data name="ReadHearing3">
+      <value>
+select top(1)
+  HEARING_ID,
+  LGA_IDENTIFIER,
+  HEARING_DT,
+  HEARING_TIME,
+  TYPE,
+  LAST_NM,
+  FIRST_NM,
+  MIDDLE_INT,
+  SUFFIX,
+  TITLE,
+  OUTCOME_RECEIVE_DT,
+  OUTCOME,
+  NOTE
+from
+  CKT_HEARING
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (
+    (
+      (HEARING_DT = @hearingDt) and
+      (HEARING_TIME &lt; @hearingTime)
+    ) or
+    (HEARING_DT &lt; @hearingDt)
+  )
+order by
+  HEARING_DT desc,
+  HEARING_TIME desc
+</value>
+   </data>
+   <data name="ReadHearing4">
+      <value>
+select top(1)
+  HEARING_ID,
+  LGA_IDENTIFIER,
+  HEARING_DT,
+  HEARING_TIME,
+  TYPE,
+  LAST_NM,
+  FIRST_NM,
+  MIDDLE_INT,
+  SUFFIX,
+  TITLE,
+  OUTCOME_RECEIVE_DT,
+  OUTCOME,
+  NOTE
+from
+  CKT_HEARING
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (
+    (
+      (HEARING_DT = @hearingDt) and
+      (HEARING_TIME &lt; @hearingTime)
+    ) or
+    (HEARING_DT &lt; @hearingDt)
+  )
+order by
+  HEARING_DT desc,
+  HEARING_TIME desc
+</value>
+   </data>
+   <data name="ReadHearing5">
+      <value>
+select
+  HEARING_ID,
+  LGA_IDENTIFIER,
+  HEARING_DT,
+  HEARING_TIME,
+  TYPE,
+  LAST_NM,
+  FIRST_NM,
+  MIDDLE_INT,
+  SUFFIX,
+  TITLE,
+  OUTCOME_RECEIVE_DT,
+  OUTCOME,
+  NOTE
+from
+  CKT_HEARING
+where
+  LGA_IDENTIFIER = @lgaIdentifier
+order by
+  HEARING_DT desc,
+  HEARING_TIME desc
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  T1.TRIBUNAL_NM,
+  T1.IDENTIFIER
+from
+  CKT_TRIBUNAL T1
+  join
+  CKT_LEGAL_ACTION T2
+  on
+    (T1.IDENTIFIER = T2.TRB_ID) and
+    (T2.LEGAL_ACTION_ID = @legalActionId)
+</value>
+   </data>
+</root>

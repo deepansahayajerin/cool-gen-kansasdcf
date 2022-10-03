@@ -1,0 +1,124 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiIiinIncomingInterstateInfo"
+           program-name="SWEIIINP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiIiinIncomingInterstateInfo"
+           transaction="SR6C"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_IIFI"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIifiIncomingInterstateFore"
+       send-command="DISPLAY">
+      <map from="DisplayOnly" to="DisplayOnly"/>
+      <map from="Next" to="Next"/>
+      <map from="ApCsePersonsWorkSet" to="Ap"/>
+      <return-map from="DisplayOnly" to="DisplayOnly"/>
+      <return-map from="Next" to="Next"/>
+      <return-map from="ApCsePersonsWorkSet" to="Ap"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_SI_IIFI"
+       action="transfer"
+       to="SiIifiIncomingInterstateFore"
+       send-command="DISPLAY">
+      <map from="DisplayOnly" to="DisplayOnly"/>
+      <map from="Next" to="Next"/>
+      <map from="ApCsePersonsWorkSet" to="Ap"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_IATT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiIattInterstateReqAttach"
+       send-command="DISPLAY">
+      <map from="DisplayOnly" to="DisplayOnly"/>
+      <map from="Next" to="Next"/>
+      <map from="ApCsePersonsWorkSet" to="Ap"/>
+      <return-map from="DisplayOnly.Number" to="DisplayOnly.Number"/>
+      <return-map from="DisplayOnly.CseOpenDate" to="DisplayOnly.CseOpenDate"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Next" to="Case1"/>
+      <return-map from="ArCsePersonsWorkSet" to="Ar"/>
+      <return-map from="Selected" to="SelectedCsePersonsWorkSet"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="IreqStatePrompt" to="IreqStatePrompt"/>
+   <map from="OtherStateFips2" to="OtherStateFips"/>
+   <map from="InterstateContact1" to="InterstateContact1"/>
+   <map from="ForeignInfoMsg" to="ForeignInfoMsg"/>
+   <map from="HotherState" to="HotherState"/>
+   <map from="Next" to="Next"/>
+   <map from="ApCsePersonsWorkSet" to="Ap"/>
+   <map from="Ar" to="Ar"/>
+   <map from="InterstateContact2" to="InterstateContact2"/>
+   <map from="AttachmentRcvd" to="AttachmentRcvd"/>
+   <map from="PromptPerson" to="PromptPerson"/>
+   <map from="Standard" to="Standard"/>
+   <map from="OspOffice" to="OspOffice"/>
+   <map from="OspServiceProvider" to="OspServiceProvider"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="InterstatePaymentAddress.State"
+        to="InterstatePaymentAddress.State"/>
+   <map from="InterstatePaymentAddress.Zip4" to="InterstatePaymentAddress.Zip4"/>
+   <map from="InterstateContactAddress.State"
+        to="InterstateContactAddress.State"/>
+   <map from="InterstateContactAddress.ZipCode"
+        to="InterstateContactAddress.ZipCode"/>
+   <map from="InterstateContactAddress.Zip4" to="InterstateContactAddress.Zip4"/>
+   <map from="InterstatePaymentAddress.ZipCode"
+        to="InterstatePaymentAddress.ZipCode"/>
+   <map from="DisplayOnly.DuplicateCaseIndicator"
+        to="DisplayOnly.DuplicateCaseIndicator"/>
+   <map from="InterstatePaymentAddress.FipsState"
+        to="InterstatePaymentAddress.FipsState"/>
+   <map from="InterstatePaymentAddress.FipsCounty"
+        to="InterstatePaymentAddress.FipsCounty"/>
+   <map from="InterstatePaymentAddress.FipsLocation"
+        to="InterstatePaymentAddress.FipsLocation"/>
+   <map from="InterstatePaymentAddress.PayableToName"
+        to="InterstatePaymentAddress.PayableToName"/>
+   <map from="InterstateRequest.IntHGeneratedId"
+        to="InterstateRequest.IntHGeneratedId"/>
+   <map from="H.Country" to="H.Country"/>
+   <map from="DisplayOnly.Number" to="DisplayOnly.Number"/>
+   <map from="DisplayOnly.CseOpenDate" to="DisplayOnly.CseOpenDate"/>
+   <map from="InterstateRequest.OtherStateFips"
+        to="InterstateRequest.OtherStateFips"/>
+   <map from="InterstateRequest.OtherStateCaseId"
+        to="InterstateRequest.OtherStateCaseId"/>
+   <map from="InterstateRequest.OtherStateCaseStatus"
+        to="InterstateRequest.OtherStateCaseStatus"/>
+   <map from="InterstateRequest.CaseType" to="InterstateRequest.CaseType"/>
+   <map from="InterstateRequest.OtherStateCaseClosureReason"
+        to="InterstateRequest.OtherStateCaseClosureReason"/>
+   <map from="InterstateRequest.OtherStateCaseClosureDate"
+        to="InterstateRequest.OtherStateCaseClosureDate"/>
+   <map from="InterstateContactAddress.Street1"
+        to="InterstateContactAddress.Street1"/>
+   <map from="InterstateContactAddress.Street2"
+        to="InterstateContactAddress.Street2"/>
+   <map from="InterstateContactAddress.City" to="InterstateContactAddress.City"/>
+   <map from="InterstatePaymentAddress.Street1"
+        to="InterstatePaymentAddress.Street1"/>
+   <map from="InterstatePaymentAddress.Street2"
+        to="InterstatePaymentAddress.Street2"/>
+   <map from="InterstatePaymentAddress.City" to="InterstatePaymentAddress.City"/>
+   <map from="OtherStateFips1.StateAbbreviation"
+        to="OtherState.StateAbbreviation"/>
+</procedure>

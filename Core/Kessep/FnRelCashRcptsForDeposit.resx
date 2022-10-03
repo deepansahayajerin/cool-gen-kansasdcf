@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  DEPOSIT_RLSE_DT,
+  TOTAL_CASH_TRANSAC,
+  TOT_CASH_TRAN_CNT,
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FTR_IDENTIFIER,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_CASH_RECEIPT
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptStatus">
+      <value>
+select top(1)
+  CR_STATUS_ID,
+  CODE
+from
+  CKT_CR_STATUS
+where
+  CR_STATUS_ID = @crStatusId
+</value>
+   </data>
+   <data name="ReadCashReceiptStatusCashReceiptStatusHistory">
+      <value>
+select top(1)
+  CRS_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  DISCONTINUE_DATE
+from
+  CKT_CR_STATUS_HIST
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadFundTransaction1">
+      <value>
+select top(1)
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FUND_TRANS_ID,
+  DEPOSIT_NUMBER,
+  AMOUNT,
+  BUSINESS_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_FUND_TRANS
+where
+  (BUSINESS_DATE = @businessDate) and
+  (FTT_IDENTIFIER = @fttIdentifier) and
+  (PCA_CODE = @pcaCode)
+</value>
+   </data>
+   <data name="ReadFundTransaction2">
+      <value>
+select top(1)
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FUND_TRANS_ID,
+  DEPOSIT_NUMBER,
+  AMOUNT,
+  BUSINESS_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_FUND_TRANS
+where
+  (FUND_TRANS_ID = @fundTransId) and
+  (FTT_IDENTIFIER = @fttIdentifier) and
+  (PCA_CODE = @pcaCode)
+</value>
+   </data>
+   <data name="ReadFundTransactionStatusHistoryFundTransactionStatus">
+      <value>
+select top(1)
+  FTR_IDENTIFIER,
+  FUN_IDENTIFIER,
+  PCA_EFFECTIVE_DATE,
+  PCA_CODE,
+  FTT_IDENTIFIER,
+  FTS_IDENTIFIER,
+  EFFECTIVE_TMST
+from
+  CKT_FUND_TRNSTATHS
+where
+  (@ftrIdentifier = FTR_IDENTIFIER) and
+  (@funIdentifier = FUN_IDENTIFIER) and
+  (@fttIdentifier = FTT_IDENTIFIER) and
+  (@pcaEffectiveDate = PCA_EFFECTIVE_DATE) and
+  (@pcaCode = PCA_CODE)
+order by
+  EFFECTIVE_TMST desc
+</value>
+   </data>
+   <data name="UpdateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  DEPOSIT_RLSE_DT = @depositRlseDt,
+  FTT_IDENTIFIER = @fttIdentifier,
+  PCA_CODE = @pcaCode,
+  PCA_EFFECTIVE_DATE = @pcaEffectiveDate,
+  FUN_IDENTIFIER = @funIdentifier,
+  FTR_IDENTIFIER = @ftrIdentifier,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="UpdateFundTransaction">
+      <value>
+update CKT_FUND_TRANS
+set
+  AMOUNT = @amount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (FTT_IDENTIFIER = @fttIdentifier) and
+  (PCA_CODE = @pcaCode) and
+  (PCA_EFFECTIVE_DATE = @pcaEffectiveDate) and
+  (FUN_IDENTIFIER = @funIdentifier) and
+  (FUND_TRANS_ID = @fundTransId)
+</value>
+   </data>
+</root>

@@ -1,0 +1,41 @@
+Feature: TC_205_ERR_MSG_PRESS_F5
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "INCS" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Income Source Detail - INCS" window appears
+    And enters "<PERSON>" in "Person #"
+    And user presses "F2"
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+    When user presses "Shift+F5"
+    Then "CSE - Employer Maintenance - EMPL" window appears
+    When user enters "<NAME>" in first field below "CSE - Employer Maintenance - EMPL"
+    And user presses "F2"
+    Then message "ACO_NI0000: Displayed successfully." is displayed
+
+    When user enters "S" in the field below "Sel"
+    When user presses "F9"
+    Then "CSE - Income Source Detail - INCS" window appears
+
+    # When user enters "<TYPE>" in "TYPE"
+    When user enters "<TYPE>" in first field above "Send Date"
+    When user enters "<SEND_DATE>" in "Send Date"
+    When user enters "<SEND_TO>" in "Send To"
+    When user enters "<RETURN_DATE>" in "Return Date"
+    When user enters "<RETURN_CODE>" in "Return Code"
+    And user presses "F5"
+    Then message "SI0000: If employment start date is known enter and PF5 again, otherwise PF5." is displayed
+
+    When user presses "F5"
+    Then message "Active employment with this employer already exists." is displayed
+
+    Examples:
+      | PERSON | NAME            | TYPE | SEND_DATE | SEND_TO | RETURN_DATE | RETURN_CODE |
+      | 88     | BANK OF AMERICA | E    | Today     | HQ      | Today       | E           |
+
+

@@ -1,0 +1,128 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnRcapMtnRecaptureInstructns"
+           program-name="SWERCAPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnRcapMtnRecaptureInstructns"
+           transaction="SR45"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_SELECT_PERSON"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_MTN_PYMNT_SCH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnOpscLstMtnPaymtSchedules"
+       send-command="DISPLAY">
+      <map from="PassThruFlowCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="PassThruFlowObligationType.SystemGeneratedIdentifier"
+           to="ObligationType.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowObligationType.Code" to="ObligationType.Code"/>
+      <map from="PassThruFlowObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="PassThruFlowLegalAction" to="LegalAction"/>
+   </on>
+   <on exit-state="FN0000_LNK_RHST_LST_RC_INSTR_HST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnRhstLstRcptureInstrucHist"
+       send-command="DISPLAY">
+      <map from="PassThruFlowCsePersonsWorkSet.Number"
+           to="CsePersonsWorkSet.Number"/>
+      <map from="PassThruFlowCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePerson.Number" to="CsePerson.Number"/>
+   </on>
+   <on exit-state="FN0000_LNK_ROHL_LST_OB_RC_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnRohlLstObligRecapHist"
+       send-command="DISPLAY">
+      <map from="PassThruFlowCsePersonsWorkSet.Number"
+           to="CsePersonsWorkSet.Number"/>
+      <map from="PassThruFlowCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePerson.Number" to="CsePerson.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTN_RECOVERY_OBLIG"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnOrecMtnRecoveryObligation"
+       send-command="RCAP">
+      <map from="CsePerson" to="ObligorCsePerson"/>
+      <map from="PassThruFlowCsePersonsWorkSet.Number"
+           to="ObligorCsePersonsWorkSet.Number"/>
+      <map from="PassThruFlowCsePersonsWorkSet.FormattedName"
+           to="ObligorCsePersonsWorkSet.FormattedName"/>
+      <map from="PassThruFlowObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowLegalAction.Identifier" to="LegalAction.Identifier"/>
+      <map from="PassThruFlowLegalAction.CourtCaseNumber"
+           to="LegalAction.CourtCaseNumber"/>
+      <map from="PassThruFlowLegalAction.StandardNumber"
+           to="LegalAction.StandardNumber"/>
+      <map from="PassThruFlowObligationType.SystemGeneratedIdentifier"
+           to="ObligationType.SystemGeneratedIdentifier"/>
+      <map from="PassThruFlowObligationType.Code" to="ObligationType.Code"/>
+   </on>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="PromptCsePerson" to="PromptCsePerson"/>
+   <map from="Export1.LegalAction" to="Import1.LegalAction"/>
+   <map from="Export1.RecapPrev" to="Import1.RecapPrev"/>
+   <map from="ZdelExportLast" to="ZdelImportLast"/>
+   <map from="Export1.RecaptureInclusion" to="Import1.RecaptureInclusion"/>
+   <map from="Export1.ObligationType" to="Import1.ObligationType"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="ZdelExportAlreadyDisplayed" to="ZdelImportAlreadyDisplayed"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Select" to="Import1.Select"/>
+   <map from="Export1.DebtDetail" to="Import1.DebtDetail"/>
+   <map from="Export1.ObligationTransaction" to="Import1.ObligationTransaction"/>
+   <map from="Export1.Recap" to="Import1.Recap"/>
+   <map from="Export1.Obligation" to="Import1.Obligation"/>
+   <map from="Previous.Number" to="Previous.Number"/>
+   <map from="Zdel.SystemGeneratedIdentifier"
+        to="Zdel.SystemGeneratedIdentifier"/>
+   <map from="ZdelExportPrevious.NegotiatedDate"
+        to="ZdelPreviousObligorRule.NegotiatedDate"/>
+   <map from="ZdelExportPrevious.NonAdcArrearsMaxAmount"
+        to="ZdelPreviousObligorRule.NonAdcArrearsMaxAmount"/>
+   <map from="ZdelExportPrevious.NonAdcArrearsAmount"
+        to="ZdelPreviousObligorRule.NonAdcArrearsAmount"/>
+   <map from="ZdelExportPrevious.NonAdcArrearsPercentage"
+        to="ZdelPreviousObligorRule.NonAdcArrearsPercentage"/>
+   <map from="ZdelExportPrevious.NonAdcCurrentMaxAmount"
+        to="ZdelPreviousObligorRule.NonAdcCurrentMaxAmount"/>
+   <map from="ZdelExportPrevious.NonAdcCurrentAmount"
+        to="ZdelPreviousObligorRule.NonAdcCurrentAmount"/>
+   <map from="ZdelExportPrevious.NonAdcCurrentPercentage"
+        to="ZdelPreviousObligorRule.NonAdcCurrentPercentage"/>
+   <map from="ZdelExportPrevious.SystemGeneratedIdentifier"
+        to="ZdelPreviousObligorRule.SystemGeneratedIdentifier"/>
+   <map from="ZdelExportPrevious.PassthruPercentage"
+        to="ZdelPreviousObligorRule.PassthruPercentage"/>
+   <map from="ZdelExportPrevious.PassthruAmount"
+        to="ZdelPreviousObligorRule.PassthruAmount"/>
+   <map from="ZdelExportPrevious.PassthruMaxAmount"
+        to="ZdelPreviousObligorRule.PassthruMaxAmount"/>
+   <map from="ZdelExportPrevious.EffectiveDate"
+        to="ZdelPreviousObligorRule.EffectiveDate"/>
+   <map from="ZdelExportPrevious.DiscontinueDate"
+        to="ZdelPreviousObligorRule.DiscontinueDate"/>
+</procedure>

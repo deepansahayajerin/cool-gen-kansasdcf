@@ -1,0 +1,217 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnApsmDsplyApPyrAcctSum"
+           program-name="SWEAPSMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnApsmDsplyApPyrAcctSum"
+           transaction="SR60"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_OCTO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="FnOctoLstObligByCourtOrder"
+       send-command="DISPLAY">
+      <map from="ShowDeactivateForOcto.SelectChar"
+           to="ShowDeactivedObligation.SelectChar"/>
+      <map from="LegalAction.StandardNumber" to="Search.StandardNumber"/>
+      <return-map from="Pass.Number" to="FromNameList.Number"/>
+      <return-map from="Pass.FormattedName" to="FromNameList.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_LGL_ACT_BY_CSE_P"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCASE"
+       to="LeLapsLstLglActnByCsePers"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePersonsWorkSet.FirstName" to="CsePersonsWorkSet.FirstName"/>
+      <map from="CsePersonsWorkSet.MiddleInitial"
+           to="CsePersonsWorkSet.MiddleInitial"/>
+      <map from="CsePersonsWorkSet.LastName" to="CsePersonsWorkSet.LastName"/>
+      <return-map from="Selected" to="FromListSelect"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LACN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCASE"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command-type="none">
+      <return-map from="DlgflwSelected" to="FromListSelect"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="FromNameList"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LCDA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnLcdaListCollDistActivity"
+       send-command="DISPLAY">
+      <map from="CsePerson" to="ObligorCsePerson"/>
+      <map from="CsePersonsWorkSet" to="ObligorCsePersonsWorkSet"/>
+      <map from="LegalAction.StandardNumber" to="LegalAction.StandardNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU ECO_LNK_TO_DSPLY_AP_PYR_ASUM"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_OPAY_OBLG_BY_AP ECO_LNK_LST_OBLIG_BY_AP_PAYOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_CRUC_UNDSTRBTD_CL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnCrucLstUndistrbtdCollectns"
+       send-command="DISPLAY">
+      <map from="LegalAction" to="CourtOrderFilter"/>
+      <map from="CsePerson" to="CsePerson"/>
+   </on>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="PromptForCourtOrder" to="PromptForCourtOrder"/>
+   <map from="MultiJoint" to="MultiJoint"/>
+   <map from="TotalOfAllCollections" to="TotalOfAllCollections"/>
+   <map from="PromptForCsePerson" to="PromptForCsePerson"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="CertifiedFdso" to="CertifiedFdso"/>
+   <map from="CertifiedSdso" to="CertifiedSdso"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="AmtPrompt" to="AmtPrompt"/>
+   <map from="TotCurrAndPerDue" to="TotCurrAndPerDue"/>
+   <map from="Group.GarrOweTitle" to="Group.GarrOweTitle"/>
+   <map from="Group.GarrOweAmount" to="Group.GarrOweAmount"/>
+   <map from="Group.GintOweTitle" to="Group.GintOweTitle"/>
+   <map from="Group.GintOweAmount" to="Group.GintOweAmount"/>
+   <map from="Group.GarrCollTitle" to="Group.GarrCollTitle"/>
+   <map from="Group.GarrCollAmount" to="Group.GarrCollAmount"/>
+   <map from="Group.GintCollTitle" to="Group.GintCollTitle"/>
+   <map from="Group.GintCollAmount" to="Group.GintCollAmount"/>
+   <map from="ScreenOwedAmountsDtl.CsCurrOwed"
+        to="ScreenOwedAmountsDtl.CsCurrOwed"/>
+   <map from="ScreenOwedAmountsDtl.SpCurrOwed"
+        to="ScreenOwedAmountsDtl.SpCurrOwed"/>
+   <map from="ScreenOwedAmountsDtl.CsCurrColl"
+        to="ScreenOwedAmountsDtl.CsCurrColl"/>
+   <map from="ScreenOwedAmountsDtl.SpCurrColl"
+        to="ScreenOwedAmountsDtl.SpCurrColl"/>
+   <map from="ScreenOwedAmountsDtl.MsCurrColl"
+        to="ScreenOwedAmountsDtl.MsCurrColl"/>
+   <map from="ScreenOwedAmountsDtl.NaNaArrearsOwed"
+        to="ScreenOwedAmountsDtl.NaNaArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.NfArrearsOwed"
+        to="ScreenOwedAmountsDtl.NfArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.AfPaArrearsOwed"
+        to="ScreenOwedAmountsDtl.AfPaArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.FcPaArrearsOwed"
+        to="ScreenOwedAmountsDtl.FcPaArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.RecoveryArrearsOwed"
+        to="ScreenOwedAmountsDtl.RecoveryArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.FeesArrearsOwed"
+        to="ScreenOwedAmountsDtl.FeesArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.UndistributedAmt"
+        to="ScreenOwedAmountsDtl.UndistributedAmt"/>
+   <map from="ScreenOwedAmountsDtl.NaNaInterestOwed"
+        to="ScreenOwedAmountsDtl.NaNaInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.NfInterestOwed"
+        to="ScreenOwedAmountsDtl.NfInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.AfPaInterestOwed"
+        to="ScreenOwedAmountsDtl.AfPaInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.FcPaInterestOwed"
+        to="ScreenOwedAmountsDtl.FcPaInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.FeesInterestOwed"
+        to="ScreenOwedAmountsDtl.FeesInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.NaNaArrearCollected"
+        to="ScreenOwedAmountsDtl.NaNaArrearCollected"/>
+   <map from="ScreenOwedAmountsDtl.NfArrearsColl"
+        to="ScreenOwedAmountsDtl.NfArrearsColl"/>
+   <map from="ScreenOwedAmountsDtl.AfPaArrearCollected"
+        to="ScreenOwedAmountsDtl.AfPaArrearCollected"/>
+   <map from="ScreenOwedAmountsDtl.FcPaArrearCollected"
+        to="ScreenOwedAmountsDtl.FcPaArrearCollected"/>
+   <map from="ScreenOwedAmountsDtl.RecoveryArrearsColl"
+        to="ScreenOwedAmountsDtl.RecoveryArrearsColl"/>
+   <map from="ScreenOwedAmountsDtl.FeesArrearsColl"
+        to="ScreenOwedAmountsDtl.FeesArrearsColl"/>
+   <map from="ScreenOwedAmountsDtl.NaNaInterestCollected"
+        to="ScreenOwedAmountsDtl.NaNaInterestCollected"/>
+   <map from="ScreenOwedAmountsDtl.NfInterestColl"
+        to="ScreenOwedAmountsDtl.NfInterestColl"/>
+   <map from="ScreenOwedAmountsDtl.AfPaInterestCollected"
+        to="ScreenOwedAmountsDtl.AfPaInterestCollected"/>
+   <map from="ScreenOwedAmountsDtl.FcPaInterestCollected"
+        to="ScreenOwedAmountsDtl.FcPaInterestCollected"/>
+   <map from="ScreenOwedAmountsDtl.FeesInterestColl"
+        to="ScreenOwedAmountsDtl.FeesInterestColl"/>
+   <map from="ScreenOwedAmountsDtl.TotalArrearsOwed"
+        to="ScreenOwedAmountsDtl.TotalArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.TotalArrearsColl"
+        to="ScreenOwedAmountsDtl.TotalArrearsColl"/>
+   <map from="ScreenOwedAmountsDtl.TotalInterestColl"
+        to="ScreenOwedAmountsDtl.TotalInterestColl"/>
+   <map from="ScreenOwedAmountsDtl.FutureColl"
+        to="ScreenOwedAmountsDtl.FutureColl"/>
+   <map from="ScreenOwedAmountsDtl.TotalCurrColl"
+        to="ScreenOwedAmountsDtl.TotalCurrColl"/>
+   <map from="ScreenOwedAmountsDtl.TotalCurrOwed"
+        to="ScreenOwedAmountsDtl.TotalCurrOwed"/>
+   <map from="ScreenOwedAmountsDtl.TotalInterestOwed"
+        to="ScreenOwedAmountsDtl.TotalInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.ErrorInformationLine"
+        to="ScreenOwedAmountsDtl.ErrorInformationLine"/>
+   <map from="ScreenOwedAmountsDtl.LastCollAmt"
+        to="ScreenOwedAmountsDtl.LastCollAmt"/>
+   <map from="ScreenOwedAmountsDtl.IncomingInterstateObExists"
+        to="ScreenOwedAmountsDtl.IncomingInterstateObExists"/>
+   <map from="ScreenOwedAmountsDtl.AfiArrearsOwed"
+        to="ScreenOwedAmountsDtl.AfiArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.AfiArrearsColl"
+        to="ScreenOwedAmountsDtl.AfiArrearsColl"/>
+   <map from="ScreenOwedAmountsDtl.AfiInterestOwed"
+        to="ScreenOwedAmountsDtl.AfiInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.AfiInterestColl"
+        to="ScreenOwedAmountsDtl.AfiInterestColl"/>
+   <map from="ScreenOwedAmountsDtl.FciArrearsOwed"
+        to="ScreenOwedAmountsDtl.FciArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.FciArrearsColl"
+        to="ScreenOwedAmountsDtl.FciArrearsColl"/>
+   <map from="ScreenOwedAmountsDtl.FciInterestOwed"
+        to="ScreenOwedAmountsDtl.FciInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.FciInterestColl"
+        to="ScreenOwedAmountsDtl.FciInterestColl"/>
+   <map from="ScreenOwedAmountsDtl.NaiArrearsOwed"
+        to="ScreenOwedAmountsDtl.NaiArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.NaiArrearsColl"
+        to="ScreenOwedAmountsDtl.NaiArrearsColl"/>
+   <map from="ScreenOwedAmountsDtl.NaiInterestOwed"
+        to="ScreenOwedAmountsDtl.NaiInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.NaiInterestColl"
+        to="ScreenOwedAmountsDtl.NaiInterestColl"/>
+   <map from="ScreenOwedAmountsDtl.NcArrearsOwed"
+        to="ScreenOwedAmountsDtl.NcArrearsOwed"/>
+   <map from="ScreenOwedAmountsDtl.NcArrearsColl"
+        to="ScreenOwedAmountsDtl.NcArrearsColl"/>
+   <map from="ScreenOwedAmountsDtl.NcInterestOwed"
+        to="ScreenOwedAmountsDtl.NcInterestOwed"/>
+   <map from="ScreenOwedAmountsDtl.NcInterestColl"
+        to="ScreenOwedAmountsDtl.NcInterestColl"/>
+   <map from="ScreenOwedAmountsDtl.McCurrOwed"
+        to="ScreenOwedAmountsDtl.McCurrOwed"/>
+   <map from="ScreenOwedAmountsDtl.McCurrColl"
+        to="ScreenOwedAmountsDtl.McCurrColl"/>
+   <map from="ScreenOwedAmountsDtl.MsCurrOwed"
+        to="ScreenOwedAmountsDtl.MsCurrOwed"/>
+</procedure>

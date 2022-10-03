@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID
+from
+  CKT_CASE_ROLE
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  CUST_SERVICE_CD
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb) and
+  (CUST_SERVICE_CD = 'E')
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  CUST_SERVICE_CD
+from
+  CKT_CSE_PERSON
+where
+  (NUMB = @numb) and
+  (CUST_SERVICE_CD = 'E')
+</value>
+   </data>
+   <data name="ReadCsePersonEmailAddress">
+      <value>
+select
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  EMAIL_SOURCE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  EMAIL_ADDR
+from
+  CKT_CSP_EMAIL_ADDR
+where
+  (CSP_NUMBER = @cspNumber) and
+  (
+    (END_DATE &lt; @endDate) or
+    (
+      (END_DATE = @endDate) and
+      (LAST_UPDATED_TMST &lt; @lastUpdatedTmst)
+    )
+  )
+order by
+  END_DATE desc,
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+</root>

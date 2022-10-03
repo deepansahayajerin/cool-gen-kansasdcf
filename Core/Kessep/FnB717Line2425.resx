@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadIncomeSource">
+      <value>
+select
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CSP_I_NUMBER,
+  END_DT
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (RETURN_DT = @returnDt)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  SITUATION_NUMBER,
+  EVENT_ID,
+  REASON_CODE,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  CASE_UNIT_NUM,
+  CREATED_TIMESTAMP,
+  REFERENCE_DATE,
+  DETAIL
+from
+  CKT_INFRASTRUCTURE with(readuncommitted)
+where
+  (CREATED_TIMESTAMP &gt; @createdTimestamp1) and
+  (CREATED_TIMESTAMP &lt; @createdTimestamp2) and
+  (CASE_NUMBER = @caseNumber) and
+  (EVENT_ID = 10)
+order by
+  REASON_CODE,
+  SITUATION_NUMBER,
+  CASE_UNIT_NUM
+</value>
+   </data>
+</root>

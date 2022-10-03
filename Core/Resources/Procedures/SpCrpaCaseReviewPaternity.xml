@@ -1,0 +1,207 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCrpaCaseReviewPaternity"
+           program-name="SWECRPAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCrpaCaseReviewPaternity"
+           transaction="SR4I"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CHDS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SiChdsChildDetails"
+       send-command="DISPLAY">
+      <map from="Case1" to="Next"/>
+      <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+      <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+      <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+      <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+      <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+      <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+      <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+      <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+      <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+      <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+      <map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+      <map from="Hidden.MiscText1" to="Hidden.MiscText1"/>
+      <map from="Hidden.MiscText2" to="Hidden.MiscText2"/>
+      <map from="Hidden.MiscNum1" to="Hidden.MiscNum1"/>
+      <map from="Hidden.MiscNum2" to="Hidden.MiscNum2"/>
+      <map from="Hidden.MiscNum1V2" to="Hidden.MiscNum1V2"/>
+      <map from="Hidden.MiscNum2V2" to="Hidden.MiscNum2V2"/>
+      <return-map from="Hidden" to="Hidden"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpCrmeCaseReviewMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_GENETIC_TEST_DETAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeGtdsDisplayGenTestDetls"
+       send-command="DISPLAY">
+      <map from="SelectedChildCsePerson" to="ChildCsePerson"/>
+      <map from="SelectedChildCsePersonsWorkSet.Number"
+           to="ChildCsePersonsWorkSet.Number"/>
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden" to="Hidden"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_GENETIC_TEST_SCHEDULE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeGtscMaintGeneticTestDetls"
+       send-command="FLWCOMP">
+      <map from="SelectedMotherCsePersonsWorkSet" to="SelectedMother"/>
+      <map from="SelectedAllegFather" to="SelectedAllegedFather"/>
+      <map from="SelectedChildCsePersonsWorkSet" to="SelectedChild"/>
+      <map from="Case1" to="SelectedCase"/>
+      <map from="Hidden.LegalActionIdentifier"
+           to="HiddenNextTranInfo.LegalActionIdentifier"/>
+      <map from="Hidden.CourtCaseNumber" to="HiddenNextTranInfo.CourtCaseNumber"/>
+      <map from="Hidden.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+      <map from="Hidden.CsePersonNumber" to="HiddenNextTranInfo.CsePersonNumber"/>
+      <map from="Hidden.CsePersonNumberAp"
+           to="HiddenNextTranInfo.CsePersonNumberAp"/>
+      <map from="Hidden.CsePersonNumberObligee"
+           to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+      <map from="Hidden.CsePersonNumberObligor"
+           to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+      <map from="Hidden.CourtOrderNumber" to="HiddenNextTranInfo.CourtOrderNumber"/>
+      <map from="Hidden.ObligationId" to="HiddenNextTranInfo.ObligationId"/>
+      <map from="Hidden.StandardCrtOrdNumber"
+           to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+      <map from="Hidden.InfrastructureId" to="HiddenNextTranInfo.InfrastructureId"/>
+      <map from="Hidden.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+      <map from="Hidden.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+      <map from="Hidden.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+      <map from="Hidden.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+      <map from="Hidden.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+      <map from="Hidden.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LEGAL_REQUEST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="OeLgrqLegalRequest"
+       send-command="DISPLAY">
+      <map from="SelectedAllegFather.Number" to="ApCsePersonsWorkSet.Number"/>
+      <map from="LegalReferral.ReferralDate" to="LegalReferral.ReferralDate"/>
+      <map from="Mo" to="ArCsePersonsWorkSet"/>
+      <map from="Case1" to="Case1"/>
+      <return-autoflow command="RETURN" exit-state="ACO_NE0000_RETURN"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CR_ESTABLISHMENT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SpCresCaseRviewEstablishment"
+       send-command="DISPLAY">
+      <map from="HiddenPass1" to="HiddenPass1"/>
+      <map from="Case1" to="Case1"/>
+      <map from="HiddenPassedReviewType" to="HiddenPassedReviewType"/>
+      <map from="Hidden" to="Hidden"/>
+      <map from="CaseClosedIndicator" to="CaseClosedIndicator"/>
+      <map from="HiddenPass.GexportHiddenPassed"
+           to="HiddenPass.GimportHiddenPassed"/>
+      <map from="HiddenPass.GexportH" to="HiddenPass.GimportH"/>
+      <map from="MultiAp" to="MultiAp"/>
+      <map from="ApSelected" to="ApSelected"/>
+      <map from="SelectedAp" to="SelectedAp"/>
+      <return-map from="HiddenPass1" to="HiddenPass1"/>
+      <return-map from="HiddenPass.GexportHiddenPassed"
+                  to="HiddenPass.GimportHiddenPassed"/>
+      <return-map from="HiddenPass.GexportH" to="HiddenPass.GimportH"/>
+      <return-map from="Case1" to="Case1"/>
+      <return-map from="HiddenPassedReviewType" to="HiddenPassedReviewType"/>
+      <return-map from="MultiAp" to="MultiAp"/>
+      <return-map from="ApSelected" to="ApSelected"/>
+      <return-map from="SelectedAp" to="SelectedAp"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CPAT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCpatChildPaternityMaint"
+       send-command="DISPLAY">
+      <map from="FromCrpa" to="FromCrpa"/>
+      <map from="Ap.FormattedName" to="Ap.FormattedName"/>
+      <map from="Ap.Number" to="Ap.Number"/>
+      <map from="Case1" to="Next"/>
+      <map from="Hidden.LegalActionIdentifier"
+           to="HiddenNextTranInfo.LegalActionIdentifier"/>
+      <map from="Hidden.CourtCaseNumber" to="HiddenNextTranInfo.CourtCaseNumber"/>
+      <map from="Hidden.CaseNumber" to="HiddenNextTranInfo.CaseNumber"/>
+      <map from="Hidden.CsePersonNumber" to="HiddenNextTranInfo.CsePersonNumber"/>
+      <map from="Hidden.CsePersonNumberAp"
+           to="HiddenNextTranInfo.CsePersonNumberAp"/>
+      <map from="Hidden.CsePersonNumberObligee"
+           to="HiddenNextTranInfo.CsePersonNumberObligee"/>
+      <map from="Hidden.CsePersonNumberObligor"
+           to="HiddenNextTranInfo.CsePersonNumberObligor"/>
+      <map from="Hidden.CourtOrderNumber" to="HiddenNextTranInfo.CourtOrderNumber"/>
+      <map from="Hidden.ObligationId" to="HiddenNextTranInfo.ObligationId"/>
+      <map from="Hidden.StandardCrtOrdNumber"
+           to="HiddenNextTranInfo.StandardCrtOrdNumber"/>
+      <map from="Hidden.InfrastructureId" to="HiddenNextTranInfo.InfrastructureId"/>
+      <map from="Hidden.MiscText1" to="HiddenNextTranInfo.MiscText1"/>
+      <map from="Hidden.MiscText2" to="HiddenNextTranInfo.MiscText2"/>
+      <map from="Hidden.MiscNum1" to="HiddenNextTranInfo.MiscNum1"/>
+      <map from="Hidden.MiscNum2" to="HiddenNextTranInfo.MiscNum2"/>
+      <map from="Hidden.MiscNum1V2" to="HiddenNextTranInfo.MiscNum1V2"/>
+      <map from="Hidden.MiscNum2V2" to="HiddenNextTranInfo.MiscNum2V2"/>
+   </on>
+   <map from="FromCrpa" to="FromCrpa"/>
+   <map from="UnknownPaternity" to="UnknownPaternity"/>
+   <map from="Child.GeneticTest" to="Child.GeneticTest"/>
+   <map from="Child.Compliance" to="Child.Compliance"/>
+   <map from="Child.Common" to="Child.Common"/>
+   <map from="Child.Child1" to="Child.Child1"/>
+   <map from="Child.StartDate" to="Child.StartDate"/>
+   <map from="Child.FedCompliance" to="Child.FedCompliance"/>
+   <map from="Child.ChildAge" to="Child.ChildAge"/>
+   <map from="Child.DaysRemainInCompli" to="Child.DaysRemainInCompli"/>
+   <map from="Child.ChildCsePersonsWorkSet" to="Child.ChildCsePersonsWorkSet"/>
+   <map from="Child.ChAgeMsgTxt" to="Child.ChAgeMsgTxt"/>
+   <map from="Child.GeneticTestSchedule" to="Child.GeneticTestSchedule"/>
+   <map from="Mo" to="Mo"/>
+   <map from="Ap" to="Ap"/>
+   <map from="MoreApsMsg" to="MoreApsMsg"/>
+   <map from="Ar" to="Ar"/>
+   <map from="ServiceProcess" to="ServiceProcess"/>
+   <map from="Case1" to="Case1"/>
+   <map from="Child.Ap" to="Child.Ap"/>
+   <map from="Child.ReferredToLegal" to="Child.ReferredToLegal"/>
+   <map from="Child.LegalReferral" to="Child.LegalReferral"/>
+   <map from="HiddenPassedReviewType" to="HiddenPassedReviewType"/>
+   <map from="LegalReferral" to="LegalReferral"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenPass1" to="HiddenPass1"/>
+   <map from="CaseClosedIndicator" to="CaseClosedIndicator"/>
+   <map from="ActivityLiteral" to="ActivityLiteral"/>
+   <map from="HiddenPass.GexportHiddenPassed"
+        to="HiddenPass.GimportHiddenPassed"/>
+   <map from="MultiAp" to="MultiAp"/>
+   <map from="ApSelected" to="ApSelected"/>
+   <map from="SelectedAp" to="SelectedAp"/>
+   <map from="PatReview" to="PatReview"/>
+   <map from="HiddenPass.GexportH" to="HiddenPass.GimportH"/>
+   <map from="Child.ChildCaseRole.Type1" to="Child.ChildCaseRole.Type1"/>
+   <map from="Child.ChildCsePerson.PaternityEstablishedIndicator"
+        to="Child.ChildCsePerson.PaternityEstablishedIndicator"/>
+   <map from="Child.ChildCsePerson.BirthCertificateSignature"
+        to="Child.ChildCsePerson.BirthCertificateSignature"/>
+   <map from="Child.ChildCsePerson.BirthCertFathersFirstName"
+        to="Child.ChildCsePerson.BirthCertFathersFirstName"/>
+   <map from="Child.ChildCsePerson.BirthCertFathersLastName"
+        to="Child.ChildCsePerson.BirthCertFathersLastName"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

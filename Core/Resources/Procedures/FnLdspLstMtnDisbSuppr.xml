@@ -1,0 +1,101 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnLdspLstMtnDisbSuppr"
+           program-name="SWELDSPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnLdspLstMtnDisbSuppr"
+           transaction="SR76"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_PAYEE_W_DISB_SUP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnLpspLstPyeesWthDisbSupp"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="SearchPayee"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_MTN_COLL_DISB_SUPPR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCsupMtnCollDisbSupprssion"
+       send-command="DISPLAY">
+      <map from="Selected.Code" to="CollectionType.Code"/>
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <return-map from="CsePerson" to="CsePerson"/>
+      <return-map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MTN_PERSON_DISB_SUPP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnPsupMtnPrsnDisbSupprssn"
+       send-command="DISPLAY">
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="CsePerson" to="CsePerson"/>
+      <return-map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LST_PAYEE_ACCT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="CsePerson" to="CsePerson"/>
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToCdvl" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromCdvl"/>
+   </on>
+   <map from="Export1.DupPmtSupp" to="Import1.DupPmtSupp"/>
+   <map from="SearchEnding" to="SearchEnding"/>
+   <map from="SearchRefNbr" to="SearchRefNbr"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="SearchStarting" to="SearchStarting"/>
+   <map from="Export1.DisbursementTransaction"
+        to="Import1.DisbursementTransaction"/>
+   <map from="PromptPayee" to="PromptPayee"/>
+   <map from="HiddenDisplayed" to="HiddenDisplayed"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.DisbursementStatus" to="Import1.DisbursementStatus"/>
+   <map from="Export1.DisbursementStatusHistory"
+        to="Import1.DisbursementStatusHistory"/>
+   <map from="Export1.AutoSupp" to="Import1.AutoSupp"/>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Export1.DisbursementType" to="Import1.DisbursementType"/>
+   <map from="Export1.CollSupp" to="Import1.CollSupp"/>
+   <map from="Export1.DisbSuppressionStatusHistory"
+        to="Import1.DisbSuppressionStatusHistory"/>
+   <map from="Export1.PersonSupp" to="Import1.PersonSupp"/>
+   <map from="Export1.DisbType" to="Import1.DisbType"/>
+   <map from="Search" to="Search"/>
+   <map from="PromptSuppressionType" to="PromptSuppressionType"/>
+   <map from="SuppressionType" to="SuppressionType"/>
+   <map from="Export1.AddrSupp" to="Import1.AddrSupp"/>
+   <map from="Export1.DodSupp" to="Import1.DodSupp"/>
+   <map from="Export1.SuppTypes" to="Import1.SuppTypes"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+</procedure>

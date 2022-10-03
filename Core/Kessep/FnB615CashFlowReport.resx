@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateJobRun">
+      <value>
+insert into CKT_JOB_RUN
+(
+  START_TIMESTAMP,
+  END_TIMESTAMP,
+  ZDEL_USER_ID,
+  ZDEL_PERSON_NUMBER,
+  ZDEL_LEG_ACTION_ID,
+  STATUS,
+  SPD_SRVC_PRVDER_ID,
+  PRINTER_ID,
+  OUTPUT_TYPE,
+  ERROR_MSG,
+  EMAIL_ADDRESS,
+  PARM_INFO,
+  JOB_NAME,
+  SYSTEM_GEN_ID
+)
+values
+(
+  @startTimestamp,
+  @endTimestamp,
+  @zdelUserId,
+  @zdelPersonNumber,
+  @zdelLegActionId,
+  @status,
+  null,
+  @zdelUserId,
+  @outputType,
+  @errorMsg,
+  @emailAddress,
+  @parmInfo,
+  @jobName,
+  @systemGenId
+)
+</value>
+   </data>
+   <data name="CreateReportData1">
+      <value>
+insert into CKT_REPORT_DATA
+(
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+)
+values
+(
+  @type,
+  @sequenceNumber,
+  @firstPageOnlyIn,
+  @lineControl,
+  @lineText,
+  @jobName,
+  @jruSystemGenId
+)
+</value>
+   </data>
+   <data name="CreateReportData2">
+      <value>
+insert into CKT_REPORT_DATA
+(
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+)
+values
+(
+  @type,
+  @sequenceNumber,
+  @firstPageOnlyIn,
+  @lineControl,
+  @lineText,
+  @jobName,
+  @jruSystemGenId
+)
+</value>
+   </data>
+   <data name="ReadJob">
+      <value>
+select top(1)
+  NAME
+from
+  CKT_JOB
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="UpdateJobRun1">
+      <value>
+update CKT_JOB_RUN
+set
+  END_TIMESTAMP = @endTimestamp,
+  STATUS = @status
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+   <data name="UpdateJobRun2">
+      <value>
+update CKT_JOB_RUN
+set
+  STATUS = @status
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+</root>

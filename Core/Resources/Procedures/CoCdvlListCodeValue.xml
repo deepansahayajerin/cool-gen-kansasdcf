@@ -1,0 +1,34 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="CoCdvlListCodeValue"
+           program-name="SWECDVLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.CoCdvlListCodeValue"
+           transaction="SR5L"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="CoStbmSupportTablesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_NAMES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCNAME"
+       to="CoCdnlListCodeNames"
+       send-command="DISPLAY">
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <map from="Export1.Detail" to="Import1.Detail"/>
+   <map from="Export1.DetailSelection" to="Import1.DeatilSelection"/>
+   <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+   <map from="CombinationCode" to="CombinationCode"/>
+   <map from="CombinationCodeValue" to="CombinationCodeValue"/>
+   <map from="Code" to="Code"/>
+   <map from="ListCrossValCodeName" to="ListCrossValCodeName"/>
+   <map from="ListCodeName" to="ListCodeName"/>
+   <map from="AllowChangingCodeName" to="AllowChangingCodeName"/>
+   <map from="HiddenReturnMultRecs" to="HiddenReturnMultRecs"/>
+   <map from="Starting" to="Starting"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

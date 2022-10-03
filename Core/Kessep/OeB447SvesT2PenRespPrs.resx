@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFcrSvesTitleIiPend">
+      <value>
+insert into CKT_FCR_SVES_T2_P
+(
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  SEQ_NO,
+  NAME_MATCHED_CODE,
+  RESPONSE_DATE,
+  OTHER_SSN,
+  SSN_MATCH_CODE,
+  CLAIM_TYPE_CODE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FCR_FIRST_NAME,
+  FCR_MIDDLE_NAME,
+  FCR_LAST_NAME,
+  AD_1ST_NAME_1_TXT,
+  AD_MID_NAME_1_TXT,
+  AD_LST_NAME_1_TXT,
+  AD_1ST_NAME_2_TXT,
+  AD_MID_NAME_2_TXT,
+  AD_LST_NAME_2_TXT
+)
+values
+(
+  @fcgMemberId,
+  @fcgLSRspAgy,
+  @seqNo,
+  @nameMatchedCode,
+  @responseDate,
+  @otherSsn,
+  @ssnMatchCode,
+  @claimTypeCode,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @fcrFirstName,
+  @fcrMiddleName,
+  @fcrLastName,
+  @ad1StName1Txt,
+  @adMidName1Txt,
+  @adLstName1Txt,
+  @ad1StName2Txt,
+  @adMidName2Txt,
+  @adLstName2Txt
+)
+</value>
+   </data>
+   <data name="ReadFcrSvesGenInfo">
+      <value>
+select top(1)
+  MEMBER_ID,
+  LOC_SRC_RSP_AGY_CD
+from
+  CKT_FCR_SVES_GEN
+where
+  (MEMBER_ID = @memberId) and
+  (LOC_SRC_RSP_AGY_CD = @locSrcRspAgyCd)
+</value>
+   </data>
+   <data name="ReadFcrSvesTitleIiPend">
+      <value>
+select top(1)
+  FCG_MEMBER_ID,
+  FCG_L_S_RSP_AGY,
+  SEQ_NO,
+  NAME_MATCHED_CODE,
+  RESPONSE_DATE,
+  OTHER_SSN,
+  SSN_MATCH_CODE,
+  CLAIM_TYPE_CODE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FCR_FIRST_NAME,
+  FCR_MIDDLE_NAME,
+  FCR_LAST_NAME,
+  AD_1ST_NAME_1_TXT,
+  AD_MID_NAME_1_TXT,
+  AD_LST_NAME_1_TXT,
+  AD_1ST_NAME_2_TXT,
+  AD_MID_NAME_2_TXT,
+  AD_LST_NAME_2_TXT
+from
+  CKT_FCR_SVES_T2_P
+where
+  (SEQ_NO = @seqNo) and
+  (@fcgLSRspAgy = FCG_L_S_RSP_AGY) and
+  (@fcgMemberId = FCG_MEMBER_ID)
+</value>
+   </data>
+   <data name="UpdateFcrSvesTitleIiPend">
+      <value>
+update CKT_FCR_SVES_T2_P
+set
+  NAME_MATCHED_CODE = @nameMatchedCode,
+  RESPONSE_DATE = @responseDate,
+  OTHER_SSN = @otherSsn,
+  SSN_MATCH_CODE = @ssnMatchCode,
+  CLAIM_TYPE_CODE = @claimTypeCode,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  FCR_FIRST_NAME = @fcrFirstName,
+  FCR_MIDDLE_NAME = @fcrMiddleName,
+  FCR_LAST_NAME = @fcrLastName,
+  AD_1ST_NAME_1_TXT = @ad1StName1Txt,
+  AD_MID_NAME_1_TXT = @adMidName1Txt,
+  AD_LST_NAME_1_TXT = @adLstName1Txt,
+  AD_1ST_NAME_2_TXT = @ad1StName2Txt,
+  AD_MID_NAME_2_TXT = @adMidName2Txt,
+  AD_LST_NAME_2_TXT = @adLstName2Txt
+where
+  (FCG_MEMBER_ID = @fcgMemberId) and
+  (FCG_L_S_RSP_AGY = @fcgLSRspAgy) and
+  (SEQ_NO = @seqNo)
+</value>
+   </data>
+</root>

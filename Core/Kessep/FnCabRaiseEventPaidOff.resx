@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateInfrastructure">
+      <value>
+update CKT_INFRASTRUCTURE
+set
+  OTY_ID = @otyId,
+  CPA_TYPE = @cpaType,
+  CSP_NO = @cspNo,
+  OBG_ID = @obgId
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadCaseCaseUnit1">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.CSP_NO_AR,
+  T2.CSP_NO_AP,
+  T2.CSP_NO_CHILD
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_UNIT T2 with(readuncommitted)
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NO) and
+    (@cspNoAr = T2.CSP_NO_AR) and
+    (T2.CSP_NO_AP = @cspNoAp)
+</value>
+   </data>
+   <data name="ReadCaseCaseUnit2">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T2.CU_NUMBER,
+  T2.CSP_NO_AR,
+  T2.CSP_NO_AP,
+  T2.CSP_NO_CHILD
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_UNIT T2 with(readuncommitted)
+  on
+    (T1.STATUS = 'O') and
+    (T1.NUMB = T2.CAS_NO) and
+    (@cspNoChild = T2.CSP_NO_CHILD) and
+    (T2.CSP_NO_AP = @cspNoAp)
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE with(readuncommitted)
+where
+  (@casNumber = CAS_NUMBER) and
+  (TYPE = 'AP') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OB_TRN T3
+  on
+    (T1.NUMB = T3.CSP_SUP_NUMBER) and
+    (T3.CPA_SUP_TYPE = 'S') and
+    (T3.OB_TRN_TYP = 'DE') and
+    (T3.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T3.CPA_TYPE = 'R') and
+    (T3.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  OTY_ID,
+  CPA_TYPE,
+  CSP_NO,
+  OBG_ID
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  CAS_I_NUMBER = @casINumber
+</value>
+   </data>
+   <data name="ReadInterstateRequestObligationInterstateRequest">
+      <value>
+select top(1)
+  T1.OTY_TYPE,
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OBG_GENERATED_ID,
+  T1.INT_GENERATED_ID,
+  T1.ORDER_END_DATE,
+  T2.KS_CASE_IND,
+  T2.CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST T2 with(readuncommitted)
+  join
+  CKT_INT_RQST_OBG T1 with(readuncommitted)
+  on
+    (T1.ORDER_END_DATE = @orderEndDate) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T1.OTY_TYPE = @otyType) and
+    (T2.IDENTIFIER = T1.INT_GENERATED_ID)
+order by
+  T1.ORDER_END_DATE desc
+</value>
+   </data>
+   <data name="ReadObligationObligationType">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_OBLIGATION T1
+  on
+    (T1.OB_ID = @obId) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T2.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (T2.DEBT_TYP_ID = @debtTypId)
+</value>
+   </data>
+</root>

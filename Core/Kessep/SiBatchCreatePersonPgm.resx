@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePersonProgram">
+      <value>
+insert into CKT_PERSON_PROGRAM
+(
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STATUS,
+  CLOSURE_REASON,
+  ASSIGNED_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CHANGED_IND,
+  CHANGE_DATE,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+)
+values
+(
+  @cspNumber,
+  @effectiveDate,
+  @status,
+  @closureReason,
+  @assignedDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @changedInd,
+  @changeDate,
+  @prgGeneratedId,
+  @medTypeDiscDate,
+  @medType
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  RECOMP_BAL_FROM_DT
+from
+  CKT_CSE_PERSON_ACC
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'S')
+</value>
+   </data>
+   <data name="ReadPersonProgram1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STATUS,
+  CLOSURE_REASON,
+  ASSIGNED_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CHANGED_IND,
+  CHANGE_DATE,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@prgGeneratedId = PRG_GENERATED_ID) and
+  (EFFECTIVE_DATE = @effectiveDate)
+</value>
+   </data>
+   <data name="ReadPersonProgram2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STATUS,
+  CLOSURE_REASON,
+  ASSIGNED_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CHANGED_IND,
+  CHANGE_DATE,
+  PRG_GENERATED_ID,
+  MED_TYPE_DISC_DATE,
+  MED_TYPE
+from
+  CKT_PERSON_PROGRAM
+where
+  (@cspNumber = CSP_NUMBER) and
+  (DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadProgram">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="UpdateCsePersonAccount">
+      <value>
+update CKT_CSE_PERSON_ACC
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  RECOMP_BAL_FROM_DT = @recompBalFromDt
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+</value>
+   </data>
+</root>

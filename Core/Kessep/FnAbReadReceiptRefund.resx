@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailAddress">
+      <value>
+select top(1)
+  CRDETAIL_ADDRESS_I,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3
+from
+  CKT_CRDETAIL_ADDRS
+where
+  CRDETAIL_ADDRESS_I = @crdetailAddressI
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  NAME
+from
+  CKT_CRSRC_TYPE
+where
+  CR_SRCE_TYPE_ID = @crSrceTypeId
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPaymentRequest">
+      <value>
+select top(1)
+  PAYMENT_REQUEST_ID,
+  PROCESS_DATE,
+  NUMBER,
+  PRINT_DATE,
+  TYPE,
+  RCT_R_TSTAMP,
+  PRQ_R_GENERATED_ID,
+  RECOUPMENT_IND_KPC
+from
+  CKT_PMNT_REQUEST
+where
+  @rctRTstamp = RCT_R_TSTAMP
+</value>
+   </data>
+   <data name="ReadPaymentStatusHistoryPaymentStatus">
+      <value>
+select top(1)
+  T1.PST_GENERATED_ID,
+  T1.PRQ_GENERATED_ID,
+  T1.PYMNT_STAT_HIST_ID,
+  T1.CREATED_TIMESTAMP,
+  T2.CODE
+from
+  CKT_PAYMENT_STATUS T2
+  join
+  CKT_PMNT_STAT_HIST T1
+  on
+    (@prqGeneratedId = T1.PRQ_GENERATED_ID) and
+    (T2.PAYMENT_STATUS_ID = T1.PST_GENERATED_ID)
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadReceiptRefund">
+      <value>
+select top(1)
+  CREATED_TIMESTAMP,
+  REASON_CODE,
+  TAXID,
+  PAYEE_NAME,
+  AMOUNT,
+  OFFSET_TAX_YEAR,
+  REQUEST_DATE,
+  CREATED_BY,
+  CSP_NUMBER,
+  CST_A_IDENTIFIER,
+  CDA_IDENTIFIER,
+  REASON_TEXT,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_RECEIPT_REFUND
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+</root>

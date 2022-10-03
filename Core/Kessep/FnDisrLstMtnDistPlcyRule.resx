@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE,
+  NAME
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadDistributionPolicy">
+      <value>
+select top(1)
+  DIST_PLCY_ID,
+  DIST_PLCY_NM,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  MAX_PRCD_DT,
+  CLT_IDENTIFIER
+from
+  CKT_DIST_PLCY
+where
+  DIST_PLCY_ID = @distPlcyId
+</value>
+   </data>
+   <data name="ReadDistributionPolicyCollectionType1">
+      <value>
+select top(1)
+  T1.DIST_PLCY_ID,
+  T1.DIST_PLCY_NM,
+  T1.EFFECTIVE_DT,
+  T1.DISCONTINUE_DT,
+  T1.MAX_PRCD_DT,
+  T1.CLT_IDENTIFIER,
+  T2.CODE,
+  T2.NAME
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_DIST_PLCY T1
+  on
+    (T1.DISCONTINUE_DT &gt; @discontinueDt) and
+    (T1.EFFECTIVE_DT &lt;= @discontinueDt) and
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.CODE = @code)
+</value>
+   </data>
+   <data name="ReadDistributionPolicyCollectionType2">
+      <value>
+select top(1)
+  T1.DIST_PLCY_ID,
+  T1.DIST_PLCY_NM,
+  T1.EFFECTIVE_DT,
+  T1.DISCONTINUE_DT,
+  T1.MAX_PRCD_DT,
+  T1.CLT_IDENTIFIER,
+  T2.CODE,
+  T2.NAME
+from
+  CKT_COLLTN_TYPE T2
+  join
+  CKT_DIST_PLCY T1
+  on
+    (T1.EFFECTIVE_DT = @effectiveDt) and
+    (T2.COLLECTION_TYPE_ID = T1.CLT_IDENTIFIER) and
+    (T2.CODE = @code)
+</value>
+   </data>
+</root>

@@ -1,0 +1,117 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeLocaLocateInterfaceResp"
+           program-name="SWELOCAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeLocaLocateInterfaceResp"
+           transaction="SRDO"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command="NMSRCH">
+      <return-map from="Selected" to="ForName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADDRESS_MAINTENANCE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETADDR"
+       to="SiAddrAddressMaintenance"
+       send-command="DISPLAY">
+      <map from="Case1" to="Next"/>
+      <map from="ForName" to="Save"/>
+      <map from="CsePerson" to="HiddenCsePerson"/>
+      <return-map from="Case1" to="FromAddrFads"/>
+      <return-map from="HiddenCsePerson.Number" to="CsePerson.Number"/>
+      <return-map from="Save.Number" to="ForName.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_FOREIGN_ADDRESS_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETADDR"
+       to="SiFadsForeignAddressMaint"
+       send-command="DISPLAY">
+      <map from="Case1" to="Next"/>
+      <map from="ForName" to="Search"/>
+      <return-map from="Start.Number" to="ForName.Number"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ALOM_MENU"
+       action="transfer"
+       to="OeAlomLocateInterfacesMenu"
+       send-command="SPACES">
+      <map from="Starting" to="Start"/>
+      <map from="CsePerson" to="Starting"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SI_COMP_CASE_COMP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Starting" to="Case1"/>
+      <return-map from="Selected" to="FromComp"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="LocateRequestSource" to="LocateRequestSource"/>
+   <map from="ZdelExportLocateRequest" to="LocateRequest1"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Case1" to="Group.Case1"/>
+   <map from="ScrollIndicator" to="ScrollIndicator"/>
+   <map from="Saved" to="Saved"/>
+   <map from="NamePrompt" to="NamePrompt"/>
+   <map from="LocaNextDisplay" to="LocalNextDisplay"/>
+   <map from="LocaPrevDisplay" to="LocalPrevDisplay"/>
+   <map from="NoCases" to="NoCases"/>
+   <map from="ZdelExportFromLocl" to="ZdelImportFromLocl"/>
+   <map from="Starting" to="Starting"/>
+   <map from="LocateRequest.SocialSecurityNumber"
+        to="LocateRequest2.SocialSecurityNumber"/>
+   <map from="LocateRequest.DateOfBirth" to="LocateRequest2.DateOfBirth"/>
+   <map from="LocateRequest.RequestDate" to="LocateRequest2.RequestDate"/>
+   <map from="LocateRequest.ResponseDate" to="LocateRequest2.ResponseDate"/>
+   <map from="LocateRequest.LicenseSourceName"
+        to="LocateRequest2.LicenseSourceName"/>
+   <map from="LocateRequest.Street1" to="LocateRequest2.Street1"/>
+   <map from="LocateRequest.Street2" to="LocateRequest2.Street2"/>
+   <map from="LocateRequest.Street3" to="LocateRequest2.Street3"/>
+   <map from="LocateRequest.Street4" to="LocateRequest2.Street4"/>
+   <map from="LocateRequest.City" to="LocateRequest2.City"/>
+   <map from="LocateRequest.State" to="LocateRequest2.State"/>
+   <map from="LocateRequest.Country" to="LocateRequest2.Country"/>
+   <map from="LocateRequest.ZipCode5" to="LocateRequest2.ZipCode5"/>
+   <map from="LocateRequest.ZipCode4" to="LocateRequest2.ZipCode4"/>
+   <map from="LocateRequest.ZipCode3" to="LocateRequest2.ZipCode3"/>
+   <map from="LocateRequest.AddressType" to="LocateRequest2.AddressType"/>
+   <map from="LocateRequest.Province" to="LocateRequest2.Province"/>
+   <map from="LocateRequest.PostalCode" to="LocateRequest2.PostalCode"/>
+   <map from="LocateRequest.LicenseNumber" to="LocateRequest2.LicenseNumber"/>
+   <map from="LocateRequest.LicenseIssuedDate"
+        to="LocateRequest2.LicenseIssuedDate"/>
+   <map from="LocateRequest.LicenseExpirationDate"
+        to="LocateRequest2.LicenseExpirationDate"/>
+   <map from="LocateRequest.LicenseSuspendedDate"
+        to="LocateRequest2.LicenseSuspendedDate"/>
+   <map from="ForName.FormattedName" to="ForName.FormattedName"/>
+   <map from="CsePerson.Number" to="CsePerson.Number"/>
+   <map from="LocateRequest.SequenceNumber" to="LocateRequest2.SequenceNumber"/>
+   <map from="LocateRequest.CsePersonNumber"
+        to="LocateRequest2.CsePersonNumber"/>
+   <map from="LocateRequest.AgencyNumber" to="LocateRequest2.AgencyNumber"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+   <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+   <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+   <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+   <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+   <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+   <map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+   <map from="Hidden.LastTran" to="Hidden.LastTran"/>
+   <map from="ForName.Dob" to="ForName.Dob"/>
+   <map from="ForName.Ssn" to="ForName.Ssn"/>
+   <map from="CsePerson.FamilyViolenceIndicator"
+        to="CsePerson.FamilyViolenceIndicator"/>
+</procedure>

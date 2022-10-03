@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateAlertDistributionRule">
+      <value>
+update CKT_ALERT_DST_RULE
+set
+  OSP_GENERATED_ID = @ospGeneratedId,
+  OFF_GENERATED_ID = @offGeneratedId,
+  OSP_ROLE_CODE = @ospRoleCode,
+  OSP_EFFECTIVE_DT = @ospEffectiveDt
+where
+  (SYSTEM_GENERATED_I = @systemGeneratedI) and
+  (EVE_NO = @eveNo) and
+  (EVD_ID = @evdId)
+</value>
+   </data>
+   <data name="CreateAlertDistributionRule">
+      <value>
+insert into CKT_ALERT_DST_RULE
+(
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT_CD,
+  CASE_UNIT_FUNCTION,
+  PRIORITIZATION_CD,
+  OPTIMIZATION_IND,
+  REASON_CODE,
+  RESPONSIBILITY_COD,
+  CASE_ROLE_CODE,
+  CSE_PERSON_ACCT_CD,
+  CSENET_ROLE_CODE,
+  LA_CASE_ROLE_CODE,
+  LA_PERSON_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  EVE_NO,
+  EVD_ID,
+  ALE_NO,
+  OSP_GENERATED_ID,
+  OFF_GENERATED_ID,
+  OSP_ROLE_CODE,
+  OSP_EFFECTIVE_DT
+)
+values
+(
+  @systemGeneratedI,
+  @businessObjectCd,
+  @caseUnitFunction,
+  @prioritizationCd,
+  @optimizationInd,
+  @reasonCode,
+  @responsibilityCod,
+  @caseRoleCode,
+  @csePersonAcctCd,
+  @csenetRoleCode,
+  @laCaseRoleCode,
+  @laPersonCode,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @eveNo,
+  @evdId,
+  @aleNo,
+  null,
+  null,
+  null,
+  null
+)
+</value>
+   </data>
+   <data name="ReadAlert">
+      <value>
+select top(1)
+  CONTROL_NUMBER
+from
+  CKT_ALERT
+where
+  CONTROL_NUMBER = @controlNumber
+</value>
+   </data>
+   <data name="ReadAlertDistributionRule">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  EVE_NO,
+  EVD_ID
+from
+  CKT_ALERT_DST_RULE
+where
+  (@evdId = EVD_ID) and
+  (@eveNo = EVE_NO)
+order by
+  SYSTEM_GENERATED_I desc
+</value>
+   </data>
+   <data name="ReadEventEventDetail">
+      <value>
+select top(1)
+  EVE_NO,
+  SYSTEM_GENERATED_I
+from
+  CKT_EVENT_DETAIL
+where
+  (EVE_NO = @eveNo) and
+  (SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode)
+</value>
+   </data>
+</root>

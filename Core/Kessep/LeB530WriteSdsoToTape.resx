@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeActCertification">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  RECOVERY_AMT,
+  CHILD_SUPP_REL_AMT,
+  DATE_SENT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'SDSO') and
+  (TAKEN_DT = @takenDt) and
+  (DATE_SENT = @dateSent)
+</value>
+   </data>
+   <data name="ReadCsePersonObligor">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T3.CSP_NUMBER,
+  T3.CPA_TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_ADMIN_ACT_CERT T3
+  on
+    (T1.NUMB = T3.CSP_NUMBER) and
+    (T1.NUMB &gt; @numb)
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select
+  OFFICE_ID,
+  TYPE_CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  (TYPE_CODE = 'R') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="UpdateAdministrativeActCertification">
+      <value>
+update CKT_ADMIN_ACT_CERT
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  DATE_SENT = @dateSent
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (TANF_CODE = @tanfCode)
+</value>
+   </data>
+</root>

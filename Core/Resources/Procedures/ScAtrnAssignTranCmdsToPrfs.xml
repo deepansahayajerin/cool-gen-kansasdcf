@@ -1,0 +1,56 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="ScAtrnAssignTranCmdsToPrfs"
+           program-name="SWEATRNP"
+           class="Gov.Kansas.DCF.Cse.Security1.ScAtrnAssignTranCmdsToPrfs"
+           transaction="SRGY">
+   <on exit-state="ECO_LNK_TO_PROFILES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFMPRO"
+       to="ScProfMaintainProfiles"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="HiddenSelected1"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="ScSecmSecurityMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_TRANSACTIONS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFMTRN"
+       to="ScPtslProfTranSelList"
+       send-command="DISPLAY">
+      <map from="Profile" to="Profile"/>
+      <return-map from="HiddenSelected.HiddenSelectedCommon"
+                  to="HiddenSelected.HiddenSelCommon"/>
+      <return-map from="HiddenSelected.HiddenSelectedTransaction"
+                  to="HiddenSelected.HiddenSelTransaction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COMMANDS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETFMCMD"
+       to="ScPcslProfCommandSelList"
+       send-command="DISPLAY">
+      <map from="HiddenSelected1" to="Transaction"/>
+      <map from="Profile" to="Profile"/>
+      <return-map from="Transaction" to="HiddenPrevTransaction"/>
+   </on>
+   <map from="Selected.HiddenSelCommon" to="HiddenSelected.HiddenSelCommon"/>
+   <map from="Selected.HiddenSelTransaction"
+        to="HiddenSelected.HiddenSelTransaction"/>
+   <map from="Group.TransactionCommand" to="Group.TransactionCommand"/>
+   <map from="Profile" to="Profile"/>
+   <map from="Starting" to="Starting"/>
+   <map from="PromptProfile" to="PromptProfile"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Transaction" to="Group.Transaction"/>
+   <map from="Group.AuthorizedCommand" to="Group.AuthorizedCommands"/>
+   <map from="PreviousCommandDelete" to="PreviousCommandDelete"/>
+   <map from="HiddenPrev" to="HiddenPrevProfile"/>
+   <map from="Group.ProfileAuthorization" to="Group.ProfileAuthorization"/>
+   <map from="Standard" to="Standard"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

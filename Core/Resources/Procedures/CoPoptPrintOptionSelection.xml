@@ -1,0 +1,63 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="CoPoptPrintOptionSelection"
+           program-name="SWEPOPTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.CoPoptPrintOptionSelection"
+           transaction="SRG4"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CODE_VALUES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="FormatCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="OutputFormatHidden"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_SERVICE_PROVIDER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPL"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected1.SystemGeneratedId"
+                  to="SelectedServiceProvider.SystemGeneratedId"/>
+      <return-map from="HiddenSelected1.UserId" to="SelectedServiceProvider.UserId"/>
+      <return-map from="HiddenSelected1.LastName" to="SelectedServiceProvider.LastName"/>
+      <return-map from="HiddenSelected1.FirstName" to="SelectedServiceProvider.FirstName"/>
+      <return-map from="HiddenSelected1.MiddleInitial"
+                  to="SelectedServiceProvider.MiddleInitial"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_OFFICE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOFCL"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="SelectedOffice"/>
+   </on>
+   <on exit-state="CO_LNK_TO_PREQ"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="CoPreqPrintRequestStatus"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="SelectedServiceProvider" to="SelectedServiceProvider"/>
+   <map from="PromptToSpvl" to="PromptToSpvl"/>
+   <map from="SelectedOffice" to="SelectedOffice"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="PromptToOfcl" to="PromptToOcfl"/>
+   <map from="SelectedPrinterOutputDestination" to="PrinterOutputDestination"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Job" to="Group.Job"/>
+   <map from="Job" to="Job"/>
+   <map from="JobRun" to="JobRun"/>
+   <map from="PromptToCdvl" to="PromptToCdvl"/>
+   <map from="FormatHidden" to="OutputFormatHidden"/>
+</procedure>

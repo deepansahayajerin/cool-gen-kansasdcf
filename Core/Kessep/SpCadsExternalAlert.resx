@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.CASE_ROLE_ID = @caseRoleId) and
+    (T2.TYPE = @type) and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'AR') and
+  (END_DATE &gt;= @endDate) and
+  (START_DATE &lt;= @startDate) and
+  (CAS_NUMBER = @casNumber)
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_ASSIGN_CASE T3
+  on
+    (T1.SERVICE_PRVDER_ID = T3.SPD_ID) and
+    (T3.CAS_NO = @casNo) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadServiceProviderCaseAssignment">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME,
+  T1.MIDDLE_INITIAL,
+  T2.REASON_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T2.CREATED_TIMESTAMP,
+  T2.SPD_ID,
+  T2.OFF_ID,
+  T2.OSP_CODE,
+  T2.OSP_DATE,
+  T2.CAS_NO
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_ASSIGN_CASE T2
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_ID) and
+    (T2.CAS_NO = @casNo)
+order by
+  T2.DISCONTINUE_DATE desc
+</value>
+   </data>
+</root>

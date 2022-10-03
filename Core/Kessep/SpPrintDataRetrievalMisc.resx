@@ -1,0 +1,1314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeActCertification">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  TYPE,
+  TAKEN_DT,
+  CURRENT_AMT,
+  TANF_CODE
+from
+  CKT_ADMIN_ACT_CERT with(readuncommitted)
+where
+  (TYPE = @type) and
+  (TAKEN_DT = @takenDt) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadAppointment">
+      <value>
+select top(1)
+  REASON_CODE,
+  APPOINTMENT_DATE,
+  APPOINTMENT_TIME,
+  CREATED_TIMESTAMP,
+  APP_TSTAMP
+from
+  CKT_APPOINTMENT with(readuncommitted)
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="ReadBankruptcy">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  COURT_ACTION_NO,
+  DISTRICT_COURT,
+  BDC_ADDR_STREET_1,
+  BDC_ADDR_STREET_2,
+  BDC_ADDR_CITY,
+  BDC_ADDR_STATE,
+  BDC_ADDR_ZIP5,
+  BDC_ADDR_ZIP4,
+  BDC_ADDR_ZIP3
+from
+  CKT_BANKRUPTCY with(readuncommitted)
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID,
+  CHECK_NUMBER,
+  RECEIVED_DATE
+from
+  CKT_CASH_RECEIPT with(readuncommitted)
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID,
+  COLLECTION_AMOUNT,
+  COLLECTION_DATE,
+  OBLGOR_PRSN_NBR,
+  REFUNDED_AMT,
+  DISTRIBUTED_AMT,
+  CLT_IDENTIFIER
+from
+  CKT_CR_DETAIL with(readuncommitted)
+where
+  (CRD_ID = @crdId) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCollection">
+      <value>
+select distinct
+  T1.COLL_ID,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.CAR_ID,
+  T1.OTY_ID,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OB_TRN_AMT,
+  T1.CRT_NOTICE_REQ_IND,
+  T1.CRT_NOTICE_PROC_DT,
+  T1.CRT_NTC_ADJ_PRC_DT
+from
+  CKT_LEGAL_ACTION T6 with(readuncommitted)
+  join
+  CKT_OBLIGATION T3 with(readuncommitted)
+  join
+  CKT_COLLECTION T1 with(readuncommitted)
+  on
+    (@crdId = T1.CRD_ID) and
+    (@crvId = T1.CRV_ID) and
+    (@cstId = T1.CST_ID) and
+    (@crtType = T1.CRT_TYPE) and
+    (T3.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T3.OB_ID = T1.OBG_ID) and
+    (T3.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T3.CPA_TYPE = T1.CPA_TYPE) and
+    (T1.CRT_NOTICE_REQ_IND = 'Y') and
+    (
+      (T1.CRT_NOTICE_PROC_DT = @crtNoticeProcDt) or
+      (T1.CRT_NTC_ADJ_PRC_DT = @crtNoticeProcDt)
+    ) and
+    (T1.OTR_TYPE = 'DE') and
+    (T3.CPA_TYPE = @cpaType) and
+    (T3.CSP_NUMBER = @cspNumber)
+  on
+    (T6.LEGAL_ACTION_ID = T3.LGA_ID) and
+    (T6.STANDARD_NO = @standardNo)
+order by
+  T1.COLL_ID
+</value>
+   </data>
+   <data name="ReadCollectionAdjustmentReason">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID,
+  OB_TRN_RLN_RSN_CD,
+  OB_TRN_RLN_RSN_NM
+from
+  CKT_COLL_ADJ_RSN with(readuncommitted)
+where
+  OB_TRN_RLN_RSN_ID = @obTrnRlnRsnId
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  PRINT_NAME,
+  CODE,
+  NAME
+from
+  CKT_COLLTN_TYPE with(readuncommitted)
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadContact">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CONTACT_NUMBER,
+  COMPANY_NAME,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_CONTACT with(readuncommitted)
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CONTACT_NUMBER = @contactNumber)
+</value>
+   </data>
+   <data name="ReadContactAddress">
+      <value>
+select top(1)
+  CON_NUMBER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY
+from
+  CKT_CONTACT_ADDR with(readuncommitted)
+where
+  (@conNumber = CON_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  (NUMB = @numb) and
+  (FAMILY_VIOL_IND &gt; ' ')
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  (NUMB = @numb) and
+  (FAMILY_VIOL_IND &gt; ' ')
+</value>
+   </data>
+   <data name="ReadCsePersonAccount1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC with(readuncommitted)
+where
+  (TYPE = @type) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonAccount2">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.TYPE
+from
+  CKT_CSE_PERSON_ACC T1 with(readuncommitted)
+  join
+  CKT_RECAPTURE_RULE T2 with(readuncommitted)
+  on
+    (T1.TYPE = T2.CPA_D_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_D_NUMBER) and
+    (T2.RECAPTURE_RULE_ID = @recaptureRuleId)
+</value>
+   </data>
+   <data name="ReadCsePersonResource">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  RESOURCE_NO,
+  LOCATION,
+  EXA_ID
+from
+  CKT_CSE_PERSON_RES with(readuncommitted)
+where
+  (RESOURCE_NO = @resourceNo) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonVehicle">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  CPR_C_RESOURCE_NO,
+  CSP_C_NUMBER,
+  VEHICLE_COLOR,
+  VEHICLE_MODEL,
+  VEHICLE_MAKE,
+  VEH_ID_NUMBER,
+  VEH_LIC_TAG,
+  VEHICLE_YEAR
+from
+  CKT_CSE_PERSON_VEH with(readuncommitted)
+where
+  (@cprCResourceNo = CPR_C_RESOURCE_NO) and
+  (@cspCNumber = CSP_C_NUMBER)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  BAL_DUE_AMT,
+  INT_BAL_DUE_AMT,
+  RETIRED_DT
+from
+  CKT_DEBT_DTL with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (OTR_TYPE = 'DE')
+</value>
+   </data>
+   <data name="ReadExternalAgency">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_EXT_AGENCY with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadExternalAgencyAddress">
+      <value>
+select top(1)
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  POSTAL_CODE,
+  ZIP,
+  ZIP4,
+  ZIP3,
+  COUNTRY,
+  EXA_ID
+from
+  CKT_EXT_AGY_ADDR with(readuncommitted)
+where
+  @exaId = EXA_ID
+order by
+  TYPE
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select distinct
+  T1.NAME,
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME
+from
+  CKT_FIELD T1 with(readuncommitted)
+  join
+  CKT_DOCUMENT_FIELD T2 with(readuncommitted)
+  on
+    (T1.NAME = T2.FLD_NAME) and
+    (T2.DOC_NAME = @docName) and
+    (T2.DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+    (T1.DEPENDANCY = @dependancy)
+order by
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME,
+  T1.NAME
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR with(readuncommitted)
+where
+  @trbId = TRB_ID
+order by
+  TYPE
+</value>
+   </data>
+   <data name="ReadGeneticTest">
+      <value>
+select top(1)
+  TEST_NUMBER,
+  PAT_PROBABILITY,
+  GTA_ACCOUNT_NUMBER,
+  VEN_IDENTIFIER,
+  CAS_M_NUMBER,
+  CSP_M_NUMBER,
+  CRO_M_TYPE,
+  CRO_M_IDENTIFIER,
+  CAS_A_NUMBER,
+  CSP_A_NUMBER,
+  CRO_A_TYPE,
+  CRO_A_IDENTIFIER
+from
+  CKT_GENETIC_TEST with(readuncommitted)
+where
+  TEST_NUMBER = @testNumber
+</value>
+   </data>
+   <data name="ReadGeneticTestAccount">
+      <value>
+select top(1)
+  ACCOUNT_NUMBER
+from
+  CKT_GENETIC_TST_AC with(readuncommitted)
+where
+  ACCOUNT_NUMBER = @accountNumber
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompany">
+      <value>
+select top(1)
+  IDENTIFIER,
+  POLICY_CARRIER,
+  INSURER_PHONE,
+  INSURER_PHONE_EXT,
+  INSURER_PH_AREA
+from
+  CKT_HEALTH_INS_CO with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCompanyAddress">
+      <value>
+select top(1)
+  HIC_IDENTIFIER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY
+from
+  CKT_HINS_CO_ADDR with(readuncommitted)
+where
+  HIC_IDENTIFIER = @hicIdentifier
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage">
+      <value>
+select top(1)
+  IDENTIFIER,
+  GROUP_NUMBER,
+  POLICY_NUMBER,
+  COVERAGE_CODE_1,
+  COVERAGE_CODE_2,
+  COVERAGE_CODE_3,
+  COVERAGE_CODE_4,
+  COVERAGE_CODE_5,
+  COVERAGE_CODE_6,
+  COVERAGE_CODE_7,
+  HIC_IDENTIFIER
+from
+  CKT_HINS_COVERAGE with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadIncarceration1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  END_DATE,
+  TYPE,
+  INSTITUTION_NAME,
+  POFFR_LAST_NAME,
+  POFFR_FIRST_NAME,
+  POFFR_MI
+from
+  CKT_INCARCERATION with(readuncommitted)
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE in ('J', 'P'))
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadIncarceration2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  END_DATE,
+  TYPE,
+  INSTITUTION_NAME,
+  POFFR_LAST_NAME,
+  POFFR_FIRST_NAME,
+  POFFR_MI
+from
+  CKT_INCARCERATION with(readuncommitted)
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE in ('T', 'R'))
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadIncarcerationAddress">
+      <value>
+select top(1)
+  INC_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY
+from
+  CKT_INCARC_ADDR with(readuncommitted)
+where
+  (@incIdentifier = INC_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadInformationRequest">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_INFO_REQ with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateContact">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  START_DATE,
+  END_DATE,
+  NAME_LAST,
+  NAME_FIRST,
+  NAME_MIDDLE
+from
+  CKT_INT_CONTACT with(readuncommitted)
+where
+  (INT_GENERATED_ID = @intGeneratedId) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadInterstateContactAddress">
+      <value>
+select top(1)
+  ICO_CONT_START_DT,
+  INT_GENERATED_ID,
+  START_DATE,
+  TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  END_DATE,
+  COUNTY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE
+from
+  CKT_INT_CNTCT_ADDR with(readuncommitted)
+where
+  (@icoContStartDt = ICO_CONT_START_DT) and
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (LOCATION_TYPE in ('D', 'F'))
+</value>
+   </data>
+   <data name="ReadInterstateRequest1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (IDENTIFIER = @identifier) and
+  (KS_CASE_IND = 'N') and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadInterstateRequest10">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (KS_CASE_IND = 'N') and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (CAS_I_NUMBER = @casINumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequest11">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (CAS_I_NUMBER = @casINumber) and
+  (KS_CASE_IND = 'Y') and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadInterstateRequest2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (IDENTIFIER = @identifier) and
+  (KS_CASE_IND = 'Y') and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadInterstateRequest3">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadInterstateRequest4">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.OTHER_STATE_CAS_ID,
+  T1.OTHR_STATE_FIPS_CD,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OTH_ST_CASE_STATUS,
+  T1.CASE_TYPE,
+  T1.KS_CASE_IND,
+  T1.CAS_I_NUMBER,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_ID,
+  T1.COUNTRY
+from
+  CKT_LEGAL_ACT_PERS T5
+  join
+  CKT_INTERSTAT_RQST T1
+  join
+  CKT_LA_PER_LA_CROL T4
+  on
+    (T1.KS_CASE_IND = 'N') and
+    (T1.OTH_ST_CASE_STATUS = 'O') and
+    (T1.CRO_TYPE = 'AP') and
+    (T1.CRO_ID = T4.CRO_ID) and
+    (T1.CRO_TYPE = T4.CRO_TYPE) and
+    (T1.CSP_NUMBER = T4.CSP_NUM) and
+    (T1.CAS_NUMBER = T4.CAS_NUM)
+  on
+    (T5.LA_PERSON_ID = T4.LAP_ID) and
+    (T5.LGA_IDENTIFIER = @lgaIdentifier)
+</value>
+   </data>
+   <data name="ReadInterstateRequest5">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.OTHER_STATE_CAS_ID,
+  T1.OTHR_STATE_FIPS_CD,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.OTH_ST_CASE_STATUS,
+  T1.CASE_TYPE,
+  T1.KS_CASE_IND,
+  T1.CAS_I_NUMBER,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_ID,
+  T1.COUNTRY
+from
+  CKT_LEGAL_ACT_PERS T5
+  join
+  CKT_INTERSTAT_RQST T1
+  join
+  CKT_LA_PER_LA_CROL T4
+  on
+    (T1.KS_CASE_IND = 'Y') and
+    (T1.OTH_ST_CASE_STATUS = 'O') and
+    (T1.CRO_TYPE = 'AP') and
+    (T1.CRO_ID = T4.CRO_ID) and
+    (T1.CRO_TYPE = T4.CRO_TYPE) and
+    (T1.CSP_NUMBER = T4.CSP_NUM) and
+    (T1.CAS_NUMBER = T4.CAS_NUM)
+  on
+    (T5.LA_PERSON_ID = T4.LAP_ID) and
+    (T5.LGA_IDENTIFIER = @lgaIdentifier)
+</value>
+   </data>
+   <data name="ReadInterstateRequest6">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (CRO_ID is not null) and
+  (KS_CASE_IND = 'N') and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (CRO_TYPE = 'AP') and
+  (CSP_NUMBER = @cspNumber) and
+  (CAS_NUMBER = CAS_I_NUMBER) and
+  (CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequest7">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (CRO_ID is not null) and
+  (CRO_TYPE = 'AP') and
+  (CSP_NUMBER = @cspNumber) and
+  (CAS_NUMBER = CAS_I_NUMBER) and
+  (CAS_NUMBER = @casNumber) and
+  (KS_CASE_IND = 'Y') and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadInterstateRequest8">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (CRO_ID is not null) and
+  (CAS_NUMBER is not null) and
+  (KS_CASE_IND = 'N') and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (CRO_TYPE = 'AP') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadInterstateRequest9">
+      <value>
+select
+  IDENTIFIER,
+  OTHER_STATE_CAS_ID,
+  OTHR_STATE_FIPS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OTH_ST_CASE_STATUS,
+  CASE_TYPE,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (CRO_ID is not null) and
+  (CAS_NUMBER is not null) and
+  (KS_CASE_IND = 'Y') and
+  (OTH_ST_CASE_STATUS = 'O') and
+  (CRO_TYPE = 'AP') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLocateRequest">
+      <value>
+select top(1)
+  CSE_PERSON_NUMBER,
+  LICENSE_ISSUED_DT,
+  LICENSE_EXP_DATE,
+  LICENSE_SUSP_DATE,
+  LICENSE_NUMBER,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER,
+  LIC_SOURCE_NAME,
+  STREET_1,
+  ADDRESS_TYPE,
+  STREET_2,
+  STREET_3,
+  STREET_4,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  CREATED_TIMESTAMP,
+  LIC_SUSPENSION_IND
+from
+  CKT_LOC_REQUEST with(readuncommitted)
+where
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (AGENCY_NUMBER = @agencyNumber) and
+  (SEQUENCE_NUMBER = @sequenceNumber)
+</value>
+   </data>
+   <data name="ReadMilitaryService">
+      <value>
+select top(1)
+  EFFECTIVE_DATE,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  CO_LAST_NAME,
+  CO_FIRST_NAME,
+  CO_MI,
+  CURR_US_DUTY_STN
+from
+  CKT_MILITARY_SRV with(readuncommitted)
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadObligationObligationType">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_NM,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_OBLIGATION T1 with(readuncommitted)
+  on
+    (T2.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.DEBT_TYP_CLASS = 'R')
+order by
+  T1.OB_ID desc
+</value>
+   </data>
+   <data name="ReadObligationObligationTypeDebtDetail">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_NM,
+  T2.DEBT_TYP_CLASS,
+  T3.OBG_GENERATED_ID,
+  T3.CSP_NUMBER,
+  T3.CPA_TYPE,
+  T3.OTR_GENERATED_ID,
+  T3.OTY_TYPE,
+  T3.OTR_TYPE,
+  T3.BAL_DUE_AMT,
+  T3.INT_BAL_DUE_AMT,
+  T3.RETIRED_DT
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_OBLIGATION T1 with(readuncommitted)
+  on
+    (T2.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.OB_ID = @obId) and
+    (T2.DEBT_TYP_ID = @debtTypId)
+  join
+  CKT_DEBT_DTL T3 with(readuncommitted)
+  on
+    (T1.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T1.OB_ID = T3.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T3.OTR_TYPE = 'DE')
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  OBLIG_PSCH_AMT,
+  END_DT,
+  FRQ_PRD_CD,
+  REPYMT_LTR_PRT_DT
+from
+  CKT_OB_PYMNT_SCH with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@obgCspNumber = OBG_CSP_NUMBER) and
+  (@obgCpaType = OBG_CPA_TYPE) and
+  (END_DT &gt;= @endDt)
+order by
+  START_DT
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest1">
+      <value>
+select top(1)
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  VEN_IDENTIFIER,
+  PGT_IDENTIFIER
+from
+  CKT_PERSON_GEN_TST with(readuncommitted)
+where
+  (@gteTestNumber = GTE_TEST_NUMBER) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest2">
+      <value>
+select top(1)
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  VEN_IDENTIFIER,
+  PGT_IDENTIFIER
+from
+  CKT_PERSON_GEN_TST with(readuncommitted)
+where
+  (@gteTestNumber = GTE_TEST_NUMBER) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest3">
+      <value>
+select
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  VEN_IDENTIFIER,
+  PGT_IDENTIFIER
+from
+  CKT_PERSON_GEN_TST with(readuncommitted)
+where
+  (@gteTestNumber = GTE_TEST_NUMBER) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPersonGeneticTest4">
+      <value>
+select
+  GTE_TEST_NUMBER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  SCHED_TEST_TIME,
+  SCHED_TEST_DATE,
+  VEN_IDENTIFIER,
+  PGT_IDENTIFIER
+from
+  CKT_PERSON_GEN_TST with(readuncommitted)
+where
+  (@gteTestNumber = GTE_TEST_NUMBER) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select top(1)
+  HCV_ID,
+  CSP_NUMBER,
+  COVER_BEGIN_DATE,
+  COVER_END_DATE
+from
+  CKT_PERSONAL_HINS with(readuncommitted)
+where
+  (@hcvId = HCV_ID) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadRecaptureRule">
+      <value>
+select top(1)
+  RECAPTURE_RULE_ID,
+  CPA_D_TYPE,
+  CSP_D_NUMBER,
+  EFFECTIVE_DATE,
+  NEGOTIATED_DATE,
+  DISCONTINUE_DATE,
+  NA_ARREARS_MAX_AMT,
+  NA_ARREARS_AMOUNT,
+  NA_ARREARS_PCT,
+  NA_CURR_MAX_AMOUNT,
+  NA_CURR_AMOUNT,
+  NA_CURR_PERCENTAGE,
+  PASSTHRU_PERCENTAG,
+  PASSTHRU_AMOUNT,
+  PASSTHRU_MAX_AMT,
+  TYPE
+from
+  CKT_RECAPTURE_RULE with(readuncommitted)
+where
+  RECAPTURE_RULE_ID = @recaptureRuleId
+</value>
+   </data>
+   <data name="ReadResourceLocationAddress">
+      <value>
+select top(1)
+  CPR_RESOURCE_NO,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE
+from
+  CKT_RSRC_LOC_ADDR with(readuncommitted)
+where
+  (@cprResourceNo = CPR_RESOURCE_NO) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  TRIBUNAL_NM,
+  IDENTIFIER
+from
+  CKT_TRIBUNAL with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadVendor1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_VENDOR with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadVendor2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_VENDOR with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadVendorAddress">
+      <value>
+select top(1)
+  VEN_IDENTIFIER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY
+from
+  CKT_VENDOR_ADDR with(readuncommitted)
+where
+  @venIdentifier = VEN_IDENTIFIER
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+</root>

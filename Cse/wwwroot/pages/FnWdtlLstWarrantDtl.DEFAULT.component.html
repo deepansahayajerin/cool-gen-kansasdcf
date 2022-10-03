@@ -1,0 +1,414 @@
+﻿<!--Name: FN_WDTL_LST_WARRANT_DTL, ID: 371869746, model: 746-->
+<div coolContent coolName="FN_WDTL_LST_WARRANT_DTL" coolType="SCREEN"
+  (coolInit)="scrollSize = 175; pageSize = 5">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 28.75%; top: 0; width: 40%; height: 4%;"
+     coolCol="24" coolRow="1" coolLength="32">CSE - List Warrant Detail - WDTL</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_7"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 7.5%; top: 4%; width: 5%; height: 4%;" coolCol="7" coolRow="2"
+     coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 8%; width: 6.25%; height: 4%;" coolCol="4"
+     coolRow="3" coolLength="5">Payee</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 8%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="3" coolLength="10">{{in.paymentRequest.csePersonNumber}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 8%; width: 41.25%; height: 4%;" coolCol="27"
+     coolRow="3" coolLength="33">{{in.payee.formattedName}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 12%; width: 13.75%; height: 4%;" coolCol="4"
+     coolRow="4" coolLength="11">Desig Payee</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan" coolUpper
+     style="left: 18.75%; top: 12%; width: 12.5%; height: 4%;" coolCol="16"
+     coolRow="4" coolLength="10">{{in.paymentRequest.designatedPayeeCsePersonNo}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 32.5%; top: 12%; width: 41.25%; height: 4%;" coolCol="27"
+     coolRow="4" coolLength="33">{{in.desigPayee.formattedName}}</div>
+   
+   <div coolType="literal"
+     style="left: 77.5%; top: 12%; width: 12.5%; height: 4%;" coolCol="63"
+     coolRow="4" coolLength="10">Interstate</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 91.25%; top: 12%; width: 1.25%; height: 4%;" coolCol="74"
+     coolRow="4" coolLength="1">{{in.paymentRequest.interstateInd}}</div>
+   
+   <div coolType="literal"
+     style="left: 42.5%; top: 16%; width: 27.5%; height: 4%;" coolCol="35"
+     coolRow="5" coolLength="22">Mailed To Name/Address</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 20%; width: 17.5%; height: 4%;" coolCol="4"
+     coolRow="6" coolLength="14">Warrant Number</div>
+   <input type="text" coolType="field" name="field_6_21"
+     [(ngModel)]="in.paymentRequest.number"
+     [coolVideo]="out.paymentRequest.screenField?.number" coolAutotab coolFocus
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="9"
+     style="left: 25%; top: 20%; width: 11.25%; height: 4%;" coolCol="21"
+     coolRow="6" coolLength="9">
+   <input type="text" coolType="field" name="field_6_31"
+     [(ngModel)]="in.warrantNoPrompt.selectChar"
+     [coolVideo]="out.warrantNoPromptIn.screenField?.selectChar" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 37.5%; top: 20%; width: 1.25%; height: 4%;" coolCol="31"
+     coolRow="6" coolLength="1">
+   
+   <div coolType="prompt" style="left: 46.25%; top: 20%; width: 5%; height: 4%;"
+     coolCol="38" coolRow="6" coolLength="4">Name</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 20%; width: 41.25%; height: 4%;" coolCol="47"
+     coolRow="6" coolLength="33">{{in.mailedTo.formattedName}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 24%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="7" coolLength="6">Amount</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 24%; width: 12.5%; height: 4%;" coolCol="18"
+     coolRow="7" coolLength="10">{{in.paymentRequest.amount|coolNumber:'######0.00;#':0}}</div>
+   
+   <div coolType="prompt"
+     style="left: 46.25%; top: 24%; width: 10%; height: 4%;" coolCol="38"
+     coolRow="7" coolLength="8">Street 1</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 24%; width: 37.5%; height: 4%;" coolCol="47"
+     coolRow="7" coolLength="30">{{in.addrMailed.addressLine1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 28%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="8" coolLength="6">Status</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 28%; width: 12.5%; height: 4%;" coolCol="21"
+     coolRow="8" coolLength="10">{{in.paymentStatus.code}}</div>
+   
+   <div coolType="prompt"
+     style="left: 46.25%; top: 28%; width: 10%; height: 4%;" coolCol="38"
+     coolRow="8" coolLength="8">Street 2</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 28%; width: 37.5%; height: 4%;" coolCol="47"
+     coolRow="8" coolLength="30">{{in.addrMailed.addressLine2}}</div>
+   
+   <div coolType="prompt" style="left: 3.75%; top: 32%; width: 15%; height: 4%;"
+     coolCol="4" coolRow="9" coolLength="12">Request Date</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 32%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="9" coolLength="8">{{in.paymentRequest.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 46.25%; top: 32%; width: 5%; height: 4%;"
+     coolCol="38" coolRow="9" coolLength="4">City</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 32%; width: 25%; height: 4%;" coolCol="47"
+     coolRow="9" coolLength="20">{{in.addrMailed.city}}</div>
+   
+   <div coolType="prompt" style="left: 85%; top: 32%; width: 6.25%; height: 4%;"
+     coolCol="69" coolRow="9" coolLength="5">State</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 92.5%; top: 32%; width: 2.5%; height: 4%;" coolCol="75"
+     coolRow="9" coolLength="2">{{in.addrMailed.state}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 36%; width: 18.75%; height: 4%;" coolCol="4"
+     coolRow="10" coolLength="15">Orig Print Date</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 25%; top: 36%; width: 10%; height: 4%;" coolCol="21"
+     coolRow="10" coolLength="8">{{in.paymentRequest.printDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt"
+     style="left: 46.25%; top: 36%; width: 3.75%; height: 4%;" coolCol="38"
+     coolRow="10" coolLength="3">Zip</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 36%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="10" coolLength="14">{{in.addrMailed.zipCode}}</div>
+   
+   <div coolType="prompt" style="left: 3.75%; top: 40%; width: 15%; height: 4%;"
+     coolCol="4" coolRow="11" coolLength="12">Warrant Type</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 40%; width: 3.75%; height: 4%;" coolCol="21"
+     coolRow="11" coolLength="3">{{in.paymentRequest.type1}}</div>
+   
+   <div coolType="prompt" style="left: 47.5%; top: 40%; width: 15%; height: 4%;"
+     coolCol="39" coolRow="11" coolLength="12">Remail  Date</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 77.5%; top: 40%; width: 10%; height: 4%;" coolCol="63"
+     coolRow="11" coolLength="8">{{in.addrMailed.remailDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 44%; width: 16.25%; height: 4%;" coolCol="4"
+     coolRow="12" coolLength="13">Warrant Class</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 44%; width: 3.75%; height: 4%;" coolCol="21"
+     coolRow="12" coolLength="3">{{in.paymentRequest.classification}}</div>
+   
+   <div coolType="prompt"
+     style="left: 47.5%; top: 44%; width: 27.5%; height: 4%;" coolCol="39"
+     coolRow="12" coolLength="22">Reissue from Warrant #</div>
+   <input type="text" coolType="field" name="field_12_63"
+     [(ngModel)]="in.reisFrom.number"
+     [coolVideo]="out.reisFrom.screenField?.number" coolAutotab coolReadonly
+     coolColor="cyan" coolUpper [attr.maxlength]="9"
+     style="left: 77.5%; top: 44%; width: 11.25%; height: 4%;" coolCol="63"
+     coolRow="12" coolLength="9">
+   
+   <div coolType="literal"
+     style="left: 3.75%; top: 48%; width: 8.75%; height: 4%;" coolCol="4"
+     coolRow="13" coolLength="7">KPC RCP</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 48%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="13" coolLength="1">{{in.paymentRequest.recoupmentIndKpc}}</div>
+   
+   <div coolType="prompt"
+     style="left: 47.5%; top: 48%; width: 27.5%; height: 4%;" coolCol="39"
+     coolRow="13" coolLength="22">Reissue  to  Warrant #</div>
+   <input type="text" coolType="field" name="field_13_63"
+     [(ngModel)]="in.reisTo.number" [coolVideo]="out.reisTo.screenField?.number"
+     coolAutotab coolReadonly coolColor="cyan" coolUpper [attr.maxlength]="9"
+     style="left: 77.5%; top: 48%; width: 11.25%; height: 4%;" coolCol="63"
+     coolRow="13" coolLength="9">
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 56%; width: 3.75%; height: 4%;" coolCol="4"
+     coolRow="15" coolLength="3">Sel</div>
+   
+   <div coolType="prompt"
+     style="left: 10%; top: 56%; width: 11.25%; height: 4%;" coolCol="9"
+     coolRow="15" coolLength="9">Disb Date</div>
+   
+   <div coolType="prompt"
+     style="left: 25%; top: 56%; width: 11.25%; height: 4%;" coolCol="21"
+     coolRow="15" coolLength="9">Disb Code</div>
+   
+   <div coolType="prompt"
+     style="left: 42.5%; top: 56%; width: 7.5%; height: 4%;" coolCol="35"
+     coolRow="15" coolLength="6">Amount</div>
+   
+   <div coolType="prompt" style="left: 57.5%; top: 56%; width: 20%; height: 4%;"
+     coolCol="47" coolRow="15" coolLength="16">Reference Number</div>
+   <input type="text" coolType="field" name="field_16_5"
+     [(ngModel)]="ref(in.disb, pageOffset, 'detailSelect.flag').value"
+     [coolVideo]="out.disb?.[pageOffset]?.detailSelect.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 5%; top: 60%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="16" coolLength="1" [hidden]="pageOffset >= length(in.disb)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 60%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="16" coolLength="8" [hidden]="pageOffset >= length(in.disb)">{{in.disb?.[pageOffset]?.disbDetailDisbursementTransaction.disbursementDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 60%; width: 12.5%; height: 4%;" coolCol="21"
+     coolRow="16" coolLength="10" [hidden]="pageOffset >= length(in.disb)">{{in.disb?.[pageOffset]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 41.25%; top: 60%; width: 11.25%; height: 4%;" coolCol="34"
+     coolRow="16" coolLength="9" [hidden]="pageOffset >= length(in.disb)">{{in.disb?.[pageOffset]?.disbDetailDisbursementTransaction.amount|coolNumber:'####0.00;-#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 57.5%; top: 60%; width: 10%; height: 4%;" coolCol="47"
+     coolRow="16" coolLength="8" [hidden]="pageOffset >= length(in.disb)">{{in.disb?.[pageOffset]?.disbDetailCashReceipt.receivedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 60%; width: 17.5%; height: 4%;" coolCol="56"
+     coolRow="16" coolLength="14" [hidden]="pageOffset >= length(in.disb)">{{in.disb?.[pageOffset]?.refNumber.text14}}</div>
+   <input type="text" coolType="field" name="field_17_5"
+     [(ngModel)]="ref(in.disb, pageOffset + 1, 'detailSelect.flag').value"
+     [coolVideo]="out.disb?.[pageOffset + 1]?.detailSelect.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 5%; top: 64%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 1 >= length(in.disb)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 64%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 1 >= length(in.disb)">{{in.disb?.[pageOffset + 1]?.disbDetailDisbursementTransaction.disbursementDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 64%; width: 12.5%; height: 4%;" coolCol="21"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 1 >= length(in.disb)">{{in.disb?.[pageOffset + 1]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 41.25%; top: 64%; width: 11.25%; height: 4%;" coolCol="34"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 1 >= length(in.disb)">{{in.disb?.[pageOffset + 1]?.disbDetailDisbursementTransaction.amount|coolNumber:'####0.00;-#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 57.5%; top: 64%; width: 10%; height: 4%;" coolCol="47"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 1 >= length(in.disb)">{{in.disb?.[pageOffset + 1]?.disbDetailCashReceipt.receivedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 64%; width: 17.5%; height: 4%;" coolCol="56"
+     coolRow="17" coolLength="14" [hidden]="pageOffset + 1 >= length(in.disb)">{{in.disb?.[pageOffset + 1]?.refNumber.text14}}</div>
+   <input type="text" coolType="field" name="field_18_5"
+     [(ngModel)]="ref(in.disb, pageOffset + 2, 'detailSelect.flag').value"
+     [coolVideo]="out.disb?.[pageOffset + 2]?.detailSelect.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 5%; top: 68%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 2 >= length(in.disb)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 68%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 2 >= length(in.disb)">{{in.disb?.[pageOffset + 2]?.disbDetailDisbursementTransaction.disbursementDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 68%; width: 12.5%; height: 4%;" coolCol="21"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 2 >= length(in.disb)">{{in.disb?.[pageOffset + 2]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 41.25%; top: 68%; width: 11.25%; height: 4%;" coolCol="34"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 2 >= length(in.disb)">{{in.disb?.[pageOffset + 2]?.disbDetailDisbursementTransaction.amount|coolNumber:'####0.00;-#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 57.5%; top: 68%; width: 10%; height: 4%;" coolCol="47"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 2 >= length(in.disb)">{{in.disb?.[pageOffset + 2]?.disbDetailCashReceipt.receivedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 68%; width: 17.5%; height: 4%;" coolCol="56"
+     coolRow="18" coolLength="14" [hidden]="pageOffset + 2 >= length(in.disb)">{{in.disb?.[pageOffset + 2]?.refNumber.text14}}</div>
+   <input type="text" coolType="field" name="field_19_5"
+     [(ngModel)]="ref(in.disb, pageOffset + 3, 'detailSelect.flag').value"
+     [coolVideo]="out.disb?.[pageOffset + 3]?.detailSelect.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 5%; top: 72%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 3 >= length(in.disb)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 72%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 3 >= length(in.disb)">{{in.disb?.[pageOffset + 3]?.disbDetailDisbursementTransaction.disbursementDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 72%; width: 12.5%; height: 4%;" coolCol="21"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 3 >= length(in.disb)">{{in.disb?.[pageOffset + 3]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 41.25%; top: 72%; width: 11.25%; height: 4%;" coolCol="34"
+     coolRow="19" coolLength="9" [hidden]="pageOffset + 3 >= length(in.disb)">{{in.disb?.[pageOffset + 3]?.disbDetailDisbursementTransaction.amount|coolNumber:'####0.00;-#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 57.5%; top: 72%; width: 10%; height: 4%;" coolCol="47"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 3 >= length(in.disb)">{{in.disb?.[pageOffset + 3]?.disbDetailCashReceipt.receivedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 72%; width: 17.5%; height: 4%;" coolCol="56"
+     coolRow="19" coolLength="14" [hidden]="pageOffset + 3 >= length(in.disb)">{{in.disb?.[pageOffset + 3]?.refNumber.text14}}</div>
+   <input type="text" coolType="field" name="field_20_5"
+     [(ngModel)]="ref(in.disb, pageOffset + 4, 'detailSelect.flag').value"
+     [coolVideo]="out.disb?.[pageOffset + 4]?.detailSelect.screenField?.flag"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1" [coolPermittedValues]="['Y','N','?','+','S',' ','*']"
+     style="left: 5%; top: 76%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 4 >= length(in.disb)">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 76%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 4 >= length(in.disb)">{{in.disb?.[pageOffset + 4]?.disbDetailDisbursementTransaction.disbursementDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 25%; top: 76%; width: 12.5%; height: 4%;" coolCol="21"
+     coolRow="20" coolLength="10" [hidden]="pageOffset + 4 >= length(in.disb)">{{in.disb?.[pageOffset + 4]?.disbType.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 41.25%; top: 76%; width: 11.25%; height: 4%;" coolCol="34"
+     coolRow="20" coolLength="9" [hidden]="pageOffset + 4 >= length(in.disb)">{{in.disb?.[pageOffset + 4]?.disbDetailDisbursementTransaction.amount|coolNumber:'####0.00;-#':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 57.5%; top: 76%; width: 10%; height: 4%;" coolCol="47"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 4 >= length(in.disb)">{{in.disb?.[pageOffset + 4]?.disbDetailCashReceipt.receivedDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 76%; width: 17.5%; height: 4%;" coolCol="56"
+     coolRow="20" coolLength="14" [hidden]="pageOffset + 4 >= length(in.disb)">{{in.disb?.[pageOffset + 4]?.refNumber.text14}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="79"
+     style="left: 0; top: 84%; width: 98.75%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 97.5%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="78">PF Key: 1 Help 2 Display 3 Exit 4 List 7 Prev 8 Next 9 Return 11 Clear 15 PACC</div>
+   
+   <div coolType="literal"
+     style="left: 2.5%; top: 92%; width: 93.75%; height: 4%;" coolCol="3"
+     coolRow="24" coolLength="75">16 WARR  17 WAST  18 WHST  19 WARA  20 ReisFrom  21 ReisTo  22 PSUM 23 CRRC</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="PACC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=PACC</a>
+   <a coolType="action" coolCommand="WARR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=WARR</a>
+   <a coolType="action" coolCommand="WAST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F5">F17=WAST</a>
+   <a coolType="action" coolCommand="WHST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F6">F18=WHST</a>
+   <a coolType="action" coolCommand="WARA" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F7">F19=WARA</a>
+   <a coolType="action" coolCommand="REISFROM" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F8">F20=REISFROM</a>
+   <a coolType="action" coolCommand="REIS_TO" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F9">F21=REIS_TO</a>
+   <a coolType="action" coolCommand="PSUM" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F10">F22=PSUM</a>
+   <a coolType="action" coolCommand="CRRC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F11">F23=CRRC</a>
+   </div>

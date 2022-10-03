@@ -1,0 +1,36 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnFeesRecCashRcptCollFees"
+           program-name="SWEFEESP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnFeesRecCashRcptCollFees"
+           transaction="SR18"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_LST_FEE_TYPES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="PRMPTRET"
+       to="FnFetlLstFeeTypes"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelection" to="ReturnFromList"/>
+   </on>
+   <map from="CashReceipt" to="CashReceipt"/>
+   <map from="HiddenCashReceiptEvent" to="HiddenCashReceiptEvent"/>
+   <map from="HiddenCashReceiptSourceType" to="HiddenCashReceiptSourceType"/>
+   <map from="HiddenCashReceiptType" to="HiddenCashReceiptType"/>
+   <map from="CashReceiptDetail" to="CashReceiptDetail"/>
+   <map from="Export1.CashReceiptDetailFeeType"
+        to="Import1.CashReceiptDetailFeeType"/>
+   <map from="Export1.CashReceiptDetailFee" to="Import1.CashReceiptDetailFee"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Detail" to="Import1.Detail"/>
+   <map from="HiddenDisplayOk" to="HiddenDisplayOk"/>
+   <map from="Export1.Selection1" to="Import1.Selection1"/>
+   <map from="TotalFee" to="TotalFee"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

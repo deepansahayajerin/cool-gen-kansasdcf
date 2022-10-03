@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateRequestObligationInterstateRequest">
+      <value>
+select top(1)
+  T1.OTY_TYPE,
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OBG_GENERATED_ID,
+  T1.INT_GENERATED_ID,
+  T1.ORDER_EFF_DATE,
+  T1.ORDER_END_DATE,
+  T3.INT_GENERATED_ID,
+  T3.ADDRESS_START_DATE,
+  T3.STREET1,
+  T3.STREET2,
+  T3.CITY,
+  T3.ADDRESS_END_DATE,
+  T3.PAYABLE_TO_NAME,
+  T3.[STATE],
+  T3.ZIP_CODE,
+  T3.ZIP4,
+  T3.ZIP3,
+  T3.STREET_3,
+  T3.STREET_4,
+  T3.LOCATION_TYPE
+from
+  CKT_INT_RQST_OBG T1
+  join
+  CKT_INT_PYMNT_ADDR T3
+  on
+    (@otyType = T1.OTY_TYPE) and
+    (@obgGeneratedId = T1.OBG_GENERATED_ID) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (@cpaType = T1.CPA_TYPE) and
+    (T1.INT_GENERATED_ID = T3.INT_GENERATED_ID) and
+    (T3.ADDRESS_START_DATE &lt;= @addressStartDate) and
+    (T3.ADDRESS_END_DATE &gt;= @addressStartDate)
+</value>
+   </data>
+</root>

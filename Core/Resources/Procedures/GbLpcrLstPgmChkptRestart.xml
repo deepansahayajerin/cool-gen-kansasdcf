@@ -1,0 +1,35 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="GbLpcrLstPgmChkptRestart"
+           program-name="SWELPCRP"
+           class="Gov.Kansas.DCF.Cse.Kessep.GbLpcrLstPgmChkptRestart"
+           transaction="SRB3"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="GbBchmBatchProcessingMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_MTN_TO_PGM_CHKPNT_RSTRT"
+       display-first="true"
+       action="transfer"
+       to="GbMpcrMtnPgmChkptRestart"
+       send-command="DISPLAY">
+      <map from="Flow" to="ProgramCheckpointRestart"/>
+   </on>
+   <map from="Export1.Common" to="Import1.Common"/>
+   <map from="Search" to="Search"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Export1.ProgramCheckpointRestart.ProgramName"
+        to="Import1.ProgramCheckpointRestart.ProgramName"/>
+   <map from="Export1.ProgramCheckpointRestart.ReadFrequencyCount"
+        to="Import1.ProgramCheckpointRestart.ReadFrequencyCount"/>
+   <map from="Export1.ProgramCheckpointRestart.UpdateFrequencyCount"
+        to="Import1.ProgramCheckpointRestart.UpdateFrequencyCount"/>
+   <map from="Export1.ProgramCheckpointRestart.CheckpointCount"
+        to="Import1.ProgramCheckpointRestart.CheckpointCount"/>
+   <map from="Export1.ProgramCheckpointRestart.LastCheckpointTimestamp"
+        to="Import1.ProgramCheckpointRestart.LastCheckpointTimestamp"/>
+   <map from="Export1.ProgramCheckpointRestart.RestartInd"
+        to="Import1.ProgramCheckpointRestart.RestartInd"/>
+</procedure>

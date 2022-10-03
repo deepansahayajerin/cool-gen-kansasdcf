@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetail">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CRD_ID
+from
+  CKT_CR_DETAIL
+where
+  (CRD_ID = @crdId) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailAddress">
+      <value>
+select top(1)
+  CRDETAIL_ADDRESS_I,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRD_IDENTIFIER
+from
+  CKT_CRDETAIL_ADDRS
+where
+  CRDETAIL_ADDRESS_I = @crdetailAddressI
+</value>
+   </data>
+   <data name="ReadReceiptRefund">
+      <value>
+select
+  CREATED_TIMESTAMP,
+  CDA_IDENTIFIER
+from
+  CKT_RECEIPT_REFUND
+where
+  @cdaIdentifier = CDA_IDENTIFIER
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetailAddress">
+      <value>
+update CKT_CRDETAIL_ADDRS
+set
+  STREET_1 = @street1,
+  STREET_2 = @street2,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CODE_5 = @zipCode5,
+  ZIP_CODE_4 = @zipCode4,
+  ZIP_CODE_3 = @zipCode3
+where
+  CRDETAIL_ADDRESS_I = @crdetailAddressI
+</value>
+   </data>
+</root>

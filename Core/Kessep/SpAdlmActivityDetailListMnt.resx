@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadActivity">
+      <value>
+select top(1)
+  CONTROL_NUMBER,
+  NAME,
+  TYPE_CODE
+from
+  CKT_ACTIVITY
+where
+  CONTROL_NUMBER = @controlNumber
+</value>
+   </data>
+   <data name="ReadActivityDetail1">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT,
+  CASE_UNIT_FUNCTION,
+  FED_NO_COMPLI_DAYS,
+  FED_NR_N_CMPL_DAYS,
+  OTH_NO_COMPLI_DAYS,
+  OTH_NR_N_COMPL_DAY,
+  REG_SOURCE_ID,
+  REG_SRC_DESC,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  ACT_NO
+from
+  CKT_ACTIVITY_DETAL
+where
+  (
+    (
+      (EFFECTIVE_DATE &lt;= @effectiveDate) and
+      (DISCONTINUE_DATE &gt;= @effectiveDate)
+    ) or
+    (EFFECTIVE_DATE between cast(@effectiveDate as date) and cast(@discontinueDate as date))
+  ) and
+  (ACT_NO = @actNo)
+</value>
+   </data>
+   <data name="ReadActivityDetail2">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  BUSINESS_OBJECT,
+  CASE_UNIT_FUNCTION,
+  FED_NO_COMPLI_DAYS,
+  FED_NR_N_CMPL_DAYS,
+  OTH_NO_COMPLI_DAYS,
+  OTH_NR_N_COMPL_DAY,
+  REG_SOURCE_ID,
+  REG_SRC_DESC,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  ACT_NO
+from
+  CKT_ACTIVITY_DETAL
+where
+  @actNo = ACT_NO
+order by
+  SYSTEM_GENERATED_I
+</value>
+   </data>
+</root>

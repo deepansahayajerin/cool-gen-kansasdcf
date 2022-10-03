@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  FULL_SRV_WO_MED_IN,
+  FULL_SERV_W_MED_IN,
+  LOCATE_IND,
+  CLOSURE_REASON,
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  EXPEDIDED_PAT_IND,
+  PA_MEDICAL_SERVICE,
+  CLOSURE_LETR_DATE,
+  NOTE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoAp = CSP_NO_AP)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="ReadNcpNonCooperation">
+      <value>
+select top(1)
+  NCP_STATUS_CD,
+  EFFECTIVE_DT,
+  REASON_CD,
+  LETTER_1_DT,
+  LETTER_1_CD,
+  LETTER_2_DT,
+  LETTER_2_CD,
+  PHONE_1_DT,
+  PHONE_1_CD,
+  PHONE_2_DT,
+  PHONE_2_CD,
+  END_DT,
+  END_STATUS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  NOTE
+from
+  CKT_NCP_NON_COOP
+where
+  CREATED_TIMESTAMP = @createdTimestamp
+</value>
+   </data>
+   <data name="UpdateNcpNonCooperation">
+      <value>
+update CKT_NCP_NON_COOP
+set
+  NCP_STATUS_CD = @ncpStatusCd,
+  EFFECTIVE_DT = @effectiveDt,
+  REASON_CD = @reasonCd,
+  LETTER_1_DT = @letter1Dt,
+  LETTER_1_CD = @letter1Cd,
+  LETTER_2_DT = @letter2Dt,
+  LETTER_2_CD = @letter2Cd,
+  PHONE_1_DT = @phone1Dt,
+  PHONE_1_CD = @phone1Cd,
+  PHONE_2_DT = @phone2Dt,
+  PHONE_2_CD = @phone2Cd,
+  END_DT = @endDt,
+  END_STATUS_CD = @endStatusCd,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  NOTE = @note
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

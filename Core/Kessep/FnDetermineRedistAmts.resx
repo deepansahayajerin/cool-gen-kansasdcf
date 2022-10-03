@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollection1">
+      <value>
+select
+  COLL_ID,
+  ADJ_IND,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  CAR_ID,
+  OTY_ID,
+  COLL_ADJ_DT,
+  CREATED_TMST,
+  OB_TRN_AMT,
+  DIST_MTD,
+  CT_ORD_APPLIED_TO
+from
+  CKT_COLLECTION
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (ADJ_IND = 'Y') and
+  (CONCURRENT_IND = 'N') and
+  (COLL_ADJ_DT = @collAdjDt)
+order by
+  CT_ORD_APPLIED_TO desc
+</value>
+   </data>
+   <data name="ReadCollection2">
+      <value>
+select
+  COLL_ID,
+  ADJ_IND,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  CAR_ID,
+  OTY_ID,
+  COLL_ADJ_DT,
+  CREATED_TMST,
+  OB_TRN_AMT,
+  DIST_MTD,
+  CT_ORD_APPLIED_TO
+from
+  CKT_COLLECTION with(readuncommitted)
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (ADJ_IND = 'N') and
+  (CONCURRENT_IND = 'N')
+</value>
+   </data>
+   <data name="ReadCollection3">
+      <value>
+select
+  COLL_ID,
+  ADJ_IND,
+  CONCURRENT_IND,
+  CRT_TYPE,
+  CST_ID,
+  CRV_ID,
+  CRD_ID,
+  OBG_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_ID,
+  OTR_TYPE,
+  CAR_ID,
+  OTY_ID,
+  COLL_ADJ_DT,
+  CREATED_TMST,
+  OB_TRN_AMT,
+  DIST_MTD,
+  CT_ORD_APPLIED_TO
+from
+  CKT_COLLECTION with(readuncommitted)
+where
+  (@crdId = CRD_ID) and
+  (@crvId = CRV_ID) and
+  (@cstId = CST_ID) and
+  (@crtType = CRT_TYPE) and
+  (ADJ_IND = 'Y') and
+  (CONCURRENT_IND = 'N')
+order by
+  COLL_ADJ_DT desc
+</value>
+   </data>
+   <data name="ReadCollectionAdjustmentReason">
+      <value>
+select top(1)
+  OB_TRN_RLN_RSN_ID
+from
+  CKT_COLL_ADJ_RSN with(readuncommitted)
+where
+  (OB_TRN_RLN_RSN_ID = @obTrnRlnRsnId1) and
+  (OB_TRN_RLN_RSN_ID = @obTrnRlnRsnId2)
+</value>
+   </data>
+</root>

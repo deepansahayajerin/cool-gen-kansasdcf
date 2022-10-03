@@ -1,0 +1,112 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeAttyPrivateAttorney"
+           program-name="SWEATTYP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeAttyPrivateAttorney"
+           transaction="SR5C"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ListCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="DismissedLiteral" to="DismissedLiteral"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="Case1" to="Case1"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HiddenPrevPersonPrivateAttorney"
+        to="HiddenPrevPersonPrivateAttorney"/>
+   <map from="HiddenPrevCase" to="HiddenPrevCase"/>
+   <map from="HiddenPrevCsePerson" to="HiddenPrevCsePerson"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="ListCsePersons" to="ListCsePersons"/>
+   <map from="ListStates" to="ListStates"/>
+   <map from="UpdateStamp" to="UpdateStamp"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Next" to="Next"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="ApInactive" to="ApInactive"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="HiddenConsent" to="HiddenConsent"/>
+   <map from="PersonPrivateAttorney.CourtCaseNumber"
+        to="PersonPrivateAttorney.CourtCaseNumber"/>
+   <map from="PersonPrivateAttorney.FipsStateAbbreviation"
+        to="PersonPrivateAttorney.FipsStateAbbreviation"/>
+   <map from="PersonPrivateAttorney.FipsCountyAbbreviation"
+        to="PersonPrivateAttorney.FipsCountyAbbreviation"/>
+   <map from="PersonPrivateAttorney.TribCountry"
+        to="PersonPrivateAttorney.TribCountry"/>
+   <map from="PersonPrivateAttorney.LastName"
+        to="PersonPrivateAttorney.LastName"/>
+   <map from="PersonPrivateAttorney.MiddleInitial"
+        to="PersonPrivateAttorney.MiddleInitial"/>
+   <map from="PersonPrivateAttorney.FirstName"
+        to="PersonPrivateAttorney.FirstName"/>
+   <map from="PersonPrivateAttorney.FirmName"
+        to="PersonPrivateAttorney.FirmName"/>
+   <map from="PersonPrivateAttorney.Phone" to="PersonPrivateAttorney.Phone"/>
+   <map from="PersonPrivateAttorney.FaxNumber"
+        to="PersonPrivateAttorney.FaxNumber"/>
+   <map from="PrivateAttorneyAddress.City" to="PrivateAttorneyAddress.City"/>
+   <map from="PrivateAttorneyAddress.State" to="PrivateAttorneyAddress.State"/>
+   <map from="PrivateAttorneyAddress.ZipCode5"
+        to="PrivateAttorneyAddress.ZipCode5"/>
+   <map from="PrivateAttorneyAddress.ZipCode4"
+        to="PrivateAttorneyAddress.ZipCode4"/>
+   <map from="PrivateAttorneyAddress.Zip3" to="PrivateAttorneyAddress.Zip3"/>
+   <map from="PrivateAttorneyAddress.Street1"
+        to="PrivateAttorneyAddress.Street1"/>
+   <map from="PrivateAttorneyAddress.Street2"
+        to="PrivateAttorneyAddress.Street2"/>
+   <map from="PersonPrivateAttorney.Identifier"
+        to="PersonPrivateAttorney.Identifier"/>
+   <map from="PersonPrivateAttorney.DateRetained"
+        to="PersonPrivateAttorney.DateRetained"/>
+   <map from="PersonPrivateAttorney.DateDismissed"
+        to="PersonPrivateAttorney.DateDismissed"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="PersonPrivateAttorney.PhoneAreaCode"
+        to="PersonPrivateAttorney.PhoneAreaCode"/>
+   <map from="PersonPrivateAttorney.FaxNumberAreaCode"
+        to="PersonPrivateAttorney.FaxNumberAreaCode"/>
+   <map from="PersonPrivateAttorney.PhoneExt"
+        to="PersonPrivateAttorney.PhoneExt"/>
+   <map from="PersonPrivateAttorney.EmailAddress"
+        to="PersonPrivateAttorney.EmailAddress"/>
+   <map from="PersonPrivateAttorney.ConsentIndicator"
+        to="PersonPrivateAttorney.ConsentIndicator"/>
+   <map from="PersonPrivateAttorney.BarNumber"
+        to="PersonPrivateAttorney.BarNumber"/>
+   <map from="PersonPrivateAttorney.Note" to="PersonPrivateAttorney.Note"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

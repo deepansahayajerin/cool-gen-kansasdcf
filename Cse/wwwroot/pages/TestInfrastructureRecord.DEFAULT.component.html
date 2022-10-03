@@ -1,0 +1,345 @@
+﻿<!--Name: TEST_INFRASTRUCTURE_RECORD, ID: 372451806, model: 746-->
+<div coolContent coolName="TEST_INFRASTRUCTURE_RECORD" coolType="SCREEN"
+  (coolInit)="scrollSize = 20; pageSize = 1">
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 33.75%; top: 0; width: 32.5%; height: 4%;" coolCol="28"
+     coolRow="1" coolLength="26" coolColor="yellow">Test Infrastructure Record</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 11.25%; top: 8%; width: 18.75%; height: 4%;" coolCol="10"
+     coolRow="3" coolLength="15">Starting Case #</div>
+   <input type="text" coolType="field" name="field_3_26"
+     [(ngModel)]="in.searchCase.number"
+     [coolVideo]="out.searchCase.screenField?.number" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="10"
+     style="left: 31.25%; top: 8%; width: 12.5%; height: 4%;" coolCol="26"
+     coolRow="3" coolLength="10">
+   
+   <div coolType="prompt"
+     style="left: 47.5%; top: 8%; width: 26.25%; height: 4%;" coolCol="39"
+     coolRow="3" coolLength="21">Starting CSE Person #</div>
+   <input type="text" coolType="field" name="field_3_61"
+     [(ngModel)]="in.searchCsePerson.number"
+     [coolVideo]="out.searchCsePerson.screenField?.number" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="10" style="left: 75%; top: 8%; width: 12.5%; height: 4%;"
+     coolCol="61" coolRow="3" coolLength="10">
+   
+   <div coolType="prompt"
+     style="left: 7.5%; top: 12%; width: 22.5%; height: 4%;" coolCol="7"
+     coolRow="4" coolLength="18">Starting Procedure</div>
+   <input type="text" coolType="field" name="field_4_26"
+     [(ngModel)]="in.searchInfrastructure.userId"
+     [coolVideo]="out.searchInfrastructure.screenField?.userId" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="8"
+     style="left: 31.25%; top: 12%; width: 10%; height: 4%;" coolCol="26"
+     coolRow="4" coolLength="8">
+   
+   <div coolType="prompt" style="left: 10%; top: 20%; width: 3.75%; height: 4%;"
+     coolCol="9" coolRow="6" coolLength="3">Sel</div>
+   <input type="text" coolType="field" name="field_6_13"
+     [(ngModel)]="ref(in.group, pageOffset, 'sel.selectChar').value"
+     [coolVideo]="out.group?.[pageOffset]?.sel.screenField?.selectChar"
+     coolAutotab #field_6_13 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 15%; top: 20%; width: 1.25%; height: 4%;" coolCol="13"
+     coolRow="6" coolLength="1" [hidden]="pageOffset >= 20">
+   
+   <div coolType="literal"
+     style="left: 18.75%; top: 20%; width: 61.25%; height: 4%;" coolCol="16"
+     coolRow="6" coolLength="49" coolColor="yellow">-----     Infrastructure Record Details     -----</div>
+   
+   <div coolType="prompt"
+     style="left: 6.25%; top: 24%; width: 7.5%; height: 4%;" coolCol="6"
+     coolRow="7" coolLength="6">Case #</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 15%; top: 24%; width: 12.5%; height: 4%;" coolCol="13"
+     coolRow="7" coolLength="10" [hidden]="pageOffset >= 20">{{in.group?.[pageOffset]?.details.caseNumber}}</div>
+   
+   <div coolType="prompt"
+     style="left: 31.25%; top: 24%; width: 15%; height: 4%;" coolCol="26"
+     coolRow="7" coolLength="12">CSE Person #</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 47.5%; top: 24%; width: 12.5%; height: 4%;" coolCol="39"
+     coolRow="7" coolLength="10" [hidden]="pageOffset >= 20">{{in.group?.[pageOffset]?.details.csePersonNumber}}</div>
+   
+   <div coolType="prompt"
+     style="left: 65%; top: 24%; width: 13.75%; height: 4%;" coolCol="53"
+     coolRow="7" coolLength="11">Case Unit #</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 80%; top: 24%; width: 3.75%; height: 4%;" coolCol="65"
+     coolRow="7" coolLength="3" [hidden]="pageOffset >= 20">{{in.group?.[pageOffset]?.details.caseUnitNumber|coolNumber:'000;#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 2.5%; top: 28%; width: 11.25%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="9">Procedure</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 15%; top: 28%; width: 10%; height: 4%;" coolCol="13"
+     coolRow="8" coolLength="8" [hidden]="pageOffset >= 20">{{in.group?.[pageOffset]?.details.userId}}</div>
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 32%; width: 12.5%; height: 4%;" coolCol="2"
+     coolRow="9" coolLength="10">Identifier</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 15%; top: 32%; width: 11.25%; height: 4%;" coolCol="13"
+     coolRow="9" coolLength="9" [hidden]="pageOffset >= 20">{{in.group?.[pageOffset]?.details.systemGeneratedIdentifier|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 32.5%; top: 32%; width: 13.75%; height: 4%;" coolCol="27"
+     coolRow="9" coolLength="11">Situation #</div>
+   <input type="text" coolType="field" name="field_9_39"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.situationNumber').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.situationNumber"
+     coolAutotab #field_9_39 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="########0;#" coolBlankWhenZero
+     [attr.maxlength]="9"
+     style="left: 47.5%; top: 32%; width: 11.25%; height: 4%;" coolCol="39"
+     coolRow="9" coolLength="9" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt" style="left: 3.75%; top: 36%; width: 10%; height: 4%;"
+     coolCol="4" coolRow="10" coolLength="8">Event Id</div>
+   <input type="text" coolType="field" name="field_10_13"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.eventId').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.eventId"
+     coolAutotab #field_10_13 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="####0;#" coolBlankWhenZero
+     [attr.maxlength]="5" style="left: 15%; top: 36%; width: 6.25%; height: 4%;"
+     coolCol="13" coolRow="10" coolLength="5" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 33.75%; top: 36%; width: 12.5%; height: 4%;" coolCol="28"
+     coolRow="10" coolLength="10">Event Type</div>
+   <input type="text" coolType="field" name="field_10_39"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.eventType').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.eventType"
+     coolAutotab #field_10_39 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="12"
+     style="left: 47.5%; top: 36%; width: 15%; height: 4%;" coolCol="39"
+     coolRow="10" coolLength="12" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 36%; width: 13.75%; height: 4%;" coolCol="54"
+     coolRow="10" coolLength="11">Reason Code</div>
+   <input type="text" coolType="field" name="field_10_66"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.reasonCode').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.reasonCode"
+     coolAutotab #field_10_66 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="15"
+     style="left: 81.25%; top: 36%; width: 18.75%; height: 4%;" coolCol="66"
+     coolRow="10" coolLength="15" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 6.25%; top: 40%; width: 7.5%; height: 4%;" coolCol="6"
+     coolRow="11" coolLength="6">Status</div>
+   <input type="text" coolType="field" name="field_11_13"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.processStatus').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.processStatus"
+     coolAutotab #field_11_13 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 15%; top: 40%; width: 1.25%; height: 4%;" coolCol="13"
+     coolRow="11" coolLength="1" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 25%; top: 40%; width: 21.25%; height: 4%;" coolCol="21"
+     coolRow="11" coolLength="17">Event Detail Name</div>
+   <input type="text" coolType="field" name="field_11_39"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.eventDetailName').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.eventDetailName"
+     coolAutotab #field_11_39 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="40"
+     style="left: 47.5%; top: 40%; width: 50%; height: 4%;" coolCol="39"
+     coolRow="11" coolLength="40" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt" style="left: 3.75%; top: 44%; width: 10%; height: 4%;"
+     coolCol="4" coolRow="12" coolLength="8">Function</div>
+   <input type="text" coolType="field" name="field_12_13"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.function').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.function"
+     coolAutotab #field_12_13 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="3"
+     style="left: 15%; top: 44%; width: 3.75%; height: 4%;" coolCol="13"
+     coolRow="12" coolLength="3" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 23.75%; top: 44%; width: 22.5%; height: 4%;" coolCol="20"
+     coolRow="12" coolLength="18">Business Object Cd</div>
+   <input type="text" coolType="field" name="field_12_39"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.businessObjectCd').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.businessObjectCd"
+     coolAutotab #field_12_39 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="3"
+     style="left: 47.5%; top: 44%; width: 3.75%; height: 4%;" coolCol="39"
+     coolRow="12" coolLength="3" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 44%; width: 17.5%; height: 4%;" coolCol="54"
+     coolRow="12" coolLength="14">Reference Date</div>
+   <input type="text" coolType="field" name="field_12_69"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.referenceDate').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.referenceDate"
+     coolAutotab #field_12_69 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 85%; top: 44%; width: 10%; height: 4%;" coolCol="69"
+     coolRow="12" coolLength="8" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 48%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="13" coolLength="3">Dtl</div>
+   <input type="text" coolType="field" name="field_13_6"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.detail').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.detail"
+     coolAutotab #field_13_6 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="75"
+     style="left: 6.25%; top: 48%; width: 93.75%; height: 4%;" coolCol="6"
+     coolRow="13" coolLength="75" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 52%; width: 17.5%; height: 4%;" coolCol="2"
+     coolRow="14" coolLength="14">Denorm Numeric</div>
+   <input type="text" coolType="field" name="field_14_17"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.denormNumeric12').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.denormNumeric12"
+     coolAutotab #field_14_17 coolAlign="right" coolColor="green"
+     coolHighlight="underscore" coolNumber="###########0;#" coolBlankWhenZero
+     [attr.maxlength]="12" style="left: 20%; top: 52%; width: 15%; height: 4%;"
+     coolCol="17" coolRow="14" coolLength="12" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 47.5%; top: 52%; width: 13.75%; height: 4%;" coolCol="39"
+     coolRow="14" coolLength="11">Denorm Text</div>
+   <input type="text" coolType="field" name="field_14_54"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.denormText12').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.denormText12"
+     coolAutotab #field_14_54 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="12"
+     style="left: 66.25%; top: 52%; width: 15%; height: 4%;" coolCol="54"
+     coolRow="14" coolLength="12" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt" style="left: 5%; top: 56%; width: 13.75%; height: 4%;"
+     coolCol="5" coolRow="15" coolLength="11">Denorm Date</div>
+   <input type="text" coolType="field" name="field_15_17"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.denormDate').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.denormDate"
+     coolAutotab #field_15_17 coolColor="green" coolHighlight="underscore"
+     coolDate="MMddyyyy" [attr.maxlength]="8"
+     style="left: 20%; top: 56%; width: 10%; height: 4%;" coolCol="17"
+     coolRow="15" coolLength="8" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt" style="left: 45%; top: 56%; width: 20%; height: 4%;"
+     coolCol="37" coolRow="15" coolLength="16">Denorm Timestamp</div>
+   <input type="text" coolType="field" name="field_15_54"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.denormTimestamp').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.denormTimestamp"
+     coolAutotab #field_15_54 coolColor="green" coolHighlight="underscore"
+     coolDate="yyyy-MM-dd-HH.mm.ss.zzzzzz" [attr.maxlength]="26"
+     style="left: 66.25%; top: 56%; width: 32.5%; height: 4%;" coolCol="54"
+     coolRow="15" coolLength="26" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 64%; width: 22.5%; height: 4%;" coolCol="2"
+     coolRow="17" coolLength="18">Csenet In Out Code</div>
+   <input type="text" coolType="field" name="field_17_21"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.csenetInOutCode').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.csenetInOutCode"
+     coolAutotab #field_17_21 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 25%; top: 64%; width: 1.25%; height: 4%;" coolCol="21"
+     coolRow="17" coolLength="1" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt"
+     style="left: 38.75%; top: 64%; width: 26.25%; height: 4%;" coolCol="32"
+     coolRow="17" coolLength="21">Initiating State Code</div>
+   <input type="text" coolType="field" name="field_17_54"
+     [(ngModel)]="ref(in.group, pageOffset, 'details.initiatingStateCode').value"
+     [coolVideo]="out.group?.[pageOffset]?.details.screenField?.initiatingStateCode"
+     coolAutotab #field_17_54 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="2"
+     style="left: 66.25%; top: 64%; width: 2.5%; height: 4%;" coolCol="54"
+     coolRow="17" coolLength="2" [hidden]="pageOffset >= 20">
+   
+   <div coolType="prompt" style="left: 10%; top: 72%; width: 12.5%; height: 4%;"
+     coolCol="9" coolRow="19" coolLength="10">Created By</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 72%; width: 10%; height: 4%;" coolCol="20"
+     coolRow="19" coolLength="8" [hidden]="pageOffset >= 20">{{in.group?.[pageOffset]?.details.createdBy}}</div>
+   
+   <div coolType="prompt"
+     style="left: 43.75%; top: 72%; width: 21.25%; height: 4%;" coolCol="36"
+     coolRow="19" coolLength="17">Created Timestamp</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 66.25%; top: 72%; width: 32.5%; height: 4%;" coolCol="54"
+     coolRow="19" coolLength="26" [hidden]="pageOffset >= 20">{{in.group?.[pageOffset]?.details.createdTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss.zzzzzz':0}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 76%; width: 18.75%; height: 4%;" coolCol="4"
+     coolRow="20" coolLength="15">Last Updated By</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 76%; width: 10%; height: 4%;" coolCol="20"
+     coolRow="20" coolLength="8" [hidden]="pageOffset >= 20">{{in.group?.[pageOffset]?.details.lastUpdatedBy}}</div>
+   
+   <div coolType="prompt"
+     style="left: 37.5%; top: 76%; width: 27.5%; height: 4%;" coolCol="31"
+     coolRow="20" coolLength="22">Last Updated Timestamp</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 66.25%; top: 76%; width: 32.5%; height: 4%;" coolCol="54"
+     coolRow="20" coolLength="26" [hidden]="pageOffset >= 20">{{in.group?.[pageOffset]?.details.lastUpdatedTimestamp|coolDate:'yyyy-MM-dd-HH.mm.ss.zzzzzz':0}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="71" coolRow="21" coolLength="9"
+     style="left: 87.5%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="79"
+     style="left: 0; top: 84%; width: 98.75%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 92.5%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="74">PF KEY :  2 Display  4 List  6 Update  7 Prev  8 Next  9 Return  10 Delete</div>
+   
+   <div coolType="literal"
+     style="left: 11.25%; top: 92%; width: 27.5%; height: 4%;" coolCol="10"
+     coolRow="24" coolLength="22">11 Refresh  12 SignOff</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="UPDATE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F6">F06=UPDATE</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="DELETE" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F10">F10=DELETE</a>
+   <a coolType="action" coolCommand="REFRESH" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=REFRESH</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   </div>

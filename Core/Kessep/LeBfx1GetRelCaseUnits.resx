@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseUnitCase">
+      <value>
+select
+  CU_NUMBER,
+  CAS_NO,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@cspNoChild = CSP_NO_CHILD) and
+  (@cspNoAp = CSP_NO_AP)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionCaseRoleCsePersonLegalActionCaseRole">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_IDENTIFIER,
+  T1.LGA_ID,
+  T1.CREATED_TSTAMP,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.CRO_TYPE,
+  T3.CRO_IDENTIFIER,
+  T3.LGA_ID,
+  T3.CREATED_TSTAMP,
+  T6.CU_NUMBER,
+  T6.CAS_NO,
+  T6.CSP_NO_AP,
+  T6.CSP_NO_CHILD
+from
+  CKT_LEG_ACT_CAS_RL T1
+  join
+  CKT_LEG_ACT_CAS_RL T3
+  on
+    (@lgaId = T1.LGA_ID) and
+    (T1.CRO_TYPE = 'AP') and
+    (@lgaId = T3.LGA_ID) and
+    (T3.CRO_TYPE = 'CH') and
+    (T1.CAS_NUMBER = T3.CAS_NUMBER)
+  join
+  CKT_CASE_UNIT T6
+  on
+    (T1.CAS_NUMBER = T6.CAS_NO) and
+    (T3.CSP_NUMBER = T6.CSP_NO_CHILD) and
+    (T1.CSP_NUMBER = T6.CSP_NO_AP)
+order by
+  T1.CSP_NUMBER,
+  T3.CSP_NUMBER,
+  T1.CAS_NUMBER,
+  T1.CREATED_TSTAMP desc,
+  T3.CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadLegalActionPersonLegalActionPersonCsePerson">
+      <value>
+select
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.END_DT,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T2.LA_PERSON_ID,
+  T2.CSP_NUMBER,
+  T2.END_DT,
+  T2.LGA_R_IDENTIFIER,
+  T2.LAD_R_NUMBER,
+  T2.ACCOUNT_TYPE,
+  T5.DETAIL_TYPE,
+  T5.OTY_ID
+from
+  CKT_LEGAL_ACT_DTL T5
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (T5.LA_DETAIL_NO = T1.LAD_R_NUMBER) and
+    (T5.LGA_IDENTIFIER = T1.LGA_R_IDENTIFIER) and
+    (@lgaIdentifier = T5.LGA_IDENTIFIER) and
+    (T1.ACCOUNT_TYPE = 'S') and
+    (T1.END_DT &gt;= @endDt) and
+    (T1.CSP_NUMBER is not null)
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T5.LA_DETAIL_NO = T2.LAD_R_NUMBER) and
+    (T5.LGA_IDENTIFIER = T2.LGA_R_IDENTIFIER) and
+    (T2.CSP_NUMBER is not null) and
+    (T2.ACCOUNT_TYPE = 'R') and
+    (T2.END_DT &gt;= @endDt)
+order by
+  T2.CSP_NUMBER,
+  T1.CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteCashReceiptBalanceAdjustment">
+      <value>
+delete from CKT_CRBAL_ADJ
+where
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CRT_I_IDENTIFIER = @crtIIdentifier) and
+  (CST_I_IDENTIFIER = @cstIIdentifier) and
+  (CRV_I_IDENTIFIER = @crvIIdentifier) and
+  (CRR_IDENTIFIER = @crrIdentifier) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+   <data name="ReadCashReceipt1">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  CASH_BAL_AMT,
+  CASH_BAL_RSN,
+  CASH_DUE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceipt2">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  RECEIPT_AMOUNT,
+  CASH_RECEIPT_ID,
+  CASH_BAL_AMT,
+  CASH_BAL_RSN,
+  CASH_DUE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustment">
+      <value>
+select top(1)
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRT_I_IDENTIFIER,
+  CST_I_IDENTIFIER,
+  CRV_I_IDENTIFIER,
+  CRR_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  ADJUSTMENT_AMOUNT
+from
+  CKT_CRBAL_ADJ
+where
+  (CRR_IDENTIFIER = @crrIdentifier) and
+  (@crtIIdentifier = CRT_I_IDENTIFIER) and
+  (@cstIIdentifier = CST_I_IDENTIFIER) and
+  (@crvIIdentifier = CRV_I_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn1">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) + T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIIdentifier = T1.CRT_I_IDENTIFIER) and
+    (@cstIIdentifier = T1.CST_I_IDENTIFIER) and
+    (@crvIIdentifier = T1.CRV_I_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn2">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) + T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIIdentifier = T1.CRT_I_IDENTIFIER) and
+    (@cstIIdentifier = T1.CST_I_IDENTIFIER) and
+    (@crvIIdentifier = T1.CRV_I_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn3">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) - T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn4">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) - T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'REFUND',
+        'PROCCSTFEE', 'NETINTFERR')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent1">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  SOURCE_CREATION_DT
+from
+  CKT_CR_EVENT
+where
+  (CREVENT_ID = @creventId) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent2">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  SOURCE_CREATION_DT
+from
+  CKT_CR_EVENT
+where
+  (CREVENT_ID = @creventId) and
+  (CST_IDENTIFIER = @cstIdentifier)
+</value>
+   </data>
+   <data name="UpdateCashReceipt1">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  CASH_BAL_AMT = @cashBalAmt,
+  CASH_BAL_RSN = @cashBalRsn,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="UpdateCashReceipt2">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  CASH_BAL_AMT = @cashBalAmt,
+  CASH_BAL_RSN = @cashBalRsn,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+</root>

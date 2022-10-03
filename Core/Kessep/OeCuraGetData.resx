@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadImHouseholdMbrMnthlyAdj">
+      <value>
+select
+  TYPE,
+  ADJUSTMENT_AMT,
+  CREATED_TMST,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER,
+  IMS_MONTH,
+  IMS_YEAR
+from
+  CKT_IM_HH_MBR_MADJ with(readuncommitted)
+where
+  (@imsYear = IMS_YEAR) and
+  (@imsMonth = IMS_MONTH) and
+  (@imhAeCaseNo = IMH_AE_CASE_NO) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySumCsePersonImHousehold">
+      <value>
+select
+  YEAR0,
+  MONTH0,
+  GRANT_AMT,
+  GRANT_MED_AMT,
+  URA_AMOUNT,
+  URA_MEDICAL_AMOUNT,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM with(readuncommitted)
+where
+  (CSP_NUMBER = @cspNumber) and
+  (
+    (YEAR0 &gt; @year1) or
+    (
+      (YEAR0 = @year1) and
+      (MONTH0 &gt;= @month1)
+    )
+  ) and
+  (
+    (YEAR0 &lt; @year2) or
+    (
+      (YEAR0 = @year2) and
+      (MONTH0 &lt;= @month2)
+    )
+  )
+order by
+  YEAR0 desc,
+  MONTH0 desc
+</value>
+   </data>
+   <data name="ReadUraCollectionApplicationObligationType">
+      <value>
+select
+  T1.COLL_AMT_APPLD,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTY_IDENTIFIER,
+  T1.OBG_IDENTIFIER,
+  T1.OTR_IDENTIFIER,
+  T1.OTR_TYPE,
+  T1.CST_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_IDENTIFIER,
+  T1.COL_IDENTIFIER,
+  T1.IMH_AE_CASE_NO,
+  T1.CSP_NUMBER0,
+  T1.IMS_MONTH,
+  T1.IMS_YEAR,
+  T1.CREATED_TSTAMP,
+  T2.DEBT_TYP_ID,
+  T2.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_URA_COLL_APPL T1 with(readuncommitted)
+  on
+    (@cspNumber0 = T1.CSP_NUMBER0) and
+    (@imsYear = T1.IMS_YEAR) and
+    (@imsMonth = T1.IMS_MONTH) and
+    (@imhAeCaseNo = T1.IMH_AE_CASE_NO) and
+    (T2.DEBT_TYP_ID = T1.OTY_IDENTIFIER)
+</value>
+   </data>
+</root>

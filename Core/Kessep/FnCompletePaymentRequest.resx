@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePaymentStatusHistory1">
+      <value>
+insert into CKT_PMNT_STAT_HIST
+(
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @pstGeneratedId,
+  @prqGeneratedId,
+  @pymntStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="CreatePaymentStatusHistory2">
+      <value>
+insert into CKT_PMNT_STAT_HIST
+(
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @pstGeneratedId,
+  @prqGeneratedId,
+  @pymntStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="CreatePaymentStatusHistory3">
+      <value>
+insert into CKT_PMNT_STAT_HIST
+(
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @pstGeneratedId,
+  @prqGeneratedId,
+  @pymntStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="DeletePaymentRequest#1">
+      <value>
+update CKT_DISB_TRAN
+set
+  PRQ_GENERATED_ID = null
+where
+  PRQ_GENERATED_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_ELEC_FUND_TRAN
+where
+  PRQ_GENERATED_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#3">
+      <value>
+update CKT_OBLIGATION
+set
+  PRQ_ID = null
+where
+  PRQ_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#4">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  PRQ_R_GENERATED_ID = null
+where
+  PRQ_R_GENERATED_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#5">
+      <value>
+select top(1)
+  1
+from
+  CKT_POT_RECOVERY
+where
+  PRQ_IDENTIFIER = @prqGeneratedId
+</value>
+   </data>
+   <data name="DeletePaymentRequest#6">
+      <value>
+delete from CKT_PMNT_REQUEST
+where
+  PAYMENT_REQUEST_ID = @prqGeneratedId
+</value>
+   </data>
+   <data name="UpdatePaymentRequest">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  PROCESS_DATE = @processDate,
+  AMOUNT = @amount,
+  TYPE = @type
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+</root>

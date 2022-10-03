@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollectionCsePerson">
+      <value>
+select
+  T1.COLL_ID,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.AR_NUMBER,
+  T3.CSP_NUMBER
+from
+  CKT_COLLECTION T1
+  join
+  CKT_DISB_TRAN T3
+  on
+    (T1.COLL_ID = T3.COL_ID) and
+    (T1.OTY_ID = T3.OTY_ID) and
+    (T1.OBG_ID = T3.OBG_ID) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER_DISB) and
+    (T1.CPA_TYPE = T3.CPA_TYPE_DISB) and
+    (T1.OTR_ID = T3.OTR_ID) and
+    (T1.OTR_TYPE = T3.OTR_TYPE_DISB) and
+    (T1.CRT_TYPE = T3.CRT_ID) and
+    (T1.CST_ID = T3.CST_ID) and
+    (T1.CRV_ID = T3.CRV_ID) and
+    (T1.CRD_ID = T3.CRD_ID) and
+    (T3.CSP_NUMBER between cast(@number1 as char(10)) and cast(@number2 as char(10)))
+</value>
+   </data>
+   <data name="UpdateCollection">
+      <value>
+update CKT_COLLECTION
+set
+  AR_NUMBER = @arNumber
+where
+  (COLL_ID = @collId) and
+  (CRT_TYPE = @crtType) and
+  (CST_ID = @cstId) and
+  (CRV_ID = @crvId) and
+  (CRD_ID = @crdId) and
+  (OBG_ID = @obgId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_ID = @otrId) and
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+</root>

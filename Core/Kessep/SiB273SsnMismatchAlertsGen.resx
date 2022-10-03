@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignmentServiceProvider">
+      <value>
+select top(1)
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T2.SERVICE_PRVDER_ID,
+  T2.USER_ID
+from
+  CKT_SERVICE_PRVDER T2
+  join
+  CKT_OFFC_SRVC_PRVR T3
+  join
+  CKT_ASSIGN_CASE T1
+  on
+    (@casNo = T1.CAS_NO) and
+    (T3.EFFECTIVE_DATE = T1.OSP_DATE) and
+    (T3.ROLE_CODE = T1.OSP_CODE) and
+    (T3.OFF_GENERATED_ID = T1.OFF_ID) and
+    (T3.SPD_GENERATED_ID = T1.SPD_ID) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE = @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE = @discontinueDate)
+  on
+    T2.SERVICE_PRVDER_ID = T3.SPD_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadCaseRoleCase">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.STATUS
+from
+  CKT_CASE T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T2.NUMB = T1.CAS_NUMBER) and
+    (T1.TYPE in ('AP', 'AR', 'CH')) and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE = @endDate)
+</value>
+   </data>
+</root>

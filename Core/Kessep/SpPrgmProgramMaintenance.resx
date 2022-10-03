@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCode">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE
+where
+  (CODE_NAME = 'OFFICE CASELOAD PROGRAM') and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE_VALUE
+where
+  (@codId = COD_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (EXPIRATION_DATE &gt;= @effectiveDate) and
+  (CDVALUE &gt;= cast(@code as char(3)))
+order by
+  CDVALUE
+</value>
+   </data>
+   <data name="ReadProgram1">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  TITLE,
+  INTERSTATE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+where
+  (CODE = cast(@cdvalue as char(10))) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadProgram2">
+      <value>
+select top(1)
+  PROGRAM_ID,
+  CODE,
+  TITLE,
+  INTERSTATE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadProgram3">
+      <value>
+select
+  PROGRAM_ID,
+  CODE,
+  TITLE,
+  INTERSTATE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  DISTRBTN_PRGM_TYPE
+from
+  CKT_PROGRAM
+where
+  CODE &gt;= @code
+order by
+  CODE
+</value>
+   </data>
+   <data name="ReadProgramIndicator">
+      <value>
+select top(1)
+  CHD_SPPRT_RTNTN_CD,
+  IV_D_FEE_INDICATOR,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  PRG_GENERATED_ID
+from
+  CKT_PROGRAM_INDICA
+where
+  (@prgGeneratedId = PRG_GENERATED_ID) and
+  (
+    (DISCONTINUE_DATE &gt;= @discontinueDate1) or
+    (DISCONTINUE_DATE = @discontinueDate2)
+  )
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+</root>

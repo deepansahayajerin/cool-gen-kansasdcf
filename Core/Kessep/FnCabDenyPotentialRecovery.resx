@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreatePaymentStatusHistory">
+      <value>
+insert into CKT_PMNT_STAT_HIST
+(
+  PST_GENERATED_ID,
+  PRQ_GENERATED_ID,
+  PYMNT_STAT_HIST_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  REASON_TEXT
+)
+values
+(
+  @pstGeneratedId,
+  @prqGeneratedId,
+  @pymntStatHistId,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @reasonText
+)
+</value>
+   </data>
+   <data name="ReadPaymentRequestPaymentStatusHistory">
+      <value>
+select top(1)
+  T1.PAYMENT_REQUEST_ID,
+  T1.PROCESS_DATE,
+  T1.PRQ_R_GENERATED_ID,
+  T2.PST_GENERATED_ID,
+  T2.PYMNT_STAT_HIST_ID,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_PMNT_REQUEST T1
+  join
+  CKT_PMNT_STAT_HIST T2
+  on
+    (T1.PAYMENT_REQUEST_ID = @paymentRequestId) and
+    (T1.PAYMENT_REQUEST_ID = T2.PRQ_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadPaymentStatus">
+      <value>
+select top(1)
+  PAYMENT_STATUS_ID,
+  CODE
+from
+  CKT_PAYMENT_STATUS
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadPaymentStatusPaymentStatusHistory">
+      <value>
+select
+  T1.PAYMENT_STATUS_ID,
+  T1.CODE,
+  T2.PRQ_GENERATED_ID,
+  T2.PYMNT_STAT_HIST_ID
+from
+  CKT_PAYMENT_STATUS T1
+  join
+  CKT_PMNT_STAT_HIST T2
+  on
+    (T2.PYMNT_STAT_HIST_ID &gt;= @pymntStatHistId) and
+    (@prqGeneratedId = T2.PRQ_GENERATED_ID) and
+    (T1.PAYMENT_STATUS_ID = T2.PST_GENERATED_ID)
+order by
+  T2.PYMNT_STAT_HIST_ID
+</value>
+   </data>
+   <data name="UpdatePaymentRequest">
+      <value>
+update CKT_PMNT_REQUEST
+set
+  PROCESS_DATE = @processDate
+where
+  PAYMENT_REQUEST_ID = @paymentRequestId
+</value>
+   </data>
+   <data name="UpdatePaymentStatusHistory">
+      <value>
+update CKT_PMNT_STAT_HIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (PST_GENERATED_ID = @pstGeneratedId) and
+  (PRQ_GENERATED_ID = @prqGeneratedId) and
+  (PYMNT_STAT_HIST_ID = @pymntStatHistId)
+</value>
+   </data>
+</root>

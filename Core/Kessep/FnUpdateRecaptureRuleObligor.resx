@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadObligorRule1">
+      <value>
+select top(1)
+  RECAPTURE_RULE_ID,
+  CPA_D_TYPE,
+  CSP_D_NUMBER,
+  EFFECTIVE_DATE,
+  NEGOTIATED_DATE,
+  DISCONTINUE_DATE,
+  NA_ARREARS_MAX_AMT,
+  NA_ARREARS_AMOUNT,
+  NA_ARREARS_PCT,
+  NA_CURR_MAX_AMOUNT,
+  NA_CURR_AMOUNT,
+  NA_CURR_PERCENTAGE,
+  PASSTHRU_PERCENTAG,
+  PASSTHRU_AMOUNT,
+  PASSTHRU_MAX_AMT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OBLIGOR_RULE_FILLE,
+  TYPE,
+  REPYMNT_LTR_PRT_DT
+from
+  CKT_RECAPTURE_RULE
+where
+  (
+    (DISCONTINUE_DATE &gt; @discontinueDate1) or
+    (DISCONTINUE_DATE = @discontinueDate2)
+  ) and
+  (CPA_D_TYPE is not null) and
+  (CSP_D_NUMBER = @cspDNumber) and
+  (RECAPTURE_RULE_ID &lt;&gt; @recaptureRuleId)
+</value>
+   </data>
+   <data name="ReadObligorRule2">
+      <value>
+select top(1)
+  RECAPTURE_RULE_ID,
+  CPA_D_TYPE,
+  CSP_D_NUMBER,
+  EFFECTIVE_DATE,
+  NEGOTIATED_DATE,
+  DISCONTINUE_DATE,
+  NA_ARREARS_MAX_AMT,
+  NA_ARREARS_AMOUNT,
+  NA_ARREARS_PCT,
+  NA_CURR_MAX_AMOUNT,
+  NA_CURR_AMOUNT,
+  NA_CURR_PERCENTAGE,
+  PASSTHRU_PERCENTAG,
+  PASSTHRU_AMOUNT,
+  PASSTHRU_MAX_AMT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  OBLIGOR_RULE_FILLE,
+  TYPE,
+  REPYMNT_LTR_PRT_DT
+from
+  CKT_RECAPTURE_RULE
+where
+  RECAPTURE_RULE_ID = @recaptureRuleId
+</value>
+   </data>
+   <data name="UpdateObligorRule1">
+      <value>
+update CKT_RECAPTURE_RULE
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  RECAPTURE_RULE_ID = @recaptureRuleId
+</value>
+   </data>
+   <data name="UpdateObligorRule2">
+      <value>
+update CKT_RECAPTURE_RULE
+set
+  EFFECTIVE_DATE = @effectiveDate,
+  NEGOTIATED_DATE = @negotiatedDate,
+  DISCONTINUE_DATE = @discontinueDate,
+  NA_ARREARS_MAX_AMT = @naArrearsMaxAmt,
+  NA_ARREARS_AMOUNT = @naArrearsAmount,
+  NA_ARREARS_PCT = @naArrearsPct,
+  NA_CURR_MAX_AMOUNT = @naCurrMaxAmount,
+  NA_CURR_AMOUNT = @naCurrAmount,
+  NA_CURR_PERCENTAGE = @naCurrPercentage,
+  PASSTHRU_PERCENTAG = @passthruPercentag,
+  PASSTHRU_AMOUNT = @passthruAmount,
+  PASSTHRU_MAX_AMT = @passthruMaxAmt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  REPYMNT_LTR_PRT_DT = @repymntLtrPrtDt
+where
+  RECAPTURE_RULE_ID = @recaptureRuleId
+</value>
+   </data>
+</root>

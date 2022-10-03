@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateServiceProcess">
+      <value>
+insert into CKT_SERVICE_PROCSS
+(
+  LGA_IDENTIFIER,
+  SERVICE_DOC_TYPE,
+  SERVICE_REQUEST_DT,
+  METHOD_OF_SERVICE,
+  SERVICE_DATE,
+  RETURN_DATE,
+  SERVER_NAME,
+  REQUESTED_SERVEE,
+  SERVEE,
+  SERVEE_RELATIONSHP,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  IDENTIFIER,
+  SERVICE_LOCATION,
+  SERVICE_RESULT
+)
+values
+(
+  @lgaIdentifier,
+  @serviceDocType,
+  @serviceRequestDt,
+  @methodOfService,
+  @serviceDate,
+  @returnDate,
+  @serverName,
+  @requestedServee,
+  @servee,
+  @serveeRelationshp,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  @identifier,
+  @serviceLocation,
+  @serviceResult
+)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadServiceProcess">
+      <value>
+select top(1)
+  LGA_IDENTIFIER,
+  IDENTIFIER
+from
+  CKT_SERVICE_PROCSS
+where
+  @lgaIdentifier = LGA_IDENTIFIER
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCsePerson">
+      <value>
+update CKT_FIPS
+set
+  CSP_NUMBER = @cspNumber
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="AssociateFipsTribAddress">
+      <value>
+update CKT_FIPS_TRIB_ADDR
+set
+  FIP_STATE = @fipState,
+  FIP_COUNTY = @fipCounty,
+  FIP_LOCATION = @fipLocation
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="AssociateOffice">
+      <value>
+update CKT_FIPS
+set
+  OFF_IDENTIFIER = @offIdentifier
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="AssociateTribunal">
+      <value>
+update CKT_TRIBUNAL
+set
+  FIP_LOCATION = @fipLocation,
+  FIP_COUNTY = @fipCounty,
+  FIP_STATE = @fipState
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="CreateFips">
+      <value>
+insert into CKT_FIPS
+(
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  OFF_IDENTIFIER,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR,
+  CSP_NUMBER
+)
+values
+(
+  @state,
+  @county,
+  @location,
+  @stateDesc,
+  @countyDesc,
+  @locationDesc,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  null,
+  @stateAbbreviation,
+  @countyAbbr,
+  null
+)
+</value>
+   </data>
+   <data name="DeleteFips#1">
+      <value>
+update CKT_FIPS_TRIB_ADDR
+set
+  FIP_LOCATION = null,
+  FIP_COUNTY = null,
+  FIP_STATE = null
+where
+  (FIP_STATE = @fipState) and
+  (FIP_COUNTY = @fipCounty) and
+  (FIP_LOCATION = @fipLocation)
+</value>
+   </data>
+   <data name="DeleteFips#2">
+      <value>
+select top(1)
+  1
+from
+  CKT_TRIBUNAL
+where
+  (FIP_STATE = @fipState) and
+  (FIP_COUNTY = @fipCounty) and
+  (FIP_LOCATION = @fipLocation)
+</value>
+   </data>
+   <data name="DeleteFips#3">
+      <value>
+delete from CKT_FIPS
+where
+  ([STATE] = @fipState) and
+  (COUNTY = @fipCounty) and
+  (LOCATION = @fipLocation)
+</value>
+   </data>
+   <data name="DisassociateCsePerson">
+      <value>
+update CKT_FIPS
+set
+  CSP_NUMBER = null
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="DisassociateFipsTribAddress">
+      <value>
+update CKT_FIPS_TRIB_ADDR
+set
+  FIP_STATE = null,
+  FIP_COUNTY = null,
+  FIP_LOCATION = null
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="DisassociateOffice">
+      <value>
+update CKT_FIPS
+set
+  OFF_IDENTIFIER = null
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="DisassociateTribunal">
+      <value>
+update CKT_TRIBUNAL
+set
+  FIP_LOCATION = null,
+  FIP_COUNTY = null,
+  FIP_STATE = null
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  OFF_IDENTIFIER,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR,
+  CSP_NUMBER
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  OFF_IDENTIFIER,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR,
+  CSP_NUMBER
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select
+  IDENTIFIER,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  (@fipLocation = FIP_LOCATION) and
+  (@fipCounty = FIP_COUNTY) and
+  (@fipState = FIP_STATE)
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select
+  FIP_LOCATION,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL
+where
+  (@fipLocation = FIP_LOCATION) and
+  (@fipCounty = FIP_COUNTY) and
+  (@fipState = FIP_STATE)
+</value>
+   </data>
+</root>

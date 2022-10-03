@@ -1,0 +1,30 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeAdaaLstAdminActionsAvail"
+           program-name="SWEADAAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeAdaaLstAdminActionsAvail"
+           transaction="SR8F"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_ADMIN_ACTION_CRITERIA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeCritAdminActCriteria"
+       send-command="DISPLAY">
+      <map from="HiddenSelected" to="AdministrativeAction"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.AdministrativeAction" to="Group.AdministrativeAction"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSecurity1" to="HiddenSecurity1"/>
+   <map from="HiddenSecurity.HiddenSecurityCommand"
+        to="HiddenSecurity.HiddenSecurityCommand"/>
+   <map from="HiddenSecurity.HiddenSecurityProfileAuthorization"
+        to="HiddenSecurity.HiddenSecurityProfileAuthorization"/>
+</procedure>

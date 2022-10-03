@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  CLOSURE_REASON,
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  NOTE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoAp = CSP_NO_AP) and
+  (CLOSURE_DATE &gt; @closureDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO,
+  CSP_NO_AP,
+  CSP_NO_CHILD
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoChild = CSP_NO_CHILD) and
+  (CLOSURE_DATE = @closureDate)
+</value>
+   </data>
+   <data name="ReadCaseUnitFunctionAssignmt">
+      <value>
+select
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CSU_NO,
+  CAS_NO
+from
+  CKT_ASSGN_CASE_UNT
+where
+  (@casNo = CAS_NO) and
+  (@csuNo = CSU_NO) and
+  (DISCONTINUE_DATE &gt; @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (KS_CASE_IND = 'N')
+</value>
+   </data>
+   <data name="UpdateCaseUnit1">
+      <value>
+update CKT_CASE_UNIT
+set
+  CLOSURE_DATE = @closureDate,
+  CLOSURE_REASON_COD = @closureReasonCod,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CU_NUMBER = @cuNumber) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="UpdateCaseUnit2">
+      <value>
+update CKT_CASE_UNIT
+set
+  CLOSURE_DATE = @closureDate,
+  CLOSURE_REASON_COD = @closureReasonCod,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CU_NUMBER = @cuNumber) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+   <data name="UpdateCaseUnitFunctionAssignmt">
+      <value>
+update CKT_ASSGN_CASE_UNT
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (CSU_NO = @csuNo) and
+  (CAS_NO = @casNo)
+</value>
+   </data>
+</root>

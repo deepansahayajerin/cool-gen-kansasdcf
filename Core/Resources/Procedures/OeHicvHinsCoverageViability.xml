@@ -1,0 +1,87 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeHicvHinsCoverageViability"
+           program-name="SWEHICVP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeHicvHinsCoverageViability"
+           transaction="SR5X"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <return-map from="Selected" to="SelectedAp"/>
+      <return-map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OeHinmHealthInsuranceMenu"
+       send-command-type="none">
+      <map from="Case1" to="Current"/>
+      <map from="ApCsePerson" to="StartCsePerson"/>
+      <map from="ApCsePersonsWorkSet" to="PersonName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_OBLIGATION_DETAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOPAY"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="ApCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="ActiveChild.ActiveChildNum" to="ActiveChild.ActiveChildNum"/>
+   <map from="ActiveChild.ActiveChild1" to="ActiveChild.ActiveChild1"/>
+   <map from="ChildCount" to="ChildCount"/>
+   <map from="ActiveChild.ActiveChildId" to="ActiveChild.ActiveChildId"/>
+   <map from="ChildCsePerson" to="ChildCsePerson"/>
+   <map from="ChildCsePersonsWorkSet" to="ChildCsePersonsWorkSet"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ApCsePerson" to="ApCsePerson"/>
+   <map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+   <map from="ArCsePerson" to="ArCsePerson"/>
+   <map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+   <map from="CurrentOblg.DetailCurrOblgLegalActionDetail"
+        to="CurrentOblg.DetailCurrOblgLegalActionDetail"/>
+   <map from="AvailHins.DetailPolicyHoldr" to="AvailHins.DetailPolicyHoldr"/>
+   <map from="AvailHins.DetailAvailHinsPersonalHealthInsurance"
+        to="AvailHins.DetailAvailHinsPersonalHealthInsurance"/>
+   <map from="AvailHins.DetailAvailHinsHealthInsuranceCoverage"
+        to="AvailHins.DetailAvailHinsHealthInsuranceCoverage"/>
+   <map from="ChildProgram.Detail" to="ChildProgram.Detail"/>
+   <map from="HealthInsuranceViability" to="HealthInsuranceViability"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="HiddenPrevious" to="HiddenPrevious"/>
+   <map from="HiddenPrevUserAction" to="HiddenPrevUserAction"/>
+   <map from="HinsCovOblg" to="HinsCovOblg"/>
+   <map from="HiddenDisplayPerformed" to="HiddenDisplayPerformed"/>
+   <map from="NoOfChildrenNeedIns" to="NoOfChildrenNeedIns"/>
+   <map from="Next" to="Next"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Notes.Detail" to="Notes.Detail"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="CourtOrderOblPrompt" to="CourtOrderOblPrompt"/>
+   <map from="MonthlyIncome" to="MonthlyIncome"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="Hap" to="Hap"/>
+   <map from="CurrentOblg.DetailCurrOblgObligationType"
+        to="CurrentOblg.DetailCurrOblgObligationType"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="ActiveChild1" to="ActiveChild1"/>
+   <map from="Child.Type1" to="Child.Type1"/>
+   <map from="Child.StartDate" to="Child.StartDate"/>
+   <map from="Child.EndDate" to="Child.EndDate"/>
+   <map from="Child.ArWaivedInsurance" to="Child.ArWaivedInsurance"/>
+   <map from="Child.DateOfEmancipation" to="Child.DateOfEmancipation"/>
+   <map from="Child.Over18AndInSchool" to="Child.Over18AndInSchool"/>
+   <map from="Child.HealthInsuranceIndicator"
+        to="Child.HealthInsuranceIndicator"/>
+   <map from="Child.MedicalSupportIndicator" to="Child.MedicalSupportIndicator"/>
+   <map from="Child.PriorMedicalSupport" to="Child.PriorMedicalSupport"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

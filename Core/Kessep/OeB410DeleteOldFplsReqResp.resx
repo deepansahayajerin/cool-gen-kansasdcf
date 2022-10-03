@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteFplsLocateRequest">
+      <value>
+delete from CKT_FPLS_LOC_REQ
+where
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="DeleteFplsLocateResponse">
+      <value>
+delete from CKT_FPLS_LOC_RESP
+where
+  (FLQ_IDENTIFIER = @flqIdentifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadFplsLocateRequest">
+      <value>
+select
+  CSP_NUMBER,
+  IDENTIFIER,
+  TRANSACTION_STATUS,
+  REQUEST_SENT_DATE
+from
+  CKT_FPLS_LOC_REQ
+where
+  (REQUEST_SENT_DATE &lt; @requestSentDate) and
+  (TRANSACTION_STATUS in ('S', 'E', 'R'))
+</value>
+   </data>
+   <data name="ReadFplsLocateResponse">
+      <value>
+select
+  FLQ_IDENTIFIER,
+  CSP_NUMBER,
+  IDENTIFIER,
+  DATE_RECEIVED
+from
+  CKT_FPLS_LOC_RESP
+where
+  (@flqIdentifier = FLQ_IDENTIFIER) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+</root>

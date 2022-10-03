@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.FAMILY_VIOL_IND,
+  T1.FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T1.TYPE = 'C') and
+    (T1.FAMILY_VIOL_IND &gt; ' ') and
+    (T1.FV_LTR_SENT_DT &gt; @fvLtrSentDt) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.FAMILY_VIOL_IND,
+  T1.FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_INFRASTRUCTURE T2
+  on
+    (T1.NUMB = T2.CSE_PERSON_NUM) and
+    (T2.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  FAMILY_VIOL_IND,
+  FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON
+where
+  NUMB = cast(@value as varchar(245))
+</value>
+   </data>
+   <data name="ReadCsePerson4">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.TYPE,
+  T1.LAST_UPDATED_TMST,
+  T1.LAST_UPDATED_BY,
+  T1.FAMILY_VIOL_IND,
+  T1.FV_LTR_SENT_DT
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T1.TYPE = 'C') and
+    (T1.FAMILY_VIOL_IND &gt; ' ') and
+    (T1.FV_LTR_SENT_DT = @fvLtrSentDt) and
+    (T2.TYPE = 'CH') and
+    (T2.CAS_NUMBER = @casNumber)
+</value>
+   </data>
+   <data name="ReadFieldFieldValue">
+      <value>
+select top(1)
+  T2.FLD_NAME,
+  T2.VALU,
+  T2.DOC_NAME,
+  T2.DOC_EFFECTIVE_DTE,
+  T2.INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE T2
+  join
+  CKT_OUTGOING_DOC T5
+  on
+    (T2.FLD_NAME = 'LAEIWO2EMP') and
+    (T2.DOC_EFFECTIVE_DTE = T5.DOC_EFFECTIVE_DTE) and
+    (T2.DOC_NAME = T5.DOC_NAME) and
+    (T5.INF_ID = @infId) and
+    (T5.INF_ID = T2.INF_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadFieldValue">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE with(readuncommitted)
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (VALU &gt; ' ') and
+  (DOC_NAME = @docName) and
+  (FLD_NAME = 'IDCHILD')
+</value>
+   </data>
+   <data name="ReadInfrastructure1">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  EVENT_DETAIL_NAME,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  USER_ID
+from
+  CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadInfrastructure2">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  EVENT_DETAIL_NAME,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  USER_ID
+from
+  CKT_INFRASTRUCTURE with(readuncommitted)
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select top(1)
+  PRNT_SUCESSFUL_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATD_TSTAMP,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentDocument1">
+      <value>
+select
+  PRNT_SUCESSFUL_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATD_TSTAMP,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  (DOC_EFFECTIVE_DTE is not null) and
+  (DOC_NAME = @docName) and
+  (PRNT_SUCESSFUL_IND &lt;&gt; 'C') and
+  (LAST_UPDATD_TSTAMP between cast(@lastUpdatdTstamp1 as datetime2) and cast(@lastUpdatdTstamp2 as datetime2))
+order by
+  LAST_UPDATD_TSTAMP desc,
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentDocument2">
+      <value>
+select
+  PRNT_SUCESSFUL_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATD_TSTAMP,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  (DOC_EFFECTIVE_DTE is not null) and
+  (DOC_NAME = @docName) and
+  (PRNT_SUCESSFUL_IND = @prntSucessfulInd) and
+  (LAST_UPDATD_TSTAMP between cast(@lastUpdatdTstamp1 as datetime2) and cast(@lastUpdatdTstamp2 as datetime2))
+order by
+  LAST_UPDATD_TSTAMP desc,
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentDocument3">
+      <value>
+select
+  PRNT_SUCESSFUL_IND,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATD_TSTAMP,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  (DOC_EFFECTIVE_DTE is not null) and
+  (DOC_NAME = @docName) and
+  (LAST_UPDATD_TSTAMP between cast(@lastUpdatdTstamp1 as datetime2) and cast(@lastUpdatdTstamp2 as datetime2))
+order by
+  LAST_UPDATD_TSTAMP desc,
+  CREATED_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructureDocument1">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID,
+  T2.EVENT_DETAIL_NAME,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME is not null) and
+    (T2.USER_ID between cast(@userId1 as char(8)) and cast(@userId2 as char(8))) and
+    (T1.DOC_NAME between cast(@name1 as char(8)) and cast(@name2 as char(8))) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (
+      (T2.CSE_PERSON_NUM between cast(@number1 as char(10)) and cast(@number2 as char(10))) or
+      (cast(@count1 as integer) = cast(@count2 as integer))
+    ) and
+    (T1.PRNT_SUCESSFUL_IND = @prntSucessfulInd) and
+    (
+      (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) or
+      (
+        (T1.LAST_UPDATD_TSTAMP = @lastUpdatdTstamp) and
+        (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+      )
+    )
+order by
+  T1.LAST_UPDATD_TSTAMP desc,
+  T1.INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructureDocument2">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID,
+  T2.EVENT_DETAIL_NAME,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME is not null) and
+    (T2.USER_ID between cast(@userId1 as char(8)) and cast(@userId2 as char(8))) and
+    (T1.DOC_NAME between cast(@name1 as char(8)) and cast(@name2 as char(8))) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (
+      (T2.CSE_PERSON_NUM between cast(@number1 as char(10)) and cast(@number2 as char(10))) or
+      (cast(@count1 as integer) = cast(@count2 as integer))
+    ) and
+    (T1.PRNT_SUCESSFUL_IND &lt;&gt; 'C') and
+    (
+      (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) or
+      (
+        (T1.LAST_UPDATD_TSTAMP = @lastUpdatdTstamp) and
+        (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+      )
+    )
+order by
+  T1.LAST_UPDATD_TSTAMP desc,
+  T1.INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructureDocument3">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID,
+  T2.EVENT_DETAIL_NAME,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME is not null) and
+    (T2.USER_ID between cast(@userId1 as char(8)) and cast(@userId2 as char(8))) and
+    (T1.DOC_NAME between cast(@name1 as char(8)) and cast(@name2 as char(8))) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (
+      (T2.CSE_PERSON_NUM between cast(@number1 as char(10)) and cast(@number2 as char(10))) or
+      (cast(@count1 as integer) = cast(@count2 as integer))
+    ) and
+    (
+      (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) or
+      (
+        (T1.LAST_UPDATD_TSTAMP = @lastUpdatdTstamp) and
+        (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+      )
+    )
+order by
+  T1.LAST_UPDATD_TSTAMP desc,
+  T1.INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructureDocument4">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID,
+  T2.EVENT_DETAIL_NAME,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME is not null) and
+    (T2.USER_ID between cast(@userId1 as char(8)) and cast(@userId2 as char(8))) and
+    (T1.DOC_NAME between cast(@name1 as char(8)) and cast(@name2 as char(8))) and
+    (T2.CSE_PERSON_NUM = @csePersonNum) and
+    (T1.PRNT_SUCESSFUL_IND = @prntSucessfulInd) and
+    (
+      (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) or
+      (
+        (T1.LAST_UPDATD_TSTAMP = @lastUpdatdTstamp) and
+        (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+      )
+    )
+order by
+  T1.LAST_UPDATD_TSTAMP desc,
+  T1.INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructureDocument5">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID,
+  T2.EVENT_DETAIL_NAME,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME is not null) and
+    (T2.USER_ID between cast(@userId1 as char(8)) and cast(@userId2 as char(8))) and
+    (T1.DOC_NAME between cast(@name1 as char(8)) and cast(@name2 as char(8))) and
+    (T2.CSE_PERSON_NUM = @csePersonNum) and
+    (T1.PRNT_SUCESSFUL_IND &lt;&gt; 'C') and
+    (
+      (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) or
+      (
+        (T1.LAST_UPDATD_TSTAMP = @lastUpdatdTstamp) and
+        (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+      )
+    )
+order by
+  T1.LAST_UPDATD_TSTAMP desc,
+  T1.INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructureDocument6">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID,
+  T2.EVENT_DETAIL_NAME,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME is not null) and
+    (T2.USER_ID between cast(@userId1 as char(8)) and cast(@userId2 as char(8))) and
+    (T1.DOC_NAME between cast(@name1 as char(8)) and cast(@name2 as char(8))) and
+    (T2.CSE_PERSON_NUM between cast(@number1 as char(10)) and cast(@number2 as char(10))) and
+    (
+      (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) or
+      (
+        (T1.LAST_UPDATD_TSTAMP = @lastUpdatdTstamp) and
+        (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+      )
+    )
+order by
+  T1.LAST_UPDATD_TSTAMP desc,
+  T1.INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructureDocument7">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID,
+  T2.EVENT_DETAIL_NAME,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME is not null) and
+    (T2.USER_ID = @userId) and
+    (T1.PRNT_SUCESSFUL_IND &lt;&gt; 'C') and
+    (
+      (T1.DOC_NAME between cast(@name1 as char(8)) and cast(@name2 as char(8))) or
+      (cast(@count1 as integer) = cast(@count2 as integer))
+    ) and
+    (
+      (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) or
+      (
+        (T1.LAST_UPDATD_TSTAMP = @lastUpdatdTstamp) and
+        (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+      )
+    )
+order by
+  T1.LAST_UPDATD_TSTAMP desc,
+  T1.INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructureDocument8">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID,
+  T2.EVENT_DETAIL_NAME,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME is not null) and
+    (T2.USER_ID = @userId) and
+    (
+      (T1.DOC_NAME between cast(@name1 as char(8)) and cast(@name2 as char(8))) or
+      (cast(@count1 as integer) = cast(@count2 as integer))
+    ) and
+    (T1.PRNT_SUCESSFUL_IND = @prntSucessfulInd) and
+    (
+      (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) or
+      (
+        (T1.LAST_UPDATD_TSTAMP = @lastUpdatdTstamp) and
+        (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+      )
+    )
+order by
+  T1.LAST_UPDATD_TSTAMP desc,
+  T1.INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocumentInfrastructureDocument9">
+      <value>
+select
+  T1.PRNT_SUCESSFUL_IND,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATD_TSTAMP,
+  T1.DOC_NAME,
+  T1.DOC_EFFECTIVE_DTE,
+  T1.INF_ID,
+  T2.EVENT_DETAIL_NAME,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.USER_ID
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_OUTGOING_DOC T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T1.DOC_EFFECTIVE_DTE is not null) and
+    (T1.DOC_NAME is not null) and
+    (T2.USER_ID = @userId) and
+    (
+      (T1.DOC_NAME between cast(@name1 as char(8)) and cast(@name2 as char(8))) or
+      (cast(@count1 as integer) = cast(@count2 as integer))
+    ) and
+    (
+      (T1.LAST_UPDATD_TSTAMP &lt; @lastUpdatdTstamp) or
+      (
+        (T1.LAST_UPDATD_TSTAMP = @lastUpdatdTstamp) and
+        (T2.SYSTEM_GENERATED_I &gt;= @systemGeneratedI)
+      )
+    )
+order by
+  T1.LAST_UPDATD_TSTAMP desc,
+  T1.INF_ID
+</value>
+   </data>
+   <data name="ReadProgramProcessingInfo">
+      <value>
+select top(1)
+  NAME,
+  CREATED_TIMESTAMP,
+  PGM_PROC_INFO_DESC
+from
+  CKT_PGM_PRCSS_INFO
+where
+  NAME = @name
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+   <data name="UpdateCsePerson">
+      <value>
+update CKT_CSE_PERSON
+set
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  FV_LTR_SENT_DT = @fvLtrSentDt
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

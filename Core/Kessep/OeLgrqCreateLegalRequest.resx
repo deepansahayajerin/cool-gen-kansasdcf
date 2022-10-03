@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateLegalReferral">
+      <value>
+insert into CKT_LEGAL_REFERRAL
+(
+  CAS_NUMBER,
+  IDENTIFIER,
+  REF_BY_USER_ID,
+  STATUS_DATE,
+  STATUS,
+  REFERRAL_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  ORA_TSTAMP,
+  ORA_CREATED_BY,
+  REFERRAL_REASON_1,
+  REFERRAL_REASON_2,
+  REFERRAL_REASON_3,
+  REFERRAL_REASON_4,
+  REFERRAL_REASON_5,
+  COURT_CASE_NO,
+  TRB_ID
+)
+values
+(
+  @casNumber,
+  @identifier,
+  @refByUserId,
+  @statusDate,
+  @status,
+  @referralDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  null,
+  null,
+  @referralReason1,
+  @referralReason2,
+  @referralReason3,
+  @referralReason4,
+  @referralReason5,
+  @courtCaseNo,
+  @trbId
+)
+</value>
+   </data>
+   <data name="CreateLegalReferralAssignment">
+      <value>
+insert into CKT_ASSGN_LEG_REF
+(
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO,
+  LGR_ID
+)
+values
+(
+  @reasonCode,
+  @overrideInd,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @spdId,
+  @offId,
+  @ospCode,
+  @ospDate,
+  @casNo,
+  @lgrId
+)
+</value>
+   </data>
+   <data name="CreateLegalReferralAttachment">
+      <value>
+insert into CKT_LEG_REF_ATTCHM
+(
+  LGR_IDENTIFIER,
+  CAS_NUMBER,
+  LINE_NO,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  COMMENT_LINE
+)
+values
+(
+  @lgrIdentifier,
+  @casNumber,
+  @lineNo,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @commentLine
+)
+</value>
+   </data>
+   <data name="CreateLegalReferralCaseRole">
+      <value>
+insert into CKT_LEG_REF_CROLE
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  CAS_NUMBER,
+  LGR_ID,
+  CAS_NUMBER_ROLE,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_ID
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @casNumber,
+  @lgrId,
+  @casNumberRole,
+  @cspNumber,
+  @croType,
+  @croId
+)
+</value>
+   </data>
+   <data name="CreateLegalReferralComment">
+      <value>
+insert into CKT_LGL_REF_COMMNT
+(
+  LGR_IDENTIFIER,
+  CAS_NUMBER,
+  LINE_NO,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  COMMENT_LINE
+)
+values
+(
+  @lgrIdentifier,
+  @casNumber,
+  @lineNo,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @commentLine
+)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (@casNumber = CAS_NUMBER) and
+  (CASE_ROLE_ID = @caseRoleId) and
+  (TYPE = @type) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate)
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CAS_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (@casNumber = CAS_NUMBER) and
+  (CASE_ROLE_ID = @caseRoleId) and
+  (TYPE = @type)
+order by
+  END_DATE desc
+</value>
+   </data>
+   <data name="ReadLegalReferral">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  IDENTIFIER
+from
+  CKT_LEGAL_REFERRAL
+where
+  @casNumber = CAS_NUMBER
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId)
+</value>
+   </data>
+</root>

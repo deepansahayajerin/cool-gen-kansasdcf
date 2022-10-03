@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCode">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE
+where
+  (CODE_NAME = 'STATE CODE') and
+  (EFFECTIVE_DATE &lt; @effectiveDate) and
+  (EXPIRATION_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadProgramProcessingInfo">
+      <value>
+select top(1)
+  NAME,
+  CREATED_TIMESTAMP,
+  PROCESS_DATE,
+  PARAMETER_LIST
+from
+  CKT_PGM_PRCSS_INFO
+where
+  NAME = @name
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

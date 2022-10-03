@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDebtDetailStatusHistory">
+      <value>
+insert into CKT_DBT_DT_STS_HIS
+(
+  OB_TRN_STAT_HST_ID,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  OTR_TYPE,
+  OTR_ID,
+  CPA_TYPE,
+  CSP_NUMBER,
+  OBG_ID,
+  OB_TRN_ST_CD,
+  OTY_TYPE,
+  RSN_TXT
+)
+values
+(
+  @obTrnStatHstId,
+  @effectiveDt,
+  @discontinueDt,
+  @createdBy,
+  @createdTmst,
+  @otrType,
+  @otrId,
+  @cpaType,
+  @cspNumber,
+  @obgId,
+  @obTrnStCd,
+  @otyType,
+  @rsnTxt
+)
+</value>
+   </data>
+   <data name="ReadDebtDetail">
+      <value>
+select top(1)
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  OTY_TYPE,
+  OTR_TYPE,
+  DUE_DT,
+  BAL_DUE_AMT,
+  INT_BAL_DUE_AMT,
+  ADC_DT,
+  RETIRED_DT,
+  CVRD_PRD_START_DT,
+  CVD_PRD_END_DT,
+  PRECNVRSN_PGM_CD,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_DEBT_DTL
+where
+  (OTR_GENERATED_ID = @otrGeneratedId) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+   <data name="ReadDebtDetailStatusHistory">
+      <value>
+select top(1)
+  OB_TRN_STAT_HST_ID,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  OTR_TYPE,
+  OTR_ID,
+  CPA_TYPE,
+  CSP_NUMBER,
+  OBG_ID,
+  OB_TRN_ST_CD,
+  OTY_TYPE,
+  RSN_TXT
+from
+  CKT_DBT_DT_STS_HIS
+where
+  (DISCONTINUE_DT = @discontinueDt) and
+  (@otyType = OTY_TYPE) and
+  (@obgId = OBG_ID) and
+  (@cspNumber = CSP_NUMBER) and
+  (@cpaType = CPA_TYPE) and
+  (@otrId = OTR_ID) and
+  (@otrType = OTR_TYPE)
+</value>
+   </data>
+   <data name="UpdateDebtDetailStatusHistory">
+      <value>
+update CKT_DBT_DT_STS_HIS
+set
+  DISCONTINUE_DT = @discontinueDt,
+  RSN_TXT = @rsnTxt
+where
+  (OB_TRN_STAT_HST_ID = @obTrnStatHstId) and
+  (OTR_TYPE = @otrType) and
+  (OTR_ID = @otrId) and
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (OBG_ID = @obgId) and
+  (OB_TRN_ST_CD = @obTrnStCd) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+</root>

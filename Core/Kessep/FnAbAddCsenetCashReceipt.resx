@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateCashReceipt">
+      <value>
+update CKT_CASH_RECEIPT
+set
+  FTT_IDENTIFIER = @fttIdentifier,
+  PCA_CODE = @pcaCode,
+  PCA_EFFECTIVE_DATE = @pcaEffectiveDate,
+  FUN_IDENTIFIER = @funIdentifier,
+  FTR_IDENTIFIER = @ftrIdentifier
+where
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier)
+</value>
+   </data>
+   <data name="ReadCashReceipt">
+      <value>
+select top(1)
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CASH_RECEIPT_ID,
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FTR_IDENTIFIER
+from
+  CKT_CASH_RECEIPT
+where
+  CASH_RECEIPT_ID = @cashReceiptId
+</value>
+   </data>
+   <data name="ReadCashReceiptEvent">
+      <value>
+select top(1)
+  CST_IDENTIFIER,
+  CREVENT_ID,
+  RECEIVED_DATE,
+  SOURCE_CREATION_DT,
+  CREATED_BY
+from
+  CKT_CR_EVENT
+where
+  (CREATED_BY = @createdBy) and
+  (RECEIVED_DATE = @receivedDate) and
+  (@cstIdentifier = CST_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_CRSRC_TYPE
+where
+  (CODE = @code) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt; @effectiveDate)
+</value>
+   </data>
+   <data name="ReadFundTransaction">
+      <value>
+select top(1)
+  FTT_IDENTIFIER,
+  PCA_CODE,
+  PCA_EFFECTIVE_DATE,
+  FUN_IDENTIFIER,
+  FUND_TRANS_ID,
+  AMOUNT,
+  BUSINESS_DATE,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST
+from
+  CKT_FUND_TRANS
+where
+  FTT_IDENTIFIER = @fttIdentifier
+order by
+  BUSINESS_DATE desc
+</value>
+   </data>
+</root>

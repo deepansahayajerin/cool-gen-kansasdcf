@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadPersonPreferredPaymentMethod1">
+      <value>
+select top(1)
+  PMT_GENERATED_ID,
+  PERSN_PMNT_METH_ID,
+  ABA_ROUTING_NUMBER,
+  DFI_ACCOUNT_NO,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATE_BY,
+  LAST_UPDATE_TMST,
+  CSP_P_NUMBER,
+  DESCRIPTION,
+  ACCOUNT_TYPE
+from
+  CKT_PER_PRF_PMNT_M
+where
+  (PERSN_PMNT_METH_ID = @persnPmntMethId) and
+  (CSP_P_NUMBER = @cspPNumber)
+</value>
+   </data>
+   <data name="ReadPersonPreferredPaymentMethod2">
+      <value>
+select top(1)
+  PMT_GENERATED_ID,
+  PERSN_PMNT_METH_ID,
+  ABA_ROUTING_NUMBER,
+  DFI_ACCOUNT_NO,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATE_BY,
+  LAST_UPDATE_TMST,
+  CSP_P_NUMBER,
+  DESCRIPTION,
+  ACCOUNT_TYPE
+from
+  CKT_PER_PRF_PMNT_M
+where
+  CSP_P_NUMBER = @cspPNumber
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadPersonPreferredPaymentMethod3">
+      <value>
+select top(1)
+  PMT_GENERATED_ID,
+  PERSN_PMNT_METH_ID,
+  ABA_ROUTING_NUMBER,
+  DFI_ACCOUNT_NO,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATE_BY,
+  LAST_UPDATE_TMST,
+  CSP_P_NUMBER,
+  DESCRIPTION,
+  ACCOUNT_TYPE
+from
+  CKT_PER_PRF_PMNT_M
+where
+  CSP_P_NUMBER = @cspPNumber
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadPersonPreferredPaymentMethod4">
+      <value>
+select
+  PMT_GENERATED_ID,
+  PERSN_PMNT_METH_ID,
+  ABA_ROUTING_NUMBER,
+  DFI_ACCOUNT_NO,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATE_BY,
+  LAST_UPDATE_TMST,
+  CSP_P_NUMBER,
+  DESCRIPTION,
+  ACCOUNT_TYPE
+from
+  CKT_PER_PRF_PMNT_M
+where
+  (PERSN_PMNT_METH_ID &lt;&gt; @persnPmntMethId) and
+  (CSP_P_NUMBER = @cspPNumber)
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadPersonPreferredPaymentMethodPaymentMethodType">
+      <value>
+select top(1)
+  T1.PMT_GENERATED_ID,
+  T1.PERSN_PMNT_METH_ID,
+  T1.ABA_ROUTING_NUMBER,
+  T1.DFI_ACCOUNT_NO,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATE_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.CSP_P_NUMBER,
+  T1.DESCRIPTION,
+  T1.ACCOUNT_TYPE,
+  T2.CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_PMNT_METHD_TYP T2
+  join
+  CKT_PER_PRF_PMNT_M T1
+  on
+    (T1.PERSN_PMNT_METH_ID = @persnPmntMethId) and
+    (T1.EFFECTIVE_DATE = @effectiveDate) and
+    (T1.DISCONTINUE_DATE = @discontinueDate) and
+    (T1.CSP_P_NUMBER = @cspPNumber) and
+    (T2.PAYMNT_METH_TYP_ID = T1.PMT_GENERATED_ID) and
+    (T2.PAYMNT_METH_TYP_ID = @paymntMethTypId)
+</value>
+   </data>
+   <data name="UpdatePersonPreferredPaymentMethod">
+      <value>
+update CKT_PER_PRF_PMNT_M
+set
+  ABA_ROUTING_NUMBER = @abaRoutingNumber,
+  DFI_ACCOUNT_NO = @dfiAccountNo,
+  EFFECTIVE_DATE = @effectiveDate,
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATE_BY = @lastUpdateBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst,
+  DESCRIPTION = @description,
+  ACCOUNT_TYPE = @accountType
+where
+  (PMT_GENERATED_ID = @pmtGeneratedId) and
+  (PERSN_PMNT_METH_ID = @persnPmntMethId) and
+  (CSP_P_NUMBER = @cspPNumber)
+</value>
+   </data>
+</root>

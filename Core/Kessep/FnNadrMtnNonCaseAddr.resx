@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseRole1">
+      <value>
+select distinct top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.NUMB = @numb) and
+    (T2.TYPE &lt;&gt; 'O') and
+    (T1.TYPE in ('AP', 'AR'))
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select distinct top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T2.NUMB = @numb) and
+    (T2.TYPE &lt;&gt; 'O') and
+    (T1.TYPE in ('FA', 'MO'))
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  OCCUPATION,
+  AE_CASE_NUMBER,
+  DATE_OF_DEATH,
+  ILLEGAL_ALIEN_IND,
+  CURRENT_SPOUSE_MI,
+  CURR_SPOUSE_1ST_NM,
+  BIRTH_PLACE_STATE,
+  EMERGENCY_PHONE,
+  NAME_MIDDLE,
+  NAME_MAIDEN,
+  HOME_PHONE,
+  OTHER_NUMBER,
+  BIRTH_PLACE_CITY,
+  CURR_MARITAL_STS,
+  CUR_SPOUSE_LAST_NM,
+  RACE,
+  HAIR_COLOR,
+  EYE_COLOR,
+  TAX_ID,
+  ORGANIZATION_NAME,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  KSCARES_NUMBER,
+  OTHER_AREA_CODE,
+  EMERGENCY_AREA_CD,
+  HOME_PHONE_AREA_CD,
+  WORK_PHONE_AREA_CD,
+  WORK_PHONE,
+  WORK_PHONE_EXT,
+  OTHER_PHONE_TYPE,
+  OTHER_ID_INFO
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR
+where
+  (LOCATION_TYPE = 'D') and
+  (
+    (END_DATE &lt; @endDate) or
+    (
+      (END_DATE = @endDate) and
+      (IDENTIFIER &lt; @identifier)
+    )
+  ) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  END_DATE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR
+where
+  (
+    (END_DATE &lt; @endDate) or
+    (
+      (END_DATE = @endDate) and
+      (IDENTIFIER &lt; @identifier)
+    )
+  ) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  END_DATE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  CSP_NUMBER
+from
+  CKT_FIPS
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  CSP_NUMBER
+from
+  CKT_FIPS
+where
+  @cspNumber = CSP_NUMBER
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select distinct
+  T1.IDENTIFIER,
+  T1.FAX_EXTENSION,
+  T1.FAX_AREA_CD,
+  T1.PHONE_EXTENSION,
+  T1.AREA_CD,
+  T1.TYPE,
+  T1.STREET_1,
+  T1.STREET_2,
+  T1.CITY,
+  T1.[STATE],
+  T1.ZIP_CD,
+  T1.ZIP4,
+  T1.ZIP3,
+  T1.COUNTY,
+  T1.STREET_3,
+  T1.STREET_4,
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.COUNTRY,
+  T1.PHONE_NUMBER,
+  T1.FAX_NUMBER,
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.FIP_STATE,
+  T1.FIP_COUNTY,
+  T1.FIP_LOCATION
+from
+  CKT_FIPS T2
+  join
+  CKT_FIPS_TRIB_ADDR T1
+  on
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (
+      (T1.CREATED_TSTAMP &lt; @createdTstamp) or
+      (cast(@createdTstamp as datetime2) = cast(@identifier as datetime2))
+    )
+order by
+  T1.CREATED_TSTAMP desc
+</value>
+   </data>
+</root>

@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCodeCodeValue">
+      <value>
+select
+  T1.COD_ID,
+  T1.CODE_NAME,
+  T1.EFFECTIVE_DATE,
+  T1.EXPIRATION_DATE,
+  T2.COV_ID,
+  T2.CDVALUE,
+  T2.EFFECTIVE_DATE,
+  T2.EXPIRATION_DATE
+from
+  CKT_CODE T1
+  join
+  CKT_CODE_VALUE T2
+  on
+    (T1.CODE_NAME = 'MONITORED DOC RESPONSE') and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.EXPIRATION_DATE &gt;= @effectiveDate) and
+    (T1.COD_ID = T2.COD_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.EXPIRATION_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadMonitoredDocumentInfrastructure1">
+      <value>
+select top(1)
+  T1.REQUIRED_RESPONSE,
+  T1.ACT_RESP_DT,
+  T1.CLOSURE_DATE,
+  T1.CLOSURE_REASON_COD,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.INF_ID,
+  T2.SYSTEM_GENERATED_I,
+  T2.PROCESS_STATUS,
+  T2.EVENT_TYPE,
+  T2.EVENT_DETAIL_NAME,
+  T2.REASON_CODE,
+  T2.BUSINESS_OBJECT_CD,
+  T2.DENORM_NUMERIC_12,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.CASE_UNIT_NUM,
+  T2.USER_ID,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.REFERENCE_DATE,
+  T2.[FUNCTION]
+from
+  CKT_INFRASTRUCTURE T2
+  join
+  CKT_MONITORED_DOC T1
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T2.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadMonitoredDocumentInfrastructure2">
+      <value>
+select top(1)
+  T1.REQUIRED_RESPONSE,
+  T1.ACT_RESP_DT,
+  T1.CLOSURE_DATE,
+  T1.CLOSURE_REASON_COD,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.INF_ID,
+  T2.SYSTEM_GENERATED_I,
+  T2.PROCESS_STATUS,
+  T2.EVENT_TYPE,
+  T2.EVENT_DETAIL_NAME,
+  T2.REASON_CODE,
+  T2.BUSINESS_OBJECT_CD,
+  T2.DENORM_NUMERIC_12,
+  T2.CASE_NUMBER,
+  T2.CSE_PERSON_NUM,
+  T2.CASE_UNIT_NUM,
+  T2.USER_ID,
+  T2.CREATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.REFERENCE_DATE,
+  T2.[FUNCTION]
+from
+  CKT_INFRASTRUCTURE T2
+  join
+  CKT_MONITORED_DOC T1
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_ID) and
+    (T2.SYSTEM_GENERATED_I = @systemGeneratedI)
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_OFFICE
+from
+  CKT_OFFICE T1
+  join
+  CKT_PRN_OUTPT_DEST T2
+  on
+    (T1.OFFICE_ID = T2.OFF_GENERATED) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate)
+  join
+  CKT_OUTGOING_DOC T3
+  on
+    (T2.PRINTER_ID = T3.POD_PRINTER_ID) and
+    (@infId = T3.INF_ID)
+</value>
+   </data>
+   <data name="ReadOfficeOfficeServiceProvider">
+      <value>
+select distinct top(1)
+  T1.OFFICE_ID,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.OFF_OFFICE,
+  T2.SPD_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE
+from
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFICE T1
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T1.OFFICE_ID = T2.OFF_GENERATED_ID) and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    (T3.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T3.USER_ID = @userId)
+order by
+  T1.OFFICE_ID
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (@offGeneratedId = OFF_GENERATED_ID) and
+  (@spdGeneratedId = SPD_GENERATED_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (DISCONTINUE_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadServiceProvider">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME
+from
+  CKT_SERVICE_PRVDER
+where
+  USER_ID = @userId
+</value>
+   </data>
+   <data name="ReadServiceProviderOfficeServiceProviderOffice1">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T2.OFF_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T3.OFF_OFFICE
+from
+  CKT_OFFICE T3
+  join
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T1.USER_ID = @userId) and
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    (T3.OFFICE_ID = T2.OFF_GENERATED_ID) and
+    (T3.OFFICE_ID = @officeId)
+</value>
+   </data>
+   <data name="ReadServiceProviderOfficeServiceProviderOffice2">
+      <value>
+select
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T2.OFF_GENERATED_ID,
+  T2.ROLE_CODE,
+  T2.EFFECTIVE_DATE,
+  T2.DISCONTINUE_DATE,
+  T3.OFF_OFFICE
+from
+  CKT_OFFICE T3
+  join
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T1.USER_ID = @userId) and
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.DISCONTINUE_DATE &gt;= @effectiveDate)
+  on
+    T3.OFFICE_ID = T2.OFF_GENERATED_ID
+</value>
+   </data>
+</root>

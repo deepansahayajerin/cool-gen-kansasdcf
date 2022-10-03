@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateOffice1">
+      <value>
+update CKT_OFFICE
+set
+  OFF_OFFICE = @offOffice
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="AssociateOffice2">
+      <value>
+update CKT_FIPS
+set
+  OFF_IDENTIFIER = @offIdentifier
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="CreateOffice">
+      <value>
+insert into CKT_OFFICE
+(
+  OFFICE_ID,
+  MAIN_PHONE_NUMBER,
+  MAIN_FAX_NUMBER,
+  TYPE_CODE,
+  NAME,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  COG_TYPE_CODE,
+  COG_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  MAIN_PHONE_AREA_CD,
+  FAX_AREA_CD,
+  OFF_OFFICE
+)
+values
+(
+  @officeId,
+  @mainPhoneNumber,
+  @mainFaxNumber,
+  @typeCode,
+  @name,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @createdBy,
+  @createdTimestamp,
+  @cogTypeCode,
+  @cogCode,
+  @effectiveDate,
+  @discontinueDate,
+  @mainPhoneAreaCd,
+  @faxAreaCd,
+  null
+)
+</value>
+   </data>
+   <data name="ReadOffice1">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  @officeId = OFFICE_ID
+</value>
+   </data>
+   <data name="ReadOffice2">
+      <value>
+select top(1)
+  OFFICE_ID,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  @offOffice = OFF_OFFICE
+</value>
+   </data>
+</root>

@@ -1,0 +1,40 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpAdlmActivityDetailListMnt"
+           program-name="SWEADLMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpAdlmActivityDetailListMnt"
+           transaction="SRP4"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToTranCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromLinkCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ATLM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETATLM"
+       to="SpAtlmActivityListMaint"
+       send-command="DISPLAY">
+      <return-map from="ToTran" to="FromLinkActivity"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpInfmInfrastructureMgmtMenu"
+       send-command-type="none"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Activity2" to="Activity2"/>
+   <map from="Activity1" to="Activity1"/>
+   <map from="Group.Hidden" to="Group.Hidden"/>
+   <map from="Group.CuFunction" to="Group.CuFunction"/>
+   <map from="Group.BusObject" to="Group.BusObject"/>
+   <map from="Group.ActivityDetail" to="Group.ActivityDetail"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="HiddenActivity" to="HiddenActivity"/>
+</procedure>

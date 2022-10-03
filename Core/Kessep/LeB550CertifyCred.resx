@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCodeValue">
+      <value>
+select top(1)
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE,
+  T1.DESCRIPTION
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'FAMILY VIOLENCE') and
+    (T1.CDVALUE = 'CRED')
+</value>
+   </data>
+   <data name="ReadCsePersonObligor">
+      <value>
+select
+  T1.NUMB,
+  T1.TYPE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CSE_PERSON_ACC T2
+  on
+    (T1.NUMB &gt; @numb) and
+    (T1.TYPE = 'C') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'R')
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadProgramProcessingInfo">
+      <value>
+select top(1)
+  NAME,
+  CREATED_TIMESTAMP,
+  PARAMETER_LIST
+from
+  CKT_PGM_PRCSS_INFO
+where
+  NAME = 'SWELB560'
+</value>
+   </data>
+   <data name="UpdateProgramProcessingInfo">
+      <value>
+update CKT_PGM_PRCSS_INFO
+set
+  PARAMETER_LIST = @parameterList
+where
+  (NAME = @name) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+</root>

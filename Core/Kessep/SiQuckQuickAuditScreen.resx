@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC
+from
+  CKT_FIPS
+where
+  [STATE] = @state
+</value>
+   </data>
+   <data name="ReadQuickAudit1">
+      <value>
+select
+  SYSTEM_USER_ID,
+  REQUEST_TIMESTAMP,
+  REQUESTOR_ID,
+  REQUESTING_CASE_ID,
+  REQ_CASE_OTHER_ID,
+  SYSTEM_SERVER_ID,
+  SYS_RESP_CODE,
+  DATA_RESP_CODE,
+  START_DATE,
+  END_DATE,
+  DATA_REQUEST_TYPE,
+  PROV_CASE_STATE,
+  PROV_CASE_OTHR_ID,
+  REQ_CASE_STATE,
+  STATE_GEN_ID,
+  SYS_RESP_MSG,
+  DATA_RESP_MSG
+from
+  CKT_QUICK_AUDIT
+where
+  REQUEST_TIMESTAMP &gt; @requestTimestamp
+order by
+  REQUEST_TIMESTAMP
+</value>
+   </data>
+   <data name="ReadQuickAudit2">
+      <value>
+select
+  SYSTEM_USER_ID,
+  REQUEST_TIMESTAMP,
+  REQUESTOR_ID,
+  REQUESTING_CASE_ID,
+  REQ_CASE_OTHER_ID,
+  SYSTEM_SERVER_ID,
+  SYS_RESP_CODE,
+  DATA_RESP_CODE,
+  START_DATE,
+  END_DATE,
+  DATA_REQUEST_TYPE,
+  PROV_CASE_STATE,
+  PROV_CASE_OTHR_ID,
+  REQ_CASE_STATE,
+  STATE_GEN_ID,
+  SYS_RESP_MSG,
+  DATA_RESP_MSG
+from
+  CKT_QUICK_AUDIT
+where
+  REQUEST_TIMESTAMP &lt; @requestTimestamp
+order by
+  REQUEST_TIMESTAMP desc
+</value>
+   </data>
+</root>

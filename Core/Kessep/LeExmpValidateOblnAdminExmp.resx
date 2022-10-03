@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeAction">
+      <value>
+select top(1)
+  TYPE,
+  DESCRIPTION,
+  INDICATR
+from
+  CKT_ADMIN_ACTION
+where
+  TYPE = @type
+</value>
+   </data>
+   <data name="ReadAdministrativeActionObligationAdmActionExemption">
+      <value>
+select
+  T1.TYPE,
+  T1.DESCRIPTION,
+  T1.INDICATR,
+  T2.OTY_TYPE,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.EFFECTIVE_DT,
+  T2.END_DT
+from
+  CKT_ADMIN_ACTION T1
+  join
+  CKT_OADM_ACT_EXMP T2
+  on
+    (T2.OBG_GENERATED_ID = @obgGeneratedId) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.OTY_TYPE = @otyType) and
+    (T1.TYPE = T2.AAT_TYPE) and
+    (T1.TYPE = @type)
+order by
+  T2.END_DT desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  COURT_CASE_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (LEGAL_ACTION_ID = @legalActionId) and
+  (CLASSIFICATION in ('J', 'O'))
+</value>
+   </data>
+   <data name="ReadLegalActionPerson1">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE
+from
+  CKT_FIPS T5
+  join
+  CKT_TRIBUNAL T4
+  join
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (T1.LAD_R_NUMBER is not null) and
+    (T3.LEGAL_ACTION_ID = T1.LGA_R_IDENTIFIER) and
+    (T3.COURT_CASE_NO = @courtCaseNo) and
+    (T3.CLASSIFICATION in ('J', 'O')) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.ACCOUNT_TYPE = 'R') and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.ACCOUNT_TYPE = 'R')
+  on
+    T4.IDENTIFIER = T3.TRB_ID
+  on
+    (T5.LOCATION = T4.FIP_LOCATION) and
+    (T5.COUNTY = T4.FIP_COUNTY) and
+    (T5.[STATE] = T4.FIP_STATE) and
+    (T5.STATE_ABBREVIATION = @stateAbbreviation) and
+    (T5.COUNTY_ABBR = @countyAbbr) and
+    (T5.STATE_ABBREVIATION = @stateAbbreviation) and
+    (T5.COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson2">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (T1.LAD_R_NUMBER is not null) and
+    (T3.LEGAL_ACTION_ID = T1.LGA_R_IDENTIFIER) and
+    (T3.COURT_CASE_NO = @courtCaseNo) and
+    (T3.CLASSIFICATION in ('J', 'O')) and
+    (T3.TRB_ID = @trbId) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.ACCOUNT_TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadLegalActionPerson3">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (LAD_R_NUMBER is not null) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER) and
+  (CSP_NUMBER = @cspNumber) and
+  (ACCOUNT_TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID,
+  LGA_ID,
+  OB_DSC
+from
+  CKT_OBLIGATION
+where
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (DTY_GENERATED_ID = @dtyGeneratedId) and
+  (OB_ID = @obId)
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemption">
+      <value>
+select top(1)
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  END_DT,
+  LAST_NM,
+  FIRST_NM,
+  MIDDLE_INITIAL,
+  SUFFIX,
+  REASON,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  DESCRIPTION
+from
+  CKT_OADM_ACT_EXMP
+where
+  (EFFECTIVE_DT = @effectiveDt) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (AAT_TYPE = @aatType) and
+  (OTY_TYPE = @otyType)
+</value>
+   </data>
+   <data name="ReadObligationObligationType">
+      <value>
+select top(1)
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T1.OB_DSC,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_NM
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_OBLIGATION T1
+  on
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.OB_ID = @obId) and
+    (T2.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (T2.DEBT_TYP_ID = @debtTypId)
+</value>
+   </data>
+   <data name="ReadObligationTribunal">
+      <value>
+select distinct
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LGA_ID,
+  T1.OB_DSC,
+  T2.FIP_LOCATION,
+  T2.IDENTIFIER,
+  T2.FIP_COUNTY,
+  T2.FIP_STATE
+from
+  CKT_TRIBUNAL T2
+  join
+  CKT_LEGAL_ACTION T3
+  join
+  CKT_OBLIGATION T1
+  on
+    (T3.LEGAL_ACTION_ID = T1.LGA_ID) and
+    (T3.COURT_CASE_NO = @courtCaseNo) and
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER)
+  on
+    T2.IDENTIFIER = T3.TRB_ID
+</value>
+   </data>
+</root>

@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  LAST_MOD_REVIEW_DT,
+  CLASSIFICATION,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP,
+  LAST_UPD_TSTAMP,
+  TRB_ID,
+  KPC_STANDARD_NO,
+  KPC_FLAG,
+  KPC_DATE,
+  KPC_STD_NO_CHG_FLG
+from
+  CKT_LEGAL_ACTION
+where
+  (@trbId = TRB_ID) and
+  (COURT_CASE_NO = @courtCaseNo) and
+  (KPC_FLAG = 'Y')
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.CURRENT_AMOUNT,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.KPC_DATE
+from
+  CKT_LEGAL_ACT_DTL T1
+  join
+  CKT_OBLIGATION T2
+  on
+    (@lgaIdentifier = T1.LGA_IDENTIFIER) and
+    (T1.DETAIL_TYPE = 'F') and
+    (T1.LA_DETAIL_NO = T2.LAD_NUMBER) and
+    (T1.LGA_IDENTIFIER = T2.LGA_IDENTIFIER)
+order by
+  T1.LA_DETAIL_NO
+</value>
+   </data>
+   <data name="ReadLegalActionDetailLegalAction">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.CURRENT_AMOUNT,
+  T1.DETAIL_TYPE,
+  T1.FRQ_PRD_CD,
+  T1.KPC_DATE,
+  T2.LAST_MOD_REVIEW_DT,
+  T2.CLASSIFICATION,
+  T2.FILED_DT,
+  T2.COURT_CASE_NO,
+  T2.END_DT,
+  T2.STANDARD_NO,
+  T2.CREATED_TSTAMP,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPD_TSTAMP,
+  T2.TRB_ID,
+  T2.KPC_STANDARD_NO,
+  T2.KPC_FLAG,
+  T2.KPC_DATE,
+  T2.KPC_STD_NO_CHG_FLG,
+  T2.KPC_TRIBUNAL_ID
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_LEGAL_ACT_DTL T1
+  on
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T1.DETAIL_TYPE = 'F') and
+    (T1.KPC_DATE = @kpcDate)
+  join
+  CKT_OBLIGATION T3
+  on
+    (T1.LA_DETAIL_NO = T3.LAD_NUMBER) and
+    (T1.LGA_IDENTIFIER = T3.LGA_IDENTIFIER)
+order by
+  T2.STANDARD_NO,
+  T1.LA_DETAIL_NO
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal1">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.LAST_MOD_REVIEW_DT,
+  T1.CLASSIFICATION,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.TRB_ID,
+  T1.KPC_STANDARD_NO,
+  T1.KPC_FLAG,
+  T1.KPC_DATE,
+  T1.KPC_STD_NO_CHG_FLG,
+  T1.KPC_TRIBUNAL_ID
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_DTL T3
+  on
+    (T1.CLASSIFICATION = 'J') and
+    (T1.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T1.KPC_STD_NO_CHG_FLG = 'Y') and
+    (T1.TRB_ID is not null)
+order by
+  T1.STANDARD_NO
+</value>
+   </data>
+   <data name="ReadLegalActionTribunal2">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.LAST_MOD_REVIEW_DT,
+  T1.CLASSIFICATION,
+  T1.FILED_DT,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.TRB_ID,
+  T1.KPC_STANDARD_NO,
+  T1.KPC_FLAG,
+  T1.KPC_DATE,
+  T1.KPC_STD_NO_CHG_FLG,
+  T1.KPC_TRIBUNAL_ID
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_DTL T3
+  on
+    (T1.CLASSIFICATION = 'J') and
+    (T1.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T1.KPC_FLAG &lt;&gt; 'Y') and
+    (T1.TRB_ID is not null)
+  join
+  CKT_OBLIGATION T4
+  on
+    T1.LEGAL_ACTION_ID = T4.LGA_ID
+order by
+  T1.STANDARD_NO
+</value>
+   </data>
+   <data name="UpdateLegalAction1">
+      <value>
+update CKT_LEGAL_ACTION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  KPC_STANDARD_NO = @kpcStandardNo,
+  KPC_FLAG = @kpcFlag,
+  KPC_DATE = @kpcDate,
+  KPC_TRIBUNAL_ID = @kpcTribunalId
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="UpdateLegalAction2">
+      <value>
+update CKT_LEGAL_ACTION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  KPC_STANDARD_NO = @kpcStandardNo,
+  KPC_FLAG = @kpcFlag,
+  KPC_DATE = @kpcDate,
+  KPC_TRIBUNAL_ID = @kpcTribunalId
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="UpdateLegalAction3">
+      <value>
+update CKT_LEGAL_ACTION
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  KPC_STANDARD_NO = @kpcStandardNo,
+  KPC_STD_NO_CHG_FLG = @kpcStdNoChgFlg,
+  KPC_TRIBUNAL_ID = @kpcTribunalId
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="UpdateLegalActionDetail">
+      <value>
+update CKT_LEGAL_ACT_DTL
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  KPC_DATE = @kpcDate
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (LA_DETAIL_NO = @laDetailNo)
+</value>
+   </data>
+</root>

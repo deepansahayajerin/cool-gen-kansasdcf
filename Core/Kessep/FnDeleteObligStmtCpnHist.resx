@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteStmtCouponSuppStatusHist">
+      <value>
+delete from CKT_STMT_SUP_ST_HS
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (COLL_ID = @collId)
+</value>
+   </data>
+   <data name="ReadCsePersonAccount">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadStmtCouponSuppStatusHist">
+      <value>
+select top(1)
+  CPA_TYPE,
+  CSP_NUMBER,
+  COLL_ID,
+  TYPE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  OTY_ID,
+  CPA_TYPE_OBLIG,
+  CSP_NUMBER_OBLIG,
+  OBG_ID
+from
+  CKT_STMT_SUP_ST_HS
+where
+  (COLL_ID = @collId) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (CSP_NUMBER_OBLIG is not null) and
+  (CPA_TYPE_OBLIG is not null) and
+  (OBG_ID = @obgId) and
+  (OTY_ID = @otyId)
+</value>
+   </data>
+</root>

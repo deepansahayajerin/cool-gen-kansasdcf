@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAppointmentOfficeServiceProviderCsePersonCase1">
+      <value>
+select top(1)
+  T1.REASON_CODE,
+  T1.TYPE,
+  T1.[RESULT],
+  T1.APPOINTMENT_DATE,
+  T1.APPOINTMENT_TIME,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_ROLE_CODE,
+  T1.OSP_DATE,
+  T1.APP_TSTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_ID,
+  T5.OFFICE_ID,
+  T5.NAME,
+  T5.OFF_OFFICE,
+  T6.SERVICE_PRVDER_ID,
+  T6.USER_ID
+from
+  CKT_OFFICE T5
+  join
+  CKT_SERVICE_PRVDER T6
+  join
+  CKT_APPOINTMENT T1
+  on
+    (T1.APP_TSTAMP = @appTstamp) and
+    (T1.CRO_ID is not null) and
+    (T1.CRO_TYPE is not null) and
+    (T1.CSP_NUMBER is not null) and
+    (T1.CAS_NUMBER is not null) and
+    (T1.OSP_DATE is not null) and
+    (T1.OSP_ROLE_CODE is not null) and
+    (T6.SERVICE_PRVDER_ID = T1.SPD_ID)
+  on
+    T5.OFFICE_ID = T1.OFF_ID
+</value>
+   </data>
+   <data name="ReadAppointmentOfficeServiceProviderCsePersonCase2">
+      <value>
+select top(1)
+  T1.REASON_CODE,
+  T1.TYPE,
+  T1.[RESULT],
+  T1.APPOINTMENT_DATE,
+  T1.APPOINTMENT_TIME,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_ROLE_CODE,
+  T1.OSP_DATE,
+  T1.APP_TSTAMP,
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.CRO_TYPE,
+  T1.CRO_ID,
+  T5.OFFICE_ID,
+  T5.NAME,
+  T5.OFF_OFFICE,
+  T6.SERVICE_PRVDER_ID,
+  T6.USER_ID
+from
+  CKT_OFFICE T5
+  join
+  CKT_SERVICE_PRVDER T6
+  join
+  CKT_APPOINTMENT T1
+  on
+    (T1.CREATED_TIMESTAMP = @createdTimestamp) and
+    (T1.CRO_ID is not null) and
+    (T1.CRO_TYPE is not null) and
+    (T1.CSP_NUMBER is not null) and
+    (T1.CAS_NUMBER is not null) and
+    (T1.OSP_DATE is not null) and
+    (T1.OSP_ROLE_CODE is not null) and
+    (T6.SERVICE_PRVDER_ID = T1.SPD_ID)
+  on
+    T5.OFFICE_ID = T1.OFF_ID
+</value>
+   </data>
+   <data name="ReadCaseCaseRoleCsePerson">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  TYPE desc,
+  TYPE
+</value>
+   </data>
+</root>

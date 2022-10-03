@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseUnit">
+      <value>
+select top(1)
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_TMST,
+  CAS_NO,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (@cspNoAp = CSP_NO_AP) and
+  (@casNo = CAS_NO) and
+  (START_DATE &lt;= @startDate) and
+  (CLOSURE_DATE &gt;= @startDate)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadFplsLocateRequest1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  TRANSACTION_STATUS,
+  REQUEST_SENT_DATE
+from
+  CKT_FPLS_LOC_REQ
+where
+  (@cspNumber = CSP_NUMBER) and
+  (REQUEST_SENT_DATE = @requestSentDate) and
+  (TRANSACTION_STATUS = 'C')
+</value>
+   </data>
+   <data name="ReadFplsLocateRequest2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  TRANSACTION_STATUS,
+  REQUEST_SENT_DATE
+from
+  CKT_FPLS_LOC_REQ
+where
+  @cspNumber = CSP_NUMBER
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+</root>

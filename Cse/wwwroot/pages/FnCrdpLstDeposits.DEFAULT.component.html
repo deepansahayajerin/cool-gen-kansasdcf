@@ -1,0 +1,599 @@
+﻿<!--Name: FN_CRDP_LST_DEPOSITS, ID: 372926714, model: 746-->
+<div coolContent coolName="FN_CRDP_LST_DEPOSITS" coolType="SCREEN"
+  (coolInit)="scrollSize = 90; pageSize = 15">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal"
+     style="left: 31.25%; top: 0; width: 32.5%; height: 4%;" coolCol="26"
+     coolRow="1" coolLength="26">CSE - List Deposits - CRDP</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_8"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 8.75%; top: 4%; width: 5%; height: 4%;" coolCol="8"
+     coolRow="2" coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="literal"
+     style="left: 3.75%; top: 8%; width: 8.75%; height: 4%;" coolCol="4"
+     coolRow="3" coolLength="7">OPTION:</div>
+   
+   <div coolType="prompt" style="left: 17.5%; top: 8%; width: 7.5%; height: 4%;"
+     coolCol="15" coolRow="3" coolLength="6">Status</div>
+   <input type="text" coolType="field" name="field_3_23"
+     [(ngModel)]="in.desired.code" [coolVideo]="out.desired.screenField?.code"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="10"
+     style="left: 27.5%; top: 8%; width: 12.5%; height: 4%;" coolCol="23"
+     coolRow="3" coolLength="10">
+   <input type="text" coolType="field" name="field_3_34"
+     [(ngModel)]="in.standard.promptField"
+     [coolVideo]="out.standard.screenField?.promptField" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 41.25%; top: 8%; width: 1.25%; height: 4%;" coolCol="34"
+     coolRow="3" coolLength="1">
+   
+   <div coolType="literal"
+     style="left: 47.5%; top: 8%; width: 12.5%; height: 4%;" coolCol="39"
+     coolRow="3" coolLength="10">Date Range</div>
+   
+   <div coolType="prompt" style="left: 62.5%; top: 8%; width: 5%; height: 4%;"
+     coolCol="51" coolRow="3" coolLength="4">From</div>
+   <input type="text" coolType="field" name="field_3_56"
+     [(ngModel)]="in.from.businessDate"
+     [coolVideo]="out.from.screenField?.businessDate" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolDate="MMddyyyy"
+     [attr.maxlength]="8" style="left: 68.75%; top: 8%; width: 10%; height: 4%;"
+     coolCol="56" coolRow="3" coolLength="8">
+   
+   <div coolType="prompt"
+     style="left: 81.25%; top: 8%; width: 2.5%; height: 4%;" coolCol="66"
+     coolRow="3" coolLength="2">To</div>
+   <input type="text" coolType="field" name="field_3_70"
+     [(ngModel)]="in.to.businessDate"
+     [coolVideo]="out.to.screenField?.businessDate" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolDate="MMddyyyy"
+     [attr.maxlength]="8" style="left: 86.25%; top: 8%; width: 10%; height: 4%;"
+     coolCol="70" coolRow="3" coolLength="8">
+   
+   <div coolType="prompt"
+     style="left: 1.25%; top: 16%; width: 3.75%; height: 4%;" coolCol="2"
+     coolRow="5" coolLength="3">Sel</div>
+   
+   <div coolType="prompt"
+     style="left: 7.5%; top: 16%; width: 11.25%; height: 4%;" coolCol="7"
+     coolRow="5" coolLength="9">Deposit #</div>
+   
+   <div coolType="prompt"
+     style="left: 21.25%; top: 16%; width: 12.5%; height: 4%;" coolCol="18"
+     coolRow="5" coolLength="10"># of Items</div>
+   
+   <div coolType="prompt" style="left: 40%; top: 16%; width: 7.5%; height: 4%;"
+     coolCol="33" coolRow="5" coolLength="6">Amount</div>
+   
+   <div coolType="prompt" style="left: 56.25%; top: 16%; width: 5%; height: 4%;"
+     coolCol="46" coolRow="5" coolLength="4">Date</div>
+   
+   <div coolType="prompt"
+     style="left: 66.25%; top: 16%; width: 17.5%; height: 4%;" coolCol="54"
+     coolRow="5" coolLength="14">Deposit Status</div>
+   
+   <div coolType="prompt"
+     style="left: 86.25%; top: 16%; width: 11.25%; height: 4%;" coolCol="70"
+     coolRow="5" coolLength="9">Worker ID</div>
+   <input type="text" coolType="field" name="field_6_3"
+     [(ngModel)]="ref(in.new1, pageOffset, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 20%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="6" coolLength="1" [hidden]="pageOffset >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 20%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="6" coolLength="8" [hidden]="pageOffset >= length(in.new1)">{{in.new1?.[pageOffset]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 20%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="6" coolLength="9" [hidden]="pageOffset >= length(in.new1)">{{in.new1?.[pageOffset]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 20%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="6" coolLength="12" [hidden]="pageOffset >= length(in.new1)">{{in.new1?.[pageOffset]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 20%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="6" coolLength="8" [hidden]="pageOffset >= length(in.new1)">{{in.new1?.[pageOffset]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 20%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="6" coolLength="10" [hidden]="pageOffset >= length(in.new1)">{{in.new1?.[pageOffset]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 20%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="6" coolLength="8" [hidden]="pageOffset >= length(in.new1)">{{in.new1?.[pageOffset]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_7_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 1, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 1]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 24%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="7" coolLength="1" [hidden]="pageOffset + 1 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 24%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="7" coolLength="8" [hidden]="pageOffset + 1 >= length(in.new1)">{{in.new1?.[pageOffset + 1]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 24%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="7" coolLength="9" [hidden]="pageOffset + 1 >= length(in.new1)">{{in.new1?.[pageOffset + 1]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 24%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="7" coolLength="12" [hidden]="pageOffset + 1 >= length(in.new1)">{{in.new1?.[pageOffset + 1]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 24%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="7" coolLength="8" [hidden]="pageOffset + 1 >= length(in.new1)">{{in.new1?.[pageOffset + 1]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 24%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="7" coolLength="10" [hidden]="pageOffset + 1 >= length(in.new1)">{{in.new1?.[pageOffset + 1]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 24%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="7" coolLength="8" [hidden]="pageOffset + 1 >= length(in.new1)">{{in.new1?.[pageOffset + 1]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_8_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 2, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 2]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 28%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="8" coolLength="1" [hidden]="pageOffset + 2 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 28%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 2 >= length(in.new1)">{{in.new1?.[pageOffset + 2]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 28%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="8" coolLength="9" [hidden]="pageOffset + 2 >= length(in.new1)">{{in.new1?.[pageOffset + 2]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 28%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="8" coolLength="12" [hidden]="pageOffset + 2 >= length(in.new1)">{{in.new1?.[pageOffset + 2]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 28%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 2 >= length(in.new1)">{{in.new1?.[pageOffset + 2]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 28%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="8" coolLength="10" [hidden]="pageOffset + 2 >= length(in.new1)">{{in.new1?.[pageOffset + 2]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 28%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="8" coolLength="8" [hidden]="pageOffset + 2 >= length(in.new1)">{{in.new1?.[pageOffset + 2]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_9_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 3, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 3]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 32%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="9" coolLength="1" [hidden]="pageOffset + 3 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 32%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 3 >= length(in.new1)">{{in.new1?.[pageOffset + 3]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 32%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="9" coolLength="9" [hidden]="pageOffset + 3 >= length(in.new1)">{{in.new1?.[pageOffset + 3]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 32%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="9" coolLength="12" [hidden]="pageOffset + 3 >= length(in.new1)">{{in.new1?.[pageOffset + 3]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 32%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 3 >= length(in.new1)">{{in.new1?.[pageOffset + 3]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 32%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="9" coolLength="10" [hidden]="pageOffset + 3 >= length(in.new1)">{{in.new1?.[pageOffset + 3]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 32%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="9" coolLength="8" [hidden]="pageOffset + 3 >= length(in.new1)">{{in.new1?.[pageOffset + 3]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_10_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 4, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 4]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 36%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="10" coolLength="1" [hidden]="pageOffset + 4 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 36%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 4 >= length(in.new1)">{{in.new1?.[pageOffset + 4]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 36%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="10" coolLength="9" [hidden]="pageOffset + 4 >= length(in.new1)">{{in.new1?.[pageOffset + 4]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 36%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="10" coolLength="12" [hidden]="pageOffset + 4 >= length(in.new1)">{{in.new1?.[pageOffset + 4]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 36%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 4 >= length(in.new1)">{{in.new1?.[pageOffset + 4]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 36%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="10" coolLength="10" [hidden]="pageOffset + 4 >= length(in.new1)">{{in.new1?.[pageOffset + 4]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 36%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="10" coolLength="8" [hidden]="pageOffset + 4 >= length(in.new1)">{{in.new1?.[pageOffset + 4]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_11_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 5, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 5]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 40%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="11" coolLength="1" [hidden]="pageOffset + 5 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 40%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 5 >= length(in.new1)">{{in.new1?.[pageOffset + 5]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 40%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="11" coolLength="9" [hidden]="pageOffset + 5 >= length(in.new1)">{{in.new1?.[pageOffset + 5]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 40%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="11" coolLength="12" [hidden]="pageOffset + 5 >= length(in.new1)">{{in.new1?.[pageOffset + 5]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 40%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 5 >= length(in.new1)">{{in.new1?.[pageOffset + 5]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 40%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="11" coolLength="10" [hidden]="pageOffset + 5 >= length(in.new1)">{{in.new1?.[pageOffset + 5]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 40%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="11" coolLength="8" [hidden]="pageOffset + 5 >= length(in.new1)">{{in.new1?.[pageOffset + 5]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_12_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 6, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 6]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 44%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="12" coolLength="1" [hidden]="pageOffset + 6 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 44%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 6 >= length(in.new1)">{{in.new1?.[pageOffset + 6]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 44%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="12" coolLength="9" [hidden]="pageOffset + 6 >= length(in.new1)">{{in.new1?.[pageOffset + 6]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 44%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="12" coolLength="12" [hidden]="pageOffset + 6 >= length(in.new1)">{{in.new1?.[pageOffset + 6]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 44%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 6 >= length(in.new1)">{{in.new1?.[pageOffset + 6]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 44%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="12" coolLength="10" [hidden]="pageOffset + 6 >= length(in.new1)">{{in.new1?.[pageOffset + 6]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 44%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="12" coolLength="8" [hidden]="pageOffset + 6 >= length(in.new1)">{{in.new1?.[pageOffset + 6]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_13_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 7, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 7]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 48%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="13" coolLength="1" [hidden]="pageOffset + 7 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 48%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 7 >= length(in.new1)">{{in.new1?.[pageOffset + 7]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 48%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="13" coolLength="9" [hidden]="pageOffset + 7 >= length(in.new1)">{{in.new1?.[pageOffset + 7]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 48%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="13" coolLength="12" [hidden]="pageOffset + 7 >= length(in.new1)">{{in.new1?.[pageOffset + 7]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 48%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 7 >= length(in.new1)">{{in.new1?.[pageOffset + 7]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 48%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="13" coolLength="10" [hidden]="pageOffset + 7 >= length(in.new1)">{{in.new1?.[pageOffset + 7]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 48%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="13" coolLength="8" [hidden]="pageOffset + 7 >= length(in.new1)">{{in.new1?.[pageOffset + 7]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_14_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 8, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 8]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 52%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="14" coolLength="1" [hidden]="pageOffset + 8 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 52%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 8 >= length(in.new1)">{{in.new1?.[pageOffset + 8]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 52%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="14" coolLength="9" [hidden]="pageOffset + 8 >= length(in.new1)">{{in.new1?.[pageOffset + 8]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 52%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="14" coolLength="12" [hidden]="pageOffset + 8 >= length(in.new1)">{{in.new1?.[pageOffset + 8]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 52%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 8 >= length(in.new1)">{{in.new1?.[pageOffset + 8]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 52%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="14" coolLength="10" [hidden]="pageOffset + 8 >= length(in.new1)">{{in.new1?.[pageOffset + 8]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 52%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="14" coolLength="8" [hidden]="pageOffset + 8 >= length(in.new1)">{{in.new1?.[pageOffset + 8]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_15_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 9, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 9]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 56%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 9 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 56%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 9 >= length(in.new1)">{{in.new1?.[pageOffset + 9]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 56%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="15" coolLength="9" [hidden]="pageOffset + 9 >= length(in.new1)">{{in.new1?.[pageOffset + 9]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 56%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="15" coolLength="12" [hidden]="pageOffset + 9 >= length(in.new1)">{{in.new1?.[pageOffset + 9]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 56%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 9 >= length(in.new1)">{{in.new1?.[pageOffset + 9]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 56%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 9 >= length(in.new1)">{{in.new1?.[pageOffset + 9]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 56%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 9 >= length(in.new1)">{{in.new1?.[pageOffset + 9]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_16_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 10, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 10]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 60%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 10 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 60%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 10 >= length(in.new1)">{{in.new1?.[pageOffset + 10]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 60%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="16" coolLength="9" [hidden]="pageOffset + 10 >= length(in.new1)">{{in.new1?.[pageOffset + 10]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 60%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="16" coolLength="12" [hidden]="pageOffset + 10 >= length(in.new1)">{{in.new1?.[pageOffset + 10]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 60%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 10 >= length(in.new1)">{{in.new1?.[pageOffset + 10]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 60%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 10 >= length(in.new1)">{{in.new1?.[pageOffset + 10]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 60%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 10 >= length(in.new1)">{{in.new1?.[pageOffset + 10]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_17_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 11, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 11]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 64%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 11 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 64%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 11 >= length(in.new1)">{{in.new1?.[pageOffset + 11]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 64%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="17" coolLength="9" [hidden]="pageOffset + 11 >= length(in.new1)">{{in.new1?.[pageOffset + 11]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 64%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="17" coolLength="12" [hidden]="pageOffset + 11 >= length(in.new1)">{{in.new1?.[pageOffset + 11]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 64%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 11 >= length(in.new1)">{{in.new1?.[pageOffset + 11]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 64%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 11 >= length(in.new1)">{{in.new1?.[pageOffset + 11]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 64%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 11 >= length(in.new1)">{{in.new1?.[pageOffset + 11]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_18_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 12, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 12]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 68%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 12 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 68%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 12 >= length(in.new1)">{{in.new1?.[pageOffset + 12]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 68%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="18" coolLength="9" [hidden]="pageOffset + 12 >= length(in.new1)">{{in.new1?.[pageOffset + 12]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 68%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="18" coolLength="12" [hidden]="pageOffset + 12 >= length(in.new1)">{{in.new1?.[pageOffset + 12]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 68%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 12 >= length(in.new1)">{{in.new1?.[pageOffset + 12]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 68%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 12 >= length(in.new1)">{{in.new1?.[pageOffset + 12]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 68%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 12 >= length(in.new1)">{{in.new1?.[pageOffset + 12]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_19_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 13, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 13]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 72%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 13 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 72%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 13 >= length(in.new1)">{{in.new1?.[pageOffset + 13]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 72%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="19" coolLength="9" [hidden]="pageOffset + 13 >= length(in.new1)">{{in.new1?.[pageOffset + 13]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 72%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="19" coolLength="12" [hidden]="pageOffset + 13 >= length(in.new1)">{{in.new1?.[pageOffset + 13]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 72%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 13 >= length(in.new1)">{{in.new1?.[pageOffset + 13]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 72%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 13 >= length(in.new1)">{{in.new1?.[pageOffset + 13]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 72%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 13 >= length(in.new1)">{{in.new1?.[pageOffset + 13]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   <input type="text" coolType="field" name="field_20_3"
+     [(ngModel)]="ref(in.new1, pageOffset + 14, 'newImportGroupMemberCommon.selectChar').value"
+     [coolVideo]="out.new1?.[pageOffset + 14]?.newExportGroupMemberCommon.screenField?.selectChar"
+     coolAutotab coolColor="green" coolHighlight="underscore" coolUpper
+     [attr.maxlength]="1"
+     style="left: 2.5%; top: 76%; width: 1.25%; height: 4%;" coolCol="3"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 14 >= length(in.new1)">
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 7.5%; top: 76%; width: 10%; height: 4%;" coolCol="7"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 14 >= length(in.new1)">{{in.new1?.[pageOffset + 14]?.newImportGroupMemberFundTransaction.depositNumber|coolNumber:'#######0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 21.25%; top: 76%; width: 11.25%; height: 4%;" coolCol="18"
+     coolRow="20" coolLength="9" [hidden]="pageOffset + 14 >= length(in.new1)">{{in.new1?.[pageOffset + 14]?.newImportGroupNoOfItems.count|coolNumber:'########0;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 36.25%; top: 76%; width: 15%; height: 4%;" coolCol="30"
+     coolRow="20" coolLength="12" [hidden]="pageOffset + 14 >= length(in.new1)">{{in.new1?.[pageOffset + 14]?.newImportGroupMemberFundTransaction.amount|coolNumber:'########0.00;#':1}}</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 53.75%; top: 76%; width: 10%; height: 4%;" coolCol="44"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 14 >= length(in.new1)">{{in.new1?.[pageOffset + 14]?.newImportGroupMemberFundTransaction.businessDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 68.75%; top: 76%; width: 12.5%; height: 4%;" coolCol="56"
+     coolRow="20" coolLength="10" [hidden]="pageOffset + 14 >= length(in.new1)">{{in.new1?.[pageOffset + 14]?.newImportGroupMemberFundTransactionStatus.code}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 86.25%; top: 76%; width: 10%; height: 4%;" coolCol="70"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 14 >= length(in.new1)">{{in.new1?.[pageOffset + 14]?.newImportGroupMemberFundTransactionStatusHistory.createdBy}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="70" coolRow="21" coolLength="9"
+     style="left: 86.25%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 100%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="80">PF KEY:  1 Help  2 Display  3 Exit  4 List  7 Prev  8 Next  11 Clear  12 Signoff</div>
+   
+   <div coolType="literal"
+     style="left: 10%; top: 92%; width: 8.75%; height: 4%;" coolCol="9"
+     coolRow="24" coolLength="7">18 CRDI</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="DETAIL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F6">F18=DETAIL</a>
+   </div>

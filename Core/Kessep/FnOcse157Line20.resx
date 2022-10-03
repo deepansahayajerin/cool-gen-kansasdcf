@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.CSE_OPEN_DATE,
+  T1.PA_MEDICAL_SERVICE,
+  T1.INTERSTATE_CASE_ID
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_INTERSTAT_RQST T2 with(readuncommitted)
+  on
+    (T1.NUMB &gt; @numb) and
+    (T1.NUMB between cast(@caseNumber1 as char(10)) and cast(@caseNumber2 as char(10))) and
+    (T1.NUMB = T2.CAS_I_NUMBER) and
+    (T2.KS_CASE_IND = 'N')
+order by
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select
+  IDENTIFIER,
+  CREATED_TIMESTAMP,
+  KS_CASE_IND,
+  CAS_I_NUMBER,
+  COUNTRY,
+  TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST with(readuncommitted)
+where
+  (KS_CASE_IND = 'N') and
+  (@casINumber = CAS_I_NUMBER)
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistory">
+      <value>
+select top(1)
+  INT_GENERATED_ID,
+  CREATED_TSTAMP,
+  ACTION_CODE,
+  FUNCTIONAL_TYPE_CO,
+  TRANSACTION_DATE,
+  ACTION_REASON_CODE
+from
+  CKT_INT_RQST_HIST with(readuncommitted)
+where
+  (@intGeneratedId = INT_GENERATED_ID) and
+  (
+    (
+      (FUNCTIONAL_TYPE_CO in ('ENF', 'EST', 'PAT')) and
+      (ACTION_CODE = 'R')
+    ) or
+    (
+      (ACTION_CODE = ' ') and
+      (FUNCTIONAL_TYPE_CO = ' ') and
+      (ACTION_REASON_CODE = 'IICNV')
+    )
+  )
+order by
+  CREATED_TSTAMP
+</value>
+   </data>
+   <data name="ReadInterstateRequestHistoryInterstateRequest">
+      <value>
+select top(1)
+  T1.INT_GENERATED_ID,
+  T1.CREATED_TSTAMP,
+  T1.ACTION_CODE,
+  T1.FUNCTIONAL_TYPE_CO,
+  T1.TRANSACTION_DATE,
+  T1.ACTION_REASON_CODE,
+  T2.CREATED_TIMESTAMP,
+  T2.KS_CASE_IND,
+  T2.CAS_I_NUMBER,
+  T2.COUNTRY,
+  T2.TRIBAL_AGENCY
+from
+  CKT_INTERSTAT_RQST T2 with(readuncommitted)
+  join
+  CKT_INT_RQST_HIST T1 with(readuncommitted)
+  on
+    (T2.IDENTIFIER = T1.INT_GENERATED_ID) and
+    (T2.KS_CASE_IND = 'N') and
+    (@casINumber = T2.CAS_I_NUMBER) and
+    (
+      (
+        (T1.FUNCTIONAL_TYPE_CO in ('ENF', 'EST', 'PAT')) and
+        (T1.ACTION_CODE = 'R')
+      ) or
+      (
+        (T1.ACTION_CODE = ' ') and
+        (T1.FUNCTIONAL_TYPE_CO = ' ') and
+        (T1.ACTION_REASON_CODE = 'IICNV')
+      )
+    )
+order by
+  T1.CREATED_TSTAMP
+</value>
+   </data>
+</root>

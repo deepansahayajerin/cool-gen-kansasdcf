@@ -1,0 +1,183 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiApdsApDetails"
+           program-name="SWEAPDSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiApdsApDetails"
+           transaction="SR1C"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+      <map from="ApCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+      <return-map from="Selected" to="ApSelected"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ALT_SSN_AND_ALIAS"
+       action="transfer"
+       to="SiAltsAlternateSsnAndAlias"
+       send-command="DISPLAY">
+      <map from="ArCsePersonsWorkSet.Number" to="ArCsePersonsWorkSet.Number"/>
+      <map from="ArCsePersonsWorkSet.FormattedName"
+           to="ArCsePersonsWorkSet.FormattedName"/>
+      <map from="ArCsePersonsWorkSet.ReplicationIndicator"
+           to="ArCsePersonsWorkSet.ReplicationIndicator"/>
+      <map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+      <map from="Next" to="Next"/>
+      <map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_EMAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiEmailAddressMaintenance"
+       send-command="DISPLAY">
+      <map from="Case1" to="Next"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="ArCsePersonsWorkSet" to="Ar"/>
+   <map from="Next" to="Next"/>
+   <map from="Standard" to="Standard"/>
+   <map from="MultipleCases" to="MultipleCases"/>
+   <map from="AltSsn" to="AltSsn"/>
+   <map from="CsePersonLicense" to="CsePersonLicense"/>
+   <map from="Uci" to="Uci"/>
+   <map from="Military" to="Military"/>
+   <map from="Incarceration" to="Incarceration"/>
+   <map from="FedBenefits" to="FedBenefits"/>
+   <map from="Bankruptcy" to="Bankruptcy"/>
+   <map from="OtherChildren" to="OtherChildren"/>
+   <map from="OtherCsOrders" to="OtherCsOrders"/>
+   <map from="HiddenPrevCsePersonsWorkSet" to="HiddenPrevCsePersonsWorkSet"/>
+   <map from="HiddenPrevCase" to="HiddenPrevCase"/>
+   <map from="HiddenAe" to="HiddenAe"/>
+   <map from="ApSelected" to="ApSelected"/>
+   <map from="PhoneTypePrompt" to="PhoneTypePrompt"/>
+   <map from="ApPrompt" to="ApPrompt"/>
+   <map from="PobStPrompt" to="PobStPrompt"/>
+   <map from="CitizenStatusPrompt" to="CitizenStatusPrompt"/>
+   <map from="RacePrompt" to="RacePrompt"/>
+   <map from="EyesPrompt" to="EyesPrompt"/>
+   <map from="HairPrompt" to="HairPrompt"/>
+   <map from="DlStatePrompt" to="DlStatePrompt"/>
+   <map from="MaritalStatusPrompt" to="MaritalStatusPrompt"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="ApActive" to="ApActive"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="ApSsnWorkArea" to="ApSsnWorkArea"/>
+   <map from="LastReadHiddenCsePersonLicense"
+        to="LastReadHiddenCsePersonLicense"/>
+   <map from="LastReadHiddenCsePersonsWorkSet"
+        to="LastReadHiddenCsePersonsWorkSet"/>
+   <map from="HiddenApSex" to="HiddenApSex"/>
+   <map from="PobFcPrompt" to="PobFcPrompt"/>
+   <map from="TribalPrompt" to="TribalPrompt"/>
+   <map from="TribalFlag" to="TribalFlag"/>
+   <map from="CustomerServicePrompt" to="CustomerServicePrompt"/>
+   <map from="CsePersonEmailAddress" to="CsePersonEmailAddress"/>
+   <map from="ApCsePersonsWorkSet.ReplicationIndicator"
+        to="ApCsePersonsWorkSet.ReplicationIndicator"/>
+   <map from="Case1.Number" to="Case1.Number"/>
+   <map from="ApCsePersonsWorkSet.Number" to="ApCsePersonsWorkSet.Number"/>
+   <map from="ApCsePersonsWorkSet.Sex" to="ApCsePersonsWorkSet.Sex"/>
+   <map from="ApCsePersonsWorkSet.Dob" to="ApCsePersonsWorkSet.Dob"/>
+   <map from="ApCsePersonsWorkSet.Ssn" to="ApCsePersonsWorkSet.Ssn"/>
+   <map from="ApCsePersonsWorkSet.FirstName" to="ApCsePersonsWorkSet.FirstName"/>
+   <map from="ApCsePersonsWorkSet.MiddleInitial"
+        to="ApCsePersonsWorkSet.MiddleInitial"/>
+   <map from="ApCsePersonsWorkSet.LastName" to="ApCsePersonsWorkSet.LastName"/>
+   <map from="ApCsePerson.Type1" to="ApCsePerson.Type1"/>
+   <map from="ApCsePerson.Occupation" to="ApCsePerson.Occupation"/>
+   <map from="ApCsePerson.AeCaseNumber" to="ApCsePerson.AeCaseNumber"/>
+   <map from="ApCsePerson.DateOfDeath" to="ApCsePerson.DateOfDeath"/>
+   <map from="ApCsePerson.IllegalAlienIndicator"
+        to="ApCsePerson.IllegalAlienIndicator"/>
+   <map from="ApCsePerson.CurrentSpouseMi" to="ApCsePerson.CurrentSpouseMi"/>
+   <map from="ApCsePerson.CurrentSpouseFirstName"
+        to="ApCsePerson.CurrentSpouseFirstName"/>
+   <map from="ApCsePerson.BirthPlaceState" to="ApCsePerson.BirthPlaceState"/>
+   <map from="ApCsePerson.NameMiddle" to="ApCsePerson.NameMiddle"/>
+   <map from="ApCsePerson.NameMaiden" to="ApCsePerson.NameMaiden"/>
+   <map from="ApCsePerson.HomePhone" to="ApCsePerson.HomePhone"/>
+   <map from="ApCsePerson.OtherNumber" to="ApCsePerson.OtherNumber"/>
+   <map from="ApCsePerson.BirthPlaceCity" to="ApCsePerson.BirthPlaceCity"/>
+   <map from="ApCsePerson.CurrentSpouseLastName"
+        to="ApCsePerson.CurrentSpouseLastName"/>
+   <map from="ApCsePerson.Weight" to="ApCsePerson.Weight"/>
+   <map from="ApCsePerson.OtherIdInfo" to="ApCsePerson.OtherIdInfo"/>
+   <map from="ApCsePerson.CurrentMaritalStatus"
+        to="ApCsePerson.CurrentMaritalStatus"/>
+   <map from="ApCsePerson.Race" to="ApCsePerson.Race"/>
+   <map from="ApCsePerson.HeightFt" to="ApCsePerson.HeightFt"/>
+   <map from="ApCsePerson.HeightIn" to="ApCsePerson.HeightIn"/>
+   <map from="ApCsePerson.HairColor" to="ApCsePerson.HairColor"/>
+   <map from="ApCsePerson.EyeColor" to="ApCsePerson.EyeColor"/>
+   <map from="ApCaseRole.Type1" to="ApCaseRole.Type1"/>
+   <map from="ApCaseRole.MothersMaidenLastName"
+        to="ApCaseRole.MothersMaidenLastName"/>
+   <map from="ApCaseRole.MothersFirstName" to="ApCaseRole.MothersFirstName"/>
+   <map from="ApCaseRole.MothersMiddleInitial"
+        to="ApCaseRole.MothersMiddleInitial"/>
+   <map from="ApCaseRole.FathersLastName" to="ApCaseRole.FathersLastName"/>
+   <map from="ApCaseRole.FathersFirstName" to="ApCaseRole.FathersFirstName"/>
+   <map from="ApCaseRole.FathersMiddleInitial"
+        to="ApCaseRole.FathersMiddleInitial"/>
+   <map from="ApCaseRole.Note" to="ApCaseRole.Note"/>
+   <map from="ApCaseRole.LivingWithArIndicator"
+        to="ApCaseRole.LivingWithArIndicator"/>
+   <map from="ApCaseRole.EndDate" to="ApCaseRole.EndDate"/>
+   <map from="ApCaseRole.StartDate" to="ApCaseRole.StartDate"/>
+   <map from="ApCaseRole.OnSsInd" to="ApCaseRole.OnSsInd"/>
+   <map from="ApCaseRole.NonpaymentCategory" to="ApCaseRole.NonpaymentCategory"/>
+   <map from="ApCaseRole.NumberOfChildren" to="ApCaseRole.NumberOfChildren"/>
+   <map from="ApCaseRole.NotifiedDate" to="ApCaseRole.NotifiedDate"/>
+   <map from="ApCaseRole.ParentType" to="ApCaseRole.ParentType"/>
+   <map from="ApCaseRole.HealthInsuranceIndicator"
+        to="ApCaseRole.HealthInsuranceIndicator"/>
+   <map from="ApCaseRole.MedicalSupportIndicator"
+        to="ApCaseRole.MedicalSupportIndicator"/>
+   <map from="ApCsePerson.WorkPhoneAreaCode" to="ApCsePerson.WorkPhoneAreaCode"/>
+   <map from="ApCsePerson.WorkPhone" to="ApCsePerson.WorkPhone"/>
+   <map from="ApCsePerson.WorkPhoneExt" to="ApCsePerson.WorkPhoneExt"/>
+   <map from="ApCaseRole.Identifier" to="ApCaseRole.Identifier"/>
+   <map from="ApCsePerson.OtherPhoneType" to="ApCsePerson.OtherPhoneType"/>
+   <map from="ApCsePerson.HomePhoneAreaCode" to="ApCsePerson.HomePhoneAreaCode"/>
+   <map from="ApCsePerson.OtherAreaCode" to="ApCsePerson.OtherAreaCode"/>
+   <map from="LastReadHiddenCsePerson.Type1" to="LastReadHiddenCsePerson.Type1"/>
+   <map from="LastReadHiddenCsePerson.DateOfDeath"
+        to="LastReadHiddenCsePerson.DateOfDeath"/>
+   <map from="ApCsePerson.BirthplaceCountry" to="ApCsePerson.BirthplaceCountry"/>
+   <map from="ApCsePerson.TribalCode" to="ApCsePerson.TribalCode"/>
+   <map from="HiddenCsePerson.DateOfDeath" to="HiddenCsePerson.DateOfDeath"/>
+   <map from="ApCsePerson.ThreatOnStaff" to="ApCsePerson.ThreatOnStaff"/>
+   <map from="HiddenCsePerson.ThreatOnStaff" to="HiddenCsePerson.ThreatOnStaff"/>
+   <map from="ApCsePerson.CustomerServiceCode"
+        to="ApCsePerson.CustomerServiceCode"/>
+   <map from="HiddenCsePerson.CustomerServiceCode"
+        to="HiddenCsePerson.CustomerServiceCode"/>
+   <map from="HiddenCsePerson.TextMessageIndicator"
+        to="HiddenCsePerson.TextMessageIndicator"/>
+   <map from="ApCsePerson.TextMessageIndicator"
+        to="ApCsePerson.TextMessageIndicator"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

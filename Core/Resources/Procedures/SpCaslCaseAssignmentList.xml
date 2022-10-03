@@ -1,0 +1,113 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCaslCaseAssignmentList"
+           program-name="SWECASLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCaslCaseAssignmentList"
+           transaction="SRJR"
+           unformatted-input="Command">
+   <on exit-state="CO_LINK_TO_POPT"
+       action="link"
+       return-when="ACO_NE0000_RETURN LE0000_CANT_NEXTTRAN_INTO"
+       return-command-type="none"
+       display-first-on-return="true"
+       to="CoPoptPrintOptionSelection"
+       send-command="DISPLAY">
+      <map from="Standard" to="Standard"/>
+      <map from="PassToPoptJob" to="Job"/>
+      <map from="PassToPoptJobRun.ParmInfo" to="JobRun.ParmInfo"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpSpmmServicePlanMgtMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenCode" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Selected" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <map from="Office.SystemGeneratedId" to="Office.SystemGeneratedId"/>
+      <map from="Office.Name" to="Office.Name"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="HiddenOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionServiceProvider" to="HiddenServiceProvider"/>
+      <return-map from="HiddenSelectionOffice" to="HiddenOffice"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASU"
+       action="link"
+       return-when="ACO_NE0000_RETURN ECO_LNK_TO_CASL"
+       return-command="RETCASU"
+       to="SpCasuCaseUnitList"
+       send-command="DISPLAY">
+      <map from="Selected" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LTRB"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLTRB"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="ToLtrb.StateAbbreviation" to="SearchFips.StateAbbreviation"/>
+      <return-map from="DlgflwSelectedTribunal" to="FromLtrb"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Office" to="Office"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="Group.DetailCommon" to="Group.DetailCommon"/>
+   <map from="Group.ArDetail" to="Group.ArDetail"/>
+   <map from="Group.DetailCase" to="Group.DetailCase"/>
+   <map from="Group.DetailFunc" to="Group.DetailFunc"/>
+   <map from="Group.DetailPrgm" to="Group.DetailPrgm"/>
+   <map from="Group.DetailCau" to="Group.DetailCau"/>
+   <map from="Group.DetailCaseAssignment" to="Group.DetailCaseAssignment"/>
+   <map from="CurrentPage" to="CurrentPage"/>
+   <map from="PageKeys.PageKeyCase" to="PageKeys.PageKey"/>
+   <map from="Scroll" to="Scroll"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="AsgnCount" to="AsgnCount"/>
+   <map from="HiddenCalcDone" to="HiddenCalcDone"/>
+   <map from="PromptSvpo" to="PromptSvpo"/>
+   <map from="SearchProgram" to="SearchProgram"/>
+   <map from="PromptCdvl" to="PromptCdvl"/>
+   <map from="SearchFunction" to="SearchFunction"/>
+   <map from="Starting" to="Starting"/>
+   <map from="SearchAp" to="SearchAp"/>
+   <map from="SearchApFi" to="SearchApFi"/>
+   <map from="SearchAr" to="SearchAr"/>
+   <map from="SearchArFi" to="SearchArFi"/>
+   <map from="SearchCaseAssignment" to="SearchCaseAssignment"/>
+   <map from="HiddenSearchAp" to="HiddenSearchAp"/>
+   <map from="HiddenSearchArFi" to="HiddenSearchArFi"/>
+   <map from="HiddenSearchAr" to="HiddenSearchAr"/>
+   <map from="HiddenSearchApFi" to="HiddenSearchApFi"/>
+   <map from="HiddenStarting" to="HiddenStarting"/>
+   <map from="HiddenSearchProgram" to="HiddenSearchProgram"/>
+   <map from="HiddenSearchFunction" to="HiddenSearchFunction"/>
+   <map from="HiddenSearchCaseAssignment" to="HiddenSearchCaseAssignment"/>
+   <map from="HiddenSearchTribunal" to="HiddenSearchTribunal"/>
+   <map from="SearchTribunal" to="SearchTribunal"/>
+   <map from="PromptLtrb" to="PromptLtrb"/>
+   <map from="PageKeys.PageKeyTribunal" to="PageKeys.PageKeys1"/>
+   <map from="Group.DetailTribunal" to="Group.DetailTribunal"/>
+   <map from="ServiceProvider.SystemGeneratedId"
+        to="ServiceProvider.SystemGeneratedId"/>
+   <map from="ServiceProvider.LastName" to="ServiceProvider.LastName"/>
+   <map from="Group.ApDetail.FormattedName" to="Group.ApDetail.FormattedName"/>
+</procedure>

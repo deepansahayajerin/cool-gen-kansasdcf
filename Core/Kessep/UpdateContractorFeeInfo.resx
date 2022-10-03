@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadContractorFeeInformation1">
+      <value>
+select top(1)
+  VEN_IDENTIFIER,
+  RATE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DIST_PGM_TYPE,
+  JUDICIAL_DISTRICT,
+  OFF_ID,
+  OTY_ID
+from
+  CKT_CON_FEE_INFO
+where
+  (VEN_IDENTIFIER = @venIdentifier) and
+  (@offId = OFF_ID)
+</value>
+   </data>
+   <data name="ReadContractorFeeInformation2">
+      <value>
+select top(1)
+  VEN_IDENTIFIER,
+  RATE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DIST_PGM_TYPE,
+  JUDICIAL_DISTRICT,
+  OFF_ID,
+  OTY_ID
+from
+  CKT_CON_FEE_INFO
+where
+  (@offId = OFF_ID) and
+  (JUDICIAL_DISTRICT = @judicialDistrict) and
+  (DIST_PGM_TYPE = @distPgmType)
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadContractorFeeInformation3">
+      <value>
+select top(1)
+  VEN_IDENTIFIER,
+  RATE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DIST_PGM_TYPE,
+  JUDICIAL_DISTRICT,
+  OFF_ID,
+  OTY_ID
+from
+  CKT_CON_FEE_INFO
+where
+  (@offId = OFF_ID) and
+  (JUDICIAL_DISTRICT = @judicialDistrict)
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadContractorFeeInformation4">
+      <value>
+select top(1)
+  VEN_IDENTIFIER,
+  RATE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DIST_PGM_TYPE,
+  JUDICIAL_DISTRICT,
+  OFF_ID,
+  OTY_ID
+from
+  CKT_CON_FEE_INFO
+where
+  (JUDICIAL_DISTRICT = @judicialDistrict) and
+  (DIST_PGM_TYPE = @distPgmType) and
+  (@offId = OFF_ID)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadContractorFeeInformation5">
+      <value>
+select top(1)
+  VEN_IDENTIFIER,
+  RATE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DIST_PGM_TYPE,
+  JUDICIAL_DISTRICT,
+  OFF_ID,
+  OTY_ID
+from
+  CKT_CON_FEE_INFO
+where
+  (JUDICIAL_DISTRICT = @judicialDistrict) and
+  (@offId = OFF_ID)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadContractorFeeInformation6">
+      <value>
+select
+  VEN_IDENTIFIER,
+  RATE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DIST_PGM_TYPE,
+  JUDICIAL_DISTRICT,
+  OFF_ID,
+  OTY_ID
+from
+  CKT_CON_FEE_INFO
+where
+  (JUDICIAL_DISTRICT = @judicialDistrict) and
+  (DIST_PGM_TYPE = @distPgmType) and
+  (VEN_IDENTIFIER &lt;&gt; @venIdentifier) and
+  (@offId = OFF_ID)
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadContractorFeeInformationObligationType1">
+      <value>
+select
+  T1.VEN_IDENTIFIER,
+  T1.RATE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.DIST_PGM_TYPE,
+  T1.JUDICIAL_DISTRICT,
+  T1.OFF_ID,
+  T1.OTY_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_NM,
+  T2.DEBT_TYP_CLASS,
+  T2.EFFECTIVE_DT,
+  T2.DISCONTINUE_DT,
+  T2.CREATED_BY,
+  T2.CREATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.SUP_PRSN_REQ_IND,
+  T2.DEBT_TYP_DSC
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_CON_FEE_INFO T1
+  on
+    (T1.JUDICIAL_DISTRICT = @judicialDistrict) and
+    (T1.DIST_PGM_TYPE = @distPgmType) and
+    (T1.VEN_IDENTIFIER &lt;&gt; @venIdentifier) and
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (T2.DEBT_TYP_CD = @debtTypCd) and
+    (@offId = T1.OFF_ID)
+order by
+  T1.EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadContractorFeeInformationObligationType2">
+      <value>
+select
+  T1.VEN_IDENTIFIER,
+  T1.RATE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_BY,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATED_TMST,
+  T1.DIST_PGM_TYPE,
+  T1.JUDICIAL_DISTRICT,
+  T1.OFF_ID,
+  T1.OTY_ID,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_NM,
+  T2.DEBT_TYP_CLASS,
+  T2.EFFECTIVE_DT,
+  T2.DISCONTINUE_DT,
+  T2.CREATED_BY,
+  T2.CREATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.LAST_UPDATED_TMST,
+  T2.SUP_PRSN_REQ_IND,
+  T2.DEBT_TYP_DSC
+from
+  CKT_OB_TYPE T2
+  join
+  CKT_CON_FEE_INFO T1
+  on
+    (T1.JUDICIAL_DISTRICT = @judicialDistrict) and
+    (T1.VEN_IDENTIFIER &lt;&gt; @venIdentifier) and
+    (T2.DEBT_TYP_ID = T1.OTY_ID) and
+    (T2.DEBT_TYP_CD = @debtTypCd) and
+    (@offId = T1.OFF_ID)
+order by
+  T1.EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadObligationType1">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_NM,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SUP_PRSN_REQ_IND,
+  DEBT_TYP_DSC
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadObligationType2">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_NM,
+  DEBT_TYP_CLASS,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SUP_PRSN_REQ_IND,
+  DEBT_TYP_DSC
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  MAIN_PHONE_NUMBER,
+  MAIN_FAX_NUMBER,
+  TYPE_CODE,
+  NAME,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  MAIN_PHONE_AREA_CD,
+  FAX_AREA_CD,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="UpdateContractorFeeInformation">
+      <value>
+update CKT_CON_FEE_INFO
+set
+  RATE = @rate,
+  EFFECTIVE_DATE = @effectiveDate,
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (VEN_IDENTIFIER = @venIdentifier) and
+  (OFF_ID = @offId)
+</value>
+   </data>
+</root>

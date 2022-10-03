@@ -1,0 +1,37 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiPar2PaReferralPage2"
+           program-name="SWEPAR2P"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiPar2PaReferralPage2"
+           transaction="SR1Z"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiRefmPaReferralMenu"
+       send-command="XXFMMENU">
+      <map from="PaReferral" to="PaReferral"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PA_REFERRAL_FC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPAREF"
+       to="SiPar3PaReferralFosterCare"
+       send-command="DISPLAY">
+      <map from="PaReferral.Type1" to="PaReferral.Type1"/>
+      <map from="PaReferral.CaseNumber" to="PaReferral.CaseNumber"/>
+      <map from="PaReferral.Number" to="PaReferral.Number"/>
+      <map from="PaReferral.CreatedTimestamp" to="PaReferral.CreatedTimestamp"/>
+      <map from="PaReferral.From" to="PaReferral.From"/>
+      <return-map from="PaReferral.Number" to="PaReferral.Number"/>
+      <return-map from="PaReferral.CaseNumber" to="PaReferral.CaseNumber"/>
+      <return-map from="PaReferral.Type1" to="PaReferral.Type1"/>
+      <return-map from="PaReferral.CreatedTimestamp" to="PaReferral.CreatedTimestamp"/>
+      <return-map from="PaReferral.From" to="PaReferral.From"/>
+   </on>
+   <map from="PaReferral" to="PaReferral"/>
+   <map from="Employer" to="Employer"/>
+   <map from="ApEmpPhone" to="ApEmpPhone"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

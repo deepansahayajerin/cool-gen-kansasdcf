@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadIncomeSource">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_I_NUMBER
+from
+  CKT_INCOME_SOURCE
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadIncomeSourceContact">
+      <value>
+select top(1)
+  ISR_IDENTIFIER,
+  IDENTIFIER,
+  TYPE,
+  NAME,
+  EXTENSION_NO,
+  NUMB,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  AREA_CODE,
+  CSE_PERSON,
+  EMAIL_ADDRESS
+from
+  CKT_INC_SRCE_CONT
+where
+  (@csePerson = CSE_PERSON) and
+  (@isrIdentifier = ISR_IDENTIFIER) and
+  (IDENTIFIER = @identifier) and
+  (TYPE = @type)
+</value>
+   </data>
+   <data name="UpdateIncomeSourceContact">
+      <value>
+update CKT_INC_SRCE_CONT
+set
+  NAME = @name,
+  EXTENSION_NO = @extensionNo,
+  NUMB = @numb,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  AREA_CODE = @areaCode,
+  EMAIL_ADDRESS = @emailAddress
+where
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (IDENTIFIER = @identifier) and
+  (TYPE = @type) and
+  (CSE_PERSON = @csePerson)
+</value>
+   </data>
+</root>

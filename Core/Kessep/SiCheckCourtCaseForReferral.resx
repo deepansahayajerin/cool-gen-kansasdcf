@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT
+from
+  CKT_LEGAL_ACTION
+where
+  (LEGAL_ACTION_ID = @legalActionId) and
+  (FILED_DT &lt;= @filedDt) and
+  (END_DT &gt; @filedDt)
+</value>
+   </data>
+   <data name="ReadLegalActionPerson">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT
+from
+  CKT_LEGAL_ACT_PERS with(readuncommitted)
+where
+  ([ROLE] = 'C') and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt;= @effectiveDt) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonCsePerson">
+      <value>
+select
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (ACCOUNT_TYPE = 'S') and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt; @effectiveDt) and
+  (CSP_NUMBER is not null)
+</value>
+   </data>
+</root>

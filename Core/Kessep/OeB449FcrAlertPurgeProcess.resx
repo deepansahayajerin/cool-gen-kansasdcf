@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteInfrastructure#1">
+      <value>
+update CKT_APPOINTMENT
+set
+  INF_ID = null
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#2">
+      <value>
+delete from CKT_ASSGN_MNT_ACT
+from
+  CKT_ASSGN_MNT_ACT T3
+  join
+  CKT_MONITORED_ACT T2
+  on
+    (T2.SYSTEM_GENERATED_I = T3.MAC_ID) and
+    (T2.INF_SYS_GEN_ID = @infId)
+</value>
+   </data>
+   <data name="DeleteInfrastructure#3">
+      <value>
+delete from CKT_MONITORED_ACT
+where
+  INF_SYS_GEN_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#4">
+      <value>
+delete from CKT_OSP_ALERT
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#5">
+      <value>
+delete from CKT_FIELD_VALUE
+where
+  INF_IDENTIFIER = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#6">
+      <value>
+delete from CKT_MONITORED_DOC
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#7">
+      <value>
+delete from CKT_OUTGOING_DOC
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#8">
+      <value>
+delete from ZDEL_REC_DOCUMENT
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="DeleteInfrastructure#9">
+      <value>
+delete from CKT_INFRASTRUCTURE
+where
+  SYSTEM_GENERATED_I = @infId
+</value>
+   </data>
+   <data name="DeleteNarrativeDetail">
+      <value>
+delete from CKT_NARR_DETAIL
+where
+  (INFRASTRUCTURE_ID = @infrastructureId) and
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (LINE_NUMBER = @lineNumber)
+</value>
+   </data>
+   <data name="DeleteOfficeServiceProviderAlert">
+      <value>
+delete from CKT_OSP_ALERT
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  PROCESS_STATUS,
+  REASON_CODE,
+  CASE_NUMBER,
+  CSE_PERSON_NUM,
+  REFERENCE_DATE
+from
+  CKT_INFRASTRUCTURE
+where
+  (REFERENCE_DATE &lt;= @referenceDate) and
+  (
+    REASON_CODE in ('FCRNEWSSNNDNHNH', 'FCRNEWSSNNDNHQW', 'FCRNEWSSNNDNHUI',
+      'FCRNEWSSNNDNH', 'FCRSVESPRISONAP', 'FCRSVESPRISONAR',
+      'FCRSVESPRISONCH')
+  )
+order by
+  REFERENCE_DATE,
+  REASON_CODE
+</value>
+   </data>
+   <data name="ReadMonitoredActivity">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  NAME,
+  ACTIVITY_CTRL_NUM,
+  INF_SYS_GEN_ID
+from
+  CKT_MONITORED_ACT
+where
+  @infSysGenId = INF_SYS_GEN_ID
+</value>
+   </data>
+   <data name="ReadNarrativeDetail">
+      <value>
+select
+  INFRASTRUCTURE_ID,
+  CREATED_TIMESTAMP,
+  LINE_NUMBER
+from
+  CKT_NARR_DETAIL
+where
+  INFRASTRUCTURE_ID = @infrastructureId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProviderAlert">
+      <value>
+select
+  SYSTEM_GENERATED_I,
+  INF_ID
+from
+  CKT_OSP_ALERT
+where
+  @infId = INF_ID
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select
+  PRNT_SUCESSFUL_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  @infId = INF_ID
+</value>
+   </data>
+</root>

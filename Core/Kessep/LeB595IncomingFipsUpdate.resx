@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFips1">
+      <value>
+insert into CKT_FIPS
+(
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  OFF_IDENTIFIER,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR,
+  CSP_NUMBER
+)
+values
+(
+  @state,
+  @county,
+  @location,
+  @stateDesc,
+  @countyDesc,
+  @locationDesc,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  null,
+  @stateAbbreviation,
+  @countyAbbr,
+  null
+)
+</value>
+   </data>
+   <data name="CreateFips2">
+      <value>
+insert into CKT_FIPS
+(
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  OFF_IDENTIFIER,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR,
+  CSP_NUMBER
+)
+values
+(
+  @state,
+  @county,
+  @location,
+  @stateDesc,
+  @countyDesc,
+  @locationDesc,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  null,
+  @stateAbbreviation,
+  @countyAbbr,
+  null
+)
+</value>
+   </data>
+   <data name="CreateFipsTribAddress">
+      <value>
+insert into CKT_FIPS_TRIB_ADDR
+(
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  ZIP3,
+  COUNTY,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION,
+  TRB_ID
+)
+values
+(
+  @identifier,
+  @faxExtension,
+  @faxAreaCd,
+  @phoneExtension,
+  @areaCd,
+  @type,
+  @street1,
+  @street2,
+  @city,
+  @state,
+  @zipCd,
+  @zip4,
+  @zip3,
+  @county,
+  @street3,
+  @street3,
+  @province,
+  @postalCode,
+  @country,
+  @phoneNumber,
+  @faxNumber,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  @fipState,
+  @fipCounty,
+  @fipLocation,
+  null
+)
+</value>
+   </data>
+   <data name="ReadFips1">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY_ABBR = @countyAbbr)
+</value>
+   </data>
+   <data name="ReadFips2">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = @county)
+</value>
+   </data>
+   <data name="ReadFips3">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = 0) and
+  (LOCATION = 0)
+</value>
+   </data>
+   <data name="ReadFips4">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_DESC,
+  COUNTY_DESC,
+  LOCATION_DESC,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress1">
+      <value>
+select top(1)
+  max(IDENTIFIER)
+from
+  CKT_FIPS_TRIB_ADDR
+</value>
+   </data>
+   <data name="ReadFipsTribAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  FAX_EXTENSION,
+  FAX_AREA_CD,
+  PHONE_EXTENSION,
+  AREA_CD,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CD,
+  ZIP4,
+  COUNTY,
+  PHONE_NUMBER,
+  FAX_NUMBER,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  FIP_STATE,
+  FIP_COUNTY,
+  FIP_LOCATION
+from
+  CKT_FIPS_TRIB_ADDR
+where
+  (TYPE = 'M') and
+  (FIP_STATE = @fipState) and
+  (FIP_COUNTY = @fipCounty) and
+  (FIP_LOCATION = @fipLocation)
+</value>
+   </data>
+   <data name="UpdateFips">
+      <value>
+update CKT_FIPS
+set
+  LOCATION_DESC = @locationDesc,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  ([STATE] = @state) and
+  (COUNTY = @county) and
+  (LOCATION = @location)
+</value>
+   </data>
+   <data name="UpdateFipsTribAddress">
+      <value>
+update CKT_FIPS_TRIB_ADDR
+set
+  FAX_AREA_CD = @faxAreaCd,
+  PHONE_EXTENSION = @phoneExtension,
+  AREA_CD = @areaCd,
+  TYPE = @type,
+  STREET_1 = @street1,
+  STREET_2 = @street2,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CD = @zipCd,
+  ZIP4 = @zip4,
+  COUNTY = @county,
+  PHONE_NUMBER = @phoneNumber,
+  FAX_NUMBER = @faxNumber,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadNcpNonCooperation">
+      <value>
+select top(1)
+  EFFECTIVE_DT,
+  REASON_CD,
+  LETTER_1_DT,
+  LETTER_1_CD,
+  LETTER_2_DT,
+  LETTER_2_CD,
+  PHONE_1_DT,
+  PHONE_1_CD,
+  PHONE_2_DT,
+  PHONE_2_CD,
+  END_DT,
+  END_STATUS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  NOTE
+from
+  CKT_NCP_NON_COOP
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  EFFECTIVE_DT desc,
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadNcpNonCooperationCsePerson1">
+      <value>
+select
+  EFFECTIVE_DT,
+  REASON_CD,
+  LETTER_1_DT,
+  LETTER_1_CD,
+  LETTER_2_DT,
+  LETTER_2_CD,
+  PHONE_1_DT,
+  PHONE_1_CD,
+  PHONE_2_DT,
+  PHONE_2_CD,
+  END_DT,
+  END_STATUS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  NOTE
+from
+  CKT_NCP_NON_COOP
+where
+  (CAS_NUMBER = @casNumber) and
+  (
+    (EFFECTIVE_DT &lt; @effectiveDt) or
+    (
+      (EFFECTIVE_DT = @effectiveDt) and
+      (LAST_UPDATED_TMST &lt; @lastUpdatedTmst)
+    )
+  )
+order by
+  EFFECTIVE_DT desc,
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadNcpNonCooperationCsePerson2">
+      <value>
+select
+  EFFECTIVE_DT,
+  REASON_CD,
+  LETTER_1_DT,
+  LETTER_1_CD,
+  LETTER_2_DT,
+  LETTER_2_CD,
+  PHONE_1_DT,
+  PHONE_1_CD,
+  PHONE_2_DT,
+  PHONE_2_CD,
+  END_DT,
+  END_STATUS_CD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  NOTE
+from
+  CKT_NCP_NON_COOP
+where
+  CAS_NUMBER = @casNumber
+order by
+  EFFECTIVE_DT desc,
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+</root>

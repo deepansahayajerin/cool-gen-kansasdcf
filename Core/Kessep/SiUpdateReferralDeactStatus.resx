@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsenetTransactionEnvelop">
+      <value>
+select top(1)
+  CCA_TRANSACTION_DT,
+  CCA_TRANS_SER_NUM,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  CREATED_BY,
+  CREATED_TSTAMP
+from
+  CKT_CSENET_TRN_ENV
+where
+  (CCA_TRANS_SER_NUM = @ccaTransSerNum) and
+  (CCA_TRANSACTION_DT = @ccaTransactionDt)
+</value>
+   </data>
+   <data name="ReadInterstateCase">
+      <value>
+select top(1)
+  TRANS_SERIAL_NBR,
+  TRANSACTION_DATE,
+  ASSN_DEACT_DT,
+  ASSN_DEACT_IND
+from
+  CKT_INTERST_CASE
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="ReadInterstateCaseAssignment">
+      <value>
+select
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  ICS_DATE,
+  ICS_NO
+from
+  CKT_ASSGN_INT_CASE
+where
+  (@icsNo = ICS_NO) and
+  (@icsDate = ICS_DATE)
+</value>
+   </data>
+   <data name="UpdateCsenetTransactionEnvelop">
+      <value>
+update CKT_CSENET_TRN_ENV
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes
+where
+  (CCA_TRANSACTION_DT = @ccaTransactionDt) and
+  (CCA_TRANS_SER_NUM = @ccaTransSerNum)
+</value>
+   </data>
+   <data name="UpdateInterstateCase">
+      <value>
+update CKT_INTERST_CASE
+set
+  ASSN_DEACT_DT = @assnDeactDt,
+  ASSN_DEACT_IND = @assnDeactInd
+where
+  (TRANS_SERIAL_NBR = @transSerialNbr) and
+  (TRANSACTION_DATE = @transactionDate)
+</value>
+   </data>
+   <data name="UpdateInterstateCaseAssignment">
+      <value>
+update CKT_ASSGN_INT_CASE
+set
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (SPD_ID = @spdId) and
+  (OFF_ID = @offId) and
+  (OSP_CODE = @ospCode) and
+  (OSP_DATE = @ospDate) and
+  (ICS_DATE = @icsDate) and
+  (ICS_NO = @icsNo)
+</value>
+   </data>
+</root>

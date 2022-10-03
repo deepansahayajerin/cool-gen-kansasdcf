@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignment">
+      <value>
+select top(1)
+  REASON_CODE,
+  EFFECTIVE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  CAS_NO
+from
+  CKT_ASSIGN_CASE
+where
+  @casNo = CAS_NO
+order by
+  EFFECTIVE_DATE
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  T1.SYSTEM_GENERATED_I,
+  T1.CASE_NUMBER
+from
+  CKT_INFRASTRUCTURE T1 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T2 with(readuncommitted)
+  on
+    (T1.CASE_NUMBER = @caseNumber) and
+    (T1.SYSTEM_GENERATED_I = T2.INF_SYS_GEN_ID) and
+    (T2.ACTIVITY_CTRL_NUM = 51)
+</value>
+   </data>
+   <data name="ReadMonitoredActivityInfrastructure">
+      <value>
+select
+  T1.SYSTEM_GENERATED_I,
+  T1.ACTIVITY_CTRL_NUM,
+  T1.OTHER_NCOMP_DTE,
+  T1.CLOSURE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.INF_SYS_GEN_ID,
+  T2.EVENT_ID,
+  T2.REASON_CODE,
+  T2.CASE_NUMBER
+from
+  CKT_INFRASTRUCTURE T2 with(readuncommitted)
+  join
+  CKT_MONITORED_ACT T1 with(readuncommitted)
+  on
+    (T2.SYSTEM_GENERATED_I = T1.INF_SYS_GEN_ID) and
+    (T2.CASE_NUMBER = @caseNumber) and
+    (T2.EVENT_ID = 5) and
+    (T1.ACTIVITY_CTRL_NUM = 51)
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>

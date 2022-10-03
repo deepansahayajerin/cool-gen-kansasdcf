@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAccrualInstructions">
+      <value>
+select top(1)
+  OTR_TYPE,
+  OTY_ID,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  OTR_GENERATED_ID,
+  DISCONTINUE_DT
+from
+  CKT_ACCRUAL_INSTR
+where
+  (@otrType = OTR_TYPE) and
+  (@otyId = OTY_ID) and
+  (@otrGeneratedId = OTR_GENERATED_ID) and
+  (@cpaType = CPA_TYPE) and
+  (@cspNumber = CSP_NUMBER) and
+  (@obgGeneratedId = OBG_GENERATED_ID)
+</value>
+   </data>
+   <data name="ReadObligationObligationTransactionObligationPaymentSchedule">
+      <value>
+select
+  T3.OBG_CPA_TYPE,
+  T3.OBG_CSP_NUMBER,
+  T3.OBG_GENERATED_ID,
+  T3.OTY_TYPE,
+  T2.OBG_GENERATED_ID,
+  T2.CSP_NUMBER,
+  T2.CPA_TYPE,
+  T2.OB_TRN_ID,
+  T2.OB_TRN_TYP,
+  T2.CSP_SUP_NUMBER,
+  T2.CPA_SUP_TYPE,
+  T2.OTY_TYPE,
+  T3.START_DT,
+  T3.END_DT,
+  T4.DISCONTINUE_DT
+from
+  CKT_OB_PYMNT_SCH T3
+  join
+  CKT_OB_TRN T2
+  join
+  CKT_ACCRUAL_INSTR T4
+  on
+    (T2.OB_TRN_TYP = T4.OTR_TYPE) and
+    (T2.OTY_TYPE = T4.OTY_ID) and
+    (T2.OB_TRN_ID = T4.OTR_GENERATED_ID) and
+    (T2.CPA_TYPE = T4.CPA_TYPE) and
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T2.OBG_GENERATED_ID = T4.OBG_GENERATED_ID) and
+    (T4.DISCONTINUE_DT = @discontinueDt)
+  on
+    (T3.OTY_TYPE = T2.OTY_TYPE) and
+    (T3.OBG_GENERATED_ID = T2.OBG_GENERATED_ID) and
+    (T3.OBG_CSP_NUMBER = T2.CSP_NUMBER) and
+    (T3.OBG_CPA_TYPE = T2.CPA_TYPE) and
+    (T3.END_DT &lt;&gt; T4.DISCONTINUE_DT)
+</value>
+   </data>
+   <data name="UpdateAccrualInstructions">
+      <value>
+update CKT_ACCRUAL_INSTR
+set
+  DISCONTINUE_DT = @discontinueDt
+where
+  (OTR_TYPE = @otrType) and
+  (OTY_ID = @otyId) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (OTR_GENERATED_ID = @otrGeneratedId)
+</value>
+   </data>
+</root>

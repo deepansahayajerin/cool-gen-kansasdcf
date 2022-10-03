@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  ON_SS_IND,
+  HEALTH_INS_IND,
+  MEDICAL_SUPP_IND,
+  CONFIRMED_TYPE,
+  NOTE
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = @type) and
+  (END_DATE &lt;= @endDate) and
+  (@casNumber = CAS_NUMBER)
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  ON_SS_IND,
+  HEALTH_INS_IND,
+  MEDICAL_SUPP_IND,
+  CONFIRMED_TYPE,
+  NOTE
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = @type) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+</root>

@@ -1,0 +1,400 @@
+﻿<!--Name: FN_EDTL_LST_EFT_DETAIL, ID: 372155943, model: 746-->
+<div coolContent coolName="FN_EDTL_LST_EFT_DETAIL" coolType="SCREEN"
+  (coolInit)="scrollSize = 50; pageSize = 8">
+   <div coolType="field" coolIntensity="dark" coolUpper
+     style="left: 1.25%; top: 0; width: 10%; height: 4%;" coolCol="2"
+     coolRow="1" coolLength="8">{{global.tranCode}}</div>
+   
+   <div coolType="literal" style="left: 32.5%; top: 0; width: 35%; height: 4%;"
+     coolCol="27" coolRow="1" coolLength="28">CSE - List EFT Detail - EDTL</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 0; width: 10%; height: 4%;" coolCol="73" coolRow="1"
+     coolLength="8">{{global.currentDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 1.25%; top: 4%; width: 5%; height: 4%;"
+     coolCol="2" coolRow="2" coolLength="4">NEXT</div>
+   <input type="text" coolType="field" name="field_2_8"
+     [(ngModel)]="in.standard.nextTransaction"
+     [coolVideo]="out.standard.screenField?.nextTransaction" coolAutotab
+     coolColor="green" coolHighlight="underscore" coolUpper [attr.maxlength]="4"
+     style="left: 8.75%; top: 4%; width: 5%; height: 4%;" coolCol="8"
+     coolRow="2" coolLength="4">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 90%; top: 4%; width: 10%; height: 4%;" coolCol="73"
+     coolRow="2" coolLength="8">{{global.currentTime|coolTime:'HH:mm:ss':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 12%; width: 6.25%; height: 4%;" coolCol="4"
+     coolRow="4" coolLength="5">Payee</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 12%; width: 12.5%; height: 4%;" coolCol="22"
+     coolRow="4" coolLength="10">{{in.payee.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 40%; top: 12%; width: 41.25%; height: 4%;" coolCol="33"
+     coolRow="4" coolLength="33">{{in.payee.formattedName}}</div>
+   
+   <div coolType="prompt" style="left: 3.75%; top: 16%; width: 20%; height: 4%;"
+     coolCol="4" coolRow="5" coolLength="16">Designated Payee</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 26.25%; top: 16%; width: 12.5%; height: 4%;" coolCol="22"
+     coolRow="5" coolLength="10">{{in.designatedPayee.number}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 40%; top: 16%; width: 41.25%; height: 4%;" coolCol="33"
+     coolRow="5" coolLength="33">{{in.designatedPayee.formattedName}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 24%; width: 6.25%; height: 4%;" coolCol="4"
+     coolRow="7" coolLength="5">EFT #</div>
+   <input type="text" coolType="field" name="field_7_20"
+     [(ngModel)]="in.electronicFundTransmission.transmissionIdentifier"
+     [coolVideo]="out.electronicFundTransmission.screenField?.transmissionIdentifier"
+     coolAutotab coolFocus coolColor="green" coolHighlight="underscore"
+     coolNumber="000000000;#" coolBlankWhenZero [attr.maxlength]="9"
+     style="left: 23.75%; top: 24%; width: 11.25%; height: 4%;" coolCol="20"
+     coolRow="7" coolLength="9">
+   <input type="text" coolType="field" name="field_7_30"
+     [(ngModel)]="in.eftNumber.promptField"
+     [coolVideo]="out.eftNumber.screenField?.promptField" coolAutotab
+     coolColor="green" coolHighlight="underscore" placeholder="+" coolUpper
+     [attr.maxlength]="1"
+     style="left: 36.25%; top: 24%; width: 1.25%; height: 4%;" coolCol="30"
+     coolRow="7" coolLength="1">
+   
+   <div coolType="prompt"
+     style="left: 61.25%; top: 24%; width: 11.25%; height: 4%;" coolCol="50"
+     coolRow="7" coolLength="9">Issued To</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 73.75%; top: 24%; width: 25%; height: 4%;" coolCol="60"
+     coolRow="7" coolLength="20">{{in.issuedTo.formattedName}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 28%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="8" coolLength="6">Amount</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 23.75%; top: 28%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="8" coolLength="10">{{in.paymentRequest.amount|coolNumber:'######0.00;#':1}}</div>
+   
+   <div coolType="prompt" style="left: 55%; top: 28%; width: 17.5%; height: 4%;"
+     coolCol="45" coolRow="8" coolLength="14">Routing Number</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 73.75%; top: 28%; width: 10%; height: 4%;" coolCol="60"
+     coolRow="8" coolLength="8">{{in.electronicFundTransmission.receivingDfiIdentification|coolNumber:'00000000;#':1}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 85%; top: 28%; width: 1.25%; height: 4%;" coolCol="69"
+     coolRow="8" coolLength="1">{{in.electronicFundTransmission.checkDigit|coolNumber:'0;#':1}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 32%; width: 7.5%; height: 4%;" coolCol="4"
+     coolRow="9" coolLength="6">Status</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 32%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="9" coolLength="10">{{in.paymentStatus.code}}</div>
+   
+   <div coolType="prompt" style="left: 55%; top: 32%; width: 17.5%; height: 4%;"
+     coolCol="45" coolRow="9" coolLength="14">Account Number</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 73.75%; top: 32%; width: 21.25%; height: 4%;" coolCol="60"
+     coolRow="9" coolLength="17">{{in.electronicFundTransmission.receivingDfiAccountNumber}}</div>
+   
+   <div coolType="prompt" style="left: 3.75%; top: 36%; width: 15%; height: 4%;"
+     coolCol="4" coolRow="10" coolLength="12">Request Date</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 23.75%; top: 36%; width: 10%; height: 4%;" coolCol="20"
+     coolRow="10" coolLength="8">{{in.paymentRequest.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 57.5%; top: 36%; width: 15%; height: 4%;"
+     coolCol="47" coolRow="10" coolLength="12">Reissue Date</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 73.75%; top: 36%; width: 10%; height: 4%;" coolCol="60"
+     coolRow="10" coolLength="8">{{in.reissuedDate.date|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="literal"
+     style="left: 3.75%; top: 40%; width: 18.75%; height: 4%;" coolCol="4"
+     coolRow="11" coolLength="15">Settlement Date</div>
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 23.75%; top: 40%; width: 10%; height: 4%;" coolCol="20"
+     coolRow="11" coolLength="8">{{in.electronicFundTransmission.effectiveEntryDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="prompt" style="left: 50%; top: 40%; width: 22.5%; height: 4%;"
+     coolCol="41" coolRow="11" coolLength="18">Reissued Warrant #</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 73.75%; top: 40%; width: 11.25%; height: 4%;" coolCol="60"
+     coolRow="11" coolLength="9">{{in.reissuedTo.number}}</div>
+   
+   <div coolType="prompt"
+     style="left: 3.75%; top: 48%; width: 3.75%; height: 4%;" coolCol="4"
+     coolRow="13" coolLength="3">Sel</div>
+   
+   <div coolType="prompt"
+     style="left: 10%; top: 48%; width: 11.25%; height: 4%;" coolCol="9"
+     coolRow="13" coolLength="9">Disb Date</div>
+   
+   <div coolType="prompt"
+     style="left: 23.75%; top: 48%; width: 11.25%; height: 4%;" coolCol="20"
+     coolRow="13" coolLength="9">Disb Code</div>
+   
+   <div coolType="prompt" style="left: 45%; top: 48%; width: 7.5%; height: 4%;"
+     coolCol="37" coolRow="13" coolLength="6">Amount</div>
+   
+   <div coolType="prompt" style="left: 57.5%; top: 48%; width: 20%; height: 4%;"
+     coolCol="47" coolRow="13" coolLength="16">Reference Number</div>
+   <input type="text" coolType="field" name="field_14_5"
+     [(ngModel)]="ref(in.disbursements, pageOffset, 'detailCommon.selectChar').value"
+     [coolVideo]="out.disbursements?.[pageOffset]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_14_5 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 5%; top: 52%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="14" coolLength="1" [hidden]="pageOffset >= 50">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 52%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="14" coolLength="8" [hidden]="pageOffset >= 50">{{in.disbursements?.[pageOffset]?.detailDisbursementTransaction.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 52%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="14" coolLength="10" [hidden]="pageOffset >= 50">{{in.disbursements?.[pageOffset]?.detailDisbCode.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 40%; top: 52%; width: 13.75%; height: 4%;" coolCol="33"
+     coolRow="14" coolLength="11" [hidden]="pageOffset >= 50">{{in.disbursements?.[pageOffset]?.detailDisbursementTransaction.amount|coolNumber:'######0.00
+      ;######0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 52%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="14" coolLength="14" [hidden]="pageOffset >= 50">{{in.disbursements?.[pageOffset]?.detailDisbursementTransaction.referenceNumber}}</div>
+   <input type="text" coolType="field" name="field_15_5"
+     [(ngModel)]="ref(in.disbursements, pageOffset + 1, 'detailCommon.selectChar').value"
+     [coolVideo]="out.disbursements?.[pageOffset + 1]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_15_5 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 5%; top: 56%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="15" coolLength="1" [hidden]="pageOffset + 1 >= 50">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 56%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="15" coolLength="8" [hidden]="pageOffset + 1 >= 50">{{in.disbursements?.[pageOffset + 1]?.detailDisbursementTransaction.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 56%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="15" coolLength="10" [hidden]="pageOffset + 1 >= 50">{{in.disbursements?.[pageOffset + 1]?.detailDisbCode.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 40%; top: 56%; width: 13.75%; height: 4%;" coolCol="33"
+     coolRow="15" coolLength="11" [hidden]="pageOffset + 1 >= 50">{{in.disbursements?.[pageOffset + 1]?.detailDisbursementTransaction.amount|coolNumber:'######0.00
+      ;######0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 56%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="15" coolLength="14" [hidden]="pageOffset + 1 >= 50">{{in.disbursements?.[pageOffset + 1]?.detailDisbursementTransaction.referenceNumber}}</div>
+   <input type="text" coolType="field" name="field_16_5"
+     [(ngModel)]="ref(in.disbursements, pageOffset + 2, 'detailCommon.selectChar').value"
+     [coolVideo]="out.disbursements?.[pageOffset + 2]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_16_5 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 5%; top: 60%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="16" coolLength="1" [hidden]="pageOffset + 2 >= 50">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 60%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="16" coolLength="8" [hidden]="pageOffset + 2 >= 50">{{in.disbursements?.[pageOffset + 2]?.detailDisbursementTransaction.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 60%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="16" coolLength="10" [hidden]="pageOffset + 2 >= 50">{{in.disbursements?.[pageOffset + 2]?.detailDisbCode.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 40%; top: 60%; width: 13.75%; height: 4%;" coolCol="33"
+     coolRow="16" coolLength="11" [hidden]="pageOffset + 2 >= 50">{{in.disbursements?.[pageOffset + 2]?.detailDisbursementTransaction.amount|coolNumber:'######0.00
+      ;######0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 60%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="16" coolLength="14" [hidden]="pageOffset + 2 >= 50">{{in.disbursements?.[pageOffset + 2]?.detailDisbursementTransaction.referenceNumber}}</div>
+   <input type="text" coolType="field" name="field_17_5"
+     [(ngModel)]="ref(in.disbursements, pageOffset + 3, 'detailCommon.selectChar').value"
+     [coolVideo]="out.disbursements?.[pageOffset + 3]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_17_5 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 5%; top: 64%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="17" coolLength="1" [hidden]="pageOffset + 3 >= 50">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 64%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="17" coolLength="8" [hidden]="pageOffset + 3 >= 50">{{in.disbursements?.[pageOffset + 3]?.detailDisbursementTransaction.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 64%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="17" coolLength="10" [hidden]="pageOffset + 3 >= 50">{{in.disbursements?.[pageOffset + 3]?.detailDisbCode.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 40%; top: 64%; width: 13.75%; height: 4%;" coolCol="33"
+     coolRow="17" coolLength="11" [hidden]="pageOffset + 3 >= 50">{{in.disbursements?.[pageOffset + 3]?.detailDisbursementTransaction.amount|coolNumber:'######0.00
+      ;######0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 64%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="17" coolLength="14" [hidden]="pageOffset + 3 >= 50">{{in.disbursements?.[pageOffset + 3]?.detailDisbursementTransaction.referenceNumber}}</div>
+   <input type="text" coolType="field" name="field_18_5"
+     [(ngModel)]="ref(in.disbursements, pageOffset + 4, 'detailCommon.selectChar').value"
+     [coolVideo]="out.disbursements?.[pageOffset + 4]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_18_5 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 5%; top: 68%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="18" coolLength="1" [hidden]="pageOffset + 4 >= 50">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 68%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="18" coolLength="8" [hidden]="pageOffset + 4 >= 50">{{in.disbursements?.[pageOffset + 4]?.detailDisbursementTransaction.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 68%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="18" coolLength="10" [hidden]="pageOffset + 4 >= 50">{{in.disbursements?.[pageOffset + 4]?.detailDisbCode.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 40%; top: 68%; width: 13.75%; height: 4%;" coolCol="33"
+     coolRow="18" coolLength="11" [hidden]="pageOffset + 4 >= 50">{{in.disbursements?.[pageOffset + 4]?.detailDisbursementTransaction.amount|coolNumber:'######0.00
+      ;######0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 68%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="18" coolLength="14" [hidden]="pageOffset + 4 >= 50">{{in.disbursements?.[pageOffset + 4]?.detailDisbursementTransaction.referenceNumber}}</div>
+   <input type="text" coolType="field" name="field_19_5"
+     [(ngModel)]="ref(in.disbursements, pageOffset + 5, 'detailCommon.selectChar').value"
+     [coolVideo]="out.disbursements?.[pageOffset + 5]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_19_5 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 5%; top: 72%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="19" coolLength="1" [hidden]="pageOffset + 5 >= 50">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 72%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="19" coolLength="8" [hidden]="pageOffset + 5 >= 50">{{in.disbursements?.[pageOffset + 5]?.detailDisbursementTransaction.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 72%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="19" coolLength="10" [hidden]="pageOffset + 5 >= 50">{{in.disbursements?.[pageOffset + 5]?.detailDisbCode.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 40%; top: 72%; width: 13.75%; height: 4%;" coolCol="33"
+     coolRow="19" coolLength="11" [hidden]="pageOffset + 5 >= 50">{{in.disbursements?.[pageOffset + 5]?.detailDisbursementTransaction.amount|coolNumber:'######0.00
+      ;######0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 72%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="19" coolLength="14" [hidden]="pageOffset + 5 >= 50">{{in.disbursements?.[pageOffset + 5]?.detailDisbursementTransaction.referenceNumber}}</div>
+   <input type="text" coolType="field" name="field_20_5"
+     [(ngModel)]="ref(in.disbursements, pageOffset + 6, 'detailCommon.selectChar').value"
+     [coolVideo]="out.disbursements?.[pageOffset + 6]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_20_5 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 5%; top: 76%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="20" coolLength="1" [hidden]="pageOffset + 6 >= 50">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 76%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="20" coolLength="8" [hidden]="pageOffset + 6 >= 50">{{in.disbursements?.[pageOffset + 6]?.detailDisbursementTransaction.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 76%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="20" coolLength="10" [hidden]="pageOffset + 6 >= 50">{{in.disbursements?.[pageOffset + 6]?.detailDisbCode.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 40%; top: 76%; width: 13.75%; height: 4%;" coolCol="33"
+     coolRow="20" coolLength="11" [hidden]="pageOffset + 6 >= 50">{{in.disbursements?.[pageOffset + 6]?.detailDisbursementTransaction.amount|coolNumber:'######0.00
+      ;######0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 76%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="20" coolLength="14" [hidden]="pageOffset + 6 >= 50">{{in.disbursements?.[pageOffset + 6]?.detailDisbursementTransaction.referenceNumber}}</div>
+   <input type="text" coolType="field" name="field_21_5"
+     [(ngModel)]="ref(in.disbursements, pageOffset + 7, 'detailCommon.selectChar').value"
+     [coolVideo]="out.disbursements?.[pageOffset + 7]?.detailCommon.screenField?.selectChar"
+     coolAutotab #field_21_5 coolColor="green" coolHighlight="underscore"
+     coolUpper [attr.maxlength]="1"
+     style="left: 5%; top: 80%; width: 1.25%; height: 4%;" coolCol="5"
+     coolRow="21" coolLength="1" [hidden]="pageOffset + 7 >= 50">
+   
+   <div coolType="field" coolColor="cyan"
+     style="left: 10%; top: 80%; width: 10%; height: 4%;" coolCol="9"
+     coolRow="21" coolLength="8" [hidden]="pageOffset + 7 >= 50">{{in.disbursements?.[pageOffset + 7]?.detailDisbursementTransaction.processDate|coolDate:'MMddyyyy':0}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 23.75%; top: 80%; width: 12.5%; height: 4%;" coolCol="20"
+     coolRow="21" coolLength="10" [hidden]="pageOffset + 7 >= 50">{{in.disbursements?.[pageOffset + 7]?.detailDisbCode.text10}}</div>
+   
+   <div coolType="field" coolAlign="right" coolColor="cyan"
+     style="left: 40%; top: 80%; width: 13.75%; height: 4%;" coolCol="33"
+     coolRow="21" coolLength="11" [hidden]="pageOffset + 7 >= 50">{{in.disbursements?.[pageOffset + 7]?.detailDisbursementTransaction.amount|coolNumber:'######0.00
+      ;######0.00-':1}}</div>
+   
+   <div coolType="field" coolColor="cyan" coolUpper
+     style="left: 57.5%; top: 80%; width: 17.5%; height: 4%;" coolCol="47"
+     coolRow="21" coolLength="14" [hidden]="pageOffset + 7 >= 50">{{in.disbursements?.[pageOffset + 7]?.detailDisbursementTransaction.referenceNumber}}</div>
+   
+   <div coolType="pagination" [hidden]="scrollSize < scrollAmt + pageOffset"
+     coolCol="63" coolRow="21" coolLength="9"
+     style="left: 77.5%; top: 80%; width: 11.25%; height: 4%;">{{pagination}}</div>
+   
+   <div coolType="error-message" [coolMessageType]="window.messageType"
+     coolCol="1" coolRow="22" coolLength="78"
+     style="left: 0; top: 84%; width: 97.5%; height: 4%;">{{window.errmsg}}</div>
+   
+   <div coolType="literal" style="left: 0; top: 88%; width: 96.25%; height: 4%;"
+     coolCol="1" coolRow="23" coolLength="77">PF KEY: 1 Help  2 Display  3 Exit  4 List  7 Prev  8 Next  9 Return  11 Clear</div>
+   
+   <div coolType="literal"
+     style="left: 1.25%; top: 92%; width: 95%; height: 4%;" coolCol="2"
+     coolRow="24" coolLength="76">12 Signoff  15 PACC  16 EFTL  17 EHST  18 PSUM  19 CRRC  20 MTRN  21 Reissue</div>
+   </div>
+<div coolCommands>
+   <a coolType="action" coolCommand="ENTER" tabindex="2" href="#"
+     coolAccesskey="ENTER">ENTER</a>
+   <a coolType="action" coolCommand="HELP" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F1">F01=HELP</a>
+   <a coolType="action" coolCommand="DISPLAY" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F2">F02=DISPLAY</a>
+   <a coolType="action" coolCommand="EXIT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F3">F03=EXIT</a>
+   <a coolType="action" coolCommand="LIST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F4">F04=LIST</a>
+   <a coolType="action" coolCommand="PREV" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F7">F07=PREV</a>
+   <a coolType="action" coolCommand="NEXT" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F8">F08=NEXT</a>
+   <a coolType="action" coolCommand="RETURN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F9">F09=RETURN</a>
+   <a coolType="action" coolCommand="CLEAR" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F11">F11=CLEAR</a>
+   <a coolType="action" coolCommand="SIGNOFF" tabindex="2" href="#"
+     class="invisible" coolAccesskey="F12">F12=SIGNOFF</a>
+   <a coolType="action" coolCommand="PACC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F3">F15=PACC</a>
+   <a coolType="action" coolCommand="EFTL" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F4">F16=EFTL</a>
+   <a coolType="action" coolCommand="EHST" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F5">F17=EHST</a>
+   <a coolType="action" coolCommand="PSUM" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F6">F18=PSUM</a>
+   <a coolType="action" coolCommand="CRRC" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F7">F19=CRRC</a>
+   <a coolType="action" coolCommand="MTRN" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F8">F20=MTRN</a>
+   <a coolType="action" coolCommand="REIS_TO" tabindex="2" href="#"
+     class="invisible" coolAccesskey="Shift+F9">F21=REIS_TO</a>
+   </div>

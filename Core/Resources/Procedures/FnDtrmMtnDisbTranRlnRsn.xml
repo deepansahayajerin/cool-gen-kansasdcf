@@ -1,0 +1,50 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnDtrmMtnDisbTranRlnRsn"
+           program-name="SWEDTRMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnDtrmMtnDisbTranRlnRsn"
+           transaction="SR92"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_DISB_TRAN_REL_RSN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDTRL"
+       to="FnDtrlLstDisbTranRlnRsn"
+       send-command="DISPLAY">
+      <return-map from="Flag" to="Flag"/>
+      <return-map from="FlowSelection.SystemGeneratedIdentifier"
+                  to="DisbursementTranRlnRsn.SystemGeneratedIdentifier"/>
+      <return-map from="FlowSelection.Code" to="DisbursementTranRlnRsn.Code"/>
+      <return-map from="FlowSelection.Name" to="DisbursementTranRlnRsn.Name"/>
+      <return-map from="FlowSelection.EffectiveDate"
+                  to="DisbursementTranRlnRsn.EffectiveDate"/>
+      <return-map from="FlowSelection.DiscontinueDate"
+                  to="DisbursementTranRlnRsn.DiscontinueDate"/>
+      <return-map from="FlowSelection.CreatedBy" to="DisbursementTranRlnRsn.CreatedBy"/>
+      <return-map from="FlowSelection.CreatedTimestamp"
+                  to="DisbursementTranRlnRsn.CreatedTimestamp"/>
+      <return-map from="FlowSelection.LastUpdatedBy"
+                  to="DisbursementTranRlnRsn.LastUpdatedBy"/>
+      <return-map from="FlowSelection.LastUpdatedTmst"
+                  to="DisbursementTranRlnRsn.LastUpdatedTmst"/>
+   </on>
+   <map from="HiddenId" to="HiddenId"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard1"/>
+   <map from="PromptTextWorkArea" to="PromptTextWorkArea"/>
+   <map from="DisbursementTranRlnRsn.Code" to="DisbursementTranRlnRsn.Code"/>
+   <map from="DisbursementTranRlnRsn.Name" to="DisbursementTranRlnRsn.Name"/>
+   <map from="DisbursementTranRlnRsn.EffectiveDate"
+        to="DisbursementTranRlnRsn.EffectiveDate"/>
+   <map from="DisbursementTranRlnRsn.DiscontinueDate"
+        to="DisbursementTranRlnRsn.DiscontinueDate"/>
+   <map from="DisbursementTranRlnRsn.Description"
+        to="DisbursementTranRlnRsn.Description"/>
+   <map from="DisbursementTranRlnRsn.SystemGeneratedIdentifier"
+        to="DisbursementTranRlnRsn.SystemGeneratedIdentifier"/>
+</procedure>

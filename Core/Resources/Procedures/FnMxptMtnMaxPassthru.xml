@@ -1,0 +1,33 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnMxptMtnMaxPassthru"
+           program-name="SWEMXPTP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnMxptMtnMaxPassthru"
+           transaction="SR56"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDsamDisbSystemAdmMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_MAX_PASSTHRU_HIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTFRMLNK"
+       to="FnPhstLstMaxPassthruHistory"
+       send-command="DISPLAY">
+      <return-map from="Mxpt" to="Flag"/>
+      <return-map from="FlowSelection.Amount" to="MaximumPassthru.Amount"/>
+      <return-map from="FlowSelection.Description" to="MaximumPassthru.Description"/>
+      <return-map from="FlowSelection.EffectiveDate" to="MaximumPassthru.EffectiveDate"/>
+      <return-map from="FlowSelection.DiscontinueDate"
+                  to="MaximumPassthru.DiscontinueDate"/>
+      <return-map from="FlowSelection.SystemGeneratedIdentifier"
+                  to="MaximumPassthru.SystemGeneratedIdentifier"/>
+   </on>
+   <map from="MaximumPassthru" to="MaximumPassthru"/>
+   <map from="HiddenMaximumPassthru" to="HiddenMaximumPassthru"/>
+   <map from="Last" to="Last"/>
+   <map from="Prompt" to="Prompt"/>
+   <map from="Standard" to="Standard"/>
+</procedure>

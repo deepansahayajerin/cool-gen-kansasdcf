@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateKdorVehicle">
+      <value>
+insert into CKT_KDOR_VEHICLE
+(
+  IDENTIFIER,
+  LAST_NAME,
+  FIRST_NAME,
+  SSN,
+  DATE_OF_BIRTH,
+  LICENSE_NUMBER,
+  VIN_NUMBER,
+  MAKE,
+  MODEL,
+  [YEAR],
+  PLATE_NUMBER,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAMP,
+  FK_CKT_CSE_PERSNUMB
+)
+values
+(
+  @identifier,
+  @lastName,
+  @firstName,
+  @ssn,
+  @dateOfBirth,
+  @licenseNumber,
+  @vinNumber,
+  @make,
+  @model,
+  @year,
+  @plateNumber,
+  @createdTstamp,
+  @createdBy,
+  @lastUpdatedBy,
+  @lastUpdatedTstamp,
+  @fkCktCsePersnumb
+)
+</value>
+   </data>
+   <data name="CreateKdorVehicleOwner">
+      <value>
+insert into CKT_KDOR_VEHICLE_OWNER
+(
+  IDENTIFIER,
+  ORGANIZATION_NAME,
+  FIRST_NAME,
+  MIDDLE_NAME,
+  LAST_NAME,
+  SUFFIX,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  VESTMENT_TYPE,
+  HOME_PHONE,
+  BUSINESS_PHONE,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAMP,
+  FK_CKT_KDOR_VEHFK_CKT_CSE_PERS,
+  FK_CKT_KDOR_VEHIDENTIFIER
+)
+values
+(
+  @identifier,
+  @organizationName,
+  @firstName,
+  @middleName,
+  @lastName,
+  @suffix,
+  @addressLine1,
+  @addressLine2,
+  @city,
+  @state,
+  @zipCode,
+  @vestmentType,
+  @homePhone,
+  @businessPhone,
+  @createdTstamp,
+  @createdBy,
+  @lastUpdatedBy,
+  @lastUpdatedTstamp,
+  @fkCktKdorVehfkCktCsePers,
+  @fkCktKdorVehidentifier
+)
+</value>
+   </data>
+   <data name="DeleteKdorVehicleOwner">
+      <value>
+delete from CKT_KDOR_VEHICLE_OWNER
+where
+  (IDENTIFIER = @identifier) and
+  (FK_CKT_KDOR_VEHFK_CKT_CSE_PERS = @fkCktKdorVehfkCktCsePers) and
+  (FK_CKT_KDOR_VEHIDENTIFIER = @fkCktKdorVehidentifier)
+</value>
+   </data>
+   <data name="ReadCase">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (@cspNumber = T2.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T2.TYPE = 'AP')
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  EYE_COLOR,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="ReadKdorVehicle1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  LAST_NAME,
+  FIRST_NAME,
+  SSN,
+  DATE_OF_BIRTH,
+  LICENSE_NUMBER,
+  VIN_NUMBER,
+  MAKE,
+  MODEL,
+  [YEAR],
+  PLATE_NUMBER,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAMP,
+  FK_CKT_CSE_PERSNUMB
+from
+  CKT_KDOR_VEHICLE
+where
+  (@fkCktCsePersnumb = FK_CKT_CSE_PERSNUMB) and
+  (VIN_NUMBER = @vinNumber)
+</value>
+   </data>
+   <data name="ReadKdorVehicle2">
+      <value>
+select top(1)
+  max(IDENTIFIER)
+from
+  CKT_KDOR_VEHICLE
+where
+  @fkCktCsePersnumb = FK_CKT_CSE_PERSNUMB
+</value>
+   </data>
+   <data name="ReadKdorVehicleOwner">
+      <value>
+select top(1)
+  IDENTIFIER,
+  ORGANIZATION_NAME,
+  FIRST_NAME,
+  MIDDLE_NAME,
+  LAST_NAME,
+  SUFFIX,
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  VESTMENT_TYPE,
+  HOME_PHONE,
+  BUSINESS_PHONE,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TSTAMP,
+  FK_CKT_KDOR_VEHFK_CKT_CSE_PERS,
+  FK_CKT_KDOR_VEHIDENTIFIER
+from
+  CKT_KDOR_VEHICLE_OWNER
+where
+  (@fkCktKdorVehfkCktCsePers = FK_CKT_KDOR_VEHFK_CKT_CSE_PERS) and
+  (@fkCktKdorVehidentifier = FK_CKT_KDOR_VEHIDENTIFIER) and
+  (IDENTIFIER = cast(@count as integer))
+</value>
+   </data>
+   <data name="UpdateKdorVehicle">
+      <value>
+update CKT_KDOR_VEHICLE
+set
+  LAST_NAME = @lastName,
+  FIRST_NAME = @firstName,
+  SSN = @ssn,
+  DATE_OF_BIRTH = @dateOfBirth,
+  LICENSE_NUMBER = @licenseNumber,
+  VIN_NUMBER = @vinNumber,
+  MAKE = @make,
+  MODEL = @model,
+  [YEAR] = @year,
+  PLATE_NUMBER = @plateNumber,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TSTAMP = @lastUpdatedTstamp
+where
+  (IDENTIFIER = @identifier) and
+  (FK_CKT_CSE_PERSNUMB = @fkCktCsePersnumb)
+</value>
+   </data>
+   <data name="UpdateKdorVehicleOwner">
+      <value>
+update CKT_KDOR_VEHICLE_OWNER
+set
+  ORGANIZATION_NAME = @organizationName,
+  FIRST_NAME = @firstName,
+  MIDDLE_NAME = @middleName,
+  LAST_NAME = @lastName,
+  SUFFIX = @suffix,
+  ADDRESS_LINE_1 = @addressLine1,
+  ADDRESS_LINE_2 = @addressLine2,
+  CITY = @city,
+  [STATE] = @state,
+  ZIP_CODE = @zipCode,
+  VESTMENT_TYPE = @vestmentType,
+  HOME_PHONE = @homePhone,
+  BUSINESS_PHONE = @businessPhone,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TSTAMP = @lastUpdatedTstamp
+where
+  (IDENTIFIER = @identifier) and
+  (FK_CKT_KDOR_VEHFK_CKT_CSE_PERS = @fkCktKdorVehfkCktCsePers) and
+  (FK_CKT_KDOR_VEHIDENTIFIER = @fkCktKdorVehidentifier)
+</value>
+   </data>
+</root>

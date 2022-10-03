@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadIwoTransaction">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TRANSACTION_NUMBER,
+  CURRENT_STATUS,
+  STATUS_DATE,
+  NOTE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  LGA_IDENTIFIER,
+  CSP_NUMBER
+from
+  CKT_IWO_TRANS
+where
+  (IDENTIFIER = @identifier) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="UpdateIwoTransaction">
+      <value>
+update CKT_IWO_TRANS
+set
+  NOTE = @note,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (IDENTIFIER = @identifier) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

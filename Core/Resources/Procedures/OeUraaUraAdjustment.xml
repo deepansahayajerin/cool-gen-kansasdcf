@@ -1,0 +1,137 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeUraaUraAdjustment"
+           program-name="SWEURAAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeUraaUraAdjustment"
+           transaction="SRDC">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none">
+      <map from="ImHholdMember" to="StartCsePerson"/>
+      <map from="CsePersonsWorkSet" to="PersonName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CURA"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeCuraMembersUra"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="SearchCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COLP"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnColpMtnCollectionProtect"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="ObligationType" to="ObligationType"/>
+      <map from="ObligorCsePerson" to="CsePerson"/>
+      <map from="Obligation" to="Obligation"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UCOL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUcolListUraCollections"
+       send-command="DISPLAY">
+      <map from="ImHousehold" to="SearchImHousehold"/>
+      <map from="CsePersonsWorkSet" to="SearchMemberCsePersonsWorkSet"/>
+      <map from="ImHholdMember" to="SearchMemberCsePerson"/>
+      <map from="ForAdjustments" to="PassToDateWorkArea"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UHMM ECO_LNK_TO_UMHH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUhmmUraHouseholdMbrMaint"
+       send-command="DISPLAY">
+      <map from="ImHousehold.AeCaseNo" to="ImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IMHH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeImhhListHhInfo"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="SearchCriteria.SearchCsePersonsWorkSet"/>
+      <map from="ImHousehold.AeCaseNo"
+           to="SearchCriteria.SearchImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAC"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUracUraByCourtOrder"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_URAH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUrahHouseholdUra"
+       send-command="DISPLAY">
+      <map from="ImHousehold" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUralListUraAdj"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="Selected.Number"/>
+      <map from="CsePersonsWorkSet.FormattedName" to="Selected.FormattedName"/>
+      <map from="ImHholdMember.Number" to="CsePerson1.Number"/>
+      <map from="ForAdjPrevious.Month" to="ToYearNMonth.Month"/>
+      <map from="ForAdjPrevious.Year" to="ToYearNMonth.Year"/>
+      <map from="ImHousehold" to="ImHousehold"/>
+   </on>
+   <map from="ImHousehold" to="ImHousehold"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CollProtExists" to="CollProtExists"/>
+   <map from="Obligation" to="Obligation"/>
+   <map from="ObligationType" to="ObligationType"/>
+   <map from="ObligorCsePerson" to="ObligorCsePerson"/>
+   <map from="ObligorCsePersonsWorkSet" to="ObligorCsePersonsWorkSet"/>
+   <map from="ImHouseholdMbrMnthlyAdj" to="ImHouseholdMbrMnthlyAdj"/>
+   <map from="ForAdjustments" to="ForAdjustments"/>
+   <map from="Tot.MbrAfGrant" to="Tot.MbrAfGrant"/>
+   <map from="Tot.MbrMedGrant" to="Tot.MbrMedGrant"/>
+   <map from="Tot.MbrAfAdj" to="Tot.MbrAfAdj"/>
+   <map from="Tot.MbrMedAdj" to="Tot.MbrMedAdj"/>
+   <map from="Tot.MbrAfColl" to="Tot.MbrAfColl"/>
+   <map from="Tot.MbrAfUra" to="Tot.MbrAfUra"/>
+   <map from="Tot.HhMedGrant" to="Tot.HhMedGrant"/>
+   <map from="Tot.HhMedUra" to="Tot.HhMedUra"/>
+   <map from="Tot.HhAfColl" to="Tot.HhAfColl"/>
+   <map from="Tot.HhMedColl" to="Tot.HhMedColl"/>
+   <map from="Tot.HhAfGrant" to="Tot.HhAfGrant"/>
+   <map from="Tot.HhAfAdj" to="Tot.HhAfAdj"/>
+   <map from="Tot.HhMedAdj" to="Tot.HhMedAdj"/>
+   <map from="Tot.HhAfUra" to="Tot.HhAfUra"/>
+   <map from="Tot.MbrMedUra" to="Tot.MbrMedUra"/>
+   <map from="Tot.MbrMedColl" to="Tot.MbrMedColl"/>
+   <map from="ForAdjPrevious" to="ForAdjPrevious"/>
+   <map from="ImHholdMember" to="CsePerson"/>
+   <map from="ImHouseholdMbrMnthlySum" to="ImHouseholdMbrMnthlySum"/>
+   <map from="FirstAfGrant" to="FirstAfGrant"/>
+   <map from="Tot.TotHhAfGrant" to="Tot.TotHhAfGrant"/>
+   <map from="Tot.TotHhAfColl" to="Tot.TotHhAfColl"/>
+   <map from="Tot.TotHhAfAdj" to="Tot.TotHhAfAdj"/>
+   <map from="Tot.TotHhAfUra" to="Tot.TotHhAfUra"/>
+   <map from="Tot.TotHhMedGrant" to="Tot.TotHhMedGrant"/>
+   <map from="Tot.TotHhMedColl" to="Tot.TotHhMedColl"/>
+   <map from="Tot.TotHhMedAdj" to="Tot.TotHhMedAdj"/>
+   <map from="Tot.TotHhMedUra" to="Tot.TotHhMedUra"/>
+   <map from="Tot.TotMbrAfGrant" to="Tot.TotMbrAfGrant"/>
+   <map from="Tot.TotMbrAfColl" to="Tot.TotMbrAfColl"/>
+   <map from="Tot.TotMbrAfAdj" to="Tot.TotMbrAfAdj"/>
+   <map from="Tot.TotMbrAfUra" to="Tot.TotMbrAfUra"/>
+   <map from="Tot.TotMbrMedGrant" to="Tot.TotMbrMedGrant"/>
+   <map from="Tot.TotMbrMedColl" to="Tot.TotMbrMedColl"/>
+   <map from="Tot.TotMbrMedAdj" to="Tot.TotMbrMedAdj"/>
+   <map from="Tot.TotMbrMedUra" to="Tot.TotMbrMedUra"/>
+   <map from="FirstMedGrant" to="FirstMedGrant"/>
+</procedure>

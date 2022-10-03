@@ -1,0 +1,68 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiItsmInterstateMenu"
+           program-name="SWEITSMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiItsmInterstateMenu"
+           transaction="SR2Q"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_SI_INTRST_REQ_ATTACH"
+       action="transfer"
+       to="SiIattInterstateReqAttach"
+       send-command="XXFMMENU">
+      <map from="CsePersonsWorkSet" to="Ap"/>
+      <map from="Case1" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_SI_INTRST_REQ_HIST"
+       action="transfer"
+       to="SiIreqInterstateReqHistory"
+       send-command="XXFMMENU">
+      <map from="CsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+      <map from="Case1" to="NextCase"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_QUICK_LOCATE_INFO"
+       action="transfer"
+       to="SiQlrqQuickLocateRequests"
+       send-command="XXFMMENU">
+      <map from="CsePersonsWorkSet.Number" to="Ap.Number"/>
+      <map from="CsePersonsWorkSet.FormattedName" to="Ap.FormattedName"/>
+      <map from="Case1" to="DisplayOnly"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SiSinmServiceInitiationMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_XFR_TO_SI_IIMC"
+       action="transfer"
+       to="SiIimcIsManualConversion"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+      <map from="CsePersonsWorkSet" to="Ap"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_IIOI"
+       action="transfer"
+       to="SiIioiIncomingIsOgInfo"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Case1"/>
+      <map from="CsePersonsWorkSet" to="Ap"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_SI_INTRST_OUTGO_INFO"
+       action="transfer"
+       to="SiOinrOutgoingInterstateInfo"
+       send-command="XXFMMENU">
+      <map from="Case1" to="SelectedCase"/>
+      <map from="CsePersonsWorkSet" to="ApFromIreq"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CSENET_REFERRAL_MENU"
+       action="transfer"
+       to="SiIstmInterstateReferralMenu"
+       send-command="XXFMMENU">
+      <map from="Case1" to="Next"/>
+   </on>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Next" to="Next"/>
+   <map from="Case1" to="Case1"/>
+   <map from="Hidden" to="Hidden"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

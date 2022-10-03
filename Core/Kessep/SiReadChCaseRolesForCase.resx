@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS,
+  CSE_OPEN_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE,
+  T2.ORGANIZATION_NAME,
+  T2.OUT_OF_WEDLOCK,
+  T2.CSE_TO_EST_PATR,
+  T2.PAT_ESTAB_IND,
+  T2.DATE_PATERN_ESTAB,
+  T2.BC_FATHER_LAST_NM,
+  T2.BC_FATHER_FIRST_NM,
+  T2.BC_FATHERS_MI,
+  T2.BC_SIGNATURE,
+  T2.HOSPITAL_PAT_EST,
+  T2.PAT_LOCK_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (@casNumber = T1.CAS_NUMBER) and
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'CH') and
+    (T2.NUMB &gt;= @numb)
+order by
+  T1.CSP_NUMBER
+</value>
+   </data>
+</root>

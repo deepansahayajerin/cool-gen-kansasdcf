@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateDisbursementTranRlnRsn">
+      <value>
+insert into CKT_DSB_TRN_RLN_RS
+(
+  DISB_TRN_RLN_RS_ID,
+  CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DESCRIPTION
+)
+values
+(
+  @disbTrnRlnRsId,
+  @code,
+  @name,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @description
+)
+</value>
+   </data>
+   <data name="ReadDisbursementTranRlnRsn">
+      <value>
+select top(1)
+  DISB_TRN_RLN_RS_ID,
+  CODE,
+  NAME,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  DESCRIPTION
+from
+  CKT_DSB_TRN_RLN_RS
+where
+  (CODE = @code) and
+  (
+    (
+      (EFFECTIVE_DATE &lt;= @effectiveDate1) and
+      (DISCONTINUE_DATE &gt;= @effectiveDate1)
+    ) or
+    (
+      (EFFECTIVE_DATE &lt;= @effectiveDate2) and
+      (DISCONTINUE_DATE &gt;= @effectiveDate2)
+    )
+  )
+</value>
+   </data>
+</root>

@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_PERS T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@ladRNumber = T2.LAD_R_NUMBER) and
+    (@lgaRIdentifier = T2.LGA_R_IDENTIFIER) and
+    (T1.NUMB = @numb) and
+    (T2.ACCOUNT_TYPE = 'R') and
+    (T2.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T2.END_DT &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON with(readuncommitted)
+where
+  (NUMB = @numb) and
+  (cast(@cpaSupType as char(1)) = 'S')
+</value>
+   </data>
+   <data name="ReadCsePersonLegalActionPerson">
+      <value>
+select
+  CSP_NUMBER,
+  LA_PERSON_ID,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT
+from
+  CKT_LEGAL_ACT_PERS with(readuncommitted)
+where
+  (@ladRNumber = LAD_R_NUMBER) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER) and
+  (CSP_NUMBER = @cspNumber) and
+  (ACCOUNT_TYPE = 'S') and
+  (EFFECTIVE_DT &lt;= @effectiveDt) and
+  (END_DT &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION
+from
+  CKT_FIPS T1 with(readuncommitted)
+  join
+  CKT_TRIBUNAL T2 with(readuncommitted)
+  on
+    (T1.LOCATION = T2.FIP_LOCATION) and
+    (T1.COUNTY = T2.FIP_COUNTY) and
+    (T1.[STATE] = T2.FIP_STATE) and
+    (T2.IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  FILED_DT,
+  ORDER_AUTHORITY,
+  COURT_CASE_NO,
+  END_DT,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionDetail">
+      <value>
+select
+  LGA_IDENTIFIER,
+  LA_DETAIL_NO,
+  END_DT,
+  EFFECTIVE_DT,
+  ARREARS_AMOUNT,
+  CURRENT_AMOUNT,
+  JUDGEMENT_AMOUNT,
+  NON_FIN_OBLG_TYPE,
+  DETAIL_TYPE,
+  FRQ_PRD_CD,
+  OTY_ID
+from
+  CKT_LEGAL_ACT_DTL with(readuncommitted)
+where
+  (@lgaIdentifier = LGA_IDENTIFIER) and
+  (END_DT &gt;= @endDt)
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetail">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.FILED_DT,
+  T1.ORDER_AUTHORITY,
+  T1.COURT_CASE_NO,
+  T1.END_DT,
+  T1.TRB_ID,
+  T2.LA_DETAIL_NO,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.ARREARS_AMOUNT,
+  T2.CURRENT_AMOUNT,
+  T2.JUDGEMENT_AMOUNT,
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T2.FRQ_PRD_CD,
+  T2.OTY_ID
+from
+  CKT_CASE_ROLE T6 with(readuncommitted)
+  join
+  CKT_LEGAL_ACTION T1 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_DTL T2 with(readuncommitted)
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T1.CLASSIFICATION = 'J') and
+    (T1.END_DT &gt;= @endDt) and
+    (T1.FILED_DT &gt; @filedDt) and
+    (T1.FILED_DT &lt;= @endDt) and
+    (T2.END_DT &gt;= @endDt)
+  join
+  CKT_LEGAL_ACT_PERS T3 with(readuncommitted)
+  on
+    (T2.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T2.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (T3.ACCOUNT_TYPE = 'R') and
+    (T3.EFFECTIVE_DT &lt;= @endDt) and
+    (T3.END_DT &gt;= @endDt)
+  join
+  CKT_LA_PER_LA_CROL T4 with(readuncommitted)
+  on
+    T3.LA_PERSON_ID = T4.LAP_ID
+  on
+    (T6.CASE_ROLE_ID = T4.CRO_ID) and
+    (T6.TYPE = T4.CRO_TYPE) and
+    (T6.CSP_NUMBER = T4.CSP_NUM) and
+    (T6.CAS_NUMBER = T4.CAS_NUM) and
+    (T6.TYPE = 'AP') and
+    (T6.START_DATE &lt;= @endDt) and
+    (T6.CAS_NUMBER = @casNumber) and
+    (T6.CSP_NUMBER = @cspNumber)
+order by
+  T1.COURT_CASE_NO
+</value>
+   </data>
+   <data name="ReadObligationObligationTypeObligationTransaction">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.OB_ID,
+  T1.DTY_GENERATED_ID,
+  T1.LAST_PYMNT_DT,
+  T1.LGA_IDENTIFIER,
+  T1.LAD_NUMBER,
+  T2.DEBT_TYP_CD,
+  T2.DEBT_TYP_CLASS,
+  T3.OB_TRN_ID,
+  T3.OB_TRN_TYP,
+  T3.CSP_SUP_NUMBER,
+  T3.CPA_SUP_TYPE,
+  T4.DUE_DT,
+  T4.BAL_DUE_AMT,
+  T4.CVRD_PRD_START_DT,
+  T4.CVD_PRD_END_DT,
+  T4.PRECNVRSN_PGM_CD
+from
+  CKT_OB_TYPE T2 with(readuncommitted)
+  join
+  CKT_OBLIGATION T1 with(readuncommitted)
+  on
+    (T2.DEBT_TYP_ID = T1.DTY_GENERATED_ID) and
+    (T1.LAD_NUMBER = @ladNumber) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier) and
+    (T1.CPA_TYPE = 'R') and
+    (T1.CSP_NUMBER = @cspNumber)
+  join
+  CKT_OB_TRN T3 with(readuncommitted)
+  on
+    (T1.DTY_GENERATED_ID = T3.OTY_TYPE) and
+    (T1.OB_ID = T3.OBG_GENERATED_ID) and
+    (T1.CSP_NUMBER = T3.CSP_NUMBER) and
+    (T1.CPA_TYPE = T3.CPA_TYPE) and
+    (T3.OB_TRN_TYP = 'DE')
+  join
+  CKT_DEBT_DTL T4 with(readuncommitted)
+  on
+    (T3.OTY_TYPE = T4.OTY_TYPE) and
+    (T3.OBG_GENERATED_ID = T4.OBG_GENERATED_ID) and
+    (T3.OB_TRN_TYP = T4.OTR_TYPE) and
+    (T3.OB_TRN_ID = T4.OTR_GENERATED_ID) and
+    (T3.CPA_TYPE = T4.CPA_TYPE) and
+    (T3.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T4.BAL_DUE_AMT &gt; 0) and
+    (T4.DUE_DT &lt; @dueDt)
+</value>
+   </data>
+   <data name="ReadObligationPaymentSchedule">
+      <value>
+select top(1)
+  OTY_TYPE,
+  OBG_GENERATED_ID,
+  OBG_CSP_NUMBER,
+  OBG_CPA_TYPE,
+  START_DT,
+  END_DT,
+  FRQ_PRD_CD
+from
+  CKT_OB_PYMNT_SCH with(readuncommitted)
+where
+  (@otyType = OTY_TYPE) and
+  (@obgGeneratedId = OBG_GENERATED_ID) and
+  (@obgCspNumber = OBG_CSP_NUMBER) and
+  (@obgCpaType = OBG_CPA_TYPE) and
+  (START_DT &lt;= @startDt) and
+  (END_DT &gt;= @startDt)
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE with(readuncommitted)
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

@@ -1,0 +1,137 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnOrelLstPotentialRecovOblg"
+           program-name="SWEORELP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnOrelLstPotentialRecovOblg"
+           transaction="SR21"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="FromFlow"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_WARRANTS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnWdtlLstWarrantDtl"
+       send-command="DISPLAY">
+      <map from="ForFlowCsePersonsWorkSet" to="Payee"/>
+      <map from="ForFlowPaymentRequest.SystemGeneratedIdentifier"
+           to="PaymentRequest.SystemGeneratedIdentifier"/>
+      <map from="ForFlowPaymentRequest.Type1" to="PaymentRequest.Type1"/>
+      <map from="ForFlowPaymentRequest.Amount" to="PaymentRequest.Amount"/>
+      <map from="ForFlowPaymentRequest.CreatedTimestamp"
+           to="PaymentRequest.CreatedTimestamp"/>
+   </on>
+   <on exit-state="FN0000_FLOW_TO_CRRL_SEL_REFUND"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrrlListRefunds"
+       send-command="DISPLAY">
+      <map from="ForFlowReceiptRefund.PayeeName" to="Selection.PayeeName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_PAYMENT_STATUSES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="FnPstlLstPaymentStatuses"
+       send-command="DISPLAY">
+      <return-map from="FlowSelection" to="SearchStatusPaymentStatus"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LST_DBT_ACT_BY_APPYR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnDebtLstDbtActvtyByApPyr"
+       send-command="DISPLAY">
+      <map from="SeltectedFlowOn.Number" to="SearchCsePerson.Number"/>
+      <map from="ForFlowCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_MTN_RECOVERY_OBLIG"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnOrecMtnRecoveryObligation"
+       send-command-type="current">
+      <map from="SeltectedFlowOn" to="ObligorCsePerson"/>
+      <map from="ForFlowCsePersonsWorkSet.Number"
+           to="ObligorCsePersonsWorkSet.Number"/>
+      <map from="ForFlowCsePersonsWorkSet.FormattedName"
+           to="ObligorCsePersonsWorkSet.FormattedName"/>
+      <map from="FlowFromObligation.SystemGeneratedIdentifier"
+           to="Obligation.SystemGeneratedIdentifier"/>
+      <map from="FlowObligationTransaction.Amount"
+           to="ObligationTransaction.Amount"/>
+      <map from="FlowDebtDetail.DueDt" to="DebtDetail.DueDt"/>
+      <map from="FlowFromObligationType" to="ObligationType"/>
+      <map from="ForFlowPaymentRequest" to="H"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_OFFSET_ADVANCEMNT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCralLstAdvancements"
+       send-command="DISPLAY">
+      <map from="SeltectedFlowOn" to="CsePerson"/>
+      <map from="ForFlowCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="ForFlowCsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LST_PAYEE_ACCT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnPaccLstPayeeAcct"
+       send-command="DISPLAY">
+      <map from="SeltectedFlowOn" to="CsePerson"/>
+   </on>
+   <map from="ScrollIndicator" to="ScrollIndicator"/>
+   <map from="Group2.Gv2Common" to="Group2.Gv2Common"/>
+   <map from="Group2.Gv2NewWorkSet" to="Group2.Gv2NewWorkSet"/>
+   <map from="HiddenGv1Subscript" to="HiddenGv1Subscript"/>
+   <map from="Hidden1.HidGv1PaymentStatusHistory"
+        to="Hidden1.HidGv1PaymentStatusHistory"/>
+   <map from="Hidden1.HidGv1PaymentRequest" to="Hidden1.HidGv1PaymentRequest"/>
+   <map from="Hidden1.HidGv1CsePersonsWorkSet"
+        to="Hidden1.HidGv1CsePersonsWorkSet"/>
+   <map from="Hidden1.HidGv1PaymentStatus" to="Hidden1.HidGv1PaymentStatus"/>
+   <map from="Hidden1.HidGv1ReasonText" to="Hidden1.HidGv1ReasonText"/>
+   <map from="Group2.HiddenGv2PaymentRequest"
+        to="Group2.HiddenGv2PaymentRequest"/>
+   <map from="Group2.HiddenGv2PaymentStatus" to="Group2.HiddenGv2PaymentStatus"/>
+   <map from="Group2.HiddenGv2CsePersonsWorkSet"
+        to="Group2.HiddenGv2CsePersonsWorkSet"/>
+   <map from="HiddenPrevious" to="HiddenPrevious"/>
+   <map from="HiddenPresent" to="HiddenPresent"/>
+   <map from="HiddenGv2" to="HiddenGv2"/>
+   <map from="HidDisplayReasonText" to="HidDisplayReasonText"/>
+   <map from="Group3.HidPage" to="Group3.HidPage"/>
+   <map from="SearchObligeeCsePerson" to="SearchObligeeCsePerson"/>
+   <map from="SearchObligeeCsePersonsWorkSet"
+        to="SearchObligeeCsePersonsWorkSet"/>
+   <map from="History" to="History"/>
+   <map from="SearchStatusPaymentStatus" to="SearchStatusPaymentStatus"/>
+   <map from="SearchFrom" to="SearchFrom"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Status" to="Status"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="Search" to="Search"/>
+   <map from="SearchTo" to="SearchTo"/>
+   <map from="StartingDte" to="StartingDte"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="SearchStatusCommon" to="SearchStatusCommon"/>
+   <map from="HiddenFirstTime" to="HiddenFirstTime"/>
+   <map from="Group.PaymentRequest.Type1" to="Group.PaymentRequest.Type1"/>
+   <map from="Group.CsePersonsWorkSet.Number"
+        to="Group.CsePersonsWorkSet.Number"/>
+   <map from="Group.PaymentRequest.SystemGeneratedIdentifier"
+        to="Group.PaymentRequest.SystemGeneratedIdentifier"/>
+</procedure>

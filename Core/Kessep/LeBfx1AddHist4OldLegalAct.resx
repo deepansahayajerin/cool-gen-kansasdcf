@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateEventDetail">
+      <value>
+insert into CKT_EVENT_DETAIL
+(
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  DESCRIPTION,
+  INITIATING_ST_CD,
+  CSENET_IN_OUT_CODE,
+  REASON_CODE,
+  PROCEDURE_NAME,
+  LIFECYCL_IMPACT_CD,
+  LOG_TO_DIARY_IND,
+  DATE_MONITOR_DAYS,
+  NEXT_EVENT_ID,
+  NEXT_EVENT_DETAIL,
+  NEXT_INIT_ST,
+  NEXT_CSENET_IO,
+  NEXT_REASON,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDTD_DTSTAMP,
+  EVE_NO,
+  [FUNCTION],
+  EXCEPTION_ROUTINE
+)
+values
+(
+  @systemGeneratedI,
+  @detailName,
+  @description,
+  @initiatingStCd,
+  @csenetInOutCode,
+  @reasonCode,
+  @procedureName,
+  @lifecyclImpactCd,
+  @logToDiaryInd,
+  @dateMonitorDays,
+  @nextEventId,
+  @nextEventDetail,
+  @nextInitSt,
+  @nextCsenetIo,
+  @nextReason,
+  @effectiveDate,
+  @discontinueDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdtdDtstamp,
+  @eveNo,
+  @function,
+  @exceptionRoutine
+)
+</value>
+   </data>
+   <data name="ReadEvent">
+      <value>
+select top(1)
+  CONTROL_NUMBER
+from
+  CKT_EVENT
+where
+  CONTROL_NUMBER = 95
+</value>
+   </data>
+   <data name="ReadEventDetail">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I,
+  DETAIL_NAME,
+  DESCRIPTION,
+  INITIATING_ST_CD,
+  CSENET_IN_OUT_CODE,
+  REASON_CODE,
+  PROCEDURE_NAME,
+  LIFECYCL_IMPACT_CD,
+  LOG_TO_DIARY_IND,
+  DATE_MONITOR_DAYS,
+  NEXT_EVENT_ID,
+  NEXT_EVENT_DETAIL,
+  NEXT_INIT_ST,
+  NEXT_CSENET_IO,
+  NEXT_REASON,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDTD_DTSTAMP,
+  EVE_NO,
+  [FUNCTION],
+  EXCEPTION_ROUTINE
+from
+  CKT_EVENT_DETAIL
+where
+  (@eveNo = EVE_NO) and
+  (REASON_CODE = @reasonCode)
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  INITIATING_STATE,
+  RESPONDING_STATE,
+  COURT_CASE_NO,
+  STANDARD_NO,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  ESTABLISHMENT_CD
+from
+  CKT_LEGAL_ACTION
+where
+  ACTION_TAKEN = @actionTaken
+order by
+  CREATED_TSTAMP
+</value>
+   </data>
+</root>

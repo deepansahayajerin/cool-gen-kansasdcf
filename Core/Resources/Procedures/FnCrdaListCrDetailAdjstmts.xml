@@ -1,0 +1,72 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCrdaListCrDetailAdjstmts"
+           program-name="SWECRDAP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCrdaListCrDetailAdjstmts"
+           transaction="SRSL"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CRRC_REC_COLL_DTL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrrcRecCollctnDetailsPri"
+       send-command="DISPLAY">
+      <map from="PassCashReceiptSourceType.SystemGeneratedIdentifier"
+           to="CashReceiptSourceType.SystemGeneratedIdentifier"/>
+      <map from="PassCashReceiptSourceType.Code" to="CashReceiptSourceType.Code"/>
+      <map from="PassCashReceiptEvent" to="HiddenCashReceiptEvent"/>
+      <map from="PassCashReceiptType" to="HiddenCashReceiptType"/>
+      <map from="PassCashReceipt.SequentialNumber"
+           to="CashReceipt.SequentialNumber"/>
+      <map from="PassCashReceiptDetail.SequentialIdentifier"
+           to="CashReceiptDetail.SequentialIdentifier"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_BALANCE_INTERFACE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrbiLstCrInterfaceBalance"
+       send-command="FROMCRDA">
+      <map from="PassCashReceiptSourceType" to="PassArea"/>
+      <return-map from="PassAreaFirstCashReceipt" to="PassArea"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CLDR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCldrLstCshRcptDtlBalRsn"
+       send-command="DISPLAY"/>
+   <map from="Export1.MbrAdjustedCashReceipt"
+        to="Import1.MbrAdjustedCashReceipt"/>
+   <map from="CashRcpt" to="CashRcpt"/>
+   <map from="CashReceiptSourceType" to="CashReceiptSourceType"/>
+   <map from="CashReceiptEvent" to="CashReceiptEvent"/>
+   <map from="CashReceipt" to="CashReceipt"/>
+   <map from="HiddenCashReceipt" to="HiddenCashReceipt"/>
+   <map from="Export1.MbrCommon" to="Import1.MbrCommon"/>
+   <map from="Export1.MbrAdjustingCashReceiptEvent"
+        to="Import1.MbrAdjustingCashReceiptEvent"/>
+   <map from="Export1.MbrAdjustingCashReceipt"
+        to="Import1.MbrAdjustingCashReceipt"/>
+   <map from="Export1.MbrAdjustedCashReceiptEvent"
+        to="Import1.MbrAdjustedCashReceiptEvent"/>
+   <map from="NetReceiptAmt" to="NetReceiptAmt"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Export1.MbrAdjustedCrdCrComboNo"
+        to="Import1.MbrAdjustedCrdCrComboNo"/>
+   <map from="Export1.MbrAdjustedCashReceiptDetail"
+        to="Import1.MbrAdjustedCashReceiptDetail"/>
+   <map from="Export1.MbrCashReceiptDetailRlnRsn"
+        to="Import1.MbrCashReceiptDetailRlnRsn"/>
+   <map from="Export1.MbrAdjustingCashReceiptDetail"
+        to="Import1.MbrAdjustingCashReceiptDetail"/>
+   <map from="Export1.MbrAdjustingCrdCrComboNo"
+        to="Import1.MbrAdjustingCrdCrComboNo"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

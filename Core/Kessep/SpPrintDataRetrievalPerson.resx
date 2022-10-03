@@ -1,0 +1,1006 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdminAppealAppellantAddress">
+      <value>
+select top(1)
+  AAP_IDENTIFIER,
+  TYPE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  STATE_PROVINCE,
+  COUNTRY,
+  POSTAL_CD,
+  ZIP_CD,
+  ZIP4,
+  ZIP3
+from
+  CKT_ADMN_APPL_ADDR with(readuncommitted)
+where
+  AAP_IDENTIFIER = @aapIdentifier
+order by
+  TYPE
+</value>
+   </data>
+   <data name="ReadContactAddress">
+      <value>
+select distinct top(1)
+  T1.CON_NUMBER,
+  T1.CSP_NUMBER,
+  T1.EFFECTIVE_DATE,
+  T1.STREET_1,
+  T1.STREET_2,
+  T1.CITY,
+  T1.[STATE],
+  T1.PROVINCE,
+  T1.POSTAL_CODE,
+  T1.ZIP_CODE5,
+  T1.ZIP_CODE4,
+  T1.ZIP3,
+  T1.COUNTRY,
+  T1.ADDRESS_TYPE
+from
+  CKT_CONTACT_ADDR T1 with(readuncommitted)
+  join
+  CKT_HINS_COVERAGE T3 with(readuncommitted)
+  on
+    (T1.CON_NUMBER = T3.CON_H_NUMBER) and
+    (T1.CSP_NUMBER = T3.CSP_H_NUMBER) and
+    (T3.IDENTIFIER = @identifier)
+order by
+  T1.ADDRESS_TYPE,
+  T1.EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  COUNTY
+from
+  CKT_CSE_PERS_ADDR with(readuncommitted)
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole1">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.BIRTH_PLACE_STATE,
+  T1.HOME_PHONE,
+  T1.BIRTH_PLACE_CITY,
+  T1.HOME_PHONE_AREA_CD,
+  T1.FAMILY_VIOL_IND,
+  T1.BIRTHPLACE_COUNTRY,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  join
+  CKT_CASE_ROLE T4
+  on
+    (T2.CAS_NUMBER = T4.CAS_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.BIRTH_PLACE_STATE,
+  T1.HOME_PHONE,
+  T1.BIRTH_PLACE_CITY,
+  T1.HOME_PHONE_AREA_CD,
+  T1.FAMILY_VIOL_IND,
+  T1.BIRTHPLACE_COUNTRY,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T2.CAS_NUMBER = T4.CAS_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole3">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.BIRTH_PLACE_STATE,
+  T1.HOME_PHONE,
+  T1.BIRTH_PLACE_CITY,
+  T1.HOME_PHONE_AREA_CD,
+  T1.FAMILY_VIOL_IND,
+  T1.BIRTHPLACE_COUNTRY,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE
+from
+  CKT_CSE_PERSON T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T2 with(readuncommitted)
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+  join
+  CKT_CASE_ROLE T4 with(readuncommitted)
+  on
+    (T2.CAS_NUMBER = T4.CAS_NUMBER) and
+    (T4.TYPE = 'CH') and
+    (T4.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadEmployer1">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.EIN,
+  T1.NAME,
+  T1.PHONE_NO,
+  T1.AREA_CODE
+from
+  CKT_EMPLOYER T1 with(readuncommitted)
+  join
+  CKT_INCOME_SOURCE T2 with(readuncommitted)
+  on
+    (T1.IDENTIFIER = T2.EMP_ID) and
+    (T2.IDENTIFIER = @identifier) and
+    (T2.CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="ReadEmployer2">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.EIN,
+  T1.NAME,
+  T1.PHONE_NO,
+  T1.AREA_CODE
+from
+  CKT_EMPLOYER T1 with(readuncommitted)
+  join
+  CKT_INCOME_SOURCE T2 with(readuncommitted)
+  on
+    (T1.IDENTIFIER = T2.EMP_ID) and
+    (T2.IDENTIFIER = @identifier) and
+    (T2.CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="ReadEmployerAddress1">
+      <value>
+select distinct top(1)
+  T1.LOCATION_TYPE,
+  T1.STREET1,
+  T1.STREET2,
+  T1.CITY,
+  T1.IDENTIFIER,
+  T1.STREET3,
+  T1.STREET4,
+  T1.PROVINCE,
+  T1.COUNTRY,
+  T1.POSTAL_CODE,
+  T1.[STATE],
+  T1.ZIP_CODE,
+  T1.ZIP4,
+  T1.ZIP3,
+  T1.EMP_ID
+from
+  CKT_EMPLOYER_ADDR T1 with(readuncommitted)
+  join
+  CKT_INCOME_SOURCE T3 with(readuncommitted)
+  on
+    (T1.EMP_ID = T3.EMP_ID) and
+    (T3.IDENTIFIER = @identifier) and
+    (T3.CSP_I_NUMBER = @cspINumber)
+order by
+  T1.IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadEmployerAddress2">
+      <value>
+select distinct top(1)
+  T1.LOCATION_TYPE,
+  T1.STREET1,
+  T1.STREET2,
+  T1.CITY,
+  T1.IDENTIFIER,
+  T1.STREET3,
+  T1.STREET4,
+  T1.PROVINCE,
+  T1.COUNTRY,
+  T1.POSTAL_CODE,
+  T1.[STATE],
+  T1.ZIP_CODE,
+  T1.ZIP4,
+  T1.ZIP3,
+  T1.EMP_ID
+from
+  CKT_EMPLOYER_ADDR T1 with(readuncommitted)
+  join
+  CKT_INCOME_SOURCE T3 with(readuncommitted)
+  on
+    (T1.EMP_ID = T3.EMP_ID) and
+    (T3.IDENTIFIER = @identifier) and
+    (T3.CSP_I_NUMBER = @cspINumber)
+order by
+  T1.IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadEmployerAddress3">
+      <value>
+select top(1)
+  LOCATION_TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  IDENTIFIER,
+  STREET3,
+  STREET4,
+  PROVINCE,
+  COUNTRY,
+  POSTAL_CODE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  EMP_ID
+from
+  CKT_EMPLOYER_ADDR with(readuncommitted)
+where
+  @empId = EMP_ID
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadEmployerAddress4">
+      <value>
+select top(1)
+  LOCATION_TYPE,
+  STREET1,
+  STREET2,
+  CITY,
+  IDENTIFIER,
+  STREET3,
+  STREET4,
+  PROVINCE,
+  COUNTRY,
+  POSTAL_CODE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  EMP_ID
+from
+  CKT_EMPLOYER_ADDR with(readuncommitted)
+where
+  @empId = EMP_ID
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadEmployerEmployerRelation">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.NAME,
+  T2.IDENTIFIER,
+  T2.VERIFIED_DATE,
+  T2.EFFECTIVE_DATE,
+  T2.END_DATE,
+  T2.EMP_LOC_ID,
+  T2.TYPE
+from
+  CKT_EMPLOYER T1 with(readuncommitted)
+  join
+  CKT_EMPL_RLN T2 with(readuncommitted)
+  on
+    (T1.IDENTIFIER = T2.EMP_HQ_ID) and
+    (@empLocId = T2.EMP_LOC_ID) and
+    (T2.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T2.END_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadEmployerRegisteredAgent">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EFFECTIVE_DATE,
+  END_DATE,
+  RAA_ID,
+  EMP_ID
+from
+  CKT_EMPL_REG_AGENT with(readuncommitted)
+where
+  (@empId = EMP_ID) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate) and
+  (END_DATE &gt;= @effectiveDate)
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select distinct
+  T1.NAME,
+  T1.DEPENDANCY,
+  T1.SUBROUTINE_NAME
+from
+  CKT_FIELD T1 with(readuncommitted)
+  join
+  CKT_DOCUMENT_FIELD T2 with(readuncommitted)
+  on
+    (T1.NAME = T2.FLD_NAME) and
+    (T2.DOC_NAME = @docName) and
+    (T2.DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+    (T1.DEPENDANCY = @dependancy)
+order by
+  T1.NAME,
+  T1.SUBROUTINE_NAME
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION,
+  COUNTY_ABBR
+from
+  CKT_FIPS with(readuncommitted)
+where
+  (LOCATION = @location) and
+  (COUNTY = @county) and
+  ([STATE] = @state)
+</value>
+   </data>
+   <data name="ReadIncomeSource1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CODE,
+  CSP_I_NUMBER,
+  EMP_ID,
+  SEND_TO,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (END_DT &gt;= @endDt)
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadIncomeSource2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CODE,
+  CSP_I_NUMBER,
+  EMP_ID,
+  SEND_TO,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (RETURN_CD = 'E') and
+  (TYPE = 'E') and
+  (START_DT &lt;= @startDt) and
+  (END_DT &gt;= @startDt)
+order by
+  RETURN_DT desc
+</value>
+   </data>
+   <data name="ReadIncomeSource3">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CODE,
+  CSP_I_NUMBER,
+  EMP_ID,
+  SEND_TO,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (
+    (
+      (RETURN_CD = 'E') and
+      (TYPE = 'E')
+    ) or
+    (
+      (RETURN_CD = 'A') and
+      (TYPE = 'M')
+    )
+  ) and
+  (START_DT &lt;= @startDt) and
+  (END_DT &gt;= @startDt)
+order by
+  RETURN_DT desc
+</value>
+   </data>
+   <data name="ReadIncomeSource4">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CODE,
+  CSP_I_NUMBER,
+  EMP_ID,
+  SEND_TO,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="ReadIncomeSource5">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  RETURN_DT,
+  RETURN_CD,
+  NAME,
+  CODE,
+  CSP_I_NUMBER,
+  EMP_ID,
+  SEND_TO,
+  START_DT,
+  END_DT
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="ReadInformationRequest">
+      <value>
+select top(1)
+  NUMB,
+  APPL_LAST_NM,
+  APPL_FIRST_NM,
+  APPL_MI,
+  APPL_STREET_1,
+  APPL_STREET_2,
+  APPL_CITY,
+  APPL_STATE,
+  APPLICANT_ZIP5,
+  APPL_ZIP4,
+  APPL_ZIP3
+from
+  CKT_INFO_REQ with(readuncommitted)
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  FILED_DT,
+  COURT_CASE_NO,
+  STANDARD_NO,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION with(readuncommitted)
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSourceIncomeSource1">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.ISR_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.WITHHOLDING_TYPE,
+  T1.END_DT,
+  T1.ORDER_TYPE,
+  T1.IDENTIFIER,
+  T2.TYPE,
+  T2.RETURN_DT,
+  T2.RETURN_CD,
+  T2.NAME,
+  T2.CODE,
+  T2.EMP_ID,
+  T2.SEND_TO,
+  T2.START_DT,
+  T2.END_DT
+from
+  CKT_INCOME_SOURCE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_ISRC T1 with(readuncommitted)
+  on
+    (T2.CSP_I_NUMBER = T1.CSP_NUMBER) and
+    (T2.IDENTIFIER = T1.ISR_IDENTIFIER) and
+    (T1.WITHHOLDING_TYPE &lt;&gt; ' ') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier)
+  join
+  CKT_CASE_ROLE T5 with(readuncommitted)
+  on
+    (T2.CSP_I_NUMBER = T5.CSP_NUMBER) and
+    (T5.TYPE = 'AP') and
+    (T5.START_DATE &lt;= @effectiveDt) and
+    (T5.END_DATE &gt;= @effectiveDt) and
+    (T5.CAS_NUMBER = @casNumber)
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSourceIncomeSource2">
+      <value>
+select distinct top(1)
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.ISR_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.WITHHOLDING_TYPE,
+  T1.END_DT,
+  T1.ORDER_TYPE,
+  T1.IDENTIFIER,
+  T2.TYPE,
+  T2.RETURN_DT,
+  T2.RETURN_CD,
+  T2.NAME,
+  T2.CODE,
+  T2.EMP_ID,
+  T2.SEND_TO,
+  T2.START_DT,
+  T2.END_DT
+from
+  CKT_INCOME_SOURCE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_ISRC T1 with(readuncommitted)
+  on
+    (T2.CSP_I_NUMBER = T1.CSP_NUMBER) and
+    (T2.IDENTIFIER = T1.ISR_IDENTIFIER) and
+    (T1.WITHHOLDING_TYPE &lt;&gt; ' ') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier)
+  join
+  CKT_CASE_ROLE T5 with(readuncommitted)
+  on
+    (T2.CSP_I_NUMBER = T5.CSP_NUMBER) and
+    (T5.TYPE = 'AP') and
+    (T5.CAS_NUMBER = @casNumber)
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSourceIncomeSource3">
+      <value>
+select top(1)
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.ISR_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.WITHHOLDING_TYPE,
+  T1.END_DT,
+  T1.ORDER_TYPE,
+  T1.IDENTIFIER,
+  T2.TYPE,
+  T2.RETURN_DT,
+  T2.RETURN_CD,
+  T2.NAME,
+  T2.CODE,
+  T2.EMP_ID,
+  T2.SEND_TO,
+  T2.START_DT,
+  T2.END_DT
+from
+  CKT_INCOME_SOURCE T2 with(readuncommitted)
+  join
+  CKT_LEGAL_ACT_ISRC T1 with(readuncommitted)
+  on
+    (T2.CSP_I_NUMBER = T1.CSP_NUMBER) and
+    (T2.IDENTIFIER = T1.ISR_IDENTIFIER) and
+    (T1.WITHHOLDING_TYPE &lt;&gt; ' ') and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T1.LGA_IDENTIFIER = @lgaIdentifier)
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="ReadLocateRequest">
+      <value>
+select top(1)
+  CSE_PERSON_NUMBER,
+  AGENCY_NUMBER,
+  SEQUENCE_NUMBER,
+  STREET_1,
+  ADDRESS_TYPE,
+  STREET_2,
+  STREET_3,
+  STREET_4,
+  CITY,
+  [STATE],
+  ZIP_CODE_5,
+  ZIP_CODE_4,
+  ZIP_CODE_3,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY
+from
+  CKT_LOC_REQUEST with(readuncommitted)
+where
+  (CSE_PERSON_NUMBER = @csePersonNumber) and
+  (AGENCY_NUMBER = @agencyNumber) and
+  (SEQUENCE_NUMBER = @sequenceNumber)
+</value>
+   </data>
+   <data name="ReadNonEmployIncomeSourceAddress1">
+      <value>
+select top(1)
+  ISR_IDENTIFIER,
+  STREET1,
+  STREET2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  STREET3,
+  STREET4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  CSE_PERSON
+from
+  CKT_NONEMP_IS_ADDR with(readuncommitted)
+where
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (CSE_PERSON = @csePerson)
+</value>
+   </data>
+   <data name="ReadNonEmployIncomeSourceAddress2">
+      <value>
+select top(1)
+  ISR_IDENTIFIER,
+  STREET1,
+  STREET2,
+  CITY,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  ZIP3,
+  STREET3,
+  STREET4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE,
+  CSE_PERSON
+from
+  CKT_NONEMP_IS_ADDR with(readuncommitted)
+where
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (CSE_PERSON = @csePerson)
+</value>
+   </data>
+   <data name="ReadOtherIncomeSource1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  NAME,
+  CODE,
+  CSP_I_NUMBER
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (CSP_I_NUMBER = @cspINumber) and
+  (CODE = 'WC') and
+  (TYPE = 'O')
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadOtherIncomeSource2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  TYPE,
+  NAME,
+  CODE,
+  CSP_I_NUMBER
+from
+  CKT_INCOME_SOURCE with(readuncommitted)
+where
+  (IDENTIFIER = @identifier) and
+  (CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  CAS_NUMBER,
+  DATE_RETAINED,
+  DATE_DISMISSED,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  FIRM_NAME,
+  PHONE,
+  PHONE_AREA,
+  PHONE_EXT,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY
+from
+  CKT_PRSN_PRIV_ATTR with(readuncommitted)
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (DATE_RETAINED &lt;= @dateRetained) and
+  (
+    (DATE_DISMISSED &gt;= @dateRetained) or
+    (DATE_DISMISSED = @dateDismissed)
+  ) and
+  (
+    (cast(@courtCaseNumber as char(17)) &lt;= ' ') or
+    (COURT_CASE_NUMBER = @courtCaseNumber)
+  ) and
+  (
+    (cast(@countyAbbreviation as char(2)) &lt;= ' ') or
+    (FIPS_COUNTY_ABBREV = @countyAbbreviation)
+  ) and
+  (
+    (cast(@stateAbbreviation as char(2)) &lt;= ' ') or
+    (FIPS_STATE_ABBREV = @stateAbbreviation)
+  )
+order by
+  COURT_CASE_NUMBER desc
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney2">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  CAS_NUMBER,
+  DATE_RETAINED,
+  DATE_DISMISSED,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  FIRM_NAME,
+  PHONE,
+  PHONE_AREA,
+  PHONE_EXT,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY
+from
+  CKT_PRSN_PRIV_ATTR with(readuncommitted)
+where
+  (CSP_NUMBER = @cspNumber) and
+  (DATE_RETAINED &lt;= @dateRetained) and
+  (
+    (DATE_DISMISSED &gt;= @dateRetained) or
+    (DATE_DISMISSED = @dateDismissed)
+  ) and
+  (
+    (cast(@courtCaseNumber as char(17)) &lt;= ' ') or
+    (COURT_CASE_NUMBER = @courtCaseNumber)
+  ) and
+  (
+    (cast(@countyAbbreviation as char(2)) &lt;= ' ') or
+    (FIPS_COUNTY_ABBREV = @countyAbbreviation)
+  ) and
+  (
+    (cast(@stateAbbreviation as char(2)) &lt;= ' ') or
+    (FIPS_STATE_ABBREV = @stateAbbreviation)
+  )
+order by
+  COURT_CASE_NUMBER desc
+</value>
+   </data>
+   <data name="ReadPersonPrivateAttorney3">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  CAS_NUMBER,
+  DATE_RETAINED,
+  DATE_DISMISSED,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL,
+  FIRM_NAME,
+  PHONE,
+  PHONE_AREA,
+  PHONE_EXT,
+  COURT_CASE_NUMBER,
+  FIPS_STATE_ABBREV,
+  FIPS_COUNTY_ABBREV,
+  TRIB_COUNTRY
+from
+  CKT_PRSN_PRIV_ATTR with(readuncommitted)
+where
+  (CSP_NUMBER = @cspNumber) and
+  (DATE_RETAINED &lt;= @dateRetained) and
+  (
+    (DATE_DISMISSED &gt;= @dateRetained) or
+    (DATE_DISMISSED = @dateDismissed)
+  ) and
+  (
+    (cast(@courtCaseNumber as char(17)) &lt;= ' ') or
+    (COURT_CASE_NUMBER = @courtCaseNumber)
+  ) and
+  (
+    (cast(@countyAbbreviation as char(2)) &lt;= ' ') or
+    (FIPS_COUNTY_ABBREV = @countyAbbreviation)
+  ) and
+  (
+    (cast(@stateAbbreviation as char(2)) &lt;= ' ') or
+    (FIPS_STATE_ABBREV = @stateAbbreviation)
+  )
+order by
+  COURT_CASE_NUMBER desc
+</value>
+   </data>
+   <data name="ReadPrivateAttorneyAddress">
+      <value>
+select top(1)
+  PPA_IDENTIFIER,
+  CSP_NUMBER,
+  EFFECTIVE_DATE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  [STATE],
+  PROVINCE,
+  POSTAL_CODE,
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  COUNTRY,
+  ADDRESS_TYPE
+from
+  CKT_PRIV_ATTR_ADDR with(readuncommitted)
+where
+  (PPA_IDENTIFIER = @ppaIdentifier) and
+  (CSP_NUMBER = @cspNumber)
+order by
+  EFFECTIVE_DATE desc
+</value>
+   </data>
+   <data name="ReadRegisteredAgent">
+      <value>
+select top(1)
+  IDENTIFIER,
+  NAME
+from
+  CKT_REG_AGENT with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadRegisteredAgentAddress">
+      <value>
+select top(1)
+  IDENTIFIER,
+  STREET1,
+  STREET2,
+  CITY,
+  [STATE],
+  ZIP_CODE5,
+  ZIP_CODE4,
+  ZIP3,
+  RAG_ID
+from
+  CKT_REG_AGENT_ADDR with(readuncommitted)
+where
+  RAG_ID = @ragId
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadTribunal">
+      <value>
+select top(1)
+  TRIBUNAL_NM,
+  FIP_LOCATION,
+  IDENTIFIER,
+  FIP_COUNTY,
+  FIP_STATE
+from
+  CKT_TRIBUNAL with(readuncommitted)
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+</root>

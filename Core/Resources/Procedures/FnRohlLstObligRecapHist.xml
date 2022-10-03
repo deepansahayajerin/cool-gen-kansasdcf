@@ -1,0 +1,57 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnRohlLstObligRecapHist"
+           program-name="SWEROHLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnRohlLstObligRecapHist"
+           transaction="SR7P"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSENO"
+       to="SiNameNameList"
+       send-command-type="none">
+      <return-map from="Selected" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="FN0000_LNK_RHST_LST_RC_INSTR_HST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnRhstLstRcptureInstrucHist"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CsePerson" to="CsePerson"/>
+   </on>
+   <on exit-state="FN0000_LNK_RCAP_LST_RECOV_OBLIGS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnRcapMtnRecaptureInstructns"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="CsePerson" to="CsePerson"/>
+   </on>
+   <map from="Prompt" to="Prompt"/>
+   <map from="Export1.ObligationType" to="Import1.ObligationType"/>
+   <map from="Export1.DebtDetail" to="Import1.DebtDetail"/>
+   <map from="Export1.ObligationTransaction" to="Import1.ObligationTransaction"/>
+   <map from="Export1.RecaptureInclusion" to="Import1.RecaptureInclusion"/>
+   <map from="Export1.LegalAction" to="Import1.LegalAction"/>
+   <map from="DisbursementType" to="DisbursementType"/>
+   <map from="RecaptureRule" to="RecaptureRule"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Export1.Obligation" to="Import1.Obligation"/>
+   <map from="CsePerson.Number" to="CsePerson.Number"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="Obligation.SystemGeneratedIdentifier"
+        to="Obligation.SystemGeneratedIdentifier"/>
+   <map from="Previous.Number" to="Previous.Number"/>
+</procedure>

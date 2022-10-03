@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseChild">
+      <value>
+select distinct top(1)
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.FC_PARENTAL_RIGHTS
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T2.TYPE = 'CH') and
+    (@cspNumber1 = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (@cspNumber2 = T3.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (T3.START_DATE &lt;= @startDate) and
+    (T3.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseChildAbsentParent">
+      <value>
+select
+  T2.CAS_NUMBER,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.FC_PARENTAL_RIGHTS,
+  T3.CAS_NUMBER,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE
+from
+  CKT_CASE_ROLE T2
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T2.TYPE = 'CH') and
+    (@cspNumber1 = T2.CSP_NUMBER) and
+    (T2.CAS_NUMBER = T3.CAS_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (@cspNumber2 = T3.CSP_NUMBER) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T3.START_DATE &lt;= @startDate) and
+    (
+      (T2.END_DATE &lt;= @startDate) or
+      (T3.END_DATE &lt;= @startDate)
+    ) and
+    (T2.START_DATE &lt;= T3.END_DATE) and
+    (T2.END_DATE &gt;= T3.START_DATE)
+</value>
+   </data>
+   <data name="ReadChild">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  FC_PARENTAL_RIGHTS
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = @type) and
+  (CASE_ROLE_ID = @caseRoleId)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson3">
+      <value>
+select distinct top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.DATE_OF_DEATH,
+  T1.ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = @type) and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePersonAddress1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  VERIFIED_DATE,
+  END_DATE,
+  ZIP_CODE,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (VERIFIED_DATE &gt; @verifiedDate) and
+  (END_DATE &gt; @endDate)
+order by
+  VERIFIED_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonAddress2">
+      <value>
+select top(1)
+  IDENTIFIER,
+  CSP_NUMBER,
+  STREET_1,
+  STREET_2,
+  CITY,
+  VERIFIED_DATE,
+  END_DATE,
+  [STATE],
+  ZIP_CODE,
+  ZIP4,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (@cspNumber = CSP_NUMBER) and
+  (VERIFIED_DATE &gt; @verifiedDate) and
+  (END_DATE &gt; @endDate)
+order by
+  VERIFIED_DATE desc
+</value>
+   </data>
+   <data name="ReadCsePersonCsePersonObligorSupported">
+      <value>
+select distinct
+  T1.NUMB,
+  T6.CSP_SUP_NUMBER,
+  T6.CSP_NUMBER,
+  T6.CPA_TYPE,
+  T6.CPA_SUP_TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_OB_TRN T6
+  on
+    (T1.NUMB = T6.CSP_NUMBER) and
+    (T6.CPA_TYPE = 'R') and
+    (T6.CSP_SUP_NUMBER is not null) and
+    (T6.CPA_SUP_TYPE = 'S')
+  join
+  CKT_DEBT_DTL T7
+  on
+    (T6.OTY_TYPE = T7.OTY_TYPE) and
+    (T6.OBG_GENERATED_ID = T7.OBG_GENERATED_ID) and
+    (T6.OB_TRN_TYP = T7.OTR_TYPE) and
+    (T6.OB_TRN_ID = T7.OTR_GENERATED_ID) and
+    (T6.CPA_TYPE = T7.CPA_TYPE) and
+    (T6.CSP_NUMBER = T7.CSP_NUMBER) and
+    (T7.BAL_DUE_AMT &gt; 0)
+</value>
+   </data>
+   <data name="ReadDebtDetailObligationObligationType">
+      <value>
+select distinct
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_GENERATED_ID,
+  T1.OTY_TYPE,
+  T1.OTR_TYPE,
+  T1.DUE_DT,
+  T1.BAL_DUE_AMT,
+  T1.CVRD_PRD_START_DT,
+  T1.CVD_PRD_END_DT,
+  T1.PRECNVRSN_PGM_CD,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.OB_ID,
+  T2.DTY_GENERATED_ID,
+  T2.LGA_ID,
+  T2.ORD_TYP_CD,
+  T3.DEBT_TYP_CD,
+  T3.DEBT_TYP_CLASS
+from
+  CKT_OB_TYPE T3
+  join
+  CKT_OBLIGATION T2
+  join
+  CKT_OB_TRN T4
+  join
+  CKT_DEBT_DTL T1
+  on
+    (T4.OTY_TYPE = T1.OTY_TYPE) and
+    (T4.OBG_GENERATED_ID = T1.OBG_GENERATED_ID) and
+    (T4.OB_TRN_TYP = T1.OTR_TYPE) and
+    (T4.OB_TRN_ID = T1.OTR_GENERATED_ID) and
+    (T4.CPA_TYPE = T1.CPA_TYPE) and
+    (T4.CSP_NUMBER = T1.CSP_NUMBER) and
+    (@cpaSupType = T4.CPA_SUP_TYPE) and
+    (@cspSupNumber = T4.CSP_SUP_NUMBER) and
+    (T1.BAL_DUE_AMT &gt; 0)
+  on
+    (T2.DTY_GENERATED_ID = T4.OTY_TYPE) and
+    (T2.OB_ID = T4.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T2.CPA_TYPE = T4.CPA_TYPE) and
+    (@cpaType = T2.CPA_TYPE) and
+    (@cspNumber = T2.CSP_NUMBER)
+  on
+    T3.DEBT_TYP_ID = T2.DTY_GENERATED_ID
+</value>
+   </data>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  T1.[STATE],
+  T1.COUNTY,
+  T1.LOCATION,
+  T1.STATE_ABBREVIATION,
+  T1.COUNTY_ABBR
+from
+  CKT_FIPS T1
+  join
+  CKT_TRIBUNAL T2
+  on
+    (T1.LOCATION = T2.FIP_LOCATION) and
+    (T1.COUNTY = T2.FIP_COUNTY) and
+    (T1.[STATE] = T2.FIP_STATE)
+  join
+  CKT_LEGAL_ACTION T3
+  on
+    (T2.IDENTIFIER = T3.TRB_ID) and
+    (T3.LEGAL_ACTION_ID = @legalActionId)
+</value>
+   </data>
+   <data name="ReadFipsTribAddress">
+      <value>
+select top(1)
+  T1.IDENTIFIER,
+  T1.COUNTRY,
+  T1.TRB_ID
+from
+  CKT_FIPS_TRIB_ADDR T1
+  join
+  CKT_LEGAL_ACTION T3
+  on
+    (T1.TRB_ID = T3.TRB_ID) and
+    (T3.LEGAL_ACTION_ID = @legalActionId)
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  T1.OFFICE_ID,
+  T1.OFF_OFFICE
+from
+  CKT_OFFICE T1
+  join
+  CKT_ASSIGN_CASE T3
+  on
+    (T1.OFFICE_ID = T3.OFF_ID) and
+    (T3.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T3.DISCONTINUE_DATE &gt;= @effectiveDate) and
+    (@casNo = T3.CAS_NO)
+</value>
+   </data>
+</root>

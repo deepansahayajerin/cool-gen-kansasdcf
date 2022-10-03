@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE in ('AP', 'AR')) and
+    (T2.END_DATE = @endDate)
+</value>
+   </data>
+   <data name="ReadHealthInsuranceCoverage">
+      <value>
+select top(1)
+  IDENTIFIER,
+  GROUP_NUMBER,
+  POLICY_NUMBER,
+  POLICY_EXP_DATE,
+  POLICY_EFF_DATE,
+  CSP_NUMBER
+from
+  CKT_HINS_COVERAGE
+where
+  (IDENTIFIER = @identifier) and
+  (@cspNumber = CSP_NUMBER)
+</value>
+   </data>
+   <data name="ReadPersonalHealthInsurance">
+      <value>
+select top(1)
+  HCV_ID,
+  CSP_NUMBER,
+  VERIFIED_USER_ID,
+  COV_VERIFIED_DATE,
+  INS_EXISTS_IND,
+  COVER_COST_AMT,
+  COVER_BEGIN_DATE,
+  COVER_END_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  PREM_VERIFIED_DATE
+from
+  CKT_PERSONAL_HINS
+where
+  (@cspNumber = CSP_NUMBER) and
+  (@hcvId = HCV_ID)
+</value>
+   </data>
+   <data name="UpdatePersonalHealthInsurance">
+      <value>
+update CKT_PERSONAL_HINS
+set
+  VERIFIED_USER_ID = @verifiedUserId,
+  COV_VERIFIED_DATE = @covVerifiedDate,
+  INS_EXISTS_IND = @insExistsInd,
+  COVER_COST_AMT = @coverCostAmt,
+  COVER_BEGIN_DATE = @coverBeginDate,
+  COVER_END_DATE = @coverEndDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  PREM_VERIFIED_DATE = @premVerifiedDate
+where
+  (HCV_ID = @hcvId) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

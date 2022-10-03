@@ -1,0 +1,83 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnPrelRecordObligationRel"
+           program-name="SWEPRELP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnPrelRecordObligationRel"
+           transaction="SRJS">
+   <on exit-state="ECO_LNK_LST_OBLIG_BY_AP_PAYOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOPAY"
+       to="FnOpayLstObligByApPayor"
+       send-command="DISPLAY">
+      <map from="PriCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="PassObligationTransaction" to="ObligationTransaction"/>
+      <return-map from="Passed" to="CsePerson"/>
+      <return-map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="SelectedCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <return-map from="PassLegalAction" to="LegalAction"/>
+      <return-map from="SelectedObligation" to="Obligation"/>
+      <return-map from="PassObligationType" to="ObligationType"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnDdmmDebtDstrbtnMngmntMenu"
+       send-command-type="none"/>
+   <map from="PriObligationType" to="PriObligationType"/>
+   <map from="PriObligation" to="PriObligation"/>
+   <map from="SecLegalAction" to="SecLegalAction"/>
+   <map from="PriLegalAction" to="PriLegalAction"/>
+   <map from="SecObligationType" to="SecObligationType"/>
+   <map from="SecObligation" to="SecObligation"/>
+   <map from="PriFrequencyWorkSet" to="PriFrequencyWorkSet"/>
+   <map from="SecFrequencyWorkSet" to="SecFrequencyWorkSet"/>
+   <map from="PriCsePersonsWorkSet" to="PriCsePersonsWorkSet"/>
+   <map from="SecCsePersonsWorkSet" to="SecCsePersonsWorkSet"/>
+   <map from="PriPayor" to="PriPayor"/>
+   <map from="SecPayor" to="SecPayor"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PriAccrualDue" to="PriAccrualDue"/>
+   <map from="SecAccrualDue" to="SecAccrualDue"/>
+   <map from="PriAccrual" to="PriAccrual"/>
+   <map from="SecAccrual" to="SecAccrual"/>
+   <map from="PriCsePerson" to="PriCsePerson"/>
+   <map from="PriCsePersonAccount" to="PriCsePersonAccount"/>
+   <map from="SecCsePerson" to="SecCsePerson"/>
+   <map from="SecCsePersonAccount" to="SecCsePersonAccount"/>
+   <map from="LegalAction" to="LegalAction"/>
+   <map from="ObligationRln" to="ObligationRln"/>
+   <map from="RelEst" to="RelEst"/>
+   <map from="ObligationType" to="ObligationType"/>
+   <map from="PriScreenOwedAmounts.CurrentAmountOwed"
+        to="PriScreenOwedAmounts.CurrentAmountOwed"/>
+   <map from="PriScreenOwedAmounts.ArrearsAmountOwed"
+        to="PriScreenOwedAmounts.ArrearsAmountOwed"/>
+   <map from="PriScreenOwedAmounts.InterestAmountOwed"
+        to="PriScreenOwedAmounts.InterestAmountOwed"/>
+   <map from="PriScreenOwedAmounts.TotalAmountOwed"
+        to="PriScreenOwedAmounts.TotalAmountOwed"/>
+   <map from="SecScreenOwedAmounts.CurrentAmountOwed"
+        to="SecScreenOwedAmounts.CurrentAmountOwed"/>
+   <map from="SecScreenOwedAmounts.ArrearsAmountOwed"
+        to="SecScreenOwedAmounts.ArrearsAmountOwed"/>
+   <map from="SecScreenOwedAmounts.InterestAmountOwed"
+        to="SecScreenOwedAmounts.InterestAmountOwed"/>
+   <map from="SecScreenOwedAmounts.TotalAmountOwed"
+        to="SecScreenOwedAmounts.TotalAmountOwed"/>
+   <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   <map from="CsePerson.Number" to="CsePerson.Number"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+   <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+   <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+   <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+   <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+   <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+   <map from="CsePersonsWorkSet.FormattedName"
+        to="CsePersonsWorkSet.FormattedName"/>
+   <map from="Obligation.SystemGeneratedIdentifier"
+        to="Obligation.SystemGeneratedIdentifier"/>
+</procedure>

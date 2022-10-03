@@ -1,0 +1,114 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeLgrqLegalRequest"
+           program-name="SWELGRQP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeLgrqLegalRequest"
+           transaction="SR6E"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelectionServiceProvider" to="SelectedServiceProvider"/>
+      <return-map from="HiddenSelectionOfficeServiceProvider"
+                  to="SelectedOfficeServiceProvider"/>
+      <return-map from="HiddenSelectionOffice" to="SelectedOffice"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CODE_VALUES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <map from="MultiSelect" to="HiddenReturnMultRecs"/>
+      <return-map from="DlgflwSelected" to="CodeValue"/>
+      <return-map from="DlgflwMultSelectn.DetailMultSelectn" to="MultiReason.CodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none">
+      <map from="ApCsePersonsWorkSet" to="PersonName"/>
+      <map from="ApCsePerson" to="StartCsePerson"/>
+      <map from="Case1" to="Current"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COMP_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <map from="HiddenToComp" to="HiddenComp"/>
+      <return-map from="SelectedCaseRole.SelectedCsePerson" to="CaseRole.Hidden"/>
+      <return-map from="SelectedCaseRole.SelectedCsePersonsWorkSet"
+                  to="CaseRole.CsePersonsWorkSet"/>
+      <return-map from="SelectedCaseRole.SelectedCaseRole1.Identifier"
+                  to="CaseRole.CaseRole1.Identifier"/>
+      <return-map from="SelectedCaseRole.SelectedCaseRole1.Type1"
+                  to="CaseRole.CaseRole1.Type1"/>
+      <return-map from="SelectedCaseRole.SelectedCaseRole1.StartDate"
+                  to="CaseRole.CaseRole1.StartDate"/>
+      <return-map from="Case1" to="Case1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ASIN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETASIN"
+       to="SpAsinOspAssignment"
+       send-command="FROMLGRQ">
+      <map from="LegalReferral" to="HlegalReferral"/>
+      <map from="Case1" to="Hcase"/>
+      <map from="AsinObject" to="HeaderObject"/>
+      <map from="ApCsePersonsWorkSet" to="Ap"/>
+      <return-map from="HiddenOffice" to="SelectedOffice"/>
+      <return-map from="HiddenServiceProvider.SystemGeneratedId"
+                  to="SelectedServiceProvider.SystemGeneratedId"/>
+      <return-map from="HiddenServiceProvider.UserId" to="SelectedServiceProvider.UserId"/>
+      <return-map from="HiddenOfficeServiceProvider" to="SelectedOfficeServiceProvider"/>
+      <return-map from="AddupdOkAsin" to="ZdelImpAddupdOkAsin"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="Attorney" to="Attorney"/>
+   <map from="Office" to="Office"/>
+   <map from="OfficeServiceProvider" to="OfficeServiceProvider"/>
+   <map from="HiddenLegalReferral" to="HiddenLegalReferral"/>
+   <map from="LegalReferral" to="LegalReferral"/>
+   <map from="Case1" to="Case1"/>
+   <map from="ZdelExpHiddenPrevUserAction" to="ZdelImpHiddenPrevUserAction"/>
+   <map from="HiddenCase" to="HiddenCase"/>
+   <map from="LrCommentLines.Detail" to="LrComments.Detail"/>
+   <map from="LrAttachmts.DetailLrAttachmts" to="LrAttachmts.DetailLrAttchmts"/>
+   <map from="ScrollingAttributes" to="ScrollingAttributes"/>
+   <map from="ArCsePersonsWorkSet" to="ArCsePersonsWorkSet"/>
+   <map from="ApCsePersonsWorkSet" to="ApCsePersonsWorkSet"/>
+   <map from="ZdelExHiddenDisplayPerformed" to="ZdelImHiddenDisplayPerformed"/>
+   <map from="ListReasonCode" to="ListReasonCode"/>
+   <map from="CaseRole.CsePersonsWorkSet" to="CaseRole.CsePersonsWorkSet"/>
+   <map from="CaseRole.CaseRole1" to="CaseRole.CaseRole1"/>
+   <map from="ZdelExportHiddenOffice" to="ZdelImportHiddenOffice"/>
+   <map from="ZdelExportHiddenOfficeServiceProvider"
+        to="ZdelImportHiddenOfficeServiceProvider"/>
+   <map from="CaseRole.CsePerson" to="CaseRole.Hidden"/>
+   <map from="ArCsePerson" to="ArCsePerson"/>
+   <map from="ApCsePerson" to="ApCsePerson"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="ListStatus" to="ListStatus"/>
+   <map from="HeaderOffice" to="HeaderOffice"/>
+   <map from="HeaderServiceProvider" to="HeaderServiceProvider"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ZdelExportHCreateDone" to="ZdelImportHCreateDone"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="MultiSelect" to="MultiSelect"/>
+   <map from="MultiReason.CodeValue" to="MultiReason.CodeValue"/>
+   <map from="Next" to="Next"/>
+   <map from="Fips" to="Fips"/>
+   <map from="FipsTribAddress" to="FipsTribAddress"/>
+   <map from="HiddenFips" to="HiddenFips"/>
+   <map from="HiddenFipsTribAddress" to="HiddenFipsTribAddress"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

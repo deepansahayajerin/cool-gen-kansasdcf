@@ -1,0 +1,76 @@
+Feature: TC_002_INI-MEMBER-MATCH
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "NAME" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    Then take snapshot "page1"
+    When user enters "<PERSON>" in "Person #"
+    And presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "page2"
+
+    When user presses "F11"
+    Then message "ACO_NI0000: Screen cleared successfully." is displayed
+    Then snapshot "page3"
+    When user enters "<LAST>" in "Last"
+    And enters "<FIRST_PART>" in "First"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "page4"
+    When user enters "<FIRST>" in "First"
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "page5"
+    When user enters "<LAST_PART>" in "Last"
+    And user presses "F2"
+    #Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "page6"
+
+    When user enters "N" in "Phonetic"
+    And enters "<LAST>" in "Last"
+    And user presses "F2"
+    Then snapshot "page7"
+    When user enters "S" in the second field below "Sel"
+    And user presses "Shift+F5"
+    Then snapshot "page8"
+    When user presses "F3"
+    Then "CSE - Person Management Menu" window appears
+    Then snapshot "page9"
+    When user enters "1" in "select an option"
+    And presses "Enter"
+    Then "CSE - Name List - NAME" window appears
+    When user presses "F11"
+    Then message "ACO_NI0000: Screen cleared successfully." is displayed
+    Then snapshot "page10"
+
+    When user enters "<UK_SSN_PART_1>" in "SSN"
+    And enters "<UK_SSN_PART_2>" in the next field
+    And enters "<UK_SSN_PART_3>" in the next field
+    And user presses "F2"
+    Then message "ACO_NI0000: No data found for input criteria." is displayed
+    Then snapshot "page11"
+
+    When user enters "<K_SSN_PART_1>" in "SSN"
+    And enters "<K_SSN_PART_2>" in the next field
+    And enters "<K_SSN_PART_3>" in the next field
+    And user presses "F2"
+    Then message "SI0000: Displayed successfully using the highlighted criteria." is displayed
+    Then snapshot "page12"
+
+    #UK_SSN_PART_1/UK_SSN_PART_2/UK_SSN_PART_3 - SSN that is unknowen to the system
+    #K_SSN_PART_1/K_SSN_PART_2/K_SSN_PART_3 - SSN that is knowen to the system
+    Examples:
+      | PERSON  | LAST       | FIRST    | LAST_PART | FIRST_PART | UK_SSN_PART_1 | UK_SSN_PART_2 | UK_SSN_PART_3 | K_SSN_PART_1 | K_SSN_PART_2 | K_SSN_PART_3 |
+      | 3804946 | REP-WILSON | SAMANTHA | REP-W     | S          | 123           | 45            | 6789          | 567          | 32           | 7682         |
+
+
+
+
+
+

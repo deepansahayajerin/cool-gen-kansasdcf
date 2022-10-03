@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_EMPLOYER T3
+  join
+  CKT_CSE_PERSON T1
+  join
+  CKT_INCOME_SOURCE T2
+  on
+    (T1.NUMB = T2.CSP_I_NUMBER) and
+    (T2.TYPE = 'E')
+  on
+    (T3.IDENTIFIER = T2.EMP_ID) and
+    (T3.EIN = @ein)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select distinct
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_INCOME_SOURCE T2
+  on
+    (T1.NUMB = T2.CSP_I_NUMBER) and
+    (T2.TYPE = 'E') and
+    (T2.EMP_ID = @empId)
+</value>
+   </data>
+</root>

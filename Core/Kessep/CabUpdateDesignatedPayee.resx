@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonDesigPayee1">
+      <value>
+select top(1)
+  SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  NOTES,
+  CSE_PERSO_NUM,
+  CSE_PERS_NUM
+from
+  CKT_CSE_P_DSIG_PYE
+where
+  (@csePersoNum = CSE_PERSO_NUM) and
+  (@csePersNum = CSE_PERS_NUM) and
+  (SEQUENTIAL_ID = @sequentialId)
+</value>
+   </data>
+   <data name="ReadCsePersonDesigPayee2">
+      <value>
+select top(1)
+  SEQUENTIAL_ID,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TMST,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  NOTES,
+  CSE_PERSO_NUM,
+  CSE_PERS_NUM
+from
+  CKT_CSE_P_DSIG_PYE
+where
+  (SEQUENTIAL_ID &lt;&gt; @sequentialId) and
+  (@csePersoNum = CSE_PERSO_NUM) and
+  (
+    (
+      (EFFECTIVE_DATE &lt;= @effectiveDate1) and
+      (DISCONTINUE_DATE &gt;= @effectiveDate1)
+    ) or
+    (
+      (EFFECTIVE_DATE &gt; @effectiveDate1) and
+      (EFFECTIVE_DATE &lt;= @effectiveDate2)
+    )
+  )
+</value>
+   </data>
+   <data name="UpdateCsePersonDesigPayee">
+      <value>
+update CKT_CSE_P_DSIG_PYE
+set
+  EFFECTIVE_DATE = @effectiveDate,
+  DISCONTINUE_DATE = @discontinueDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  NOTES = @notes
+where
+  (SEQUENTIAL_ID = @sequentialId) and
+  (CSE_PERSO_NUM = @csePersoNum)
+</value>
+   </data>
+</root>

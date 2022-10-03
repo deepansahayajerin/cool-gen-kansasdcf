@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="ReadInterstateRequestAttachment">
+      <value>
+select top(1)
+  INT_H_GENERATED_ID,
+  SYS_GEN_SEQ_NBR,
+  RECEIVED_DATE,
+  LAST_UPDATED_TIMES,
+  LAST_UPDATED_BY
+from
+  CKT_INT_RQST_ATTCH
+where
+  (@intHGeneratedId = INT_H_GENERATED_ID) and
+  (SYS_GEN_SEQ_NBR = @sysGenSeqNbr)
+</value>
+   </data>
+   <data name="UpdateInterstateRequestAttachment">
+      <value>
+update CKT_INT_RQST_ATTCH
+set
+  RECEIVED_DATE = @receivedDate,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (INT_H_GENERATED_ID = @intHGeneratedId) and
+  (SYS_GEN_SEQ_NBR = @sysGenSeqNbr)
+</value>
+   </data>
+</root>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalAction1">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T2
+  on
+    (T1.STANDARD_NO &gt; ' ') and
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID)
+  join
+  CKT_INTERSTAT_RQST T5
+  on
+    (T2.CAS_NUMBER = T5.CAS_I_NUMBER) and
+    (T5.COUNTRY &gt; ' ') and
+    (T5.KS_CASE_IND = 'N') and
+    (T5.OTH_ST_CASE_STATUS = 'O')
+order by
+  T1.STANDARD_NO
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEG_ACT_CAS_RL T2
+  on
+    (T1.STANDARD_NO &gt; ' ') and
+    (T1.LEGAL_ACTION_ID = T2.LGA_ID)
+  join
+  CKT_INTERSTAT_RQST T5
+  on
+    (T2.CAS_NUMBER = T5.CAS_I_NUMBER) and
+    (T5.COUNTRY &gt; ' ') and
+    (T5.KS_CASE_IND = 'Y') and
+    (T5.OTH_ST_CASE_STATUS = 'O')
+order by
+  T1.STANDARD_NO
+</value>
+   </data>
+</root>

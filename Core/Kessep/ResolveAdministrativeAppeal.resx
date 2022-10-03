@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadAdministrativeAppeal1">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID,
+  ADMIN_APPEAL_NO,
+  TYPE,
+  REQUEST_DT,
+  RECEIVED_DT,
+  RESPONDENT,
+  APPELLANT_LAST_NM,
+  APPELLANT_FIRST_NM,
+  APPELLANT_MI,
+  APPELLANT_SUFFIX,
+  APPELLANT_REL,
+  ADMIN_APPEAL_DT,
+  ADMIN_ORDER_DT,
+  WITHDRAW_DT,
+  REQ_FURTHER_REV_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  JUD_REVIEW_IND,
+  REASON,
+  OUTCOME,
+  REVIEW_OUTCOME,
+  WITHDRAW_REASON,
+  REQ_FURTHER_REVIEW,
+  ADMIN_REVIEW_STATE
+from
+  CKT_ADMIN_APPEAL
+where
+  ADMIN_APPEAL_ID = @adminAppealId
+</value>
+   </data>
+   <data name="ReadAdministrativeAppeal2">
+      <value>
+select top(1)
+  ADMIN_APPEAL_ID,
+  ADMIN_APPEAL_NO,
+  TYPE,
+  REQUEST_DT
+from
+  CKT_ADMIN_APPEAL
+where
+  (TYPE = @type) and
+  (REQUEST_DT = @requestDt)
+</value>
+   </data>
+   <data name="UpdateAdministrativeAppeal">
+      <value>
+update CKT_ADMIN_APPEAL
+set
+  ADMIN_APPEAL_NO = @adminAppealNo,
+  REQUEST_DT = @requestDt,
+  RECEIVED_DT = @receivedDt,
+  RESPONDENT = @respondent,
+  APPELLANT_LAST_NM = @appellantLastNm,
+  APPELLANT_FIRST_NM = @appellantFirstNm,
+  APPELLANT_MI = @appellantMi,
+  APPELLANT_SUFFIX = @appellantSuffix,
+  APPELLANT_REL = @appellantRel,
+  ADMIN_APPEAL_DT = @adminAppealDt,
+  ADMIN_ORDER_DT = @adminOrderDt,
+  WITHDRAW_DT = @withdrawDt,
+  REQ_FURTHER_REV_DT = @reqFurtherRevDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp,
+  JUD_REVIEW_IND = @judReviewInd,
+  REASON = @reason,
+  OUTCOME = @outcome,
+  REVIEW_OUTCOME = @reviewOutcome,
+  WITHDRAW_REASON = @withdrawReason,
+  REQ_FURTHER_REVIEW = @reqFurtherReview,
+  ADMIN_REVIEW_STATE = @adminReviewState
+where
+  ADMIN_APPEAL_ID = @adminAppealId
+</value>
+   </data>
+</root>

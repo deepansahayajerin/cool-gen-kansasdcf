@@ -1,0 +1,43 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiRafeRegisteredAgentForEmp"
+           program-name="SWERAFEP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiRafeRegisteredAgentForEmp"
+           transaction="SR1H"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePlomPersonLocateMenu"
+       send-command-type="none">
+      <map from="Next" to="StartCase"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_REGISTERED_AGENTS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="SiRageRegisteredAgentMaint"
+       send-command-type="none">
+      <return-map from="RtnRegisteredAgentAddress" to="RegisteredAgentAddress"/>
+      <return-map from="RtnRegisteredAgent" to="RegisteredAgent"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EMPLOYER"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiEmplEmployerMaintenance"
+       send-command-type="none">
+      <return-map from="RtnEmployer" to="Employer1"/>
+      <return-map from="RtnEmployerAddress" to="Employer2"/>
+   </on>
+   <map from="Next" to="Next"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Employer1" to="Employer1"/>
+   <map from="Employer2" to="Employer2"/>
+   <map from="RegisteredAgent" to="RegisteredAgent"/>
+   <map from="RegisteredAgentAddress" to="RegisteredAgentAddress"/>
+   <map from="RegAgentPrompt" to="RegAgentPrompt"/>
+   <map from="EmployerPrompt" to="EmployerPrompt"/>
+   <map from="HiddenEmployerRegisteredAgent" to="HiddenEmployerRegisteredAgent"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,152 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiFcdsFosterCareChildDetail"
+           program-name="SWEFCDSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiFcdsFosterCareChildDetail"
+           transaction="SR1I"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+      <map from="Ap" to="CsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden" to="Hidden"/>
+      <return-map from="Selected.Number" to="HiddenApSelected.Number"/>
+      <return-map from="Selected.FormattedName" to="HiddenApSelected.FormattedName"/>
+      <return-map from="SelectedChildCsePersonsWorkSet" to="HiddenChSelected"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="Next" to="Next"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Ap" to="Ap"/>
+   <map from="Ar" to="Ar"/>
+   <map from="FcChildCsePersonsWorkSet" to="FcChildCsePersonsWorkSet"/>
+   <map from="Placement" to="Placement"/>
+   <map from="HiddenPreviousCsePersonsWorkSet"
+        to="HiddenPreviousCsePersonsWorkSet"/>
+   <map from="HiddenPreviousCase" to="HiddenPreviousCase"/>
+   <map from="HiddenAe" to="HiddenAe"/>
+   <map from="HiddenChSelected" to="HiddenChSelected"/>
+   <map from="HiddenApSelected" to="HiddenApSelected"/>
+   <map from="ApPrompt" to="ApPrompt"/>
+   <map from="OrderEstPrompt" to="OrderEstPrompt"/>
+   <map from="PlaceStatePrompt" to="PlaceStatePrompt"/>
+   <map from="FreqPrompt" to="FreqPrompt"/>
+   <map from="CountyPrompt" to="CountyPrompt"/>
+   <map from="PlacementPrompt" to="PlacementPrompt"/>
+   <map from="SourcePrompt" to="SourcePrompt"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="ActiveChild" to="ActiveChild"/>
+   <map from="Case1.Number" to="Case1.Number"/>
+   <map from="FcChildCaseRole.FcIvECaseNumber"
+        to="FcChildCaseRole.FcIvECaseNumber"/>
+   <map from="FcChildCaseRole.FcPreviousPa" to="FcChildCaseRole.FcPreviousPa"/>
+   <map from="FcChildCaseRole.FcPlacementReason"
+        to="FcChildCaseRole.FcPlacementReason"/>
+   <map from="FcChildCaseRole.FcSourceOfFunding"
+        to="FcChildCaseRole.FcSourceOfFunding"/>
+   <map from="FcChildCaseRole.FcCincInd" to="FcChildCaseRole.FcCincInd"/>
+   <map from="FcChildCaseRole.FcJuvenileOffenderInd"
+        to="FcChildCaseRole.FcJuvenileOffenderInd"/>
+   <map from="FcChildCaseRole.FcJuvenileCourtOrder"
+        to="FcChildCaseRole.FcJuvenileCourtOrder"/>
+   <map from="FcChildCaseRole.FcOrderEstBy" to="FcChildCaseRole.FcOrderEstBy"/>
+   <map from="FcChildCaseRole.FcNextJuvenileCtDt"
+        to="FcChildCaseRole.FcNextJuvenileCtDt"/>
+   <map from="FcChildCaseRole.FcPlacementName"
+        to="FcChildCaseRole.FcPlacementName"/>
+   <map from="FcChildCaseRole.FcPlacementDate"
+        to="FcChildCaseRole.FcPlacementDate"/>
+   <map from="FcChildCaseRole.FcDateOfInitialCustody"
+        to="FcChildCaseRole.FcDateOfInitialCustody"/>
+   <map from="FcChildCaseRole.FcCostOfCare" to="FcChildCaseRole.FcCostOfCare"/>
+   <map from="FcChildCaseRole.FcCostOfCareFreq"
+        to="FcChildCaseRole.FcCostOfCareFreq"/>
+   <map from="FcChildCaseRole.FcSsa" to="FcChildCaseRole.FcSsa"/>
+   <map from="FcChildCaseRole.FcSsi" to="FcChildCaseRole.FcSsi"/>
+   <map from="FcChildCaseRole.FcVaInd" to="FcChildCaseRole.FcVaInd"/>
+   <map from="FcChildCaseRole.FcZebInd" to="FcChildCaseRole.FcZebInd"/>
+   <map from="FcChildCaseRole.FcOtherBenefitInd"
+        to="FcChildCaseRole.FcOtherBenefitInd"/>
+   <map from="FcChildCaseRole.FcWardsAccount"
+        to="FcChildCaseRole.FcWardsAccount"/>
+   <map from="FcChildCaseRole.FcSrsPayee" to="FcChildCaseRole.FcSrsPayee"/>
+   <map from="FcChildCaseRole.FcApNotified" to="FcChildCaseRole.FcApNotified"/>
+   <map from="FcChildCaseRole.FcCountyChildRemovedFrom"
+        to="FcChildCaseRole.FcCountyChildRemovedFrom"/>
+   <map from="FcChildCaseRole.FcAdoptionDisruptionInd"
+        to="FcChildCaseRole.FcAdoptionDisruptionInd"/>
+   <map from="FcChildCaseRole.Note" to="FcChildCaseRole.Note"/>
+   <map from="FcChildCaseRole.Type1" to="FcChildCaseRole.Type1"/>
+   <map from="FcChildCaseRole.StartDate" to="FcChildCaseRole.StartDate"/>
+   <map from="FcChildCaseRole.EndDate" to="FcChildCaseRole.EndDate"/>
+   <map from="FcChildCaseRole.OnSsInd" to="FcChildCaseRole.OnSsInd"/>
+   <map from="FcChildCaseRole.HealthInsuranceIndicator"
+        to="FcChildCaseRole.HealthInsuranceIndicator"/>
+   <map from="FcChildCaseRole.MedicalSupportIndicator"
+        to="FcChildCaseRole.MedicalSupportIndicator"/>
+   <map from="FcChildCaseRole.AbsenceReasonCode"
+        to="FcChildCaseRole.AbsenceReasonCode"/>
+   <map from="FcChildCaseRole.ResidesWithArIndicator"
+        to="FcChildCaseRole.ResidesWithArIndicator"/>
+   <map from="FcChildCaseRole.PriorMedicalSupport"
+        to="FcChildCaseRole.PriorMedicalSupport"/>
+   <map from="FcChildCaseRole.ArWaivedInsurance"
+        to="FcChildCaseRole.ArWaivedInsurance"/>
+   <map from="FcChildCaseRole.DateOfEmancipation"
+        to="FcChildCaseRole.DateOfEmancipation"/>
+   <map from="FcChildCaseRole.Over18AndInSchool"
+        to="FcChildCaseRole.Over18AndInSchool"/>
+   <map from="FcChildCaseRole.FcParentalRights"
+        to="FcChildCaseRole.FcParentalRights"/>
+   <map from="FcChildCaseRole.FcPrevPayeeFirstName"
+        to="FcChildCaseRole.FcPrevPayeeFirstName"/>
+   <map from="FcChildCaseRole.FcPreviousPayeeLastName"
+        to="FcChildCaseRole.FcPreviousPayeeLastName"/>
+   <map from="FcChildCaseRole.FcPrevPayeeMiddleInitial"
+        to="FcChildCaseRole.FcPrevPayeeMiddleInitial"/>
+   <map from="FcChildCaseRole.Identifier" to="FcChildCaseRole.Identifier"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+   <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+   <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+   <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+   <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+   <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+   <map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+   <map from="Hidden.MiscText1" to="Hidden.MiscText1"/>
+   <map from="Hidden.MiscText2" to="Hidden.MiscText2"/>
+   <map from="Hidden.MiscNum1" to="Hidden.MiscNum1"/>
+   <map from="Hidden.MiscNum2" to="Hidden.MiscNum2"/>
+   <map from="Hidden.MiscNum1V2" to="Hidden.MiscNum1V2"/>
+   <map from="Hidden.MiscNum2V2" to="Hidden.MiscNum2V2"/>
+   <map from="FcChildCaseRole.FcInHomeServiceInd"
+        to="FcChildCaseRole.FcInHomeServiceInd"/>
+   <map from="FcChildCaseRole.RelToAr" to="FcChildCaseRole.RelToAr"/>
+   <map from="FcChildCaseRole.SpecialtyArea" to="FcChildCaseRole.SpecialtyArea"/>
+   <map from="FcChildCaseRole.FcLevelOfCare" to="FcChildCaseRole.FcLevelOfCare"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDocumentField">
+      <value>
+select top(1)
+  ORDER_POSITION,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE
+from
+  CKT_DOCUMENT_FIELD with(readuncommitted)
+where
+  (@fldName = FLD_NAME) and
+  (DOC_NAME = @docName) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte)
+</value>
+   </data>
+   <data name="ReadField">
+      <value>
+select top(1)
+  NAME
+from
+  CKT_FIELD with(readuncommitted)
+where
+  NAME = @name
+</value>
+   </data>
+   <data name="ReadFieldValue">
+      <value>
+select top(1)
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE with(readuncommitted)
+where
+  (@infIdentifier = INF_IDENTIFIER) and
+  (DOC_NAME = @docName) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (FLD_NAME = @fldName)
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select top(1)
+  SYSTEM_GENERATED_I
+from
+  CKT_INFRASTRUCTURE with(readuncommitted)
+where
+  SYSTEM_GENERATED_I = @systemGeneratedI
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select top(1)
+  PRNT_SUCESSFUL_IND,
+  INF_ID
+from
+  CKT_OUTGOING_DOC with(readuncommitted)
+where
+  @infId = INF_ID
+</value>
+   </data>
+</root>

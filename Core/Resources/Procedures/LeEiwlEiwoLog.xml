@@ -1,0 +1,119 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeEiwlEiwoLog"
+           program-name="SWEEIWLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeEiwlEiwoLog"
+           transaction="SSAB"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSOR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCSOR"
+       to="SpCsorCseOrganizationMaint"
+       send-command="DISPLAY">
+      <map from="ToCsor.Type1" to="Search.Type1"/>
+      <return-map from="ReturnSelect" to="FromCsor"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_OFCL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETOFCL"
+       to="SpOfclListOffice"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected" to="FromOfclAndSvpo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SVPL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPL"
+       to="SpSvplListServiceProvider"
+       send-command="DISPLAY">
+      <return-map from="HiddenSelected1" to="FromSvplAndSvpo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_SVPO"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETSVPO"
+       to="SpSvpoOffcServProviderMaint"
+       send-command="DISPLAY">
+      <map from="SearchOffice.SystemGeneratedId" to="Office.SystemGeneratedId"/>
+      <map from="SearchOffice.Name" to="Office.Name"/>
+      <return-map from="HiddenSelectionOffice" to="FromOfclAndSvpo"/>
+      <return-map from="HiddenSelectionServiceProvider" to="FromSvplAndSvpo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_NAME"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command="DISPLAY">
+      <return-map from="Selected" to="FromName"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToCdvlCombinationCode" to="CombinationCode"/>
+      <map from="ToCdvlCombinationCodeValue" to="CombinationCodeValue"/>
+      <map from="ToCdvl" to="Code"/>
+      <return-map from="DlgflwSelected" to="FromCdvl"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EIWH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETEIWH"
+       to="LeEiwhEiwoHistory"
+       send-command="DISPLAY">
+      <map from="ToEiwhCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="ToEiwhLegalAction" to="LegalAction"/>
+      <map from="ToEiwhIwoTransaction.Identifier" to="IwoTransaction.Identifier"/>
+      <map from="ToEiwhIwoTransaction.TransactionNumber"
+           to="IwoTransaction.TransactionNumber"/>
+      <map from="ToEiwhIncomeSource" to="IncomeSource"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <map from="Export1.GiwoAction" to="Import1.GiwoAction"/>
+   <map from="Export1.Gcommon" to="Import1.Gcommon"/>
+   <map from="Export1.GiwoTransaction" to="Import1.GiwoTransaction"/>
+   <map from="Export1.GincomeSource" to="Import1.GincomeSource"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Export1.Goffice" to="Import1.Goffice"/>
+   <map from="SearchContractor" to="SearchContractor"/>
+   <map from="PromptContractor" to="PromptContractor"/>
+   <map from="SearchOffice" to="SearchOffice"/>
+   <map from="PromptOffice" to="PromptOffice"/>
+   <map from="SearchServiceProvider" to="SearchServiceProvider"/>
+   <map from="PromptWorker" to="PromptWorker"/>
+   <map from="SearchWorker" to="SearchWorker"/>
+   <map from="SearchCsePerson" to="SearchCsePerson"/>
+   <map from="PromptPerson" to="PromptPerson"/>
+   <map from="SearchIwoTransaction" to="SearchIwoTransaction"/>
+   <map from="PromptStatus" to="PromptStatus"/>
+   <map from="SearchSeverity" to="SearchSeverity"/>
+   <map from="PromptSeverity" to="PromptSeverity"/>
+   <map from="SeverityDefault" to="SeverityDefault"/>
+   <map from="SeverityYellow" to="SeverityYellow"/>
+   <map from="SeverityRed" to="SeverityRed"/>
+   <map from="SeverityTotal" to="SeverityTotal"/>
+   <map from="SearchSeverityCode" to="SearchSeverityCode"/>
+   <map from="SearchStatusCode" to="SearchStatusCode"/>
+   <map from="Export1.GserviceProvider" to="Import1.GserviceProvider"/>
+   <map from="Export1.GlegalAction" to="Import1.GlegalAction"/>
+   <map from="HiddenSearchContractor" to="HiddenSearchContractor"/>
+   <map from="HiddenSearchOffice" to="HiddenSearchOffice"/>
+   <map from="HiddenSearchServiceProvider" to="HiddenSearchServiceProvider"/>
+   <map from="HiddenSearchCsePerson" to="HiddenSearchCsePerson"/>
+   <map from="HiddenSearchIwoTransaction" to="HiddenSearchIwoTransaction"/>
+   <map from="HiddenSearchSeverity" to="HiddenSearchSeverity"/>
+   <map from="Export1.GexportSeverity" to="Import1.GimportSeverity"/>
+   <map from="PageNumber" to="PageNumber"/>
+   <map from="Paging.GexportPaging" to="Paging.GimportPaging"/>
+   <map from="MoreIndicator" to="MoreIndicator"/>
+   <map from="Export1.GcsePerson" to="Import1.GcsePerson"/>
+</procedure>

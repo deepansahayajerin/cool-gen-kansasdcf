@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePersonAccountCsePerson">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  TYPE
+from
+  CKT_CSE_PERSON_ACC
+where
+  (TYPE = 'E') and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDisbursementTransactionCsePersonAccountCsePerson">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DISB_TRAN_ID,
+  T1.TYPE,
+  T1.AMOUNT,
+  T1.PROCESS_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPDATE_TMST,
+  T1.COLLECTION_DATE,
+  T1.COLLCTN_PROCESS_DT,
+  T1.OTY_ID,
+  T1.OTR_TYPE_DISB,
+  T1.OTR_ID,
+  T1.CPA_TYPE_DISB,
+  T1.CSP_NUMBER_DISB,
+  T1.OBG_ID,
+  T1.CRD_ID,
+  T1.CRV_ID,
+  T1.CST_ID,
+  T1.CRT_ID,
+  T1.COL_ID,
+  T1.INTERSTATE_IND,
+  T1.REFERENCE_NUMBER,
+  T1.INT_INTER_ID,
+  T1.EXCESS_URA_IND,
+  T3.NUMB,
+  T3.TYPE,
+  T4.APPLIED_TO_CD,
+  T4.COLL_DT,
+  T4.ADJ_IND,
+  T4.PGM_APPLD_TO,
+  T4.APPLIED_TO_FUT_IND,
+  T4.PGM_ST_APPLD_TO,
+  T5.CSP_SUP_NUMBER,
+  T5.CPA_SUP_TYPE,
+  T8.CLT_IDENTIFIER,
+  T9.CASH_RECEIPT_ID,
+  T10.CODE,
+  T10.CATEGORY_IND,
+  T12.DUE_DT
+from
+  CKT_CR_TYPE T10
+  join
+  CKT_CASH_RECEIPT T9
+  join
+  CKT_CR_DETAIL T8
+  join
+  CKT_OB_TRN T5
+  join
+  CKT_COLLECTION T4
+  join
+  CKT_CSE_PERSON T3
+  join
+  CKT_DISB_TRAN T1
+  on
+    (T1.TYPE = 'C') and
+    (T1.PROCESS_DATE = @processDate) and
+    (T3.NUMB = T1.CSP_NUMBER)
+  on
+    (T4.COLL_ID = T1.COL_ID) and
+    (T4.OTY_ID = T1.OTY_ID) and
+    (T4.OBG_ID = T1.OBG_ID) and
+    (T4.CSP_NUMBER = T1.CSP_NUMBER_DISB) and
+    (T4.CPA_TYPE = T1.CPA_TYPE_DISB) and
+    (T4.OTR_ID = T1.OTR_ID) and
+    (T4.OTR_TYPE = T1.OTR_TYPE_DISB) and
+    (T4.CRT_TYPE = T1.CRT_ID) and
+    (T4.CST_ID = T1.CST_ID) and
+    (T4.CRV_ID = T1.CRV_ID) and
+    (T4.CRD_ID = T1.CRD_ID)
+  on
+    (T5.OTY_TYPE = T4.OTY_ID) and
+    (T5.OB_TRN_TYP = T4.OTR_TYPE) and
+    (T5.OB_TRN_ID = T4.OTR_ID) and
+    (T5.CPA_TYPE = T4.CPA_TYPE) and
+    (T5.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T5.OBG_GENERATED_ID = T4.OBG_ID) and
+    (T5.CPA_SUP_TYPE is not null) and
+    (T5.CSP_SUP_NUMBER is not null)
+  join
+  CKT_DEBT_DTL T12
+  on
+    (T5.OTY_TYPE = T12.OTY_TYPE) and
+    (T5.OBG_GENERATED_ID = T12.OBG_GENERATED_ID) and
+    (T5.OB_TRN_TYP = T12.OTR_TYPE) and
+    (T5.OB_TRN_ID = T12.OTR_GENERATED_ID) and
+    (T5.CPA_TYPE = T12.CPA_TYPE) and
+    (T5.CSP_NUMBER = T12.CSP_NUMBER)
+  on
+    (T8.CRD_ID = T4.CRD_ID) and
+    (T8.CRV_IDENTIFIER = T4.CRV_ID) and
+    (T8.CST_IDENTIFIER = T4.CST_ID) and
+    (T8.CRT_IDENTIFIER = T4.CRT_TYPE) and
+    (T8.CLT_IDENTIFIER is not null)
+  on
+    (T9.CRT_IDENTIFIER = T8.CRT_IDENTIFIER) and
+    (T9.CST_IDENTIFIER = T8.CST_IDENTIFIER) and
+    (T9.CRV_IDENTIFIER = T8.CRV_IDENTIFIER)
+  on
+    T10.CRTYPE_ID = T9.CRT_IDENTIFIER
+order by
+  T3.NUMB,
+  T1.REFERENCE_NUMBER,
+  T1.AMOUNT
+</value>
+   </data>
+   <data name="ReadDisbursementType">
+      <value>
+select top(1)
+  DISB_TYPE_ID,
+  PROGRAM_CODE
+from
+  CKT_DISB_TYPE
+where
+  DISB_TYPE_ID = @disbTypeId
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  COUNTRY
+from
+  CKT_INTERSTAT_RQST
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateDisbursementTransaction">
+      <value>
+update CKT_DISB_TRAN
+set
+  PROCESS_DATE = @processDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATE_TMST = @lastUpdateTmst
+where
+  (CPA_TYPE = @cpaType) and
+  (CSP_NUMBER = @cspNumber) and
+  (DISB_TRAN_ID = @disbTranId)
+</value>
+   </data>
+</root>

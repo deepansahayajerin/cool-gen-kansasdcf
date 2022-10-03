@@ -1,0 +1,32 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpOfclListOffice"
+           program-name="SWEOFCLP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpOfclListOffice"
+           transaction="SR3F"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="HiddenToCodeTableList" to="Code"/>
+      <return-map from="DlgflwSelected" to="HiddenFromList"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Group.Office" to="Group.Office"/>
+   <map from="StartingOffice" to="StartingOffice"/>
+   <map from="StartingOfficeAddress" to="StartingOfficeAddress"/>
+   <map from="Group.OfficeAddress" to="Group.OfficeAddress"/>
+   <map from="SortBy" to="SortBy"/>
+   <map from="PromptOfficeType" to="PromptOfficeType"/>
+   <map from="OfficeTypeDesc" to="OfficeTypeDesc"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="ShowAll" to="ShowAll"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

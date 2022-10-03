@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  STATUS
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type)
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (TYPE = 'AP') and
+  (END_DATE &lt;= @endDate) and
+  (@casNumber = CAS_NUMBER)
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleCsePerson2">
+      <value>
+select top(1)
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.TYPE
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_CASE_ROLE T1
+  on
+    (T2.NUMB = T1.CSP_NUMBER) and
+    (T1.TYPE = 'AR') and
+    (T1.END_DATE &lt;= @endDate) and
+    (@casNumber = T1.CAS_NUMBER)
+order by
+  T1.START_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRoleLegalReferralCaseRole">
+      <value>
+select
+  T1.CAS_NUMBER,
+  T1.CSP_NUMBER,
+  T1.TYPE,
+  T1.CASE_ROLE_ID,
+  T1.START_DATE,
+  T1.END_DATE,
+  T2.CREATED_TIMESTAMP,
+  T2.CAS_NUMBER,
+  T2.LGR_ID
+from
+  CKT_CASE_ROLE T1
+  join
+  CKT_LEG_REF_CROLE T2
+  on
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.TYPE = @type) and
+    (T1.START_DATE &lt;= @startDate) and
+    (T1.END_DATE &gt; @startDate) and
+    (T1.CASE_ROLE_ID = T2.CRO_ID) and
+    (T1.TYPE = T2.CRO_TYPE) and
+    (T1.CSP_NUMBER = T2.CSP_NUMBER) and
+    (T1.CAS_NUMBER = T2.CAS_NUMBER_ROLE) and
+    (@lgrId = T2.LGR_ID) and
+    (@casNumber = T2.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  T1.NUMB
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AP') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (@casNumber = T2.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T2.START_DATE &lt;= @startDate) and
+    (T2.END_DATE &gt;= @startDate) and
+    (@casNumber = T2.CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadLegalReferral1">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.IDENTIFIER,
+  T1.REF_BY_USER_ID,
+  T1.STATUS_DATE,
+  T1.STATUS,
+  T1.REFERRAL_DATE,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_BY,
+  T1.REFERRAL_REASON_1,
+  T1.REFERRAL_REASON_2,
+  T1.REFERRAL_REASON_3,
+  T1.REFERRAL_REASON_4,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_LEGAL_REFERRAL T1
+  join
+  CKT_LEG_REF_CROLE T5
+  on
+    (T1.CAS_NUMBER = @casNumber) and
+    (T1.CAS_NUMBER = T5.CAS_NUMBER_ROLE) and
+    (T5.CRO_TYPE = 'CH') and
+    (T5.CSP_NUMBER = @cspNumber) and
+    (T1.IDENTIFIER = T5.LGR_ID) and
+    (T1.CAS_NUMBER = T5.CAS_NUMBER) and
+    (T1.STATUS in ('O', 'S')) and
+    (T1.COURT_CASE_NO = @courtCaseNo) and
+    (T1.TRB_ID = @trbId)
+</value>
+   </data>
+   <data name="ReadLegalReferral2">
+      <value>
+select distinct
+  T1.CAS_NUMBER,
+  T1.IDENTIFIER,
+  T1.REF_BY_USER_ID,
+  T1.STATUS_DATE,
+  T1.STATUS,
+  T1.REFERRAL_DATE,
+  T1.CREATED_BY,
+  T1.LAST_UPDATED_BY,
+  T1.REFERRAL_REASON_1,
+  T1.REFERRAL_REASON_2,
+  T1.REFERRAL_REASON_3,
+  T1.REFERRAL_REASON_4,
+  T1.COURT_CASE_NO,
+  T1.TRB_ID
+from
+  CKT_LEGAL_REFERRAL T1
+  join
+  CKT_LEG_REF_CROLE T5
+  on
+    (T1.CAS_NUMBER = @casNumber) and
+    (T1.CAS_NUMBER = T5.CAS_NUMBER_ROLE) and
+    (T5.CRO_TYPE = 'CH') and
+    (T5.CSP_NUMBER = @cspNumber) and
+    (T1.IDENTIFIER = T5.LGR_ID) and
+    (T1.CAS_NUMBER = T5.CAS_NUMBER) and
+    (T1.STATUS in ('O', 'S'))
+</value>
+   </data>
+</root>

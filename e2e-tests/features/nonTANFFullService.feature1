@@ -1,0 +1,172 @@
+Feature: TC_018_INI-Process Manual non-TANF Case Referrals (IV-D Enrollment for Full Service)
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "1" in a field next to the 'select an option'
+    And presses "Enter"
+    Then "CSE - Service Initiation Menu" window appears
+    Then take snapshot "page1"
+    When user enters "1" in "option"
+    And presses "Enter"
+    Then "CSE - Information Request Menu" window appears
+    Then snapshot "page2"
+    When user enters "1" in "option"
+    And presses "Enter"
+    Then "CSE - Information Request Details" window appears
+    Then snapshot "page3"
+    When user enters "N" in "Enrollment Type"
+    And enters "<MOTHER_LAST>" in "Applicant"
+    And enters "<MOTHER_FIRST>" in the next field
+    And enters "66 OAK ST" in "Address"
+    And enters "TOPEKA" in 2 rows below
+    And enters "KS" in the next field
+    And enters "42155" in second field to the right
+    And enters "Y" in "Enrollment Sent"
+    And enters "Y" in "Parent"
+    And enters "Today" in "Date Enrollment Sent"
+    And enters "Today" in "Date Received Complete"
+    And enters "Y" in "Full Service"
+    Then snapshot "page4_beforeF5"
+    When user presses "F5"
+    Then message "ACO_NI0000: Successfully added." is displayed
+    Then snapshot "page4"
+    When user presses "Shift+F4"
+    Then message "Information Request processed successfully." is displayed
+    Then snapshot "page5"
+    When user presses "Shift+F3"
+    Then "CSE - Name List - Name" window appears
+    Then snapshot "page6"
+
+    When user enters "<MOTHER_SSN_PART1>" in "SSN"
+    And enters "<MOTHER_SSN_PART2>" in the next field
+    And enters "<MOTHER_SSN_PART3>" in next field
+    When presses "F2"
+    Then message "ACO_NI0000: No data found for input criteria." is displayed
+    Then snapshot "page7"
+
+    When user enters "" in "SSN" field
+    And enters "" in next field
+    And enters "" in next field
+    And enters "<FATHER_FIRST>" in "First"
+    Then message "ACO_NI0000: No data found for input criteria." is displayed
+    Then snapshot "page8"
+
+    When user enters "<FATHER_SSN_PART1>" in "SSN"
+    And enters "<FATHER_SSN_PART2>" in next field
+    And enters "<FATHER_SSN_PART3>" in next field
+    When presses "F2"
+    Then message "ACO_NI0000: No data found for input criteria." is displayed
+    Then snapshot "page9"
+
+    When user enters "" in "SSN"
+    And enters "" in next field
+    And enters "" in next field
+    And enters "<CHILD_FIRST>" in "First"
+    Then message "ACO_NI0000: No data found for input criteria." is displayed
+    Then snapshot "page10"
+
+    When user enters "<CHILD_SSN_PART1>" in "SSN"
+    And enters "<CHILD_SSN_PART2>" in next field
+    And enters "<CHILD_SSN_PART3>" in next field
+    When presses "F2"
+    Then message "ACO_NI0000: No data found for input criteria." is displayed
+    Then snapshot "page10"
+
+    When user presses "Shift+F3"
+    Then "CSE - Case Registration - REGI" window appears
+    Then snapshot "page11"
+
+    When user enters "0107" in "Office"
+    And enters "<MOTHER_LAST>" in "Last"
+    And enters "<MOTHER_FIRST>" in "First"
+    And enters "<MOTHER_GENDER>" in "Sex" next to "Add Person" section
+    And enters "<MOTHER_SSN_PART1>" in "SSN" next to "Add Person" section
+    And enters "<MOTHER_SSN_PART2>" in the next field
+    And enters "<MOTHER_SSN_PART3>" in the next field
+    And enters "<MOTHER_DOB>" in "DOB" next to "Add Person" section
+    And presses "F5"
+    Then message "SI0000: Person added successfully." is displayed
+    #And "Name" field in row 1 has value "REP-BRYSON, TANYA"
+    #And "Person #" field in row 1 has data
+    Then snapshot "page12"
+
+    When user enters "<FATHER_LAST>" in "Last"
+    And enters "<FATHER_FIRST>" in "First"
+    And enters "<FATHER_GENDER>" in "Sex" next to "Add Person" section
+    And enters "<FATHER_SSN_PART1>" in "SSN" next to "Add Person" section
+    And enters "<FATHER_SSN_PART2>" in the next field
+    And enters "<FATHER_SSN_PART3>" in next field
+    And enters "<FATHER_DOB>" in "DOB" next to "Add Person" section
+    And presses "F5"
+    Then message "SI0000: Person added successfully." is displayed
+    #And "Name" field in row 1 has value "REP-BRYSON, TANYA"
+    #And "Person #" field in row 1 has data
+    Then snapshot "page13"
+
+    When user enters "<CHILD_LAST>" in "Last"
+    And enters "<CHILD_FIRST>" in "First"
+    And enters "<CHILD_GENDER>" in "Sex" next to "Add Person" section
+    And enters "<CHILD_SSN_PART1>" in "SSN" next to "Add Person" section
+    And enters "<CHILD_SSN_PART2>" in the next field
+    And enters "<CHILD_SSN_PART3>" in next field
+    And enters "<CHILD_DOB>" in "DOB" next to "Add Person" section
+    And presses "F5"
+    Then message "SI0000: Person added successfully." is displayed
+    #And "Name" field in row 1 has value "REP-BRYSON, TANYA"
+    #And "Person #" field in row 1 has data
+    Then snapshot "page14"
+    When user enters "AR" in first field under text "Case" and "Rl"
+    And enters "AP" in the field below
+    And enters "CH" in the field below
+    And enters "MO" in first field under text "Fam" and "Rl"
+
+    And presses "Shift+F7"
+    Then message "SI0000: Case registration completed successfully." is displayed
+    Then snapshot "page15"
+    When user presses "Shift+F9"
+    Then "CSE - Child Paternity Maintenance" window appears
+    Then snapshot "page16"
+
+    When user enters "S" in first field under text "Sel"
+    And user enters "N" in "Born out of Wedlock"
+    And user enters "N" in "CSE to Estbl Patern"
+    And user enters "Y" in "Paternity Established"
+    And user enters "Y" in "Father's Signature on Birth Certificate"
+    And user enters "Y" in "KS Hospital Pat Ack"
+    And user enters "<FATHER_LAST>" in "Name of Father on Birth Certificate"
+    And user enters "<FATHER_FIRST>" in next field
+    When user presses "F6"
+    Then message "ACO_NI0000: Successfully updated." is displayed
+    Then snapshot "page17"
+    When user presses "F9"
+    Then "CSE - Case Registration - REGI" window appears
+    When user presses "Shift+F6"
+    Then "CSE - Case Composition - COMP" window appears
+    Then snapshot "page18"
+
+    Examples:
+      | MOTHER_LAST | MOTHER_FIRST | MOTHER_SSN_PART1 | MOTHER_SSN_PART2 | MOTHER_SSN_PART3 | MOTHER_GENDER | MOTHER_DOB | FATHER_LAST | FATHER_FIRST | FATHER_SSN_PART1 | FATHER_SSN_PART2 | FATHER_SSN_PART3 | FATHER_GENDER | FATHER_DOB | CHILD_LAST | CHILD_FIRST | CHILD_SSN_PART1 | CHILD_SSN_PART2 | CHILD_SSN_PART3 | CHILD_GENDER | CHILD_DOB |
+      #| REP-BRYSON  | TANYA        | 785              | 98               | 0283             | F             | 12121989   | REP-BRYSON  | TYLER        | 685              | 98               | 0283             | M             | 10121987   | REP-BRYSON | TYSON       | 651             | 81              | 0989            | M            | 10102016  |
+      #| DAWSON      | JANE         | 145              | 81               | 0115             | F             | 10111990   | DAWSON      | JACK         | 135              | 77               | 0115             | M             | 07101987   | DAWSON     | JOHN        | 565             | 44              | 0199            | M            | 05102016  |
+      #| HOPKINS     | MARY         | 185              | 91               | 0125             | F             | 08111990   | HOPKINS     | ANTHONY      | 175              | 66               | 0125             | M             | 05101987   | HOPKINS    | JOHN        | 535             | 24              | 0179            | M            | 04102016  |
+      #| ISNER       | ANITA        | 105              | 44               | 0375             | F             | 08031982   | ISNER       | ANDY         | 143              | 34               | 0225             | M             | 04071980   | ISNER      | JIM         | 742             | 17              | 0323            | M            | 03072015  |
+      #| DAMON       | MIKAILA      | 432              | 17               | 0339             | F             | 07061981   | DAMON       | MATT         | 191              | 27               | 0669             | M             | 03061979   | DAMON      | TIM         | 661             | 94              | 0812            | M            | 02092017  |
+      #| THOMSON     | TERESA       | 109              | 16               | 0340             | F             | 02051983   | THOMSON     | BEN          | 029              | 17               | 0549             | M             | 02051983   | THOMSON    | TIM         | 494             | 84              | 0560            | M            | 02112017  |
+      #| JAMESON     | KYLIE        | 443              | 39               | 0295             | F             | 05151981   | JAMESON     | TOM          | 096              | 37               | 0634             | M             | 02081976   | JAMESON    | KIM         | 774             | 64              | 0620            | M            | 07082018  |
+      #| HARDY       | JILL         | 811              | 43               | 0795             | F             | 04141981   | HARDY       | THOMAS       | 051              | 22               | 0814             | M             | 02061976   | HARDY      | JACK        | 709             | 53              | 0973            | M            | 07072018  |
+      #| COLLINS     | JACKIE       | 722              | 41               | 0815             | F             | 12021979   | COLLINS     | THOMAS       | 056              | 34               | 0924             | M             | 11081975   | COLLINS    | JACK        | 889             | 47              | 0855            | M            | 04052019  |
+      | MILLER      | JANE         | 799              | 71               | 0899             | F             | 12121977   | MILLER      | SCOTT        | 066              | 19               | 0989             | M             | 09071975   | MILLER     | JOHN        | 486             | 29              | 0998            | M            | 03052019  |
+#| NICHOLSON   | JULIA        | 621              | 29               | 0348             | F             | 10091974   | NICHOLSON   | JACK         | 055              | 82               | 0881             | M             | 09111972   | NICHOLSON  | BILL        | 684             | 19              | 0987            | M            | 04122018  |
+#| JACKSON     | JANET        | 874              | 67               | 0291             | F             | 11071977   | JACKSON     | MICHAEL      | 391              | 44               | 0775             | M             | 03091973   | JACKSON    | BILL        | 401             | 23              | 0846            | M            | 04272018  |
+#| WILLIS      | CHRISTINA    | 888              | 97               | 0779             | F             | 11211976   | WILLIS      | BRUCE        | 493              | 23               | 0716             | M             | 05281973   | WILLIS     | BILL        | 207             | 63              | 0996            | M            | 03252018  |
+#| LAWSON      | MEGAN        | 449              | 77               | 0787             | F             | 10171979   | LAWSON      | CHARLES      | 297              | 13               | 0788             | M             | 07291975   | LAWSON     | TIM         | 299             | 69              | 0986            | M            | 12222017  |
+#| DOUGLAS     | KATHY        | 262              | 76               | 0776             | F             | 02231979   | DOUGLAS     | MIKE         | 313              | 53               | 0922             | M             | 06151975   | DOUGLAS    | TIM         | 211             | 51              | 0988            | M            | 12242017  |
+#| MURRAY      | LIZ          | 595              | 43               | 0711             | F             | 07191978   | MURRAY      | ANDY         | 404              | 59               | 0616             | M             | 07171976   | MURRAY     | JIM         | 299             | 47              | 0978            | M            | 01292017  |
+#| MORRISON    | ANNA         | 417              | 26               | 0925             | F             | 05171979   | MORRISON    | THOMAS       | 823              | 47               | 0229             | M             | 02211974   | MORRISON   | TIM         | 206             | 32              | 0811            | M            | 11222018  |
+#| HARRISON    | EMILY        | 421              | 28               | 0945             | F             | 12271979   | HARRISON    | THOMAS       | 223              | 65               | 0774             | M             | 08211978   | HARRISON   | TIM         | 575             | 92              | 0484            | M            | 06182018  |
+#| CAMERON     | BARBARA      | 977              | 32               | 0591             | F             | 12311978   | CAMERON     | JAMES        | 209              | 81               | 0769             | M             | 07191976   | CAMERON    | TIM         | 545             | 82              | 0489            | M            | 06182018  |
+#| HANKS       | ELIZABETH    | 412              | 24               | 0975             | F             | 07241978   | HANKS       | TOM          | 122              | 41               | 0589             | M             | 02191973   | HANKS      | JACK        | 202             | 12              | 0799            | M            | 10192017  |

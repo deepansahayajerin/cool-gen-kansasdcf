@@ -1,0 +1,40 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpCsorCseOrganizationMaint"
+           program-name="SWECSORP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpCsorCseOrganizationMaint"
+           transaction="SR3B"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="SearchCodePromt.SearchCode" to="Code"/>
+      <map from="SearchCodePromt.SearchCodeValue" to="CombinationCodeValue"/>
+      <return-map from="Code" to="SearchCodePromt.SearchCode"/>
+      <return-map from="DlgflwSelected" to="SearchCodePromt.SearchCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SpOspmOfficeServProvMenu"
+       send-command-type="none"/>
+   <map from="Export2.Common" to="Import1.Common"/>
+   <map from="Export2.CseOrganization" to="Import1.CseOrganization"/>
+   <map from="HidPrevCommand" to="HidPrevCommand"/>
+   <map from="Export2.Hidden" to="Import1.Hidden"/>
+   <map from="SearchCodePromt.SearchCode" to="SearchCodePromt.SearchCode"/>
+   <map from="SearchCodePromt.SearchReturnVal"
+        to="SearchCodePromt.SearchReturnVal"/>
+   <map from="SelTypePrompt" to="SelTypePrompt"/>
+   <map from="DateWorkArea" to="DateWorkArea"/>
+   <map from="Export2.HidVerifyDel" to="Import1.HidVerifyDel"/>
+   <map from="Hidden" to="Hidden"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Search.Type1" to="Search.Type1"/>
+   <map from="Search.Code" to="Search.Code"/>
+   <map from="SearchCodePromt.SearchCodeValue.Cdvalue"
+        to="SearchCodePromt.SearchCodeValue.Cdvalue"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateObligationAdmActionExemption">
+      <value>
+insert into CKT_OADM_ACT_EXMP
+(
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  END_DT,
+  LAST_NM,
+  FIRST_NM,
+  MIDDLE_INITIAL,
+  SUFFIX,
+  REASON,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  DESCRIPTION
+)
+values
+(
+  @otyType,
+  @aatType,
+  @obgGeneratedId,
+  @cspNumber,
+  @cpaType,
+  @effectiveDt,
+  @endDt,
+  @lastNm,
+  @firstNm,
+  @middleInitial,
+  @suffix,
+  @reason,
+  @createdBy,
+  @createdTstamp,
+  @lastUpdatedBy,
+  @lastUpdTstamp,
+  @description
+)
+</value>
+   </data>
+   <data name="DeleteObligationAdmActionExemption">
+      <value>
+delete from CKT_OADM_ACT_EXMP
+where
+  (OTY_TYPE = @otyType) and
+  (AAT_TYPE = @aatType) and
+  (OBG_GENERATED_ID = @obgGeneratedId) and
+  (CSP_NUMBER = @cspNumber) and
+  (CPA_TYPE = @cpaType) and
+  (EFFECTIVE_DT = @effectiveDt)
+</value>
+   </data>
+   <data name="ReadAdministrativeAction">
+      <value>
+select top(1)
+  TYPE
+from
+  CKT_ADMIN_ACTION
+where
+  TYPE = 'ADM'
+</value>
+   </data>
+   <data name="ReadObligation">
+      <value>
+select
+  CPA_TYPE,
+  CSP_NUMBER,
+  OB_ID,
+  DTY_GENERATED_ID
+from
+  CKT_OBLIGATION
+where
+  CSP_NUMBER = @cspNumber
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemption">
+      <value>
+select
+  OTY_TYPE,
+  AAT_TYPE,
+  OBG_GENERATED_ID,
+  CSP_NUMBER,
+  CPA_TYPE,
+  EFFECTIVE_DT,
+  END_DT,
+  LAST_NM,
+  FIRST_NM,
+  MIDDLE_INITIAL,
+  SUFFIX,
+  REASON,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  DESCRIPTION
+from
+  CKT_OADM_ACT_EXMP
+where
+  (REASON = 'BANKRUPT ADM EXCL') and
+  (@aatType = AAT_TYPE) and
+  (CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn1">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) + T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIIdentifier = T1.CRT_I_IDENTIFIER) and
+    (@cstIIdentifier = T1.CST_I_IDENTIFIER) and
+    (@crvIIdentifier = T1.CRV_I_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'PROCCSTFEE',
+        'NETINTFERR', 'REFUND')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptBalanceAdjustmentCashReceiptRlnRsn2">
+      <value>
+select top(1)
+  sum(cast(@totalCurrency as decimal(15, 2)) - T1.ADJUSTMENT_AMOUNT)
+from
+  CKT_CR_RLN_RSN T2
+  join
+  CKT_CRBAL_ADJ T1
+  on
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (T2.CR_RLN_RSN_ID = T1.CRR_IDENTIFIER) and
+    (
+      T2.CODE in ('ADDPMT', 'NETPMT', 'PROCCSTFEE',
+        'NETINTFERR', 'REFUND')
+    )
+</value>
+   </data>
+   <data name="ReadCashReceiptCashReceiptEvent">
+      <value>
+select
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.RECEIPT_AMOUNT,
+  T1.CASH_RECEIPT_ID,
+  T1.CHECK_DATE,
+  T1.TOTAL_CASH_TRANSAC,
+  T1.CASH_BAL_AMT,
+  T1.CASH_DUE,
+  T2.RECEIVED_DATE,
+  T2.SOURCE_CREATION_DT
+from
+  CKT_CR_EVENT T2
+  join
+  CKT_CASH_RECEIPT T1
+  on
+    (@cstIdentifier = T2.CST_IDENTIFIER) and
+    (T2.CREVENT_ID = T1.CRV_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.SOURCE_CREATION_DT &gt; @sourceCreationDt)
+order by
+  T2.RECEIVED_DATE desc
+</value>
+   </data>
+   <data name="ReadCashReceiptSourceType">
+      <value>
+select top(1)
+  CR_SRCE_TYPE_ID,
+  INTERFACE_IND,
+  CODE
+from
+  CKT_CRSRC_TYPE
+where
+  CODE = @code
+</value>
+   </data>
+   <data name="ReadCashReceiptStatusHistoryCashReceiptStatus">
+      <value>
+select top(1)
+  CRT_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CRS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  DISCONTINUE_DATE
+from
+  CKT_CR_STATUS_HIST
+where
+  (@crtIdentifier = CRT_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (DISCONTINUE_DATE = @discontinueDate)
+</value>
+   </data>
+   <data name="ReadCashReceiptType">
+      <value>
+select top(1)
+  CRTYPE_ID,
+  CODE,
+  CATEGORY_IND
+from
+  CKT_CR_TYPE
+where
+  CRTYPE_ID = @crtypeId
+</value>
+   </data>
+</root>

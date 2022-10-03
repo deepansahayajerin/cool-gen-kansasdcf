@@ -1,0 +1,58 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="QaQarmMenu"
+           program-name="SWEQARMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.QaQarmMenu"
+           transaction="SRQQ"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="BYPASS"
+       to="SiNameNameList"
+       send-command="QARM">
+      <return-map from="Next" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="QaQamnQualityAssuranceMenu"
+       send-command="XXFMMENU"/>
+   <on exit-state="ECO_XFR_TO_QAPD"
+       action="transfer"
+       to="QaQapdQuickApData"
+       send-command="DISPLAY">
+      <map from="Search" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_QARD"
+       action="transfer"
+       to="QaQardQuickArData"
+       send-command="DISPLAY">
+      <map from="Search" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_QCHD ECO_LNK_TO_CHDS"
+       action="transfer"
+       to="QaQchdQuickChildData"
+       send-command="DISPLAY">
+      <map from="Search" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_QINC ECO_XFR_TO_COMP_CASE_COMPOSITN"
+       action="transfer"
+       to="QaQincQuickIncomeSource"
+       send-command="DISPLAY">
+      <map from="Search" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_QCOL"
+       action="transfer"
+       to="QaQcolQuickCollectionDetail"
+       send-command="DISPLAY">
+      <map from="Search" to="Next"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_QDBT"
+       action="transfer"
+       to="QaQdbtQuickDebtDetail"
+       send-command="DISPLAY">
+      <map from="Search" to="Next"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Search" to="Search"/>
+   <map from="Hidden" to="NextTranInfo"/>
+</procedure>

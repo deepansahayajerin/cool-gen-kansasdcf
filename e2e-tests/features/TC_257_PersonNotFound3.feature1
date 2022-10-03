@@ -1,0 +1,37 @@
+Feature: PersonNotFound2
+
+  Background: Navigation
+    Given Go to the ksdcf website
+    Then snapshot "landing_page"
+    Then "CSE - Main Menu" window appears
+
+  Scenario Outline: Scenario1
+    When user enters "OPAY" in a field next to the 'NEXT'
+    And presses "Enter"
+    Then "CSE - List Obligations by AP/Payor - OPAY" window appears
+
+    When user enters "<AP_PAYOR>" in "AP/Payor"
+    And user presses "F2"
+    And user enters "S" in first field under text "Sel"
+    And enters "<FLOW_TO>" in "Flow to"
+
+    And user presses "Shift+F4"
+    Then "CSE - Adjust Accrual Amount - DBWR" window appears
+
+    When user enters "<ADJUSTMENT_REASON>" in "Adjustment Reason"
+    And enters "<ADJUSTMENT_IND>" in "Adjustment Ind"
+    And enters "<ADJUSTMENT_PERIOD_FROM>" in "Adjustment Period"
+    And enters "<ADJUSTMENT_PERIOD_TO>" in the next field
+    And enters "<DESCRIPTION>" in first field under text "Description"
+    And enters "S" in first field under text "Sel"
+    And enters "<ADJUSTMENT_AMOUNT>" in the next field
+    And user presses "F5"
+    Then message "FN0000: Debt adjustment successful for the period specified" is displayed
+
+
+
+    Examples:
+      | AP_PAYOR | FLOW_TO | ADJUSTMENT_REASON | ADJUSTMENT_IND | ADJUSTMENT_PERIOD_FROM | ADJUSTMENT_PERIOD_TO | DESCRIPTION | ADJUSTMENT_AMOUNT |
+      | 132      | DBWR    | ACC               | -              | 04012022               | 04302022             | Testing     | 50                |
+
+

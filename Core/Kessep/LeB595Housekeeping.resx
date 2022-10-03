@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadFips">
+      <value>
+select top(1)
+  [STATE],
+  COUNTY,
+  LOCATION,
+  STATE_ABBREVIATION
+from
+  CKT_FIPS with(readuncommitted)
+where
+  STATE_ABBREVIATION = 'KS'
+</value>
+   </data>
+   <data name="ReadPgmNameTable">
+      <value>
+select top(1)
+  PGM_NAME,
+  PGM_DESCRIPTION
+from
+  CKT_PGM_NAME_TABLE
+where
+  PGM_NAME = cast(@name as char(8))
+</value>
+   </data>
+</root>

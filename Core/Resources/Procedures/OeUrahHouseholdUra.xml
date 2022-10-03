@@ -1,0 +1,107 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeUrahHouseholdUra"
+           program-name="SWEURAHP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeUrahHouseholdUra"
+           transaction="SR6B"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CSE_NAME_LIST"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETNAME"
+       to="SiNameNameList"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_PART_CASE_PARTICIPATN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETPART"
+       to="SiPartCaseParticipation"
+       send-command="DISPLAY">
+      <map from="Zzzzzzzzzzzz" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="OePatmGeneticWorkUraLrMenu"
+       send-command-type="none">
+      <map from="Zzzzzzzzzzzz" to="Current"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Zzzzzzzzzzzz" to="Case1"/>
+      <return-map from="Case1" to="Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzi"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_URAC"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUracUraByCourtOrder"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_LNK_TO_UCOL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUcolListUraCollections"
+       send-command="DISPLAY">
+      <map from="DialogFlowImHousehold" to="SearchImHousehold"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_UHMM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUhmmUraHouseholdMbrMaint"
+       send-command="DISPLAY">
+      <map from="DialogFlowImHousehold.AeCaseNo" to="ImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_IMHH"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeImhhListHhInfo"
+       send-command="DISPLAY">
+      <map from="DialogFlowImHousehold.AeCaseNo"
+           to="SearchCriteria.SearchImHousehold.AeCaseNo"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CURA"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeCuraMembersUra"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_URAL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="OeUralListUraAdj"
+       send-command="DISPLAY">
+      <map from="DialogFlowImHousehold" to="ImHousehold"/>
+   </on>
+   <map from="Search" to="Search"/>
+   <map from="Standard" to="Standard"/>
+   <map from="TotGrp" to="TotGrp"/>
+   <map from="TotGrpAfFcColl" to="TotGrpAfFcColl"/>
+   <map from="TotGrpMedicalColl" to="TotGrpMedicalColl"/>
+   <map from="TotGrpSsColl" to="TotGrpSsColl"/>
+   <map from="TotGrpAfFc" to="TotGrpAfFc"/>
+   <map from="TotGrpMedical" to="TotGrpMedical"/>
+   <map from="Detail.DtlCommon" to="Detail.DtlCommon"/>
+   <map from="Detail.DtlDateWorkAttributes" to="Detail.DtlDateWorkAttributes"/>
+   <map from="Detail.DtlGrpLabel1" to="Detail.DtlGrpLabel1"/>
+   <map from="Detail.DtlGrpLabel2" to="Detail.DtlGrpLabel2"/>
+   <map from="Detail.DtlImHouseholdMbrMnthlySum"
+        to="Detail.DtlImHouseholdMbrMnthlySum"/>
+   <map from="Detail.DtlGrpAfFcColl" to="Detail.DtlGrpAfFcColl"/>
+   <map from="Detail.DtlGrpMedicalColl" to="Detail.DtlGrpMedicalColl"/>
+   <map from="Detail.DtlGrpSsColl" to="Detail.DtlGrpSsColl"/>
+   <map from="Detail.DtlGrpAfFc" to="Detail.DtlGrpAfFc"/>
+   <map from="Detail.DtlGrpMedical" to="Detail.DtlGrpMedical"/>
+   <map from="TotGrpAfFcOwed" to="TotGrpAfFcOwed"/>
+   <map from="TotGrpMedicalOwed" to="TotGrpMedicalOwed"/>
+   <map from="SearchFrom.TextMonthYear" to="SearchFrom.TextMonthYear"/>
+   <map from="SearchTo.TextMonthYear" to="SearchTo.TextMonthYear"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

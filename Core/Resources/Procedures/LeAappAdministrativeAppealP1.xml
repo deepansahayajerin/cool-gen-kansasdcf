@@ -1,0 +1,241 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeAappAdministrativeAppealP1"
+           program-name="SWEAAPPP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeAappAdministrativeAppealP1"
+           transaction="SR8Z"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_AAP2 ECO_LNK_TO_ADMIN_APPEAL_TWO"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command-type="current"
+       to="LeAap2AdministrativeAppeal2"
+       send-command-type="none">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAction" to="AdministrativeAction"/>
+      <map from="ActionTaken" to="ActionTaken"/>
+      <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+      <map from="HiddenSecurity" to="HiddenSecurity"/>
+      <return-map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <return-map from="CsePersonsWorkSet.FormattedName"
+                  to="CsePersonsWorkSet.FormattedName"/>
+      <return-map from="AdministrativeAction" to="AdministrativeAction"/>
+      <return-map from="ActionTaken" to="ActionTaken"/>
+      <return-map from="AdministrativeAppeal.Identifier"
+                  to="AdministrativeAppeal.Identifier"/>
+      <return-map from="AdministrativeAppeal.Number" to="AdministrativeAppeal.Number"/>
+      <return-map from="AdministrativeAppeal.Type1" to="AdministrativeAppeal.Type1"/>
+      <return-map from="AdministrativeAppeal.RequestDate"
+                  to="AdministrativeAppeal.RequestDate"/>
+      <return-map from="AdministrativeAppeal.ReceivedDate"
+                  to="AdministrativeAppeal.ReceivedDate"/>
+      <return-map from="AdministrativeAppeal.Reason" to="AdministrativeAppeal.Reason"/>
+      <return-map from="AdministrativeAppeal.Respondent"
+                  to="AdministrativeAppeal.Respondent"/>
+      <return-map from="AdministrativeAppeal.AppellantLastName"
+                  to="AdministrativeAppeal.AppellantLastName"/>
+      <return-map from="AdministrativeAppeal.AppellantFirstName"
+                  to="AdministrativeAppeal.AppellantFirstName"/>
+      <return-map from="AdministrativeAppeal.AppellantMiddleInitial"
+                  to="AdministrativeAppeal.AppellantMiddleInitial"/>
+      <return-map from="AdministrativeAppeal.AppellantSuffix"
+                  to="AdministrativeAppeal.AppellantSuffix"/>
+      <return-map from="AdministrativeAppeal.AppellantRelationship"
+                  to="AdministrativeAppeal.AppellantRelationship"/>
+      <return-map from="AdministrativeAppeal.Outcome" to="AdministrativeAppeal.Outcome"/>
+      <return-map from="AdministrativeAppeal.ReviewOutcome"
+                  to="AdministrativeAppeal.ReviewOutcome"/>
+      <return-map from="AdministrativeAppeal.Date" to="AdministrativeAppeal.Date"/>
+      <return-map from="AdministrativeAppeal.AdminOrderDate"
+                  to="AdministrativeAppeal.AdminOrderDate"/>
+      <return-map from="AdministrativeAppeal.WithdrawDate"
+                  to="AdministrativeAppeal.WithdrawDate"/>
+      <return-map from="AdministrativeAppeal.WithdrawReason"
+                  to="AdministrativeAppeal.WithdrawReason"/>
+      <return-map from="AdministrativeAppeal.RequestFurtherReview"
+                  to="AdministrativeAppeal.RequestFurtherReview"/>
+      <return-map from="AdministrativeAppeal.RequestFurtherReviewDate"
+                  to="AdministrativeAppeal.RequestFurtherReviewDate"/>
+      <return-map from="AdministrativeAppeal.JudicialReviewInd"
+                  to="AdministrativeAppeal.JudicialReviewInd"/>
+      <return-map from="AdministrativeAppeal.AdminReviewState"
+                  to="AdministrativeAppeal.AdminReviewState"/>
+      <return-map from="HiddenSecurity" to="HiddenSecurity"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_DOCUMENT_MAINT"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETDOCM"
+       to="SpDocmDocumentMaint"
+       send-command="DISPLAY">
+      <map from="Document" to="FilterDocument"/>
+      <map from="DocmProtectFilter" to="ProtectFilter"/>
+      <return-map from="ReturnDoc.Name" to="Document.Name"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ASIN"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SpAsinOspAssignment"
+       send-command="DISPLAY">
+      <map from="AdministrativeAppeal" to="HadministrativeAppeal"/>
+      <map from="AsinObject" to="HeaderObject"/>
+      <map from="Asin" to="HcsePerson"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_POSITION_STATEMENT"
+       action="transfer"
+       to="LePostPositionStatement"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+      <map from="HiddenSecurity" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ADMIN_APPEAL_HEARING"
+       action="transfer"
+       to="LeAheaAdminAppealHearing"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+      <map from="HiddenSecurity" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_ADMIN_APPEAL_ADDRESS"
+       action="transfer"
+       to="LeAaadAdminAppealAddress"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="AdministrativeAppeal" to="AdministrativeAppeal"/>
+      <map from="HiddenSecurity" to="HiddenSecurity1"/>
+   </on>
+   <on exit-state="ECO_LNK_2_ADMN_APPEAL_BY_CSE_PER"
+       action="transfer"
+       to="LeAapsLstAdmApplsByCsePer"
+       send-command="DISPLAY">
+      <map from="CsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+      <map from="CsePersonsWorkSet.FormattedName"
+           to="CsePersonsWorkSet.FormattedName"/>
+      <map from="CsePersonsWorkSet.Ssn" to="CsePersonsWorkSet.Ssn"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLCVAL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Code" to="Code"/>
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <return-map from="DlgflwSelected" to="SelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADMIN_ACTION_AVAIL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="LeAdaaLstAdminActionsAvail"
+       send-command="DISPLAY">
+      <map from="HiddenSecurity" to="HiddenSecurity1"/>
+      <return-map from="HiddenSecurity1" to="HiddenSecurity"/>
+      <return-map from="HiddenSelected" to="SelectedAdministrativeAction"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeAdmnAdministrativeActnMenu"
+       send-command-type="none"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="HiddenSsnWorkArea" to="HiddenSsnWorkArea"/>
+   <map from="AdminRvwStatePrompt" to="AdminReviewStatePrompt"/>
+   <map from="Standard" to="Standard"/>
+   <map from="CsePersonsWorkSet" to="CsePersonsWorkSet"/>
+   <map from="AdminActionTypePrompt" to="AdminActionTypePrompt"/>
+   <map from="AppealTypePrompt" to="AppealTypePrompt"/>
+   <map from="AdministrativeAction" to="AdministrativeAction"/>
+   <map from="HiddenAdministrativeAction" to="HiddenAdministrativeAction"/>
+   <map from="ActionTaken" to="ActionTaken"/>
+   <map from="HiddenActionTaken" to="HiddenActionTaken"/>
+   <map from="HiddenSecurity" to="HiddenSecurity"/>
+   <map from="AdministrativeAppeal.AppellantSuffix"
+        to="AdministrativeAppeal.AppellantSuffix"/>
+   <map from="SsnWorkArea.SsnText9" to="SsnWorkArea.SsnText9"/>
+   <map from="HiddenAdministrativeAppeal.AdminReviewState"
+        to="HiddenAdministrativeAppeal.AdminReviewState"/>
+   <map from="AdministrativeAppeal.AdminReviewState"
+        to="AdministrativeAppeal.AdminReviewState"/>
+   <map from="AdministrativeAppeal.Number" to="AdministrativeAppeal.Number"/>
+   <map from="AdministrativeAppeal.Type1" to="AdministrativeAppeal.Type1"/>
+   <map from="AdministrativeAppeal.RequestDate"
+        to="AdministrativeAppeal.RequestDate"/>
+   <map from="AdministrativeAppeal.ReceivedDate"
+        to="AdministrativeAppeal.ReceivedDate"/>
+   <map from="AdministrativeAppeal.Reason" to="AdministrativeAppeal.Reason"/>
+   <map from="AdministrativeAppeal.Respondent"
+        to="AdministrativeAppeal.Respondent"/>
+   <map from="AdministrativeAppeal.AppellantFirstName"
+        to="AdministrativeAppeal.AppellantFirstName"/>
+   <map from="AdministrativeAppeal.AppellantMiddleInitial"
+        to="AdministrativeAppeal.AppellantMiddleInitial"/>
+   <map from="AdministrativeAppeal.AppellantLastName"
+        to="AdministrativeAppeal.AppellantLastName"/>
+   <map from="AdministrativeAppeal.AppellantRelationship"
+        to="AdministrativeAppeal.AppellantRelationship"/>
+   <map from="AdministrativeAppeal.Identifier"
+        to="AdministrativeAppeal.Identifier"/>
+   <map from="AdministrativeAppeal.Date" to="AdministrativeAppeal.Date"/>
+   <map from="AdministrativeAppeal.AdminOrderDate"
+        to="AdministrativeAppeal.AdminOrderDate"/>
+   <map from="AdministrativeAppeal.WithdrawReason"
+        to="AdministrativeAppeal.WithdrawReason"/>
+   <map from="AdministrativeAppeal.WithdrawDate"
+        to="AdministrativeAppeal.WithdrawDate"/>
+   <map from="HiddenCsePersonsWorkSet.Number"
+        to="HiddenCsePersonsWorkSet.Number"/>
+   <map from="HiddenAdministrativeAppeal.Identifier"
+        to="HiddenAdministrativeAppeal.Identifier"/>
+   <map from="HiddenAdministrativeAppeal.Number"
+        to="HiddenAdministrativeAppeal.Number"/>
+   <map from="HiddenAdministrativeAppeal.Type1"
+        to="HiddenAdministrativeAppeal.Type1"/>
+   <map from="HiddenAdministrativeAppeal.RequestDate"
+        to="HiddenAdministrativeAppeal.RequestDate"/>
+   <map from="HiddenAdministrativeAppeal.ReceivedDate"
+        to="HiddenAdministrativeAppeal.ReceivedDate"/>
+   <map from="HiddenAdministrativeAppeal.Reason"
+        to="HiddenAdministrativeAppeal.Reason"/>
+   <map from="HiddenAdministrativeAppeal.Respondent"
+        to="HiddenAdministrativeAppeal.Respondent"/>
+   <map from="HiddenAdministrativeAppeal.AppellantLastName"
+        to="HiddenAdministrativeAppeal.AppellantLastName"/>
+   <map from="HiddenAdministrativeAppeal.AppellantFirstName"
+        to="HiddenAdministrativeAppeal.AppellantFirstName"/>
+   <map from="HiddenAdministrativeAppeal.AppellantMiddleInitial"
+        to="HiddenAdministrativeAppeal.AppellantMiddleInitial"/>
+   <map from="HiddenAdministrativeAppeal.AppellantSuffix"
+        to="HiddenAdministrativeAppeal.AppellantSuffix"/>
+   <map from="HiddenAdministrativeAppeal.AppellantRelationship"
+        to="HiddenAdministrativeAppeal.AppellantRelationship"/>
+   <map from="HiddenAdministrativeAppeal.Outcome"
+        to="AdministrativeAppeal.Outcome"/>
+   <map from="HiddenAdministrativeAppeal.ReviewOutcome"
+        to="AdministrativeAppeal.ReviewOutcome"/>
+   <map from="HiddenAdministrativeAppeal.Date"
+        to="HiddenAdministrativeAppeal.Date"/>
+   <map from="HiddenAdministrativeAppeal.AdminOrderDate"
+        to="HiddenAdministrativeAppeal.AdminOrderDate"/>
+   <map from="HiddenAdministrativeAppeal.WithdrawDate"
+        to="HiddenAdministrativeAppeal.WithdrawDate"/>
+   <map from="HiddenAdministrativeAppeal.WithdrawReason"
+        to="HiddenAdministrativeAppeal.WithdrawReason"/>
+   <map from="HiddenAdministrativeAppeal.RequestFurtherReview"
+        to="AdministrativeAppeal.RequestFurtherReview"/>
+   <map from="HiddenAdministrativeAppeal.RequestFurtherReviewDate"
+        to="AdministrativeAppeal.RequestFurtherReviewDate"/>
+   <map from="HiddenAdministrativeAppeal.JudicialReviewInd"
+        to="AdministrativeAppeal.JudicialReviewInd"/>
+   <map from="HiddenCsePersonsWorkSet.Ssn" to="HiddenCsePersonsWorkSet.Ssn"/>
+   <map from="SsnWorkArea.SsnNumPart1" to="SsnWorkArea.SsnNumPart1"/>
+   <map from="SsnWorkArea.SsnNumPart2" to="SsnWorkArea.SsnNumPart2"/>
+   <map from="SsnWorkArea.SsnNumPart3" to="SsnWorkArea.SsnNumPart3"/>
+   <map from="AdministrativeAppeal.CreatedBy"
+        to="AdministrativeAppeal.CreatedBy"/>
+   <map from="AdministrativeAppeal.LastUpdatedBy"
+        to="AdministrativeAppeal.LastUpdatedBy"/>
+</procedure>

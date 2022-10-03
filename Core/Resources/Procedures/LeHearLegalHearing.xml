@@ -1,0 +1,77 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="LeHearLegalHearing"
+           program-name="SWEHEARP"
+           class="Gov.Kansas.DCF.Cse.Kessep.LeHearLegalHearing"
+           transaction="SR9J"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"
+       display-first="true"
+       action="transfer"
+       to="LeLeglLegalActionsMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="DisplayActiveCasesOnly" to="DisplayActiveCasesOnly"/>
+      <map from="Code" to="Code"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedCodeValue"/>
+   </on>
+   <on exit-state="ECO_LNK_LST_LEG_ACT_BY_CRT_CASE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RLLGLACT"
+       to="LeLacnLstLglActnByCrtCase"
+       send-command="DISPLAY">
+      <map from="Fips.StateAbbreviation" to="SearchFips.StateAbbreviation"/>
+      <map from="Fips.CountyAbbreviation" to="SearchFips.CountyAbbreviation"/>
+      <map from="Fips.CountyDescription" to="SearchFips.CountyDescription"/>
+      <map from="LegalAction.Identifier" to="SearchLegalAction.Identifier"/>
+      <map from="LegalAction.CourtCaseNumber"
+           to="SearchLegalAction.CourtCaseNumber"/>
+      <map from="LegalAction.Classification" to="SearchLegalAction.Classification"/>
+      <map from="LegalAction.ForeignOrderNumber"
+           to="SearchLegalAction.ForeignOrderNumber"/>
+      <map from="LegalAction.StandardNumber" to="SearchLegalAction.StandardNumber"/>
+      <return-map from="SearchFips" to="Fips"/>
+      <return-map from="SearchTribunal" to="Tribunal"/>
+      <return-map from="DlgflwSelected" to="DlgflwSelectedLegalAction"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_TRIBUNALS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="LeLtrbListTribunals"
+       send-command="DISPLAY">
+      <map from="Fips" to="SearchFips"/>
+      <return-map from="DlgflwSelectedFips" to="Fips"/>
+      <return-map from="DlgflwSelectedTribunal" to="Tribunal"/>
+   </on>
+   <map from="Hearing2" to="Hearing2"/>
+   <map from="PromptClass" to="PromptClass"/>
+   <map from="Hearing1" to="Hearing1"/>
+   <map from="PetitionerRespondentDetails" to="PetitionerRespondentDetails"/>
+   <map from="Addresses.FipsTribAddress" to="Addresses.FipsTribAddress"/>
+   <map from="ActionTaken" to="ActionTaken"/>
+   <map from="HiddenFips" to="HiddenFips"/>
+   <map from="Fips" to="Fips"/>
+   <map from="Tribunal" to="Tribunal"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="ListTribunal" to="ListTribunal"/>
+   <map from="Foreign" to="Foreign"/>
+   <map from="HiddenTribunal" to="HiddenTribunal"/>
+   <map from="HiddenHearing" to="HiddenHearing"/>
+   <map from="LegalAction.Identifier" to="LegalAction.Identifier"/>
+   <map from="LegalAction.CourtCaseNumber" to="LegalAction.CourtCaseNumber"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="LegalAction.Classification" to="LegalAction.Classification"/>
+   <map from="HiddenLegalAction.Identifier" to="HiddenLegalAction.Identifier"/>
+   <map from="HiddenLegalAction.Classification"
+        to="HiddenLegalAction.Classification"/>
+   <map from="HiddenLegalAction.CourtCaseNumber"
+        to="HiddenLegalAction.CourtCaseNumber"/>
+   <map from="LegalAction.ActionTaken" to="LegalAction.ActionTaken"/>
+   <autoflow command="EXIT" exit-state="ECO_XFR_TO_LEGAL_ACTION_MENU"/>
+</procedure>

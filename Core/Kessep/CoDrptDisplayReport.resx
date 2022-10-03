@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="DeleteJobRun">
+      <value>
+delete from CKT_JOB_RUN
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+   <data name="DeleteReportData">
+      <value>
+delete from CKT_REPORT_DATA
+where
+  (TYPE = @type) and
+  (SEQUENCE_NUMBER = @sequenceNumber) and
+  (JOB_NAME = @jobName) and
+  (JRU_SYSTEM_GEN_ID = @jruSystemGenId)
+</value>
+   </data>
+   <data name="ReadJobRun">
+      <value>
+select top(1)
+  START_TIMESTAMP,
+  STATUS,
+  JOB_NAME,
+  SYSTEM_GEN_ID
+from
+  CKT_JOB_RUN
+where
+  (JOB_NAME = @jobName) and
+  (SYSTEM_GEN_ID = @systemGenId)
+</value>
+   </data>
+   <data name="ReadReportData1">
+      <value>
+select
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+from
+  CKT_REPORT_DATA
+where
+  (@jobName = JOB_NAME) and
+  (@jruSystemGenId = JRU_SYSTEM_GEN_ID)
+</value>
+   </data>
+   <data name="ReadReportData2">
+      <value>
+select
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+from
+  CKT_REPORT_DATA with(readuncommitted)
+where
+  (JRU_SYSTEM_GEN_ID = @jruSystemGenId) and
+  (JOB_NAME = @jobName) and
+  (TYPE = 'D') and
+  (SEQUENCE_NUMBER &gt;= @sequenceNumber)
+order by
+  SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadReportData3">
+      <value>
+select
+  TYPE,
+  SEQUENCE_NUMBER,
+  FIRST_PAGE_ONLY_IN,
+  LINE_CONTROL,
+  LINE_TEXT,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+from
+  CKT_REPORT_DATA with(readuncommitted)
+where
+  (JRU_SYSTEM_GEN_ID = @jruSystemGenId) and
+  (JOB_NAME = @jobName)
+order by
+  TYPE desc,
+  SEQUENCE_NUMBER
+</value>
+   </data>
+   <data name="ReadReportData4">
+      <value>
+select
+  TYPE,
+  SEQUENCE_NUMBER,
+  LINE_CONTROL,
+  JOB_NAME,
+  JRU_SYSTEM_GEN_ID
+from
+  CKT_REPORT_DATA with(readuncommitted)
+where
+  (JRU_SYSTEM_GEN_ID = @jruSystemGenId) and
+  (JOB_NAME = @jobName)
+order by
+  TYPE desc,
+  SEQUENCE_NUMBER
+</value>
+   </data>
+</root>

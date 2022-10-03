@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseAssignmentOfficeServiceProviderServiceProvider">
+      <value>
+select top(1)
+  T1.REASON_CODE,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.CREATED_TIMESTAMP,
+  T1.SPD_ID,
+  T1.OFF_ID,
+  T1.OSP_CODE,
+  T1.OSP_DATE,
+  T1.CAS_NO,
+  T2.DISCONTINUE_DATE,
+  T3.USER_ID,
+  T3.LAST_NAME,
+  T3.FIRST_NAME,
+  T3.MIDDLE_INITIAL,
+  T4.NAME,
+  T4.OFF_OFFICE
+from
+  CKT_OFFICE T4
+  join
+  CKT_SERVICE_PRVDER T3
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  join
+  CKT_ASSIGN_CASE T1
+  on
+    (@casNo = T1.CAS_NO) and
+    (T1.REASON_CODE = 'RSP') and
+    (T2.EFFECTIVE_DATE = T1.OSP_DATE) and
+    (T2.ROLE_CODE = T1.OSP_CODE) and
+    (T2.OFF_GENERATED_ID = T1.OFF_ID) and
+    (T2.SPD_GENERATED_ID = T1.SPD_ID) and
+    (T1.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T1.EFFECTIVE_DATE &lt;= @discontinueDate) and
+    (T2.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T2.EFFECTIVE_DATE &lt;= @discontinueDate)
+  on
+    T3.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID
+  on
+    T4.OFFICE_ID = T2.OFF_GENERATED_ID
+order by
+  T1.DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseCsePerson">
+      <value>
+select distinct
+  T1.NUMB,
+  T5.CSP_SUP_NUMBER
+from
+  CKT_OB_TRN T5,
+  CKT_CASE T1
+  join
+  CKT_CASE_UNIT T3
+  on
+    (T1.NUMB = T3.CAS_NO) and
+    (@cspNoAp = T3.CSP_NO_AP)
+where
+  (T5.CSP_SUP_NUMBER in (T3.CSP_NO_CHILD, T3.CSP_NO_AR)) and
+  (T5.CPA_SUP_TYPE is not null) and
+  (T5.CSP_SUP_NUMBER is not null) and
+  (@otyType = T5.OTY_TYPE) and
+  (@obgGeneratedId = T5.OBG_GENERATED_ID) and
+  (@cspNumber = T5.CSP_NUMBER) and
+  (@cpaType = T5.CPA_TYPE) and
+  (T5.DEBT_TYP = @debtTyp)
+order by
+  T5.CSP_SUP_NUMBER,
+  T1.NUMB
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadObligationAssignment">
+      <value>
+select top(1)
+  REASON_CODE,
+  OVERRIDE_IND,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_TIMESTAMP,
+  SPD_ID,
+  OFF_ID,
+  OSP_CODE,
+  OSP_DATE,
+  OTY_ID,
+  CPA_TYPE,
+  CSP_NO,
+  OBG_ID
+from
+  CKT_ASSGN_OBG
+where
+  (@obgId = OBG_ID) and
+  (@cspNo = CSP_NO) and
+  (@cpaType = CPA_TYPE) and
+  (@otyId = OTY_ID) and
+  (DISCONTINUE_DATE &gt; @discontinueDate) and
+  (EFFECTIVE_DATE &lt;= @discontinueDate)
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CLASS,
+  SUP_PRSN_REQ_IND
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+   <data name="ReadOffice">
+      <value>
+select top(1)
+  OFFICE_ID,
+  NAME,
+  OFF_OFFICE
+from
+  CKT_OFFICE
+where
+  OFFICE_ID = @officeId
+</value>
+   </data>
+   <data name="ReadOfficeServiceProvider">
+      <value>
+select top(1)
+  SPD_GENERATED_ID,
+  OFF_GENERATED_ID,
+  ROLE_CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE
+from
+  CKT_OFFC_SRVC_PRVR
+where
+  (EFFECTIVE_DATE = @effectiveDate1) and
+  (ROLE_CODE = @roleCode) and
+  (OFF_GENERATED_ID = @offGeneratedId) and
+  (SPD_GENERATED_ID = @spdGeneratedId) and
+  (EFFECTIVE_DATE &lt;= @effectiveDate2) and
+  (DISCONTINUE_DATE &gt; @effectiveDate2)
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadServiceProvider1">
+      <value>
+select top(1)
+  SERVICE_PRVDER_ID,
+  USER_ID,
+  LAST_NAME,
+  FIRST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_SERVICE_PRVDER
+where
+  SERVICE_PRVDER_ID = @servicePrvderId
+</value>
+   </data>
+   <data name="ReadServiceProvider2">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T1.LAST_NAME,
+  T1.FIRST_NAME
+from
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_OFFC_SRVC_PRVR T2
+  on
+    (T1.SERVICE_PRVDER_ID = T2.SPD_GENERATED_ID) and
+    (T2.DISCONTINUE_DATE &gt; @discontinueDate) and
+    (T2.EFFECTIVE_DATE &lt;= @discontinueDate)
+  join
+  CKT_OFC_SRCPRV_RLT T3
+  on
+    (T2.ROLE_CODE = T3.OSP_R_ROLE_CODE) and
+    (T2.EFFECTIVE_DATE = T3.OSP_R_EFFECTIVE_DT) and
+    (T2.OFF_GENERATED_ID = T3.OFF_R_GENERATED_ID) and
+    (T2.SPD_GENERATED_ID = T3.SPD_R_GENERATED_ID) and
+    (@ospRoleCode = T3.OSP_ROLE_CODE) and
+    (@ospEffectiveDate = T3.OSP_EFFECTIVE_DATE) and
+    (@offGeneratedId = T3.OFF_GENERATED_ID) and
+    (@spdGeneratedId = T3.SPD_GENERATED_ID)
+</value>
+   </data>
+</root>

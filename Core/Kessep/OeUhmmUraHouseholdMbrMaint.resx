@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadImHousehold">
+      <value>
+select top(1)
+  AE_CASE_NO,
+  CASE_STATUS,
+  STATUS_DATE,
+  FIRST_BEN_DATE
+from
+  CKT_IM_HOUSEHOLD
+where
+  AE_CASE_NO = @aeCaseNo
+</value>
+   </data>
+   <data name="ReadImHouseholdMbrMnthlySum">
+      <value>
+select top(1)
+  YEAR0,
+  MONTH0,
+  RELATIONSHIP,
+  IMH_AE_CASE_NO,
+  CSP_NUMBER
+from
+  CKT_IM_HH_MBR_MSUM
+where
+  (IMH_AE_CASE_NO = @imhAeCaseNo) and
+  (CSP_NUMBER &lt;&gt; @cspNumber) and
+  (RELATIONSHIP = 'PI')
+</value>
+   </data>
+   <data name="ReadServiceProviderProfileServiceProviderProfile">
+      <value>
+select top(1)
+  T1.SERVICE_PRVDER_ID,
+  T1.USER_ID,
+  T3.PRO_NAME,
+  T3.CREATED_TIMESTAMP,
+  T3.EFFECTIVE_DATE,
+  T3.DISCONTINUE_DATE,
+  T4.CREATED_TIMESTAMP,
+  T4.ACTIVE_IND,
+  T4.FK_PRO_NAME,
+  T4.FK_TRN_TRANCODE,
+  T4.FK_TRN_SCREENID,
+  T4.FK_CMD_VALUE
+from
+  CKT_PROF_AUTH T4,
+  CKT_SERVICE_PRVDER T1
+  join
+  CKT_SERV_PROV_PRO T3
+  on
+    (T1.USER_ID = @userId) and
+    (T1.SERVICE_PRVDER_ID = T3.SPD_GEN_ID) and
+    (T3.DISCONTINUE_DATE &gt;= @discontinueDate) and
+    (T3.EFFECTIVE_DATE &lt;= @discontinueDate) and
+    (T3.PRO_NAME = 'DEVELOPERS')
+where
+  T4.ACTIVE_IND = 'Y'
+</value>
+   </data>
+</root>

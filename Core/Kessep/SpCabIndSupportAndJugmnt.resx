@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLaDetNonfinancial">
+      <value>
+select top(1)
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.NON_FIN_OBLG_TYPE,
+  T1.DETAIL_TYPE
+from
+  CKT_LEGAL_ACT_DTL T1
+  join
+  CKT_LEGAL_ACT_PERS T2
+  on
+    (T1.LA_DETAIL_NO = T2.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T2.LGA_R_IDENTIFIER) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.ACCOUNT_TYPE = 'S') and
+    (T1.DETAIL_TYPE = 'N') and
+    (T1.END_DT &gt; @endDt) and
+    (T1.EFFECTIVE_DT &lt;= @endDt)
+</value>
+   </data>
+   <data name="ReadLegalActionDetailLegalAction">
+      <value>
+select distinct
+  T1.LGA_IDENTIFIER,
+  T1.LA_DETAIL_NO,
+  T1.END_DT,
+  T1.EFFECTIVE_DT,
+  T1.JUDGEMENT_AMOUNT,
+  T1.DETAIL_TYPE,
+  T1.OTY_ID
+from
+  CKT_LEGAL_ACT_DTL T1
+  join
+  CKT_LEGAL_ACT_PERS T3
+  on
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt; @effectiveDt) and
+    (T1.LA_DETAIL_NO = T3.LAD_R_NUMBER) and
+    (T1.LGA_IDENTIFIER = T3.LGA_R_IDENTIFIER) and
+    (T3.CSP_NUMBER = @cspNumber) and
+    (T3.ACCOUNT_TYPE = 'S')
+</value>
+   </data>
+   <data name="ReadLegalActionPerson1">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CSP_NUMBER = @cspNumber) and
+  ([ROLE] = 'R')
+</value>
+   </data>
+   <data name="ReadLegalActionPerson2">
+      <value>
+select top(1)
+  LA_PERSON_ID,
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  [ROLE],
+  END_DT,
+  LGA_R_IDENTIFIER,
+  LAD_R_NUMBER,
+  ACCOUNT_TYPE
+from
+  CKT_LEGAL_ACT_PERS
+where
+  (@ladRNumber = LAD_R_NUMBER) and
+  (@lgaRIdentifier = LGA_R_IDENTIFIER) and
+  (CSP_NUMBER = @cspNumber) and
+  (ACCOUNT_TYPE = 'R')
+</value>
+   </data>
+   <data name="ReadObligationType">
+      <value>
+select top(1)
+  DEBT_TYP_ID,
+  DEBT_TYP_CD,
+  EFFECTIVE_DT,
+  DISCONTINUE_DT
+from
+  CKT_OB_TYPE
+where
+  DEBT_TYP_ID = @debtTypId
+</value>
+   </data>
+</root>

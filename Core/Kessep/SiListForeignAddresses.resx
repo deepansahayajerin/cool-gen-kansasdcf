@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonAddress">
+      <value>
+select
+  IDENTIFIER,
+  CSP_NUMBER,
+  ZDEL_START_DATE,
+  SEND_DATE,
+  SOURCE,
+  STREET_1,
+  STREET_2,
+  CITY,
+  TYPE,
+  WORKER_ID,
+  VERIFIED_DATE,
+  END_DATE,
+  END_CODE,
+  ZDEL_VERIFIED_CODE,
+  LAST_UPDATED_TMST,
+  STREET_3,
+  STREET_4,
+  PROVINCE,
+  POSTAL_CODE,
+  COUNTRY,
+  LOCATION_TYPE
+from
+  CKT_CSE_PERS_ADDR
+where
+  (
+    (END_DATE &lt; @endDate) or
+    (
+      (END_DATE = @endDate) and
+      (IDENTIFIER &lt;= @identifier)
+    )
+  ) and
+  (LOCATION_TYPE = 'F') and
+  (CSP_NUMBER = @cspNumber)
+order by
+  END_DATE desc,
+  IDENTIFIER desc
+</value>
+   </data>
+</root>

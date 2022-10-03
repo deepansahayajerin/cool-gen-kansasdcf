@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateMonthlyObligeeSummary">
+      <value>
+insert into CKT_MNTHLY_OBE_SUM
+(
+  YER,
+  MNTH,
+  PT_RECAP_AMT,
+  DISBURSEMENTS_SUPP,
+  RECAPTURED_AMT,
+  NA_ARS_RECAP_AMT,
+  PASSTHRU_AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  ADC_REIMBURSED_AMT,
+  CPA_S_TYPE,
+  CSP_S_NUMBER,
+  COLLECTION_AMT,
+  COLLCTN_DSB_TO_AR,
+  FEE_AMT,
+  ZDEL_TYPE,
+  TOT_EXCESS_URA_AMT,
+  NBR_OF_COLLECTIONS,
+  NA_CURR_RECAP_AMT
+)
+values
+(
+  @yer,
+  @mnth,
+  @ptRecapAmt,
+  @disbursementsSupp,
+  @recapturedAmt,
+  @naArsRecapAmt,
+  @passthruAmount,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @adcReimbursedAmt,
+  @cpaSType,
+  @cspSNumber,
+  @collectionAmt,
+  @collctnDsbToAr,
+  @feeAmt,
+  @zdelType,
+  @totExcessUraAmt,
+  @nbrOfCollections,
+  @naCurrRecapAmt
+)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadMonthlyObligeeSummary">
+      <value>
+select top(1)
+  YER,
+  MNTH,
+  PT_RECAP_AMT,
+  DISBURSEMENTS_SUPP,
+  RECAPTURED_AMT,
+  NA_ARS_RECAP_AMT,
+  PASSTHRU_AMOUNT,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  ADC_REIMBURSED_AMT,
+  CPA_S_TYPE,
+  CSP_S_NUMBER,
+  COLLECTION_AMT,
+  COLLCTN_DSB_TO_AR,
+  FEE_AMT,
+  TOT_EXCESS_URA_AMT,
+  NBR_OF_COLLECTIONS,
+  NA_CURR_RECAP_AMT
+from
+  CKT_MNTHLY_OBE_SUM
+where
+  (YER = @yer) and
+  (MNTH = @mnth) and
+  (@cpaSType = CPA_S_TYPE) and
+  (@cspSNumber = CSP_S_NUMBER)
+</value>
+   </data>
+   <data name="UpdateMonthlyObligeeSummary">
+      <value>
+update CKT_MNTHLY_OBE_SUM
+set
+  PT_RECAP_AMT = @ptRecapAmt,
+  DISBURSEMENTS_SUPP = @disbursementsSupp,
+  RECAPTURED_AMT = @recapturedAmt,
+  NA_ARS_RECAP_AMT = @naArsRecapAmt,
+  PASSTHRU_AMOUNT = @passthruAmount,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  ADC_REIMBURSED_AMT = @adcReimbursedAmt,
+  COLLECTION_AMT = @collectionAmt,
+  COLLCTN_DSB_TO_AR = @collctnDsbToAr,
+  FEE_AMT = @feeAmt,
+  TOT_EXCESS_URA_AMT = @totExcessUraAmt,
+  NBR_OF_COLLECTIONS = @nbrOfCollections,
+  NA_CURR_RECAP_AMT = @naCurrRecapAmt
+where
+  (YER = @yer) and
+  (MNTH = @mnth) and
+  (CPA_S_TYPE = @cpaSType) and
+  (CSP_S_NUMBER = @cspSNumber)
+</value>
+   </data>
+</root>

@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  FULL_SRV_WO_MED_IN,
+  FULL_SERV_W_MED_IN,
+  LOCATE_IND,
+  CLOSURE_REASON,
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE,
+  EXPEDIDED_PAT_IND,
+  ADC_OPEN_DATE,
+  ADC_CLOSE_DATE
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseCaseRole">
+      <value>
+select top(1)
+  T1.FULL_SRV_WO_MED_IN,
+  T1.FULL_SERV_W_MED_IN,
+  T1.LOCATE_IND,
+  T1.CLOSURE_REASON,
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T1.CSE_OPEN_DATE,
+  T1.EXPEDIDED_PAT_IND,
+  T1.ADC_OPEN_DATE,
+  T1.ADC_CLOSE_DATE,
+  T2.CSP_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.ON_SS_IND,
+  T2.HEALTH_INS_IND,
+  T2.MEDICAL_SUPP_IND,
+  T2.CONTACT_FIRST_NAME,
+  T2.CONTACT_MID_INIT,
+  T2.CONTACT_PHONE,
+  T2.CONTACT_LAST_NAME,
+  T2.CHILD_CARE_EXPENSE,
+  T2.ASSIGNMENT_DATE,
+  T2.ASSIGNMENT_TERM_CD,
+  T2.ASSIGN_OF_RIGHTS,
+  T2.ASSIGNMENT_TERM_DT,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.CREATED_BY,
+  T2.AR_CHG_PRC_REQ_IND,
+  T2.AR_CHG_PROC_DT,
+  T2.AR_INVALID_IND,
+  T2.NOTE
+from
+  CKT_CASE T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (T1.NUMB = @numb) and
+    (T1.NUMB = T2.CAS_NUMBER) and
+    (T2.CSP_NUMBER between cast(@number as char(10)) and cast(@number as char(10))) and
+    (T2.TYPE = 'AR')
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  OCCUPATION,
+  AE_CASE_NUMBER,
+  DATE_OF_DEATH,
+  ILLEGAL_ALIEN_IND,
+  CURRENT_SPOUSE_MI,
+  CURR_SPOUSE_1ST_NM,
+  BIRTH_PLACE_STATE,
+  EMERGENCY_PHONE,
+  NAME_MIDDLE,
+  NAME_MAIDEN,
+  HOME_PHONE,
+  OTHER_NUMBER,
+  BIRTH_PLACE_CITY,
+  CURR_MARITAL_STS,
+  CUR_SPOUSE_LAST_NM,
+  RACE,
+  HAIR_COLOR,
+  EYE_COLOR,
+  WEIGHT,
+  HEIGHT_FT,
+  HEIGHT_IN,
+  KSCARES_NUMBER,
+  OTHER_AREA_CODE,
+  EMERGENCY_AREA_CD,
+  HOME_PHONE_AREA_CD,
+  WORK_PHONE_AREA_CD,
+  WORK_PHONE,
+  WORK_PHONE_EXT,
+  OTHER_PHONE_TYPE,
+  OTHER_ID_INFO,
+  BIRTHPLACE_COUNTRY,
+  PRIOR_TAF_IND,
+  TRIBAL_CODE,
+  THREAT_ON_STAFF,
+  CUST_SERVICE_CD
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+</root>

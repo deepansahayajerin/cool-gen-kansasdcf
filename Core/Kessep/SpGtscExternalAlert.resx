@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  PA_REFER_NO
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadPaReferral">
+      <value>
+select top(1)
+  NUMB,
+  ASSIGN_DEACT_IND,
+  CASE_NUMBER,
+  TYPE,
+  CREATED_TSTAMP,
+  CAS_NUMBER
+from
+  CKT_PA_REFERRAL
+where
+  (TYPE = 'NEW') and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadPaReferralParticipant">
+      <value>
+select top(1)
+  IDENTIFIER,
+  PERSON_NUM,
+  PRE_NUMBER,
+  PAF_TYPE,
+  PAF_TSTAMP,
+  [ROLE]
+from
+  CKT_PA_REFER_PART
+where
+  (@pafTstamp = PAF_TSTAMP) and
+  (@preNumber = PRE_NUMBER) and
+  (@pafType = PAF_TYPE) and
+  (PERSON_NUM = @personNum) and
+  ([ROLE] = 'CH')
+</value>
+   </data>
+</root>

@@ -1,0 +1,24 @@
+name: Release the version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Copy GA repository
+      run: |
+        git clone --bare https://${{secrets.COOL_GEN_ACCOUNT}}:${{secrets.COOL_GEN_TOKEN}}@github.com/adv-appmod/cool-gen-kansasdcf-docs.git
+        cd cool-gen-kansasdcf-docs.git
+        git push --mirror https://${{secrets.KANSAS_GH_ACCOUNT}}:${{secrets.KANSAS_GH_TOKEN}}@github.com/HSEBIT/css-docs.git;
+        cd ..
+        rm -rf cool-gen-kansasdcf-docs.git
+
+    - name: Copy X repository
+      run: |
+        echo 'Copy X repository'

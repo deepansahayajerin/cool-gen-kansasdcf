@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  LAST_MOD_REVIEW_DT,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (STANDARD_NO = @standardNo) and
+  (CLASSIFICATION = 'J')
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  LAST_MOD_REVIEW_DT,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP,
+  LAST_UPD_TSTAMP,
+  TRB_ID
+from
+  CKT_LEGAL_ACTION
+where
+  (END_DT &gt;= @endDt) and
+  (CLASSIFICATION = 'N') and
+  (cast(CREATED_TSTAMP as date) &gt; cast(@date as date)) and
+  (
+    ACTION_TAKEN in (cast(@actionTaken1 as char(30)), cast(@actionTaken2 as char(30)), cast(@actionTaken3 as char(30)),
+      cast(@actionTaken4 as char(30)), cast(@actionTaken5 as char(30)), cast(@actionTaken6 as char(30)))
+  )
+order by
+  STANDARD_NO,
+  CREATED_TSTAMP desc
+</value>
+   </data>
+   <data name="ReadTribunalFips1">
+      <value>
+select top(1)
+  T1.FIP_LOCATION,
+  T1.IDENTIFIER,
+  T1.FIP_COUNTY,
+  T1.FIP_STATE,
+  T2.STATE_ABBREVIATION
+from
+  CKT_FIPS T2
+  join
+  CKT_TRIBUNAL T1
+  on
+    (T1.IDENTIFIER = @identifier) and
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE)
+</value>
+   </data>
+   <data name="ReadTribunalFips2">
+      <value>
+select top(1)
+  T1.FIP_LOCATION,
+  T1.IDENTIFIER,
+  T1.FIP_COUNTY,
+  T1.FIP_STATE,
+  T2.STATE_ABBREVIATION
+from
+  CKT_FIPS T2
+  join
+  CKT_TRIBUNAL T1
+  on
+    (T1.IDENTIFIER = @identifier) and
+    (T2.LOCATION = T1.FIP_LOCATION) and
+    (T2.COUNTY = T1.FIP_COUNTY) and
+    (T2.[STATE] = T1.FIP_STATE)
+</value>
+   </data>
+</root>

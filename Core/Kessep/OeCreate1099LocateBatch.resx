@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="Create1099LocateRequest">
+      <value>
+insert into CKT_1099_LOC_REQ
+(
+  CSP_NUMBER,
+  IDENTIFIER,
+  SSN,
+  LOCAL_CODE,
+  LAST_NAME,
+  AFDC_CODE,
+  CASE_ID_NO,
+  CT_OR_ADM_ORD_IND,
+  NO_MATCH_CODE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  FIRST_NAME,
+  REQUEST_SENT_DATE,
+  MIDDLE_INITIAL
+)
+values
+(
+  @cspNumber,
+  @identifier,
+  @ssn,
+  @localCode,
+  @lastName,
+  @afdcCode,
+  @caseIdNo,
+  @ctOrAdmOrdInd,
+  @noMatchCode,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @firstName,
+  @requestSentDate,
+  @middleInitial
+)
+</value>
+   </data>
+   <data name="Read1099LocateRequest">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  IDENTIFIER,
+  REQUEST_SENT_DATE
+from
+  CKT_1099_LOC_REQ
+where
+  @cspNumber = CSP_NUMBER
+order by
+  IDENTIFIER desc
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadLegalActionPersonLegalAction">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.[ROLE],
+  T1.END_DT,
+  T1.END_REASON,
+  T1.CREATED_TSTAMP,
+  T1.CREATED_BY,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T2.CLASSIFICATION,
+  T2.FILED_DT,
+  T2.END_DT
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T2.END_DT &gt;= @effectiveDt)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonLegalActionLegalActionDetail">
+      <value>
+select top(1)
+  T1.LA_PERSON_ID,
+  T1.CSP_NUMBER,
+  T1.LGA_IDENTIFIER,
+  T1.EFFECTIVE_DT,
+  T1.[ROLE],
+  T1.END_DT,
+  T1.END_REASON,
+  T1.CREATED_TSTAMP,
+  T1.CREATED_BY,
+  T1.LGA_R_IDENTIFIER,
+  T1.LAD_R_NUMBER,
+  T1.ACCOUNT_TYPE,
+  T2.LEGAL_ACTION_ID,
+  T2.CLASSIFICATION,
+  T2.FILED_DT,
+  T2.END_DT,
+  T3.END_DT,
+  T3.EFFECTIVE_DT
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_LEGAL_ACT_DTL T3
+  join
+  CKT_LEGAL_ACT_PERS T1
+  on
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt;= @effectiveDt) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T3.LA_DETAIL_NO = T1.LAD_R_NUMBER) and
+    (T3.LGA_IDENTIFIER = T1.LGA_R_IDENTIFIER) and
+    (T3.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T3.END_DT &gt;= @effectiveDt)
+  on
+    (T2.LEGAL_ACTION_ID = T3.LGA_IDENTIFIER) and
+    (T2.END_DT &lt;= @effectiveDt)
+</value>
+   </data>
+</root>

@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="AssociateGoodCause">
+      <value>
+update CKT_GOOD_CAUSE
+set
+  CAS_NUMBER1 = @casNumber1,
+  CSP_NUMBER1 = @cspNumber1,
+  CRO_TYPE1 = @croType1,
+  CRO_IDENTIFIER1 = @croIdentifier1
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (CRO_TYPE = @croType) and
+  (CRO_IDENTIFIER = @croIdentifier)
+</value>
+   </data>
+   <data name="AssociateNonCooperation">
+      <value>
+update CKT_NON_COPERATION
+set
+  CAS_NUMBER1 = @casNumber1,
+  CSP_NUMBER1 = @cspNumber1,
+  CRO_TYPE1 = @croType1,
+  CRO_IDENTIFIER1 = @croIdentifier1
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (CRO_TYPE = @croType) and
+  (CRO_IDENTIFIER = @croIdentifier)
+</value>
+   </data>
+   <data name="ReadCase1">
+      <value>
+select top(1)
+  FULL_SRV_WO_MED_IN,
+  FULL_SERV_W_MED_IN,
+  LOCATE_IND,
+  CLOSURE_REASON,
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  EXPEDIDED_PAT_IND,
+  PA_MEDICAL_SERVICE,
+  CLOSURE_LETR_DATE,
+  DUP_CASE_INDICATOR,
+  NOTE,
+  NO_JURISDICTION_CD
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCase2">
+      <value>
+select top(1)
+  FULL_SRV_WO_MED_IN,
+  FULL_SERV_W_MED_IN,
+  LOCATE_IND,
+  CLOSURE_REASON,
+  NUMB,
+  STATUS,
+  STATUS_DATE,
+  CSE_OPEN_DATE,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  EXPEDIDED_PAT_IND,
+  PA_MEDICAL_SERVICE,
+  CLOSURE_LETR_DATE,
+  DUP_CASE_INDICATOR,
+  NOTE,
+  NO_JURISDICTION_CD
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseRole1">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  ASSIGNMENT_DATE,
+  ASSIGNMENT_TERM_CD,
+  ASSIGN_OF_RIGHTS,
+  ASSIGNMENT_TERM_DT,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'AP')
+order by
+  START_DATE desc
+</value>
+   </data>
+   <data name="ReadCaseRole2">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE,
+  ASSIGNMENT_DATE,
+  ASSIGNMENT_TERM_CD,
+  ASSIGN_OF_RIGHTS,
+  ASSIGNMENT_TERM_DT,
+  LAST_UPDATED_TMST,
+  LAST_UPDATED_BY,
+  CREATED_TIMESTAMP,
+  CREATED_BY
+from
+  CKT_CASE_ROLE
+where
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = 'AR') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt; @startDate) and
+  (@casNumber = CAS_NUMBER)
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoAp = CSP_NO_AP) and
+  (@cspNoAr = CSP_NO_AR) and
+  (START_DATE &lt;= @startDate) and
+  (CLOSURE_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (@cspNoAr = CSP_NO_AR) and
+  (START_DATE &lt;= @startDate) and
+  (CLOSURE_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCaseUnit3">
+      <value>
+select
+  CU_NUMBER,
+  START_DATE,
+  CLOSURE_DATE,
+  CAS_NO,
+  CSP_NO_AR,
+  CSP_NO_AP
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (START_DATE &lt;= @startDate) and
+  (CLOSURE_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  ORGANIZATION_NAME
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePersonCaseRole">
+      <value>
+select top(1)
+  T1.NUMB,
+  T1.TYPE,
+  T1.ORGANIZATION_NAME,
+  T2.CAS_NUMBER,
+  T2.TYPE,
+  T2.CASE_ROLE_ID,
+  T2.START_DATE,
+  T2.END_DATE,
+  T2.ASSIGNMENT_DATE,
+  T2.ASSIGNMENT_TERM_CD,
+  T2.ASSIGN_OF_RIGHTS,
+  T2.ASSIGNMENT_TERM_DT,
+  T2.LAST_UPDATED_TMST,
+  T2.LAST_UPDATED_BY,
+  T2.CREATED_TIMESTAMP,
+  T2.CREATED_BY
+from
+  CKT_CSE_PERSON T1
+  join
+  CKT_CASE_ROLE T2
+  on
+    (@casNumber = T2.CAS_NUMBER) and
+    (T2.TYPE = 'AR') and
+    (T1.NUMB = T2.CSP_NUMBER) and
+    (T1.NUMB = @numb)
+order by
+  T2.END_DATE desc
+</value>
+   </data>
+   <data name="ReadGoodCause">
+      <value>
+select
+  CODE,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_NUMBER1,
+  CSP_NUMBER1,
+  CRO_TYPE1,
+  CRO_IDENTIFIER1
+from
+  CKT_GOOD_CAUSE
+where
+  (@casNumber = CAS_NUMBER) and
+  (@cspNumber = CSP_NUMBER)
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="ReadInterstateRequest1">
+      <value>
+select top(1)
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+   <data name="ReadInterstateRequest2">
+      <value>
+select
+  IDENTIFIER,
+  OTH_ST_CASE_STATUS,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  (@casINumber = CAS_I_NUMBER) and
+  (OTH_ST_CASE_STATUS = 'O')
+</value>
+   </data>
+   <data name="ReadNonCooperation">
+      <value>
+select
+  CODE,
+  REASON,
+  EFFECTIVE_DATE,
+  DISCONTINUE_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TIMES,
+  CAS_NUMBER,
+  CSP_NUMBER,
+  CRO_TYPE,
+  CRO_IDENTIFIER,
+  CAS_NUMBER1,
+  CSP_NUMBER1,
+  CRO_TYPE1,
+  CRO_IDENTIFIER1
+from
+  CKT_NON_COPERATION
+where
+  @casNumber = CAS_NUMBER
+order by
+  CREATED_TIMESTAMP desc
+</value>
+   </data>
+   <data name="UpdateCase">
+      <value>
+update CKT_CASE
+set
+  FULL_SRV_WO_MED_IN = @fullSrvWoMedIn,
+  FULL_SERV_W_MED_IN = @fullServWMedIn,
+  LOCATE_IND = @locateInd,
+  CLOSURE_REASON = @closureReason,
+  STATUS = @status,
+  STATUS_DATE = @statusDate,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  EXPEDIDED_PAT_IND = @expedidedPatInd,
+  PA_MEDICAL_SERVICE = @paMedicalService,
+  CLOSURE_LETR_DATE = @closureLetrDate,
+  DUP_CASE_INDICATOR = @dupCaseIndicator,
+  NOTE = @note,
+  NO_JURISDICTION_CD = @noJurisdictionCd
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="UpdateCaseRole">
+      <value>
+update CKT_CASE_ROLE
+set
+  ASSIGNMENT_TERM_CD = @assignmentTermCd,
+  ASSIGNMENT_TERM_DT = @assignmentTermDt,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  LAST_UPDATED_BY = @lastUpdatedBy
+where
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (TYPE = @type) and
+  (CASE_ROLE_ID = @caseRoleId)
+</value>
+   </data>
+   <data name="UpdateGoodCause">
+      <value>
+update CKT_GOOD_CAUSE
+set
+  CODE = @code,
+  EFFECTIVE_DATE = @effectiveDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (CRO_TYPE = @croType) and
+  (CRO_IDENTIFIER = @croIdentifier)
+</value>
+   </data>
+   <data name="UpdateInterstateRequest">
+      <value>
+update CKT_INTERSTAT_RQST
+set
+  OTH_ST_CASE_STATUS = @othStCaseStatus
+where
+  IDENTIFIER = @identifier
+</value>
+   </data>
+   <data name="UpdateNonCooperation">
+      <value>
+update CKT_NON_COPERATION
+set
+  CODE = @code,
+  REASON = @reason,
+  EFFECTIVE_DATE = @effectiveDate,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TIMES = @lastUpdatedTimes
+where
+  (CREATED_TIMESTAMP = @createdTimestamp) and
+  (CAS_NUMBER = @casNumber) and
+  (CSP_NUMBER = @cspNumber) and
+  (CRO_TYPE = @croType) and
+  (CRO_IDENTIFIER = @croIdentifier)
+</value>
+   </data>
+</root>

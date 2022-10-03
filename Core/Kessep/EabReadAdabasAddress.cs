@@ -1,0 +1,149 @@
+﻿// Program: EAB_READ_ADABAS_ADDRESS, ID: 371728438, model: 746.
+// Short name: SWEXIR20
+using System;
+using System.Text.Json.Serialization;
+using Bphx.Cool;
+using Gov.Kansas.DCF.Cse.Entities;
+using Gov.Kansas.DCF.Cse.Worksets;
+
+namespace Gov.Kansas.DCF.Cse.Kessep;
+
+/// <summary>
+/// <para>
+/// A program: EAB_READ_ADABAS_ADDRESS.
+/// </para>
+/// <para>
+/// RESP: SRVINIT
+/// </para>
+/// </summary>
+[Serializable]
+public partial class EabReadAdabasAddress: Bphx.Cool.Action
+{
+  /// <summary>
+  /// Executes the EAB_READ_ADABAS_ADDRESS program.
+  /// </summary>
+  public static readonly Action<IContext, Import, Export> Execute =
+    (c, i, e) => new EabReadAdabasAddress(c, i, e).Run();
+
+  /// <summary>
+  /// Constructs an instance of EabReadAdabasAddress.
+  /// </summary>
+  public EabReadAdabasAddress(IContext context, Import import, Export export):
+    base(context)
+  {
+    this.import = import;
+    this.export = export;
+  }
+
+#region Implementation
+  /// <summary>Executes action's logic.</summary>
+  public void Run()
+  {
+    GetService<IEabStub>().Execute(
+      "SWEXIR20", context, import, export, EabOptions.NoIefParams);
+  }
+#endregion
+
+#region Parameters.
+  protected readonly Import import;
+  protected readonly Export export;
+#endregion
+
+#region Structures
+  /// <summary>
+  /// This class defines import view.
+  /// </summary>
+  [Serializable]
+  public class Import
+  {
+    /// <summary>
+    /// A value of AddressType.
+    /// </summary>
+    [JsonPropertyName("addressType")]
+    [Member(Index = 1, Members = new[] { "Flag" })]
+    public Common AddressType
+    {
+      get => addressType ??= new();
+      set => addressType = value;
+    }
+
+    /// <summary>
+    /// A value of Current.
+    /// </summary>
+    [JsonPropertyName("current")]
+    [Member(Index = 2, Members = new[] { "Date" })]
+    public DateWorkArea Current
+    {
+      get => current ??= new();
+      set => current = value;
+    }
+
+    /// <summary>
+    /// A value of Ae.
+    /// </summary>
+    [JsonPropertyName("ae")]
+    [Member(Index = 3, Members = new[] { "Number" })]
+    public CsePersonsWorkSet Ae
+    {
+      get => ae ??= new();
+      set => ae = value;
+    }
+
+    private Common addressType;
+    private DateWorkArea current;
+    private CsePersonsWorkSet ae;
+  }
+
+  /// <summary>
+  /// This class defines export view.
+  /// </summary>
+  [Serializable]
+  public class Export
+  {
+    /// <summary>
+    /// A value of AbendData.
+    /// </summary>
+    [JsonPropertyName("abendData")]
+    [Member(Index = 1, Members = new[]
+    {
+      "Type1",
+      "AdabasFileNumber",
+      "AdabasFileAction",
+      "AdabasResponseCd",
+      "CicsResourceNm",
+      "CicsFunctionCd",
+      "CicsResponseCd"
+    })]
+    public AbendData AbendData
+    {
+      get => abendData ??= new();
+      set => abendData = value;
+    }
+
+    /// <summary>
+    /// A value of Ae.
+    /// </summary>
+    [JsonPropertyName("ae")]
+    [Member(Index = 2, Members = new[]
+    {
+      "LocationType",
+      "Street1",
+      "Street2",
+      "City",
+      "State",
+      "ZipCode",
+      "Zip4",
+      "Type1",
+      "County"
+    })]
+    public CsePersonAddress Ae
+    {
+      get => ae ??= new();
+      set => ae = value;
+    }
+
+    private AbendData abendData;
+    private CsePersonAddress ae;
+  }
+#endregion
+}

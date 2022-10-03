@@ -1,0 +1,183 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnMtrnMaintainEftTrnsmission"
+           program-name="SWEMTRNP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnMtrnMaintainEftTrnsmission"
+           transaction="SRI2"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_CDVL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCDVL"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="ToList" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_DISB_MGMNT_MENU"
+       action="transfer"
+       to="FnDmenDisbManagementMenu"
+       send-command="DISPLAY"/>
+   <on exit-state="ECO_XFR_TO_CASH_MGMNT_MENU"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_CRSL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="FROMCRSL"
+       to="FnCrslLstCashRcptSources"
+       send-command="DISPLAY">
+      <return-map from="FlowSelection" to="CashReceiptSourceType"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASH_RECEIPTING"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrecCashReceipting"
+       send-command="DISPLAY">
+      <map from="ForLink.SequentialNumber" to="CashReceipt.SequentialNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_COLLECTION_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrrcRecCollctnDetailsPri"
+       send-command="DISPLAY">
+      <map from="ForLink.SequentialNumber" to="CashReceipt.SequentialNumber"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EDTL"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnEdtlLstEftDetail"
+       send-command="DISPLAY">
+      <map from="ElectronicFundTransmission" to="ElectronicFundTransmission"/>
+   </on>
+   <map from="NextRead" to="NextRead"/>
+   <map from="Pf15Nf" to="Pf15Nf"/>
+   <map from="Type1" to="Type1"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="ElectronicFundTransmission.FileCreationTime"
+        to="ElectronicFundTransmission.FileCreationTime"/>
+   <map from="ElectronicFundTransmission.LastUpdatedBy"
+        to="ElectronicFundTransmission.LastUpdatedBy"/>
+   <map from="ElectronicFundTransmission.LastUpdatedTimestamp"
+        to="ElectronicFundTransmission.LastUpdatedTimestamp"/>
+   <map from="ElectronicFundTransmission.ReceivingDfiIdentification"
+        to="ElectronicFundTransmission.ReceivingDfiIdentification"/>
+   <map from="ElectronicFundTransmission.CheckDigit"
+        to="ElectronicFundTransmission.CheckDigit"/>
+   <map from="ElectronicFundTransmission.VendorNumber"
+        to="ElectronicFundTransmission.VendorNumber"/>
+   <map from="HiddenElectronicFundTransmission.PayDate"
+        to="HiddenElectronicFundTransmission.PayDate"/>
+   <map from="HiddenElectronicFundTransmission.TransmittalAmount"
+        to="HiddenElectronicFundTransmission.TransmittalAmount"/>
+   <map from="HiddenElectronicFundTransmission.ApSsn"
+        to="HiddenElectronicFundTransmission.ApSsn"/>
+   <map from="HiddenElectronicFundTransmission.MedicalSupportId"
+        to="HiddenElectronicFundTransmission.MedicalSupportId"/>
+   <map from="HiddenElectronicFundTransmission.ApName"
+        to="HiddenElectronicFundTransmission.ApName"/>
+   <map from="HiddenElectronicFundTransmission.FipsCode"
+        to="HiddenElectronicFundTransmission.FipsCode"/>
+   <map from="HiddenElectronicFundTransmission.EmploymentTerminationId"
+        to="HiddenElectronicFundTransmission.EmploymentTerminationId"/>
+   <map from="HiddenElectronicFundTransmission.ReceivingDfiIdentification"
+        to="HiddenElectronicFundTransmission.ReceivingDfiIdentification"/>
+   <map from="HiddenElectronicFundTransmission.DfiAccountNumber"
+        to="HiddenElectronicFundTransmission.DfiAccountNumber"/>
+   <map from="HiddenElectronicFundTransmission.CaseId"
+        to="HiddenElectronicFundTransmission.CaseId"/>
+   <map from="HiddenElectronicFundTransmission.TransmissionStatusCode"
+        to="HiddenElectronicFundTransmission.TransmissionStatusCode"/>
+   <map from="HiddenElectronicFundTransmission.CompanyName"
+        to="HiddenElectronicFundTransmission.CompanyName"/>
+   <map from="HiddenElectronicFundTransmission.OriginatingDfiIdentification"
+        to="HiddenElectronicFundTransmission.OriginatingDfiIdentification"/>
+   <map from="HiddenElectronicFundTransmission.TransactionCode"
+        to="HiddenElectronicFundTransmission.TransactionCode"/>
+   <map from="HiddenElectronicFundTransmission.CompanyIdentificationIcd"
+        to="HiddenElectronicFundTransmission.CompanyIdentificationIcd"/>
+   <map from="HiddenElectronicFundTransmission.CompanyIdentificationNumber"
+        to="HiddenElectronicFundTransmission.CompanyIdentificationNumber"/>
+   <map from="HiddenElectronicFundTransmission.CompanyDescriptiveDate"
+        to="HiddenElectronicFundTransmission.CompanyDescriptiveDate"/>
+   <map from="HiddenElectronicFundTransmission.EffectiveEntryDate"
+        to="HiddenElectronicFundTransmission.EffectiveEntryDate"/>
+   <map from="HiddenElectronicFundTransmission.TraceNumber"
+        to="HiddenElectronicFundTransmission.TraceNumber"/>
+   <map from="HiddenElectronicFundTransmission.ApplicationIdentifier"
+        to="HiddenElectronicFundTransmission.ApplicationIdentifier"/>
+   <map from="HiddenElectronicFundTransmission.CollectionAmount"
+        to="HiddenElectronicFundTransmission.CollectionAmount"/>
+   <map from="HiddenElectronicFundTransmission.CompanyEntryDescription"
+        to="HiddenElectronicFundTransmission.CompanyEntryDescription"/>
+   <map from="HiddenElectronicFundTransmission.ReceivingCompanyName"
+        to="HiddenElectronicFundTransmission.ReceivingCompanyName"/>
+   <map from="HiddenElectronicFundTransmission.VendorNumber"
+        to="HiddenElectronicFundTransmission.VendorNumber"/>
+   <map from="HiddenElectronicFundTransmission.CheckDigit"
+        to="HiddenElectronicFundTransmission.CheckDigit"/>
+   <map from="ApplicationId.PromptField" to="ApplicationId.PromptField"/>
+   <map from="CoEntryDesc.PromptField" to="CoEntryDesc.PromptField"/>
+   <map from="ElectronicFundTransmission.ApplicationIdentifier"
+        to="ElectronicFundTransmission.ApplicationIdentifier"/>
+   <map from="ElectronicFundTransmission.CaseId"
+        to="ElectronicFundTransmission.CaseId"/>
+   <map from="ElectronicFundTransmission.MedicalSupportId"
+        to="ElectronicFundTransmission.MedicalSupportId"/>
+   <map from="ElectronicFundTransmission.ApName"
+        to="ElectronicFundTransmission.ApName"/>
+   <map from="ElectronicFundTransmission.EmploymentTerminationId"
+        to="ElectronicFundTransmission.EmploymentTerminationId"/>
+   <map from="ElectronicFundTransmission.CollectionAmount"
+        to="ElectronicFundTransmission.CollectionAmount"/>
+   <map from="ElectronicFundTransmission.ApSsn"
+        to="ElectronicFundTransmission.ApSsn"/>
+   <map from="ElectronicFundTransmission.FipsCode"
+        to="ElectronicFundTransmission.FipsCode"/>
+   <map from="ElectronicFundTransmission.TransmittalAmount"
+        to="ElectronicFundTransmission.TransmittalAmount"/>
+   <map from="ElectronicFundTransmission.TransactionCode"
+        to="ElectronicFundTransmission.TransactionCode"/>
+   <map from="ElectronicFundTransmission.ReceivingDfiAccountNumber"
+        to="ElectronicFundTransmission.ReceivingDfiAccountNumber"/>
+   <map from="PaymentRequest.CsePersonNumber"
+        to="PaymentRequest.CsePersonNumber"/>
+   <map from="PaymentRequest.SystemGeneratedIdentifier"
+        to="PaymentRequest.SystemGeneratedIdentifier"/>
+   <map from="ElectronicFundTransmission.PayDate"
+        to="ElectronicFundTransmission.PayDate"/>
+   <map from="ElectronicFundTransmission.SequenceNumber"
+        to="ElectronicFundTransmission.SequenceNumber"/>
+   <map from="ElectronicFundTransmission.TransmissionStatusCode"
+        to="ElectronicFundTransmission.TransmissionStatusCode"/>
+   <map from="ElectronicFundTransmission.CompanyName"
+        to="ElectronicFundTransmission.CompanyName"/>
+   <map from="ElectronicFundTransmission.TransmissionType"
+        to="ElectronicFundTransmission.TransmissionType"/>
+   <map from="ElectronicFundTransmission.TransmissionProcessDate"
+        to="ElectronicFundTransmission.TransmissionProcessDate"/>
+   <map from="Standard.NextTransaction" to="ApplicationId.NextTransaction"/>
+   <map from="ElectronicFundTransmission.TransmissionIdentifier"
+        to="ElectronicFundTransmission.TransmissionIdentifier"/>
+   <map from="ElectronicFundTransmission.FileCreationDate"
+        to="ElectronicFundTransmission.FileCreationDate"/>
+   <map from="ElectronicFundTransmission.CompanyIdentificationIcd"
+        to="ElectronicFundTransmission.CompanyIdentificationIcd"/>
+   <map from="ElectronicFundTransmission.CompanyIdentificationNumber"
+        to="ElectronicFundTransmission.CompanyIdentificationNumber"/>
+   <map from="ElectronicFundTransmission.CompanyEntryDescription"
+        to="ElectronicFundTransmission.CompanyEntryDescription"/>
+   <map from="ElectronicFundTransmission.CompanyDescriptiveDate"
+        to="ElectronicFundTransmission.CompanyDescriptiveDate"/>
+   <map from="ElectronicFundTransmission.EffectiveEntryDate"
+        to="ElectronicFundTransmission.EffectiveEntryDate"/>
+   <map from="ElectronicFundTransmission.OriginatingDfiIdentification"
+        to="ElectronicFundTransmission.OriginatingDfiIdentification"/>
+   <map from="ElectronicFundTransmission.ReceivingCompanyName"
+        to="ElectronicFundTransmission.ReceivingCompanyName"/>
+   <map from="ElectronicFundTransmission.TraceNumber"
+        to="ElectronicFundTransmission.TraceNumber"/>
+</procedure>

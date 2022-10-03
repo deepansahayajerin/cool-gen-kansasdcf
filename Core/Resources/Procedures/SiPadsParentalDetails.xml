@@ -1,0 +1,89 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiPadsParentalDetails"
+           program-name="SWEPADSP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiPadsParentalDetails"
+           transaction="SR1X"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Case1" to="Case1"/>
+      <map from="Ap" to="CsePersonsWorkSet"/>
+      <map from="Hidden" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_CASE_COMPOSITION"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETCOMP"
+       to="SiCompCaseComposition"
+       send-command="DISPLAY">
+      <map from="Case1" to="Case1"/>
+      <map from="Hidden" to="Hidden"/>
+      <return-map from="Selected.Number" to="ApSelected.Number"/>
+      <return-map from="Selected.FormattedName" to="ApSelected.FormattedName"/>
+      <return-map from="Hidden" to="Hidden"/>
+   </on>
+   <map from="HeaderLine" to="HeaderLine"/>
+   <map from="Ap" to="Ap"/>
+   <map from="Ar" to="Ar"/>
+   <map from="MotherCsePersonsWorkSet" to="MotherCsePersonsWorkSet"/>
+   <map from="FatherCsePersonsWorkSet" to="FatherCsePersonsWorkSet"/>
+   <map from="Next" to="Next"/>
+   <map from="Standard" to="Standard"/>
+   <map from="Case1" to="Case1"/>
+   <map from="MotherCommon" to="MotherCommon"/>
+   <map from="MotherCaseRole" to="MotherCaseRole"/>
+   <map from="MotherCsePersonAddress" to="MotherCsePersonAddress"/>
+   <map from="FatherCommon" to="FatherCommon"/>
+   <map from="FatherCsePersonAddress" to="FatherCsePersonAddress"/>
+   <map from="FatherCaseRole" to="FatherCaseRole"/>
+   <map from="HiddenPrevFather" to="HiddenPrevFather"/>
+   <map from="HiddenPrevMother" to="HiddenPrevMother"/>
+   <map from="ApSelected" to="ApSelected"/>
+   <map from="FaHiddenAe" to="FaHiddenAe"/>
+   <map from="MoHiddenAe" to="MoHiddenAe"/>
+   <map from="FaHiddenOtherCr" to="FaHiddenOtherCr"/>
+   <map from="MoHiddenOtherCr" to="MoHiddenOtherCr"/>
+   <map from="MoHiddenOtherCase" to="MoHiddenOtherCase"/>
+   <map from="FaHiddenOtherCase" to="FaHiddenOtherCase"/>
+   <map from="ApPrompt" to="ApPrompt"/>
+   <map from="MoStatePrompt" to="MoStatePrompt"/>
+   <map from="FaStatePrompt" to="FaStatePrompt"/>
+   <map from="Office" to="Office"/>
+   <map from="ServiceProvider" to="ServiceProvider"/>
+   <map from="CaseOpen" to="CaseOpen"/>
+   <map from="MoCntyPrompt" to="MoCntyPrompt"/>
+   <map from="FaCntyPrompt" to="FaCntyPrompt"/>
+   <map from="MotherSsnWorkArea" to="MotherSsnWorkArea"/>
+   <map from="FatherSsnWorkArea" to="FatherSsnWorkArea"/>
+   <map from="Hidden.LegalActionIdentifier" to="Hidden.LegalActionIdentifier"/>
+   <map from="Hidden.CourtCaseNumber" to="Hidden.CourtCaseNumber"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+   <map from="Hidden.CsePersonNumber" to="Hidden.CsePersonNumber"/>
+   <map from="Hidden.CsePersonNumberAp" to="Hidden.CsePersonNumberAp"/>
+   <map from="Hidden.CsePersonNumberObligee" to="Hidden.CsePersonNumberObligee"/>
+   <map from="Hidden.CsePersonNumberObligor" to="Hidden.CsePersonNumberObligor"/>
+   <map from="Hidden.CourtOrderNumber" to="Hidden.CourtOrderNumber"/>
+   <map from="Hidden.ObligationId" to="Hidden.ObligationId"/>
+   <map from="Hidden.StandardCrtOrdNumber" to="Hidden.StandardCrtOrdNumber"/>
+   <map from="Hidden.InfrastructureId" to="Hidden.InfrastructureId"/>
+   <map from="Hidden.MiscText1" to="Hidden.MiscText1"/>
+   <map from="Hidden.MiscText2" to="Hidden.MiscText2"/>
+   <map from="Hidden.MiscNum1" to="Hidden.MiscNum1"/>
+   <map from="Hidden.MiscNum2" to="Hidden.MiscNum2"/>
+   <map from="Hidden.MiscNum1V2" to="Hidden.MiscNum1V2"/>
+   <map from="Hidden.MiscNum2V2" to="Hidden.MiscNum2V2"/>
+   <map from="MotherCsePerson.DateOfDeath" to="MotherCsePerson.DateOfDeath"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

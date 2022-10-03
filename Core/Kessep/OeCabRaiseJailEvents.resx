@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseUnitCase1">
+      <value>
+select
+  T1.CU_NUMBER,
+  T1.START_DATE,
+  T1.CLOSURE_DATE,
+  T1.CAS_NO,
+  T1.CSP_NO_AR,
+  T1.CSP_NO_AP,
+  T2.STATUS
+from
+  CKT_CASE T2
+  join
+  CKT_CASE_UNIT T1
+  on
+    (@cspNoAp = T1.CSP_NO_AP) and
+    (T2.NUMB = T1.CAS_NO)
+</value>
+   </data>
+   <data name="ReadCaseUnitCase2">
+      <value>
+select
+  T1.CU_NUMBER,
+  T1.START_DATE,
+  T1.CLOSURE_DATE,
+  T1.CAS_NO,
+  T1.CSP_NO_AR,
+  T1.CSP_NO_AP,
+  T2.STATUS
+from
+  CKT_CASE T2
+  join
+  CKT_CASE_UNIT T1
+  on
+    (@cspNoAr = T1.CSP_NO_AR) and
+    (T2.NUMB = T1.CAS_NO)
+</value>
+   </data>
+   <data name="ReadCsePerson">
+      <value>
+select top(1)
+  NUMB,
+  TYPE
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadInterstateRequest">
+      <value>
+select top(1)
+  IDENTIFIER,
+  KS_CASE_IND,
+  CAS_I_NUMBER
+from
+  CKT_INTERSTAT_RQST
+where
+  @casINumber = CAS_I_NUMBER
+</value>
+   </data>
+</root>

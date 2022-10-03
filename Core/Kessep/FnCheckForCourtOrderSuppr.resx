@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCollectionCollectionType">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.CT_ORD_APPLIED_TO,
+  T3.CLT_IDENTIFIER
+from
+  CKT_CR_DETAIL T3
+  join
+  CKT_COLLECTION T1
+  on
+    (T1.COLL_ID = @collId) and
+    (T1.OTY_ID = @otyId) and
+    (T1.OBG_ID = @obgId) and
+    (T1.CSP_NUMBER = @cspNumber) and
+    (T1.CPA_TYPE = @cpaType) and
+    (T1.OTR_ID = @otrId) and
+    (T1.OTR_TYPE = @otrType) and
+    (T1.CRT_TYPE = @crtType) and
+    (T1.CST_ID = @cstId) and
+    (T1.CRV_ID = @crvId) and
+    (T1.CRD_ID = @crdId) and
+    (T3.CLT_IDENTIFIER is not null) and
+    (T3.CRD_ID = T1.CRD_ID) and
+    (T3.CRV_IDENTIFIER = T1.CRV_ID) and
+    (T3.CST_IDENTIFIER = T1.CST_ID) and
+    (T3.CRT_IDENTIFIER = T1.CRT_TYPE)
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID
+from
+  CKT_COLLTN_TYPE
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+   <data name="ReadDisbSuppressionStatusHistoryLegalAction">
+      <value>
+select
+  T1.CPA_TYPE,
+  T1.CSP_NUMBER,
+  T1.DSS_GENERATED_ID,
+  T1.CLT_SEQUENTIAL_ID,
+  T1.EFFECTIVE_DATE,
+  T1.DISCONTINUE_DATE,
+  T1.TYPE,
+  T1.LGA_IDENTIFIER,
+  T2.STANDARD_NO
+from
+  CKT_LEGAL_ACTION T2
+  join
+  CKT_DISB_SUPPR_STS T1
+  on
+    (@cpaType = T1.CPA_TYPE) and
+    (@cspNumber = T1.CSP_NUMBER) and
+    (T1.TYPE = 'O') and
+    (T1.EFFECTIVE_DATE &lt;= @effectiveDate) and
+    (T1.DISCONTINUE_DATE &gt; @effectiveDate) and
+    (T2.LEGAL_ACTION_ID = T1.LGA_IDENTIFIER) and
+    (T2.STANDARD_NO = @standardNo)
+</value>
+   </data>
+</root>

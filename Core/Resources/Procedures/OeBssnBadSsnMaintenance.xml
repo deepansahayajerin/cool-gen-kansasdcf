@@ -1,0 +1,47 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeBssnBadSsnMaintenance"
+           program-name="SWEBSSNP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeBssnBadSsnMaintenance"
+           transaction="SRD5"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_SELECT_PERSON"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="SortCsePersonsWorkSet.Number" to="Selected.Number"/>
+      <map from="SortCsePersonsWorkSet.Ssn" to="Selected.Ssn"/>
+      <map from="SortCsePersonsWorkSet.FormattedName" to="Selected.FormattedName"/>
+      <return-map from="Selected" to="SortCsePersonsWorkSet"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="SortCsePersonsWorkSet.Number" to="CsePersonsWorkSet.Number"/>
+   </on>
+   <map from="SortCsePersonsWorkSet" to="SortCsePersonsWorkSet"/>
+   <map from="MoreLessScroll" to="MoreLessScroll"/>
+   <map from="PageCount" to="PageCount"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="Standard" to="Standard"/>
+   <map from="PromptCsePersonNumber" to="PromptCsePersonNumber"/>
+   <map from="SortSsnWorkArea" to="SortSsnWorkArea"/>
+   <map from="From" to="From"/>
+   <map from="To" to="To"/>
+   <map from="Display.InvalidSsn" to="Display.InvalidSsn"/>
+   <map from="Display.CsePersonsWorkSet" to="Display.CsePersonsWorkSet"/>
+   <map from="Paging.PageTo" to="Paging.PageDateWorkArea"/>
+   <map from="Paging.PageFrom" to="Paging.PageFrom"/>
+   <map from="Paging.PageCsePersonsWorkSet" to="Paging.PageCsePersonsWorkSet"/>
+   <map from="Paging.PageDateWorkArea" to="Paging.PageTo"/>
+   <map from="FromPrevious" to="FromPrevious"/>
+   <map from="ToPrevious" to="ToPrevious"/>
+   <map from="FirstPassAdd" to="FirstAddPass"/>
+   <map from="Display.Common" to="Display.Common"/>
+   <map from="Display.SsnWorkArea" to="Display.SsnWorkArea"/>
+   <map from="Display.DateWorkArea" to="Display.DateWorkArea"/>
+   <map from="Paging.PageInvalidSsn.Ssn" to="Paging.PageInvalidSsn.Ssn"/>
+</procedure>

@@ -1,0 +1,62 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="OeFcrvFcrCaseView"
+           program-name="SWEFCRVP"
+           class="Gov.Kansas.DCF.Cse.Kessep.OeFcrvFcrCaseView"
+           transaction="SRSP"
+           unformatted-input="Command">
+   <on exit-state="ECO_LINK_TO_CADS ECO_LNK_TO_LST_CASE_DETAILS"
+       action="link"
+       return-when="ACO_NE0000_RETURN_NM ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiCadsCaseDetails"
+       send-command="DISPLAY">
+      <map from="PassAp.Number" to="Ap.Number"/>
+      <map from="PassAp.FormattedName" to="Ap.FormattedName"/>
+      <map from="PassAr.Number" to="ArCsePersonsWorkSet.Number"/>
+      <map from="PassCaseNumber.Number" to="Case1.Number"/>
+      <map from="PassCaseNumber" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU ECO_XFR_TO_ALOM_MENU"
+       display-first="true"
+       action="transfer"
+       to="OeAlomLocateInterfacesMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LINK_TO_MBDT"
+       action="link"
+       return-when="ACO_NE0000_RETURN ACO_NE0000_RETURN_NM"
+       return-command="DISPLAY"
+       to="OeMbdtFcrCaseMemberDetail"
+       send-command="DISPLAY">
+      <map from="FilterCaseId" to="FcrCaseMaster"/>
+      <map from="PassMemberId.MemberId" to="FcrMember.MemberId"/>
+   </on>
+   <on exit-state="ECO_LINK_TO_MBLS"
+       action="link"
+       return-when="ACO_NE0000_RETURN ACO_NE0000_RETURN_NM"
+       return-command="DISPLAY"
+       to="OeMblsFcrCaseMemberList"
+       send-command="DISPLAY">
+      <map from="FilterCaseId" to="FilterCaseId"/>
+   </on>
+   <map from="FilterCaseId" to="FilterCaseId"/>
+   <map from="FcrMemberList.FcrCase" to="FcrMemberList.FcrCase"/>
+   <map from="FcrMemberList.SelChar" to="FcrMemberList.SelCharx"/>
+   <map from="HiddnFilterPrevCaseId" to="HiddnFilterPrevCaseId"/>
+   <map from="Scrolling" to="Scrolling"/>
+   <map from="FcrMemberList.Comma" to="FcrMemberList.Comma"/>
+   <map from="FcrMemberList.FcrMember.MiddleName"
+        to="FcrMemberList.FcrMember.MiddleName"/>
+   <map from="FcrMemberList.FcrMember.MemberId"
+        to="FcrMemberList.FcrMember.MemberId"/>
+   <map from="FcrMemberList.FcrMember.ParticipantType"
+        to="FcrMemberList.FcrMember.ParticipantType"/>
+   <map from="FcrMemberList.FcrMember.Ssn" to="FcrMemberList.FcrMember.Ssn"/>
+   <map from="FcrMemberList.FcrMember.FirstName"
+        to="FcrMemberList.FcrMember.FirstName"/>
+   <map from="FcrMemberList.FcrMember.LastName"
+        to="FcrMemberList.FcrMember.LastName"/>
+   <map from="FcrMemberList.FcrMember.SsnValidityCode"
+        to="FcrMemberList.FcrMember.SsnValidityCode"/>
+   <map from="Standard.NextTransaction" to="Standard.NextTransaction"/>
+   <map from="Hidden.CaseNumber" to="Hidden.CaseNumber"/>
+</procedure>

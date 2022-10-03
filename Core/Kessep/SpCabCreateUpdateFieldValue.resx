@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateFieldValue">
+      <value>
+insert into CKT_FIELD_VALUE
+(
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+)
+values
+(
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatdTstamp,
+  @valu,
+  @fldName,
+  @docName,
+  @docEffectiveDte,
+  @infIdentifier
+)
+</value>
+   </data>
+   <data name="ReadDocumentField">
+      <value>
+select top(1)
+  ORDER_POSITION,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE
+from
+  CKT_DOCUMENT_FIELD
+where
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (DOC_NAME = @docName) and
+  (FLD_NAME = @fldName)
+</value>
+   </data>
+   <data name="ReadFieldValue">
+      <value>
+select top(1)
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATD_TSTAMP,
+  VALU,
+  FLD_NAME,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_IDENTIFIER
+from
+  CKT_FIELD_VALUE
+where
+  (@docEffectiveDte = DOC_EFFECTIVE_DTE) and
+  (@docName = DOC_NAME) and
+  (@fldName = FLD_NAME) and
+  (@infIdentifier = INF_IDENTIFIER)
+</value>
+   </data>
+   <data name="ReadOutgoingDocument">
+      <value>
+select top(1)
+  PRNT_SUCESSFUL_IND,
+  DOC_NAME,
+  DOC_EFFECTIVE_DTE,
+  INF_ID
+from
+  CKT_OUTGOING_DOC
+where
+  INF_ID = @infId
+</value>
+   </data>
+   <data name="UpdateFieldValue">
+      <value>
+update CKT_FIELD_VALUE
+set
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATD_TSTAMP = @lastUpdatdTstamp,
+  VALU = @valu
+where
+  (FLD_NAME = @fldName) and
+  (DOC_NAME = @docName) and
+  (DOC_EFFECTIVE_DTE = @docEffectiveDte) and
+  (INF_IDENTIFIER = @infIdentifier)
+</value>
+   </data>
+</root>

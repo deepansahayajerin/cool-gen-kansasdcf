@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLifecycleTransformation">
+      <value>
+select top(1)
+  DESCRIPTION,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  LCS_ID_PRI,
+  EVE_CTRL_NO_PRI,
+  EVD_ID_PRI,
+  LCS_LCT_ID_SEC,
+  EVE_NO_SEC,
+  EVD_LCT_ID_SEC
+from
+  CKT_LIFECYCLE_TRAN
+where
+  (EVD_ID_PRI = @evdIdPri) and
+  (EVE_CTRL_NO_PRI = @eveCtrlNoPri) and
+  (EVD_LCT_ID_SEC = @evdLctIdSec) and
+  (EVE_NO_SEC = @eveNoSec) and
+  (LCS_LCT_ID_SEC = @lcsLctIdSec) and
+  (LCS_ID_PRI = @lcsIdPri)
+</value>
+   </data>
+   <data name="UpdateLifecycleTransformation">
+      <value>
+update CKT_LIFECYCLE_TRAN
+set
+  DESCRIPTION = @description,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst
+where
+  (LCS_ID_PRI = @lcsIdPri) and
+  (EVE_CTRL_NO_PRI = @eveCtrlNoPri) and
+  (EVD_ID_PRI = @evdIdPri) and
+  (LCS_LCT_ID_SEC = @lcsLctIdSec)
+</value>
+   </data>
+</root>

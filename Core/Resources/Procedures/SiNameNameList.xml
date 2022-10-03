@@ -1,0 +1,98 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiNameNameList"
+           program-name="SWENAMEP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiNameNameList"
+           transaction="SR1W"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_CASE_REGISTRATION"
+       action="transfer"
+       to="SiRegiCaseRegistration"
+       send-command="FROMNAME">
+      <map from="FromInterstateCase.TransSerialNumber"
+           to="FromInterstateCase.TransSerialNumber"/>
+      <map from="FromInterstateCase.TransactionDate"
+           to="FromInterstateCase.TransactionDate"/>
+      <map from="FromPaReferral" to="FromPaReferral"/>
+      <map from="FromInrdCommon" to="FromInrdCommon"/>
+      <map from="FromPar1" to="FromPar1"/>
+      <map from="FromIapi" to="FromIapi"/>
+      <map from="ToRegi.DetailToRegi" to="FromName.NameDetail"/>
+      <map from="FromInrdInformationRequest" to="FromInrdInformationRequest"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Next" to="Case1"/>
+      <map from="SearchCsePersonsWorkSet" to="CsePersonsWorkSet"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_CASE_PARTICIPATION"
+       action="transfer"
+       to="SiPartCaseParticipation"
+       send-command="DISPLAY">
+      <map from="Selected" to="Search"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_LIST_CASES_BY_PERSON"
+       action="link"
+       return-when="ECO_XFR_TO_NAME_LIST ACO_NE0000_RETURN"
+       return-command="RETCOMN"
+       to="SiComnCaseCompositionByName"
+       send-command="DISPLAY">
+      <map from="FromInterstateCase" to="InterstateCase"/>
+      <map from="FromPaReferral" to="PaReferral"/>
+      <map from="Selected" to="Search"/>
+      <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+      <map from="FromInrdInformationRequest" to="InformationRequest"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ORG_MAINTENANCE ECO_LNK_TO_ORGZ"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTNORG"
+       to="SiOrgzOrganizationMaintenance"
+       send-command="DISPLAY">
+      <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+      <return-map from="HiddenSelected.Number" to="Selected.Number"/>
+      <return-map from="HiddenSelected.FormattedName" to="Selected.FormattedName"/>
+      <return-map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="Next" to="Next"/>
+   <map from="Phonetic" to="Phonetic"/>
+   <map from="ToRegi.DetailToRegi" to="ToRegi.DetailToRegi"/>
+   <map from="Export1.GcsePersonsWorkSet" to="Import1.GcsePersonsWorkSet"/>
+   <map from="HiddenCsePersonsWorkSet" to="HiddenCsePersonsWorkSet"/>
+   <map from="FromIapi" to="FromIapi"/>
+   <map from="FromInterstateCase" to="FromInterstateCase"/>
+   <map from="FromPaReferral" to="FromPaReferral"/>
+   <map from="FromInrdCommon" to="FromInrdCommon"/>
+   <map from="FromPar1" to="FromPar1"/>
+   <map from="FromRegi" to="FromRegi"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="InitialExecution" to="InitialExecution"/>
+   <map from="SearchSsnWorkArea" to="SearchSsnWorkArea"/>
+   <map from="FromInrdInformationRequest" to="FromInrdInformationRequest"/>
+   <map from="SearchOffice" to="SearchOffice"/>
+   <map from="SearchPrev" to="SearchPrev"/>
+   <map from="Export1.Gcommon" to="Import1.Gcommon"/>
+   <map from="Export1.GexportAliasKscares" to="Import1.GimportAliasKscares"/>
+   <map from="Export1.GexportAliasKanpay" to="Import1.GimportAliasKanpay"/>
+   <map from="Export1.GexportAliasCse" to="Import1.GimportAliasCse"/>
+   <map from="Export1.GexportAliasAe" to="Import1.GimportAliasAe"/>
+   <map from="Export1.GexportAliasFacts" to="Import1.GimportAliasFacts"/>
+   <map from="Searched.Searched1" to="Searched.Searched1"/>
+   <map from="SearchCsePersonsWorkSet.LastName"
+        to="SearchCsePersonsWorkSet.LastName"/>
+   <map from="SearchCsePersonsWorkSet.FirstName"
+        to="SearchCsePersonsWorkSet.FirstName"/>
+   <map from="SearchCsePersonsWorkSet.MiddleInitial"
+        to="SearchCsePersonsWorkSet.MiddleInitial"/>
+   <map from="SearchCsePersonsWorkSet.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+   <map from="SearchCsePersonsWorkSet.Sex" to="SearchCsePersonsWorkSet.Sex"/>
+   <map from="SearchCsePersonsWorkSet.Dob" to="SearchCsePersonsWorkSet.Dob"/>
+   <map from="SearchCsePersonsWorkSet.Number"
+        to="SearchCsePersonsWorkSet.Number"/>
+   <map from="Export1.GexportAlt.SelectChar" to="Import1.GimportAlt.SelectChar"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

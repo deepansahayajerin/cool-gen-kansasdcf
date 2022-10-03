@@ -1,0 +1,55 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SpLtlmLifeCycleTransLMaint"
+           program-name="SWELTLMP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SpLtlmLifeCycleTransLMaint"
+           transaction="SRP9"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_TO_LSLM"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpLslmLifeCycleStateLMaint"
+       send-command="DISPLAY">
+      <return-map from="ToTran" to="FromLinkLifecycleState"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_EDLM"
+       display-first="true"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RETLINK"
+       to="SpEdlmEventDetailsListMaint"
+       send-command-type="none">
+      <return-map from="ToTranEventDetail" to="FromLinkEventDetail"/>
+      <return-map from="ToTranEvent" to="FromLinkEvent"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="SpInfmInfrastructureMgmtMenu"
+       send-command-type="none"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenEventDetail" to="HiddenEventDetail"/>
+   <map from="HiddenEvent" to="HiddenEvent"/>
+   <map from="Event1" to="Event1"/>
+   <map from="EventDetail2" to="EventDetail2"/>
+   <map from="EventDetail1" to="EventDetail1"/>
+   <map from="Group.HiddenExportGrpTransformed"
+        to="Group.HiddenImportGrpTransformed"/>
+   <map from="Group.HiddenExportGrpCurrent" to="Group.HiddenImportGrpCurrent"/>
+   <map from="Group.HiddenEventDetail" to="Group.HiddenEventDetail"/>
+   <map from="Group.HiddenEvent" to="Group.HiddenEvent"/>
+   <map from="Group.HiddenLifecycleTransformation"
+        to="Group.HiddenLifecycleTransformation"/>
+   <map from="Group.LifecycleTransformation" to="Group.LifecycleTransformation"/>
+   <map from="Group.ResultingLcState" to="Group.ResultingLcState"/>
+   <map from="Group.EventDetail1" to="Group.EventDetail2"/>
+   <map from="Group.LcState" to="Group.LcState"/>
+   <map from="Group.EventDetail2" to="Group.EventDetail1"/>
+   <map from="Group.Event1" to="Group.Event1"/>
+   <map from="Group.Transformed" to="Group.Transformed"/>
+   <map from="Group.Current" to="Group.Current"/>
+   <map from="Group.Common" to="Group.Common"/>
+   <map from="Start" to="Start"/>
+</procedure>

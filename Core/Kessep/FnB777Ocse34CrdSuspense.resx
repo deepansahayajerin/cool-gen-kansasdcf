@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCashReceipt">
+      <value>
+select
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.ADJUSTMENT_IND,
+  T1.COLLECTION_AMOUNT,
+  T1.COLLECTION_DATE,
+  T1.OBLGOR_PRSN_NBR,
+  T1.REFUNDED_AMT,
+  T1.DISTRIBUTED_AMT,
+  T1.COLLAMT_APPL_IND,
+  T1.CLT_IDENTIFIER,
+  T2.CASH_RECEIPT_ID,
+  T2.RECEIPT_DATE
+from
+  CKT_CASH_RECEIPT T2 with(readuncommitted)
+  join
+  CKT_CR_DETAIL T1 with(readuncommitted)
+  on
+    (T2.RECEIPT_DATE &lt;= @receiptDate) and
+    (
+      T2.CRT_IDENTIFIER in (1, 3, 4,
+        5, 6, 9,
+        10, 12)
+    ) and
+    (T2.CRT_IDENTIFIER = T1.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T1.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T1.CRV_IDENTIFIER) and
+    (T1.ADJUSTMENT_IND = ' ') and
+    (T1.COLLAMT_APPL_IND = ' ')
+  join
+  CKT_CRDTL_STATHIST T4 with(readuncommitted)
+  on
+    (T1.CRD_ID = T4.CRD_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T4.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T4.CST_IDENTIFIER) and
+    (T1.CRT_IDENTIFIER = T4.CRT_IDENTIFIER) and
+    (T4.DISCONTINUE_DATE = @discontinueDate) and
+    (T4.CDS_IDENTIFIER in (3, 7))
+order by
+  T1.CRD_ID
+</value>
+   </data>
+   <data name="ReadCashReceiptDetailStatHistory">
+      <value>
+select
+  CRD_IDENTIFIER,
+  CRV_IDENTIFIER,
+  CST_IDENTIFIER,
+  CRT_IDENTIFIER,
+  CDS_IDENTIFIER,
+  CREATED_TIMESTAMP,
+  REASON_CODE_ID,
+  DISCONTINUE_DATE
+from
+  CKT_CRDTL_STATHIST with(readuncommitted)
+where
+  (@crdIdentifier = CRD_IDENTIFIER) and
+  (@crvIdentifier = CRV_IDENTIFIER) and
+  (@cstIdentifier = CST_IDENTIFIER) and
+  (@crtIdentifier = CRT_IDENTIFIER)
+order by
+  DISCONTINUE_DATE desc
+</value>
+   </data>
+   <data name="ReadCollectionType">
+      <value>
+select top(1)
+  COLLECTION_TYPE_ID,
+  CODE
+from
+  CKT_COLLTN_TYPE with(readuncommitted)
+where
+  COLLECTION_TYPE_ID = @collectionTypeId
+</value>
+   </data>
+</root>

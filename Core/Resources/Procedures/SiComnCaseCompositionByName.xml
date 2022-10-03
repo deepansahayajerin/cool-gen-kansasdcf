@@ -1,0 +1,137 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="SiComnCaseCompositionByName"
+           program-name="SWECOMNP"
+           class="Gov.Kansas.DCF.Cse.Kessep.SiComnCaseCompositionByName"
+           transaction="SR1F"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_XFR_TO_ICAS"
+       action="transfer"
+       to="SiIcasCsenetRefCase"
+       send-command="FROMCOMN">
+      <map from="HiddenSelectedCase" to="Regi"/>
+      <map from="InterstateCase.TransSerialNumber"
+           to="InterstateCase.TransSerialNumber"/>
+      <map from="InterstateCase.TransactionDate"
+           to="InterstateCase.TransactionDate"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_PA_REFERRAL_PG1"
+       action="transfer"
+       to="SiPar1PaReferralPage1"
+       send-command="FROMCOMN">
+      <map from="Par1FromComn" to="Par1FromComn"/>
+      <map from="HiddenSelectedCase" to="RegiCase"/>
+      <map from="PaReferral.CreatedTimestamp" to="PaReferral.CreatedTimestamp"/>
+      <map from="PaReferral.Number" to="PaReferral.Number"/>
+      <map from="PaReferral.Type1" to="PaReferral.Type1"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_PEPR"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiPeprPersonProgramMaint"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <return-map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_LIST_CODE_VALUE ECO_LNK_TO_CODE_VALUES"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="RTLIST"
+       to="CoCdvlListCodeValue"
+       send-command="DISPLAY">
+      <map from="Prompt" to="Code"/>
+      <return-map from="DlgflwSelected" to="Selected"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_QARM"
+       action="transfer"
+       to="QaQarmMenu"
+       send-command-type="none">
+      <map from="HiddenSelectedCase" to="Search"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ROLE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="SiRoleCaseRoleMaintenance"
+       send-command="DISPLAY">
+      <map from="Next" to="Next"/>
+      <return-map from="Next" to="Next"/>
+   </on>
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       action="transfer"
+       to="SiPermPersonManagementMenu"
+       send-command-type="none">
+      <map from="Search" to="CsePersonsWorkSet"/>
+      <map from="Next" to="Case1"/>
+      <map from="HiddenNextTranInfo" to="Hidden"/>
+   </on>
+   <on exit-state="ECO_XFR_TO_NAME_LIST"
+       action="transfer"
+       to="SiNameNameList"
+       send-command-type="none">
+      <map from="InterstateCase" to="FromInterstateCase"/>
+      <map from="PaReferral.CreatedTimestamp" to="FromPaReferral.CreatedTimestamp"/>
+      <map from="PaReferral.Number" to="FromPaReferral.Number"/>
+      <map from="PaReferral.Type1" to="FromPaReferral.Type1"/>
+      <map from="HfromInrd" to="FromInrdCommon"/>
+      <map from="HfromPar1" to="FromPar1"/>
+      <map from="HfromIapi" to="FromIapi"/>
+      <map from="Search.Number" to="SearchCsePersonsWorkSet.Number"/>
+      <map from="Search.Sex" to="SearchCsePersonsWorkSet.Sex"/>
+      <map from="Search.Ssn" to="SearchCsePersonsWorkSet.Ssn"/>
+      <map from="Search.FirstName" to="SearchCsePersonsWorkSet.FirstName"/>
+      <map from="Search.LastName" to="SearchCsePersonsWorkSet.LastName"/>
+      <map from="Search.MiddleInitial" to="SearchCsePersonsWorkSet.MiddleInitial"/>
+      <map from="Search.ReplicationIndicator"
+           to="SearchCsePersonsWorkSet.ReplicationIndicator"/>
+      <map from="InformationRequest.Number" to="FromInrdInformationRequest.Number"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_INRD"
+       action="link"
+       return-when="RETURN_FROM_LINK"
+       return-command="DISPLAY"
+       to="SiInrdInquiryMaintenance"
+       send-command="DISPLAY">
+      <map from="HiddenSelectedCsePersonsWorkSet" to="Ar"/>
+      <map from="GoToInrdReopen.Text1" to="ReopenFromComn.Text1"/>
+      <map from="InformationRequest.Number" to="InformationRequest.Number"/>
+      <map from="HiddenSelectedCase" to="Case1"/>
+      <return-map from="Ar.Number" to="Search.Number"/>
+      <return-map from="InformationRequest" to="InformationRequest"/>
+      <return-map from="Case1.Number" to="Case1.Number"/>
+   </on>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenStandard" to="HiddenStandard"/>
+   <map from="PageKeys.PageKeyCase" to="PageKeys.PageKeyCase"/>
+   <map from="Next" to="Next"/>
+   <map from="Search" to="Search"/>
+   <map from="PageKeys.PageKeyCaseRole" to="PageKeys.PageKeyCaseRole"/>
+   <map from="PageKeys.PageKeyCsePerson" to="PageKeys.PageKeyCsePerson"/>
+   <map from="Previous" to="Previous"/>
+   <map from="ReopenWorkArea" to="ReopenWorkArea"/>
+   <map from="ReopenOffice" to="ReopenOffice"/>
+   <map from="PaReferral" to="PaReferral"/>
+   <map from="InformationRequest" to="InformationRequest"/>
+   <map from="NotFromReferral" to="NotFromReferral"/>
+   <map from="HfromIapi" to="HfromIapi"/>
+   <map from="HfromPar1" to="HfromPar1"/>
+   <map from="HfromInrd" to="HfromInrd"/>
+   <map from="InterstateCase" to="InterstateCase"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="PageKeys.PageKeyStatus" to="PageKeys.PageKeyStatus"/>
+   <map from="Export1.DetCommon" to="Import1.DetCommon"/>
+   <map from="Export1.DetCase1" to="Import1.DetCase1"/>
+   <map from="Export1.DetCsePersonsWorkSet" to="Import1.DetCsePersonsWorkSet"/>
+   <map from="Export1.DetCase2" to="Import1.DetCase2"/>
+   <map from="Export1.DetFamily" to="Import1.DetFamily"/>
+   <map from="Export1.DetStatus" to="Import1.DetStatus"/>
+   <map from="CsePerson" to="CsePerson"/>
+   <map from="FvPrompt" to="FvPrompt"/>
+   <map from="Export1.DetCsePerson" to="Import1.DetCsePerson"/>
+   <map from="HiddenPrev" to="HiddenPrev"/>
+   <map from="Export1.DetInter" to="Import1.DetInter"/>
+   <map from="GoToInrdReopen" to="GoToInrdReopen"/>
+   <map from="Ar" to="Ar"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

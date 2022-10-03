@@ -1,0 +1,57 @@
+﻿<procedure xmlns="http://www.bphx.com/coolgen/procedure/2008-11-04"
+           name="FnCrajLstCrBalanceAdjstmts"
+           program-name="SWECRAJP"
+           class="Gov.Kansas.DCF.Cse.Kessep.FnCrajLstCrBalanceAdjstmts"
+           transaction="SRID"
+           display-first="false"
+           unformatted-input="Command">
+   <on exit-state="ECO_LNK_RETURN_TO_MENU"
+       display-first="true"
+       action="transfer"
+       to="FnCammCashManagementMenu"
+       send-command-type="none"/>
+   <on exit-state="ECO_LNK_TO_BALANCE_INTERFACE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCrbiLstCrInterfaceBalance"
+       send-command="FROMCRAJ">
+      <map from="CashReceiptSourceType" to="PassArea"/>
+      <return-map from="PassAreaFirstCashReceipt" to="PassArea"/>
+   </on>
+   <on exit-state="ECO_LNK_TO_ADJUST_REC_INTERFACE"
+       action="link"
+       return-when="ACO_NE0000_RETURN"
+       return-command="DISPLAY"
+       to="FnCriaAdjRecptdInterface"
+       send-command="CRAJ">
+      <map from="PassAreaCashReceiptRlnRsn" to="PassAreaCashReceiptRlnRsn"/>
+      <map from="PassAreaCashReceiptBalanceAdjustment"
+           to="PassAreaCashReceiptBalanceAdjustment"/>
+      <map from="PassAreaIncrease" to="PassAreaIncrease"/>
+      <map from="PassAreaDecrease" to="PassAreaDecrease"/>
+      <return-map from="Pass" to="PassArea"/>
+   </on>
+   <map from="CashReceiptSourceType" to="CashReceiptSourceType"/>
+   <map from="CashReceiptEvent" to="CashReceiptEvent"/>
+   <map from="NetReceiptAmt" to="NetReceiptAmt"/>
+   <map from="Export1.DetailIncrCashReceipt" to="Import1.DetailIncrCashReceipt"/>
+   <map from="Export1.DetailDecrCashReceipt" to="Import1.DetailDecrCashReceipt"/>
+   <map from="Export1.DetailDecrCashReceiptEvent"
+        to="Import1.DetailDecrCashReceiptEvent"/>
+   <map from="Export1.DetailIncrCashReceiptEvent"
+        to="Import1.DetailIncrCashReceiptEvent"/>
+   <map from="Export1.DetailDecrCashReceiptBalanceAdjustment"
+        to="Import1.DetailDecrCashReceiptBalanceAdjustment"/>
+   <map from="CashReceipt" to="CashReceipt"/>
+   <map from="CashRcpt" to="CashRcpt"/>
+   <map from="Standard" to="Standard"/>
+   <map from="HiddenNextTranInfo" to="HiddenNextTranInfo"/>
+   <map from="Export1.DetailIncrCashReceiptBalanceAdjustment"
+        to="Import1.DetailIncrCashReceiptBalanceAdjustment"/>
+   <map from="Export1.DetailCashReceiptRlnRsn"
+        to="Import1.DetailCashReceiptRlnRsn"/>
+   <map from="HiddenCashReceipt" to="HiddenCashReceipt"/>
+   <map from="Export1.DetailCommon" to="Import1.DetailCommon"/>
+   <autoflow command="EXIT" exit-state="ECO_LNK_RETURN_TO_MENU"/>
+</procedure>

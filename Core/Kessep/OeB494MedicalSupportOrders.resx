@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalAction">
+      <value>
+select
+  LEGAL_ACTION_ID,
+  CLASSIFICATION,
+  ACTION_TAKEN,
+  FILED_DT,
+  END_DT,
+  STANDARD_NO,
+  CREATED_TSTAMP,
+  LAST_UPD_TSTAMP
+from
+  CKT_LEGAL_ACTION
+where
+  (CLASSIFICATION = 'O') and
+  (ACTION_TAKEN = 'QUALMEDO') and
+  (FILED_DT &gt; @filedDt) and
+  (
+    (CREATED_TSTAMP between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) or
+    (LAST_UPD_TSTAMP between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+  )
+</value>
+   </data>
+   <data name="ReadLegalActionLegalActionDetail">
+      <value>
+select
+  T1.LEGAL_ACTION_ID,
+  T1.CLASSIFICATION,
+  T1.ACTION_TAKEN,
+  T1.FILED_DT,
+  T1.END_DT,
+  T1.STANDARD_NO,
+  T1.CREATED_TSTAMP,
+  T1.LAST_UPD_TSTAMP,
+  T2.LA_DETAIL_NO,
+  T2.END_DT,
+  T2.EFFECTIVE_DT,
+  T2.CREATED_TSTAMP,
+  T2.LAST_UPD_TSTAMP,
+  T2.NON_FIN_OBLG_TYPE,
+  T2.DETAIL_TYPE,
+  T2.DESCRIPTION
+from
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_DTL T2
+  on
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER) and
+    (T1.FILED_DT &gt; @filedDt) and
+    (T1.CLASSIFICATION = 'J') and
+    (T2.NON_FIN_OBLG_TYPE = 'HIC') and
+    (T2.DETAIL_TYPE = 'N') and
+    (
+      (T2.CREATED_TSTAMP between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2)) or
+      (T2.LAST_UPD_TSTAMP between cast(@timestamp1 as datetime2) and cast(@timestamp2 as datetime2))
+    )
+</value>
+   </data>
+</root>

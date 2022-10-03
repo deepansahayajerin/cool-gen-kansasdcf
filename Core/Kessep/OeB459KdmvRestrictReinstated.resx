@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCaseCaseUnitCaseRole">
+      <value>
+select distinct
+  T1.NUMB,
+  T1.STATUS,
+  T1.STATUS_DATE,
+  T2.CU_NUMBER,
+  T2.CSP_NO_AP,
+  T3.CSP_NUMBER,
+  T3.TYPE,
+  T3.CASE_ROLE_ID,
+  T3.START_DATE,
+  T3.END_DATE
+from
+  CKT_CASE T1 with(readuncommitted)
+  join
+  CKT_CASE_ROLE T3 with(readuncommitted)
+  join
+  CKT_LEG_ACT_CAS_RL T4 with(readuncommitted)
+  on
+    (@cspNumber = T3.CSP_NUMBER) and
+    (T3.TYPE = 'AP') and
+    (T3.CASE_ROLE_ID = T4.CRO_IDENTIFIER) and
+    (T3.TYPE = T4.CRO_TYPE) and
+    (T3.CSP_NUMBER = T4.CSP_NUMBER) and
+    (T3.CAS_NUMBER = T4.CAS_NUMBER) and
+    (@lgaId = T4.LGA_ID)
+  on
+    (T1.NUMB = T3.CAS_NUMBER) and
+    (T1.STATUS = 'O')
+  join
+  CKT_CASE_UNIT T2 with(readuncommitted)
+  on
+    (@cspNumber = T2.CSP_NO_AP) and
+    (T1.NUMB = T2.CAS_NO)
+</value>
+   </data>
+   <data name="ReadCaseRole">
+      <value>
+select top(1)
+  CAS_NUMBER,
+  CSP_NUMBER,
+  TYPE,
+  CASE_ROLE_ID,
+  START_DATE,
+  END_DATE
+from
+  CKT_CASE_ROLE
+where
+  (@cspNumber = CSP_NUMBER) and
+  (TYPE = 'AP') and
+  (START_DATE &lt;= @startDate) and
+  (END_DATE &gt;= @startDate)
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select distinct
+  T1.COV_ID,
+  T1.COD_ID,
+  T1.CDVALUE
+from
+  CKT_CODE T2
+  join
+  CKT_CODE_VALUE T1
+  on
+    (T2.COD_ID = T1.COD_ID) and
+    (T2.CODE_NAME = 'DMV SUFFIX')
+order by
+  T1.CDVALUE
+</value>
+   </data>
+   <data name="ReadCsePerson1">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH,
+  FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCsePerson2">
+      <value>
+select top(1)
+  NUMB,
+  TYPE,
+  DATE_OF_DEATH,
+  FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadKsDriversLicense1">
+      <value>
+select top(1)
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  APPEAL_REC_DATE,
+  APPEAL_RESOLVED,
+  PAYMENT_AGRMNT_DT,
+  FIRST_PMNT_DUE_DT,
+  MANUAL_IND,
+  MANUAL_DATE,
+  APPEAL_RESLVD_DT,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  AMOUNT_OWED,
+  AMOUNT_DUE,
+  REC_CLOSURE_REASON,
+  RECORD_CLOSURE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  (CSP_NUM = @cspNum) and
+  (PROCESSED_IND = 'Y')
+</value>
+   </data>
+   <data name="ReadKsDriversLicense2">
+      <value>
+select top(1)
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  APPEAL_REC_DATE,
+  APPEAL_RESOLVED,
+  PAYMENT_AGRMNT_DT,
+  FIRST_PMNT_DUE_DT,
+  MANUAL_IND,
+  MANUAL_DATE,
+  APPEAL_RESLVD_DT,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  AMOUNT_OWED,
+  AMOUNT_DUE,
+  REC_CLOSURE_REASON,
+  RECORD_CLOSURE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  CREATED_TSTAMP = @createdTstamp
+</value>
+   </data>
+   <data name="ReadKsDriversLicense3">
+      <value>
+select top(1)
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  APPEAL_REC_DATE,
+  APPEAL_RESOLVED,
+  PAYMENT_AGRMNT_DT,
+  FIRST_PMNT_DUE_DT,
+  MANUAL_DATE,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  AMOUNT_OWED,
+  AMOUNT_DUE,
+  REC_CLOSURE_REASON,
+  RECORD_CLOSURE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  VALIDATION_DATE &gt; @validationDate
+order by
+  VALIDATION_DATE desc
+</value>
+   </data>
+   <data name="ReadKsDriversLicense4">
+      <value>
+select
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  APPEAL_REC_DATE,
+  APPEAL_RESOLVED,
+  PAYMENT_AGRMNT_DT,
+  FIRST_PMNT_DUE_DT,
+  MANUAL_IND,
+  MANUAL_DATE,
+  APPEAL_RESLVD_DT,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  AMOUNT_OWED,
+  AMOUNT_DUE,
+  REC_CLOSURE_REASON,
+  RECORD_CLOSURE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  (LTR_30_DAY_DATE &gt; @ltr30DayDate) and
+  (RESTRICT_SENT_DT &lt;= @ltr30DayDate) and
+  (RECORD_CLOSURE_DT &lt;= @ltr30DayDate) and
+  (RESTRICTION_STATUS &lt;= ' ') and
+  (SERV_COMPLETE_IND = 'Y') and
+  (SERV_COMPLETE_DT &gt; @ltr30DayDate) and
+  (@cspNum = CSP_NUM)
+order by
+  VALIDATION_DATE desc,
+  FIRST_PMNT_DUE_DT desc
+</value>
+   </data>
+   <data name="ReadKsDriversLicense5">
+      <value>
+select
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  APPEAL_REC_DATE,
+  APPEAL_RESOLVED,
+  PAYMENT_AGRMNT_DT,
+  FIRST_PMNT_DUE_DT,
+  MANUAL_DATE,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  AMOUNT_OWED,
+  AMOUNT_DUE,
+  REC_CLOSURE_REASON,
+  RECORD_CLOSURE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  (@cspNum = CSP_NUM) and
+  (RESTRICT_SENT_DT &gt; @restrictSentDt1) and
+  (RESTRICT_SENT_DT &lt; @restrictSentDt2) and
+  (RECORD_CLOSURE_DT &lt;= @restrictSentDt1) and
+  (REINSTATED_DATE &lt;= @restrictSentDt1)
+order by
+  VALIDATION_DATE desc
+</value>
+   </data>
+   <data name="ReadKsDriversLicense6">
+      <value>
+select
+  CSP_NUM,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  MANUAL_DATE,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  REC_CLOSURE_REASON,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  (RESTRICT_SENT_DT &lt; @restrictSentDt1) and
+  (RESTRICT_SENT_DT &gt; @restrictSentDt2) and
+  (REINSTATED_DATE &lt;= @restrictSentDt2) and
+  (SEQUENCE_COUNTER &gt; @sequenceCounter) and
+  (MANUAL_DATE &lt;= @restrictSentDt2)
+order by
+  SEQUENCE_COUNTER
+</value>
+   </data>
+   <data name="ReadKsDriversLicense7">
+      <value>
+select
+  CREATED_BY,
+  CREATED_TSTAMP,
+  CSP_NUM,
+  LGA_IDENTIFIER,
+  KS_DVR_LICENSE,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  APPEAL_REC_DATE,
+  APPEAL_RESOLVED,
+  PAYMENT_AGRMNT_DT,
+  FIRST_PMNT_DUE_DT,
+  MANUAL_DATE,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  AMOUNT_OWED,
+  AMOUNT_DUE,
+  REC_CLOSURE_REASON,
+  RECORD_CLOSURE_DT,
+  LAST_UPDATED_BY,
+  LAST_UPD_TSTAMP,
+  PROCESSED_IND,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  PROCESSED_IND = 'Y'
+</value>
+   </data>
+   <data name="ReadKsDriversLicenseCsePerson1">
+      <value>
+select top(1)
+  T1.CREATED_BY,
+  T1.CREATED_TSTAMP,
+  T1.CSP_NUM,
+  T1.LGA_IDENTIFIER,
+  T1.KS_DVR_LICENSE,
+  T1.VALIDATION_DATE,
+  T1.COURTESY_LTR_DATE,
+  T1.LTR_30_DAY_DATE,
+  T1.SERV_COMPLETE_IND,
+  T1.SERV_COMPLETE_DT,
+  T1.RESTRICTED_DATE,
+  T1.REINSTATED_DATE,
+  T1.APPEAL_REC_DATE,
+  T1.APPEAL_RESOLVED,
+  T1.PAYMENT_AGRMNT_DT,
+  T1.FIRST_PMNT_DUE_DT,
+  T1.MANUAL_DATE,
+  T1.RESTRICT_SENT_DT,
+  T1.RESTRICTION_STATUS,
+  T1.AMOUNT_OWED,
+  T1.AMOUNT_DUE,
+  T1.REC_CLOSURE_REASON,
+  T1.RECORD_CLOSURE_DT,
+  T1.LAST_UPDATED_BY,
+  T1.LAST_UPD_TSTAMP,
+  T1.PROCESSED_IND,
+  T1.SEQUENCE_COUNTER,
+  T2.TYPE,
+  T2.DATE_OF_DEATH,
+  T2.FAMILY_VIOL_IND
+from
+  CKT_CSE_PERSON T2
+  join
+  CKT_KDMV T1
+  on
+    (T1.LTR_30_DAY_DATE &gt; @ltr30DayDate) and
+    (T2.NUMB = T1.CSP_NUM) and
+    (T2.NUMB = @numb) and
+    (T1.SEQUENCE_COUNTER = @sequenceCounter) and
+    (T2.TYPE = 'C')
+  join
+  CKT_CASE_ROLE T3
+  on
+    (T2.NUMB = T3.CSP_NUMBER) and
+    (T3.TYPE = 'AP')
+</value>
+   </data>
+   <data name="ReadKsDriversLicenseCsePerson2">
+      <value>
+select
+  CSP_NUM,
+  VALIDATION_DATE,
+  COURTESY_LTR_DATE,
+  LTR_30_DAY_DATE,
+  SERV_COMPLETE_IND,
+  SERV_COMPLETE_DT,
+  RESTRICTED_DATE,
+  REINSTATED_DATE,
+  MANUAL_DATE,
+  RESTRICT_SENT_DT,
+  RESTRICTION_STATUS,
+  REC_CLOSURE_REASON,
+  SEQUENCE_COUNTER
+from
+  CKT_KDMV
+where
+  (COURTESY_LTR_DATE &gt; @courtesyLtrDate) and
+  (LTR_30_DAY_DATE &gt; @courtesyLtrDate) and
+  (RESTRICT_SENT_DT &lt;= @courtesyLtrDate) and
+  (SERV_COMPLETE_IND = 'Y') and
+  (SERV_COMPLETE_DT &gt; @courtesyLtrDate) and
+  (REC_CLOSURE_REASON &lt;= ' ') and
+  (CSP_NUM &gt; @cspNum)
+order by
+  CSP_NUM
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  FILED_DT,
+  COURT_CASE_NO,
+  END_DT,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  LEGAL_ACTION_ID = @legalActionId
+</value>
+   </data>
+   <data name="ReadObligationAdmActionExemption">
+      <value>
+select top(1)
+  T1.OTY_TYPE,
+  T1.AAT_TYPE,
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.EFFECTIVE_DT,
+  T1.END_DT
+from
+  CKT_LEGAL_ACTION T6 with(readuncommitted)
+  join
+  CKT_OBLIGATION T5 with(readuncommitted)
+  on
+    (T5.CSP_NUMBER = @cspNumber) and
+    (T6.LEGAL_ACTION_ID = T5.LGA_ID) and
+    (T6.STANDARD_NO = @standardNo)
+  join
+  CKT_OADM_ACT_EXMP T1 with(readuncommitted)
+  on
+    (T1.AAT_TYPE in (cast(@type as char(4)), 'ALL')) and
+    (T5.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T5.OB_ID = T1.OBG_GENERATED_ID) and
+    (T5.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T5.CPA_TYPE = T1.CPA_TYPE) and
+    (T1.EFFECTIVE_DT &lt;= @effectiveDt) and
+    (T1.END_DT &gt; @effectiveDt)
+order by
+  T1.EFFECTIVE_DT desc
+</value>
+   </data>
+   <data name="UpdateKsDriversLicense1">
+      <value>
+update CKT_KDMV
+set
+  RESTRICT_SENT_DT = @restrictSentDt,
+  RESTRICTION_STATUS = @restrictionStatus,
+  AMOUNT_OWED = @amountOwed,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (CSP_NUM = @cspNum) and
+  (SEQUENCE_COUNTER = @sequenceCounter)
+</value>
+   </data>
+   <data name="UpdateKsDriversLicense2">
+      <value>
+update CKT_KDMV
+set
+  REC_CLOSURE_REASON = @recClosureReason,
+  RECORD_CLOSURE_DT = @recordClosureDt,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (CSP_NUM = @cspNum) and
+  (SEQUENCE_COUNTER = @sequenceCounter)
+</value>
+   </data>
+   <data name="UpdateKsDriversLicense3">
+      <value>
+update CKT_KDMV
+set
+  MANUAL_IND = @manualInd,
+  MANUAL_DATE = @manualDate,
+  RESTRICTION_STATUS = @restrictionStatus,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPD_TSTAMP = @lastUpdTstamp
+where
+  (CSP_NUM = @cspNum) and
+  (SEQUENCE_COUNTER = @sequenceCounter)
+</value>
+   </data>
+   <data name="UpdateKsDriversLicense4">
+      <value>
+update CKT_KDMV
+set
+  PROCESSED_IND = @processedInd
+where
+  (CSP_NUM = @cspNum) and
+  (SEQUENCE_COUNTER = @sequenceCounter)
+</value>
+   </data>
+   <data name="UpdateKsDriversLicense5">
+      <value>
+update CKT_KDMV
+set
+  PROCESSED_IND = @processedInd
+where
+  (CSP_NUM = @cspNum) and
+  (SEQUENCE_COUNTER = @sequenceCounter)
+</value>
+   </data>
+</root>

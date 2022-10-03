@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailCashReceiptDetailStatus">
+      <value>
+select
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CRD_ID,
+  T1.ADJUSTMENT_IND,
+  T1.COURT_ORDER_NUMBER,
+  T1.OBLGOR_PRSN_NBR,
+  T1.COLLAMT_APPL_IND,
+  T3.CDS_IDENTIFIER
+from
+  CKT_CR_DETAIL T1
+  join
+  CKT_CRDTL_STATHIST T3
+  on
+    (T1.CRD_ID = T3.CRD_IDENTIFIER) and
+    (T1.CRV_IDENTIFIER = T3.CRV_IDENTIFIER) and
+    (T1.CST_IDENTIFIER = T3.CST_IDENTIFIER) and
+    (T1.CRT_IDENTIFIER = T3.CRT_IDENTIFIER) and
+    (T1.COLLAMT_APPL_IND = ' ') and
+    (T1.OBLGOR_PRSN_NBR = @oblgorPrsnNbr) and
+    (T1.ADJUSTMENT_IND in ('N', ' '))
+</value>
+   </data>
+   <data name="ReadCollectionObligation">
+      <value>
+select top(1)
+  T1.COLL_ID,
+  T1.ADJ_IND,
+  T1.CRT_TYPE,
+  T1.CST_ID,
+  T1.CRV_ID,
+  T1.CRD_ID,
+  T1.OBG_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OTR_ID,
+  T1.OTR_TYPE,
+  T1.OTY_ID,
+  T1.COLL_ADJ_PROC_DATE,
+  T2.CPA_TYPE,
+  T2.CSP_NUMBER,
+  T2.OB_ID,
+  T2.DTY_GENERATED_ID,
+  T2.LGA_ID
+from
+  CKT_OBLIGATION T2
+  join
+  CKT_COLLECTION T1
+  on
+    (T1.ADJ_IND = 'Y') and
+    (T1.COLL_ADJ_PROC_DATE = @collAdjProcDate) and
+    (T2.DTY_GENERATED_ID = T1.OTY_ID) and
+    (T2.OB_ID = T1.OBG_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = @cspNumber)
+</value>
+   </data>
+   <data name="ReadDebtAdjustmentObligation">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T1.DEBT_ADJ_PROC_DATE,
+  T2.LGA_ID
+from
+  CKT_OBLIGATION T2
+  join
+  CKT_OB_TRN T1
+  on
+    (T1.DEBT_ADJ_PROC_DATE = @debtAdjProcDate) and
+    (T2.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T2.OB_ID = T1.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.DTY_GENERATED_ID between cast(@systemGeneratedIdentifier1 as smallint) and cast(@systemGeneratedIdentifier2 as smallint)) and
+    (T2.OB_ID between cast(@systemGeneratedIdentifier3 as smallint) and cast(@systemGeneratedIdentifier4 as smallint))
+</value>
+   </data>
+   <data name="ReadDebtObligation">
+      <value>
+select top(1)
+  T1.OBG_GENERATED_ID,
+  T1.CSP_NUMBER,
+  T1.CPA_TYPE,
+  T1.OB_TRN_ID,
+  T1.OB_TRN_TYP,
+  T1.DEBT_TYP,
+  T1.CSP_SUP_NUMBER,
+  T1.CPA_SUP_TYPE,
+  T1.OTY_TYPE,
+  T1.NEW_DEBT_PROC_DT,
+  T2.LGA_ID
+from
+  CKT_OBLIGATION T2
+  join
+  CKT_OB_TRN T1
+  on
+    (T1.DEBT_TYP in ('D', 'V')) and
+    (T1.NEW_DEBT_PROC_DT = @newDebtProcDt) and
+    (T2.DTY_GENERATED_ID = T1.OTY_TYPE) and
+    (T2.OB_ID = T1.OBG_GENERATED_ID) and
+    (T2.CSP_NUMBER = T1.CSP_NUMBER) and
+    (T2.CPA_TYPE = T1.CPA_TYPE) and
+    (T2.CSP_NUMBER = @cspNumber) and
+    (T2.DTY_GENERATED_ID between cast(@systemGeneratedIdentifier1 as smallint) and cast(@systemGeneratedIdentifier2 as smallint)) and
+    (T2.OB_ID between cast(@systemGeneratedIdentifier3 as smallint) and cast(@systemGeneratedIdentifier4 as smallint))
+</value>
+   </data>
+   <data name="ReadLegalAction1">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  (LEGAL_ACTION_ID = @legalActionId) and
+  (STANDARD_NO = @standardNo)
+</value>
+   </data>
+   <data name="ReadLegalAction2">
+      <value>
+select top(1)
+  LEGAL_ACTION_ID,
+  STANDARD_NO
+from
+  CKT_LEGAL_ACTION
+where
+  STANDARD_NO = @standardNo
+</value>
+   </data>
+</root>

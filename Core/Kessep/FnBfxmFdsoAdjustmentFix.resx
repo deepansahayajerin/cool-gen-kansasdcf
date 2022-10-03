@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCashReceiptDetailStatHistoryCashReceiptDetailStatus">
+      <value>
+select
+  T1.CRD_IDENTIFIER,
+  T1.CRV_IDENTIFIER,
+  T1.CST_IDENTIFIER,
+  T1.CRT_IDENTIFIER,
+  T1.CDS_IDENTIFIER,
+  T1.CREATED_TIMESTAMP,
+  T1.CREATED_BY,
+  T1.DISCONTINUE_DATE,
+  T2.CODE,
+  T2.NAME
+from
+  CKT_CR_DETAIL_STAT T2
+  join
+  CKT_CRDTL_STATHIST T1
+  on
+    (@crdIdentifier = T1.CRD_IDENTIFIER) and
+    (@crvIdentifier = T1.CRV_IDENTIFIER) and
+    (@cstIdentifier = T1.CST_IDENTIFIER) and
+    (@crtIdentifier = T1.CRT_IDENTIFIER) and
+    (T2.CRDETAIL_STAT_ID = T1.CDS_IDENTIFIER)
+order by
+  T1.CREATED_TIMESTAMP desc,
+  T1.CDS_IDENTIFIER
+</value>
+   </data>
+   <data name="ReadCashReceiptEventCashReceiptCashReceiptDetail">
+      <value>
+select distinct
+  T2.CST_IDENTIFIER,
+  T2.CRV_IDENTIFIER,
+  T2.CRT_IDENTIFIER,
+  T2.CASH_RECEIPT_ID,
+  T3.CRD_ID,
+  T3.REFUNDED_AMT
+from
+  CKT_CRSRC_TYPE T4
+  join
+  CKT_CASH_RECEIPT T2
+  on
+    (T4.CR_SRCE_TYPE_ID = T2.CST_IDENTIFIER) and
+    (T4.CODE = 'FDSO') and
+    (T2.CASH_RECEIPT_ID between cast(@sequentialNumber1 as integer) and cast(@sequentialNumber2 as integer))
+  join
+  CKT_CR_DETAIL T3
+  on
+    (T2.CRT_IDENTIFIER = T3.CRT_IDENTIFIER) and
+    (T2.CST_IDENTIFIER = T3.CST_IDENTIFIER) and
+    (T2.CRV_IDENTIFIER = T3.CRV_IDENTIFIER)
+order by
+  T2.CASH_RECEIPT_ID,
+  T3.CRD_ID
+</value>
+   </data>
+   <data name="UpdateCashReceiptDetailStatHistory">
+      <value>
+update CKT_CRDTL_STATHIST
+set
+  DISCONTINUE_DATE = @discontinueDate
+where
+  (CRD_IDENTIFIER = @crdIdentifier) and
+  (CRV_IDENTIFIER = @crvIdentifier) and
+  (CST_IDENTIFIER = @cstIdentifier) and
+  (CRT_IDENTIFIER = @crtIdentifier) and
+  (CDS_IDENTIFIER = @cdsIdentifier) and
+  (CREATED_TIMESTAMP = @createdTimestamp)
+</value>
+   </data>
+</root>

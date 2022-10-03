@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadDolUiWithholding">
+      <value>
+select
+  CSP_NUMBER,
+  IWO_CERT_DATE,
+  STANDARD_NUMBER,
+  SSN,
+  WA_AMOUNT,
+  WC_AMOUNT,
+  MAX_WITHHOLD_PCT,
+  FIRST_NAME,
+  LAST_NAME,
+  MIDDLE_INITIAL
+from
+  CKT_DOL_UI_IWO
+where
+  (CSP_NUMBER = @cspNumber) and
+  (SSN = @ssn) and
+  (IWO_CERT_DATE = @iwoCertDate)
+</value>
+   </data>
+   <data name="ReadEmployer">
+      <value>
+select top(1)
+  IDENTIFIER,
+  EIN
+from
+  CKT_EMPLOYER
+where
+  EIN = '621444754'
+</value>
+   </data>
+   <data name="ReadLegalAction">
+      <value>
+select distinct
+  T1.LEGAL_ACTION_ID,
+  T1.ACTION_TAKEN,
+  T1.STANDARD_NO
+from
+  CKT_INCOME_SOURCE T3
+  join
+  CKT_LEGAL_ACTION T1
+  join
+  CKT_LEGAL_ACT_ISRC T2
+  on
+    (T1.STANDARD_NO = @standardNo) and
+    (T1.ACTION_TAKEN = 'ORDIWO2') and
+    (T1.LEGAL_ACTION_ID = T2.LGA_IDENTIFIER)
+  on
+    (T3.CSP_I_NUMBER = T2.CSP_NUMBER) and
+    (T3.IDENTIFIER = T2.ISR_IDENTIFIER) and
+    (@empId = T3.EMP_ID) and
+    (T3.CSP_I_NUMBER = @cspINumber)
+</value>
+   </data>
+</root>

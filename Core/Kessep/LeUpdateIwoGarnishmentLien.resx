@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadLegalActionIncomeSource1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  ISR_IDENTIFIER,
+  EFFECTIVE_DT,
+  CREATED_BY,
+  CREATED_TSTAMP,
+  WITHHOLDING_TYPE,
+  END_DT,
+  WAGE_OR_NON_WAGE,
+  ORDER_TYPE,
+  IDENTIFIER
+from
+  CKT_LEGAL_ACT_ISRC
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionIncomeSource2">
+      <value>
+select
+  CSP_NUMBER,
+  LGA_IDENTIFIER,
+  ISR_IDENTIFIER,
+  EFFECTIVE_DT,
+  CREATED_TSTAMP,
+  WITHHOLDING_TYPE,
+  END_DT,
+  WAGE_OR_NON_WAGE,
+  ORDER_TYPE,
+  IDENTIFIER
+from
+  CKT_LEGAL_ACT_ISRC
+where
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IDENTIFIER &lt;&gt; @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonResource1">
+      <value>
+select top(1)
+  CSP_NUMBER,
+  CPR_RESOURCE_NO,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  LIEN_TYPE,
+  END_DATE,
+  CREATED_TSTAMP,
+  CREATED_BY,
+  IDENTIFIER
+from
+  CKT_LEGL_ACT_PRSRC
+where
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (CPR_RESOURCE_NO = @cprResourceNo) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="ReadLegalActionPersonResource2">
+      <value>
+select
+  CSP_NUMBER,
+  CPR_RESOURCE_NO,
+  LGA_IDENTIFIER,
+  EFFECTIVE_DT,
+  LIEN_TYPE,
+  END_DATE,
+  CREATED_TSTAMP,
+  IDENTIFIER
+from
+  CKT_LEGL_ACT_PRSRC
+where
+  (CPR_RESOURCE_NO = @cprResourceNo) and
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IDENTIFIER &lt;&gt; @identifier)
+</value>
+   </data>
+   <data name="UpdateLegalActionIncomeSource">
+      <value>
+update CKT_LEGAL_ACT_ISRC
+set
+  EFFECTIVE_DT = @effectiveDt,
+  WITHHOLDING_TYPE = @withholdingType,
+  END_DT = @endDt,
+  WAGE_OR_NON_WAGE = @wageOrNonWage,
+  ORDER_TYPE = @orderType
+where
+  (CSP_NUMBER = @cspNumber) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (ISR_IDENTIFIER = @isrIdentifier) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+   <data name="UpdateLegalActionPersonResource">
+      <value>
+update CKT_LEGL_ACT_PRSRC
+set
+  EFFECTIVE_DT = @effectiveDt,
+  LIEN_TYPE = @lienType,
+  END_DATE = @endDate
+where
+  (CSP_NUMBER = @cspNumber) and
+  (CPR_RESOURCE_NO = @cprResourceNo) and
+  (LGA_IDENTIFIER = @lgaIdentifier) and
+  (IDENTIFIER = @identifier)
+</value>
+   </data>
+</root>

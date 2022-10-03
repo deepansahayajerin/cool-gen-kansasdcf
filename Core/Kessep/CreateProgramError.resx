@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateProgramError">
+      <value>
+insert into CKT_PROGRAM_ERROR
+(
+  PRR_START_TSTAMP,
+  PPI_CREATED_TSTAMP,
+  PPI_NAME,
+  PGM_ERROR_ID,
+  CODE,
+  STATUS_DATE,
+  STATUS_IND,
+  PROGRAM_ERROR,
+  KEY_INFO,
+  RESOLUTION
+)
+values
+(
+  @prrStartTstamp,
+  @ppiCreatedTstamp,
+  @ppiName,
+  @pgmErrorId,
+  @code,
+  @statusDate,
+  @statusInd,
+  @programError,
+  @keyInfo,
+  @resolution
+)
+</value>
+   </data>
+   <data name="ReadProgramRun">
+      <value>
+select top(1)
+  PPI_CREATED_TSTAMP,
+  PPI_NAME,
+  START_TIMESTAMP
+from
+  CKT_PROGRAM_RUN
+where
+  (START_TIMESTAMP = @startTimestamp) and
+  (PPI_NAME = @ppiName) and
+  (PPI_CREATED_TSTAMP = @ppiCreatedTstamp)
+order by
+  START_TIMESTAMP desc
+</value>
+   </data>
+</root>

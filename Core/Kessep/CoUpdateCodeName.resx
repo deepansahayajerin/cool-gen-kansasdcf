@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="CreateCode">
+      <value>
+insert into CKT_CODE
+(
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DISPLAY_TITLE
+)
+values
+(
+  @codId,
+  @codeName,
+  @effectiveDate,
+  @expirationDate,
+  @createdBy,
+  @createdTimestamp,
+  @lastUpdatedBy,
+  @lastUpdatedTmst,
+  @displayTitle
+)
+</value>
+   </data>
+   <data name="ReadCode1">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  DISPLAY_TITLE
+from
+  CKT_CODE
+order by
+  COD_ID desc
+</value>
+   </data>
+   <data name="ReadCode2">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DISPLAY_TITLE
+from
+  CKT_CODE
+where
+  (CODE_NAME = @codeName) and
+  (COD_ID &lt;&gt; @codId)
+</value>
+   </data>
+   <data name="ReadCode3">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DISPLAY_TITLE
+from
+  CKT_CODE
+where
+  CODE_NAME = @codeName
+</value>
+   </data>
+   <data name="ReadCode4">
+      <value>
+select top(1)
+  COD_ID,
+  CODE_NAME,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  DISPLAY_TITLE
+from
+  CKT_CODE
+where
+  COD_ID = @codId
+</value>
+   </data>
+   <data name="ReadCodeValue">
+      <value>
+select
+  COV_ID,
+  COD_ID,
+  CDVALUE,
+  EFFECTIVE_DATE,
+  EXPIRATION_DATE
+from
+  CKT_CODE_VALUE
+where
+  @codId = COD_ID
+</value>
+   </data>
+   <data name="UpdateCode">
+      <value>
+update CKT_CODE
+set
+  CODE_NAME = @codeName,
+  EFFECTIVE_DATE = @effectiveDate,
+  EXPIRATION_DATE = @expirationDate,
+  CREATED_BY = @createdBy,
+  CREATED_TIMESTAMP = @createdTimestamp,
+  LAST_UPDATED_BY = @lastUpdatedBy,
+  LAST_UPDATED_TMST = @lastUpdatedTmst,
+  DISPLAY_TITLE = @displayTitle
+where
+  COD_ID = @codId
+</value>
+   </data>
+</root>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+   <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+   </resheader>
+   <resheader name="version">
+      <value>2.0</value>
+   </resheader>
+   <resheader name="reader">
+      <value>System.Resources.ResXResourceReader</value>
+   </resheader>
+   <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter</value>
+   </resheader>
+   <data name="ReadCase">
+      <value>
+select top(1)
+  NUMB,
+  CREATED_TIMESTAMP
+from
+  CKT_CASE
+where
+  NUMB = @numb
+</value>
+   </data>
+   <data name="ReadCaseUnit1">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (CLOSURE_REASON_COD = ' ') and
+  (
+    (CLOSURE_DATE &gt; @closureDate1) or
+    (CLOSURE_DATE = @closureDate2)
+  )
+order by
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadCaseUnit2">
+      <value>
+select
+  CU_NUMBER,
+  [STATE],
+  START_DATE,
+  CLOSURE_DATE,
+  CLOSURE_REASON_COD,
+  CREATED_BY,
+  CREATED_TIMESTAMP,
+  LAST_UPDATED_BY,
+  LAST_UPDATED_TMST,
+  CAS_NO
+from
+  CKT_CASE_UNIT
+where
+  (@casNo = CAS_NO) and
+  (CLOSURE_REASON_COD &lt;&gt; ' ')
+order by
+  LAST_UPDATED_TMST desc
+</value>
+   </data>
+   <data name="ReadInfrastructure">
+      <value>
+select distinct
+  T1.SYSTEM_GENERATED_I,
+  T1.EVENT_ID,
+  T1.EVENT_TYPE,
+  T1.CASE_NUMBER,
+  T1.CASE_UNIT_NUM,
+  T1.CREATED_TIMESTAMP,
+  T1.DETAIL
+from
+  CKT_INFRASTRUCTURE T1
+  join
+  CKT_CASE_UNIT T2
+  on
+    (T1.CASE_NUMBER = @caseNumber) and
+    (T1.CASE_UNIT_NUM = T2.CU_NUMBER) and
+    (T2.CLOSURE_REASON_COD = ' ') and
+    (
+      (T2.CLOSURE_DATE &gt; @closureDate1) or
+      (T2.CLOSURE_DATE = @closureDate2)
+    ) and
+    (@casNo = T2.CAS_NO) and
+    (T1.EVENT_TYPE = 'CASEUNIT') and
+    (T1.EVENT_ID = 7)
+order by
+  T1.CREATED_TIMESTAMP desc
+</value>
+   </data>
+</root>
